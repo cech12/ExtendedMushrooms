@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package cech12.extendedmushrooms;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -44,6 +44,7 @@ public class ExtendedMushrooms
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
