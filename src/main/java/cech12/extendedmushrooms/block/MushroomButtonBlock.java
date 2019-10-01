@@ -3,25 +3,25 @@ package cech12.extendedmushrooms.block;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.WoodButtonBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 
-public class MushroomPlanksBlock extends Block implements IBlockItemGetter {
+public class MushroomButtonBlock extends WoodButtonBlock implements IBlockItemGetter {
 
-    private static final ResourceLocation REGISTRY_NAME = new ResourceLocation(ExtendedMushrooms.MOD_ID, "mushroom_planks");
+    private static final ResourceLocation REGISTRY_NAME = new ResourceLocation(ExtendedMushrooms.MOD_ID, "mushroom_button");
 
-    public MushroomPlanksBlock() {
-        super(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(0.2F).sound(SoundType.WOOD));
+    public MushroomButtonBlock() {
+        super(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
         setRegistryName(REGISTRY_NAME);
     }
 
     @Override
     public Item getBlockItem() {
-        Item item = new BlockItem(this, (new Item.Properties()).group(ItemGroup.BUILDING_BLOCKS));
+        Item item = new BlockItem(this, (new Item.Properties()).group(ItemGroup.REDSTONE));
         item.setRegistryName(REGISTRY_NAME);
         return item;
     }

@@ -2,6 +2,8 @@ package cech12.extendedmushrooms;
 
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModItems;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 

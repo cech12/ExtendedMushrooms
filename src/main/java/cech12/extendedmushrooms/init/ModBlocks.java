@@ -1,12 +1,9 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.block.IBlockItemProperty;
-import cech12.extendedmushrooms.block.MushroomPlanksBlock;
+import cech12.extendedmushrooms.block.*;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,8 +12,22 @@ import net.minecraftforge.registries.IForgeRegistry;
 @Mod.EventBusSubscriber(modid=ExtendedMushrooms.MOD_ID)
 public final class ModBlocks {
 
+    public static final Block MUSHROOM_PLANKS = new MushroomPlanksBlock();
+    public static final Block MUSHROOM_SIGN = new MushroomSignBlock();
+    public static final Block MUSHROOM_WALL_SIGN = new MushroomWallSignBlock();
+
     private static final Block[] blocks = {
-            new MushroomPlanksBlock()
+            new MushroomButtonBlock(),
+            new MushroomDoorBlock(),
+            new MushroomFenceBlock(),
+            new MushroomFenceGateBlock(),
+            MUSHROOM_PLANKS,
+            new MushroomPressurePlateBlock(),
+            MUSHROOM_SIGN,
+            new MushroomSlabBlock(),
+            new MushroomStairsBlock(),
+            new MushroomTrapdoorBlock(),
+            MUSHROOM_WALL_SIGN
     };
 
     @SubscribeEvent
@@ -30,13 +41,8 @@ public final class ModBlocks {
     public static void registerBlockItems(RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();
         for (Block block : ModBlocks.blocks) {
-            if (block instanceof IBlockItemProperty) {
-                Item item = new BlockItem(block, ((IBlockItemProperty) block).getBlockItemProperties());
-                ResourceLocation registryName = block.getRegistryName();
-                if (registryName != null) {
-                    item.setRegistryName(registryName);
-                }
-                registry.register(item);
+            if (block instanceof IBlockItemGetter) {
+                registry.register(((IBlockItemGetter) block).getBlockItem());
             }
         }
     }
