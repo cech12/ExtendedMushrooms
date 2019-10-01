@@ -13,8 +13,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 public final class ModBlocks {
 
     public static final Block MUSHROOM_PLANKS = new MushroomPlanksBlock();
-    public static final Block MUSHROOM_SIGN = new MushroomSignBlock();
-    public static final Block MUSHROOM_WALL_SIGN = new MushroomWallSignBlock();
 
     private static final Block[] blocks = {
             new MushroomButtonBlock(),
@@ -23,11 +21,9 @@ public final class ModBlocks {
             new MushroomFenceGateBlock(),
             MUSHROOM_PLANKS,
             new MushroomPressurePlateBlock(),
-            MUSHROOM_SIGN,
             new MushroomSlabBlock(),
             new MushroomStairsBlock(),
-            new MushroomTrapdoorBlock(),
-            MUSHROOM_WALL_SIGN
+            new MushroomTrapdoorBlock()
     };
 
     @SubscribeEvent

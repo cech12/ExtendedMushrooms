@@ -1,20 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "boat",
   "pattern": [
-    "###",
-    "###",
-    " X "
+    "# #",
+    "###"
   ],
   "key": {
     "#": {
       "item": "extendedmushrooms:mushroom_planks"
-    },
-    "X": {
-      "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "extendedmushrooms:mushroom_sign",
-    "count": 3
+    "item": "minecraft:oak_boat"
   }
 }
