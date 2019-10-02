@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "forge:mushroom"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:mushroom_spores",
+    "count": 2
+  }
+}
