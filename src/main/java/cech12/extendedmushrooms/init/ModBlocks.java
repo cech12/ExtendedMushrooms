@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +16,10 @@ public final class ModBlocks {
     public static final Block MUSHROOM_PLANKS = new MushroomPlanksBlock();
 
     private static final Block[] blocks = {
+            //overriding Minecraft mushrooms (a bit hacky :D)
+            new ExtendedMushroomBlock(Blocks.BROWN_MUSHROOM),
+            new ExtendedMushroomBlock(Blocks.RED_MUSHROOM),
+            //mod blocks
             new MushroomButtonBlock(),
             new MushroomDoorBlock(),
             new MushroomFenceBlock(),
