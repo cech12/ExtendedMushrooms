@@ -5,7 +5,10 @@ import cech12.extendedmushrooms.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -17,8 +20,8 @@ public final class ModBlocks {
 
     private static final Block[] blocks = {
             //overriding Minecraft mushrooms (a bit hacky :D)
-            new ExtendedMushroomBlock(Blocks.BROWN_MUSHROOM),
-            new ExtendedMushroomBlock(Blocks.RED_MUSHROOM),
+            //new ExtendedMushroomBlock(Blocks.BROWN_MUSHROOM),
+            //new ExtendedMushroomBlock(Blocks.RED_MUSHROOM),
             //mod blocks
             new MushroomButtonBlock(),
             new MushroomDoorBlock(),
@@ -48,5 +51,17 @@ public final class ModBlocks {
         }
     }
 
+    // wait for Pull Request: https://github.com/MinecraftForge/MinecraftForge/pull/6212
+    /*
+    @SubscribeEvent
+    public static void onRandomTick(BlockEvent.RandomTickEvent event) {
+        if (event.getState().getBlock() instanceof MushroomBlock) {
+            if (event.getRandom().nextInt(7) == 0) {
+                ((MushroomBlock) block).grow(event.getWorld().getWorld(), event.getRandom(), event.getPos(), event.getState());
+                event.setCanceled(true);
+            }
+        }
+    }
+     */
 
 }
