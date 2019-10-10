@@ -23,7 +23,7 @@ public class StrippedMushroomStem extends HugeMushroomBlock implements IBlockIte
 
     @Override
     public Item getBlockItem() {
-        Item item = new BlockItem(this, (new Item.Properties()).group(ItemGroup.DECORATIONS));
+        Item item = new BlockItem(this, (new Item.Properties()).group(ItemGroup.BUILDING_BLOCKS));
         item.setRegistryName(REGISTRY_NAME);
         ComposterBlock.CHANCES.put(item, 0.85F);
         return item;
