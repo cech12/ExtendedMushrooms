@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.block;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import net.minecraft.block.Block;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,6 +25,7 @@ public class MushroomPressurePlateBlock extends PressurePlateBlock implements IB
     public Item getBlockItem() {
         Item item = new BlockItem(this, (new Item.Properties()).group(ItemGroup.REDSTONE));
         item.setRegistryName(REGISTRY_NAME);
+        ComposterBlock.CHANCES.put(item, 0.15F);
         return item;
     }
 }

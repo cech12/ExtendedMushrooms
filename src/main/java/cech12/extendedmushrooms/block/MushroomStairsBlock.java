@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.block;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -22,6 +23,7 @@ public class MushroomStairsBlock extends StairsBlock implements IBlockItemGetter
     public Item getBlockItem() {
         Item item = new BlockItem(this, (new Item.Properties()).group(ItemGroup.BUILDING_BLOCKS));
         item.setRegistryName(REGISTRY_NAME);
+        ComposterBlock.CHANCES.put(item, 0.15F);
         return item;
     }
 }

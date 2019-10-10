@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.item;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.CowEntity;
@@ -25,6 +26,7 @@ public class MushroomSporesItem extends Item {
 
     public MushroomSporesItem() {
         super((new Properties()).group(ItemGroup.MATERIALS));
+        ComposterBlock.CHANCES.put(this, 0.15F);
         this.setRegistryName(REGISTRY_NAME);
     }
 

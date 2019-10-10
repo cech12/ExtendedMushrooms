@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.item;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -14,6 +15,7 @@ public class GrilledMushroomItem extends Item {
 
     public GrilledMushroomItem() {
         super((new Item.Properties()).group(ItemGroup.FOOD).food(FOOD));
+        ComposterBlock.CHANCES.put(this, 0.65F);
         this.setRegistryName(REGISTRY_NAME);
     }
 
