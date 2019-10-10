@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:red_mushroom_from_block"
+      "extendedmushrooms:brown_mushroom_block_from_mushroom"
     ]
   },
   "criteria": {
-    "has_red_mushroom_block": {
+    "has_brown_mushroom": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:red_mushroom_block"
+            "item": "minecraft:brown_mushroom"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:red_mushroom_from_block"
+        "recipe": "extendedmushrooms:brown_mushroom_block_from_mushroom"
       }
     }
   },
   "requirements": [
     [
-      "has_red_mushroom_block",
+      "has_brown_mushroom",
       "has_the_recipe"
     ]
   ]
