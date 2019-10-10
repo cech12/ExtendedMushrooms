@@ -3,12 +3,16 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -17,6 +21,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public final class ModBlocks {
 
     public static final Block MUSHROOM_PLANKS = new MushroomPlanksBlock();
+    public static final Block STRIPPED_MUSHROOM_STEM = new StrippedMushroomStem();
 
     private static final Block[] blocks = {
             //overriding Minecraft mushrooms (a bit hacky :D)
@@ -32,7 +37,7 @@ public final class ModBlocks {
             new MushroomSlabBlock(),
             new MushroomStairsBlock(),
             new MushroomTrapdoorBlock(),
-            new StrippedMushroomStem()
+            STRIPPED_MUSHROOM_STEM
     };
 
     @SubscribeEvent
@@ -49,6 +54,32 @@ public final class ModBlocks {
             if (block instanceof IBlockItemGetter) {
                 registry.register(((IBlockItemGetter) block).getBlockItem());
             }
+        }
+    }
+
+    /**
+     * Add stripping behaviour to mushroom stems
+     */
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        BlockState blockState = event.getWorld().getBlockState(event.getPos());
+        ItemStack itemStack = event.getPlayer().getHeldItem(event.getHand());
+        //check for mushroom stem and axe
+        if (blockState.getBlock() == Blocks.MUSHROOM_STEM && itemStack.getItem() instanceof AxeItem) {
+            //play sound
+            event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (!event.getWorld().isRemote) {
+                //replace block
+                event.getWorld().setBlockState(event.getPos(), STRIPPED_MUSHROOM_STEM.getDefaultState(), 11);
+                //do the item damage
+                if (event.getPlayer() != null) {
+                    itemStack.damageItem(1, event.getPlayer(), (p_220040_1_) -> {
+                        p_220040_1_.sendBreakAnimation(event.getHand());
+                    });
+                }
+            }
+            event.setCanceled(true);
+            event.setCancellationResult(ActionResultType.SUCCESS);
         }
     }
 

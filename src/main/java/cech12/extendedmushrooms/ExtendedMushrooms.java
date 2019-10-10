@@ -2,8 +2,7 @@ package cech12.extendedmushrooms;
 
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModItems;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -17,6 +16,7 @@ public class ExtendedMushrooms {
     public ExtendedMushrooms() {
         FMLJavaModLoadingContext.get().getModEventBus().register(ModBlocks.class);
         FMLJavaModLoadingContext.get().getModEventBus().register(ModItems.class);
+        MinecraftForge.EVENT_BUS.register(ModBlocks.class);
     }
 
 }
