@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "extendedmushrooms:mushroom_sign"
+          "name": "extendedmushrooms:stripped_mushroom_stem"
         }
       ],
       "conditions": [

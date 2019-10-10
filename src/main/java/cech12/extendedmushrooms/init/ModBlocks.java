@@ -31,7 +31,8 @@ public final class ModBlocks {
             new MushroomPressurePlateBlock(),
             new MushroomSlabBlock(),
             new MushroomStairsBlock(),
-            new MushroomTrapdoorBlock()
+            new MushroomTrapdoorBlock(),
+            new StrippedMushroomStem()
     };
 
     @SubscribeEvent

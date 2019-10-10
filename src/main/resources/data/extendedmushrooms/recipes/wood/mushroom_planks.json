@@ -3,7 +3,7 @@
   "group": "planks",
   "ingredients": [
     {
-      "item": "minecraft:mushroom_stem"
+      "tag": "extendedmushrooms:mushroom_stems"
     }
   ],
   "result": {
