@@ -2,12 +2,10 @@ package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.item.*;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -15,85 +13,36 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod.EventBusSubscriber(modid=ExtendedMushrooms.MOD_ID)
+import static cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks.*;
+
+@Mod.EventBusSubscriber(modid= ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModBlocks {
-
-    public static final Block MUSHROOM_PLANKS = new MushroomPlanksBlock();
-    public static final Block STRIPPED_MUSHROOM_STEM = new StrippedMushroomStem();
-
-    private static final Block[] blocks = {
-            //overriding Minecraft mushrooms (a bit hacky :D)
-            //new ExtendedMushroomBlock(Blocks.BROWN_MUSHROOM),
-            //new ExtendedMushroomBlock(Blocks.RED_MUSHROOM),
-            //mod blocks
-            new MushroomButtonBlock(),
-            new MushroomDoorBlock(),
-            new MushroomFenceBlock(),
-            new MushroomFenceGateBlock(),
-            MUSHROOM_PLANKS,
-            new MushroomPressurePlateBlock(),
-            new MushroomSlabBlock(),
-            new MushroomStairsBlock(),
-            new MushroomTrapdoorBlock(),
-            STRIPPED_MUSHROOM_STEM
-    };
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        for (Block block : ModBlocks.blocks) {
-            event.getRegistry().register(block);
-        }
+
+        MUSHROOM_BUTTON = registerBlock("mushroom_button", ItemGroup.REDSTONE, new MushroomButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));
+        MUSHROOM_DOOR = registerBlock("mushroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_FENCE = registerBlock("mushroom_fence", ItemGroup.DECORATIONS, new FenceBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_FENCE_GATE = registerBlock("mushroom_fence_gate", ItemGroup.REDSTONE, new FenceGateBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_PLANKS = registerBlock("mushroom_planks", ItemGroup.BUILDING_BLOCKS, new Block(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
+        MUSHROOM_PRESSURE_PLATE = registerBlock("mushroom_pressure_plate", ItemGroup.REDSTONE, new MushroomPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.WOOL).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));
+        MUSHROOM_SLAB = registerBlock("mushroom_slab", ItemGroup.BUILDING_BLOCKS, new SlabBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_STAIRS = registerBlock("mushroom_stairs", ItemGroup.BUILDING_BLOCKS, new MushroomStairsBlock(MUSHROOM_PLANKS.getDefaultState(), Block.Properties.from(MUSHROOM_PLANKS)));
+        MUSHROOM_TRAPDOOR = registerBlock("mushroom_trapdoor", ItemGroup.REDSTONE, new MushroomTrapdoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
+        STRIPPED_MUSHROOM_STEM = registerBlock("stripped_mushroom_stem", ItemGroup.BUILDING_BLOCKS, new HugeMushroomBlock(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
     }
 
-    @SubscribeEvent
-    public static void registerBlockItems(RegistryEvent.Register<Item> event) {
-        final IForgeRegistry<Item> registry = event.getRegistry();
-        for (Block block : ModBlocks.blocks) {
-            if (block instanceof IBlockItemGetter) {
-                registry.register(((IBlockItemGetter) block).getBlockItem());
-            }
-        }
+    public static Block registerBlock(String name, ItemGroup itemGroup, Block block) {
+        BlockItem itemBlock = new BlockItem(block, new Item.Properties().group(itemGroup));
+        block.setRegistryName(name);
+        itemBlock.setRegistryName(name);
+        ForgeRegistries.BLOCKS.register(block);
+        ForgeRegistries.ITEMS.register(itemBlock);
+        return block;
     }
-
-    /**
-     * Add stripping behaviour to mushroom stems
-     */
-    @SubscribeEvent
-    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        BlockState blockState = event.getWorld().getBlockState(event.getPos());
-        ItemStack itemStack = event.getPlayer().getHeldItem(event.getHand());
-        //check for mushroom stem and axe
-        if (blockState.getBlock() == Blocks.MUSHROOM_STEM && itemStack.getItem() instanceof AxeItem) {
-            //play sound
-            event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if (!event.getWorld().isRemote) {
-                //replace block
-                event.getWorld().setBlockState(event.getPos(), STRIPPED_MUSHROOM_STEM.getDefaultState(), 11);
-                //do the item damage
-                if (event.getPlayer() != null) {
-                    itemStack.damageItem(1, event.getPlayer(), (p_220040_1_) -> {
-                        p_220040_1_.sendBreakAnimation(event.getHand());
-                    });
-                }
-            }
-            event.setCanceled(true);
-            event.setCancellationResult(ActionResultType.SUCCESS);
-        }
-    }
-
-    // wait for Pull Request: https://github.com/MinecraftForge/MinecraftForge/pull/6212
-    /*
-    @SubscribeEvent
-    public static void onRandomTick(BlockEvent.RandomTickEvent event) {
-        if (event.getState().getBlock() instanceof MushroomBlock) {
-            if (event.getRandom().nextInt(7) == 0) {
-                ((MushroomBlock) block).grow(event.getWorld().getWorld(), event.getRandom(), event.getPos(), event.getState());
-                event.setCanceled(true);
-            }
-        }
-    }
-     */
 
 }

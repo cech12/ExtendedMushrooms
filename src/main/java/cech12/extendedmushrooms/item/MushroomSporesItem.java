@@ -1,33 +1,25 @@
 package cech12.extendedmushrooms.item;
 
-import cech12.extendedmushrooms.ExtendedMushrooms;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class MushroomSporesItem extends Item {
 
-    private static final ResourceLocation REGISTRY_NAME = new ResourceLocation(ExtendedMushrooms.MOD_ID, "mushroom_spores");
-
-    public MushroomSporesItem() {
-        super((new Properties()).group(ItemGroup.MATERIALS));
-        ComposterBlock.CHANCES.put(this, 0.15F);
-        this.setRegistryName(REGISTRY_NAME);
+    public MushroomSporesItem(Item.Properties properties) {
+        super(properties);
     }
 
     @Override
