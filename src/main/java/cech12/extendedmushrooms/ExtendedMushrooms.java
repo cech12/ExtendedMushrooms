@@ -3,11 +3,11 @@ package cech12.extendedmushrooms;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -39,7 +39,7 @@ public class ExtendedMushrooms {
         BlockState blockState = event.getWorld().getBlockState(event.getPos());
         ItemStack itemStack = event.getPlayer().getHeldItem(event.getHand());
         //check for mushroom stem and axe
-        if (blockState.getBlock() == Blocks.MUSHROOM_STEM && itemStack.getItem() instanceof AxeItem) {
+        if (blockState.getBlock() == Blocks.MUSHROOM_STEM && itemStack.getToolTypes().contains(ToolType.AXE)) {
             //play sound
             event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
             if (!event.getWorld().isRemote) {
