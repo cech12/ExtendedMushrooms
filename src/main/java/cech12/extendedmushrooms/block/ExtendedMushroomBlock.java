@@ -7,8 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 /**
@@ -36,7 +37,7 @@ public class ExtendedMushroomBlock extends MushroomBlock implements IBlockItemGe
      * The automatic multiplication still remaining.
      */
     @Override
-    public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+    public void tick(@Nonnull BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
         //automatic multiplication
         super.tick(state, worldIn, pos, random);
 

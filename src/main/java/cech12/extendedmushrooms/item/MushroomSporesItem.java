@@ -16,6 +16,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class MushroomSporesItem extends Item {
 
     public MushroomSporesItem(Item.Properties properties) {
@@ -23,7 +25,7 @@ public class MushroomSporesItem extends Item {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public @Nonnull ActionResultType onItemUse(ItemUseContext context) {
         World world = context.getWorld();
         BlockPos blockPos = context.getPos();
         Block block = world.getBlockState(blockPos).getBlock();
@@ -45,14 +47,15 @@ public class MushroomSporesItem extends Item {
         // Cow to Mooshroom
         if (!world.isRemote && target instanceof CowEntity && !(target instanceof MooshroomEntity)) {
             target.setAIMoveSpeed(0);
+            BlockPos pos = target.getPosition();
             //create mooshroom
             MooshroomEntity mooshroom = new MooshroomEntity(EntityType.MOOSHROOM, target.world);
-            mooshroom.setLocationAndAngles(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
+            mooshroom.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), target.rotationYaw, target.rotationPitch);
             mooshroom.setHealth(target.getHealth());
             mooshroom.setGrowingAge(((CowEntity) target).getGrowingAge());
             mooshroom.renderYawOffset = target.renderYawOffset;
             //a small explosion
-            world.createExplosion(target, target.posX, target.posY, target.posZ, 0.0F, Explosion.Mode.NONE);
+            world.createExplosion(target, pos.getX(), pos.getY(), pos.getZ(), 0.0F, Explosion.Mode.NONE);
             //replace cow with new mooshroom
             target.remove();
             world.addEntity(mooshroom);
