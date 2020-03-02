@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -33,12 +35,15 @@ public class MushroomSporesItem extends Item {
 
         // replace dirt with mycelium
         if (block == Blocks.DIRT) {
+            //play sound
+            world.playSound(context.getPlayer(), blockPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            //change dirt to mycelium
             world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState());
             //remove one item
             itemStack.setCount(itemStack.getCount() - 1);
             return ActionResultType.SUCCESS;
         }
-        return ActionResultType.FAIL;
+        return ActionResultType.PASS;
     }
 
     @Override
