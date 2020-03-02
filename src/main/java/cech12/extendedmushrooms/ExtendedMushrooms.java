@@ -57,17 +57,4 @@ public class ExtendedMushrooms {
         }
     }
 
-    // wait for Pull Request: https://github.com/MinecraftForge/MinecraftForge/pull/6212
-    /*
-    @SubscribeEvent
-    public static void onRandomTick(BlockEvent.RandomTickEvent event) {
-        if (event.getState().getBlock() instanceof MushroomBlock) {
-            if (event.getRandom().nextInt(7) == 0) {
-                ((MushroomBlock) block).grow(event.getWorld().getWorld(), event.getRandom(), event.getPos(), event.getState());
-                event.setCanceled(true);
-            }
-        }
-    }
-     */
-
 }

@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "cech12.extendedmushrooms.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mixins.extendedmushrooms.refmap.json",
+  "mixins": [
+    "MixinMushroomBlock"
+  ],
+  "minVersion": "0.8"
+}
