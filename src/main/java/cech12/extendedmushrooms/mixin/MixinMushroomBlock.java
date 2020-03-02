@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms.mixin;
 
-import cech12.extendedmushrooms.ExtendedMushrooms;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +20,6 @@ public class MixinMushroomBlock {
      */
     @Inject(at = @At("HEAD"), method = "tick", cancellable = true)
     public void tickProxy(BlockState blockState, ServerWorld world, BlockPos blockPos, Random random, CallbackInfo ci) {
-        ExtendedMushrooms.LOGGER.fatal("MushroomBlockTick");
         //automatic growing of mushrooms
         //Forge: prevent loading unloaded chunks
         if (world.isAreaLoaded(blockPos, 7) && random.nextInt(25) == 0) {
