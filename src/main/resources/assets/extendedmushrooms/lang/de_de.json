@@ -1,0 +1,16 @@
+{
+  "item.extendedmushrooms.grilled_mushroom": "Grillpilz",
+  "item.extendedmushrooms.mushroom_bread": "Pilzbrot",
+  "item.extendedmushrooms.mushroom_spores": "Pilzsporen",
+
+  "block.extendedmushrooms.mushroom_button": "Pilzknopf",
+  "block.extendedmushrooms.mushroom_door": "Pilztür",
+  "block.extendedmushrooms.mushroom_fence": "Pilzzaun",
+  "block.extendedmushrooms.mushroom_fence_gate": "Pilzzauntor",
+  "block.extendedmushrooms.mushroom_planks": "Pilzbretter",
+  "block.extendedmushrooms.mushroom_pressure_plate": "Pilzdruckplatte",
+  "block.extendedmushrooms.mushroom_slab": "Pilzstufe",
+  "block.extendedmushrooms.mushroom_stairs": "Pilztreppe",
+  "block.extendedmushrooms.mushroom_trapdoor": "Pilzfalltür",
+  "block.extendedmushrooms.stripped_mushroom_stem": "Entrindeter Pilzstiel"
+}
