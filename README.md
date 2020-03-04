@@ -4,6 +4,10 @@ This is a **Minecraft Forge** mod for version 1.15.2 and change some **mushroom 
 
 ![Logo](https://raw.githubusercontent.com/cech12/ExtendedMushrooms/1.15/material/store.png)
 
+## Relations
+
+To use this mod, you need the [Mixin Bootstrap Mod](https://www.curseforge.com/minecraft/mc-mods/mixinbootstrap).
+
 ## Behaviour:
 
 **Huge Mushrooms** can grow at random tick with a chance of 1:25 like trees. A difference to trees is, that Huge Mushrooms can only grow on specific blocks. On **Mycelium** and **Podzol** a mushroom can grow at any light level, but on **Dirt** and **Grass Block** it can only grow at light level below 13. 
