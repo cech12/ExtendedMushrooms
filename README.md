@@ -4,9 +4,9 @@ This is a **Minecraft Forge** mod for version 1.15.2 and change some **mushroom 
 
 ![Logo](https://raw.githubusercontent.com/cech12/ExtendedMushrooms/1.15/material/store.png)
 
-## Relations
+## Installation
 
-To use this mod, you need the [Mixin Bootstrap Mod](https://www.curseforge.com/minecraft/mc-mods/mixinbootstrap).
+To use all features, it is recommended to install [MixinBootstrap](https://www.curseforge.com/minecraft/mc-mods/mixinbootstrap).
 
 ## Behaviour:
 
