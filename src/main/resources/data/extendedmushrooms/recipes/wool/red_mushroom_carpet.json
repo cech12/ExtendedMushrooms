@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:brown_mushroom_block"
+      "item": "minecraft:red_mushroom_block"
     }
   },
   "result": {
-    "item": "minecraft:brown_carpet",
+    "item": "extendedmushrooms:red_mushroom_carpet",
     "count": 3
   }
 }

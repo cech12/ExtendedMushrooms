@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:wool/red_carpet"
+      "extendedmushrooms:wool/red_mushroom_carpet"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:wool/red_carpet"
+        "recipe": "extendedmushrooms:wool/red_mushroom_carpet"
       }
     }
   },

@@ -15,4 +15,7 @@ public class ExtendedMushroomsBlocks {
     public static Block MUSHROOM_TRAPDOOR;
     public static Block STRIPPED_MUSHROOM_STEM;
 
+    public static Block BROWN_MUSHROOM_CARPET;
+    public static Block RED_MUSHROOM_CARPET;
+
 }
