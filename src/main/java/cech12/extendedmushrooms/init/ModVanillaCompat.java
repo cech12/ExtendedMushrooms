@@ -37,6 +37,13 @@ public class ModVanillaCompat {
         registerCompostable(0.15F, MUSHROOM_TRAPDOOR);
         registerCompostable(0.85F, STRIPPED_MUSHROOM_STEM);
 
+        registerCompostable(0.15F, BROWN_MUSHROOM_BUTTON);
+        registerCompostable(0.3F, BROWN_MUSHROOM_CARPET);
+        registerCompostable(0.15F, BROWN_MUSHROOM_PRESSURE_PLATE);
+        registerCompostable(0.15F, RED_MUSHROOM_BUTTON);
+        registerCompostable(0.3F, RED_MUSHROOM_CARPET);
+        registerCompostable(0.15F, RED_MUSHROOM_PRESSURE_PLATE);
+
         registerCompostable(0.65F, GRILLED_MUSHROOM);
         registerCompostable(0.85F, MUSHROOM_BREAD);
         registerCompostable(0.15F, MUSHROOM_SPORES);
