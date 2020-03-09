@@ -14,6 +14,10 @@
   "block.extendedmushrooms.mushroom_trapdoor": "Mushroom Trapdoor",
   "block.extendedmushrooms.stripped_mushroom_stem": "Stripped Mushroom Stem",
 
+  "block.extendedmushrooms.brown_mushroom_button": "Brown Mushroom Button",
   "block.extendedmushrooms.brown_mushroom_carpet": "Brown Mushroom Carpet",
-  "block.extendedmushrooms.red_mushroom_carpet": "Red Mushroom Carpet"
+  "block.extendedmushrooms.brown_mushroom_pressure_plate": "Brown Mushroom Pressure Plate",
+  "block.extendedmushrooms.red_mushroom_button": "Red Mushroom Button",
+  "block.extendedmushrooms.red_mushroom_carpet": "Red Mushroom Carpet",
+  "block.extendedmushrooms.red_mushroom_pressure_plate": "Red Mushroom Pressure Plate"
 }

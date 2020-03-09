@@ -14,6 +14,10 @@
   "block.extendedmushrooms.mushroom_trapdoor": "Pilzfalltür",
   "block.extendedmushrooms.stripped_mushroom_stem": "Entrindeter Pilzstiel",
 
+  "block.extendedmushrooms.brown_mushroom_button": "Brauner Pilzknopf",
   "block.extendedmushrooms.brown_mushroom_carpet": "Brauner Pilzteppich",
-  "block.extendedmushrooms.red_mushroom_carpet": "Roter Pilzteppich"
+  "block.extendedmushrooms.brown_mushroom_pressure_plate": "Braune Pilzdruckplatte",
+  "block.extendedmushrooms.red_mushroom_button": "Roter Pilzknopf",
+  "block.extendedmushrooms.red_mushroom_carpet": "Roter Pilzteppich",
+  "block.extendedmushrooms.red_mushroom_pressure_plate": "Rote Pilzdruckplatte"
 }
