@@ -1,11 +1,15 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
 import cech12.extendedmushrooms.client.renderer.entity.MushroomSheepRenderer;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
@@ -36,5 +40,16 @@ public class ModEntities {
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderers() {
         RenderingRegistry.registerEntityRenderingHandler((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, MushroomSheepRenderer::new);
+    }
+
+    /**
+     * Add registered entities to biomes. Is called at mod initialisation.
+     */
+    public static void addEntitiesToBiomes() {
+        //add Mushroom Sheep to Mushroom Biomes
+        Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
+        for (Biome biome : biomes) {
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP, 8, 4, 8));
+        }
     }
 }

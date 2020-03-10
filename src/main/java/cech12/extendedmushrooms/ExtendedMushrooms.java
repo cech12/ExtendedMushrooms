@@ -1,20 +1,17 @@
 package cech12.extendedmushrooms;
 
-import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
+import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModEntities;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,15 +35,12 @@ public class ExtendedMushrooms {
 
     private void setup(final FMLCommonSetupEvent event) {
         ModVanillaCompat.setup();
-
-        //add Mushroom Sheep to Mushroom Biomes
-        Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
-        for (Biome biome : biomes) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP, 8, 4, 8));
-        }
+        ModBlocks.addBlocksToBiomes();
+        ModEntities.addEntitiesToBiomes();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
+        ModBlocks.setupRenderLayers();
         ModEntities.setupRenderers();
     }
 

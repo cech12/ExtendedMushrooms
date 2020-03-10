@@ -2,10 +2,34 @@ package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FenceBlock;
+import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.HugeMushroomBlock;
+import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.*;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.placement.FrequencyConfig;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -18,6 +42,8 @@ public final class ModBlocks {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
+
+        INFESTED_GRASS = registerBlock("infested_grass", ItemGroup.DECORATIONS, new InfestedGrassBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
 
         MUSHROOM_BUTTON = registerBlock("mushroom_button", ItemGroup.REDSTONE, new MushroomButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));
         MUSHROOM_DOOR = registerBlock("mushroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
@@ -39,13 +65,32 @@ public final class ModBlocks {
 
     }
 
-    public static Block registerBlock(String name, ItemGroup itemGroup, Block block) {
+    private static Block registerBlock(String name, ItemGroup itemGroup, Block block) {
         BlockItem itemBlock = new BlockItem(block, new Item.Properties().group(itemGroup));
         block.setRegistryName(name);
         itemBlock.setRegistryName(name);
         ForgeRegistries.BLOCKS.register(block);
         ForgeRegistries.ITEMS.register(itemBlock);
         return block;
+    }
+
+    /**
+     * Setup render layers of blocks which are not solid blocks.
+     * Method is called at mod initialisation (client side).
+     */
+    @OnlyIn(Dist.CLIENT)
+    public static void setupRenderLayers() {
+        RenderTypeLookup.setRenderLayer(INFESTED_GRASS, RenderType.cutout());
+    }
+
+    public static void addBlocksToBiomes() {
+        //add infested grass to mushroom biomes
+        BlockState infestedGrass = INFESTED_GRASS.getDefaultState();
+        BlockClusterFeatureConfig field_226826_u_ = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedGrass), new SimpleBlockPlacer())).func_227315_a_(32).func_227322_d_();
+        Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
+        for (Biome biome : biomes) {
+            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(field_226826_u_).func_227228_a_(Placement.COUNT_HEIGHTMAP_DOUBLE.func_227446_a_(new FrequencyConfig(2))));
+        }
     }
 
 }
