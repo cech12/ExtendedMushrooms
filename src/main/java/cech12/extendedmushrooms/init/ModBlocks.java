@@ -80,16 +80,16 @@ public final class ModBlocks {
      */
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderLayers() {
-        RenderTypeLookup.setRenderLayer(INFESTED_GRASS, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(INFESTED_GRASS, RenderType.getCutout());
     }
 
     public static void addBlocksToBiomes() {
         //add infested grass to mushroom biomes
         BlockState infestedGrass = INFESTED_GRASS.getDefaultState();
-        BlockClusterFeatureConfig field_226826_u_ = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedGrass), new SimpleBlockPlacer())).func_227315_a_(32).func_227322_d_();
+        BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedGrass), new SimpleBlockPlacer())).tries(32).build();
         Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
         for (Biome biome : biomes) {
-            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(field_226826_u_).func_227228_a_(Placement.COUNT_HEIGHTMAP_DOUBLE.func_227446_a_(new FrequencyConfig(2))));
+            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(config).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(2))));
         }
     }
 

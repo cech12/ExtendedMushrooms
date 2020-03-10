@@ -1,8 +1,11 @@
 package cech12.extendedmushrooms.mixin;
 
+import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
+import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
 import cech12.extendedmushrooms.utils.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
@@ -54,6 +57,23 @@ public class MixinMushroomBlock {
             cir.setReturnValue(true);
         } else {
             cir.setReturnValue(world.getLightSubtracted(pos, 0) < 13 && blockstate.canSustainPlant(world, blockpos, net.minecraft.util.Direction.UP, (IPlantable) state.getBlock()));
+        }
+        cir.cancel();
+    }
+
+    /**
+     * Change grow behaviour to enable mega mushrooms can be grown out of vanilla mushrooms.
+     */
+    @Inject(at = @At("HEAD"), method = "func_226940_a_", cancellable = true)
+    public void growProxy(ServerWorld world, BlockPos pos, BlockState state, Random random, CallbackInfoReturnable<Boolean> cir) {
+        if (state.getBlock() == Blocks.BROWN_MUSHROOM) {
+            (new BrownMushroom()).growMushroom(world, world.getChunkProvider().getChunkGenerator(), pos, state, random);
+            cir.setReturnValue(true);
+        } else if (state.getBlock() == Blocks.RED_MUSHROOM) {
+            (new RedMushroom()).growMushroom(world, world.getChunkProvider().getChunkGenerator(), pos, state, random);
+            cir.setReturnValue(true);
+        } else {
+            cir.setReturnValue(false);
         }
         cir.cancel();
     }
