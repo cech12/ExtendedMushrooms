@@ -3,6 +3,10 @@
   "item.extendedmushrooms.mushroom_bread": "Mushroom Bread",
   "item.extendedmushrooms.mushroom_spores": "Mushroom Spores",
 
+  "item.extendedmushrooms.mushroom_sheep_spawn_egg": "Mushroom Sheep Spawn Egg",
+
+  "entity.extendedmushrooms.mushroom_sheep": "Mushroom Sheep",
+
   "block.extendedmushrooms.mushroom_button": "Mushroom Button",
   "block.extendedmushrooms.mushroom_door": "Mushroom Door",
   "block.extendedmushrooms.mushroom_fence": "Mushroom Fence",

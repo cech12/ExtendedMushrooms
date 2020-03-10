@@ -1,0 +1,271 @@
+package cech12.extendedmushrooms.entity.passive;
+
+import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
+import cech12.extendedmushrooms.entity.ai.goal.EatMyceliumGoal;
+import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.EatGrassGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.Tags;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
+public class MushroomSheepEntity extends SheepEntity {
+
+    private static final DataParameter<Boolean> SHEARED = EntityDataManager.createKey(MushroomSheepEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<ItemStack> MUSHROOM_TYPE = EntityDataManager.createKey(MushroomSheepEntity.class, DataSerializers.ITEMSTACK);
+
+    private int sheepTimer;
+    private EatMyceliumGoal eatMyceliumGoal;
+
+    public MushroomSheepEntity(EntityType<? extends SheepEntity> type, World worldIn) {
+        super(type, worldIn);
+    }
+
+    @Override
+    protected void registerGoals() {
+        //only for super.updateAITasks() to avoid NullPointerException
+        this.eatGrassGoal = new EatGrassGoal(this); //changed field eatGrassGoal in accesstransformer.cfg
+        this.eatMyceliumGoal = new EatMyceliumGoal(this);
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        //add temptGoal for each mushroom
+        for (Item mushroom : Tags.Items.MUSHROOMS.getAllElements()) {
+            this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.fromItems(mushroom), false));
+        }
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.addGoal(5, this.eatMyceliumGoal);
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+    }
+
+    @Override
+    protected void updateAITasks() {
+        this.sheepTimer = this.eatMyceliumGoal.getEatingTimer();
+        super.updateAITasks();
+    }
+
+    @Override
+    public void livingTick() {
+        if (this.world.isRemote) {
+            this.sheepTimer = Math.max(0, this.sheepTimer - 1);
+        }
+        super.livingTick();
+    }
+
+    protected void registerAttributes() {
+        super.registerAttributes();
+        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23F);
+    }
+
+    protected void registerData() {
+        super.registerData();
+        this.dataManager.register(SHEARED, false);
+        this.dataManager.register(MUSHROOM_TYPE, new ItemStack(MushroomType.byId(0).getItem()));
+    }
+
+    @Nonnull
+    public ResourceLocation getLootTable() {
+        if (this.getSheared()) {
+            return this.getType().getLootTable();
+        } else {
+            return this.getMushroomType().getSheepLootTable();
+        }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void handleStatusUpdate(byte id) {
+        if (id == 10) {
+            this.sheepTimer = 40;
+        } else {
+            super.handleStatusUpdate(id);
+        }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public float getHeadRotationPointY(float p_70894_1_) {
+        if (this.sheepTimer <= 0) {
+            return 0.0F;
+        } else if (this.sheepTimer >= 4 && this.sheepTimer <= 36) {
+            return 1.0F;
+        } else {
+            return this.sheepTimer < 4 ? ((float)this.sheepTimer - p_70894_1_) / 4.0F : -((float)(this.sheepTimer - 40) - p_70894_1_) / 4.0F;
+        }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public float getHeadRotationAngleX(float p_70890_1_) {
+        if (this.sheepTimer > 4 && this.sheepTimer <= 36) {
+            float f = ((float)(this.sheepTimer - 4) - p_70890_1_) / 32.0F;
+            return ((float)Math.PI / 5F) + 0.21991149F * MathHelper.sin(f * 28.7F);
+        } else {
+            return this.sheepTimer > 0 ? ((float)Math.PI / 5F) : this.rotationPitch * ((float)Math.PI / 180F);
+        }
+    }
+
+    @Override
+    public boolean processInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getHeldItem(hand);
+        boolean superResult = super.processInteract(player, hand);
+        if (superResult && itemstack.getItem().getTags().contains(Tags.Items.MUSHROOMS.getId())) {
+            //change mushroom type
+            MushroomType type = MushroomType.byItem(itemstack.getItem());
+            if (type != null && type != this.getMushroomType()) {
+                this.setMushroomType(type);
+            }
+        }
+        return superResult;
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.getItem().getTags().contains(Tags.Items.MUSHROOMS.getId());
+    }
+
+    @Override
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        compound.putBoolean("Sheared", this.getSheared());
+        compound.putInt("Mushroom", this.getMushroomType().getId());
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readAdditional(CompoundNBT compound) {
+        super.readAdditional(compound);
+        this.setSheared(compound.getBoolean("Sheared"));
+        this.setMushroomType(MushroomType.byId(compound.getInt("Mushroom")));
+    }
+
+    /**
+     * Gets the wool color of this sheep.
+     */
+    public MushroomType getMushroomType() {
+        return MushroomType.byItem(this.dataManager.get(MUSHROOM_TYPE).getItem());
+    }
+
+    /**
+     * Sets the wool color of this sheep
+     */
+    public void setMushroomType(MushroomType mushroomType) {
+        this.dataManager.set(MUSHROOM_TYPE, new ItemStack(mushroomType.getItem()));
+    }
+
+    /**
+     * returns true if a sheeps wool has been sheared
+     */
+    public boolean getSheared() {
+        return this.dataManager.get(SHEARED);
+    }
+
+    /**
+     * make a sheep sheared if set to true
+     */
+    public void setSheared(boolean sheared) {
+        this.dataManager.set(SHEARED, sheared);
+    }
+
+    /**
+     * Chooses a "vanilla" sheep color based on the provided random.
+     */
+    public static MushroomType getRandomMushroomType(Random random) {
+        int i = random.nextInt(100);
+        if (i < 50) {
+            return MushroomType.BROWN_MUSHROOM;
+        } else {
+            return MushroomType.RED_MUSHROOM;
+        } //TODO more variants
+    }
+
+    public SheepEntity createChild(AgeableEntity ageable) {
+        if (ageable instanceof MushroomSheepEntity) {
+            // only create a mushroom sheep, when both parents are mushroom sheeps.
+            MushroomSheepEntity child = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(this.world);
+            if (child != null) {
+                child.setMushroomType(this.getMushroomTypeMixFromParents(this, (MushroomSheepEntity) ageable));
+                return child;
+            }
+        } else {
+            //when other entity is no mushroom sheep, create a normal sheep with its color.
+            SheepEntity child = EntityType.SHEEP.create(this.world);
+            if (child != null) {
+                child.setFleeceColor(((SheepEntity) ageable).getFleeceColor());
+                return child;
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    public ILivingEntityData onInitialSpawn(IWorld worldIn, @Nonnull DifficultyInstance difficultyIn, @Nonnull SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        this.setMushroomType(getRandomMushroomType(worldIn.getRandom()));
+        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+    }
+
+    /**
+     * Attempts to mix both parent sheep to come up with a mixed dye color.
+     */
+    private MushroomType getMushroomTypeMixFromParents(MushroomSheepEntity father, MushroomSheepEntity mother) {
+        if (father.getRNG().nextBoolean()) {
+            return father.getMushroomType();
+        } else {
+            return mother.getMushroomType();
+        }
+    }
+
+    @Override
+    @Nonnull
+    public List<ItemStack> onSheared(ItemStack item, IWorld world, BlockPos pos, int fortune) {
+        java.util.List<ItemStack> ret = new java.util.ArrayList<>();
+        if (!this.world.isRemote) {
+            this.setSheared(true);
+            int i = 1 + this.rand.nextInt(3);
+            for(int j = 0; j < i; ++j) {
+                ret.add(new ItemStack(this.getMushroomType().getCapBlock()));
+            }
+        }
+        this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+        return ret;
+    }
+
+}

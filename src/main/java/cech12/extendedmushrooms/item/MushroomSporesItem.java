@@ -1,11 +1,14 @@
 package cech12.extendedmushrooms.item;
 
+import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
+import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -49,24 +52,45 @@ public class MushroomSporesItem extends Item {
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
         World world = target.world;
-        // Cow to Mooshroom
-        if (!world.isRemote && target instanceof CowEntity && !(target instanceof MooshroomEntity)) {
-            target.setAIMoveSpeed(0);
-            BlockPos pos = target.getPosition();
-            //create mooshroom
-            MooshroomEntity mooshroom = new MooshroomEntity(EntityType.MOOSHROOM, target.world);
-            mooshroom.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), target.rotationYaw, target.rotationPitch);
-            mooshroom.setHealth(target.getHealth());
-            mooshroom.setGrowingAge(((CowEntity) target).getGrowingAge());
-            mooshroom.renderYawOffset = target.renderYawOffset;
-            //a small explosion
-            world.createExplosion(target, pos.getX(), pos.getY(), pos.getZ(), 0.0F, Explosion.Mode.NONE);
-            //replace cow with new mooshroom
-            target.remove();
-            world.addEntity(mooshroom);
-            //remove one item
-            stack.setCount(stack.getCount() - 1);
-            return true;
+        if (!world.isRemote) {
+            // Cow to Mooshroom
+            if (target instanceof CowEntity && !(target instanceof MooshroomEntity)) {
+                target.setAIMoveSpeed(0);
+                BlockPos pos = target.getPosition();
+                //create mooshroom
+                MooshroomEntity mooshroom = new MooshroomEntity(EntityType.MOOSHROOM, target.world);
+                mooshroom.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), target.rotationYaw, target.rotationPitch);
+                mooshroom.setHealth(target.getHealth());
+                mooshroom.setGrowingAge(((CowEntity) target).getGrowingAge());
+                mooshroom.renderYawOffset = target.renderYawOffset;
+                //a small explosion
+                world.createExplosion(target, pos.getX(), pos.getY(), pos.getZ(), 0.0F, Explosion.Mode.NONE);
+                //replace cow with new mooshroom
+                target.remove();
+                world.addEntity(mooshroom);
+                //remove one item
+                stack.setCount(stack.getCount() - 1);
+                return true;
+            }
+            //Sheep to Mushroom Sheep
+            if (target instanceof SheepEntity && !(target instanceof MushroomSheepEntity)) {
+                target.setAIMoveSpeed(0);
+                BlockPos pos = target.getPosition();
+                //create mushroom sheep
+                MushroomSheepEntity mushroomSheep = new MushroomSheepEntity((EntityType<MushroomSheepEntity>)ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP, target.world);
+                mushroomSheep.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), target.rotationYaw, target.rotationPitch);
+                mushroomSheep.setHealth(target.getHealth());
+                mushroomSheep.setGrowingAge(((SheepEntity) target).getGrowingAge());
+                mushroomSheep.renderYawOffset = target.renderYawOffset;
+                //a small explosion
+                world.createExplosion(target, pos.getX(), pos.getY(), pos.getZ(), 0.0F, Explosion.Mode.NONE);
+                //replace sheep with new mushroom sheep
+                target.remove();
+                world.addEntity(mushroomSheep);
+                //remove one item
+                stack.setCount(stack.getCount() - 1);
+                return true;
+            }
         }
         return false;
     }

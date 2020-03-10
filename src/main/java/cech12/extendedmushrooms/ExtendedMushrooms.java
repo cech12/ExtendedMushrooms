@@ -1,8 +1,12 @@
 package cech12.extendedmushrooms;
 
+import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
+import cech12.extendedmushrooms.init.ModEntities;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
@@ -11,6 +15,7 @@ import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -24,11 +29,15 @@ public class ExtendedMushrooms {
 
     public ExtendedMushrooms() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
+    private void setup(final FMLCommonSetupEvent event) {
         ModVanillaCompat.setup();
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
+        ModEntities.setupRenderers();
     }
 
     /**
@@ -54,6 +63,20 @@ public class ExtendedMushrooms {
             }
             event.setCanceled(true);
             event.setCancellationResult(ActionResultType.SUCCESS);
+        }
+    }
+
+    /**
+     * Remove dye behaviour from mushroom sheeps.
+     */
+    @SubscribeEvent
+    public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
+        ItemStack itemStack = event.getPlayer().getHeldItem(event.getHand());
+        Entity entity = event.getTarget();
+        //check for dye item and mushroom sheep entity
+        if (entity instanceof MushroomSheepEntity && itemStack.getItem() instanceof DyeItem) {
+            event.setCanceled(true);
+            event.setCancellationResult(ActionResultType.FAIL);
         }
     }
 

@@ -3,6 +3,10 @@
   "item.extendedmushrooms.mushroom_bread": "Pilzbrot",
   "item.extendedmushrooms.mushroom_spores": "Pilzsporen",
 
+  "item.extendedmushrooms.mushroom_sheep_spawn_egg": "Pilzschaf Spawn-Ei",
+
+  "entity.extendedmushrooms.mushroom_sheep": "Pilzschaf",
+
   "block.extendedmushrooms.mushroom_button": "Pilzknopf",
   "block.extendedmushrooms.mushroom_door": "Pilztür",
   "block.extendedmushrooms.mushroom_fence": "Pilzzaun",
