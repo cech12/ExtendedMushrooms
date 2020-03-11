@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
+import cech12.extendedmushrooms.init.ModFeatures;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
@@ -12,8 +13,7 @@ public class RedMushroom extends MegaMushroom{
     @Nullable
     @Override
     protected ConfiguredFeature<?, ?> getMegaMushroomFeature(Random var1) {
-        //TODO
-        return null;
+        return ModFeatures.MEGA_RED_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_RED_MUSHROOM);
     }
 
     @Nullable

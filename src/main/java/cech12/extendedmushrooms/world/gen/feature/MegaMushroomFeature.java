@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.datafixers.Dynamic;
+import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -36,4 +37,11 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
             }
         }
     }
+
+    protected void placeCapBlockIfPossible(IWorld world, Random random, BigMushroomFeatureConfig config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south) {
+        if (world.getBlockState(blockPos).canBeReplacedByLeaves(world, blockPos)) {
+            this.setBlockState(world, blockPos, config.field_227272_a_.getBlockState(random, blockPos).with(HugeMushroomBlock.WEST, west).with(HugeMushroomBlock.EAST, east).with(HugeMushroomBlock.NORTH, north).with(HugeMushroomBlock.SOUTH, south));
+        }
+    }
+
 }

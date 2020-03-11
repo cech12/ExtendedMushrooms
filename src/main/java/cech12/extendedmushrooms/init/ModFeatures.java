@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.world.gen.feature.MegaBrownMushroomFeature;
+import cech12.extendedmushrooms.world.gen.feature.MegaRedMushroomFeature;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
@@ -18,9 +19,8 @@ public class ModFeatures {
 
     @SubscribeEvent
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-
         MEGA_BROWN_MUSHROOM = register("mega_brown_mushroom", new MegaBrownMushroomFeature(BigMushroomFeatureConfig::deserialize));
-        //MEGA_RED_MUSHROOM = register("mega_red_mushroom", new MegaRedMushroomFeature(BigMushroomFeatureConfig::deserialize));
+        MEGA_RED_MUSHROOM = register("mega_red_mushroom", new MegaRedMushroomFeature(BigMushroomFeatureConfig::deserialize));
     }
 
     private static <C extends IFeatureConfig, F extends Feature<C>> F register(String key, F feature) {
