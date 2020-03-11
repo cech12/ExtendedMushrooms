@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.world.gen.feature.MegaBrownMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaRedMushroomFeature;
 import net.minecraft.world.biome.Biome;
@@ -37,10 +38,14 @@ public class ModFeatures {
     }
 
     public static void addFeaturesToBiomes() {
-        //add infested grass to mushroom biomes
-        Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
-        for (Biome biome : biomes) {
-            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_BOOLEAN_SELECTOR.withConfiguration(new TwoFeatureChoiceConfig(MEGA_RED_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_RED_MUSHROOM), MEGA_BROWN_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_BROWN_MUSHROOM))).withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(20))));
+        //add vanilla mega mushrooms to mushroom biomes
+        if (Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.getValue()) {
+            Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
+            for (Biome biome : biomes) {
+                biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_BOOLEAN_SELECTOR
+                        .withConfiguration(new TwoFeatureChoiceConfig(MEGA_RED_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_RED_MUSHROOM), MEGA_BROWN_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_BROWN_MUSHROOM)))
+                        .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Config.VANILLA_MEGA_MUSHROOM_GENERATION_CHANCE.getValue()))));
+            }
         }
     }
 

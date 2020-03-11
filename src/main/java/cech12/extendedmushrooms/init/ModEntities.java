@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
 import cech12.extendedmushrooms.client.renderer.entity.MushroomSheepRenderer;
+import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -47,9 +48,15 @@ public class ModEntities {
      */
     public static void addEntitiesToBiomes() {
         //add Mushroom Sheep to Mushroom Biomes
-        Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
-        for (Biome biome : biomes) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP, 8, 4, 8));
+        if (Config.MUSHROOM_SHEEP_ENABLED.getValue()) {
+            Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
+            for (Biome biome : biomes) {
+                biome.getSpawns(EntityClassification.CREATURE).add(
+                        new Biome.SpawnListEntry(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
+                                Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.getValue(),
+                                Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.getValue(),
+                                Config.MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.getValue()));
+            }
         }
     }
 }
