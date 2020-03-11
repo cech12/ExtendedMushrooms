@@ -19,12 +19,16 @@ public class ModVanillaCompat {
         registerFlammable(Blocks.RED_MUSHROOM_BLOCK, 30, 60);
         registerFlammable(Blocks.MUSHROOM_STEM, 5, 5);
 
+        registerFlammable(INFESTED_GRASS, 60, 100);
+
         registerFlammable(MUSHROOM_FENCE, 5, 20);
         registerFlammable(MUSHROOM_FENCE_GATE, 5, 20);
         registerFlammable(MUSHROOM_PLANKS, 5, 20);
         registerFlammable(MUSHROOM_SLAB, 5, 20);
         registerFlammable(MUSHROOM_STAIRS, 5, 20);
         registerFlammable(STRIPPED_MUSHROOM_STEM, 5, 5);
+
+        registerCompostable(0.3F, INFESTED_GRASS);
 
         registerCompostable(0.15F, MUSHROOM_BUTTON);
         registerCompostable(0.3F, MUSHROOM_DOOR);
