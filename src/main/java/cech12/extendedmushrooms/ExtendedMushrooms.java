@@ -3,6 +3,7 @@ package cech12.extendedmushrooms;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModEntities;
+import cech12.extendedmushrooms.init.ModFeatures;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -37,6 +38,7 @@ public class ExtendedMushrooms {
         ModVanillaCompat.setup();
         ModBlocks.addBlocksToBiomes();
         ModEntities.addEntitiesToBiomes();
+        ModFeatures.addFeaturesToBiomes();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

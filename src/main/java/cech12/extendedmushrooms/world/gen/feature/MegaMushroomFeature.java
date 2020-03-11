@@ -19,7 +19,7 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
     protected int getSize(Random random) {
         int i = random.nextInt(5) + 10;
         if (random.nextInt(12) == 0) {
-            i *= random.nextInt(7) + 15;
+            i = random.nextInt(7) + 15;
         }
         return i;
     }
