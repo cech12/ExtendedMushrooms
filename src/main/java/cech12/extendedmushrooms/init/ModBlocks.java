@@ -81,6 +81,9 @@ public final class ModBlocks {
      */
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderLayers() {
+        //RenderTypeLookup.setRenderLayer(MUSHROOM_DOOR, RenderType.getCutout()); //unfortunately buggy - so, texture without transparency
+        //RenderTypeLookup.setRenderLayer(MUSHROOM_TRAPDOOR, RenderType.getCutout()); //unfortunately buggy - so, texture without transparency
+
         RenderTypeLookup.setRenderLayer(INFESTED_GRASS, RenderType.getCutout());
     }
 
