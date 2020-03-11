@@ -17,8 +17,23 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected void placeCap(IWorld world, Random random, BlockPos blockPos, int size, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
-        int radius = 4 + random.nextInt(2);
+    protected int getCapRadius(Random random) {
+        return 4 + random.nextInt(2);
+    }
+
+    @Override
+    protected boolean canPlaceCap(IWorld world, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+        Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, size / 2, 0), size, radius);
+        for (CapPosition capPos: cap.capPositions) {
+            if (!world.getBlockState(capPos.blockPos).canBeReplacedByLeaves(world, capPos.blockPos)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    protected void placeCap(IWorld world, Random random, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, size / 2, 0), size, radius);
         for (CapPosition capPos: cap.capPositions) {
             this.placeCapBlockIfPossible(world, random, config, capPos.blockPos, capPos.west, capPos.east, capPos.north, capPos.south);

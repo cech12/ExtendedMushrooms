@@ -15,9 +15,26 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected void placeCap(IWorld world, Random random, BlockPos blockPos, int size, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
-        //top layer: 3 blocks in each direction without corners
-        int radius = 3 + random.nextInt(2);
+    protected int getCapRadius(Random random) {
+        return 3 + random.nextInt(2);
+    }
+
+    @Override
+    protected boolean canPlaceCap(IWorld world, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+        for (int x = -capRadius; x <= capRadius+1; ++x) {
+            for (int z = -capRadius; z <= capRadius+1; ++z) {
+                mutableBlockPos.setPos(blockPos).move(x, size, z);
+                if (!world.getBlockState(mutableBlockPos).canBeReplacedByLeaves(world, mutableBlockPos)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    protected void placeCap(IWorld world, Random random, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+        //top layer: "radius" blocks in each direction without corners
         for(int x = -radius; x <= radius+1; ++x) {
             for(int z = -radius; z <= radius+1; ++z) {
                 boolean flag = x == -radius;
