@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:wood/mushroom_trapdoor"
+      "extendedmushrooms:mushroom_wood/beige/mushroom_trapdoor"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:wood/mushroom_trapdoor"
+        "recipe": "extendedmushrooms:mushroom_wood/beige/mushroom_trapdoor"
       }
     }
   },

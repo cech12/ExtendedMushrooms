@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:wool/brown_mushroom_button"
+      "extendedmushrooms:mushroom_cap/brown/brown_mushroom_button"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:wool/brown_mushroom_button"
+        "recipe": "extendedmushrooms:mushroom_cap/brown/brown_mushroom_button"
       }
     }
   },

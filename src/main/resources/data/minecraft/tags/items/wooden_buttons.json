@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "extendedmushrooms:mushroom_button",
-    "extendedmushrooms:brown_mushroom_button",
-    "extendedmushrooms:red_mushroom_button"
+    "#extendedmushrooms:mushroom_buttons"
   ]
 }

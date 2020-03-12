@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=false": { "model": "extendedmushrooms:block/glowshroom_pressure_plate" },
+        "powered=true": { "model": "extendedmushrooms:block/glowshroom_pressure_plate_down" }
+    }
+}

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:wood/mushroom_oak_boat"
+      "extendedmushrooms:mushroom_wood/mushroom_oak_boat"
     ]
   },
   "criteria": {
@@ -15,7 +15,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:wood/mushroom_oak_boat"
+        "recipe": "extendedmushrooms:mushroom_wood/mushroom_oak_boat"
       }
     }
   },

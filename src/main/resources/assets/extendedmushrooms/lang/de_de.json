@@ -20,15 +20,27 @@
   "block.extendedmushrooms.mushroom_trapdoor": "Pilzfalltür",
   "block.extendedmushrooms.stripped_mushroom_stem": "Entrindeter Pilzstiel",
 
-  "block.extendedmushrooms.glowshroom": "Leuchtpilz",
-  "block.extendedmushrooms.glowshroom_cap": "Leuchtpilzhut",
-  "block.extendedmushrooms.glowshroom_stem": "Leuchtpilzstiel",
-  "block.extendedmushrooms.glowshroom_stem_stripped": "Entrindeter Leuchtpilzstiel",
-
   "block.extendedmushrooms.brown_mushroom_button": "Brauner Pilzknopf",
   "block.extendedmushrooms.brown_mushroom_carpet": "Brauner Pilzteppich",
   "block.extendedmushrooms.brown_mushroom_pressure_plate": "Braune Pilzdruckplatte",
   "block.extendedmushrooms.red_mushroom_button": "Roter Pilzknopf",
   "block.extendedmushrooms.red_mushroom_carpet": "Roter Pilzteppich",
-  "block.extendedmushrooms.red_mushroom_pressure_plate": "Rote Pilzdruckplatte"
+  "block.extendedmushrooms.red_mushroom_pressure_plate": "Rote Pilzdruckplatte",
+
+  "block.extendedmushrooms.glowshroom": "Leuchtpilz",
+  "block.extendedmushrooms.glowshroom_cap": "Leuchtpilzhut",
+  "block.extendedmushrooms.glowshroom_stem": "Leuchtpilzstiel",
+  "block.extendedmushrooms.glowshroom_stem_stripped": "Entrindeter Leuchtpilzstiel",
+  "block.extendedmushrooms.glowshroom_button": "Leuchtpilzknopf",
+  "block.extendedmushrooms.glowshroom_door": "Leuchtpilztür",
+  "block.extendedmushrooms.glowshroom_fence": "Leuchtpilzzaun",
+  "block.extendedmushrooms.glowshroom_fence_gate": "Leuchtpilzzauntor",
+  "block.extendedmushrooms.glowshroom_planks": "Leuchtpilzbretter",
+  "block.extendedmushrooms.glowshroom_pressure_plate": "Leuchtpilzdruckplatte",
+  "block.extendedmushrooms.glowshroom_slab": "Leuchtpilzstufe",
+  "block.extendedmushrooms.glowshroom_stairs": "Leuchtpilztreppe",
+  "block.extendedmushrooms.glowshroom_trapdoor": "Leuchtpilzfalltür",
+  "block.extendedmushrooms.glowshroom_cap_button": "Leuchtpilzhutknopf",
+  "block.extendedmushrooms.glowshroom_cap_carpet": "Leuchtpilzhutteppich",
+  "block.extendedmushrooms.glowshroom_cap_pressure_plate": "Leuchtpilzhutdruckplatte"
 }

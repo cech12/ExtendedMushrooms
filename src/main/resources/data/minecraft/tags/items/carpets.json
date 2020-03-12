@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "extendedmushrooms:brown_mushroom_carpet",
-    "extendedmushrooms:red_mushroom_carpet"
+    "#extendedmushrooms:mushroom_carpets"
   ]
 }

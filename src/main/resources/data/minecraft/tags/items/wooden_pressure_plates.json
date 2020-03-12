@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "extendedmushrooms:mushroom_pressure_plate",
-    "extendedmushrooms:brown_mushroom_pressure_plate",
-    "extendedmushrooms:red_mushroom_pressure_plate"
+    "#extendedmushrooms:mushroom_pressure_plates"
   ]
 }

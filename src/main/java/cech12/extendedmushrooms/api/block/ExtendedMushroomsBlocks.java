@@ -28,5 +28,17 @@ public class ExtendedMushroomsBlocks {
     public static Block GLOWSHROOM_CAP;
     public static Block GLOWSHROOM_STEM;
     public static Block GLOWSHROOM_STEM_STRIPPED;
+    public static Block GLOWSHROOM_BUTTON;
+    public static Block GLOWSHROOM_DOOR;
+    public static Block GLOWSHROOM_FENCE;
+    public static Block GLOWSHROOM_FENCE_GATE;
+    public static Block GLOWSHROOM_PLANKS;
+    public static Block GLOWSHROOM_PRESSURE_PLATE;
+    public static Block GLOWSHROOM_SLAB;
+    public static Block GLOWSHROOM_STAIRS;
+    public static Block GLOWSHROOM_TRAPDOOR;
+    public static Block GLOWSHROOM_CAP_BUTTON;
+    public static Block GLOWSHROOM_CAP_CARPET;
+    public static Block GLOWSHROOM_CAP_PRESSURE_PLATE;
 
 }

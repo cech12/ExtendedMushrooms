@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:wool/blue_bed"
+      "extendedmushrooms:mushroom_cap/glowshroom/blue_bed"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:wool/blue_bed"
+        "recipe": "extendedmushrooms:mushroom_cap/glowshroom/blue_bed"
       }
     }
   },

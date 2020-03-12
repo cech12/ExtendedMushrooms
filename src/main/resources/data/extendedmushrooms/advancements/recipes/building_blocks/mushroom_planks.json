@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:wood/mushroom_planks"
+      "extendedmushrooms:mushroom_wood/beige/mushroom_planks"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "extendedmushrooms:mushroom_stems"
+            "tag": "extendedmushrooms:mushroom_stems/beige"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:wood/mushroom_planks"
+        "recipe": "extendedmushrooms:mushroom_wood/beige/mushroom_planks"
       }
     }
   },

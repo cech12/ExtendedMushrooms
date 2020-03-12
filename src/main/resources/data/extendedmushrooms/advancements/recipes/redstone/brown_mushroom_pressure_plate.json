@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:wool/brown_mushroom_pressure_plate"
+      "extendedmushrooms:mushroom_cap/brown/brown_mushroom_pressure_plate"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:wool/brown_mushroom_pressure_plate"
+        "recipe": "extendedmushrooms:mushroom_cap/brown/brown_mushroom_pressure_plate"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:wood/mushroom_stairs"
+      "extendedmushrooms:mushroom_wood/beige/mushroom_stairs"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:wood/mushroom_stairs"
+        "recipe": "extendedmushrooms:mushroom_wood/beige/mushroom_stairs"
       }
     }
   },
