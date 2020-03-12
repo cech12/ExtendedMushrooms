@@ -1,58 +1,76 @@
 package cech12.extendedmushrooms.item;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.function.Supplier;
 
 public enum MushroomType implements IStringSerializable {
 
-    BROWN_MUSHROOM(0, Items.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.MUSHROOM_STEM),
-    RED_MUSHROOM(1, Items.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK, Blocks.MUSHROOM_STEM);
+    BROWN_MUSHROOM(0, ()->Items.BROWN_MUSHROOM, ()->Blocks.BROWN_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM),
+    RED_MUSHROOM(1, ()->Items.RED_MUSHROOM, ()->Blocks.RED_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM),
+    GLOWSHROOM(2, ()->ExtendedMushroomsBlocks.GLOWSHROOM, ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP, ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM, ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getDefaultState()));
 
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 
     private final int id;
-    private final Item item;
-    private final Block capBlock;
-    private final Block stemBlock;
+    private final Supplier<IItemProvider> item;
+    private final Supplier<Block> capBlock;
+    private final Supplier<Block> stemBlock;
+    private final Supplier<Integer> lightValue;
 
-    MushroomType(int id, Item item, Block capBlock, Block stemBlock) {
+    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, Supplier<Block> stemBlock) {
         this.id = id;
         this.item = item;
         this.capBlock = capBlock;
         this.stemBlock = stemBlock;
+        this.lightValue = () -> 0;
+    }
+
+    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, Supplier<Block> stemBlock, Supplier<Integer> lightValue) {
+        this.id = id;
+        this.item = item;
+        this.capBlock = capBlock;
+        this.stemBlock = stemBlock;
+        this.lightValue = lightValue;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public Item getItem() {
-        return item;
+        return this.item.get().asItem();
     }
 
     public Block getCapBlock() {
-        return capBlock;
+        return this.capBlock.get();
     }
 
     public Block getStemBlock() {
-        return stemBlock;
+        return this.stemBlock.get();
+    }
+
+    public int getLightValue() {
+        return this.lightValue.get();
     }
 
     public ResourceLocation getSheepLootTable() {
-        return new ResourceLocation(ExtendedMushrooms.MOD_ID, "entities/sheep/" + this.item.getRegistryName().getPath());
+        return new ResourceLocation(ExtendedMushrooms.MOD_ID, "entities/sheep/" + this.getItem().getRegistryName().getPath());
     }
 
     @Override
     public String getName() {
-        return item.getRegistryName().getPath();
+        return this.getItem().getRegistryName().getPath();
     }
 
     public static MushroomType byId(int id) {
@@ -64,7 +82,7 @@ public enum MushroomType implements IStringSerializable {
 
     public static MushroomType byItemOrNull(Item item) {
         for (MushroomType mushroomType : VALUES) {
-            if (mushroomType.item == item) {
+            if (mushroomType.getItem() == item) {
                 return mushroomType;
             }
         }

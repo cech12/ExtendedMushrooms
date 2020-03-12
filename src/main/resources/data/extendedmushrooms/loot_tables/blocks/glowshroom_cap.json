@@ -35,7 +35,7 @@
                   ]
                 }
               ],
-              "name": "minecraft:glowshroom_cap"
+              "name": "extendedmushrooms:glowshroom_cap"
             },
             {
               "type": "minecraft:item",
@@ -54,7 +54,7 @@
                   ]
                 }
               ],
-              "name": "minecraft:glowshroom"
+              "name": "extendedmushrooms:glowshroom"
             }
           ]
         }
