@@ -25,6 +25,7 @@ public class ExtendedMushroomsBlocks {
     public static Block RED_MUSHROOM_PRESSURE_PLATE;
 
     public static Block GLOWSHROOM;
+    public static Block GLOWSHROOM_POTTED;
     public static Block GLOWSHROOM_CAP;
     public static Block GLOWSHROOM_STEM;
     public static Block GLOWSHROOM_STEM_STRIPPED;
