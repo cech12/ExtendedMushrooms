@@ -21,13 +21,16 @@ public class Config {
     public static final ConfigType.Integer MEGA_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
 
     public static final ConfigType.Boolean VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
+    public static final ConfigType.Double MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT = new ConfigType.Double(1.0);
+    public static final ConfigType.Double MEGA_RED_MUSHROOM_GENERATION_WEIGHT = new ConfigType.Double(1.0);
 
     public static final ConfigType.Boolean GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Double GLOWSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.25);
+    public static final ConfigType.Double GLOWSHROOM_GENERATION_COUNT_FACTOR = new ConfigType.Double(0.25);
     public static final ConfigType.Boolean BIG_GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double BIG_GLOWSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.25);
+    public static final ConfigType.Double BIG_GLOWSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.25);
     public static final ConfigType.Boolean MEGA_GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double MEGA_GLOWSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.25);
+    public static final ConfigType.Double MEGA_GLOWSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.25);
 
     static {
         final ForgeConfigSpec.Builder common = new ForgeConfigSpec.Builder();
@@ -77,15 +80,26 @@ public class Config {
                 .comment("Generating chance of mega mushrooms in mushroom biomes. (1 - high chance; 100 - low chance)")
                 .defineInRange("megaMushroomGenerationChance", MEGA_MUSHROOM_GENERATION_CHANCE.getDefaultValue(), 1, 100);
 
+
+        MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.configObj = common
+                .comment("Weight of mega brown mushrooms generation.")
+                .defineInRange("megaBrownMushroomGenerationWeight", MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
+        MEGA_RED_MUSHROOM_GENERATION_WEIGHT.configObj = common
+                .comment("Weight of mega red mushrooms generation.")
+                .defineInRange("megaRedMushroomGenerationWeight", MEGA_RED_MUSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
+
         GLOWSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
-                .comment("Chance factor of glowshrooms generation. (1.0: generation is like vanilla brown mushroom generation)")
+                .comment("Chance factor of glowshrooms generation. (1.0: generation chance of vanilla brown mushroom)")
                 .defineInRange("glowshroomGenerationChanceFactor", GLOWSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
-        BIG_GLOWSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
-                .comment("Chance factor of big glowshrooms generation.")
-                .defineInRange("bigGlowshroomGenerationChanceFactor", BIG_GLOWSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
-        MEGA_GLOWSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
-                .comment("Chance factor of mega glowshrooms generation.")
-                .defineInRange("megaGlowshroomGenerationChanceFactor", MEGA_GLOWSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
+        GLOWSHROOM_GENERATION_COUNT_FACTOR.configObj = common
+                .comment("Count factor of glowshrooms generation. (1.0: generation count of vanilla brown mushroom)")
+                .defineInRange("glowshroomGenerationCountFactor", GLOWSHROOM_GENERATION_COUNT_FACTOR.getDefaultValue(), 0.0, 10.0);
+        BIG_GLOWSHROOM_GENERATION_WEIGHT.configObj = common
+                .comment("Weight of big glowshrooms generation.")
+                .defineInRange("bigGlowshroomGenerationWeight", BIG_GLOWSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
+        MEGA_GLOWSHROOM_GENERATION_WEIGHT.configObj = common
+                .comment("Weight of mega glowshrooms generation.")
+                .defineInRange("megaGlowshroomGenerationWeight", MEGA_GLOWSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
 
         common.pop();
 
