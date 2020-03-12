@@ -6,7 +6,9 @@ public class ExtendedMushroomsItems {
 
     public static Item GRILLED_MUSHROOM;
     public static Item MUSHROOM_BREAD;
+
     public static Item MUSHROOM_SPORES;
+    public static Item GLOWSTONE_CRUMBS;
 
     public static Item MUSHROOM_SHEEP_SPAWN_EGG;
 

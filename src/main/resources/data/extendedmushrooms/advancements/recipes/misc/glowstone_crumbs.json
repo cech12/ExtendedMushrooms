@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:misc/mushroom_spores"
+      "extendedmushrooms:misc/glowstone_crumbs"
     ]
   },
   "criteria": {
-    "has_mushroom": {
+    "has_glowstone_dust": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:mushrooms"
+            "item": "minecraft:glowstone_dust"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:misc/mushroom_spores"
+        "recipe": "extendedmushrooms:misc/glowstone_crumbs"
       }
     }
   },
   "requirements": [
     [
-      "has_mushroom",
+      "has_glowstone_dust",
       "has_the_recipe"
     ]
   ]
