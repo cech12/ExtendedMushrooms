@@ -17,8 +17,17 @@ public class Config {
     public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT = new ConfigType.Integer(4);
     public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT = new ConfigType.Integer(8);
 
+    public static final ConfigType.Integer BIG_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
+    public static final ConfigType.Integer MEGA_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
+
     public static final ConfigType.Boolean VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Integer VANILLA_MEGA_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(15);
+
+    public static final ConfigType.Boolean GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
+    public static final ConfigType.Double GLOWSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.25);
+    public static final ConfigType.Boolean BIG_GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
+    public static final ConfigType.Double BIG_GLOWSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.25);
+    public static final ConfigType.Boolean MEGA_GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
+    public static final ConfigType.Double MEGA_GLOWSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.25);
 
     static {
         final ForgeConfigSpec.Builder common = new ForgeConfigSpec.Builder();
@@ -37,6 +46,16 @@ public class Config {
                 .comment("Whether or not vanilla mega mushrooms should be generated in mushroom biomes.")
                 .define("vanillaMegaMushroomGenerationEnabled", VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.getDefaultValue());
 
+        GLOWSHROOM_GENERATION_ENABLED.configObj = common
+                .comment("Whether or not glowshrooms should be generated.")
+                .define("glowshroomGenerationEnabled", GLOWSHROOM_GENERATION_ENABLED.getDefaultValue());
+        BIG_GLOWSHROOM_GENERATION_ENABLED.configObj = common
+                .comment("Whether or not big glowshrooms should be generated.")
+                .define("bigGlowshroomGenerationEnabled", BIG_GLOWSHROOM_GENERATION_ENABLED.getDefaultValue());
+        MEGA_GLOWSHROOM_GENERATION_ENABLED.configObj = common
+                .comment("Whether or not mega glowshrooms should be generated.")
+                .define("megaGlowshroomGenerationEnabled", MEGA_GLOWSHROOM_GENERATION_ENABLED.getDefaultValue());
+
         common.pop();
 
         common.comment("Various options that affect blocks and entities.").push("Balance Options");
@@ -51,9 +70,22 @@ public class Config {
                 .comment("Maximal group size of spawning Mushroom Sheep herds.")
                 .defineInRange("mushroomSheepSpawnMaxGroupCount", MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.getDefaultValue(), 1, 20);
 
-        VANILLA_MEGA_MUSHROOM_GENERATION_CHANCE.configObj = common
-                .comment("Chance of generate vanilla mega mushrooms in mushroom biomes. (1 - high chance; 100 - low chance)")
-                .defineInRange("vanillaMegaMushroomGenerationChance", VANILLA_MEGA_MUSHROOM_GENERATION_CHANCE.getDefaultValue(), 1, 100);
+        BIG_MUSHROOM_GENERATION_CHANCE.configObj = common
+                .comment("Generating chance of big mushrooms in biomes with big mushrooms. (1 - high chance; 100 - low chance)")
+                .defineInRange("bigMushroomGenerationChance", BIG_MUSHROOM_GENERATION_CHANCE.getDefaultValue(), 1, 100);
+        MEGA_MUSHROOM_GENERATION_CHANCE.configObj = common
+                .comment("Generating chance of mega mushrooms in mushroom biomes. (1 - high chance; 100 - low chance)")
+                .defineInRange("megaMushroomGenerationChance", MEGA_MUSHROOM_GENERATION_CHANCE.getDefaultValue(), 1, 100);
+
+        GLOWSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
+                .comment("Chance factor of glowshrooms generation. (1.0: generation is like vanilla brown mushroom generation)")
+                .defineInRange("glowshroomGenerationChanceFactor", GLOWSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
+        BIG_GLOWSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
+                .comment("Chance factor of big glowshrooms generation.")
+                .defineInRange("bigGlowshroomGenerationChanceFactor", BIG_GLOWSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
+        MEGA_GLOWSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
+                .comment("Chance factor of mega glowshrooms generation.")
+                .defineInRange("megaGlowshroomGenerationChanceFactor", MEGA_GLOWSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
 
         common.pop();
 

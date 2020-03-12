@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "extendedmushrooms:wool/blue_bed"
+    ]
+  },
+  "criteria": {
+    "has_blue_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "extendedmushrooms:glowshroom_cap"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "extendedmushrooms:wool/blue_bed"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

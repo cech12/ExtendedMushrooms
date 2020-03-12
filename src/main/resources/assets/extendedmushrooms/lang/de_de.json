@@ -20,6 +20,11 @@
   "block.extendedmushrooms.mushroom_trapdoor": "Pilzfalltür",
   "block.extendedmushrooms.stripped_mushroom_stem": "Entrindeter Pilzstiel",
 
+  "block.extendedmushrooms.glowshroom": "Leuchtpilz",
+  "block.extendedmushrooms.glowshroom_cap": "Leuchtpilzhut",
+  "block.extendedmushrooms.glowshroom_stem": "Leuchtpilzstiel",
+  "block.extendedmushrooms.glowshroom_stem_stripped": "Entrindeter Leuchtpilzstiel",
+
   "block.extendedmushrooms.brown_mushroom_button": "Brauner Pilzknopf",
   "block.extendedmushrooms.brown_mushroom_carpet": "Brauner Pilzteppich",
   "block.extendedmushrooms.brown_mushroom_pressure_plate": "Braune Pilzdruckplatte",

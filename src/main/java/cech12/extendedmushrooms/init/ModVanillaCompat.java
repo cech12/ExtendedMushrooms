@@ -13,8 +13,6 @@ public class ModVanillaCompat {
 
     public static void setup() {
 
-        //registerStrippable(Blocks.MUSHROOM_STEM, STRIPPED_MUSHROOM_STEM);
-
         registerFlammable(Blocks.BROWN_MUSHROOM_BLOCK, 30, 60);
         registerFlammable(Blocks.RED_MUSHROOM_BLOCK, 30, 60);
         registerFlammable(Blocks.MUSHROOM_STEM, 5, 5);
@@ -28,6 +26,10 @@ public class ModVanillaCompat {
         registerFlammable(MUSHROOM_STAIRS, 5, 20);
         registerFlammable(STRIPPED_MUSHROOM_STEM, 5, 5);
 
+        registerFlammable(GLOWSHROOM_CAP, 30, 60);
+        registerFlammable(GLOWSHROOM_STEM, 5, 5);
+        registerFlammable(GLOWSHROOM_STEM_STRIPPED, 5, 5);
+
         registerCompostable(0.3F, INFESTED_GRASS);
 
         registerCompostable(0.15F, MUSHROOM_BUTTON);
@@ -39,7 +41,12 @@ public class ModVanillaCompat {
         registerCompostable(0.15F, MUSHROOM_SLAB);
         registerCompostable(0.15F, MUSHROOM_STAIRS);
         registerCompostable(0.15F, MUSHROOM_TRAPDOOR);
-        registerCompostable(0.85F, STRIPPED_MUSHROOM_STEM);
+        registerCompostable(0.65F, STRIPPED_MUSHROOM_STEM);
+
+        registerCompostable(0.65F, GLOWSHROOM);
+        registerCompostable(0.85F, GLOWSHROOM_CAP);
+        registerCompostable(0.65F, GLOWSHROOM_STEM);
+        registerCompostable(0.65F, GLOWSHROOM_STEM_STRIPPED);
 
         registerCompostable(0.15F, BROWN_MUSHROOM_BUTTON);
         registerCompostable(0.3F, BROWN_MUSHROOM_CARPET);
@@ -53,15 +60,6 @@ public class ModVanillaCompat {
         registerCompostable(0.15F, MUSHROOM_SPORES);
 
     }
-
-    //TODO AxeItem.BLOCK_STRIPPING_MAP is protected
-    // realized in ExtendedMushrooms#onRightClickBlock
-    /*
-    public static void registerStrippable(Block log, Block stripped_log) {
-        AxeItem.BLOCK_STRIPPING_MAP = Maps.newHashMap(AxeItem.BLOCK_STRIPPING_MAP);
-        AxeItem.BLOCK_STRIPPING_MAP.put(log, stripped_log);
-    }
-     */
 
     public static void registerCompostable(float chance, IItemProvider itemIn) {
         ComposterBlock.CHANCES.put(itemIn.asItem(), chance);

@@ -1,7 +1,9 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -20,6 +22,14 @@ public abstract class BigMushroom {
     @Nullable
     protected abstract ConfiguredFeature<?, ?> getBigMushroomFeature(Random var1, boolean var2);
 
+    protected static BlockState getDefaultStemState(Block stemBlock) {
+        return stemBlock.getDefaultState().with(HugeMushroomBlock.UP, false).with(HugeMushroomBlock.DOWN, false);
+    }
+
+    protected static BlockState getDefaultCapState(Block capBlock) {
+        return capBlock.getDefaultState().with(HugeMushroomBlock.DOWN, false);
+    }
+
     public boolean growMushroom(IWorld world, ChunkGenerator<?> chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
         ConfiguredFeature<?, ?> feature = this.getBigMushroomFeature(random, this.canGrowBigMushroom(world, blockPos));
         if (feature == null) {
@@ -35,7 +45,7 @@ public abstract class BigMushroom {
         }
     }
 
-    private boolean canGrowBigMushroom(IWorld world, BlockPos blockPos) {
+    private boolean canGrowBigMushroom(IWorld world, BlockPos blockPos) { //TODO
         Iterator var3 = BlockPos.Mutable.getAllInBoxMutable(blockPos.down().north(2).west(2), blockPos.up().south(2).east(2)).iterator();
 
         BlockPos pos;
