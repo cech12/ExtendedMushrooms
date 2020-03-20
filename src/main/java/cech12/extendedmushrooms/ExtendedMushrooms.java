@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms;
 
 import cech12.extendedmushrooms.config.Config;
+import cech12.extendedmushrooms.entity.ai.goal.EatMushroomGoal;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModEntities;
@@ -9,12 +10,14 @@ import cech12.extendedmushrooms.init.ModVanillaCompat;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -90,6 +93,19 @@ public class ExtendedMushrooms {
         if (entity instanceof MushroomSheepEntity && itemStack.getItem() instanceof DyeItem) {
             event.setCanceled(true);
             event.setCancellationResult(ActionResultType.FAIL);
+        }
+    }
+
+    /**
+     * Add eat mushroom goal to sheep entities when configured.
+     */
+    @SubscribeEvent
+    public static void onLivingSpawn(LivingSpawnEvent.EnteringChunk event) {
+        if (Config.SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.getValue()) {
+            if (event.getEntity() instanceof SheepEntity) { //also mushroom sheep
+                SheepEntity sheep = ((SheepEntity) event.getEntity());
+                sheep.goalSelector.addGoal(5, new EatMushroomGoal(sheep));
+            }
         }
     }
 

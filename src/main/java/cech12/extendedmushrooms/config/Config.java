@@ -16,6 +16,8 @@ public class Config {
     public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_WEIGHT = new ConfigType.Integer(8);
     public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT = new ConfigType.Integer(4);
     public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT = new ConfigType.Integer(8);
+    public static final ConfigType.Boolean SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED = new ConfigType.Boolean(true);
+    public static final ConfigType.Boolean SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED = new ConfigType.Boolean(true);
 
     public static final ConfigType.Integer BIG_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
     public static final ConfigType.Integer MEGA_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
@@ -72,6 +74,13 @@ public class Config {
         MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.configObj = common
                 .comment("Maximal group size of spawning Mushroom Sheep herds.")
                 .defineInRange("mushroomSheepSpawnMaxGroupCount", MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.getDefaultValue(), 1, 20);
+
+        SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.configObj = common
+                .comment("Whether or not sheeps and mushroom sheeps can eat mushrooms from ground.")
+                .define("sheepEatMushroomFromGroundEnabled", SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.getDefaultValue());
+        SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.configObj = common
+                .comment("Whether or not sheeps and mushroom sheeps change their fleece to the mushroom type when eating a mushroom from ground or while feeding.")
+                .define("sheepAbsorbMushroomTypeEnabled", SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getDefaultValue());
 
         BIG_MUSHROOM_GENERATION_CHANCE.configObj = common
                 .comment("Generating chance of big mushrooms in biomes with big mushrooms. (1 - high chance; 100 - low chance)")
