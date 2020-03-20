@@ -19,6 +19,7 @@ import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -189,6 +190,24 @@ public class MushroomSheepEntity extends SheepEntity {
      */
     public void setMushroomType(MushroomType mushroomType) {
         this.dataManager.set(MUSHROOM_TYPE, new ItemStack(mushroomType.getItem()));
+        //set also the DyeColor to be compatible with other mods
+        super.setFleeceColor(mushroomType.getColor());
+    }
+
+    @Nonnull
+    @Override
+    public DyeColor getFleeceColor() {
+        //get the DyeColor from mushroom type to be compatible with other mods
+        return this.getMushroomType().getColor();
+    }
+
+    /**
+     * @deprecated Method is disabled. Use setMushroomType to set the color.
+     */
+    @Deprecated
+    @Override
+    public void setFleeceColor(DyeColor color) {
+        //disable setting the fleece color for mushroom sheeps
     }
 
     /**
@@ -203,6 +222,7 @@ public class MushroomSheepEntity extends SheepEntity {
      */
     public void setSheared(boolean sheared) {
         this.dataManager.set(SHEARED, sheared);
+        super.setSheared(sheared); //set sheared value of super class to be compatible with other mods
     }
 
     /**
@@ -210,11 +230,16 @@ public class MushroomSheepEntity extends SheepEntity {
      */
     public static MushroomType getRandomMushroomType(Random random) {
         int i = random.nextInt(100);
-        if (i < 50) {
-            return MushroomType.BROWN_MUSHROOM;
+        if (i < 3) {
+            return MushroomType.GLOWSHROOM;
+            //TODO more variants
         } else {
-            return MushroomType.RED_MUSHROOM;
-        } //TODO more variants
+            if (random.nextBoolean()) {
+                return MushroomType.BROWN_MUSHROOM;
+            } else {
+                return MushroomType.RED_MUSHROOM;
+            }
+        }
     }
 
     public SheepEntity createChild(AgeableEntity ageable) {

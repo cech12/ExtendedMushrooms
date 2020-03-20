@@ -4,21 +4,24 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Supplier;
 
 public enum MushroomType implements IStringSerializable {
 
-    BROWN_MUSHROOM(0, ()->Items.BROWN_MUSHROOM, ()->Blocks.BROWN_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM),
-    RED_MUSHROOM(1, ()->Items.RED_MUSHROOM, ()->Blocks.RED_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM),
-    GLOWSHROOM(2, ()->ExtendedMushroomsBlocks.GLOWSHROOM, ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP, ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM, ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getDefaultState()));
+    BROWN_MUSHROOM(0, ()->Items.BROWN_MUSHROOM, ()->Blocks.BROWN_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM, DyeColor.BROWN),
+    RED_MUSHROOM(1, ()->Items.RED_MUSHROOM, ()->Blocks.RED_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM, DyeColor.RED),
+    GLOWSHROOM(2, ()->ExtendedMushroomsBlocks.GLOWSHROOM, ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP, ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM, DyeColor.BLUE,
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getDefaultState()));
 
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 
@@ -26,21 +29,19 @@ public enum MushroomType implements IStringSerializable {
     private final Supplier<IItemProvider> item;
     private final Supplier<Block> capBlock;
     private final Supplier<Block> stemBlock;
+    private final DyeColor color;
     private final Supplier<Integer> lightValue;
 
-    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, Supplier<Block> stemBlock) {
-        this.id = id;
-        this.item = item;
-        this.capBlock = capBlock;
-        this.stemBlock = stemBlock;
-        this.lightValue = () -> 0;
+    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, Supplier<Block> stemBlock, @Nonnull DyeColor color) {
+        this(id, item, capBlock, stemBlock, color, () -> 0);
     }
 
-    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, Supplier<Block> stemBlock, Supplier<Integer> lightValue) {
+    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, Supplier<Block> stemBlock, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
         this.id = id;
         this.item = item;
         this.capBlock = capBlock;
         this.stemBlock = stemBlock;
+        this.color = color;
         this.lightValue = lightValue;
     }
 
@@ -58,6 +59,10 @@ public enum MushroomType implements IStringSerializable {
 
     public Block getStemBlock() {
         return this.stemBlock.get();
+    }
+
+    public DyeColor getColor() {
+        return this.color;
     }
 
     public int getLightValue() {
