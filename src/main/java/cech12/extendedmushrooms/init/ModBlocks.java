@@ -24,6 +24,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.potion.Effects;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
@@ -55,6 +56,9 @@ public final class ModBlocks {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
 
         INFESTED_GRASS = registerBlock("infested_grass", ItemGroup.DECORATIONS, new InfestedGrassBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
+        INFESTED_FLOWER = registerBlock("infested_flower", ItemGroup.DECORATIONS, new InfestedFlowerBlock(Effects.SLOWNESS, 9, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
+        INFESTED_FLOWER_POTTED = registerBlock("infested_flower_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> INFESTED_FLOWER, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid()));
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(INFESTED_FLOWER.getRegistryName()), () -> INFESTED_FLOWER_POTTED);
 
         MUSHROOM_BUTTON = registerBlock("mushroom_button", ItemGroup.REDSTONE, new MushroomButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));
         MUSHROOM_DOOR = registerBlock("mushroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
@@ -122,6 +126,8 @@ public final class ModBlocks {
         //RenderTypeLookup.setRenderLayer(MUSHROOM_TRAPDOOR, RenderType.getCutout()); //unfortunately buggy - so, texture without transparency
 
         RenderTypeLookup.setRenderLayer(INFESTED_GRASS, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(INFESTED_FLOWER, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(INFESTED_FLOWER_POTTED, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GLOWSHROOM, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GLOWSHROOM_POTTED, RenderType.getCutout());
     }
@@ -134,6 +140,15 @@ public final class ModBlocks {
             Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
             for (Biome biome : biomes) {
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(config).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(2))));
+            }
+        }
+        //add infested flower to mushroom biomes
+        if (Config.INFESTED_FLOWER_ENABLED.getValue()) {
+            BlockState infestedFlower = INFESTED_FLOWER.getDefaultState();
+            BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedFlower), new SimpleBlockPlacer())).tries(32).build();
+            Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
+            for (Biome biome : biomes) {
+                biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.FLOWER.withConfiguration(config).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(4))));
             }
         }
     }

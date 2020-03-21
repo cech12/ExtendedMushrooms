@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:infested_flower"
+    }
+  ],
+  "result": {
+    "item": "minecraft:brown_dye"
+  }
+}

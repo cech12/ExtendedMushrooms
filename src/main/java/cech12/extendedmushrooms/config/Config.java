@@ -11,6 +11,7 @@ public class Config {
     public static List<IResettableConfigType> allValues = new ArrayList<>();
 
     public static final ConfigType.Boolean INFESTED_GRASS_ENABLED = new ConfigType.Boolean(true);
+    public static final ConfigType.Boolean INFESTED_FLOWER_ENABLED = new ConfigType.Boolean(true);
 
     public static final ConfigType.Boolean MUSHROOM_SHEEP_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_WEIGHT = new ConfigType.Integer(8);
@@ -42,6 +43,9 @@ public class Config {
         INFESTED_GRASS_ENABLED.configObj = common
                 .comment("Whether or not Infested Grass should be generated in mushroom biomes.")
                 .define("infestedGrassEnabled", INFESTED_GRASS_ENABLED.getDefaultValue());
+        INFESTED_FLOWER_ENABLED.configObj = common
+                .comment("Whether or not Infested Flower should be generated in mushroom biomes.")
+                .define("infestedFlowerEnabled", INFESTED_FLOWER_ENABLED.getDefaultValue());
 
         MUSHROOM_SHEEP_ENABLED.configObj = common
                 .comment("Whether or not Mushroom Sheep entity should spawn in mushroom biomes.")
