@@ -20,6 +20,9 @@ public class Config {
     public static final ConfigType.Boolean SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Boolean SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED = new ConfigType.Boolean(true);
 
+    public static final ConfigType.Boolean MUSHROOM_CAP_BUTTON_PLAY_SOUND = new ConfigType.Boolean(false);
+    public static final ConfigType.Boolean MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND = new ConfigType.Boolean(false);
+
     public static final ConfigType.Integer BIG_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
     public static final ConfigType.Integer MEGA_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
 
@@ -85,6 +88,13 @@ public class Config {
         SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.configObj = common
                 .comment("Whether or not sheeps and mushroom sheeps change their fleece to the mushroom type when eating a mushroom from ground or while feeding.")
                 .define("sheepAbsorbMushroomTypeEnabled", SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getDefaultValue());
+
+        MUSHROOM_CAP_BUTTON_PLAY_SOUND.configObj = common
+                .comment("Whether or not mushroom cap buttons should play a sound when activated.")
+                .define("mushroomButtonPressurePlatePlaySound", MUSHROOM_CAP_BUTTON_PLAY_SOUND.getDefaultValue());
+        MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.configObj = common
+                .comment("Whether or not mushroom cap pressure plates should play a sound when stepped on or off.")
+                .define("mushroomCapPressurePlatePlaySound", MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.getDefaultValue());
 
         BIG_MUSHROOM_GENERATION_CHANCE.configObj = common
                 .comment("Generating chance of big mushrooms in biomes with big mushrooms. (1 - high chance; 100 - low chance)")
