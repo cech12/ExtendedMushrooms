@@ -7,7 +7,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.WoodButtonBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 
 import javax.annotation.Nonnull;
 
@@ -33,7 +32,7 @@ public class MushroomCapButtonBlock extends WoodButtonBlock {
     @Override
     protected SoundEvent getSoundEvent(boolean isPressed) {
         if (Config.MUSHROOM_CAP_BUTTON_PLAY_SOUND.getValue()) {
-            return isPressed ? SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON : SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF;
+            return super.getSoundEvent(isPressed);
         }
         return ModSounds.NO_SOUND;
     }
