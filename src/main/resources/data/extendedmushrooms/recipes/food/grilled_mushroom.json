@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "tag": "forge:mushrooms"
+    "tag": "forge:edible_mushrooms"
   },
   "result": "extendedmushrooms:grilled_mushroom",
   "experience": 0.15,

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#extendedmushrooms:edible_mushrooms",
+    "#extendedmushrooms:poisonous_mushrooms"
+  ]
+}

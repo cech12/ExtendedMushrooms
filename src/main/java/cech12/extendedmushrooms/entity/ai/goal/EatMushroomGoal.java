@@ -90,7 +90,9 @@ public class EatMushroomGoal extends Goal {
                 if (Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue()) {
                     if (this.eaterEntity instanceof SheepEntity && mushroomType != null) {
                         if (this.eaterEntity instanceof MushroomSheepEntity) {
-                            ((MushroomSheepEntity) this.eaterEntity).setMushroomType(mushroomType);
+                            MushroomSheepEntity mushroomSheep = (MushroomSheepEntity) this.eaterEntity;
+                            mushroomSheep.setMushroomType(mushroomType);
+                            mushroomSheep.activateMushroomEffect(mushroomType);
                         } else {
                             MushroomSheepEntity.replaceSheep((SheepEntity) this.eaterEntity, mushroomType);
                         }

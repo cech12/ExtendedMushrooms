@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.entity.passive;
 
 import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
+import cech12.extendedmushrooms.api.tags.ExtendedMushroomsTags;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMyceliumGoal;
 import cech12.extendedmushrooms.item.MushroomType;
@@ -28,6 +29,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
@@ -77,6 +80,7 @@ public class MushroomSheepEntity extends SheepEntity {
             //set mushroom type
             if (mushroomType != null) {
                 mushroomSheep.setMushroomType(mushroomType);
+                mushroomSheep.activateMushroomEffect(mushroomType);
             }
             //replace sheep with new mushroom sheep
             sheep.remove();
@@ -182,9 +186,20 @@ public class MushroomSheepEntity extends SheepEntity {
             MushroomType type = MushroomType.byItem(item);
             if (type != null && type != this.getMushroomType()) {
                 this.setMushroomType(type);
+                this.activateMushroomEffect(type);
             }
         }
         return superResult;
+    }
+
+    /**
+     * Activate mushroom effects like poison on this sheep.
+     * When a given MushroomType has no effect, nothing happens.
+     */
+    public void activateMushroomEffect(MushroomType mushroomType) {
+        if (mushroomType.getItem().isIn(ExtendedMushroomsTags.Items.POISONOUS_MUSHROOMS)) {
+            this.addPotionEffect(new EffectInstance(Effects.POISON, 200));
+        }
     }
 
     @Override

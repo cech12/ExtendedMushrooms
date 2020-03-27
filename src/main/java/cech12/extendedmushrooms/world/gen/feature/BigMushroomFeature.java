@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
-import  cech12.extendedmushrooms.utils.TagUtils;
+import cech12.extendedmushrooms.api.tags.ExtendedMushroomsTags;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.block.HugeMushroomBlock;
@@ -38,7 +38,7 @@ public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfi
 
     protected boolean hasValidGround(IWorld world, BlockPos mushroomPos) {
         Block block = world.getBlockState(mushroomPos.down()).getBlock();
-        return TagUtils.hasTag(block, TagUtils.MUSHROOM_GROWING_BLOCKS) || TagUtils.hasTag(block, TagUtils.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL);
+        return block.isIn(ExtendedMushroomsTags.Blocks.MUSHROOM_GROWING_BLOCKS) || block.isIn(ExtendedMushroomsTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL);
     }
 
     protected boolean canGrow(IWorld world, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {

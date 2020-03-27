@@ -1,8 +1,8 @@
 package cech12.extendedmushrooms.mixin;
 
+import cech12.extendedmushrooms.api.tags.ExtendedMushroomsTags;
 import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
 import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
-import cech12.extendedmushrooms.utils.TagUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -33,8 +33,8 @@ public class MixinMushroomBlock {
         if (world.isAreaLoaded(pos, 7) && random.nextInt(25) == 0) {
             if (state.getBlock() instanceof MushroomBlock) {
                 Block blockBeneath = world.getBlockState(pos.down()).getBlock();
-                if (TagUtils.hasTag(blockBeneath, TagUtils.MUSHROOM_GROWING_BLOCKS) ||
-                        (TagUtils.hasTag(blockBeneath, TagUtils.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL) && world.getLightSubtracted(pos, 0) < 13)) {
+                if (blockBeneath.isIn(ExtendedMushroomsTags.Blocks.MUSHROOM_GROWING_BLOCKS) ||
+                        (blockBeneath.isIn(ExtendedMushroomsTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL) && world.getLightSubtracted(pos, 0) < 13)) {
                     ((MushroomBlock) state.getBlock()).grow(world, random, pos, state);
                 }
             }
@@ -53,7 +53,7 @@ public class MixinMushroomBlock {
         BlockPos blockpos = pos.down();
         BlockState blockstate = world.getBlockState(blockpos);
         Block block = blockstate.getBlock();
-        if (TagUtils.hasTag(block, TagUtils.MUSHROOM_VALID_BLOCKS)) {
+        if (block.isIn(ExtendedMushroomsTags.Blocks.MUSHROOM_VALID_BLOCKS)) {
             cir.setReturnValue(true);
         } else {
             cir.setReturnValue(world.getLightSubtracted(pos, 0) < 13 && blockstate.canSustainPlant(world, blockpos, net.minecraft.util.Direction.UP, (IPlantable) state.getBlock()));

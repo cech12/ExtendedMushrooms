@@ -3,6 +3,6 @@
   "values": [
     "minecraft:brown_mushroom",
     "minecraft:red_mushroom",
-    "#extendedmushrooms:mushrooms"
+    "#extendedmushrooms:edible_mushrooms"
   ]
 }
