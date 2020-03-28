@@ -9,6 +9,7 @@ import cech12.extendedmushrooms.init.ModFeatures;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.DyeItem;
@@ -67,8 +68,16 @@ public class ExtendedMushrooms {
                 //play sound
                 event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 if (!event.getWorld().isRemote) {
+                    //copy block state orientation
+                    BlockState strippedBlockState = strippedBlock.getDefaultState();
+                    if (blockState.has(HugeMushroomBlock.UP)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.UP, blockState.get(HugeMushroomBlock.UP));
+                    if (blockState.has(HugeMushroomBlock.DOWN)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.DOWN, blockState.get(HugeMushroomBlock.DOWN));
+                    if (blockState.has(HugeMushroomBlock.NORTH)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.NORTH, blockState.get(HugeMushroomBlock.NORTH));
+                    if (blockState.has(HugeMushroomBlock.EAST)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.EAST, blockState.get(HugeMushroomBlock.EAST));
+                    if (blockState.has(HugeMushroomBlock.SOUTH)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.SOUTH, blockState.get(HugeMushroomBlock.SOUTH));
+                    if (blockState.has(HugeMushroomBlock.WEST)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.WEST, blockState.get(HugeMushroomBlock.WEST));
                     //replace block
-                    event.getWorld().setBlockState(event.getPos(), strippedBlock.getDefaultState(), 11);
+                    event.getWorld().setBlockState(event.getPos(), strippedBlockState, 11);
                     //do the item damage
                     if (event.getPlayer() != null) {
                         itemStack.damageItem(1, event.getPlayer(), (p_220040_1_) -> {
