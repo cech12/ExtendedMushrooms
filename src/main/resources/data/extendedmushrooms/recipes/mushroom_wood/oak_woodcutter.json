@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "woodcutter",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "corail_woodcutter"
+    }
+  ],
+  "pattern": [
+    " 1 ",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "tag": "extendedmushrooms:mushroom_planks"
+    },
+    "1": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "corail_woodcutter:oak_woodcutter"
+  }
+}
