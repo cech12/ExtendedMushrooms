@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_top_rh",
+    "textures": {
+        "bottom": "extendedmushrooms:block/poisonous_mushroom_door_bottom",
+        "top": "extendedmushrooms:block/poisonous_mushroom_door_top"
+    }
+}

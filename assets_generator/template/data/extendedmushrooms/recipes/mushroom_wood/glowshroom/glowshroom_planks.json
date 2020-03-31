@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "extendedmushrooms:mushroom_stems/glowshroom"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:glowshroom_planks",
+    "count": 4
+  }
+}

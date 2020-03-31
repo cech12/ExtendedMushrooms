@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "extendedmushrooms:mushroom_door",
-    "extendedmushrooms:glowshroom_door"
+    "extendedmushrooms:glowshroom_door",
+    "extendedmushrooms:poisonous_mushroom_door"
   ]
 }

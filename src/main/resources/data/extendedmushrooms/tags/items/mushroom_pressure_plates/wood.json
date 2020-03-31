@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "extendedmushrooms:mushroom_pressure_plate",
-    "extendedmushrooms:glowshroom_pressure_plate"
+    "extendedmushrooms:glowshroom_pressure_plate",
+    "extendedmushrooms:poisonous_mushroom_pressure_plate"
   ]
 }

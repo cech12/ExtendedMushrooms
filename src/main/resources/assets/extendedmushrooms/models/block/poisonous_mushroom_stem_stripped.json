@@ -1,0 +1,14 @@
+{
+    "textures": {
+        "texture": "extendedmushrooms:block/poisonous_mushroom_stem_stripped",
+        "particle": "extendedmushrooms:block/poisonous_mushroom_stem_stripped"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 0 ],
+            "faces": {
+                "north": { "texture": "#texture", "cullface":"north" }
+            }
+        }
+    ]
+}

@@ -3,10 +3,13 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
+import cech12.extendedmushrooms.block.mushrooms.PoisonousMushroom;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.world.gen.feature.BigGlowshroomFeature;
+import cech12.extendedmushrooms.world.gen.feature.BigPoisonousMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaBrownMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaGlowshroomFeature;
+import cech12.extendedmushrooms.world.gen.feature.MegaPoisonousMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaRedMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.WeightedFeature;
 import cech12.extendedmushrooms.world.gen.feature.WeightedRandomFeature;
@@ -45,6 +48,9 @@ public class ModFeatures {
     public static Feature<BigMushroomFeatureConfig> BIG_GLOWSHROOM;
     public static Feature<BigMushroomFeatureConfig> MEGA_GLOWSHROOM;
 
+    public static Feature<BigMushroomFeatureConfig> BIG_POISONOUS_MUSHROOM;
+    public static Feature<BigMushroomFeatureConfig> MEGA_POISONOUS_MUSHROOM;
+
     @SubscribeEvent
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
         WEIGHT_RANDOM_SELECTOR = register("weight_random_selector", new WeightedRandomFeatureConfig(WeightedRandomFeature::deserialize));
@@ -54,6 +60,9 @@ public class ModFeatures {
 
         BIG_GLOWSHROOM = register("big_glowshroom", new BigGlowshroomFeature(BigMushroomFeatureConfig::deserialize));
         MEGA_GLOWSHROOM = register("mega_glowshroom", new MegaGlowshroomFeature(BigMushroomFeatureConfig::deserialize));
+
+        BIG_POISONOUS_MUSHROOM = register("big_poisonous_mushroom", new BigPoisonousMushroomFeature(BigMushroomFeatureConfig::deserialize));
+        MEGA_POISONOUS_MUSHROOM = register("mega_poisonous_mushroom", new MegaPoisonousMushroomFeature(BigMushroomFeatureConfig::deserialize));
     }
 
     private static <C extends IFeatureConfig, F extends Feature<C>> F register(String key, F feature) {
@@ -81,6 +90,16 @@ public class ModFeatures {
         }
         if (Config.MEGA_GLOWSHROOM_GENERATION_ENABLED.getValue()) {
             megaMushrooms.add(new WeightedFeature<>(MEGA_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), (float) Config.MEGA_GLOWSHROOM_GENERATION_WEIGHT.getValue()));
+        }
+
+        if (Config.POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
+            mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, (float) Config.POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR.getValue(), (float) Config.POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR.getValue()));
+        }
+        if (Config.BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
+            bigMushrooms.add(new WeightedFeature<>(BIG_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), (float) Config.BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getValue()));
+        }
+        if (Config.MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
+            megaMushrooms.add(new WeightedFeature<>(MEGA_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), (float) Config.MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getValue()));
         }
 
         //add all collected mushrooms to biomes

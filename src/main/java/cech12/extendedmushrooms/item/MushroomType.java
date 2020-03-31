@@ -21,7 +21,8 @@ public enum MushroomType implements IStringSerializable {
     BROWN_MUSHROOM(0, ()->Items.BROWN_MUSHROOM, ()->Blocks.BROWN_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM, DyeColor.BROWN),
     RED_MUSHROOM(1, ()->Items.RED_MUSHROOM, ()->Blocks.RED_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM, DyeColor.RED),
     GLOWSHROOM(2, ()->ExtendedMushroomsBlocks.GLOWSHROOM, ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP, ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM, DyeColor.BLUE,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getDefaultState()));
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getDefaultState())),
+    POISONOUS_MUSHROOM(3, ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP, ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM, DyeColor.PURPLE);
 
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 

@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom_rh",
+    "textures": {
+        "bottom": "extendedmushrooms:block/glowshroom_door_bottom",
+        "top": "extendedmushrooms:block/glowshroom_door_top"
+    }
+}

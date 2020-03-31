@@ -73,7 +73,7 @@ public abstract class AbstractEffectMushroomCap extends HugeMushroomBlock {
         }
     }
 
-    private void spawnEffectCloud(@Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
+    protected void spawnEffectCloud(@Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
         List<EffectInstance> effects = this.getEffects(random);
         if (!effects.isEmpty()) {
             AreaEffectCloudEntity areaeffectcloudentity = new AreaEffectCloudEntity(worldIn, pos.getX() + random.nextDouble(), pos.getY(), pos.getZ() + random.nextDouble());

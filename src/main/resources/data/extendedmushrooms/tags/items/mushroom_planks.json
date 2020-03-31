@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "extendedmushrooms:mushroom_planks",
-    "extendedmushrooms:glowshroom_planks"
+    "extendedmushrooms:glowshroom_planks",
+    "extendedmushrooms:poisonous_mushroom_planks"
   ]
 }

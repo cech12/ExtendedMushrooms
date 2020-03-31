@@ -21,9 +21,18 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
         return 4 + random.nextInt(2);
     }
 
+    /**
+     * @return value between 0.0 and 1.0 - cap size related to size of mushroom
+     */
+    protected float getCapHeightFactor() {
+        return 0.5F;
+    }
+
     @Override
     protected boolean canPlaceCap(IWorld world, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
-        Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, size / 2, 0), size, radius);
+        int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
+        int capSize = (int) (size * getCapHeightFactor());
+        Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
             if (!world.getBlockState(capPos.blockPos).canBeReplacedByLeaves(world, capPos.blockPos)) {
                 return false;
@@ -34,7 +43,9 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
 
     @Override
     protected void placeCap(IWorld world, Random random, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
-        Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, size / 2, 0), size, radius);
+        int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
+        int capSize = (int) (size * getCapHeightFactor());
+        Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
             this.placeCapBlockIfPossible(world, random, config, capPos.blockPos, capPos.west, capPos.east, capPos.north, capPos.south);
         }
@@ -58,7 +69,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
             this.size = size;
             this.radius = radius + 0.5F;
             this.a_q = radius * radius;
-            this.b_q = size * size / 4.0F;
+            this.b_q = (size * 2) * (size * 2) / 4.0F;
             this.c_q = this.a_q;
 
             this.generateBlockPositions();
@@ -73,7 +84,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
         }
 
         private void generateBlockPositions() {
-            for (int y = 0; y <= (this.size / 2) + 2; y++) {
+            for (int y = 0; y <= (this.size) + 2; y++) {
                 for (int x = (int) (-this.radius - 1.5); x <= this.radius + 2; x++) {
                     for (int z = (int) (-this.radius - 1.5); z <= this.radius + 2; z++) {
                         BlockPos ellPos = new BlockPos(x, y, z);

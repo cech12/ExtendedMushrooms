@@ -45,5 +45,22 @@
   "block.extendedmushrooms.glowshroom_trapdoor": "Leuchtpilzfalltür",
   "block.extendedmushrooms.glowshroom_cap_button": "Leuchtpilzhutknopf",
   "block.extendedmushrooms.glowshroom_cap_carpet": "Leuchtpilzhutteppich",
-  "block.extendedmushrooms.glowshroom_cap_pressure_plate": "Leuchtpilzhutdruckplatte"
+  "block.extendedmushrooms.glowshroom_cap_pressure_plate": "Leuchtpilzhutdruckplatte",
+
+  "block.extendedmushrooms.poisonous_mushroom": "Giftpilz",
+  "block.extendedmushrooms.poisonous_mushroom_cap": "Giftpilzhut",
+  "block.extendedmushrooms.poisonous_mushroom_stem": "Giftpilzstiel",
+  "block.extendedmushrooms.poisonous_mushroom_stem_stripped": "Entrindeter Giftpilzstiel",
+  "block.extendedmushrooms.poisonous_mushroom_button": "Giftpilzknopf",
+  "block.extendedmushrooms.poisonous_mushroom_door": "Giftpilztür",
+  "block.extendedmushrooms.poisonous_mushroom_fence": "Giftpilzzaun",
+  "block.extendedmushrooms.poisonous_mushroom_fence_gate": "Giftpilzzauntor",
+  "block.extendedmushrooms.poisonous_mushroom_planks": "Giftpilzbretter",
+  "block.extendedmushrooms.poisonous_mushroom_pressure_plate": "Giftpilzdruckplatte",
+  "block.extendedmushrooms.poisonous_mushroom_slab": "Giftpilzstufe",
+  "block.extendedmushrooms.poisonous_mushroom_stairs": "Giftpilztreppe",
+  "block.extendedmushrooms.poisonous_mushroom_trapdoor": "Giftpilzfalltür",
+  "block.extendedmushrooms.poisonous_mushroom_cap_button": "Giftpilzhutknopf",
+  "block.extendedmushrooms.poisonous_mushroom_cap_carpet": "Giftpilzhutteppich",
+  "block.extendedmushrooms.poisonous_mushroom_cap_pressure_plate": "Giftpilzhutdruckplatte"
 }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:glowshroom_planks"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:glowshroom_door",
+    "count": 3
+  }
+}

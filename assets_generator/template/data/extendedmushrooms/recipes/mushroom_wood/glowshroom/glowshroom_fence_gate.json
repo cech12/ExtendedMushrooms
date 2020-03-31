@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence_gate",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "extendedmushrooms:glowshroom_planks"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:glowshroom_fence_gate"
+  }
+}

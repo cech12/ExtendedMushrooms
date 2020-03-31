@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:poisonous_mushroom_planks"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:poisonous_mushroom_door",
+    "count": 3
+  }
+}

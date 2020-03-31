@@ -1,0 +1,6 @@
+{
+    "parent": "block/pressure_plate_up",
+    "textures": {
+        "texture": "extendedmushrooms:block/poisonous_mushroom_cap"
+    }
+}

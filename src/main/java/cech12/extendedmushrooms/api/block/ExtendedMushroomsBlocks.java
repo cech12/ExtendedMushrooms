@@ -44,4 +44,22 @@ public class ExtendedMushroomsBlocks {
     public static Block GLOWSHROOM_CAP_CARPET;
     public static Block GLOWSHROOM_CAP_PRESSURE_PLATE;
 
+    public static Block POISONOUS_MUSHROOM;
+    public static Block POISONOUS_MUSHROOM_POTTED;
+    public static Block POISONOUS_MUSHROOM_CAP;
+    public static Block POISONOUS_MUSHROOM_STEM;
+    public static Block POISONOUS_MUSHROOM_STEM_STRIPPED;
+    public static Block POISONOUS_MUSHROOM_BUTTON;
+    public static Block POISONOUS_MUSHROOM_DOOR;
+    public static Block POISONOUS_MUSHROOM_FENCE;
+    public static Block POISONOUS_MUSHROOM_FENCE_GATE;
+    public static Block POISONOUS_MUSHROOM_PLANKS;
+    public static Block POISONOUS_MUSHROOM_PRESSURE_PLATE;
+    public static Block POISONOUS_MUSHROOM_SLAB;
+    public static Block POISONOUS_MUSHROOM_STAIRS;
+    public static Block POISONOUS_MUSHROOM_TRAPDOOR;
+    public static Block POISONOUS_MUSHROOM_CAP_BUTTON;
+    public static Block POISONOUS_MUSHROOM_CAP_CARPET;
+    public static Block POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE;
+
 }

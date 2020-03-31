@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "extendedmushrooms:block/poisonous_mushroom_slab" },
+        "type=top": { "model": "extendedmushrooms:block/poisonous_mushroom_slab_top" },
+        "type=double": { "model": "extendedmushrooms:block/poisonous_mushroom_planks" }
+    }
+}

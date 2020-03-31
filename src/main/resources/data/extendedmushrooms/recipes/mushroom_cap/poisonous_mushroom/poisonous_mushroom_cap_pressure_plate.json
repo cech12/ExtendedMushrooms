@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wool_plates",
+  "ingredients": [
+    {
+      "tag": "minecraft:wooden_pressure_plates"
+    },
+    {
+      "item": "extendedmushrooms:poisonous_mushroom_cap"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:poisonous_mushroom_cap_pressure_plate"
+  }
+}

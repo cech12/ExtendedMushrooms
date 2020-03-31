@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wool_buttons",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:glowshroom_cap"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:glowshroom_cap_button"
+  }
+}

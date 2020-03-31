@@ -1,0 +1,58 @@
+{
+    "multipart": [
+        {   "when": { "north": true, "triggered": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap" }
+        },
+        {   "when": { "east": true, "triggered": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap", "y": 90, "uvlock": true }
+        },
+        {   "when": { "south": true, "triggered": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap", "y": 180, "uvlock": true }
+        },
+        {   "when": { "west": true, "triggered": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap", "y": 270, "uvlock": true }
+        },
+        {   "when": { "up": true, "triggered": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap", "x": 270, "uvlock": true }
+        },
+        {   "when": { "down": true, "triggered": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap", "x": 90, "uvlock": true }
+        },
+        {   "when": { "north": true, "triggered": true },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap_triggered" }
+        },
+        {   "when": { "east": true, "triggered": true },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap_triggered", "y": 90, "uvlock": true }
+        },
+        {   "when": { "south": true, "triggered": true },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap_triggered", "y": 180, "uvlock": true }
+        },
+        {   "when": { "west": true, "triggered": true },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap_triggered", "y": 270, "uvlock": true }
+        },
+        {   "when": { "up": true, "triggered": true },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap_triggered", "x": 270, "uvlock": true }
+        },
+        {   "when": { "down": true, "triggered": true },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_cap_triggered", "x": 90, "uvlock": true }
+        },
+        {   "when": { "north": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_inside" }
+        },
+        {   "when": { "east": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_inside", "y": 90, "uvlock": false }
+        },
+        {   "when": { "south": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_inside", "y": 180, "uvlock": false }
+        },
+        {   "when": { "west": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_inside", "y": 270, "uvlock": false }
+        },
+        {   "when": { "up": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_inside", "x": 270, "uvlock": false }
+        },
+        {   "when": { "down": false },
+            "apply": { "model": "extendedmushrooms:block/poisonous_mushroom_inside", "x": 90, "uvlock": false }
+        }
+    ]
+}

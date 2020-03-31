@@ -3,6 +3,8 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
 import cech12.extendedmushrooms.block.mushroomblocks.GlowshroomCap;
+import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomCap;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
 import cech12.extendedmushrooms.config.Config;
 import net.minecraft.block.Block;
@@ -98,6 +100,26 @@ public final class ModBlocks {
         GLOWSHROOM_CAP_CARPET = registerBlock("glowshroom_cap_carpet", ItemGroup.DECORATIONS, new MushroomCarpetBlock(DyeColor.BROWN, Block.Properties.create(Material.CARPET, MaterialColor.BLUE).hardnessAndResistance(0.1F).sound(SoundType.CLOTH).lightValue(8)));
         GLOWSHROOM_CAP_PRESSURE_PLATE = registerBlock("glowshroom_cap_pressure_plate", ItemGroup.REDSTONE, new MushroomCapPressurePlateBlock(8));
 
+        POISONOUS_MUSHROOM = registerBlock("poisonous_mushroom", ItemGroup.DECORATIONS, new PoisonousMushroomBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
+        POISONOUS_MUSHROOM_POTTED = registerBlock("poisonous_mushroom_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> POISONOUS_MUSHROOM, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid()));
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(POISONOUS_MUSHROOM.getRegistryName()), () -> POISONOUS_MUSHROOM_POTTED);
+        POISONOUS_MUSHROOM_CAP = registerBlock("poisonous_mushroom_cap", ItemGroup.DECORATIONS, new PoisonousMushroomCap(Block.Properties.create(Material.WOOL).hardnessAndResistance(0.2F).sound(SoundType.CLOTH)));
+        POISONOUS_MUSHROOM_STEM = registerBlock("poisonous_mushroom_stem", ItemGroup.BUILDING_BLOCKS, new HugeMushroomBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_STEM_STRIPPED = registerBlock("poisonous_mushroom_stem_stripped", ItemGroup.BUILDING_BLOCKS, new HugeMushroomBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
+        BLOCK_STRIPPING_MAP.put(POISONOUS_MUSHROOM_STEM, POISONOUS_MUSHROOM_STEM_STRIPPED);
+        POISONOUS_MUSHROOM_BUTTON = registerBlock("poisonous_mushroom_button", ItemGroup.REDSTONE, new MushroomWoodButtonBlock());
+        POISONOUS_MUSHROOM_DOOR = registerBlock("poisonous_mushroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_FENCE = registerBlock("poisonous_mushroom_fence", ItemGroup.DECORATIONS, new FenceBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_FENCE_GATE = registerBlock("poisonous_mushroom_fence_gate", ItemGroup.REDSTONE, new FenceGateBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_PLANKS = registerBlock("poisonous_mushroom_planks", ItemGroup.BUILDING_BLOCKS, new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_PRESSURE_PLATE = registerBlock("poisonous_mushroom_pressure_plate", ItemGroup.REDSTONE, new MushroomWoodPressurePlateBlock());
+        POISONOUS_MUSHROOM_SLAB = registerBlock("poisonous_mushroom_slab", ItemGroup.BUILDING_BLOCKS, new SlabBlock(Block.Properties.from(POISONOUS_MUSHROOM_PLANKS)));
+        POISONOUS_MUSHROOM_STAIRS = registerBlock("poisonous_mushroom_stairs", ItemGroup.BUILDING_BLOCKS, new StairsBlock(() -> POISONOUS_MUSHROOM_PLANKS.getDefaultState(), Block.Properties.from(POISONOUS_MUSHROOM_PLANKS)));
+        POISONOUS_MUSHROOM_TRAPDOOR = registerBlock("poisonous_mushroom_trapdoor", ItemGroup.REDSTONE, new MushroomTrapdoorBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_CAP_BUTTON = registerBlock("poisonous_mushroom_cap_button", ItemGroup.REDSTONE, new MushroomCapButtonBlock());
+        POISONOUS_MUSHROOM_CAP_CARPET = registerBlock("poisonous_mushroom_cap_carpet", ItemGroup.DECORATIONS, new MushroomCarpetBlock(DyeColor.PURPLE, Block.Properties.create(Material.CARPET, MaterialColor.PURPLE).hardnessAndResistance(0.1F).sound(SoundType.CLOTH)));
+        POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE = registerBlock("poisonous_mushroom_cap_pressure_plate", ItemGroup.REDSTONE, new MushroomCapPressurePlateBlock());
+
     }
 
     private static Block registerBlock(String name, Block block) {
@@ -129,6 +151,8 @@ public final class ModBlocks {
         RenderTypeLookup.setRenderLayer(INFESTED_FLOWER_POTTED, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GLOWSHROOM, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GLOWSHROOM_POTTED, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM_POTTED, RenderType.getCutout());
     }
 
     public static void addBlocksToBiomes() {

@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "extendedmushrooms:mushroom_slab",
-    "extendedmushrooms:glowshroom_slab"
+    "extendedmushrooms:glowshroom_slab",
+    "extendedmushrooms:poisonous_mushroom_slab"
   ]
 }

@@ -3,6 +3,7 @@
   "values": [
     "minecraft:brown_mushroom_block",
     "minecraft:red_mushroom_block",
-    "extendedmushrooms:glowshroom_cap"
+    "extendedmushrooms:glowshroom_cap",
+    "extendedmushrooms:poisonous_mushroom_cap"
   ]
 }

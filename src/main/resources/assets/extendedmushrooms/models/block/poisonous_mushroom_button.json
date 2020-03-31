@@ -1,0 +1,6 @@
+{
+    "parent": "block/button",
+    "textures": {
+        "texture": "extendedmushrooms:block/poisonous_mushroom_planks"
+    }
+}
