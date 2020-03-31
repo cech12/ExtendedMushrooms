@@ -76,10 +76,10 @@ public class BigPoisonousMushroomFeature extends BigMushroomFeature {
         for (int i = 0; i < sideLength; i++) {
             boolean begin = i == 0;
             boolean end = i == sideLength - 1;
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(i - capRadius+1, size - 2, -capRadius), begin, end, true, false);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(i - capRadius+1, size - 2, capRadius), begin, end, false, true);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(-capRadius, size - 2, i - capRadius+1), true, false, begin, end);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(capRadius, size - 2, i - capRadius+1), false, true, begin, end);
+            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(i - capRadius+1, size - 2, -capRadius), begin, end, true, false, false);
+            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(i - capRadius+1, size - 2, capRadius), begin, end, false, true, false);
+            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(-capRadius, size - 2, i - capRadius+1), true, false, begin, end, false);
+            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(capRadius, size - 2, i - capRadius+1), false, true, begin, end, false);
         }
     }
 }

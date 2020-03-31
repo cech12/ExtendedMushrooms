@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms;
 
+import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMushroomGoal;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
@@ -7,6 +8,8 @@ import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModEntities;
 import cech12.extendedmushrooms.init.ModFeatures;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
+import cech12.extendedmushrooms.item.crafting.MushroomArrowRecipe;
+import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HugeMushroomBlock;
@@ -14,10 +17,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.potion.Potions;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,6 +46,9 @@ public class ExtendedMushrooms {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+
+        // Register an event with the mod specific event bus for mod own recipes.
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -46,11 +56,20 @@ public class ExtendedMushrooms {
         ModBlocks.addBlocksToBiomes();
         ModEntities.addEntitiesToBiomes();
         ModFeatures.addFeaturesToBiomes();
+
+        //add potion recipes
+        //BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ExtendedMushroomsBlocks.GLOWSHROOM.asItem(), Potions.NIGHT_VISION)); //overpowered
+        BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM.asItem(), Potions.POISON));
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ModBlocks.setupRenderLayers();
         ModEntities.setupRenderers();
+    }
+
+    private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+        // Register the recipe serializer.
+        event.getRegistry().register(MushroomArrowRecipe.SERIALIZER);
     }
 
     /**

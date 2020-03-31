@@ -94,8 +94,12 @@ public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfi
     }
 
     protected void placeCapBlockIfPossible(IWorld world, Random random, BigMushroomFeatureConfig config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south) {
+        this.placeCapBlockIfPossible(world, random, config, blockPos, west, east, north, south, true);
+    }
+
+    protected void placeCapBlockIfPossible(IWorld world, Random random, BigMushroomFeatureConfig config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south, boolean up) {
         if (world.getBlockState(blockPos).canBeReplacedByLeaves(world, blockPos)) {
-            this.setBlockState(world, blockPos, config.field_227272_a_.getBlockState(random, blockPos).with(HugeMushroomBlock.WEST, west).with(HugeMushroomBlock.EAST, east).with(HugeMushroomBlock.NORTH, north).with(HugeMushroomBlock.SOUTH, south));
+            this.setBlockState(world, blockPos, config.field_227272_a_.getBlockState(random, blockPos).with(HugeMushroomBlock.WEST, west).with(HugeMushroomBlock.EAST, east).with(HugeMushroomBlock.NORTH, north).with(HugeMushroomBlock.SOUTH, south).with(HugeMushroomBlock.UP, up));
         }
     }
 

@@ -47,7 +47,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
-            this.placeCapBlockIfPossible(world, random, config, capPos.blockPos, capPos.west, capPos.east, capPos.north, capPos.south);
+            this.placeCapBlockIfPossible(world, random, config, capPos.blockPos, capPos.west, capPos.east, capPos.north, capPos.south, !cap.hasCapPosition(capPos.blockPos.up()));
         }
     }
 
@@ -101,6 +101,15 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
                     }
                 }
             }
+        }
+
+        private boolean hasCapPosition(BlockPos pos) {
+            for (CapPosition capPosition : this.capPositions) {
+                if (capPosition.blockPos.equals(pos)) {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }
