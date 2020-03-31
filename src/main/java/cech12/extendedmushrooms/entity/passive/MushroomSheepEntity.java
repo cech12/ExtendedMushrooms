@@ -277,6 +277,8 @@ public class MushroomSheepEntity extends SheepEntity {
         int i = random.nextInt(100);
         if (i < 3) {
             return MushroomType.GLOWSHROOM;
+        } else if (i < 6) {
+            return MushroomType.POISONOUS_MUSHROOM;
             //TODO more variants
         } else {
             if (random.nextBoolean()) {
