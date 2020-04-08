@@ -183,7 +183,7 @@ public class MushroomSheepEntity extends SheepEntity {
         boolean superResult = super.processInteract(player, hand);
         if (superResult && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue() && item.isIn(Tags.Items.MUSHROOMS)) {
             //change mushroom type
-            MushroomType type = MushroomType.byItem(item);
+            MushroomType type = MushroomType.byItemOrNull(item);
             if (type != null && type != this.getMushroomType()) {
                 this.setMushroomType(type);
                 this.activateMushroomEffect(type);
