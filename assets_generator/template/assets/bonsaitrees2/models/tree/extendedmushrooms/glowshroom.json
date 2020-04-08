@@ -1,0 +1,54 @@
+{
+  "type": "bonsaitrees2:sapling/extendedmushrooms/glowshroom",
+  "version": 3,
+  "ref": {
+    "a": {
+      "block": "extendedmushrooms:glowshroom_stem"
+    },
+    "b": {
+      "block": "extendedmushrooms:glowshroom_cap"
+    }
+  },
+  "shape": [
+    [
+      "     ",
+      " bbb ",
+      "     ",
+      "     ",
+      "     ",
+      "     "
+    ],
+    [
+      " bbb ",
+      "b   b",
+      "     ",
+      "     ",
+      "     ",
+      "     "
+    ],
+    [
+      " bbb ",
+      "b a b",
+      "  a  ",
+      "  a  ",
+      "  a  ",
+      "  a  "
+    ],
+    [
+      " bbb ",
+      "b   b",
+      "     ",
+      "     ",
+      "     ",
+      "     "
+    ],
+    [
+      "     ",
+      " bbb ",
+      "     ",
+      "     ",
+      "     ",
+      "     "
+    ]
+  ]
+}

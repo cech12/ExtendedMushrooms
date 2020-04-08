@@ -1,0 +1,70 @@
+{
+  "type": "bonsaitrees2:sapling/extendedmushrooms/brown_mushroom",
+  "version": 3,
+  "ref": {
+    "a": {
+      "block": "minecraft:mushroom_stem"
+    },
+    "b": {
+      "block": "minecraft:brown_mushroom_block"
+    }
+  },
+  "shape": [
+    [
+      " bbbbb ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      "bbbbbbb",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      "bbbbbbb",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      "bbbbbbb",
+      "   a   ",
+      "   a   ",
+      "   a   ",
+      "   a   ",
+      "   a   "
+    ],
+    [
+      "bbbbbbb",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      "bbbbbbb",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      " bbbbb ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ]
+  ]
+}

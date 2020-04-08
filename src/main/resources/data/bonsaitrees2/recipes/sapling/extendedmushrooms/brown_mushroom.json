@@ -1,0 +1,36 @@
+{
+  "type": "bonsaitrees2:sapling",
+  "mod": "extendedmushrooms",
+
+  "sapling": {
+    "item": "minecraft:brown_mushroom"
+  },
+
+  "drops": [
+    {
+      "result": {
+        "item": "minecraft:mushroom_stem"
+      },
+      "rolls": 1,
+      "chance": 0.75
+    },
+
+    {
+      "result": {
+        "item": "minecraft:brown_mushroom_block"
+      },
+      "rolls": 1,
+      "chance": 0.1
+    },
+
+    {
+      "result": {
+        "item": "minecraft:brown_mushroom"
+      },
+      "rolls": 1,
+      "chance": 0.3
+    }
+  ],
+
+  "compatibleSoilTags": ["mycelium", "podzol"]
+}

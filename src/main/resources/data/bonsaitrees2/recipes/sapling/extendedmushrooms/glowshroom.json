@@ -1,0 +1,44 @@
+{
+  "type": "bonsaitrees2:sapling",
+  "mod": "extendedmushrooms",
+
+  "sapling": {
+    "item": "extendedmushrooms:glowshroom"
+  },
+
+  "drops": [
+    {
+      "result": {
+        "item": "extendedmushrooms:glowshroom_stem"
+      },
+      "rolls": 1,
+      "chance": 0.75
+    },
+
+    {
+      "result": {
+        "item": "extendedmushrooms:glowshroom_cap"
+      },
+      "rolls": 1,
+      "chance": 0.1
+    },
+
+    {
+      "result": {
+        "item": "extendedmushrooms:glowshroom"
+      },
+      "rolls": 1,
+      "chance": 0.3
+    },
+
+    {
+      "result": {
+        "item": "extendedmushrooms:glowstone_crumbs"
+      },
+      "rolls": 1,
+      "chance": 0.75
+    }
+  ],
+
+  "compatibleSoilTags": ["mycelium", "podzol"]
+}

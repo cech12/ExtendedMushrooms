@@ -1,0 +1,36 @@
+{
+  "type": "bonsaitrees2:sapling",
+  "mod": "extendedmushrooms",
+
+  "sapling": {
+    "item": "extendedmushrooms:poisonous_mushroom"
+  },
+
+  "drops": [
+    {
+      "result": {
+        "item": "extendedmushrooms:poisonous_mushroom_stem"
+      },
+      "rolls": 1,
+      "chance": 0.75
+    },
+
+    {
+      "result": {
+        "item": "extendedmushrooms:poisonous_mushroom_cap"
+      },
+      "rolls": 1,
+      "chance": 0.1
+    },
+
+    {
+      "result": {
+        "item": "extendedmushrooms:poisonous_mushroom"
+      },
+      "rolls": 1,
+      "chance": 0.3
+    }
+  ],
+
+  "compatibleSoilTags": ["mycelium", "podzol"]
+}
