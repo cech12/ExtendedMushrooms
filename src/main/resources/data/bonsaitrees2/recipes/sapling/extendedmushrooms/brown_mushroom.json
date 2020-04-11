@@ -1,6 +1,12 @@
 {
   "type": "bonsaitrees2:sapling",
   "mod": "extendedmushrooms",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bonsaitrees2"
+    }
+  ],
 
   "sapling": {
     "item": "minecraft:brown_mushroom"
