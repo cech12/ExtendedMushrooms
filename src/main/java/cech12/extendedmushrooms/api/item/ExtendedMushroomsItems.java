@@ -4,6 +4,10 @@ import net.minecraft.item.Item;
 
 public class ExtendedMushroomsItems {
 
+    public static Item MUSHROOM_BOAT;
+    public static Item GLOWSHROOM_BOAT;
+    public static Item POISONOUS_MUSHROOM_BOAT;
+
     public static Item GRILLED_MUSHROOM;
     public static Item MUSHROOM_BREAD;
 

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "extendedmushrooms:mushroom_boat",
+    "extendedmushrooms:glowshroom_boat",
+    "extendedmushrooms:poisonous_mushroom_boat"
+  ]
+}

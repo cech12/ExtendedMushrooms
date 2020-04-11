@@ -18,30 +18,42 @@ import java.util.function.Supplier;
 
 public enum MushroomType implements IStringSerializable {
 
-    BROWN_MUSHROOM(0, ()->Items.BROWN_MUSHROOM, ()->Blocks.BROWN_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM, DyeColor.BROWN),
-    RED_MUSHROOM(1, ()->Items.RED_MUSHROOM, ()->Blocks.RED_MUSHROOM_BLOCK, ()->Blocks.MUSHROOM_STEM, DyeColor.RED),
-    GLOWSHROOM(2, ()->ExtendedMushroomsBlocks.GLOWSHROOM, ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP, ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM, DyeColor.BLUE,
+    BROWN_MUSHROOM(0,
+            ()->Items.BROWN_MUSHROOM,
+            ()->Blocks.BROWN_MUSHROOM_BLOCK,
+            MushroomWoodType.MUSHROOM, DyeColor.BROWN),
+    RED_MUSHROOM(1,
+            ()->Items.RED_MUSHROOM,
+            ()->Blocks.RED_MUSHROOM_BLOCK,
+            MushroomWoodType.MUSHROOM, DyeColor.RED),
+    GLOWSHROOM(2,
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM,
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP,
+            MushroomWoodType.GLOWSHROOM, DyeColor.BLUE,
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getDefaultState())),
-    POISONOUS_MUSHROOM(3, ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP, ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM, DyeColor.PURPLE);
+    POISONOUS_MUSHROOM(3,
+            ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM,
+            ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP,
+            MushroomWoodType.POISONOUS_MUSHROOM, DyeColor.PURPLE);
 
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 
     private final int id;
     private final Supplier<IItemProvider> item;
     private final Supplier<Block> capBlock;
-    private final Supplier<Block> stemBlock;
+    private final MushroomWoodType woodType;
     private final DyeColor color;
     private final Supplier<Integer> lightValue;
 
-    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, Supplier<Block> stemBlock, @Nonnull DyeColor color) {
-        this(id, item, capBlock, stemBlock, color, () -> 0);
+    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color) {
+        this(id, item, capBlock, woodType, color, () -> 0);
     }
 
-    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, Supplier<Block> stemBlock, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
+    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
         this.id = id;
         this.item = item;
         this.capBlock = capBlock;
-        this.stemBlock = stemBlock;
+        this.woodType = woodType;
         this.color = color;
         this.lightValue = lightValue;
     }
@@ -58,8 +70,8 @@ public enum MushroomType implements IStringSerializable {
         return this.capBlock.get();
     }
 
-    public Block getStemBlock() {
-        return this.stemBlock.get();
+    public MushroomWoodType getWoodType() {
+        return this.woodType;
     }
 
     public DyeColor getColor() {

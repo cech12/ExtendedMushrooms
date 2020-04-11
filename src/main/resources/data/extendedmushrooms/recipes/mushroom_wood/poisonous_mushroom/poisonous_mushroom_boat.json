@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "tag": "extendedmushrooms:mushroom_planks"
+      "item": "extendedmushrooms:poisonous_mushroom_planks"
     }
   },
   "result": {
-    "item": "minecraft:oak_boat"
+    "item": "extendedmushrooms:poisonous_mushroom_boat"
   }
 }
