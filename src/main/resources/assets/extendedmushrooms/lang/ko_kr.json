@@ -6,7 +6,6 @@
   "item.extendedmushrooms.glowstone_crumbs": "발광석 부스러기",
 
   "item.extendedmushrooms.mushroom_sheep_spawn_egg": "버섯양 스폰 알",
-
   "entity.extendedmushrooms.mushroom_sheep": "버섯양",
 
   "block.extendedmushrooms.infested_grass": "들끓는 풀",
@@ -22,6 +21,8 @@
   "block.extendedmushrooms.mushroom_stairs": "버섯 계단",
   "block.extendedmushrooms.mushroom_trapdoor": "버섯 다락문",
   "block.extendedmushrooms.stripped_mushroom_stem": "껍질을 벗긴 버섯 줄기",
+  "item.extendedmushrooms.mushroom_boat": "버섯 보트",
+  "entity.extendedmushrooms.mushroom_boat": "버섯 보트",
 
   "block.extendedmushrooms.brown_mushroom_button": "갈색 버섯 버튼",
   "block.extendedmushrooms.brown_mushroom_carpet": "갈색 버섯 카펫",
@@ -46,21 +47,25 @@
   "block.extendedmushrooms.glowshroom_cap_button": "발광 버섯 갓 버튼",
   "block.extendedmushrooms.glowshroom_cap_carpet": "발광 버섯 갓 카펫",
   "block.extendedmushrooms.glowshroom_cap_pressure_plate": "발광 버섯 갓 압력판",
+  "item.extendedmushrooms.glowshroom_boat": "발광 버섯 보트",
+  "entity.extendedmushrooms.glowshroom_boat": "발광 버섯 보트",
   
-  "block.extendedmushrooms.poisonous_mushroom": "독 버섯",
-  "block.extendedmushrooms.poisonous_mushroom_cap": "독 버섯 갓",
-  "block.extendedmushrooms.poisonous_mushroom_stem": "독 버섯 줄기",
-  "block.extendedmushrooms.poisonous_mushroom_stem_stripped": "껍질을 벗긴 독 버섯 줄기",
-  "block.extendedmushrooms.poisonous_mushroom_button": "독 버섯 버튼",
-  "block.extendedmushrooms.poisonous_mushroom_door": "독 버섯 문",
-  "block.extendedmushrooms.poisonous_mushroom_fence": "독 버섯 울타리",
-  "block.extendedmushrooms.poisonous_mushroom_fence_gate": "독 버섯 울타리 문",
-  "block.extendedmushrooms.poisonous_mushroom_planks": "독 버섯 판자",
-  "block.extendedmushrooms.poisonous_mushroom_pressure_plate": "독 버섯 압력판",
-  "block.extendedmushrooms.poisonous_mushroom_slab": "독 버섯 반 블록",
-  "block.extendedmushrooms.poisonous_mushroom_stairs": "독 버섯 계단",
-  "block.extendedmushrooms.poisonous_mushroom_trapdoor": "독 버섯 다락문",
-  "block.extendedmushrooms.poisonous_mushroom_cap_button": "독 버섯 갓 버튼",
-  "block.extendedmushrooms.poisonous_mushroom_cap_carpet": "독 버섯 갓 카펫",
-  "block.extendedmushrooms.poisonous_mushroom_cap_pressure_plate": "독 버섯 갓 압력판"
+  "block.extendedmushrooms.poisonous_mushroom": "독버섯",
+  "block.extendedmushrooms.poisonous_mushroom_cap": "독버섯 갓",
+  "block.extendedmushrooms.poisonous_mushroom_stem": "독버섯 줄기",
+  "block.extendedmushrooms.poisonous_mushroom_stem_stripped": "껍질을 벗긴 독버섯 줄기",
+  "block.extendedmushrooms.poisonous_mushroom_button": "독버섯 버튼",
+  "block.extendedmushrooms.poisonous_mushroom_door": "독버섯 문",
+  "block.extendedmushrooms.poisonous_mushroom_fence": "독버섯 울타리",
+  "block.extendedmushrooms.poisonous_mushroom_fence_gate": "독버섯 울타리 문",
+  "block.extendedmushrooms.poisonous_mushroom_planks": "독버섯 판자",
+  "block.extendedmushrooms.poisonous_mushroom_pressure_plate": "독버섯 압력판",
+  "block.extendedmushrooms.poisonous_mushroom_slab": "독버섯 반 블록",
+  "block.extendedmushrooms.poisonous_mushroom_stairs": "독버섯 계단",
+  "block.extendedmushrooms.poisonous_mushroom_trapdoor": "독버섯 다락문",
+  "block.extendedmushrooms.poisonous_mushroom_cap_button": "독버섯 갓 버튼",
+  "block.extendedmushrooms.poisonous_mushroom_cap_carpet": "독버섯 갓 카펫",
+  "block.extendedmushrooms.poisonous_mushroom_cap_pressure_plate": "독버섯 갓 압력판"
+  "item.extendedmushrooms.poisonous_mushroom_boat": "독버섯 보트",
+  "entity.extendedmushrooms.poisonous_mushroom_boat": "독버섯 보트"
 }
