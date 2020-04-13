@@ -65,7 +65,7 @@
   "block.extendedmushrooms.poisonous_mushroom_trapdoor": "독버섯 다락문",
   "block.extendedmushrooms.poisonous_mushroom_cap_button": "독버섯 갓 버튼",
   "block.extendedmushrooms.poisonous_mushroom_cap_carpet": "독버섯 갓 카펫",
-  "block.extendedmushrooms.poisonous_mushroom_cap_pressure_plate": "독버섯 갓 압력판"
+  "block.extendedmushrooms.poisonous_mushroom_cap_pressure_plate": "독버섯 갓 압력판",
   "item.extendedmushrooms.poisonous_mushroom_boat": "독버섯 보트",
   "entity.extendedmushrooms.poisonous_mushroom_boat": "독버섯 보트"
 }
