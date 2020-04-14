@@ -10,6 +10,8 @@ import cech12.extendedmushrooms.init.ModFeatures;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import cech12.extendedmushrooms.item.crafting.MushroomArrowRecipe;
 import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
+import cech12.extendedmushrooms.loot_modifiers.MushroomCapLootModifier;
+import cech12.extendedmushrooms.loot_modifiers.MushroomStemLootModifier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HugeMushroomBlock;
@@ -20,10 +22,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -34,6 +38,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import javax.annotation.Nonnull;
 
 @Mod(ExtendedMushrooms.MOD_ID)
 @Mod.EventBusSubscriber
@@ -46,6 +52,7 @@ public class ExtendedMushrooms {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::onRegisterModifierSerializers);
 
         // Register an event with the mod specific event bus for mod own recipes.
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
@@ -70,6 +77,19 @@ public class ExtendedMushrooms {
     private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
         // Register the recipe serializer.
         event.getRegistry().register(MushroomArrowRecipe.SERIALIZER);
+    }
+
+    /**
+     * Add some loot modifiers to be compatible with other mods and change some loot behaviour of vanilla Minecraft.
+     */
+    public void onRegisterModifierSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event)
+    {
+        event.getRegistry().register(
+                new MushroomCapLootModifier.Serializer().setRegistryName(MOD_ID, "mushroom_cap_harvest")
+        );
+        event.getRegistry().register(
+                new MushroomStemLootModifier.Serializer().setRegistryName(MOD_ID, "mushroom_stem_harvest")
+        );
     }
 
     /**

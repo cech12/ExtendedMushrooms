@@ -1,0 +1,7 @@
+{
+  "replace" : false,
+  "entries" : [
+    "extendedmushrooms:mushroom_cap_harvest",
+    "extendedmushrooms:mushroom_stem_harvest"
+  ]
+}

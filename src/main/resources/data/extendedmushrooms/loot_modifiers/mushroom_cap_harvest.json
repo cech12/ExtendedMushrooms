@@ -1,0 +1,11 @@
+{
+  "type": "extendedmushrooms:mushroom_cap_harvest",
+  "conditions": [
+      {
+        "condition": "minecraft:match_tool",
+        "predicate": {
+          "tag": "forge:shears"
+        }
+      }
+  ]
+}

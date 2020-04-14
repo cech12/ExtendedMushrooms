@@ -17,6 +17,9 @@ public class ExtendedMushroomsTags {
         public static final Tag<Block> EDIBLE_MUSHROOMS = tag("edible_mushrooms"); //all edible mushrooms
         public static final Tag<Block> MUSHROOMS = tag("mushrooms"); //all mushrooms
 
+        public static final Tag<Block> MUSHROOM_CAPS = tag("mushroom_caps"); //all mushroom caps
+        public static final Tag<Block> MUSHROOM_STEMS = tag("mushroom_stems"); //all mushroom stems
+
         private static Tag<Block> tag(@Nonnull String name) {
             return new BlockTags.Wrapper(new ResourceLocation("forge", name));
         }
@@ -41,6 +44,9 @@ public class ExtendedMushroomsTags {
 
         public static final Tag<Item> EDIBLE_MUSHROOMS = tag("edible_mushrooms"); //all edible mushrooms
         //public static final Tag<Item> MUSHROOMS = tag("mushrooms"); //already in Tags class
+
+        public static final Tag<Item> MUSHROOM_CAPS = tag("mushroom_caps"); //all mushroom caps
+        public static final Tag<Item> MUSHROOM_STEMS = tag("mushroom_stems"); //all mushroom stems
 
         private static Tag<Item> tag(@Nonnull String name) {
             return new ItemTags.Wrapper(new ResourceLocation("forge", name));
