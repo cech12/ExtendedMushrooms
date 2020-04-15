@@ -22,14 +22,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -148,7 +147,7 @@ public class ExtendedMushrooms {
      * Add eat mushroom goal to sheep entities when configured.
      */
     @SubscribeEvent
-    public static void onLivingSpawn(LivingSpawnEvent.EnteringChunk event) {
+    public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if (Config.SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.getValue()) {
             if (event.getEntity() instanceof SheepEntity) { //also mushroom sheep
                 SheepEntity sheep = ((SheepEntity) event.getEntity());
