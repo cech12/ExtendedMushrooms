@@ -10,6 +10,9 @@ public class Config {
 
     public static List<IResettableConfigType> allValues = new ArrayList<>();
 
+    public static final ConfigType.Boolean MUSHROOM_CAPS_WITH_SHEARS_ENABLED = new ConfigType.Boolean(true);
+    public static final ConfigType.Boolean MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED = new ConfigType.Boolean(true);
+
     public static final ConfigType.Boolean INFESTED_GRASS_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Boolean INFESTED_FLOWER_ENABLED = new ConfigType.Boolean(true);
 
@@ -48,6 +51,17 @@ public class Config {
 
     static {
         final ForgeConfigSpec.Builder common = new ForgeConfigSpec.Builder();
+
+        common.comment("Various options that affect mod behaviour.").push("Behaviour Options");
+
+        MUSHROOM_CAPS_WITH_SHEARS_ENABLED.configObj = common
+                .comment("Whether or not mushroom caps can be harvested with shears.")
+                .define("mushroomCapsWithShearsEnabled", MUSHROOM_CAPS_WITH_SHEARS_ENABLED.getDefaultValue());
+        MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED.configObj = common
+                .comment("Whether or not mushroom stems can be harvested without silk touch enchantment.")
+                .define("mushroomStemsWithoutSilkTouchEnabled", MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED.getDefaultValue());
+
+        common.pop();
 
         common.comment("Enable or disable certain blocks or entities.").push("Accessibility Config");
 
