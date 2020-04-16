@@ -1,12 +1,24 @@
 modLoader="javafml"
 loaderVersion="[31,)"
-
+issueTrackerURL="https://github.com/cech12/ExtendedMushrooms/issues"
 [[mods]]
-modId="extendedmushrooms"
-version="${file.jarVersion}"
-displayName="Extended Mushrooms"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms"
-authors="Cech12"
-description='''
-This mod changes some mushroom behaviour and adds mushroom related blocks, items and recipes.
-'''
+    modId="extendedmushrooms"
+    version="${file.jarVersion}"
+    displayName="Extended Mushrooms"
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms"
+    authors="Cech12"
+    description='''
+    This mod changes some mushroom behaviour and adds mushroom related blocks, items and recipes.
+    '''
+[[dependencies.extendedmushrooms]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31.1.18,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.extendedmushrooms]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2,)"
+    ordering="NONE"
+    side="BOTH"
