@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#extendedmushrooms:mushroom_stems",
+    "#forge:mushroom_stems",
     "#extendedmushrooms:mushroom_planks"
   ]
 }
