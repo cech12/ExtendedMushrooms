@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "extendedmushrooms:block/poisonous_mushroom_planks",
-        "top": "extendedmushrooms:block/poisonous_mushroom_planks",
-        "side": "extendedmushrooms:block/poisonous_mushroom_planks"
-    }
-}

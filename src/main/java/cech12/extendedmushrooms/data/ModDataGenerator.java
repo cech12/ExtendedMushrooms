@@ -12,6 +12,7 @@ public class ModDataGenerator {
     public static void gatherData(GatherDataEvent evt) {
         if (evt.includeServer()) {
             evt.getGenerator().addProvider(new BlockLootProvider(evt.getGenerator()));
+            evt.getGenerator().addProvider(new BlockModelProvider(evt.getGenerator(), evt.getExistingFileHelper()));
             /*
             evt.getGenerator().addProvider(new BlockTagProvider(evt.getGenerator()));
             evt.getGenerator().addProvider(new ItemTagProvider(evt.getGenerator()));

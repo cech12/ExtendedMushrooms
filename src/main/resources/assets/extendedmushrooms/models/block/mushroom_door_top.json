@@ -1,7 +1,0 @@
-{
-    "parent": "block/door_top",
-    "textures": {
-        "bottom": "extendedmushrooms:block/mushroom_door_bottom",
-        "top": "extendedmushrooms:block/mushroom_door_top"
-    }
-}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/carpet",
+  "textures": {
+    "particle": "extendedmushrooms:block/poisonous_mushroom_cap",
+    "wool": "extendedmushrooms:block/poisonous_mushroom_cap"
+  }
+}

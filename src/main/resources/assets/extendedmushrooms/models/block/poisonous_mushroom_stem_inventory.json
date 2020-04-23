@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "extendedmushrooms:block/poisonous_mushroom_stem"
-    }
-}

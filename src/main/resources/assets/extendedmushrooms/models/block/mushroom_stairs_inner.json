@@ -1,8 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "extendedmushrooms:block/mushroom_planks",
-        "top": "extendedmushrooms:block/mushroom_planks",
-        "side": "extendedmushrooms:block/mushroom_planks"
-    }
-}
