@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
+import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -32,8 +33,8 @@ public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
 
     private static final Direction[] DIRECTION_ORDER = {Direction.UP, Direction.DOWN, Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.SOUTH};
 
-    public PoisonousMushroomCap(Properties properties) {
-        super(properties);
+    public PoisonousMushroomCap(MushroomType type, Properties properties) {
+        super(type, properties);
         this.setDefaultState(this.getDefaultState().with(TRIGGERED, false));
     }
 

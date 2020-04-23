@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
+import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.block.BlockState;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -13,8 +14,8 @@ import java.util.Random;
 
 public class GlowshroomCap extends AbstractEffectMushroomCap {
 
-    public GlowshroomCap(Properties properties) {
-        super(properties);
+    public GlowshroomCap(MushroomType type, Properties properties) {
+        super(type, properties);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
+import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.potion.EffectInstance;
@@ -18,12 +18,12 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
-public abstract class AbstractEffectMushroomCap extends HugeMushroomBlock {
+public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
 
     public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 
-    public AbstractEffectMushroomCap(Properties properties) {
-        super(properties);
+    public AbstractEffectMushroomCap(MushroomType type, Properties properties) {
+        super(type, properties);
         this.setDefaultState(this.getDefaultState().with(PERSISTENT, false));
     }
 

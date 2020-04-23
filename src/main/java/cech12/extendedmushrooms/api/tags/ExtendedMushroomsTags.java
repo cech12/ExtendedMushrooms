@@ -48,6 +48,8 @@ public class ExtendedMushroomsTags {
         public static final Tag<Item> MUSHROOM_CAPS = tag("mushroom_caps"); //all mushroom caps
         public static final Tag<Item> MUSHROOM_STEMS = tag("mushroom_stems"); //all mushroom stems
 
+        public static final Tag<Item> SHEARS = tag("shears");
+
         private static Tag<Item> tag(@Nonnull String name) {
             return new ItemTags.Wrapper(new ResourceLocation("forge", name));
         }
