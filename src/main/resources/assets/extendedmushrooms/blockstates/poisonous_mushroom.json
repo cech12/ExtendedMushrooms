@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "triggered=false": { "model": "extendedmushrooms:block/poisonous_mushroom" },
-        "triggered=true": { "model": "extendedmushrooms:block/poisonous_mushroom_triggered" }
-    }
-}

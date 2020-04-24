@@ -77,7 +77,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'extendedmushrooms', '--all', '--output', file('src/generated/resources/'), '--validate', '--existing', file('src/main/resources/')
+            args '--mod', 'extendedmushrooms', '--all', '--validate',
+                    '--output', file('src/generated/resources/'),
+                    '--existing', file('src/main/resources/'),
+                    '--existing', file('src/generated/resources/')
 
             mods {
                 extendedmushrooms {
@@ -89,8 +92,7 @@ minecraft {
 }
 
 sourceSets.main.resources {
-    srcDirs += 'src/generated/resources'
-    srcDirs += 'src/main/resources'
+    srcDir 'src/generated/resources'
 }
 
 repositories {

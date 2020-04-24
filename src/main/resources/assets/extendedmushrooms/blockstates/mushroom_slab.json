@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "type=bottom": { "model": "extendedmushrooms:block/mushroom_slab" },
-        "type=top": { "model": "extendedmushrooms:block/mushroom_slab_top" },
-        "type=double": { "model": "extendedmushrooms:block/mushroom_planks" }
-    }
-}
