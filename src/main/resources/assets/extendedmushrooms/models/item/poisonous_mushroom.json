@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "extendedmushrooms:block/poisonous_mushroom"
-    }
-}
