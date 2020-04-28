@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "extendedmushrooms:grilled_mushroom"
+    ]
+  },
+  "criteria": {
+    "has_mushroom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:mushrooms/edible"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "extendedmushrooms:grilled_mushroom"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mushroom",
+      "has_the_recipe"
+    ]
+  ]
+}

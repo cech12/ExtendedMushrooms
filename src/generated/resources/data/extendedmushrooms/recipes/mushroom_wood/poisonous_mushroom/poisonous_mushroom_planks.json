@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "forge:mushroom_stems/green"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:poisonous_mushroom_planks",
+    "count": 4
+  }
+}

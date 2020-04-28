@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "extendedmushrooms:glowshroom_slab",
+    "extendedmushrooms:mushroom_slab",
+    "extendedmushrooms:poisonous_mushroom_slab"
+  ]
+}

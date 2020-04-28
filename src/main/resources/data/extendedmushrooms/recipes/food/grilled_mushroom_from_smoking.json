@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "tag": "forge:edible_mushrooms"
-  },
-  "result": "extendedmushrooms:grilled_mushroom",
-  "experience": 0.15,
-  "cookingtime": 75
-}

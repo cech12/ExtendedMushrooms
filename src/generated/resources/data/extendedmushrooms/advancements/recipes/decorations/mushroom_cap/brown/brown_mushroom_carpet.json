@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "extendedmushrooms:mushroom_cap/brown/brown_mushroom_carpet"
+    ]
+  },
+  "criteria": {
+    "has_cap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:mushroom_caps/brown"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "extendedmushrooms:mushroom_cap/brown/brown_mushroom_carpet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cap",
+      "has_the_recipe"
+    ]
+  ]
+}

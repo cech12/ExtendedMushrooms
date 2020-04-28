@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.loot_modifiers;
 
-import cech12.extendedmushrooms.api.tags.ExtendedMushroomsTags;
+import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.config.Config;
 import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
@@ -31,7 +31,7 @@ public class MushroomCapLootModifier extends LootModifier {
         //only called when shears are used
         if (Config.MUSHROOM_CAPS_WITH_SHEARS_ENABLED.getValue()) {
             BlockState blockState = context.get(LootParameters.BLOCK_STATE);
-            if (blockState != null && blockState.isIn(ExtendedMushroomsTags.ForgeBlocks.MUSHROOM_CAPS)) {
+            if (blockState != null && blockState.isIn(ModTags.ForgeBlocks.MUSHROOM_CAPS)) {
                 ItemStack tool = context.get(LootParameters.TOOL);
                 //to avoid endless loop: test for silk touch enchantment
                 if (tool != null && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {

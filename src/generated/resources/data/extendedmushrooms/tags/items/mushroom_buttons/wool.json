@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "extendedmushrooms:brown_mushroom_button",
+    "extendedmushrooms:glowshroom_cap_button",
+    "extendedmushrooms:poisonous_mushroom_cap_button",
+    "extendedmushrooms:red_mushroom_button"
+  ]
+}

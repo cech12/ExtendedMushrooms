@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.mixin;
 
-import cech12.extendedmushrooms.api.tags.ExtendedMushroomsTags;
+import cech12.extendedmushrooms.init.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.BlockTags;
@@ -25,7 +25,7 @@ public abstract class MixinAbstractBigMushroomFeature {
         int i = pos.getY();
         if (i >= 1 && i + p_227209_3_ + 1 < world.getMaxHeight()) {
             Block block = world.getBlockState(pos.down()).getBlock();
-            if (block.isIn(ExtendedMushroomsTags.Blocks.MUSHROOM_GROWING_BLOCKS) || block.isIn(ExtendedMushroomsTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL)) {
+            if (block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS) || block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL)) {
                 for(int j = 0; j <= p_227209_3_; ++j) {
                     //int k = this.func_225563_a_(-1, -1, p_227209_5_.field_227274_c_, j);
                     int k = j <= 3 ? 0 : p_227209_5_.field_227274_c_;

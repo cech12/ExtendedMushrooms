@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:mushrooms/brown",
+    "#forge:mushrooms/red",
+    "#forge:mushrooms/blue",
+    "#forge:mushrooms/purple"
+  ]
+}

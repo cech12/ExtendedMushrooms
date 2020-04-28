@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.entity.passive;
 
 import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
-import cech12.extendedmushrooms.api.tags.ExtendedMushroomsTags;
+import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMyceliumGoal;
 import cech12.extendedmushrooms.item.MushroomType;
@@ -197,7 +197,7 @@ public class MushroomSheepEntity extends SheepEntity {
      * When a given MushroomType has no effect, nothing happens.
      */
     public void activateMushroomEffect(MushroomType mushroomType) {
-        if (mushroomType.getItem().isIn(ExtendedMushroomsTags.Items.POISONOUS_MUSHROOMS)) {
+        if (mushroomType.getItem().isIn(ModTags.ForgeItems.MUSHROOMS_POISONOUS)) {
             this.addPotionEffect(new EffectInstance(Effects.POISON, 200));
         }
     }

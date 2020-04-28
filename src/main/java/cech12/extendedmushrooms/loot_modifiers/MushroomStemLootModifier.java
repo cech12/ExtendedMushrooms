@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.loot_modifiers;
 
-import cech12.extendedmushrooms.api.tags.ExtendedMushroomsTags;
+import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.config.Config;
 import com.google.gson.JsonObject;
 import net.minecraft.block.BlockState;
@@ -31,7 +31,7 @@ public class MushroomStemLootModifier extends LootModifier {
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         if (Config.MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED.getValue()) {
             BlockState blockState = context.get(LootParameters.BLOCK_STATE);
-            if (blockState != null && blockState.isIn(ExtendedMushroomsTags.ForgeBlocks.MUSHROOM_STEMS)) {
+            if (blockState != null && blockState.isIn(ModTags.ForgeBlocks.MUSHROOM_STEMS)) {
                 ItemStack tool = context.get(LootParameters.TOOL);
                 //to avoid endless loop: test for silk touch enchantment
                 if (tool == null || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
