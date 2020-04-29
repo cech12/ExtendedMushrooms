@@ -168,7 +168,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                         .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.WEST).addModels(new ConfiguredModel(slab, 0, 270, true))
                         .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.DOUBLE).addModels(new ConfiguredModel(doubleSlab));
             } else {
-                //mushrooms, (vertical) planks, carpets, flower, potted flower, grass
+                //mushrooms, (vertical) planks, carpets, flower, potted flower, grass, bookshelf
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
             }
         }

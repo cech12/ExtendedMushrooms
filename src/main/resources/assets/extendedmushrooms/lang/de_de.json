@@ -11,6 +11,7 @@
   "block.extendedmushrooms.infested_grass": "Befallenes Gras",
   "block.extendedmushrooms.infested_flower": "Befallene Blume",
 
+  "block.extendedmushrooms.mushroom_bookshelf": "Pilzbücherregal",
   "block.extendedmushrooms.mushroom_button": "Pilzknopf",
   "block.extendedmushrooms.mushroom_door": "Pilztür",
   "block.extendedmushrooms.mushroom_fence": "Pilzzaun",
@@ -37,6 +38,7 @@
   "block.extendedmushrooms.glowshroom_cap": "Leuchtpilzhut",
   "block.extendedmushrooms.glowshroom_stem": "Leuchtpilzstiel",
   "block.extendedmushrooms.glowshroom_stem_stripped": "Entrindeter Leuchtpilzstiel",
+  "block.extendedmushrooms.glowshroom_bookshelf": "Leuchtpilzbücherregal",
   "block.extendedmushrooms.glowshroom_button": "Leuchtpilzknopf",
   "block.extendedmushrooms.glowshroom_door": "Leuchtpilztür",
   "block.extendedmushrooms.glowshroom_fence": "Leuchtpilzzaun",
@@ -58,6 +60,7 @@
   "block.extendedmushrooms.poisonous_mushroom_cap": "Giftpilzhut",
   "block.extendedmushrooms.poisonous_mushroom_stem": "Giftpilzstiel",
   "block.extendedmushrooms.poisonous_mushroom_stem_stripped": "Entrindeter Giftpilzstiel",
+  "block.extendedmushrooms.poisonous_mushroom_bookshelf": "Giftpilzbücherregal",
   "block.extendedmushrooms.poisonous_mushroom_button": "Giftpilzknopf",
   "block.extendedmushrooms.poisonous_mushroom_door": "Giftpilztür",
   "block.extendedmushrooms.poisonous_mushroom_fence": "Giftpilzzaun",

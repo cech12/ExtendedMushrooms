@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.EMMushroomBlock;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
@@ -100,6 +101,10 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/cross")))
                         .texture("cross", getBlockResourceLocation(name));
+            } else if (block instanceof BookshelfBlock) {
+                ResourceLocation side = getBlockResourceLocation(name);
+                ResourceLocation end = getBlockResourceLocation(name, "_bookshelf", "_planks");
+                cubeColumn(name, side, end);
             } else if (block instanceof MushroomWoodButtonBlock) {
                 buttonBlock(name, getBlockResourceLocation(name, "_button", "_planks"));
             } else if (block instanceof MushroomCapBlock) {

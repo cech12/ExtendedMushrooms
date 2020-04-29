@@ -31,6 +31,7 @@ public class ItemTagProvider extends ItemTagsProvider {
                 .filter(item -> item instanceof MushroomBoatItem)
                 .sorted(Comparator.comparing(Item::getRegistryName))
                 .toArray(Item[]::new));
+        copy(ModTags.Blocks.MUSHROOM_BOOKSHELVES, ModTags.Items.MUSHROOM_BOOKSHELVES);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD, ModTags.Items.MUSHROOM_BUTTONS_WOOD);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL, ModTags.Items.MUSHROOM_BUTTONS_WOOL);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS, ModTags.Items.MUSHROOM_BUTTONS);
@@ -64,6 +65,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE, ModTags.ForgeItems.MUSHROOMS_EDIBLE);
         copy(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS, ModTags.ForgeItems.MUSHROOMS_POISONOUS);
 
+        getBuilder(Tags.Items.BOOKSHELVES).add(ModTags.Items.MUSHROOM_BOOKSHELVES);
         getBuilder(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
         getBuilder(ModTags.ForgeItems.SHEARS).add(Items.SHEARS);
 

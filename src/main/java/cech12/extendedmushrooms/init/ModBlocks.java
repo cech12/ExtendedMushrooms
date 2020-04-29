@@ -65,6 +65,7 @@ public final class ModBlocks {
         INFESTED_FLOWER_POTTED = registerBlock("infested_flower_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> INFESTED_FLOWER, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid()));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(INFESTED_FLOWER.getRegistryName()), () -> INFESTED_FLOWER_POTTED);
 
+        MUSHROOM_BOOKSHELF = registerCompatBlock("mushroom_bookshelf", ItemGroup.BUILDING_BLOCKS, ModCompat.isVariantBookshelfModLoaded(), new BookshelfBlock(Block.Properties.from(Blocks.BOOKSHELF)));
         MUSHROOM_BUTTON = registerBlock("mushroom_button", ItemGroup.REDSTONE, new MushroomWoodButtonBlock());
         MUSHROOM_DOOR = registerBlock("mushroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
         MUSHROOM_FENCE = registerBlock("mushroom_fence", ItemGroup.DECORATIONS, new FenceBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
@@ -93,6 +94,7 @@ public final class ModBlocks {
         GLOWSHROOM_STEM = registerBlock("glowshroom_stem", ItemGroup.BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD).lightValue(8)));
         GLOWSHROOM_STEM_STRIPPED = registerBlock("glowshroom_stem_stripped", ItemGroup.BUILDING_BLOCKS, new HugeMushroomBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD).lightValue(8)));
         BLOCK_STRIPPING_MAP.put(GLOWSHROOM_STEM, GLOWSHROOM_STEM_STRIPPED);
+        GLOWSHROOM_BOOKSHELF = registerCompatBlock("glowshroom_bookshelf", ItemGroup.BUILDING_BLOCKS, ModCompat.isVariantBookshelfModLoaded(), new BookshelfBlock(Block.Properties.from(Blocks.BOOKSHELF).lightValue(8)));
         GLOWSHROOM_BUTTON = registerBlock("glowshroom_button", ItemGroup.REDSTONE, new MushroomWoodButtonBlock(8));
         GLOWSHROOM_DOOR = registerBlock("glowshroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(3.0F).sound(SoundType.WOOD).lightValue(8)));
         GLOWSHROOM_FENCE = registerBlock("glowshroom_fence", ItemGroup.DECORATIONS, new FenceBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD).lightValue(8)));
@@ -115,6 +117,7 @@ public final class ModBlocks {
         POISONOUS_MUSHROOM_STEM = registerBlock("poisonous_mushroom_stem", ItemGroup.BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
         POISONOUS_MUSHROOM_STEM_STRIPPED = registerBlock("poisonous_mushroom_stem_stripped", ItemGroup.BUILDING_BLOCKS, new HugeMushroomBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
         BLOCK_STRIPPING_MAP.put(POISONOUS_MUSHROOM_STEM, POISONOUS_MUSHROOM_STEM_STRIPPED);
+        POISONOUS_MUSHROOM_BOOKSHELF = registerCompatBlock("poisonous_mushroom_bookshelf", ItemGroup.BUILDING_BLOCKS, ModCompat.isVariantBookshelfModLoaded(), new BookshelfBlock(Block.Properties.from(Blocks.BOOKSHELF)));
         POISONOUS_MUSHROOM_BUTTON = registerBlock("poisonous_mushroom_button", ItemGroup.REDSTONE, new MushroomWoodButtonBlock());
         POISONOUS_MUSHROOM_DOOR = registerBlock("poisonous_mushroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
         POISONOUS_MUSHROOM_FENCE = registerBlock("poisonous_mushroom_fence", ItemGroup.DECORATIONS, new FenceBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));

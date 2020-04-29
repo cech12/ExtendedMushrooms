@@ -92,6 +92,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
         mushroomWoodRecipes(consumer, "colorless",
                 ModTags.ForgeItems.MUSHROOM_STEMS_COLORLESS,
                 ExtendedMushroomsItems.MUSHROOM_BOAT.asItem(),
+                ExtendedMushroomsBlocks.MUSHROOM_BOOKSHELF.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_BUTTON.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_FENCE.asItem(),
@@ -121,6 +122,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
         mushroomWoodRecipes(consumer, "glowshroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM,
                 ExtendedMushroomsItems.GLOWSHROOM_BOAT.asItem(),
+                ExtendedMushroomsBlocks.GLOWSHROOM_BOOKSHELF.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_BUTTON.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_FENCE.asItem(),
@@ -154,6 +156,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
         mushroomWoodRecipes(consumer, "poisonous_mushroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
                 ExtendedMushroomsItems.POISONOUS_MUSHROOM_BOAT.asItem(),
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_BOOKSHELF.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_BUTTON.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_FENCE.asItem(),
@@ -188,7 +191,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
 
 
     private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> stems,
-                                     Item boat, Item button, Item door, Item fence,
+                                     Item boat, Item bookshelf, Item button, Item door, Item fence,
                                      Item fence_gate, Item planks, Item pressure_plate, Item slab, Item stairs,
                                      Item trapdoor, Item verticalPlanks, Item verticalSlabs) {
         String directory = "mushroom_wood/" + name + "/";
@@ -262,6 +265,18 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .build(consumer, getResourceLocation(directory, trapdoor.getRegistryName()));
 
         //recipes that are only active when other mods are installed
+        ShapedRecipeBuilder.shapedRecipe(bookshelf)
+                .key('#', planks)
+                .key('X', Items.BOOK)
+                .patternLine("###")
+                .patternLine("XXX")
+                .patternLine("###")
+                .addCriterion("has_book", hasItem(Items.BOOK))
+                .build(ResultWrapper.transformJson(consumer, json -> {
+                    JsonArray array = new JsonArray();
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantBookshelf")));
+                    json.add("conditions", array);
+                }), getResourceLocation(directory, bookshelf.getRegistryName()));
         ShapedRecipeBuilder.shapedRecipe(verticalPlanks, 3)
                 .key('#', planks)
                 .patternLine("#")

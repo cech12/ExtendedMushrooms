@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.data;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
+import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import com.google.gson.Gson;
@@ -19,6 +20,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Items;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.IItemProvider;
@@ -66,7 +68,9 @@ public class BlockLootProvider implements IDataProvider {
                 continue;
             }
 
-            if (block instanceof SlabBlock) {
+            if (block instanceof BookshelfBlock) {
+                this.functionTable.put(block, BlockLootProvider::dropBookshelf);
+            } else if (block instanceof SlabBlock) {
                 this.functionTable.put(block, BlockLootProvider::dropSlab);
             } else if (block instanceof DoorBlock) {
                 this.functionTable.put(block, BlockLootProvider::dropDoor);
@@ -155,6 +159,19 @@ public class BlockLootProvider implements IDataProvider {
         }
 
         return lootTable;
+    }
+
+    private static LootTable.Builder dropBookshelf(Block block) {
+        ItemPredicate.Builder silkPredicate = ItemPredicate.Builder.create()
+                .enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1)));
+        LootEntry.Builder<?> silkTouchAlternative = ItemLootEntry.builder(block)
+                .acceptCondition(MatchTool.builder(silkPredicate));
+        LootEntry.Builder<?> dropBooksAlternative = ItemLootEntry.builder(Items.BOOK)
+                .acceptFunction(SetCount.builder(ConstantRange.of(3)))
+                .acceptFunction(ExplosionDecay.builder());
+
+        LootEntry.Builder<?> entry = AlternativesLootEntry.builder(silkTouchAlternative, dropBooksAlternative);
+        return LootTable.builder().addLootPool(LootPool.builder().name("main").rolls(ConstantRange.of(1)).addEntry(entry));
     }
 
     @Override

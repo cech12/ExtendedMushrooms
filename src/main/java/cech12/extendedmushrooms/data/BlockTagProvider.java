@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
@@ -34,6 +35,10 @@ public class BlockTagProvider extends BlockTagsProvider {
         Predicate<Block> extendedMushrooms = block -> ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace());
 
         //generate mod intern tags
+        getBuilder(ModTags.Blocks.MUSHROOM_BOOKSHELVES).add(registry.stream().filter(extendedMushrooms)
+                .filter(block -> block instanceof BookshelfBlock)
+                .sorted(Comparator.comparing(Block::getRegistryName))
+                .toArray(Block[]::new));
         getBuilder(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof MushroomWoodButtonBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))

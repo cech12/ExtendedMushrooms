@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "extendedmushrooms:block/poisonous_mushroom_bookshelf",
+    "end": "extendedmushrooms:block/poisonous_mushroom_planks"
+  }
+}

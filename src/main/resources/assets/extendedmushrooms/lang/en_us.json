@@ -11,6 +11,7 @@
   "block.extendedmushrooms.infested_grass": "Infested Grass",
   "block.extendedmushrooms.infested_flower": "Infested Flower",
 
+  "block.extendedmushrooms.mushroom_bookshelf": "Mushroom Bookshelf",
   "block.extendedmushrooms.mushroom_button": "Mushroom Button",
   "block.extendedmushrooms.mushroom_door": "Mushroom Door",
   "block.extendedmushrooms.mushroom_fence": "Mushroom Fence",
@@ -37,6 +38,7 @@
   "block.extendedmushrooms.glowshroom_cap": "Glowshroom Cap",
   "block.extendedmushrooms.glowshroom_stem": "Glowshroom Stem",
   "block.extendedmushrooms.glowshroom_stem_stripped": "Stripped Glowshroom Stem",
+  "block.extendedmushrooms.glowshroom_bookshelf": "Glowshroom Bookshelf",
   "block.extendedmushrooms.glowshroom_button": "Glowshroom Button",
   "block.extendedmushrooms.glowshroom_door": "Glowshroom Door",
   "block.extendedmushrooms.glowshroom_fence": "Glowshroom Fence",
@@ -58,6 +60,7 @@
   "block.extendedmushrooms.poisonous_mushroom_cap": "Poisonous Mushroom Cap",
   "block.extendedmushrooms.poisonous_mushroom_stem": "Poisonous Mushroom Stem",
   "block.extendedmushrooms.poisonous_mushroom_stem_stripped": "Stripped Poisonous Mushroom Stem",
+  "block.extendedmushrooms.poisonous_mushroom_bookshelf": "Poisonous Mushroom Bookshelf",
   "block.extendedmushrooms.poisonous_mushroom_button": "Poisonous Mushroom Button",
   "block.extendedmushrooms.poisonous_mushroom_door": "Poisonous Mushroom Door",
   "block.extendedmushrooms.poisonous_mushroom_fence": "Poisonous Mushroom Fence",

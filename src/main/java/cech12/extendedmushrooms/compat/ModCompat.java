@@ -33,12 +33,16 @@ public class ModCompat {
         return false;
     }
 
+    public static boolean isVariantBookshelfModLoaded() {
+        return checkValue(VariantBookshelfMod.class, Config.VARIANT_BOOKSHELF_ENABLED);
+    }
+
     public static boolean isVerticalPlanksModLoaded() {
-        return checkValue(VerticalPlanksMod.class, Config.MUSHROOM_VERTICAL_PLANKS_ENABLED);
+        return checkValue(VerticalPlanksMod.class, Config.VERTICAL_PLANKS_ENABLED);
     }
 
     public static boolean isVerticalSlabsModLoaded() {
-        return checkValue(VerticalSlabsMod.class, Config.MUSHROOM_VERTICAL_SLABS_ENABLED);
+        return checkValue(VerticalSlabsMod.class, Config.VERTICAL_SLABS_ENABLED);
     }
 
     public static class Mod {
@@ -55,6 +59,7 @@ public class ModCompat {
 
     }
 
+    public interface VariantBookshelfMod {}
     public interface VerticalPlanksMod {}
     public interface VerticalSlabsMod {}
 
