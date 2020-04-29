@@ -7,6 +7,7 @@ import net.minecraft.block.BushBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.HugeMushroomBlock;
+import net.minecraft.block.LadderBlock;
 import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -51,7 +52,7 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
             if (item instanceof BlockItem) {
                 BlockItem blockItem = (BlockItem) item;
                 Block block = blockItem.getBlock();
-                if (block instanceof BushBlock) { //mushrooms, grass, flowers
+                if (block instanceof BushBlock || block instanceof LadderBlock) { //mushrooms, grass, flowers, ladders
                     //block items with block texture
                     singleTexture(name, ITEM_GENERATED, "layer0", getBlockResourceLocation(name));
                 } else if (block instanceof DoorBlock) {

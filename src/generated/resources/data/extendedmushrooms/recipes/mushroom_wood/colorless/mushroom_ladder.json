@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "| |",
+    "|#|",
+    "| |"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:mushroom_planks"
+    },
+    "|": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:mushroom_ladder",
+    "count": 4
+  },
+  "conditions": [
+    {
+      "feature": "variantLadder",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

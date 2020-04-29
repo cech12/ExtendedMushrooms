@@ -70,6 +70,7 @@ public final class ModBlocks {
         MUSHROOM_DOOR = registerBlock("mushroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
         MUSHROOM_FENCE = registerBlock("mushroom_fence", ItemGroup.DECORATIONS, new FenceBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
         MUSHROOM_FENCE_GATE = registerBlock("mushroom_fence_gate", ItemGroup.REDSTONE, new FenceGateBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_LADDER = registerCompatBlock("mushroom_ladder", ItemGroup.DECORATIONS, ModCompat.isVariantLadderModLoaded(), new MushroomLadderBlock(Block.Properties.from(Blocks.LADDER)));
         MUSHROOM_PLANKS = registerBlock("mushroom_planks", ItemGroup.BUILDING_BLOCKS, new Block(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
         MUSHROOM_PRESSURE_PLATE = registerBlock("mushroom_pressure_plate", ItemGroup.REDSTONE, new MushroomWoodPressurePlateBlock());
         MUSHROOM_SLAB = registerBlock("mushroom_slab", ItemGroup.BUILDING_BLOCKS, new SlabBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
@@ -99,6 +100,7 @@ public final class ModBlocks {
         GLOWSHROOM_DOOR = registerBlock("glowshroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(3.0F).sound(SoundType.WOOD).lightValue(8)));
         GLOWSHROOM_FENCE = registerBlock("glowshroom_fence", ItemGroup.DECORATIONS, new FenceBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD).lightValue(8)));
         GLOWSHROOM_FENCE_GATE = registerBlock("glowshroom_fence_gate", ItemGroup.REDSTONE, new FenceGateBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD).lightValue(8)));
+        GLOWSHROOM_LADDER = registerCompatBlock("glowshroom_ladder", ItemGroup.DECORATIONS, ModCompat.isVariantLadderModLoaded(), new MushroomLadderBlock(Block.Properties.from(Blocks.LADDER).lightValue(8)));
         GLOWSHROOM_PLANKS = registerBlock("glowshroom_planks", ItemGroup.BUILDING_BLOCKS, new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD).lightValue(8)));
         GLOWSHROOM_PRESSURE_PLATE = registerBlock("glowshroom_pressure_plate", ItemGroup.REDSTONE, new MushroomWoodPressurePlateBlock(8));
         GLOWSHROOM_SLAB = registerBlock("glowshroom_slab", ItemGroup.BUILDING_BLOCKS, new SlabBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD).lightValue(8)));
@@ -122,6 +124,7 @@ public final class ModBlocks {
         POISONOUS_MUSHROOM_DOOR = registerBlock("poisonous_mushroom_door", ItemGroup.REDSTONE, new MushroomDoorBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
         POISONOUS_MUSHROOM_FENCE = registerBlock("poisonous_mushroom_fence", ItemGroup.DECORATIONS, new FenceBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
         POISONOUS_MUSHROOM_FENCE_GATE = registerBlock("poisonous_mushroom_fence_gate", ItemGroup.REDSTONE, new FenceGateBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_LADDER = registerCompatBlock("poisonous_mushroom_ladder", ItemGroup.DECORATIONS, ModCompat.isVariantLadderModLoaded(), new MushroomLadderBlock(Block.Properties.from(Blocks.LADDER)));
         POISONOUS_MUSHROOM_PLANKS = registerBlock("poisonous_mushroom_planks", ItemGroup.BUILDING_BLOCKS, new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
         POISONOUS_MUSHROOM_PRESSURE_PLATE = registerBlock("poisonous_mushroom_pressure_plate", ItemGroup.REDSTONE, new MushroomWoodPressurePlateBlock());
         POISONOUS_MUSHROOM_SLAB = registerBlock("poisonous_mushroom_slab", ItemGroup.BUILDING_BLOCKS, new SlabBlock(Block.Properties.from(POISONOUS_MUSHROOM_PLANKS)));
@@ -167,9 +170,12 @@ public final class ModBlocks {
         RenderTypeLookup.setRenderLayer(INFESTED_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(INFESTED_FLOWER, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(INFESTED_FLOWER_POTTED, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(MUSHROOM_LADDER, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GLOWSHROOM, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GLOWSHROOM_LADDER, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GLOWSHROOM_POTTED, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM_LADDER, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM_POTTED, RenderType.getCutout());
     }
 

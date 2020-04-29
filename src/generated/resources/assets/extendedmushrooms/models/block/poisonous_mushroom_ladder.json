@@ -1,0 +1,8 @@
+{
+  "parent": "block/ladder",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "extendedmushrooms:block/poisonous_mushroom_ladder",
+    "texture": "extendedmushrooms:block/poisonous_mushroom_ladder"
+  }
+}

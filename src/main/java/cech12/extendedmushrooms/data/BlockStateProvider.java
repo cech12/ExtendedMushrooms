@@ -1,12 +1,14 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.block.MushroomLadderBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.HugeMushroomBlock;
+import net.minecraft.block.LadderBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.block.SlabBlock;
@@ -137,6 +139,15 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile post = models().getExistingFile(getBlockResourceLocation(name + "_post"));
                 ModelFile side = models().getExistingFile(getBlockResourceLocation(name + "_side"));
                 fourWayBlock((FenceBlock) block, post, side);
+            } else if (block instanceof MushroomLadderBlock) {
+                ModelFile ladder = models().getExistingFile(getBlockResourceLocation(name));
+                getVariantBuilder(block).forAllStatesExcept(state ->
+                    ConfiguredModel.builder()
+                            .modelFile(ladder)
+                            .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 180) % 360)
+                            .build(),
+                        LadderBlock.WATERLOGGED
+                );
             } else if (block instanceof PressurePlateBlock) {
                 // cap plates, wood plates
                 ModelFile plate = models().getExistingFile(getBlockResourceLocation(name));

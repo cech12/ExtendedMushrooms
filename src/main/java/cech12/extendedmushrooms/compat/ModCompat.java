@@ -37,6 +37,10 @@ public class ModCompat {
         return checkValue(VariantBookshelfMod.class, Config.VARIANT_BOOKSHELF_ENABLED);
     }
 
+    public static boolean isVariantLadderModLoaded() {
+        return checkValue(VariantLadderMod.class, Config.VARIANT_LADDER_ENABLED);
+    }
+
     public static boolean isVerticalPlanksModLoaded() {
         return checkValue(VerticalPlanksMod.class, Config.VERTICAL_PLANKS_ENABLED);
     }
@@ -60,6 +64,7 @@ public class ModCompat {
     }
 
     public interface VariantBookshelfMod {}
+    public interface VariantLadderMod {}
     public interface VerticalPlanksMod {}
     public interface VerticalSlabsMod {}
 

@@ -29,6 +29,8 @@ public class ModFeatureEnabledCondition implements ICondition {
         switch (this.feature) {
             case "variantBookshelf":
                 return ModCompat.isVariantBookshelfModLoaded();
+            case "variantLadder":
+                return ModCompat.isVariantLadderModLoaded();
             case "verticalPlanks":
                 return ModCompat.isVerticalPlanksModLoaded();
             case "verticalSlab":

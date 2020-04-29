@@ -1,0 +1,8 @@
+{
+  "parent": "block/ladder",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "extendedmushrooms:block/glowshroom_ladder",
+    "texture": "extendedmushrooms:block/glowshroom_ladder"
+  }
+}

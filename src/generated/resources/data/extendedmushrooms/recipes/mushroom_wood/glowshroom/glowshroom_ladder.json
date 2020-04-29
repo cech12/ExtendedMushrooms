@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "| |",
+    "|#|",
+    "| |"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:glowshroom_planks"
+    },
+    "|": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:glowshroom_ladder",
+    "count": 4
+  },
+  "conditions": [
+    {
+      "feature": "variantLadder",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

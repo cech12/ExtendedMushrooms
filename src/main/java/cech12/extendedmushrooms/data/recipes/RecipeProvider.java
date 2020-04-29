@@ -97,6 +97,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.MUSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_FENCE.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_FENCE_GATE.asItem(),
+                ExtendedMushroomsBlocks.MUSHROOM_LADDER.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_PLANKS.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_PRESSURE_PLATE.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_SLAB.asItem(),
@@ -127,6 +128,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.GLOWSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_FENCE.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_FENCE_GATE.asItem(),
+                ExtendedMushroomsBlocks.GLOWSHROOM_LADDER.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_PLANKS.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_PRESSURE_PLATE.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_SLAB.asItem(),
@@ -161,6 +163,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_FENCE.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_FENCE_GATE.asItem(),
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_LADDER.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PLANKS.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PRESSURE_PLATE.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_SLAB.asItem(),
@@ -190,10 +193,10 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
     }
 
 
-    private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> stems,
-                                     Item boat, Item bookshelf, Item button, Item door, Item fence,
-                                     Item fence_gate, Item planks, Item pressure_plate, Item slab, Item stairs,
-                                     Item trapdoor, Item verticalPlanks, Item verticalSlabs) {
+    private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> stems, Item boat,
+                                     Item bookshelf, Item button, Item door, Item fence, Item fence_gate, Item ladder,
+                                     Item planks, Item pressure_plate, Item slab, Item stairs, Item trapdoor,
+                                     Item verticalPlanks, Item verticalSlabs) {
         String directory = "mushroom_wood/" + name + "/";
         ShapedRecipeBuilder.shapedRecipe(boat)
                 .key('#', planks)
@@ -277,6 +280,18 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantBookshelf")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, bookshelf.getRegistryName()));
+        ShapedRecipeBuilder.shapedRecipe(ladder, 4)
+                .key('#', planks)
+                .key('|', Tags.Items.RODS_WOODEN)
+                .patternLine("| |")
+                .patternLine("|#|")
+                .patternLine("| |")
+                .addCriterion("has_stick", hasItem(Tags.Items.RODS_WOODEN))
+                .build(ResultWrapper.transformJson(consumer, json -> {
+                    JsonArray array = new JsonArray();
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder")));
+                    json.add("conditions", array);
+                }), getResourceLocation(directory, ladder.getRegistryName()));
         ShapedRecipeBuilder.shapedRecipe(verticalPlanks, 3)
                 .key('#', planks)
                 .patternLine("#")

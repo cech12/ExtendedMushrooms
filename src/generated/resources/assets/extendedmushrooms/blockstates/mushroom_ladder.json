@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "extendedmushrooms:block/mushroom_ladder"
+    },
+    "facing=south": {
+      "model": "extendedmushrooms:block/mushroom_ladder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "extendedmushrooms:block/mushroom_ladder",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "extendedmushrooms:block/mushroom_ladder",
+      "y": 90
+    }
+  }
+}

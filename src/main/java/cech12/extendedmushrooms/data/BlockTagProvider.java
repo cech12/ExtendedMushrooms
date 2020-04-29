@@ -13,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CarpetBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
+import net.minecraft.block.LadderBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapDoorBlock;
@@ -60,6 +61,10 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .toArray(Block[]::new));
         getBuilder(ModTags.Blocks.MUSHROOM_FENCES).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof FenceBlock)
+                .sorted(Comparator.comparing(Block::getRegistryName))
+                .toArray(Block[]::new));
+        getBuilder(ModTags.Blocks.MUSHROOM_LADDERS).add(registry.stream().filter(extendedMushrooms)
+                .filter(block -> block instanceof LadderBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
         getBuilder(ModTags.Blocks.MUSHROOM_PLANKS).add(registry.stream().filter(extendedMushrooms)

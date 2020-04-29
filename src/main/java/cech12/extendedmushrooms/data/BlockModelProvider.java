@@ -5,6 +5,7 @@ import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.EMMushroomBlock;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
+import cech12.extendedmushrooms.block.MushroomLadderBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.VerticalPlanksBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
@@ -160,6 +161,13 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/flower_pot_cross")))
                         .texture("plant", getBlockResourceLocation(name, "_potted", ""));
+            } else if (block instanceof MushroomLadderBlock) {
+                ResourceLocation texture = getBlockResourceLocation(name);
+                getBuilder(name)
+                        .parent(getExistingFile(new ResourceLocation("block/ladder")))
+                        .ao(false)
+                        .texture("particle", texture)
+                        .texture("texture", texture);
             } else if (block instanceof PressurePlateBlock) {
                 pressurePlateBlock(name, getBlockResourceLocation(name, "_pressure_plate", "_planks"));
             } else if (block instanceof SlabBlock) {
