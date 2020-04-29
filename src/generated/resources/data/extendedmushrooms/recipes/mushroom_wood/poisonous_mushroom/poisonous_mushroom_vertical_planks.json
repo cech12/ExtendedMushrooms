@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:poisonous_mushroom_planks"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:poisonous_mushroom_vertical_planks",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "feature": "verticalPlanks",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

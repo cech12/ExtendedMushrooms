@@ -1,9 +1,11 @@
-package cech12.extendedmushrooms.data;
+package cech12.extendedmushrooms.data.recipes;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
+import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.init.ModTags;
+import com.google.gson.JsonArray;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
@@ -98,7 +100,9 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.MUSHROOM_PRESSURE_PLATE.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_SLAB.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_STAIRS.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_TRAPDOOR.asItem());
+                ExtendedMushroomsBlocks.MUSHROOM_TRAPDOOR.asItem(),
+                ExtendedMushroomsBlocks.MUSHROOM_VERTICAL_PLANKS.asItem(),
+                ExtendedMushroomsBlocks.MUSHROOM_VERTICAL_SLAB.asItem());
         mushroomCapRecipes(consumer, "brown",
                 ModTags.ForgeItems.MUSHROOM_CAPS_BROWN,
                 Items.BROWN_BANNER,
@@ -125,7 +129,9 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.GLOWSHROOM_PRESSURE_PLATE.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_SLAB.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_STAIRS.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_TRAPDOOR.asItem());
+                ExtendedMushroomsBlocks.GLOWSHROOM_TRAPDOOR.asItem(),
+                ExtendedMushroomsBlocks.GLOWSHROOM_VERTICAL_PLANKS.asItem(),
+                ExtendedMushroomsBlocks.GLOWSHROOM_VERTICAL_SLAB.asItem());
         mushroomCapRecipes(consumer, "glowshroom",
                 ModTags.ForgeItems.MUSHROOM_CAPS_GLOWSHROOM,
                 Items.BLUE_BANNER,
@@ -156,7 +162,9 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PRESSURE_PLATE.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_SLAB.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STAIRS.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_TRAPDOOR.asItem());
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_TRAPDOOR.asItem(),
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_VERTICAL_PLANKS.asItem(),
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_VERTICAL_SLAB.asItem());
         mushroomCapRecipes(consumer, "poisonous_mushroom",
                 ModTags.ForgeItems.MUSHROOM_CAPS_PURPLE,
                 Items.PURPLE_BANNER,
@@ -179,9 +187,10 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
     }
 
 
-    private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> stems, Item boat,
-                                     Item button, Item door, Item fence, Item fence_gate, Item planks,
-                                     Item pressure_plate, Item slab, Item stairs, Item trapdoor) {
+    private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> stems,
+                                     Item boat, Item button, Item door, Item fence,
+                                     Item fence_gate, Item planks, Item pressure_plate, Item slab, Item stairs,
+                                     Item trapdoor, Item verticalPlanks, Item verticalSlabs) {
         String directory = "mushroom_wood/" + name + "/";
         ShapedRecipeBuilder.shapedRecipe(boat)
                 .key('#', planks)
@@ -251,6 +260,46 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .setGroup("wooden_trapdoor")
                 .addCriterion("has_planks", hasItem(planks))
                 .build(consumer, getResourceLocation(directory, trapdoor.getRegistryName()));
+
+        //recipes that are only active when other mods are installed
+        ShapedRecipeBuilder.shapedRecipe(verticalPlanks, 3)
+                .key('#', planks)
+                .patternLine("#")
+                .patternLine("#")
+                .patternLine("#")
+                .addCriterion("has_planks", hasItem(planks))
+                .build(ResultWrapper.transformJson(consumer, json -> {
+                    JsonArray array = new JsonArray();
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")));
+                    json.add("conditions", array);
+                }), getResourceLocation(directory, verticalPlanks.getRegistryName()));
+        ShapelessRecipeBuilder.shapelessRecipe(planks)
+                .addIngredient(verticalPlanks)
+                .addCriterion("has_vertical_planks", hasItem(verticalPlanks))
+                .build(ResultWrapper.transformJson(consumer, json -> {
+                    JsonArray array = new JsonArray();
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")));
+                    json.add("conditions", array);
+                }), getResourceLocation(directory, verticalPlanks.getRegistryName().getPath() + "_revert"));
+        ShapedRecipeBuilder.shapedRecipe(verticalSlabs, 3)
+                .key('#', slab)
+                .patternLine("#")
+                .patternLine("#")
+                .patternLine("#")
+                .addCriterion("has_slab", hasItem(slab))
+                .build(ResultWrapper.transformJson(consumer, json -> {
+                    JsonArray array = new JsonArray();
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")));
+                    json.add("conditions", array);
+                }), getResourceLocation(directory, verticalSlabs.getRegistryName()));
+        ShapelessRecipeBuilder.shapelessRecipe(slab)
+                .addIngredient(verticalSlabs)
+                .addCriterion("has_vertical_slab", hasItem(verticalSlabs))
+                .build(ResultWrapper.transformJson(consumer, json -> {
+                    JsonArray array = new JsonArray();
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")));
+                    json.add("conditions", array);
+                }), getResourceLocation(directory, verticalSlabs.getRegistryName().getPath() + "_revert"));
 
         //TODO wood cutting
     }

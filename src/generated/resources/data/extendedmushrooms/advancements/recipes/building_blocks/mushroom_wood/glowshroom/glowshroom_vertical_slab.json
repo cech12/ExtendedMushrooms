@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "extendedmushrooms:mushroom_wood/glowshroom/glowshroom_vertical_slab"
+    ]
+  },
+  "criteria": {
+    "has_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "extendedmushrooms:glowshroom_slab"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "extendedmushrooms:mushroom_wood/glowshroom/glowshroom_vertical_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_slab",
+      "has_the_recipe"
+    ]
+  ]
+}

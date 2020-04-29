@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:poisonous_mushroom_vertical_planks"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:poisonous_mushroom_planks"
+  },
+  "conditions": [
+    {
+      "feature": "verticalPlanks",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

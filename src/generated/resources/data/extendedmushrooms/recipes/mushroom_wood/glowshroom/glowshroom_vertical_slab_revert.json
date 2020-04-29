@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:glowshroom_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:glowshroom_slab"
+  },
+  "conditions": [
+    {
+      "feature": "verticalSlab",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

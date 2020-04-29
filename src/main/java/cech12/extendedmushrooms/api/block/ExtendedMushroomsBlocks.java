@@ -18,6 +18,8 @@ public class ExtendedMushroomsBlocks {
     public static Block MUSHROOM_STAIRS;
     public static Block MUSHROOM_TRAPDOOR;
     public static Block STRIPPED_MUSHROOM_STEM;
+    public static Block MUSHROOM_VERTICAL_PLANKS;
+    public static Block MUSHROOM_VERTICAL_SLAB;
 
     public static Block BROWN_MUSHROOM_BUTTON;
     public static Block BROWN_MUSHROOM_CARPET;
@@ -40,6 +42,8 @@ public class ExtendedMushroomsBlocks {
     public static Block GLOWSHROOM_SLAB;
     public static Block GLOWSHROOM_STAIRS;
     public static Block GLOWSHROOM_TRAPDOOR;
+    public static Block GLOWSHROOM_VERTICAL_PLANKS;
+    public static Block GLOWSHROOM_VERTICAL_SLAB;
     public static Block GLOWSHROOM_CAP_BUTTON;
     public static Block GLOWSHROOM_CAP_CARPET;
     public static Block GLOWSHROOM_CAP_PRESSURE_PLATE;
@@ -58,6 +62,8 @@ public class ExtendedMushroomsBlocks {
     public static Block POISONOUS_MUSHROOM_SLAB;
     public static Block POISONOUS_MUSHROOM_STAIRS;
     public static Block POISONOUS_MUSHROOM_TRAPDOOR;
+    public static Block POISONOUS_MUSHROOM_VERTICAL_PLANKS;
+    public static Block POISONOUS_MUSHROOM_VERTICAL_SLAB;
     public static Block POISONOUS_MUSHROOM_CAP_BUTTON;
     public static Block POISONOUS_MUSHROOM_CAP_CARPET;
     public static Block POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE;

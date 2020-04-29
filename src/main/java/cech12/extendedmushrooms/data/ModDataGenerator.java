@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.data.recipes.RecipeProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;

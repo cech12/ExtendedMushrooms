@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
@@ -157,8 +158,17 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));
                 ModelFile open = models().getExistingFile(getBlockResourceLocation(name + "_open"));
                 trapdoorBlock((TrapDoorBlock) block, bottom, top, open, true);
+            } else if (block instanceof VerticalSlabBlock) {
+                ModelFile slab = models().getExistingFile(getBlockResourceLocation(name));
+                ModelFile doubleSlab = models().getExistingFile(getBlockResourceLocation(name, "_vertical_slab", "_planks"));
+                getVariantBuilder(block)
+                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.NORTH).addModels(new ConfiguredModel(slab, 0, 0, true))
+                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.EAST).addModels(new ConfiguredModel(slab, 0, 90, true))
+                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.SOUTH).addModels(new ConfiguredModel(slab, 0, 180, true))
+                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.WEST).addModels(new ConfiguredModel(slab, 0, 270, true))
+                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.DOUBLE).addModels(new ConfiguredModel(doubleSlab));
             } else {
-                //mushrooms, planks, carpets, flower, potted flower, grass
+                //mushrooms, (vertical) planks, carpets, flower, potted flower, grass
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
             }
         }

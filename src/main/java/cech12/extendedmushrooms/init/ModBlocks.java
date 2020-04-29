@@ -7,6 +7,7 @@ import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomCap;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
+import cech12.extendedmushrooms.compat.ModCompat;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.item.MushroomType;
 import cech12.extendedmushrooms.item.MushroomWoodType;
@@ -75,6 +76,8 @@ public final class ModBlocks {
         MUSHROOM_TRAPDOOR = registerBlock("mushroom_trapdoor", ItemGroup.REDSTONE, new MushroomTrapdoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOL).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
         STRIPPED_MUSHROOM_STEM = registerBlock("stripped_mushroom_stem", ItemGroup.BUILDING_BLOCKS, new HugeMushroomBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
         BLOCK_STRIPPING_MAP.put(Blocks.MUSHROOM_STEM, STRIPPED_MUSHROOM_STEM);
+        MUSHROOM_VERTICAL_PLANKS = registerCompatBlock("mushroom_vertical_planks", ItemGroup.BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
+        MUSHROOM_VERTICAL_SLAB = registerCompatBlock("mushroom_vertical_slab", ItemGroup.BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
 
         BROWN_MUSHROOM_BUTTON = registerBlock("brown_mushroom_button", ItemGroup.REDSTONE, new MushroomCapButtonBlock());
         BROWN_MUSHROOM_CARPET = registerBlock("brown_mushroom_carpet", ItemGroup.DECORATIONS, new MushroomCarpetBlock(DyeColor.BROWN, Block.Properties.create(Material.CARPET, MaterialColor.BROWN).hardnessAndResistance(0.1F).sound(SoundType.CLOTH)));
@@ -99,6 +102,8 @@ public final class ModBlocks {
         GLOWSHROOM_SLAB = registerBlock("glowshroom_slab", ItemGroup.BUILDING_BLOCKS, new SlabBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD).lightValue(8)));
         GLOWSHROOM_STAIRS = registerBlock("glowshroom_stairs", ItemGroup.BUILDING_BLOCKS, new StairsBlock(() -> GLOWSHROOM_PLANKS.getDefaultState(), Block.Properties.from(GLOWSHROOM_PLANKS)));
         GLOWSHROOM_TRAPDOOR = registerBlock("glowshroom_trapdoor", ItemGroup.REDSTONE, new MushroomTrapdoorBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(3.0F).sound(SoundType.WOOD).lightValue(8)));
+        GLOWSHROOM_VERTICAL_PLANKS = registerCompatBlock("glowshroom_vertical_planks", ItemGroup.BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD).lightValue(8)));
+        GLOWSHROOM_VERTICAL_SLAB = registerCompatBlock("glowshroom_vertical_slab", ItemGroup.BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD).lightValue(8)));
         GLOWSHROOM_CAP_BUTTON = registerBlock("glowshroom_cap_button", ItemGroup.REDSTONE, new MushroomCapButtonBlock(8));
         GLOWSHROOM_CAP_CARPET = registerBlock("glowshroom_cap_carpet", ItemGroup.DECORATIONS, new MushroomCarpetBlock(DyeColor.BLUE, Block.Properties.create(Material.CARPET, MaterialColor.BLUE).hardnessAndResistance(0.1F).sound(SoundType.CLOTH).lightValue(8)));
         GLOWSHROOM_CAP_PRESSURE_PLATE = registerBlock("glowshroom_cap_pressure_plate", ItemGroup.REDSTONE, new MushroomCapPressurePlateBlock(8));
@@ -119,6 +124,8 @@ public final class ModBlocks {
         POISONOUS_MUSHROOM_SLAB = registerBlock("poisonous_mushroom_slab", ItemGroup.BUILDING_BLOCKS, new SlabBlock(Block.Properties.from(POISONOUS_MUSHROOM_PLANKS)));
         POISONOUS_MUSHROOM_STAIRS = registerBlock("poisonous_mushroom_stairs", ItemGroup.BUILDING_BLOCKS, new StairsBlock(() -> POISONOUS_MUSHROOM_PLANKS.getDefaultState(), Block.Properties.from(POISONOUS_MUSHROOM_PLANKS)));
         POISONOUS_MUSHROOM_TRAPDOOR = registerBlock("poisonous_mushroom_trapdoor", ItemGroup.REDSTONE, new MushroomTrapdoorBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_VERTICAL_PLANKS = registerCompatBlock("poisonous_mushroom_vertical_planks", ItemGroup.BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.2F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_VERTICAL_SLAB = registerCompatBlock("poisonous_mushroom_vertical_slab", ItemGroup.BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));
         POISONOUS_MUSHROOM_CAP_BUTTON = registerBlock("poisonous_mushroom_cap_button", ItemGroup.REDSTONE, new MushroomCapButtonBlock());
         POISONOUS_MUSHROOM_CAP_CARPET = registerBlock("poisonous_mushroom_cap_carpet", ItemGroup.DECORATIONS, new MushroomCarpetBlock(DyeColor.PURPLE, Block.Properties.create(Material.CARPET, MaterialColor.PURPLE).hardnessAndResistance(0.1F).sound(SoundType.CLOTH)));
         POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE = registerBlock("poisonous_mushroom_cap_pressure_plate", ItemGroup.REDSTONE, new MushroomCapPressurePlateBlock());
@@ -129,6 +136,11 @@ public final class ModBlocks {
         block.setRegistryName(name);
         ForgeRegistries.BLOCKS.register(block);
         return block;
+    }
+
+    private static Block registerCompatBlock(String name, ItemGroup itemGroup, boolean isActive, Block block) {
+        ItemGroup determinedGroup = (isActive) ? itemGroup : null;
+        return registerBlock(name, determinedGroup, block);
     }
 
     private static Block registerBlock(String name, ItemGroup itemGroup, Block block) {

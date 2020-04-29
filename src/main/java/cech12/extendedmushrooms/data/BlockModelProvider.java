@@ -5,6 +5,8 @@ import cech12.extendedmushrooms.block.EMMushroomBlock;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
+import cech12.extendedmushrooms.block.VerticalPlanksBlock;
+import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BushBlock;
@@ -22,6 +24,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ExistingFileHelper;
+import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -62,6 +65,31 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
 
     @Override
     protected void registerModels() {
+        //parent models
+        ResourceLocation verticalPlanks = getBlockResourceLocation("vertical_planks");
+        getBuilder(verticalPlanks.getPath())
+                .parent(getExistingFile(new ResourceLocation("block/block")))
+                .texture("particle", "#all")
+                .element().from(0, 0, 0).to(16, 16, 16)
+                .allFaces((direction, faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture("#all").cullface(direction).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90));
+        ResourceLocation verticalSlab = getBlockResourceLocation("vertical_slab");
+        getBuilder(verticalSlab.getPath())
+                .parent(getExistingFile(new ResourceLocation("block/block")))
+                .texture("particle", "#side")
+                .element().from(0, 0, 8).to(16, 16, 16)
+                .allFaces((direction, faceBuilder) -> {
+                    String texture = "#side";
+                    if (direction == Direction.DOWN) {
+                        texture = "#bottom";
+                    } else if (direction == Direction.UP) {
+                        texture = "#top";
+                    }
+                    int u1 = (direction == Direction.EAST || direction == Direction.WEST) ? 8 : 0;
+                    int v1 = (direction == Direction.DOWN || direction == Direction.UP) ? 8 : 0;
+                    faceBuilder.uvs(u1, v1, 16, 16).texture(texture);
+                });
+
+        //block models
         for (Block block : ForgeRegistries.BLOCKS) {
             if (!ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace())) {
                 continue;
@@ -165,6 +193,18 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 simpleTexturedBlock(name + "_bottom", "template_orientable_trapdoor_bottom", texture);
                 simpleTexturedBlock(name + "_open", "template_orientable_trapdoor_open", texture);
                 simpleTexturedBlock(name + "_top", "template_orientable_trapdoor_top", texture);
+            } else if (block instanceof VerticalPlanksBlock) {
+                ResourceLocation texture = getBlockResourceLocation(name, "_vertical_planks", "_planks");
+                getBuilder(name)
+                        .parent(getExistingFile(verticalPlanks))
+                        .texture("all", texture);
+            } else if (block instanceof VerticalSlabBlock) {
+                ResourceLocation texture = getBlockResourceLocation(name, "_vertical_slab", "_planks");
+                getBuilder(name)
+                        .parent(getExistingFile(verticalSlab))
+                        .texture("bottom", texture)
+                        .texture("top", texture)
+                        .texture("side", texture);
             } else if (block instanceof BushBlock) {
                 //flower & grass
                 getBuilder(name)

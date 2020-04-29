@@ -16,6 +16,9 @@ public class Config {
     public static final ConfigType.Boolean INFESTED_GRASS_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Boolean INFESTED_FLOWER_ENABLED = new ConfigType.Boolean(true);
 
+    public static final ConfigType.Integer MUSHROOM_VERTICAL_PLANKS_ENABLED = new ConfigType.Integer(2);
+    public static final ConfigType.Integer MUSHROOM_VERTICAL_SLABS_ENABLED = new ConfigType.Integer(2);
+
     public static final ConfigType.Boolean MUSHROOM_SHEEP_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_WEIGHT = new ConfigType.Integer(8);
     public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT = new ConfigType.Integer(4);
@@ -71,6 +74,13 @@ public class Config {
         INFESTED_FLOWER_ENABLED.configObj = common
                 .comment("Whether or not Infested Flower should be generated in mushroom biomes.")
                 .define("infestedFlowerEnabled", INFESTED_FLOWER_ENABLED.getDefaultValue());
+
+        MUSHROOM_VERTICAL_PLANKS_ENABLED.configObj = common
+                .comment("Whether or not Vertical Planks should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
+                .defineInRange("mushroomVerticalPlanksEnabled", MUSHROOM_VERTICAL_PLANKS_ENABLED.getDefaultValue(), 0, 2);
+        MUSHROOM_VERTICAL_SLABS_ENABLED.configObj = common
+                .comment("Whether or not Vertical Slabs should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
+                .defineInRange("mushroomVerticalSlabsEnabled", MUSHROOM_VERTICAL_SLABS_ENABLED.getDefaultValue(), 0, 2);
 
         MUSHROOM_SHEEP_ENABLED.configObj = common
                 .comment("Whether or not Mushroom Sheep entity should spawn in mushroom biomes.")

@@ -39,11 +39,9 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            property 'extendedmushrooms.developmentMode', 'true'
 
             mods {
                 extendedmushrooms {
@@ -55,11 +53,9 @@ minecraft {
         server {
             workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            property 'extendedmushrooms.developmentMode', 'true'
 
             mods {
                 extendedmushrooms {
@@ -71,11 +67,9 @@ minecraft {
         data {
             workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            property 'extendedmushrooms.developmentMode', 'true'
 
             args '--mod', 'extendedmushrooms', '--all', '--validate',
                     '--output', file('src/generated/resources/'),

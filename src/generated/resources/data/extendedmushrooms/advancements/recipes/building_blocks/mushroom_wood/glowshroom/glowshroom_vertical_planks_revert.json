@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "extendedmushrooms:mushroom_wood/glowshroom/glowshroom_vertical_planks_revert"
+    ]
+  },
+  "criteria": {
+    "has_vertical_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "extendedmushrooms:glowshroom_vertical_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "extendedmushrooms:mushroom_wood/glowshroom/glowshroom_vertical_planks_revert"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_vertical_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

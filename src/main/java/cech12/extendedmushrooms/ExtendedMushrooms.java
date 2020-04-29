@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms;
 
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMushroomGoal;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
@@ -26,6 +27,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -45,6 +47,9 @@ import javax.annotation.Nonnull;
 public class ExtendedMushrooms {
 
     public static final String MOD_ID = "extendedmushrooms";
+
+    // Use for data generation and development
+    public static final boolean DEVELOPMENT_MODE = Boolean.parseBoolean(System.getProperty("extendedmushrooms.developmentMode", "false"));
 
     public ExtendedMushrooms() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON, "extendedmushrooms-common.toml");
@@ -74,6 +79,9 @@ public class ExtendedMushrooms {
     }
 
     private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+        //serializer for conditions
+        CraftingHelper.register(ModFeatureEnabledCondition.Serializer.INSTANCE);
+
         // Register the recipe serializer.
         event.getRegistry().register(MushroomArrowRecipe.SERIALIZER);
     }

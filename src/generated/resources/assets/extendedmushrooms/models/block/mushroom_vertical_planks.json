@@ -1,0 +1,6 @@
+{
+  "parent": "extendedmushrooms:block/vertical_planks",
+  "textures": {
+    "all": "extendedmushrooms:block/mushroom_planks"
+  }
+}
