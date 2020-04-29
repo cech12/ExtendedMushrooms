@@ -13,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CarpetBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
+import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
@@ -20,6 +21,7 @@ import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
@@ -57,6 +59,10 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .toArray(Block[]::new));
         getBuilder(ModTags.Blocks.MUSHROOM_DOORS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof DoorBlock)
+                .sorted(Comparator.comparing(Block::getRegistryName))
+                .toArray(Block[]::new));
+        getBuilder(ModTags.Blocks.MUSHROOM_FENCE_GATES).add(registry.stream().filter(extendedMushrooms)
+                .filter(block -> block instanceof FenceGateBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
         getBuilder(ModTags.Blocks.MUSHROOM_FENCES).add(registry.stream().filter(extendedMushrooms)
@@ -141,6 +147,9 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .add(ModTags.Blocks.MUSHROOMS_EDIBLE);
         getBuilder(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
+
+        getBuilder(Tags.Blocks.FENCE_GATES_WOODEN).add(ModTags.Blocks.MUSHROOM_FENCE_GATES);
+        getBuilder(Tags.Blocks.FENCE_GATES).add(ModTags.Blocks.MUSHROOM_FENCE_GATES);
 
         //generate minecraft tags
         getBuilder(BlockTags.BUTTONS).add(ModTags.Blocks.MUSHROOM_BUTTONS);

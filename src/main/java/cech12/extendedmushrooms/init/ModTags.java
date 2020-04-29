@@ -46,6 +46,7 @@ public class ModTags {
         public static final Tag<Block> MUSHROOM_BUTTONS = tag("mushroom_buttons");
         public static final Tag<Block> MUSHROOM_CARPETS = tag("mushroom_carpets");
         public static final Tag<Block> MUSHROOM_DOORS = tag("mushroom_doors");
+        public static final Tag<Block> MUSHROOM_FENCE_GATES = tag("mushroom_fence_gates");
         public static final Tag<Block> MUSHROOM_FENCES = tag("mushroom_fences");
         public static final Tag<Block> MUSHROOM_LADDERS = tag("mushroom_ladders");
         public static final Tag<Block> MUSHROOM_PLANKS = tag("mushroom_planks");
@@ -114,6 +115,7 @@ public class ModTags {
         public static final Tag<Item> MUSHROOM_BUTTONS = tag("mushroom_buttons");
         public static final Tag<Item> MUSHROOM_CARPETS = tag("mushroom_carpets");
         public static final Tag<Item> MUSHROOM_DOORS = tag("mushroom_doors");
+        public static final Tag<Item> MUSHROOM_FENCE_GATES = tag("mushroom_fence_gates");
         public static final Tag<Item> MUSHROOM_FENCES = tag("mushroom_fences");
         public static final Tag<Item> MUSHROOM_LADDERS = tag("mushroom_ladders");
         public static final Tag<Item> MUSHROOM_PLANKS = tag("mushroom_planks");

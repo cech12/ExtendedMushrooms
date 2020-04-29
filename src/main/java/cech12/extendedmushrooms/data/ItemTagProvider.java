@@ -37,6 +37,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOM_BUTTONS, ModTags.Items.MUSHROOM_BUTTONS);
         copy(ModTags.Blocks.MUSHROOM_CARPETS, ModTags.Items.MUSHROOM_CARPETS);
         copy(ModTags.Blocks.MUSHROOM_DOORS, ModTags.Items.MUSHROOM_DOORS);
+        copy(ModTags.Blocks.MUSHROOM_FENCE_GATES, ModTags.Items.MUSHROOM_FENCE_GATES);
         copy(ModTags.Blocks.MUSHROOM_FENCES, ModTags.Items.MUSHROOM_FENCES);
         copy(ModTags.Blocks.MUSHROOM_LADDERS, ModTags.Items.MUSHROOM_LADDERS);
         copy(ModTags.Blocks.MUSHROOM_PLANKS, ModTags.Items.MUSHROOM_PLANKS);
@@ -67,6 +68,9 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS, ModTags.ForgeItems.MUSHROOMS_POISONOUS);
 
         getBuilder(Tags.Items.BOOKSHELVES).add(ModTags.Items.MUSHROOM_BOOKSHELVES);
+        copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
+        copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
+
         getBuilder(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
         getBuilder(ModTags.ForgeItems.SHEARS).add(Items.SHEARS);
 
