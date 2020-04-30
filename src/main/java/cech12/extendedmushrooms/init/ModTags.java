@@ -28,7 +28,7 @@ public class ModTags {
         public static final Tag<Block> MUSHROOMS = tag("mushrooms");
         public static final Tag<Block> MUSHROOMS_BROWN = tag("mushrooms/brown");
         public static final Tag<Block> MUSHROOMS_RED = tag("mushrooms/red");
-        public static final Tag<Block> MUSHROOMS_BLUE = tag("mushrooms/blue");
+        public static final Tag<Block> MUSHROOMS_GLOWSHROOM = tag("mushrooms/glowshroom");
         public static final Tag<Block> MUSHROOMS_PURPLE = tag("mushrooms/purple");
         public static final Tag<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
         public static final Tag<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
@@ -93,7 +93,7 @@ public class ModTags {
         // public static final Tag<Item> MUSHROOMS = tag("mushrooms"); // already there!
         public static final Tag<Item> MUSHROOMS_BROWN = tag("mushrooms/brown");
         public static final Tag<Item> MUSHROOMS_RED = tag("mushrooms/red");
-        public static final Tag<Item> MUSHROOMS_BLUE = tag("mushrooms/blue");
+        public static final Tag<Item> MUSHROOMS_GLOWSHROOM = tag("mushrooms/glowshroom");
         public static final Tag<Item> MUSHROOMS_PURPLE = tag("mushrooms/purple");
         public static final Tag<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
         public static final Tag<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");

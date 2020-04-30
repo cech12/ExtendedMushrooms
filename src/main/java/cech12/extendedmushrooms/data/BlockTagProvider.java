@@ -132,12 +132,12 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         getBuilder(ModTags.ForgeBlocks.MUSHROOMS_BROWN).add(Blocks.BROWN_MUSHROOM);
         getBuilder(ModTags.ForgeBlocks.MUSHROOMS_RED).add(Blocks.RED_MUSHROOM);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOMS_BLUE).add(ExtendedMushroomsBlocks.GLOWSHROOM);
+        getBuilder(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM).add(ExtendedMushroomsBlocks.GLOWSHROOM);
         getBuilder(ModTags.ForgeBlocks.MUSHROOMS_PURPLE).add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
         getBuilder(ModTags.ForgeBlocks.MUSHROOMS)
                 .add(ModTags.ForgeBlocks.MUSHROOMS_BROWN)
                 .add(ModTags.ForgeBlocks.MUSHROOMS_RED)
-                .add(ModTags.ForgeBlocks.MUSHROOMS_BLUE)
+                .add(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM)
                 .add(ModTags.ForgeBlocks.MUSHROOMS_PURPLE);
         getBuilder(ModTags.Blocks.MUSHROOMS_EDIBLE) // add mod intern edible mushrooms
                 .add(ExtendedMushroomsBlocks.GLOWSHROOM);

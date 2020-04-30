@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.item.crafting;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+import cech12.extendedmushrooms.init.ModTags;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,6 +12,7 @@ import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -23,15 +24,24 @@ public class MushroomArrowRecipe extends SpecialRecipe {
 
     public static final SpecialRecipeSerializer<MushroomArrowRecipe> SERIALIZER = new Serializer();
 
-    private static final Map<Item, Potion> MUSHROOM_POTION_MAP = new HashMap<>();
+    private static final Map<Tag<Item>, Potion> MUSHROOM_POTION_MAP = new HashMap<>();
 
     static {
-        MUSHROOM_POTION_MAP.putIfAbsent(ExtendedMushroomsBlocks.GLOWSHROOM.asItem(), Potions.NIGHT_VISION);
-        MUSHROOM_POTION_MAP.putIfAbsent(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM.asItem(), Potions.POISON);
+        MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM, Potions.NIGHT_VISION);
+        MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_POISONOUS, Potions.POISON);
     }
 
     public MushroomArrowRecipe(ResourceLocation idIn) {
         super(idIn);
+    }
+
+    private Potion getPotionFromMushroom(Item mushroom) {
+        for (Map.Entry<Tag<Item>, Potion> entry : MUSHROOM_POTION_MAP.entrySet()) {
+            if (mushroom.isIn(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -49,7 +59,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
     public ItemStack getCraftingResult(@Nonnull CraftingInventory inv) {
         try {
             RecipeIngredients ingredients = new RecipeIngredients(inv);
-            Potion potion = MUSHROOM_POTION_MAP.getOrDefault(ingredients.mushroom.getItem(), null);
+            Potion potion = getPotionFromMushroom(ingredients.mushroom.getItem());
             if (potion != null) {
                 ItemStack tippedArrow = new ItemStack(Items.TIPPED_ARROW, 1);
                 PotionUtils.addPotionToItemStack(tippedArrow, potion);
@@ -94,7 +104,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
                         } else {
                             throw new Exception();
                         }
-                    } else if (MUSHROOM_POTION_MAP.containsKey(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM.asItem())) {
+                    } else if (MUSHROOM_POTION_MAP.containsKey(ModTags.ForgeItems.MUSHROOMS_POISONOUS)) {
                         if (this.mushroom == null) {
                             this.mushroom = stack;
                         } else {

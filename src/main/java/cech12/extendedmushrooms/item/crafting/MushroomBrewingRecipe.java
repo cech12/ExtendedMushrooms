@@ -6,17 +6,18 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
+import net.minecraft.tags.Tag;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 
 import javax.annotation.Nonnull;
 
 public class MushroomBrewingRecipe implements IBrewingRecipe {
 
-    Item mushroom;
+    Tag<Item> mushroomTag;
     Potion result;
 
-    public MushroomBrewingRecipe(Item mushroom, Potion result) {
-        this.mushroom = mushroom;
+    public MushroomBrewingRecipe(Tag<Item> mushroomTag, Potion result) {
+        this.mushroomTag = mushroomTag;
         this.result = result;
     }
 
@@ -27,7 +28,7 @@ public class MushroomBrewingRecipe implements IBrewingRecipe {
 
     @Override
     public boolean isIngredient(ItemStack ingredient) {
-        return ingredient.getItem() == this.mushroom;
+        return ingredient.getItem().isIn(this.mushroomTag);
     }
 
     @Nonnull

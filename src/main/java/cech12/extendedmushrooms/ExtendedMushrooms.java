@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms;
 
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMushroomGoal;
@@ -8,6 +7,7 @@ import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModEntities;
 import cech12.extendedmushrooms.init.ModFeatures;
+import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import cech12.extendedmushrooms.item.crafting.MushroomArrowRecipe;
 import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
@@ -69,8 +69,8 @@ public class ExtendedMushrooms {
         ModFeatures.addFeaturesToBiomes();
 
         //add potion recipes
-        //BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ExtendedMushroomsBlocks.GLOWSHROOM.asItem(), Potions.NIGHT_VISION)); //overpowered
-        BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM.asItem(), Potions.POISON));
+        //BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM, Potions.NIGHT_VISION)); //overpowered
+        BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_POISONOUS, Potions.POISON));
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
