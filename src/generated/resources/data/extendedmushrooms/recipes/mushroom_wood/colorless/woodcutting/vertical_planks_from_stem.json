@@ -1,0 +1,18 @@
+{
+  "type": "corail_woodcutter:woodcutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "corail_woodcutter"
+    },
+    {
+      "feature": "verticalPlanks",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:mushroom_stems/colorless"
+  },
+  "result": "extendedmushrooms:mushroom_vertical_planks",
+  "count": 4
+}

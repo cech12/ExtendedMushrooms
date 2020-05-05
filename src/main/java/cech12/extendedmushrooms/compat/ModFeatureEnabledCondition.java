@@ -14,9 +14,16 @@ import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 public class ModFeatureEnabledCondition implements ICondition {
     private static final ResourceLocation ID = new ResourceLocation(ExtendedMushrooms.MOD_ID, "mod_feature_enabled");
     private final String feature;
+    private final boolean inverted;
 
     public ModFeatureEnabledCondition(String feature) {
         this.feature = feature;
+        this.inverted = false;
+    }
+
+    public ModFeatureEnabledCondition(String feature, boolean inverted) {
+        this.feature = feature;
+        this.inverted = inverted;
     }
 
     @Override
@@ -28,13 +35,13 @@ public class ModFeatureEnabledCondition implements ICondition {
     public boolean test() {
         switch (this.feature) {
             case "variantBookshelf":
-                return ModCompat.isVariantBookshelfModLoaded();
+                return this.inverted != ModCompat.isVariantBookshelfModLoaded();
             case "variantLadder":
-                return ModCompat.isVariantLadderModLoaded();
+                return this.inverted != ModCompat.isVariantLadderModLoaded();
             case "verticalPlanks":
-                return ModCompat.isVerticalPlanksModLoaded();
+                return this.inverted != ModCompat.isVerticalPlanksModLoaded();
             case "verticalSlab":
-                return ModCompat.isVerticalSlabsModLoaded();
+                return this.inverted != ModCompat.isVerticalSlabsModLoaded();
         }
         return false;
     }
@@ -45,11 +52,16 @@ public class ModFeatureEnabledCondition implements ICondition {
         @Override
         public void write(JsonObject json, ModFeatureEnabledCondition value) {
             json.addProperty("feature", value.feature);
+            if (value.inverted) {
+                json.addProperty("inverted", true);
+            }
         }
 
         @Override
         public ModFeatureEnabledCondition read(JsonObject json) {
-            return new ModFeatureEnabledCondition(JSONUtils.getString(json, "feature"));
+            return new ModFeatureEnabledCondition(
+                    JSONUtils.getString(json, "feature"),
+                    JSONUtils.getBoolean(json, "inverted", false));
         }
 
         @Override

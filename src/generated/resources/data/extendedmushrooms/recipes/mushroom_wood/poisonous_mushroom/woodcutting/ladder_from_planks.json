@@ -1,0 +1,18 @@
+{
+  "type": "corail_woodcutter:woodcutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "corail_woodcutter"
+    },
+    {
+      "feature": "variantLadder",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ],
+  "ingredient": {
+    "item": "extendedmushrooms:poisonous_mushroom_planks"
+  },
+  "result": "extendedmushrooms:poisonous_mushroom_ladder",
+  "count": 1
+}

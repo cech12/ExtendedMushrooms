@@ -180,6 +180,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.asItem());
 
         //oak sign
+        String woodDirectory = "mushroom_wood/";
         ShapedRecipeBuilder.shapedRecipe(Items.OAK_SIGN, 3)
                 .key('#', ModTags.Items.MUSHROOM_PLANKS)
                 .key('|', Tags.Items.RODS_WOODEN)
@@ -187,16 +188,37 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .patternLine("###")
                 .patternLine(" | ")
                 .addCriterion("has_planks", hasItem(ModTags.Items.MUSHROOM_PLANKS))
-                .build(consumer, getResourceLocation(Items.OAK_SIGN.getRegistryName().getPath()));
-        //TODO woodcutting
+                .build(consumer, getResourceLocation(woodDirectory, Items.OAK_SIGN.getRegistryName().getPath()));
 
+        //wood cutting
+        String woodcuttingDirectory = woodDirectory + "woodcutting/";
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.OAK_SIGN, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "oak_sign_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.OAK_SIGN, Ingredient.fromTag(ModTags.ForgeItems.MUSHROOM_STEMS), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "oak_sign_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.BOWL, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "bowl_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.BOWL, Ingredient.fromTag(ModTags.ForgeItems.MUSHROOM_STEMS), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "bowl_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.STICK, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS), 2)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "stick_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.STICK, Ingredient.fromTag(ModTags.ForgeItems.MUSHROOM_STEMS), 8)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "stick_from_stem"));
+
+        //wood cutting recipes that are only active when other mods are installed
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.LADDER, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS), 2)
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder", true)))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.LADDER, Ingredient.fromTag(ModTags.ForgeItems.MUSHROOM_STEMS), 8)
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder", true)))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_stem"));
     }
 
 
     private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> stems, Item boat,
-                                     Item bookshelf, Item button, Item door, Item fence, Item fence_gate, Item ladder,
-                                     Item planks, Item pressure_plate, Item slab, Item stairs, Item trapdoor,
-                                     Item verticalPlanks, Item verticalSlabs) {
+                                     Item bookshelf, Item button, Item door, Item fence, Item fenceGate, Item ladder,
+                                     Item planks, Item pressurePlate, Item slab, Item stairs, Item trapdoor,
+                                     Item verticalPlanks, Item verticalSlab) {
         String directory = "mushroom_wood/" + name + "/";
         ShapedRecipeBuilder.shapedRecipe(boat)
                 .key('#', planks)
@@ -226,25 +248,25 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .setGroup("wooden_fence")
                 .addCriterion("has_planks", hasItem(planks))
                 .build(consumer, getResourceLocation(directory, fence.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(fence_gate)
+        ShapedRecipeBuilder.shapedRecipe(fenceGate)
                 .key('#', Tags.Items.RODS_WOODEN)
                 .key('W', planks)
                 .patternLine("#W#")
                 .patternLine("#W#")
                 .setGroup("wooden_fence_gate")
                 .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, fence_gate.getRegistryName()));
+                .build(consumer, getResourceLocation(directory, fenceGate.getRegistryName()));
         ShapelessRecipeBuilder.shapelessRecipe(planks, 4)
                 .addIngredient(stems)
                 .setGroup("planks")
                 .addCriterion("has_logs", hasItem(stems))
                 .build(consumer, getResourceLocation(directory, planks.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(pressure_plate)
+        ShapedRecipeBuilder.shapedRecipe(pressurePlate)
                 .key('#', planks)
                 .patternLine("##")
                 .setGroup("wooden_pressure_plate")
                 .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, pressure_plate.getRegistryName()));
+                .build(consumer, getResourceLocation(directory, pressurePlate.getRegistryName()));
         ShapedRecipeBuilder.shapedRecipe(slab, 6)
                 .key('#', planks)
                 .patternLine("###")
@@ -311,7 +333,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, verticalPlanks.getRegistryName().getPath() + "_revert"));
-        ShapedRecipeBuilder.shapedRecipe(verticalSlabs, 3)
+        ShapedRecipeBuilder.shapedRecipe(verticalSlab, 3)
                 .key('#', slab)
                 .patternLine("#")
                 .patternLine("#")
@@ -321,17 +343,72 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")));
                     json.add("conditions", array);
-                }), getResourceLocation(directory, verticalSlabs.getRegistryName()));
+                }), getResourceLocation(directory, verticalSlab.getRegistryName()));
         ShapelessRecipeBuilder.shapelessRecipe(slab)
-                .addIngredient(verticalSlabs)
-                .addCriterion("has_vertical_slab", hasItem(verticalSlabs))
+                .addIngredient(verticalSlab)
+                .addCriterion("has_vertical_slab", hasItem(verticalSlab))
                 .build(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")));
                     json.add("conditions", array);
-                }), getResourceLocation(directory, verticalSlabs.getRegistryName().getPath() + "_revert"));
+                }), getResourceLocation(directory, verticalSlab.getRegistryName().getPath() + "_revert"));
 
-        //TODO wood cutting
+        //wood cutting
+        String woodcuttingDirectory = directory + "woodcutting/";
+        WoodcutterRecipeBuilder.woodcutterRecipe(boat, Ingredient.fromTag(stems))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "boat_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(button, Ingredient.fromItems(planks))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "button_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(button, Ingredient.fromTag(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "button_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(door, Ingredient.fromItems(planks))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "door_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(door, Ingredient.fromTag(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "door_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(fence, Ingredient.fromItems(planks))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(fence, Ingredient.fromTag(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(fenceGate, Ingredient.fromTag(stems))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_gate_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(planks, Ingredient.fromTag(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "planks_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(pressurePlate, Ingredient.fromItems(planks))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "pressure_plate_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(pressurePlate, Ingredient.fromTag(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "pressure_plate_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(slab, Ingredient.fromItems(planks), 2)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "slab_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(slab, Ingredient.fromTag(stems), 8)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "slab_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(stairs, Ingredient.fromItems(planks))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "stairs_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(stairs, Ingredient.fromTag(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "stairs_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(trapdoor, Ingredient.fromItems(planks))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "trapdoor_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(trapdoor, Ingredient.fromTag(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "trapdoor_from_stem"));
+
+        //wood cutting recipes that are only active when other mods are installed
+        WoodcutterRecipeBuilder.woodcutterRecipe(ladder, Ingredient.fromItems(planks))
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder")))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(ladder, Ingredient.fromTag(stems), 4)
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder")))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.fromItems(planks))
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_planks_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.fromTag(stems), 4)
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_planks_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(verticalSlab, Ingredient.fromItems(planks), 2)
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_slab_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(verticalSlab, Ingredient.fromTag(stems), 8)
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_slab_from_stem"));
     }
 
     private void mushroomCapRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> caps, Item banner,

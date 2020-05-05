@@ -1,0 +1,19 @@
+{
+  "type": "corail_woodcutter:woodcutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "corail_woodcutter"
+    },
+    {
+      "feature": "variantLadder",
+      "inverted": true,
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ],
+  "ingredient": {
+    "tag": "extendedmushrooms:mushroom_planks"
+  },
+  "result": "minecraft:ladder",
+  "count": 2
+}
