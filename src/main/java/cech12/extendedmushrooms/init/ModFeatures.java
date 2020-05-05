@@ -4,6 +4,7 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
 import cech12.extendedmushrooms.block.mushrooms.PoisonousMushroom;
+import cech12.extendedmushrooms.compat.ModCompat;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.world.gen.feature.BigGlowshroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.BigPoisonousMushroomFeature;
@@ -109,6 +110,14 @@ public class ModFeatures {
                     .withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(1, 0.25F * mushroom.chanceFactor))));
             //all other biomes with mushrooms
             addMushroomToAllBiomes(mushroom.config, mushroom.chanceFactor, mushroom.countFactor);
+
+            //mod biomes
+            List<ModCompat.BiomeConfig> modBiomeConfigs = ModCompat.getBiomesWithMushrooms();
+            for (ModCompat.BiomeConfig biomeConfig : modBiomeConfigs) {
+                if (biomeConfig.biomeExist()) {
+                    biomeConfig.getBiome().addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(biomeConfig.getPlacement(mushroom.countFactor, mushroom.chanceFactor)));
+                }
+            }
         }
 
         //add all collected big mushrooms to biomes
@@ -123,6 +132,16 @@ public class ModFeatures {
             addFeatureToMushroomBiomes(WEIGHT_RANDOM_SELECTOR
                     .withConfiguration(new WeightedRandomFeature(bigMushrooms))
                     .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(5))));
+
+            //mod biomes
+            List<ModCompat.BiomeConfig> modBiomeConfigs = ModCompat.getBiomesWithHugeMushrooms();
+            for (ModCompat.BiomeConfig biomeConfig : modBiomeConfigs) {
+                if (biomeConfig.biomeExist()) {
+                    biomeConfig.getBiome().addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, WEIGHT_RANDOM_SELECTOR
+                            .withConfiguration(new WeightedRandomFeature(bigMushrooms))
+                            .withPlacement(biomeConfig.getPlacement(Config.BIG_MUSHROOM_GENERATION_CHANCE.getValue(), 0)));
+                }
+            }
         }
 
         //add all collected mega mushrooms to mushroom biomes
@@ -130,7 +149,6 @@ public class ModFeatures {
             addFeatureToMushroomBiomes(WEIGHT_RANDOM_SELECTOR
                     .withConfiguration(new WeightedRandomFeature(megaMushrooms))
                     .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Config.MEGA_MUSHROOM_GENERATION_CHANCE.getValue()))));
-
         }
 
     }
