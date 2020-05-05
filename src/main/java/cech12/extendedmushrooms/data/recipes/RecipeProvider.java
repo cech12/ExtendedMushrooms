@@ -206,10 +206,10 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "stick_from_stem"));
 
         //wood cutting recipes that are only active when other mods are installed
-        WoodcutterRecipeBuilder.woodcutterRecipe(Items.LADDER, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS), 2)
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.LADDER, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS))
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder", true)))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(Items.LADDER, Ingredient.fromTag(ModTags.ForgeItems.MUSHROOM_STEMS), 8)
+        WoodcutterRecipeBuilder.woodcutterRecipe(Items.LADDER, Ingredient.fromTag(ModTags.ForgeItems.MUSHROOM_STEMS), 4)
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder", true)))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_stem"));
     }
