@@ -34,13 +34,17 @@ public class ModFeatureEnabledCondition implements ICondition {
     @Override
     public boolean test() {
         switch (this.feature) {
-            case "variantBookshelf":
-                return this.inverted != ModCompat.isVariantBookshelfModLoaded();
-            case "variantLadder":
-                return this.inverted != ModCompat.isVariantLadderModLoaded();
+            case "variantBookshelves":
+                return this.inverted != ModCompat.isVariantBookshelvesModLoaded();
+            case "variantChests":
+                return this.inverted != ModCompat.isVariantChestsModLoaded();
+            case "variantTrappedChests":
+                return this.inverted != ModCompat.isVariantTrappedChestsModLoaded();
+            case "variantLadders":
+                return this.inverted != ModCompat.isVariantLaddersModLoaded();
             case "verticalPlanks":
                 return this.inverted != ModCompat.isVerticalPlanksModLoaded();
-            case "verticalSlab":
+            case "verticalSlabs":
                 return this.inverted != ModCompat.isVerticalSlabsModLoaded();
         }
         return false;

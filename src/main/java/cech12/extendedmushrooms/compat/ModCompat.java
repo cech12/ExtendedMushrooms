@@ -75,11 +75,19 @@ public class ModCompat {
         return list;
     }
 
-    public static boolean isVariantBookshelfModLoaded() {
+    public static boolean isVariantBookshelvesModLoaded() {
         return checkValue(VariantBookshelfMod.class, Config.VARIANT_BOOKSHELF_ENABLED);
     }
 
-    public static boolean isVariantLadderModLoaded() {
+    public static boolean isVariantChestsModLoaded() {
+        return checkValue(VariantChestsMod.class, Config.VARIANT_CHESTS_ENABLED);
+    }
+
+    public static boolean isVariantTrappedChestsModLoaded() {
+        return checkValue(VariantTrappedChestsMod.class, Config.VARIANT_TRAPPED_CHESTS_ENABLED);
+    }
+
+    public static boolean isVariantLaddersModLoaded() {
         return checkValue(VariantLadderMod.class, Config.VARIANT_LADDER_ENABLED);
     }
 
@@ -111,6 +119,8 @@ public class ModCompat {
     }
 
     public interface VariantBookshelfMod {}
+    public interface VariantChestsMod {}
+    public interface VariantTrappedChestsMod {}
     public interface VariantLadderMod {}
     public interface VerticalPlanksMod {}
     public interface VerticalSlabsMod {}

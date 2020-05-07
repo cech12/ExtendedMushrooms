@@ -2,6 +2,8 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.MushroomLadderBlock;
+import cech12.extendedmushrooms.block.VariantChestBlock;
+import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.DoorBlock;
@@ -123,6 +125,8 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                                 .condition(entry.getValue(), boolValue).end();
                     }
                 }
+            } else if (block instanceof VariantChestBlock || block instanceof VariantTrappedChestBlock) {
+                simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name.replace("_trapped", ""))));
             } else if (block instanceof DoorBlock) {
                 ModelFile bottom = models().getExistingFile(getBlockResourceLocation(name + "_bottom"));
                 ModelFile bottomHinge = models().getExistingFile(getBlockResourceLocation(name + "_bottom_hinge"));

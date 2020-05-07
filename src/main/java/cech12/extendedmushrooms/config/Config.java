@@ -17,6 +17,8 @@ public class Config {
     public static final ConfigType.Boolean INFESTED_FLOWER_ENABLED = new ConfigType.Boolean(true);
 
     public static final ConfigType.Integer VARIANT_BOOKSHELF_ENABLED = new ConfigType.Integer(2);
+    public static final ConfigType.Integer VARIANT_CHESTS_ENABLED = new ConfigType.Integer(2);
+    public static final ConfigType.Integer VARIANT_TRAPPED_CHESTS_ENABLED = new ConfigType.Integer(2);
     public static final ConfigType.Integer VARIANT_LADDER_ENABLED = new ConfigType.Integer(2);
     public static final ConfigType.Integer VERTICAL_PLANKS_ENABLED = new ConfigType.Integer(2);
     public static final ConfigType.Integer VERTICAL_SLABS_ENABLED = new ConfigType.Integer(2);
@@ -79,10 +81,16 @@ public class Config {
 
         VARIANT_BOOKSHELF_ENABLED.configObj = common
                 .comment("Whether or not variant bookshelves should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
-                .defineInRange("variantBookshelfEnabled", VARIANT_BOOKSHELF_ENABLED.getDefaultValue(), 0, 2);
+                .defineInRange("variantBookshelvesEnabled", VARIANT_BOOKSHELF_ENABLED.getDefaultValue(), 0, 2);
+        VARIANT_CHESTS_ENABLED.configObj = common
+                .comment("Whether or not variant chests should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
+                .defineInRange("variantChestsEnabled", VARIANT_CHESTS_ENABLED.getDefaultValue(), 0, 2);
+        VARIANT_TRAPPED_CHESTS_ENABLED.configObj = common
+                .comment("Whether or not variant trapped chests should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
+                .defineInRange("variantTrappedChestsEnabled", VARIANT_TRAPPED_CHESTS_ENABLED.getDefaultValue(), 0, 2);
         VARIANT_LADDER_ENABLED.configObj = common
                 .comment("Whether or not variant ladders should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
-                .defineInRange("variantLadderEnabled", VARIANT_LADDER_ENABLED.getDefaultValue(), 0, 2);
+                .defineInRange("variantLaddersEnabled", VARIANT_LADDER_ENABLED.getDefaultValue(), 0, 2);
         VERTICAL_PLANKS_ENABLED.configObj = common
                 .comment("Whether or not Vertical Planks should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
                 .defineInRange("verticalPlanksEnabled", VERTICAL_PLANKS_ENABLED.getDefaultValue(), 0, 2);

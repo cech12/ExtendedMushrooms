@@ -10,6 +10,8 @@ public class ExtendedMushroomsBlocks {
 
     public static Block MUSHROOM_BOOKSHELF;
     public static Block MUSHROOM_BUTTON;
+    public static Block MUSHROOM_CHEST;
+    public static Block MUSHROOM_CHEST_TRAPPED;
     public static Block MUSHROOM_DOOR;
     public static Block MUSHROOM_FENCE;
     public static Block MUSHROOM_FENCE_GATE;
@@ -37,6 +39,8 @@ public class ExtendedMushroomsBlocks {
     public static Block GLOWSHROOM_STEM_STRIPPED;
     public static Block GLOWSHROOM_BOOKSHELF;
     public static Block GLOWSHROOM_BUTTON;
+    public static Block GLOWSHROOM_CHEST;
+    public static Block GLOWSHROOM_CHEST_TRAPPED;
     public static Block GLOWSHROOM_DOOR;
     public static Block GLOWSHROOM_FENCE;
     public static Block GLOWSHROOM_FENCE_GATE;
@@ -59,6 +63,8 @@ public class ExtendedMushroomsBlocks {
     public static Block POISONOUS_MUSHROOM_STEM_STRIPPED;
     public static Block POISONOUS_MUSHROOM_BOOKSHELF;
     public static Block POISONOUS_MUSHROOM_BUTTON;
+    public static Block POISONOUS_MUSHROOM_CHEST;
+    public static Block POISONOUS_MUSHROOM_CHEST_TRAPPED;
     public static Block POISONOUS_MUSHROOM_DOOR;
     public static Block POISONOUS_MUSHROOM_FENCE;
     public static Block POISONOUS_MUSHROOM_FENCE_GATE;

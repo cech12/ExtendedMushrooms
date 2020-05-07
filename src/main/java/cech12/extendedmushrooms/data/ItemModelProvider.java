@@ -1,6 +1,8 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.block.VariantChestBlock;
+import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BushBlock;
@@ -16,6 +18,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ExistingFileHelper;
+import net.minecraftforge.client.model.generators.ModelBuilder;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -38,6 +42,10 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
         return getResourceLocation("block/" + name);
     }
 
+    private static ResourceLocation getBlockResourceLocation(String name, String removeSuffix, String addSuffix) {
+        return getBlockResourceLocation(name.substring(0, name.length() - removeSuffix.length()) + addSuffix);
+    }
+
     private static ResourceLocation getItemResourceLocation(String name) {
         return getResourceLocation("item/" + name);
     }
@@ -55,6 +63,18 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
                 if (block instanceof BushBlock || block instanceof LadderBlock) { //mushrooms, grass, flowers, ladders
                     //block items with block texture
                     singleTexture(name, ITEM_GENERATED, "layer0", getBlockResourceLocation(name));
+                } else if (block instanceof VariantChestBlock || block instanceof VariantTrappedChestBlock) {
+                    getBuilder(name)
+                            .parent(new ModelFile.UncheckedModelFile("builtin/entity"))
+                            .texture("particle", getBlockResourceLocation(name.replace("_trapped", ""), "_chest", "_planks"))
+                            .transforms()
+                            .transform(ModelBuilder.Perspective.GUI).rotation(30, 45, 0).translation(0, 0, 0).scale(0.625F, 0.625F, 0.625F).end()
+                            .transform(ModelBuilder.Perspective.GROUND).rotation(0, 0, 0).translation(0, 3, 0).scale(0.25F, 0.25F, 0.25F).end()
+                            .transform(ModelBuilder.Perspective.HEAD).rotation(0, 180, 0).translation(0, 0, 0).scale(1, 1, 1).end()
+                            .transform(ModelBuilder.Perspective.FIXED).rotation(0, 180, 0).translation(0, 0, 0).scale(0.5F, 0.5F, 0.5F).end()
+                            .transform(ModelBuilder.Perspective.THIRDPERSON_RIGHT).rotation(75, 315, 0).translation(0, 2.5F, 0).scale(0.375F, 0.375F, 0.375F).end()
+                            .transform(ModelBuilder.Perspective.FIRSTPERSON_RIGHT).rotation(0, 315, 0).translation(0, 0, 0).scale(0.4F, 0.4F, 0.4F).end()
+                            .end();
                 } else if (block instanceof DoorBlock) {
                     //block items with item texture
                     singleTexture(name, ITEM_GENERATED, "layer0", getItemResourceLocation(name));

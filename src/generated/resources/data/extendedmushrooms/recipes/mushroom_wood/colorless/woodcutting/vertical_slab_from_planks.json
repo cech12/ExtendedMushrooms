@@ -6,7 +6,7 @@
       "modid": "corail_woodcutter"
     },
     {
-      "feature": "verticalSlab",
+      "feature": "verticalSlabs",
       "type": "extendedmushrooms:mod_feature_enabled"
     }
   ],

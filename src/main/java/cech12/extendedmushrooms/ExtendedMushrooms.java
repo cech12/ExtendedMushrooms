@@ -8,6 +8,7 @@ import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModEntities;
 import cech12.extendedmushrooms.init.ModFeatures;
 import cech12.extendedmushrooms.init.ModTags;
+import cech12.extendedmushrooms.init.ModTileEntities;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import cech12.extendedmushrooms.item.crafting.MushroomArrowRecipe;
 import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
@@ -76,6 +77,7 @@ public class ExtendedMushrooms {
     private void clientSetup(final FMLClientSetupEvent event) {
         ModBlocks.setupRenderLayers();
         ModEntities.setupRenderers();
+        ModTileEntities.setupRenderers();
     }
 
     private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {

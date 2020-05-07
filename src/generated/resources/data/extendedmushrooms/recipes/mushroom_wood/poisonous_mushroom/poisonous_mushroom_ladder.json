@@ -19,7 +19,7 @@
   },
   "conditions": [
     {
-      "feature": "variantLadder",
+      "feature": "variantLadders",
       "type": "extendedmushrooms:mod_feature_enabled"
     }
   ]

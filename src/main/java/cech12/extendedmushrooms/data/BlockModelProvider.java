@@ -7,6 +7,8 @@ import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomLadderBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
+import cech12.extendedmushrooms.block.VariantChestBlock;
+import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.block.VerticalPlanksBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
@@ -127,6 +129,10 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                         .texture("wool", texture);
             } else if (block instanceof MushroomCapPressurePlateBlock) {
                 pressurePlateBlock(name, getCapResourceLocation(name, "_pressure_plate"));
+            } else if (block instanceof VariantChestBlock) {
+                getBuilder(name).texture("particle", getBlockResourceLocation(name, "_chest", "_planks"));
+            } else if (block instanceof VariantTrappedChestBlock) {
+                //ignore
             } else if (block instanceof DoorBlock) {
                 ResourceLocation bottom = getBlockResourceLocation(name + "_bottom");
                 ResourceLocation top = getBlockResourceLocation(name + "_top");

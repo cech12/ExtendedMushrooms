@@ -10,7 +10,7 @@
   },
   "conditions": [
     {
-      "feature": "verticalSlab",
+      "feature": "verticalSlabs",
       "type": "extendedmushrooms:mod_feature_enabled"
     }
   ]

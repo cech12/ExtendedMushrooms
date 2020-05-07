@@ -6,6 +6,9 @@ import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.init.ModTags;
 import com.google.gson.JsonArray;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
@@ -94,6 +97,8 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsItems.MUSHROOM_BOAT.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_BOOKSHELF.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_BUTTON.asItem(),
+                ExtendedMushroomsBlocks.MUSHROOM_CHEST.asItem(),
+                ExtendedMushroomsBlocks.MUSHROOM_CHEST_TRAPPED.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_FENCE.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_FENCE_GATE.asItem(),
@@ -125,6 +130,8 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsItems.GLOWSHROOM_BOAT.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_BOOKSHELF.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_BUTTON.asItem(),
+                ExtendedMushroomsBlocks.GLOWSHROOM_CHEST.asItem(),
+                ExtendedMushroomsBlocks.GLOWSHROOM_CHEST_TRAPPED.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_FENCE.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_FENCE_GATE.asItem(),
@@ -160,6 +167,8 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsItems.POISONOUS_MUSHROOM_BOAT.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_BOOKSHELF.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_BUTTON.asItem(),
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST.asItem(),
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_DOOR.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_FENCE.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_FENCE_GATE.asItem(),
@@ -207,18 +216,18 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
 
         //wood cutting recipes that are only active when other mods are installed
         WoodcutterRecipeBuilder.woodcutterRecipe(Items.LADDER, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS))
-                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder", true)))
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadders", true)))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(Items.LADDER, Ingredient.fromTag(ModTags.ForgeItems.MUSHROOM_STEMS), 4)
-                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder", true)))
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadders", true)))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_stem"));
     }
 
 
     private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> stems, Item boat,
-                                     Item bookshelf, Item button, Item door, Item fence, Item fenceGate, Item ladder,
-                                     Item planks, Item pressurePlate, Item slab, Item stairs, Item trapdoor,
-                                     Item verticalPlanks, Item verticalSlab) {
+                                     Item bookshelf, Item button, Item chest, Item chestTrapped, Item door, Item fence,
+                                     Item fenceGate, Item ladder, Item planks, Item pressurePlate, Item slab,
+                                     Item stairs, Item trapdoor, Item verticalPlanks, Item verticalSlab) {
         String directory = "mushroom_wood/" + name + "/";
         ShapedRecipeBuilder.shapedRecipe(boat)
                 .key('#', planks)
@@ -299,9 +308,35 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .addCriterion("has_book", hasItem(Items.BOOK))
                 .build(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
-                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantBookshelf")));
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantBookshelves")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, bookshelf.getRegistryName()));
+        ShapedRecipeBuilder.shapedRecipe(chest)
+                .key('#', planks)
+                .key('|', Tags.Items.RODS_WOODEN)
+                .patternLine("###")
+                .patternLine("#|#")
+                .patternLine("###")
+                .setGroup("mushroom_chest")
+                .addCriterion("has_lots_of_items", new InventoryChangeTrigger.Instance(MinMaxBounds.IntBound.atLeast(10), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new ItemPredicate[0]))
+                .build(ResultWrapper.transformJson(consumer, json -> {
+                    JsonArray array = new JsonArray();
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantChests")));
+                    json.add("conditions", array);
+                }), getResourceLocation(directory, chest.getRegistryName()));
+        ShapedRecipeBuilder.shapedRecipe(chestTrapped)
+                .key('#', planks)
+                .key('|', Items.TRIPWIRE_HOOK)
+                .patternLine("###")
+                .patternLine("#|#")
+                .patternLine("###")
+                .addCriterion("has_tripwire_hook", hasItem(Items.TRIPWIRE_HOOK))
+                .setGroup("mushroom_trapped_chest")
+                .build(ResultWrapper.transformJson(consumer, json -> {
+                    JsonArray array = new JsonArray();
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantTrappedChests")));
+                    json.add("conditions", array);
+                }), getResourceLocation(directory, chestTrapped.getRegistryName()));
         ShapedRecipeBuilder.shapedRecipe(ladder, 4)
                 .key('#', planks)
                 .key('|', Tags.Items.RODS_WOODEN)
@@ -311,7 +346,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .addCriterion("has_stick", hasItem(Tags.Items.RODS_WOODEN))
                 .build(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
-                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder")));
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadders")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, ladder.getRegistryName()));
         ShapedRecipeBuilder.shapedRecipe(verticalPlanks, 3)
@@ -341,7 +376,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .addCriterion("has_slab", hasItem(slab))
                 .build(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
-                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")));
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlabs")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, verticalSlab.getRegistryName()));
         ShapelessRecipeBuilder.shapelessRecipe(slab)
@@ -349,7 +384,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .addCriterion("has_vertical_slab", hasItem(verticalSlab))
                 .build(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
-                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")));
+                    array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlabs")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, verticalSlab.getRegistryName().getPath() + "_revert"));
 
@@ -392,10 +427,10 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
 
         //wood cutting recipes that are only active when other mods are installed
         WoodcutterRecipeBuilder.woodcutterRecipe(ladder, Ingredient.fromItems(planks))
-                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder")))
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadders")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(ladder, Ingredient.fromTag(stems), 4)
-                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadder")))
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadders")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "ladder_from_stem"));
         WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.fromItems(planks))
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")))
@@ -404,10 +439,10 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_planks_from_stem"));
         WoodcutterRecipeBuilder.woodcutterRecipe(verticalSlab, Ingredient.fromItems(planks), 2)
-                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")))
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlabs")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_slab_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(verticalSlab, Ingredient.fromTag(stems), 8)
-                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlab")))
+                .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlabs")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_slab_from_stem"));
     }
 

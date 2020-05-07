@@ -7,6 +7,8 @@ import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.MushroomWoodPressurePlateBlock;
+import cech12.extendedmushrooms.block.VariantChestBlock;
+import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.init.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -26,6 +28,8 @@ import net.minecraftforge.common.Tags;
 import javax.annotation.Nonnull;
 import java.util.Comparator;
 import java.util.function.Predicate;
+
+import static cech12.extendedmushrooms.init.ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED;
 
 public class BlockTagProvider extends BlockTagsProvider {
 
@@ -55,6 +59,14 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .add(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL);
         getBuilder(ModTags.Blocks.MUSHROOM_CARPETS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof CarpetBlock)
+                .sorted(Comparator.comparing(Block::getRegistryName))
+                .toArray(Block[]::new));
+        getBuilder(ModTags.Blocks.MUSHROOM_CHESTS).add(registry.stream().filter(extendedMushrooms)
+                .filter(block -> block instanceof VariantChestBlock)
+                .sorted(Comparator.comparing(Block::getRegistryName))
+                .toArray(Block[]::new));
+        getBuilder(MUSHROOM_CHESTS_TRAPPED).add(registry.stream().filter(extendedMushrooms)
+                .filter(block -> block instanceof VariantTrappedChestBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
         getBuilder(ModTags.Blocks.MUSHROOM_DOORS).add(registry.stream().filter(extendedMushrooms)
@@ -148,6 +160,9 @@ public class BlockTagProvider extends BlockTagsProvider {
         getBuilder(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
 
+        getBuilder(Tags.Blocks.CHESTS).add(ModTags.Blocks.MUSHROOM_CHESTS);
+        getBuilder(Tags.Blocks.CHESTS_TRAPPED).add(MUSHROOM_CHESTS_TRAPPED);
+        getBuilder(Tags.Blocks.CHESTS_WOODEN).add(ModTags.Blocks.MUSHROOM_CHESTS, MUSHROOM_CHESTS_TRAPPED);
         getBuilder(Tags.Blocks.FENCE_GATES_WOODEN).add(ModTags.Blocks.MUSHROOM_FENCE_GATES);
         getBuilder(Tags.Blocks.FENCE_GATES).add(ModTags.Blocks.MUSHROOM_FENCE_GATES);
 
