@@ -14,6 +14,8 @@ import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.IBlockReader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
@@ -35,6 +37,7 @@ public class VariantChestBlock extends ChestBlock {
         return this.woodType;
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void setISTER(Item.Properties props) {
         props.setISTER(() -> () -> new ItemStackTileEntityRenderer() {
             private VariantChestTileEntity tile;

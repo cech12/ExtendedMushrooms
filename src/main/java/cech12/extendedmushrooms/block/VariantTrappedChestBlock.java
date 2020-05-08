@@ -21,6 +21,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
@@ -42,6 +44,7 @@ public class VariantTrappedChestBlock extends ChestBlock {
         return this.woodType;
     }
 
+    @OnlyIn(Dist.CLIENT)
     public void setISTER(Item.Properties props) {
         props.setISTER(() -> () -> new ItemStackTileEntityRenderer() {
             private VariantTrappedChestTileEntity tile;

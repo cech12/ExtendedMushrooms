@@ -157,11 +157,13 @@ public final class ModBlocks {
 
     private static Block registerBlock(String name, ItemGroup itemGroup, Block block) {
         Item.Properties itemProperties = new Item.Properties().group(itemGroup);
-        if (block instanceof VariantChestBlock) {
-            ((VariantChestBlock)block).setISTER(itemProperties);
-        } else if (block instanceof VariantTrappedChestBlock) {
-            ((VariantTrappedChestBlock)block).setISTER(itemProperties);
-        }
+        try {
+            if (block instanceof VariantChestBlock) {
+                ((VariantChestBlock)block).setISTER(itemProperties);
+            } else if (block instanceof VariantTrappedChestBlock) {
+                ((VariantTrappedChestBlock)block).setISTER(itemProperties);
+            }
+        } catch (NoSuchMethodError ignore) {}
         BlockItem itemBlock = new BlockItem(block, itemProperties);
         block.setRegistryName(name);
         itemBlock.setRegistryName(name);
