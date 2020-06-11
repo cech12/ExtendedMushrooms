@@ -192,6 +192,8 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
     /**
      * A bug in VariantBlockStateBuilder.PartialBlockstate.toString method produces wrong values for AttachFace EnumProperty (CAPSLOCK)
      * This class fixes this bug. A bit hacky but it works.
+     *
+     * TODO: it was fixed in https://github.com/MinecraftForge/MinecraftForge/commit/7fa42ca064207f72162315268ff6200fab4b1616 (only for 1.15)
      */
     static class BugFixer extends net.minecraftforge.client.model.generators.BlockStateProvider {
 
