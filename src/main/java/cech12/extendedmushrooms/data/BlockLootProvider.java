@@ -123,9 +123,11 @@ public class BlockLootProvider implements IDataProvider {
     }
 
     private static LootTable.Builder dropStem(Block block) {
+        ItemPredicate.Builder silkPredicate = ItemPredicate.Builder.create()
+                .enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1)));
         LootEntry.Builder<?> entry = ItemLootEntry.builder(block);
         LootPool.Builder lootPool = LootPool.builder().name("main").rolls(ConstantRange.of(1)).addEntry(entry)
-                .acceptCondition(SurvivesExplosion.builder());
+                .acceptCondition(MatchTool.builder(silkPredicate));
         return LootTable.builder().addLootPool(lootPool);
     }
 
