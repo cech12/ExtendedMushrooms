@@ -1,5 +1,5 @@
 {
-  "parent": "block/carpet",
+  "parent": "minecraft:block/carpet",
   "textures": {
     "particle": "extendedmushrooms:block/glowshroom_cap",
     "wool": "extendedmushrooms:block/glowshroom_cap"

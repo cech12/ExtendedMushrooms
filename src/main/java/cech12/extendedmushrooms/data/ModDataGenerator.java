@@ -17,7 +17,6 @@ public class ModDataGenerator {
             evt.getGenerator().addProvider(new BlockLootProvider(gen));
             evt.getGenerator().addProvider(new BlockModelProvider(gen, evt.getExistingFileHelper()));
             evt.getGenerator().addProvider(new BlockStateProvider(gen, evt.getExistingFileHelper()));
-            evt.getGenerator().addProvider(new BlockStateProvider.BugFixer(gen, evt.getExistingFileHelper())); //fixes the AttachFace-Capslock bug
             BlockTagProvider blockTags = new BlockTagProvider(gen);
             evt.getGenerator().addProvider(blockTags);
             evt.getGenerator().addProvider(new ItemModelProvider(gen, evt.getExistingFileHelper()));

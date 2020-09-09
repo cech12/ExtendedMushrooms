@@ -1,6 +1,6 @@
 {
-  "parent": "block/pressure_plate_down",
+  "parent": "minecraft:block/pressure_plate_down",
   "textures": {
-    "texture": "block/brown_mushroom_block"
+    "texture": "minecraft:block/brown_mushroom_block"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "block/stairs",
+  "parent": "minecraft:block/stairs",
   "textures": {
     "bottom": "extendedmushrooms:block/poisonous_mushroom_planks",
     "top": "extendedmushrooms:block/poisonous_mushroom_planks",

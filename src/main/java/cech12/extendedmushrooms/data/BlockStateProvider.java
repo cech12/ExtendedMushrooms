@@ -189,43 +189,4 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
         }
     }
 
-    /**
-     * A bug in VariantBlockStateBuilder.PartialBlockstate.toString method produces wrong values for AttachFace EnumProperty (CAPSLOCK)
-     * This class fixes this bug. A bit hacky but it works.
-     *
-     * TODO: it was fixed in https://github.com/MinecraftForge/MinecraftForge/commit/7fa42ca064207f72162315268ff6200fab4b1616 (only for 1.15) [1.15.2-31.1.93]
-     */
-    static class BugFixer extends net.minecraftforge.client.model.generators.BlockStateProvider {
-
-        DataGenerator generator;
-
-        public BugFixer(DataGenerator generator, ExistingFileHelper fileHelper) {
-            super(generator, ExtendedMushrooms.MOD_ID, fileHelper);
-            this.generator = generator;
-        }
-
-        @Override
-        protected void registerStatesAndModels() {
-            Path folder = this.generator.getOutputFolder();
-            Charset charset = StandardCharsets.UTF_8;
-            for (Block block : ForgeRegistries.BLOCKS) {
-                if (!ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace())
-                        || !(block instanceof WoodButtonBlock)) {
-                    continue;
-                }
-                String name = block.getRegistryName().getPath();
-                Path path = Paths.get(folder + "/assets/" + ExtendedMushrooms.MOD_ID + "/blockstates/" + name + ".json");
-                try {
-                    String content = new String(Files.readAllBytes(path), charset);
-                    content = content.replaceAll("FLOOR", "floor");
-                    content = content.replaceAll("WALL", "wall");
-                    content = content.replaceAll("CEILING", "ceiling");
-                    Files.write(path, content.getBytes(charset));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 }
