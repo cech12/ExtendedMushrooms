@@ -26,7 +26,7 @@ public class MixinMushroomBlock {
      * Add a tree like automatic growing.
      * The automatic multiplication still remaining.
      */
-    @Inject(at = @At("HEAD"), method = "tick", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
     public void tickProxy(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         //automatic growing of mushrooms
         //Forge: prevent loading unloaded chunks
@@ -64,7 +64,7 @@ public class MixinMushroomBlock {
     /**
      * Change grow behaviour to enable mega mushrooms can be grown out of vanilla mushrooms.
      */
-    @Inject(at = @At("HEAD"), method = "func_226940_a_", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "grow", cancellable = true)
     public void growProxy(ServerWorld world, BlockPos pos, BlockState state, Random random, CallbackInfoReturnable<Boolean> cir) {
         if (state.getBlock() == Blocks.BROWN_MUSHROOM) {
             (new BrownMushroom()).growMushroom(world, world.getChunkProvider().getChunkGenerator(), pos, state, random);

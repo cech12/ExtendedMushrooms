@@ -1,19 +1,17 @@
 package cech12.extendedmushrooms.block;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CarpetBlock;
-import net.minecraft.item.DyeColor;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
-public class MushroomCarpetBlock extends CarpetBlock {
+import java.util.function.Supplier;
 
-    /**
-     * CarpetBlock has protected constructor.
-     */
-    public MushroomCarpetBlock(DyeColor color, Properties properties) {
-        super(color, properties);
+public class MushroomStairsBlock extends StairsBlock {
+
+    public MushroomStairsBlock(Supplier<BlockState> state, Properties properties) {
+        super(state, properties);
     }
 
     @Override
@@ -23,7 +21,7 @@ public class MushroomCarpetBlock extends CarpetBlock {
 
     @Override
     public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-        return 60;
+        return 5;
     }
 
 }
