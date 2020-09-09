@@ -7,7 +7,7 @@ import net.minecraft.block.FlowerBlock;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -42,7 +42,7 @@ public class InfestedFlowerBlock extends FlowerBlock {
     public void animateTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
         super.animateTick(blockState, world, blockPos, random);
         if (random.nextInt(15) == 0) {
-            Vec3d offset = blockState.getOffset(world, blockPos).add(0.3125, 0, 0.3125);
+            Vector3d offset = blockState.getOffset(world, blockPos).add(0.3125, 0, 0.3125);
             world.addParticle(ParticleTypes.MYCELIUM,
                     blockPos.getX() + offset.x + (random.nextDouble() * 0.375),
                     blockPos.getY() + offset.y + (random.nextDouble() * 0.2),

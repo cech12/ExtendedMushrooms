@@ -6,17 +6,17 @@ import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.ITag;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 
 import javax.annotation.Nonnull;
 
 public class MushroomBrewingRecipe implements IBrewingRecipe {
 
-    Tag<Item> mushroomTag;
+    ITag<Item> mushroomTag;
     Potion result;
 
-    public MushroomBrewingRecipe(Tag<Item> mushroomTag, Potion result) {
+    public MushroomBrewingRecipe(ITag<Item> mushroomTag, Potion result) {
         this.mushroomTag = mushroomTag;
         this.result = result;
     }

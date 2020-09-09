@@ -1,6 +1,7 @@
 modLoader="javafml"
-loaderVersion="[31,)"
+loaderVersion="[33,)"
 issueTrackerURL="https://github.com/cech12/ExtendedMushrooms/issues"
+license="The MIT License (MIT)"
 [[mods]]
     modId="extendedmushrooms"
     version="${file.jarVersion}"
@@ -13,12 +14,12 @@ issueTrackerURL="https://github.com/cech12/ExtendedMushrooms/issues"
 [[dependencies.extendedmushrooms]]
     modId="forge"
     mandatory=true
-    versionRange="[31.1.18,)"
+    versionRange="[33.0.21,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.extendedmushrooms]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2,)"
+    versionRange="[1.16.2,)"
     ordering="NONE"
     side="BOTH"

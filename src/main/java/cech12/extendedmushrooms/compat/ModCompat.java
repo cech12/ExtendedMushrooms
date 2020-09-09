@@ -7,7 +7,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.ConfiguredPlacement;
-import net.minecraft.world.gen.placement.HeightWithChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -142,6 +141,8 @@ public class ModCompat {
             this.count = count;
         }
 
+        //TODO!!!!
+        /*
         public boolean biomeExist() {
             return ForgeRegistries.BIOMES.containsKey(location);
         }
@@ -159,6 +160,7 @@ public class ModCompat {
                 return Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Math.max(1, (int) (this.chance * chanceFactor))));
             }
         }
+         */
 
         enum Type {
             CHANCE, COUNT_CHANCE, HUGE

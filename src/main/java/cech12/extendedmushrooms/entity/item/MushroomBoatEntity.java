@@ -51,7 +51,7 @@ public class MushroomBoatEntity extends BoatEntity {
     @Override
     protected void writeAdditional(@Nonnull CompoundNBT compound) {
         super.writeAdditional(compound);
-        compound.putString("MushroomWoodType", this.getMushroomWoodType().getName());
+        compound.putString("MushroomWoodType", this.getMushroomWoodType().getString());
     }
 
     @Override

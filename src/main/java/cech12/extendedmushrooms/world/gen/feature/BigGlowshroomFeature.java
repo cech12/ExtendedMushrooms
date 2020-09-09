@@ -1,17 +1,16 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class BigGlowshroomFeature extends BigMushroomFeature {
 
-    public BigGlowshroomFeature(Function<Dynamic<?>, ? extends BigMushroomFeatureConfig> config) {
+    public BigGlowshroomFeature(Codec<BigMushroomFeatureConfig> config) {
         super(config);
     }
 

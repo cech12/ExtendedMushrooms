@@ -57,7 +57,8 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
     public void randomTick(BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
         if (!state.get(PERSISTENT) && this.shouldDropEffectCloud(state, worldIn, pos, random)) {
             //find ground block below
-            BlockPos.Mutable effectPos = new BlockPos.Mutable(pos.down());
+            BlockPos down = pos.down();
+            BlockPos.Mutable effectPos = new BlockPos.Mutable(down.getX(), down.getY(), down.getZ());
             //block below must not be a solid block
             if (!worldIn.getBlockState(effectPos).isSolid()) {
                 //go down until reached a solid block or world bounds

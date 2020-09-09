@@ -1,16 +1,15 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public abstract class MegaMushroomFeature extends BigMushroomFeature {
 
-    public MegaMushroomFeature(Function<Dynamic<?>, ? extends BigMushroomFeatureConfig> config) {
+    public MegaMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
         super(config);
     }
 
@@ -25,7 +24,7 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
 
     @Override
     protected boolean hasValidGround(IWorld world, BlockPos mushroomPos) {
-        BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable(mushroomPos);
+        BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable(mushroomPos.getX(), mushroomPos.getY(), mushroomPos.getZ());
         for (int x = 0; x < 2; x++) {
             for (int z = 0; z < 2; z++) {
                 if (!super.hasValidGround(world, mutableBlockPos.setPos(mushroomPos).move(x, 0, z))) {
@@ -55,7 +54,8 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
                 for (int z = 0; z < 2; z++) {
                     mutableBlockPos.setPos(blockPos).move(x, y, z);
                     if (world.getBlockState(mutableBlockPos).canBeReplacedByLogs(world, mutableBlockPos)) {
-                        this.setBlockState(world, mutableBlockPos, config.field_227273_b_.getBlockState(random, blockPos));
+                        //setBlockState
+                        this.func_230367_a_(world, mutableBlockPos, config.field_227273_b_.getBlockState(random, blockPos));
                     }
                 }
             }

@@ -22,7 +22,7 @@ public class MushroomBoatRenderer extends BoatRenderer {
     @Override
     public ResourceLocation getEntityTexture(@Nonnull BoatEntity entity) {
         if (entity instanceof MushroomBoatEntity) {
-            String name = ((MushroomBoatEntity) entity).getMushroomWoodType().getName();
+            String name = ((MushroomBoatEntity) entity).getMushroomWoodType().getString();
             if (!TEXTURES.containsKey(name)) {
                 TEXTURES.put(name, new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/boat/" + name + ".png"));
             }

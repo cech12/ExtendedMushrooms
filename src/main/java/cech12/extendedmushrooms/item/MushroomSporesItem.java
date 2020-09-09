@@ -19,6 +19,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nonnull;
 
@@ -49,10 +50,10 @@ public class MushroomSporesItem extends Item {
     }
 
     @Override
-    public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
         boolean itemUsed = false;
         World world = target.world;
-        if (!world.isRemote) {
+        if (!world.isRemote && world instanceof ServerWorld) {
             if (target instanceof CowEntity && !(target instanceof MooshroomEntity)) {
                 // Cow to Mooshroom
                 target.setAIMoveSpeed(0);
@@ -60,7 +61,7 @@ public class MushroomSporesItem extends Item {
                 MooshroomEntity mooshroom = EntityType.MOOSHROOM.create(target.world);
                 if (mooshroom != null) {
                     mooshroom.copyLocationAndAnglesFrom(target);
-                    mooshroom.onInitialSpawn(world, world.getDifficultyForLocation(target.getPosition()), SpawnReason.CONVERSION, null, null);
+                    mooshroom.onInitialSpawn((ServerWorld)world, world.getDifficultyForLocation(target.getPosition()), SpawnReason.CONVERSION, null, null);
                     mooshroom.setGrowingAge(((CowEntity) target).getGrowingAge());
                     if (target.hasCustomName()) {
                         mooshroom.setCustomName(target.getCustomName());
@@ -84,8 +85,9 @@ public class MushroomSporesItem extends Item {
         if (itemUsed) {
             //remove one item
             stack.setCount(stack.getCount() - 1);
+            return ActionResultType.SUCCESS;
         }
-        return itemUsed;
+        return ActionResultType.PASS;
     }
 
 }

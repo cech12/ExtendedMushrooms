@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms.client.renderer.tileentity;
 
-import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import cech12.extendedmushrooms.tileentity.VariantTrappedChestTileEntity;

@@ -10,6 +10,7 @@ import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -38,6 +39,10 @@ public class ModEntities {
         return entityType;
     }
 
+    public static void registerAttributes() {
+        GlobalEntityTypeAttributes.put((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, MushroomSheepEntity.registerAttributes().create());
+    }
+
     /**
      * Setup renderers for entities. Is called at mod initialisation.
      */
@@ -52,6 +57,8 @@ public class ModEntities {
      */
     public static void addEntitiesToBiomes() {
         //add Mushroom Sheep to Mushroom Biomes
+        //TODO
+        /*
         if (Config.MUSHROOM_SHEEP_ENABLED.getValue()) {
             Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
             for (Biome biome : biomes) {
@@ -62,5 +69,6 @@ public class ModEntities {
                                 Config.MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.getValue()));
             }
         }
+         */
     }
 }

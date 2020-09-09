@@ -32,7 +32,7 @@ public class EatMyceliumGoal extends Goal {
         if (this.eaterEntity.getRNG().nextInt(this.eaterEntity.isChild() ? 50 : 1000) != 0) {
             return false;
         } else {
-            BlockPos blockpos = new BlockPos(this.eaterEntity);
+            BlockPos blockpos = this.eaterEntity.getPosition();
             if (IS_MYCELIUM.test(this.entityWorld.getBlockState(blockpos))) {
                 return true;
             } else {
@@ -77,7 +77,7 @@ public class EatMyceliumGoal extends Goal {
     public void tick() {
         this.eatingTimer = Math.max(0, this.eatingTimer - 1);
         if (this.eatingTimer == 4) {
-            BlockPos blockpos = new BlockPos(this.eaterEntity);
+            BlockPos blockpos = this.eaterEntity.getPosition();
             if (IS_MYCELIUM.test(this.entityWorld.getBlockState(blockpos))) {
                 if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.entityWorld, this.eaterEntity)) {
                     this.entityWorld.destroyBlock(blockpos, false);

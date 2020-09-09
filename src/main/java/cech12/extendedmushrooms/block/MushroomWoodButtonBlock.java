@@ -17,7 +17,7 @@ public class MushroomWoodButtonBlock extends WoodButtonBlock {
     }
 
     public MushroomWoodButtonBlock(final int lightValue) {
-        super(generateBlockProperties().lightValue(lightValue));
+        super(generateBlockProperties().setLightLevel((state) -> lightValue));
     }
 
     @Nonnull

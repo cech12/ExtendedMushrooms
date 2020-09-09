@@ -23,7 +23,7 @@ public abstract class MixinAbstractBigMushroomFeature {
     @Inject(at = @At("HEAD"), method = "func_227209_a_", cancellable = true)
     public void placeProxy(IWorld world, BlockPos pos, int p_227209_3_, BlockPos.Mutable p_227209_4_, BigMushroomFeatureConfig p_227209_5_, CallbackInfoReturnable<Boolean> cir) {
         int i = pos.getY();
-        if (i >= 1 && i + p_227209_3_ + 1 < world.getMaxHeight()) {
+        if (i >= 1 && i + p_227209_3_ + 1 < world.func_234938_ad_()) { //getMaxHeight
             Block block = world.getBlockState(pos.down()).getBlock();
             if (block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS) || block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL)) {
                 for(int j = 0; j <= p_227209_3_; ++j) {

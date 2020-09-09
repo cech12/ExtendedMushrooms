@@ -23,7 +23,7 @@ public class GlowshroomCap extends AbstractEffectMushroomCap {
         if (super.shouldDropEffectCloud(state, world, pos, random)) {
             //only drop effect at night or in dark areas
             BlockPos up = pos.up();
-            return !world.dimension.isDaytime() || (!world.getBlockState(up).isSolid() && world.getLight(up) <= state.getLightValue());
+            return !world.isDaytime() || (!world.getBlockState(up).isSolid() && world.getLight(up) <= state.getLightValue());
         }
         return false;
     }

@@ -8,8 +8,10 @@ import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.BreedGoal;
 import net.minecraft.entity.ai.goal.EatGrassGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
@@ -31,20 +33,23 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -68,9 +73,9 @@ public class MushroomSheepEntity extends SheepEntity {
         World world = sheep.world;
         //create mushroom sheep
         MushroomSheepEntity mushroomSheep = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(world);
-        if (mushroomSheep != null) {
+        if (mushroomSheep != null && world instanceof ServerWorld) {
             mushroomSheep.copyLocationAndAnglesFrom(sheep);
-            mushroomSheep.onInitialSpawn(world, world.getDifficultyForLocation(sheep.getPosition()), SpawnReason.CONVERSION, null, null);
+            mushroomSheep.onInitialSpawn((ServerWorld)world, world.getDifficultyForLocation(sheep.getPosition()), SpawnReason.CONVERSION, null, null);
             mushroomSheep.setGrowingAge(sheep.getGrowingAge());
             if (sheep.hasCustomName()) {
                 mushroomSheep.setCustomName(sheep.getCustomName());
@@ -123,10 +128,10 @@ public class MushroomSheepEntity extends SheepEntity {
         super.livingTick();
     }
 
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23F);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 8.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.23F);
     }
 
     protected void registerData() {
@@ -177,16 +182,19 @@ public class MushroomSheepEntity extends SheepEntity {
         }
     }
 
+    //TODO test interaction
     @Override
-    public boolean processInteract(PlayerEntity player, @Nonnull Hand hand) {
+    //processInteract
+    public @Nonnull ActionResultType func_230254_b_(PlayerEntity player, @Nonnull Hand hand) {
         Item item = player.getHeldItem(hand).getItem();
-        boolean superResult = super.processInteract(player, hand);
-        if (superResult && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue() && item.isIn(Tags.Items.MUSHROOMS)) {
+        ActionResultType superResult = super.func_230254_b_(player, hand); //processInteract
+        if (!superResult.isSuccessOrConsume() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue() && item.isIn(Tags.Items.MUSHROOMS)) {
             //change mushroom type
             MushroomType type = MushroomType.byItemOrNull(item);
             if (type != null && type != this.getMushroomType()) {
                 this.setMushroomType(type);
                 this.activateMushroomEffect(type);
+                return ActionResultType.CONSUME;
             }
         }
         return superResult;
@@ -208,7 +216,7 @@ public class MushroomSheepEntity extends SheepEntity {
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
+    public void writeAdditional(@Nonnull CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putBoolean("Sheared", this.getSheared());
         compound.putInt("Mushroom", this.getMushroomType().getId());
@@ -217,7 +225,7 @@ public class MushroomSheepEntity extends SheepEntity {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readAdditional(CompoundNBT compound) {
+    public void readAdditional(@Nonnull CompoundNBT compound) {
         super.readAdditional(compound);
         this.setSheared(compound.getBoolean("Sheared"));
         this.setMushroomType(MushroomType.byId(compound.getInt("Mushroom")));
@@ -251,7 +259,7 @@ public class MushroomSheepEntity extends SheepEntity {
      */
     @Deprecated
     @Override
-    public void setFleeceColor(DyeColor color) {
+    public void setFleeceColor(@Nonnull DyeColor color) {
         //disable setting the fleece color for mushroom sheeps
     }
 
@@ -289,7 +297,7 @@ public class MushroomSheepEntity extends SheepEntity {
         }
     }
 
-    public SheepEntity createChild(AgeableEntity ageable) {
+    public SheepEntity createChild(@Nonnull AgeableEntity ageable) {
         if (ageable instanceof MushroomSheepEntity) {
             // only create a mushroom sheep, when both parents are mushroom sheeps.
             MushroomSheepEntity child = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(this.world);
@@ -308,8 +316,9 @@ public class MushroomSheepEntity extends SheepEntity {
         return null;
     }
 
+    @Override
     @Nullable
-    public ILivingEntityData onInitialSpawn(IWorld worldIn, @Nonnull DifficultyInstance difficultyIn, @Nonnull SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+    public ILivingEntityData onInitialSpawn(IServerWorld worldIn, @Nonnull DifficultyInstance difficultyIn, @Nonnull SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
         this.setMushroomType(getRandomMushroomType(worldIn.getRandom()));
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
@@ -327,8 +336,8 @@ public class MushroomSheepEntity extends SheepEntity {
 
     @Override
     @Nonnull
-    public List<ItemStack> onSheared(ItemStack item, IWorld world, BlockPos pos, int fortune) {
-        java.util.List<ItemStack> ret = new java.util.ArrayList<>();
+    public List<ItemStack> onSheared(@Nullable PlayerEntity player, @Nonnull ItemStack item, @Nonnull World world, @Nonnull BlockPos pos, int fortune) {
+        List<ItemStack> ret = new ArrayList<>();
         if (!this.world.isRemote) {
             this.setSheared(true);
             int i = 1 + this.rand.nextInt(3);

@@ -1,4 +1,4 @@
-# Extended Mushrooms [![Curseforge](http://cf.way2muchnoise.eu/full_extended-mushrooms_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_extended-mushrooms_all.svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms/files)
+# Extended Mushrooms [![Curseforge](http://cf.way2muchnoise.eu/full_extended-mushrooms_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_extended-mushrooms_all.svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms/files)  [![](https://img.shields.io/discord/752506676719910963.svg?style=flat&color=informational&logo=discord&label=Discord)](https://discord.gg/gRUFH5t) [![License](https://img.shields.io/github/license/cech12/ExtendedMushrooms)](http://opensource.org/licenses/MIT)
 
 This is a **Minecraft Forge** mod for version 1.15.2 and change some **mushroom behaviour** and adds mushroom related **blocks, items and recipes**.
 

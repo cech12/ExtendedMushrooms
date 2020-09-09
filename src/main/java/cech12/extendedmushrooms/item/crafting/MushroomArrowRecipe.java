@@ -12,7 +12,7 @@ import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -24,7 +24,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
 
     public static final SpecialRecipeSerializer<MushroomArrowRecipe> SERIALIZER = new Serializer();
 
-    private static final Map<Tag<Item>, Potion> MUSHROOM_POTION_MAP = new HashMap<>();
+    private static final Map<ITag.INamedTag<Item>, Potion> MUSHROOM_POTION_MAP = new HashMap<>();
 
     static {
         MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM, Potions.NIGHT_VISION);
@@ -36,7 +36,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
     }
 
     private Potion getPotionFromMushroom(Item mushroom) {
-        for (Map.Entry<Tag<Item>, Potion> entry : MUSHROOM_POTION_MAP.entrySet()) {
+        for (Map.Entry<ITag.INamedTag<Item>, Potion> entry : MUSHROOM_POTION_MAP.entrySet()) {
             if (mushroom.isIn(entry.getKey())) {
                 return entry.getValue();
             }

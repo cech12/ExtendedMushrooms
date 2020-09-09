@@ -31,7 +31,7 @@ public class MushroomSheepWoolLayer extends LayerRenderer<MushroomSheepEntity, S
                     headPitch, partialTicks, color[0], color[1], color[2]);
             if (!entitylivingbaseIn.getSheared()) {
                 renderCopyCutoutModel(this.getEntityModel(), this.sheepWoolModel,
-                        new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/sheep/" + entitylivingbaseIn.getMushroomType().getName() + ".png"),
+                        new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/sheep/" + entitylivingbaseIn.getMushroomType().getString() + ".png"),
                         matrixStackIn, bufferIn, packedLightIn, entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, partialTicks, 1, 1, 1);
             }
         }

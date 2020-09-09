@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
@@ -8,11 +8,10 @@ import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Function;
 
 public class MegaRedMushroomFeature extends MegaMushroomFeature {
 
-    public MegaRedMushroomFeature(Function<Dynamic<?>, ? extends BigMushroomFeatureConfig> config) {
+    public MegaRedMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
         super(config);
     }
 

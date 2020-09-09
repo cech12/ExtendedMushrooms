@@ -1,23 +1,22 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import cech12.extendedmushrooms.init.ModTags;
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfig> {
 
-    public BigMushroomFeature(Function<Dynamic<?>, ? extends BigMushroomFeatureConfig> config) {
+    public BigMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
         super(config);
     }
 
@@ -33,7 +32,7 @@ public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfi
 
     protected boolean isInWorldBounds(IWorld world, BlockPos mushroomPos, int size) {
         int y = mushroomPos.getY();
-        return y >= 1 && y + size + 1 < world.getMaxHeight();
+        return y >= 1 && y + size + 1 < world.func_234938_ad_(); //getMaxHeight
     }
 
     protected boolean hasValidGround(IWorld world, BlockPos mushroomPos) {
@@ -75,12 +74,15 @@ public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfi
         for(int i = 0; i < size; ++i) {
             mutableBlockPos.setPos(blockPos).move(Direction.UP, i);
             if (world.getBlockState(mutableBlockPos).canBeReplacedByLogs(world, mutableBlockPos)) {
-                this.setBlockState(world, mutableBlockPos, config.field_227273_b_.getBlockState(random, blockPos));
+                //setBlockState
+                this.func_230367_a_(world, mutableBlockPos, config.field_227273_b_.getBlockState(random, blockPos));
             }
         }
     }
 
-    public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BigMushroomFeatureConfig config) {
+    @Override
+    //place
+    public boolean func_241855_a(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, BigMushroomFeatureConfig config) {
         int size = this.getSize(rand);
         int capRadius = this.getCapRadius(rand);
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
@@ -99,7 +101,8 @@ public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfi
 
     protected void placeCapBlockIfPossible(IWorld world, Random random, BigMushroomFeatureConfig config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south, boolean up) {
         if (world.getBlockState(blockPos).canBeReplacedByLeaves(world, blockPos)) {
-            this.setBlockState(world, blockPos, config.field_227272_a_.getBlockState(random, blockPos).with(HugeMushroomBlock.WEST, west).with(HugeMushroomBlock.EAST, east).with(HugeMushroomBlock.NORTH, north).with(HugeMushroomBlock.SOUTH, south).with(HugeMushroomBlock.UP, up));
+            //setBlockState
+            this.func_230367_a_(world, blockPos, config.field_227272_a_.getBlockState(random, blockPos).with(HugeMushroomBlock.WEST, west).with(HugeMushroomBlock.EAST, east).with(HugeMushroomBlock.NORTH, north).with(HugeMushroomBlock.SOUTH, south).with(HugeMushroomBlock.UP, up));
         }
     }
 

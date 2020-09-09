@@ -30,7 +30,7 @@ public enum MushroomType implements IStringSerializable {
             ()->ExtendedMushroomsBlocks.GLOWSHROOM,
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP,
             MushroomWoodType.GLOWSHROOM, DyeColor.BLUE,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getDefaultState())),
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getDefaultState(), null, null)), //TODO TEST!
     POISONOUS_MUSHROOM(3,
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM,
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP,
@@ -87,7 +87,7 @@ public enum MushroomType implements IStringSerializable {
     }
 
     @Override
-    public String getName() {
+    public String getString() {
         return this.getItem().getRegistryName().getPath();
     }
 

@@ -14,7 +14,6 @@ import cech12.extendedmushrooms.world.gen.feature.MegaPoisonousMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaRedMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.WeightedFeature;
 import cech12.extendedmushrooms.world.gen.feature.WeightedRandomFeature;
-import cech12.extendedmushrooms.world.gen.feature.WeightedRandomFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -28,7 +27,6 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.HeightWithChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -54,16 +52,17 @@ public class ModFeatures {
 
     @SubscribeEvent
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-        WEIGHT_RANDOM_SELECTOR = register("weight_random_selector", new WeightedRandomFeatureConfig(WeightedRandomFeature::deserialize));
+        //TODO
+        //WEIGHT_RANDOM_SELECTOR = register("weight_random_selector", new WeightedRandomFeatureConfig(WeightedRandomFeatureConfig.INSTANCE));
 
-        MEGA_BROWN_MUSHROOM = register("mega_brown_mushroom", new MegaBrownMushroomFeature(BigMushroomFeatureConfig::deserialize));
-        MEGA_RED_MUSHROOM = register("mega_red_mushroom", new MegaRedMushroomFeature(BigMushroomFeatureConfig::deserialize));
+        MEGA_BROWN_MUSHROOM = register("mega_brown_mushroom", new MegaBrownMushroomFeature(BigMushroomFeatureConfig.field_236528_a_));
+        MEGA_RED_MUSHROOM = register("mega_red_mushroom", new MegaRedMushroomFeature(BigMushroomFeatureConfig.field_236528_a_));
 
-        BIG_GLOWSHROOM = register("big_glowshroom", new BigGlowshroomFeature(BigMushroomFeatureConfig::deserialize));
-        MEGA_GLOWSHROOM = register("mega_glowshroom", new MegaGlowshroomFeature(BigMushroomFeatureConfig::deserialize));
+        BIG_GLOWSHROOM = register("big_glowshroom", new BigGlowshroomFeature(BigMushroomFeatureConfig.field_236528_a_));
+        MEGA_GLOWSHROOM = register("mega_glowshroom", new MegaGlowshroomFeature(BigMushroomFeatureConfig.field_236528_a_));
 
-        BIG_POISONOUS_MUSHROOM = register("big_poisonous_mushroom", new BigPoisonousMushroomFeature(BigMushroomFeatureConfig::deserialize));
-        MEGA_POISONOUS_MUSHROOM = register("mega_poisonous_mushroom", new MegaPoisonousMushroomFeature(BigMushroomFeatureConfig::deserialize));
+        BIG_POISONOUS_MUSHROOM = register("big_poisonous_mushroom", new BigPoisonousMushroomFeature(BigMushroomFeatureConfig.field_236528_a_));
+        MEGA_POISONOUS_MUSHROOM = register("mega_poisonous_mushroom", new MegaPoisonousMushroomFeature(BigMushroomFeatureConfig.field_236528_a_));
     }
 
     private static <C extends IFeatureConfig, F extends Feature<C>> F register(String key, F feature) {
@@ -77,11 +76,14 @@ public class ModFeatures {
         List<WeightedFeature<?>> bigMushrooms = new LinkedList<>();
         List<WeightedFeature<?>> megaMushrooms = new LinkedList<>();
 
+        //TODO
         //add vanilla mega mushrooms to mushroom biomes
+        /*
         if (Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.getValue()) {
             megaMushrooms.add(new WeightedFeature<>(MEGA_RED_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_RED_MUSHROOM), (float) Config.MEGA_RED_MUSHROOM_GENERATION_WEIGHT.getValue()));
             megaMushrooms.add(new WeightedFeature<>(MEGA_BROWN_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_BROWN_MUSHROOM), (float) Config.MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.getValue()));
         }
+         */
 
         if (Config.GLOWSHROOM_GENERATION_ENABLED.getValue()) {
             mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.GLOWSHROOM, (float) Config.GLOWSHROOM_GENERATION_CHANCE_FACTOR.getValue(), (float) Config.GLOWSHROOM_GENERATION_COUNT_FACTOR.getValue()));
@@ -103,6 +105,8 @@ public class ModFeatures {
             megaMushrooms.add(new WeightedFeature<>(MEGA_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), (float) Config.MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getValue()));
         }
 
+        //TODO
+        /*
         //add all collected mushrooms to biomes
         for (Mushroom mushroom : mushrooms) {
             //mushroom biomes
@@ -150,9 +154,11 @@ public class ModFeatures {
                     .withConfiguration(new WeightedRandomFeature(megaMushrooms))
                     .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Config.MEGA_MUSHROOM_GENERATION_CHANCE.getValue()))));
         }
+         */
 
     }
 
+    /*
     private static void addFeatureToMushroomBiomes(ConfiguredFeature<?, ?> feature) {
         Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
         for (Biome biome : biomes) {
@@ -171,7 +177,7 @@ public class ModFeatures {
         for (Biome biome : giantTaigaBiomes) {
             biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroomConfig).withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(Math.max(1, (int) (3 * countFactor)), 0.25F * chanceFactor))));
         }
-        //normal biomes
+        //normal biomes //TODO NETHER!!!
         Biome[] biomes = {
                 Biomes.BADLANDS, Biomes.BADLANDS_PLATEAU, Biomes.BAMBOO_JUNGLE, Biomes.BAMBOO_JUNGLE_HILLS, Biomes.BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS,
                 Biomes.COLD_OCEAN, Biomes.DARK_FOREST, Biomes.DARK_FOREST_HILLS, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_OCEAN,
@@ -179,7 +185,7 @@ public class ModFeatures {
                 Biomes.FROZEN_OCEAN, Biomes.FROZEN_RIVER, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS,
                 Biomes.GRAVELLY_MOUNTAINS, Biomes.ICE_SPIKES, Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.LUKEWARM_OCEAN, Biomes.MODIFIED_BADLANDS_PLATEAU,
                 Biomes.MODIFIED_GRAVELLY_MOUNTAINS, Biomes.MODIFIED_JUNGLE, Biomes.MODIFIED_JUNGLE_EDGE, Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU, Biomes.MOUNTAIN_EDGE,
-                Biomes.MOUNTAINS, Biomes.MUSHROOM_FIELD_SHORE, Biomes.MUSHROOM_FIELDS, Biomes.NETHER, Biomes.OCEAN, Biomes.PLAINS, Biomes.RIVER, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU,
+                Biomes.MOUNTAINS, Biomes.MUSHROOM_FIELD_SHORE, Biomes.MUSHROOM_FIELDS, Biomes.OCEAN, Biomes.PLAINS, Biomes.RIVER, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU,
                 Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU, Biomes.SNOWY_BEACH, Biomes.SNOWY_MOUNTAINS, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS,
                 Biomes.SNOWY_MOUNTAINS, Biomes.SNOWY_TUNDRA, Biomes.STONE_SHORE, Biomes.SUNFLOWER_PLAINS, Biomes.SWAMP, Biomes.SWAMP_HILLS, Biomes.TAIGA, Biomes.TAIGA_HILLS,
                 Biomes.TAIGA_MOUNTAINS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS, Biomes.WARM_OCEAN, Biomes.WOODED_BADLANDS_PLATEAU, Biomes.WOODED_HILLS, Biomes.WOODED_MOUNTAINS
@@ -188,6 +194,7 @@ public class ModFeatures {
             biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroomConfig).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Math.max(1, (int) (4 / chanceFactor))))));
         }
     }
+     */
 
     private static class Mushroom {
 

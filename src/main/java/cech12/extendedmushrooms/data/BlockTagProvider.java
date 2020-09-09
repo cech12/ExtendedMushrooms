@@ -42,152 +42,152 @@ public class BlockTagProvider extends BlockTagsProvider {
         Predicate<Block> extendedMushrooms = block -> ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace());
 
         //generate mod intern tags
-        getBuilder(ModTags.Blocks.MUSHROOM_BOOKSHELVES).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_BOOKSHELVES).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof BookshelfBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof MushroomWoodButtonBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof MushroomCapButtonBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_BUTTONS)
-                .add(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD)
-                .add(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL);
-        getBuilder(ModTags.Blocks.MUSHROOM_CARPETS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_BUTTONS)
+                .addTag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD)
+                .addTag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL);
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_CARPETS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof CarpetBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_CHESTS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_CHESTS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof VariantChestBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(MUSHROOM_CHESTS_TRAPPED).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(MUSHROOM_CHESTS_TRAPPED).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof VariantTrappedChestBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_DOORS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_DOORS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof DoorBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_FENCE_GATES).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_FENCE_GATES).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof FenceGateBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_FENCES).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_FENCES).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof FenceBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_LADDERS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_LADDERS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof LadderBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_PLANKS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_PLANKS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block.getRegistryName().getPath().contains("_planks"))
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof MushroomWoodPressurePlateBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof MushroomCapPressurePlateBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES)
-                .add(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD)
-                .add(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
-        getBuilder(ModTags.Blocks.MUSHROOM_SLABS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES)
+                .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD)
+                .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_SLABS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof SlabBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_STAIRS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_STAIRS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof StairsBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getBuilder(ModTags.Blocks.MUSHROOM_TRAPDOORS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_TRAPDOORS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof TrapDoorBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
         //generate block categories
-        getBuilder(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS).add(Blocks.MYCELIUM).add(Blocks.PODZOL);
-        getBuilder(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL).add(Blocks.DIRT).add(Blocks.GRASS_BLOCK);
-        getBuilder(ModTags.Blocks.MUSHROOM_VALID_BLOCKS).add(Blocks.MYCELIUM).add(Blocks.PODZOL);
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS).add(Blocks.MYCELIUM).add(Blocks.PODZOL);
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL).add(Blocks.DIRT).add(Blocks.GRASS_BLOCK);
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_VALID_BLOCKS).add(Blocks.MYCELIUM).add(Blocks.PODZOL);
 
         //generate forge tags
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN).add(Blocks.BROWN_MUSHROOM_BLOCK);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_RED).add(Blocks.RED_MUSHROOM_BLOCK);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM).add(ExtendedMushroomsBlocks.GLOWSHROOM_CAP);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE).add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS)
-                .add(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN)
-                .add(ModTags.ForgeBlocks.MUSHROOM_CAPS_RED)
-                .add(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM)
-                .add(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN).add(Blocks.BROWN_MUSHROOM_BLOCK);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_RED).add(Blocks.RED_MUSHROOM_BLOCK);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM).add(ExtendedMushroomsBlocks.GLOWSHROOM_CAP);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE).add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_RED)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE);
 
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS)
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS)
                 .add(Blocks.MUSHROOM_STEM)
                 .add(ExtendedMushroomsBlocks.STRIPPED_MUSHROOM_STEM);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_STEMS_GLOWSHROOM)
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_STEMS_GLOWSHROOM)
                 .add(ExtendedMushroomsBlocks.GLOWSHROOM_STEM)
                 .add(ExtendedMushroomsBlocks.GLOWSHROOM_STEM_STRIPPED);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN)
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM_STRIPPED);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOM_STEMS)
-                .add(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS)
-                .add(ModTags.ForgeBlocks.MUSHROOM_STEMS_GLOWSHROOM)
-                .add(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_STEMS)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS_GLOWSHROOM)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN);
 
-        getBuilder(ModTags.ForgeBlocks.MUSHROOMS_BROWN).add(Blocks.BROWN_MUSHROOM);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOMS_RED).add(Blocks.RED_MUSHROOM);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM).add(ExtendedMushroomsBlocks.GLOWSHROOM);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOMS_PURPLE).add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOMS)
-                .add(ModTags.ForgeBlocks.MUSHROOMS_BROWN)
-                .add(ModTags.ForgeBlocks.MUSHROOMS_RED)
-                .add(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM)
-                .add(ModTags.ForgeBlocks.MUSHROOMS_PURPLE);
-        getBuilder(ModTags.Blocks.MUSHROOMS_EDIBLE) // add mod intern edible mushrooms
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS_BROWN).add(Blocks.BROWN_MUSHROOM);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS_RED).add(Blocks.RED_MUSHROOM);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM).add(ExtendedMushroomsBlocks.GLOWSHROOM);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS_PURPLE).add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS)
+                .addTag(ModTags.ForgeBlocks.MUSHROOMS_BROWN)
+                .addTag(ModTags.ForgeBlocks.MUSHROOMS_RED)
+                .addTag(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM)
+                .addTag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE);
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOMS_EDIBLE) // add mod intern edible mushrooms
                 .add(ExtendedMushroomsBlocks.GLOWSHROOM);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE)
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE)
                 .add(Blocks.BROWN_MUSHROOM)
                 .add(Blocks.RED_MUSHROOM)
-                .add(ModTags.Blocks.MUSHROOMS_EDIBLE);
-        getBuilder(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS)
+                .addTag(ModTags.Blocks.MUSHROOMS_EDIBLE);
+        getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
 
-        getBuilder(Tags.Blocks.CHESTS).add(ModTags.Blocks.MUSHROOM_CHESTS);
-        getBuilder(Tags.Blocks.CHESTS_TRAPPED).add(MUSHROOM_CHESTS_TRAPPED);
-        getBuilder(Tags.Blocks.CHESTS_WOODEN).add(ModTags.Blocks.MUSHROOM_CHESTS, MUSHROOM_CHESTS_TRAPPED);
-        getBuilder(Tags.Blocks.FENCE_GATES_WOODEN).add(ModTags.Blocks.MUSHROOM_FENCE_GATES);
-        getBuilder(Tags.Blocks.FENCE_GATES).add(ModTags.Blocks.MUSHROOM_FENCE_GATES);
+        getOrCreateBuilder(Tags.Blocks.CHESTS).addTag(ModTags.Blocks.MUSHROOM_CHESTS);
+        getOrCreateBuilder(Tags.Blocks.CHESTS_TRAPPED).addTag(MUSHROOM_CHESTS_TRAPPED);
+        getOrCreateBuilder(Tags.Blocks.CHESTS_WOODEN).addTags(ModTags.Blocks.MUSHROOM_CHESTS, MUSHROOM_CHESTS_TRAPPED);
+        getOrCreateBuilder(Tags.Blocks.FENCE_GATES_WOODEN).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
+        getOrCreateBuilder(Tags.Blocks.FENCE_GATES).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
 
         //generate minecraft tags
-        getBuilder(BlockTags.BUTTONS).add(ModTags.Blocks.MUSHROOM_BUTTONS);
-        getBuilder(BlockTags.CARPETS).add(ModTags.Blocks.MUSHROOM_CARPETS);
-        getBuilder(BlockTags.DOORS).add(ModTags.Blocks.MUSHROOM_DOORS);
-        getBuilder(BlockTags.FENCES).add(ModTags.Blocks.MUSHROOM_FENCES);
-        getBuilder(BlockTags.LOGS).add(ModTags.ForgeBlocks.MUSHROOM_STEMS);
-        getBuilder(BlockTags.PLANKS).add(ModTags.Blocks.MUSHROOM_PLANKS);
-        getBuilder(BlockTags.SLABS).add(ModTags.Blocks.MUSHROOM_SLABS);
-        getBuilder(BlockTags.SMALL_FLOWERS).add(ExtendedMushroomsBlocks.INFESTED_FLOWER);
-        getBuilder(BlockTags.STAIRS).add(ModTags.Blocks.MUSHROOM_STAIRS);
-        getBuilder(BlockTags.TRAPDOORS).add(ModTags.Blocks.MUSHROOM_TRAPDOORS);
-        getBuilder(BlockTags.WOODEN_BUTTONS).add(ModTags.Blocks.MUSHROOM_BUTTONS);
-        getBuilder(BlockTags.WOODEN_DOORS).add(ModTags.Blocks.MUSHROOM_DOORS);
-        getBuilder(BlockTags.WOODEN_FENCES).add(ModTags.Blocks.MUSHROOM_FENCES);
-        getBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES);
-        getBuilder(BlockTags.WOODEN_SLABS).add(ModTags.Blocks.MUSHROOM_SLABS);
-        getBuilder(BlockTags.WOODEN_STAIRS).add(ModTags.Blocks.MUSHROOM_STAIRS);
-        getBuilder(BlockTags.WOODEN_TRAPDOORS).add(ModTags.Blocks.MUSHROOM_TRAPDOORS);
-        getBuilder(BlockTags.WOOL).add(ModTags.ForgeBlocks.MUSHROOM_CAPS);
+        getOrCreateBuilder(BlockTags.BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
+        getOrCreateBuilder(BlockTags.CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
+        getOrCreateBuilder(BlockTags.DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
+        getOrCreateBuilder(BlockTags.FENCES).addTag(ModTags.Blocks.MUSHROOM_FENCES);
+        getOrCreateBuilder(BlockTags.LOGS).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
+        getOrCreateBuilder(BlockTags.PLANKS).addTag(ModTags.Blocks.MUSHROOM_PLANKS);
+        getOrCreateBuilder(BlockTags.SLABS).addTag(ModTags.Blocks.MUSHROOM_SLABS);
+        getOrCreateBuilder(BlockTags.SMALL_FLOWERS).add(ExtendedMushroomsBlocks.INFESTED_FLOWER);
+        getOrCreateBuilder(BlockTags.STAIRS).addTag(ModTags.Blocks.MUSHROOM_STAIRS);
+        getOrCreateBuilder(BlockTags.TRAPDOORS).addTag(ModTags.Blocks.MUSHROOM_TRAPDOORS);
+        getOrCreateBuilder(BlockTags.WOODEN_BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
+        getOrCreateBuilder(BlockTags.WOODEN_DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
+        getOrCreateBuilder(BlockTags.WOODEN_FENCES).addTag(ModTags.Blocks.MUSHROOM_FENCES);
+        getOrCreateBuilder(BlockTags.WOODEN_PRESSURE_PLATES).addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES);
+        getOrCreateBuilder(BlockTags.WOODEN_SLABS).addTag(ModTags.Blocks.MUSHROOM_SLABS);
+        getOrCreateBuilder(BlockTags.WOODEN_STAIRS).addTag(ModTags.Blocks.MUSHROOM_STAIRS);
+        getOrCreateBuilder(BlockTags.WOODEN_TRAPDOORS).addTag(ModTags.Blocks.MUSHROOM_TRAPDOORS);
+        getOrCreateBuilder(BlockTags.WOOL).addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS);
 
         //generate tags for mod compatibility
-        getBuilder(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES).add(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
+        getOrCreateBuilder(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES).addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
 
     }
 

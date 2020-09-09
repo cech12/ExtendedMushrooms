@@ -124,7 +124,8 @@ public class ModVanillaCompat {
 
     public static void registerFlammable(Block blockIn, int encouragement, int flammability) {
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
-        fireblock.setFireInfo(blockIn, encouragement, flammability);
+        //TODO move flammability to blocks methods getFireSpreadSpeed & getFlammability
+        //fireblock.setFireInfo(blockIn, encouragement, flammability);
     }
 
 

@@ -1,17 +1,16 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 /**
  * Like MegaRedMushroomFeature, only size and cap height is different
  */
 public class MegaPoisonousMushroomFeature extends MegaRedMushroomFeature {
 
-    public MegaPoisonousMushroomFeature(Function<Dynamic<?>, ? extends BigMushroomFeatureConfig> config) {
+    public MegaPoisonousMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
         super(config);
     }
 

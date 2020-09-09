@@ -23,7 +23,7 @@ public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
     }
 
     public MushroomCapPressurePlateBlock(final int lightValue) {
-        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().lightValue(lightValue));
+        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().setLightLevel((state) -> lightValue));
     }
 
     @Nonnull

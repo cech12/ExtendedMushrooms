@@ -6,6 +6,7 @@ import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.init.ModTags;
 import com.google.gson.JsonArray;
+import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;
@@ -19,8 +20,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 
@@ -53,20 +54,20 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
         String name = ExtendedMushroomsItems.GRILLED_MUSHROOM.getRegistryName().getPath();
         CookingRecipeBuilder
                 .smeltingRecipe(Ingredient.fromTag(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 150)
-                .addCriterion("has_mushroom", this.hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer);
+                .addCriterion("has_mushroom", hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer);
         CookingRecipeBuilder
                 .cookingRecipe(Ingredient.fromTag(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 450, IRecipeSerializer.CAMPFIRE_COOKING)
-                .addCriterion("has_mushroom", this.hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer, getResourceLocation(name + "_from_campfire_cooking"));
+                .addCriterion("has_mushroom", hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer, getResourceLocation(name + "_from_campfire_cooking"));
         CookingRecipeBuilder
                 .cookingRecipe(Ingredient.fromTag(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 75, IRecipeSerializer.SMOKING)
-                .addCriterion("has_mushroom", this.hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer, getResourceLocation(name + "_from_smoking"));
+                .addCriterion("has_mushroom", hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer, getResourceLocation(name + "_from_smoking"));
 
         //mushroom bread
         ShapedRecipeBuilder.shapedRecipe(ExtendedMushroomsItems.MUSHROOM_BREAD)
                 .key('#', ModTags.ForgeItems.MUSHROOMS_EDIBLE)
                 .patternLine("###")
                 .setGroup("bread")
-                .addCriterion("has_mushroom", this.hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE))
+                .addCriterion("has_mushroom", hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE))
                 .build(consumer);
 
         //rabbit stew
@@ -155,7 +156,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .key('#', ExtendedMushroomsItems.GLOWSTONE_CRUMBS)
                 .patternLine("##")
                 .patternLine("##")
-                .addCriterion("has_crumbs", this.hasItem(ExtendedMushroomsItems.GLOWSTONE_CRUMBS))
+                .addCriterion("has_crumbs", hasItem(ExtendedMushroomsItems.GLOWSTONE_CRUMBS))
                 .build(consumer, getResourceLocation(Items.GLOWSTONE_DUST.getRegistryName().getPath()));
         ShapelessRecipeBuilder.shapelessRecipe(ExtendedMushroomsItems.GLOWSTONE_CRUMBS, 4)
                 .addIngredient(Items.GLOWSTONE_DUST)
@@ -224,7 +225,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
     }
 
 
-    private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> stems, Item boat,
+    private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, ITag.INamedTag<Item> stems, Item boat,
                                      Item bookshelf, Item button, Item chest, Item chestTrapped, Item door, Item fence,
                                      Item fenceGate, Item ladder, Item planks, Item pressurePlate, Item slab,
                                      Item stairs, Item trapdoor, Item verticalPlanks, Item verticalSlab) {
@@ -318,7 +319,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .patternLine("#|#")
                 .patternLine("###")
                 .setGroup("mushroom_chest")
-                .addCriterion("has_lots_of_items", new InventoryChangeTrigger.Instance(MinMaxBounds.IntBound.atLeast(10), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new ItemPredicate[0]))
+                .addCriterion("has_lots_of_items", new InventoryChangeTrigger.Instance(EntityPredicate.AndPredicate.ANY_AND, MinMaxBounds.IntBound.atLeast(10), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new ItemPredicate[0]))
                 .build(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantChests")));
@@ -446,7 +447,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_slab_from_stem"));
     }
 
-    private void mushroomCapRecipes(Consumer<IFinishedRecipe> consumer, String name, Tag<Item> caps, Item banner,
+    private void mushroomCapRecipes(Consumer<IFinishedRecipe> consumer, String name, ITag.INamedTag<Item> caps, Item banner,
                                     Item bed, Item button, Item carpet, Item pressure_plate) {
         String directory = "mushroom_cap/" + name + "/";
         ShapedRecipeBuilder.shapedRecipe(banner)

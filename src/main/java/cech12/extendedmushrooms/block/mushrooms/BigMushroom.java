@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 import java.util.Iterator;
@@ -30,13 +31,13 @@ public abstract class BigMushroom {
         return capBlock.getDefaultState().with(HugeMushroomBlock.DOWN, false);
     }
 
-    public boolean growMushroom(IWorld world, ChunkGenerator<?> chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
+    public boolean growMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
         ConfiguredFeature<?, ?> feature = this.getBigMushroomFeature(random, this.canGrowBigMushroom(world, blockPos));
         if (feature == null) {
             return false;
         } else {
             world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 4);
-            if (feature.place(world, chunkGenerator, random, blockPos)) {
+            if (feature.func_242765_a(world, chunkGenerator, random, blockPos)) { //place
                 return true;
             } else {
                 world.setBlockState(blockPos, blockState, 4);

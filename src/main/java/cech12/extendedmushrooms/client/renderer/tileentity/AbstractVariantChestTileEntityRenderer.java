@@ -11,7 +11,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.DualBrightnessCallback;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
@@ -21,6 +20,7 @@ import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -76,7 +76,7 @@ public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestTile
         World world = tileEntityIn.getWorld();
         boolean flag = world != null;
         BlockState blockstate = flag ? tileEntityIn.getBlockState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
-        ChestType chesttype = blockstate.has(ChestBlock.TYPE) ? blockstate.get(ChestBlock.TYPE) : ChestType.SINGLE;
+        ChestType chesttype = blockstate.hasProperty(ChestBlock.TYPE) ? blockstate.get(ChestBlock.TYPE) : ChestType.SINGLE;
         Block block = blockstate.getBlock();
         if (block instanceof AbstractChestBlock) {
             AbstractChestBlock<?> abstractchestblock = (AbstractChestBlock<?>)block;
@@ -88,12 +88,12 @@ public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestTile
             matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
             TileEntityMerger.ICallbackWrapper<? extends ChestTileEntity> icallbackwrapper;
             if (flag) {
-                icallbackwrapper = abstractchestblock.func_225536_a_(blockstate, world, tileEntityIn.getPos(), true);
+                icallbackwrapper = abstractchestblock.combine(blockstate, world, tileEntityIn.getPos(), true);
             } else {
                 icallbackwrapper = TileEntityMerger.ICallback::func_225537_b_;
             }
 
-            float f1 = icallbackwrapper.apply(ChestBlock.func_226917_a_(tileEntityIn)).get(partialTicks);
+            float f1 = icallbackwrapper.apply(ChestBlock.getLidRotationCallback(tileEntityIn)).get(partialTicks);
             f1 = 1.0F - f1;
             f1 = 1.0F - f1 * f1 * f1;
             int i = icallbackwrapper.apply(new DualBrightnessCallback<>()).applyAsInt(combinedLightIn);
@@ -139,7 +139,7 @@ public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestTile
         public final ResourceLocation trapped_single;
 
         public ChestTextures(MushroomWoodType woodType) {
-            String basePath = "textures/entity/chest/" + woodType.getName();
+            String basePath = "textures/entity/chest/" + woodType.getString();
             this.left = new ResourceLocation(ExtendedMushrooms.MOD_ID,basePath + "/left.png");
             this.right = new ResourceLocation(ExtendedMushrooms.MOD_ID,basePath + "/right.png");
             this.single = new ResourceLocation(ExtendedMushrooms.MOD_ID,basePath + "/single.png");

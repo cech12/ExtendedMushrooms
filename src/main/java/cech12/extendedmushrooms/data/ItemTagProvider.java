@@ -4,10 +4,10 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.item.MushroomBoatItem;
+import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
@@ -18,8 +18,8 @@ import java.util.function.Predicate;
 
 public class ItemTagProvider extends ItemTagsProvider {
 
-    public ItemTagProvider(DataGenerator generatorIn) {
-        super(generatorIn);
+    public ItemTagProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider) {
+        super(generatorIn, blockTagProvider);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         Predicate<Item> extendedMushrooms = item -> ExtendedMushrooms.MOD_ID.equals(item.getRegistryName().getNamespace());
 
         //generate mod intern tags
-        getBuilder(ModTags.Items.MUSHROOM_BOATS).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Items.MUSHROOM_BOATS).add(registry.stream().filter(extendedMushrooms)
                 .filter(item -> item instanceof MushroomBoatItem)
                 .sorted(Comparator.comparing(Item::getRegistryName))
                 .toArray(Item[]::new));
@@ -69,18 +69,17 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE, ModTags.ForgeItems.MUSHROOMS_EDIBLE);
         copy(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS, ModTags.ForgeItems.MUSHROOMS_POISONOUS);
 
-        getBuilder(Tags.Items.BOOKSHELVES).add(ModTags.Items.MUSHROOM_BOOKSHELVES);
+        getOrCreateBuilder(Tags.Items.BOOKSHELVES).addTag(ModTags.Items.MUSHROOM_BOOKSHELVES);
         copy(Tags.Blocks.CHESTS, Tags.Items.CHESTS);
         copy(Tags.Blocks.CHESTS_TRAPPED, Tags.Items.CHESTS_TRAPPED);
         copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
         copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
         copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
 
-        getBuilder(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
-        getBuilder(ModTags.ForgeItems.SHEARS).add(Items.SHEARS);
+        getOrCreateBuilder(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
 
         //generate minecraft tags
-        getBuilder(ItemTags.BOATS).add(ModTags.Items.MUSHROOM_BOATS);
+        getOrCreateBuilder(ItemTags.BOATS).addTag(ModTags.Items.MUSHROOM_BOATS);
         copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
         copy(BlockTags.CARPETS, ItemTags.CARPETS);
         copy(BlockTags.DOORS, ItemTags.DOORS);
@@ -102,9 +101,9 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         //generate tags for mod compatibility
         copy(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES, ModTags.OtherModItems.WOOLPLATES_WOOLPLATES);
-        getBuilder(ModTags.OtherModItems.CORAIL_WOODCUTTER_ALLOWED_ITEMS)
-                .add(ModTags.ForgeItems.MUSHROOM_STEMS)
-                .add(ModTags.Items.MUSHROOM_PLANKS);
+        getOrCreateBuilder(ModTags.OtherModItems.CORAIL_WOODCUTTER_ALLOWED_ITEMS)
+                .addTag(ModTags.ForgeItems.MUSHROOM_STEMS)
+                .addTag(ModTags.Items.MUSHROOM_PLANKS);
 
     }
 

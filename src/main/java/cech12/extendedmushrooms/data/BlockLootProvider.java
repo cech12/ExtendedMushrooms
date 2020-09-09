@@ -4,7 +4,6 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import cech12.extendedmushrooms.block.BookshelfBlock;
-import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,29 +20,30 @@ import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
+import net.minecraft.loot.AlternativesLootEntry;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.IntClamper;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootEntry;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTableManager;
+import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.conditions.Alternative;
+import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.loot.conditions.Inverted;
+import net.minecraft.loot.conditions.MatchTool;
+import net.minecraft.loot.conditions.SurvivesExplosion;
+import net.minecraft.loot.conditions.TableBonus;
+import net.minecraft.loot.functions.ExplosionDecay;
+import net.minecraft.loot.functions.LimitCount;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.AlternativesLootEntry;
-import net.minecraft.world.storage.loot.ConstantRange;
-import net.minecraft.world.storage.loot.IntClamper;
-import net.minecraft.world.storage.loot.ItemLootEntry;
-import net.minecraft.world.storage.loot.LootEntry;
-import net.minecraft.world.storage.loot.LootParameterSets;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTableManager;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.conditions.Alternative;
-import net.minecraft.world.storage.loot.conditions.BlockStateProperty;
-import net.minecraft.world.storage.loot.conditions.Inverted;
-import net.minecraft.world.storage.loot.conditions.MatchTool;
-import net.minecraft.world.storage.loot.conditions.SurvivesExplosion;
-import net.minecraft.world.storage.loot.conditions.TableBonus;
-import net.minecraft.world.storage.loot.functions.ExplosionDecay;
-import net.minecraft.world.storage.loot.functions.LimitCount;
-import net.minecraft.world.storage.loot.functions.SetCount;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -104,7 +104,7 @@ public class BlockLootProvider implements IDataProvider {
 
     private static LootTable.Builder dropOnlyWithShears(Block block) {
         LootEntry.Builder<?> entry = AlternativesLootEntry.builder(ItemLootEntry.builder(block)
-                .acceptCondition(MatchTool.builder(ItemPredicate.Builder.create().tag(ModTags.ForgeItems.SHEARS))));
+                .acceptCondition(MatchTool.builder(ItemPredicate.Builder.create().tag(Tags.Items.SHEARS))));
         return LootTable.builder().addLootPool(LootPool.builder().name("main").rolls(ConstantRange.of(1)).addEntry(entry));
     }
 
