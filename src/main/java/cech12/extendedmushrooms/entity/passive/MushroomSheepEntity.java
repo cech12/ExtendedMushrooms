@@ -134,6 +134,7 @@ public class MushroomSheepEntity extends SheepEntity {
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.23F);
     }
 
+    @Override
     protected void registerData() {
         super.registerData();
         this.dataManager.register(SHEARED, false);
@@ -141,6 +142,7 @@ public class MushroomSheepEntity extends SheepEntity {
     }
 
     @Nonnull
+    @Override
     public ResourceLocation getLootTable() {
         if (this.getSheared()) {
             return this.getType().getLootTable();
@@ -182,19 +184,18 @@ public class MushroomSheepEntity extends SheepEntity {
         }
     }
 
-    //TODO test interaction
     @Override
     //processInteract
     public @Nonnull ActionResultType func_230254_b_(PlayerEntity player, @Nonnull Hand hand) {
         Item item = player.getHeldItem(hand).getItem();
         ActionResultType superResult = super.func_230254_b_(player, hand); //processInteract
-        if (!superResult.isSuccessOrConsume() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue() && item.isIn(Tags.Items.MUSHROOMS)) {
+        if (superResult.isSuccessOrConsume() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue() && item.isIn(Tags.Items.MUSHROOMS)) {
             //change mushroom type
             MushroomType type = MushroomType.byItemOrNull(item);
             if (type != null && type != this.getMushroomType()) {
                 this.setMushroomType(type);
                 this.activateMushroomEffect(type);
-                return ActionResultType.CONSUME;
+                return ActionResultType.SUCCESS;
             }
         }
         return superResult;
@@ -225,6 +226,7 @@ public class MushroomSheepEntity extends SheepEntity {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readAdditional(@Nonnull CompoundNBT compound) {
         super.readAdditional(compound);
         this.setSheared(compound.getBoolean("Sheared"));
@@ -266,6 +268,7 @@ public class MushroomSheepEntity extends SheepEntity {
     /**
      * returns true if a sheeps wool has been sheared
      */
+    @Override
     public boolean getSheared() {
         return this.dataManager.get(SHEARED);
     }
@@ -273,6 +276,7 @@ public class MushroomSheepEntity extends SheepEntity {
     /**
      * make a sheep sheared if set to true
      */
+    @Override
     public void setSheared(boolean sheared) {
         this.dataManager.set(SHEARED, sheared);
         super.setSheared(sheared); //set sheared value of super class to be compatible with other mods
@@ -294,17 +298,19 @@ public class MushroomSheepEntity extends SheepEntity {
         }
     }
 
-    public SheepEntity createChild(@Nonnull AgeableEntity ageable) {
+    @Override
+    //createChild
+    public SheepEntity func_241840_a(@Nonnull ServerWorld world, @Nonnull AgeableEntity ageable) {
         if (ageable instanceof MushroomSheepEntity) {
             // only create a mushroom sheep, when both parents are mushroom sheeps.
-            MushroomSheepEntity child = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(this.world);
+            MushroomSheepEntity child = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(world);
             if (child != null) {
                 child.setMushroomType(this.getMushroomTypeMixFromParents(this, (MushroomSheepEntity) ageable));
                 return child;
             }
         } else {
             //when other entity is no mushroom sheep, create a normal sheep with its color.
-            SheepEntity child = EntityType.SHEEP.create(this.world);
+            SheepEntity child = EntityType.SHEEP.create(world);
             if (child != null) {
                 child.setFleeceColor(((SheepEntity) ageable).getFleeceColor());
                 return child;
