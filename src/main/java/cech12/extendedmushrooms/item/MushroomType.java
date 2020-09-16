@@ -114,4 +114,12 @@ public enum MushroomType implements IStringSerializable {
         }
         return type;
     }
+
+    /**
+     * @return an array of all mushroom types that are not brown and not red.
+     */
+    public static MushroomType[] getSpecialTypes() {
+        return Arrays.stream(values()).filter(type -> type != BROWN_MUSHROOM && type != RED_MUSHROOM).toArray(MushroomType[]::new);
+    }
+
 }

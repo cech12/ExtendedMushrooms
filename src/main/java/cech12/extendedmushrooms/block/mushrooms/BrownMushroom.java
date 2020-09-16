@@ -7,8 +7,7 @@ import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 
-import javax.annotation.Nullable;
-import java.util.Random;
+import javax.annotation.Nonnull;
 
 public class BrownMushroom extends MegaMushroom {
 
@@ -17,15 +16,15 @@ public class BrownMushroom extends MegaMushroom {
                 new SimpleBlockStateProvider(getDefaultStemState(Blocks.MUSHROOM_STEM)), 3);
     }
 
-    @Nullable
+    @Nonnull
     @Override
-    protected ConfiguredFeature<?, ?> getMegaMushroomFeature(Random var1) {
+    protected ConfiguredFeature<?, ?> getMegaMushroomFeature() {
         return ModFeatures.MEGA_BROWN_MUSHROOM.withConfiguration(getConfig());
     }
 
-    @Nullable
+    @Nonnull
     @Override
-    protected ConfiguredFeature<?, ?> getBigMushroomFeature(Random var1, boolean var2) {
+    protected ConfiguredFeature<?, ?> getBigMushroomFeature() {
         //vanilla mushroom
         return Feature.HUGE_BROWN_MUSHROOM.withConfiguration(getConfig());
     }

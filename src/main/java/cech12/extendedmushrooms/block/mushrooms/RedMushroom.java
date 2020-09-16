@@ -7,25 +7,24 @@ import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 
-import javax.annotation.Nullable;
-import java.util.Random;
+import javax.annotation.Nonnull;
 
-public class RedMushroom extends MegaMushroom{
+public class RedMushroom extends MegaMushroom {
 
     public static BigMushroomFeatureConfig getConfig() {
         return new BigMushroomFeatureConfig(new SimpleBlockStateProvider(getDefaultCapState(Blocks.RED_MUSHROOM_BLOCK)),
                 new SimpleBlockStateProvider(getDefaultStemState(Blocks.MUSHROOM_STEM)), 2);
     }
 
-    @Nullable
+    @Nonnull
     @Override
-    protected ConfiguredFeature<?, ?> getMegaMushroomFeature(Random var1) {
+    protected ConfiguredFeature<?, ?> getMegaMushroomFeature() {
         return ModFeatures.MEGA_RED_MUSHROOM.withConfiguration(getConfig());
     }
 
-    @Nullable
+    @Nonnull
     @Override
-    protected ConfiguredFeature<?, ?> getBigMushroomFeature(Random var1, boolean var2) {
+    protected ConfiguredFeature<?, ?> getBigMushroomFeature() {
         //vanilla mushroom
         return Feature.HUGE_RED_MUSHROOM.withConfiguration(getConfig());
     }

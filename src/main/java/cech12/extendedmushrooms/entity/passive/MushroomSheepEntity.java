@@ -282,12 +282,9 @@ public class MushroomSheepEntity extends SheepEntity {
      * Chooses a "vanilla" sheep color based on the provided random.
      */
     public static MushroomType getRandomMushroomType(Random random) {
-        int i = random.nextInt(100);
-        if (i < 3) {
-            return MushroomType.GLOWSHROOM;
-        } else if (i < 6) {
-            return MushroomType.POISONOUS_MUSHROOM;
-            //TODO more variants
+        if (random.nextInt(100) < 5) {
+            MushroomType[] specialTypes = MushroomType.getSpecialTypes();
+            return specialTypes[random.nextInt(specialTypes.length)];
         } else {
             if (random.nextBoolean()) {
                 return MushroomType.BROWN_MUSHROOM;

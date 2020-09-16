@@ -6,8 +6,7 @@ import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
-import javax.annotation.Nullable;
-import java.util.Random;
+import javax.annotation.Nonnull;
 
 public class Glowshroom extends MegaMushroom {
 
@@ -16,15 +15,15 @@ public class Glowshroom extends MegaMushroom {
                 new SimpleBlockStateProvider(getDefaultStemState(ExtendedMushroomsBlocks.GLOWSHROOM_STEM)), 2);
     }
 
-    @Nullable
+    @Nonnull
     @Override
-    protected ConfiguredFeature<?, ?> getBigMushroomFeature(Random var1, boolean var2) {
+    protected ConfiguredFeature<?, ?> getBigMushroomFeature() {
         return ModFeatures.BIG_GLOWSHROOM.withConfiguration(getConfig());
     }
 
-    @Nullable
+    @Nonnull
     @Override
-    protected ConfiguredFeature<?, ?> getMegaMushroomFeature(Random var1) {
+    protected ConfiguredFeature<?, ?> getMegaMushroomFeature() {
         return ModFeatures.MEGA_GLOWSHROOM.withConfiguration(getConfig());
     }
 
