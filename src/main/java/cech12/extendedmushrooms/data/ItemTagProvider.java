@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
@@ -18,8 +19,8 @@ import java.util.function.Predicate;
 
 public class ItemTagProvider extends ItemTagsProvider {
 
-    public ItemTagProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider) {
-        super(generatorIn, blockTagProvider);
+    public ItemTagProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
+        super(generatorIn, blockTagProvider, ExtendedMushrooms.MOD_ID, existingFileHelper);
     }
 
     @Override

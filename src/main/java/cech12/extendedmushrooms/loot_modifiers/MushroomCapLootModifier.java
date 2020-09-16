@@ -56,6 +56,12 @@ public class MushroomCapLootModifier extends LootModifier {
         {
             return new MushroomCapLootModifier(conditions);
         }
+
+        @Override
+        public JsonObject write(MushroomCapLootModifier instance) {
+            //TODO ?
+            return null;
+        }
     }
 
 }

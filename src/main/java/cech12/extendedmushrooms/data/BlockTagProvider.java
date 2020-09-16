@@ -24,6 +24,7 @@ import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
@@ -33,8 +34,8 @@ import static cech12.extendedmushrooms.init.ModTags.Blocks.MUSHROOM_CHESTS_TRAPP
 
 public class BlockTagProvider extends BlockTagsProvider {
 
-    public BlockTagProvider(DataGenerator generatorIn) {
-        super(generatorIn);
+    public BlockTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
+        super(generatorIn, ExtendedMushrooms.MOD_ID, existingFileHelper);
     }
 
     @Override
