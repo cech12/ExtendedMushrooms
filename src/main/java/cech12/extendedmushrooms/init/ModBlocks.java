@@ -85,7 +85,7 @@ public final class ModBlocks {
         RED_MUSHROOM_CARPET = registerBlock("red_mushroom_carpet", ItemGroup.DECORATIONS, new MushroomCarpetBlock(DyeColor.RED, Block.Properties.create(Material.CARPET, MaterialColor.RED).hardnessAndResistance(0.1F).sound(SoundType.CLOTH)));
         RED_MUSHROOM_PRESSURE_PLATE = registerBlock("red_mushroom_pressure_plate", ItemGroup.REDSTONE, new MushroomCapPressurePlateBlock());
 
-        GLOWSHROOM = registerBlock("glowshroom", ItemGroup.DECORATIONS, new EMMushroomBlock(new Glowshroom(), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT).setLightLevel((state) -> 8)));
+        GLOWSHROOM = registerBlock("glowshroom", ItemGroup.DECORATIONS, new EMMushroomBlock(new Glowshroom(), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT).setLightLevel((state) -> 8).setNeedsPostProcessing((a,b,c)->true)));
         GLOWSHROOM_POTTED = registerBlock("glowshroom_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> GLOWSHROOM, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid().setLightLevel((state) -> 8)));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(GLOWSHROOM.getRegistryName()), () -> GLOWSHROOM_POTTED);
         GLOWSHROOM_CAP = registerBlock("glowshroom_cap", ItemGroup.DECORATIONS, new GlowshroomCap(MushroomType.GLOWSHROOM, Block.Properties.create(Material.WOOD, MaterialColor.BLUE).hardnessAndResistance(0.2F).sound(SoundType.CLOTH).setLightLevel((state) -> 8)));
@@ -111,7 +111,7 @@ public final class ModBlocks {
         GLOWSHROOM_CAP_CARPET = registerBlock("glowshroom_cap_carpet", ItemGroup.DECORATIONS, new MushroomCarpetBlock(DyeColor.BLUE, Block.Properties.create(Material.CARPET, MaterialColor.BLUE).hardnessAndResistance(0.1F).sound(SoundType.CLOTH).setLightLevel((state) -> 8)));
         GLOWSHROOM_CAP_PRESSURE_PLATE = registerBlock("glowshroom_cap_pressure_plate", ItemGroup.REDSTONE, new MushroomCapPressurePlateBlock(8));
 
-        POISONOUS_MUSHROOM = registerBlock("poisonous_mushroom", ItemGroup.DECORATIONS, new PoisonousMushroomBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)));
+        POISONOUS_MUSHROOM = registerBlock("poisonous_mushroom", ItemGroup.DECORATIONS, new PoisonousMushroomBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT).setNeedsPostProcessing((a,b,c)->true)));
         POISONOUS_MUSHROOM_POTTED = registerBlock("poisonous_mushroom_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> POISONOUS_MUSHROOM, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid()));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(POISONOUS_MUSHROOM.getRegistryName()), () -> POISONOUS_MUSHROOM_POTTED);
         POISONOUS_MUSHROOM_CAP = registerBlock("poisonous_mushroom_cap", ItemGroup.DECORATIONS, new PoisonousMushroomCap(MushroomType.POISONOUS_MUSHROOM, Block.Properties.create(Material.WOOD, MaterialColor.PURPLE).hardnessAndResistance(0.2F).sound(SoundType.CLOTH)));

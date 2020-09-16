@@ -55,8 +55,6 @@ public class ModFeatures {
     public static Feature<BigMushroomFeatureConfig> BIG_POISONOUS_MUSHROOM;
     public static Feature<BigMushroomFeatureConfig> MEGA_POISONOUS_MUSHROOM;
 
-    private static List<Biome.Category> biomeCategoryBlacklist = null;
-
     private static List<Mushroom> mushrooms = null;
     private static List<WeightedFeature<?>> bigMushrooms = null;
     private static List<WeightedFeature<?>> megaMushrooms = null;
@@ -83,12 +81,7 @@ public class ModFeatures {
     }
 
     public static void addFeaturesToBiomes(BiomeLoadingEvent event) {
-        if (biomeCategoryBlacklist == null || mushrooms == null || bigMushrooms == null || megaMushrooms == null) {
-            biomeCategoryBlacklist = new LinkedList<>();
-            biomeCategoryBlacklist.add(Biome.Category.NONE);
-            biomeCategoryBlacklist.add(Biome.Category.THEEND);
-            biomeCategoryBlacklist.add(Biome.Category.DESERT);
-
+        if (mushrooms == null || bigMushrooms == null || megaMushrooms == null) {
             mushrooms = new LinkedList<>();
             bigMushrooms = new LinkedList<>();
             megaMushrooms = new LinkedList<>();
@@ -100,7 +93,7 @@ public class ModFeatures {
             }
 
             if (Config.GLOWSHROOM_GENERATION_ENABLED.getValue()) {
-                mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.GLOWSHROOM, (float) Config.GLOWSHROOM_GENERATION_CHANCE_FACTOR.getValue(), (float) Config.GLOWSHROOM_GENERATION_COUNT_FACTOR.getValue()));
+                mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.GLOWSHROOM, (float) Config.GLOWSHROOM_GENERATION_FACTOR.getValue()));
             }
             if (Config.BIG_GLOWSHROOM_GENERATION_ENABLED.getValue()) {
                 bigMushrooms.add(new WeightedFeature<>(BIG_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), (float) Config.BIG_GLOWSHROOM_GENERATION_WEIGHT.getValue()));
@@ -110,7 +103,7 @@ public class ModFeatures {
             }
 
             if (Config.POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
-                mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, (float) Config.POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR.getValue(), (float) Config.POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR.getValue()));
+                mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, (float) Config.POISONOUS_MUSHROOM_GENERATION_FACTOR.getValue()));
             }
             if (Config.BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
                 bigMushrooms.add(new WeightedFeature<>(BIG_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), (float) Config.BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getValue()));
@@ -158,16 +151,22 @@ public class ModFeatures {
 
     }
 
+    private static boolean biomeHasNoMushrooms(BiomeLoadingEvent event) {
+        Biome.Category category = event.getCategory();
+        Biome.TemperatureModifier temperatureModifier = event.getClimate().field_242462_d;
+        return category == Biome.Category.THEEND
+                || (category == Biome.Category.OCEAN && temperatureModifier != Biome.TemperatureModifier.FROZEN);
+    }
+
     private static void addMushrooms(BiomeLoadingEvent event) {
-        //TODO check if all works fine
-        //skip biome categories with no mushrooms
-        if (biomeCategoryBlacklist.contains(event.getCategory())) {
+        //skip biomes with no mushrooms
+        if (biomeHasNoMushrooms(event)) {
             return;
         }
         BiomeGenerationSettingsBuilder generation = event.getGeneration();
         for (Mushroom mushroom : mushrooms) {
             //calculate chance
-            int chance = (int) Math.max(1.0, 4.0 / mushroom.chanceFactor);
+            int chance = Math.max(1, (int) (4.0 / mushroom.spawnFactor));
             //add mushrooms to all biomes
             generation.func_242513_a(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.field_244002_m).func_242729_a(chance));
             //add more mushrooms to some specific biomes
@@ -243,14 +242,12 @@ public class ModFeatures {
     private static class Mushroom {
 
         Block block;
-        float chanceFactor;
-        float countFactor;
+        float spawnFactor;
         BlockClusterFeatureConfig config;
 
-        private Mushroom(Block mushroomBlock, float chanceFactor, float countFactor) {
+        private Mushroom(Block mushroomBlock, float chanceFactor) {
             this.block = mushroomBlock;
-            this.chanceFactor = chanceFactor;
-            this.countFactor = countFactor;
+            this.spawnFactor = chanceFactor;
             this.config = new BlockClusterFeatureConfig.Builder(
                     new SimpleBlockStateProvider(mushroomBlock.getDefaultState()),
                     new SimpleBlockPlacer()).tries(64).func_227317_b_().build();

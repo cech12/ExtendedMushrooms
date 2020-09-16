@@ -41,16 +41,14 @@ public class Config {
     public static final ConfigType.Double MEGA_RED_MUSHROOM_GENERATION_WEIGHT = new ConfigType.Double(1.0);
 
     public static final ConfigType.Boolean GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double GLOWSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.15);
-    public static final ConfigType.Double GLOWSHROOM_GENERATION_COUNT_FACTOR = new ConfigType.Double(0.15);
+    public static final ConfigType.Double GLOWSHROOM_GENERATION_FACTOR = new ConfigType.Double(0.15);
     public static final ConfigType.Boolean BIG_GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Double BIG_GLOWSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.15);
     public static final ConfigType.Boolean MEGA_GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Double MEGA_GLOWSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.15);
 
     public static final ConfigType.Boolean POISONOUS_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.25);
-    public static final ConfigType.Double POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR = new ConfigType.Double(0.25);
+    public static final ConfigType.Double POISONOUS_MUSHROOM_GENERATION_FACTOR = new ConfigType.Double(0.25);
     public static final ConfigType.Boolean BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
     public static final ConfigType.Double BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.25);
     public static final ConfigType.Boolean MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
@@ -169,12 +167,9 @@ public class Config {
                 .comment("Weight of mega red mushrooms generation.")
                 .defineInRange("megaRedMushroomGenerationWeight", MEGA_RED_MUSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
 
-        GLOWSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
-                .comment("Chance factor of glowshrooms generation. (1.0: generation chance of vanilla brown mushroom)")
-                .defineInRange("glowshroomGenerationChanceFactor", GLOWSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
-        GLOWSHROOM_GENERATION_COUNT_FACTOR.configObj = common
-                .comment("Count factor of glowshrooms generation. (1.0: generation count of vanilla brown mushroom)")
-                .defineInRange("glowshroomGenerationCountFactor", GLOWSHROOM_GENERATION_COUNT_FACTOR.getDefaultValue(), 0.0, 10.0);
+        GLOWSHROOM_GENERATION_FACTOR.configObj = common
+                .comment("Factor of glowshrooms generation. (1.0: generation chance of vanilla brown mushroom)")
+                .defineInRange("glowshroomGenerationChanceFactor", GLOWSHROOM_GENERATION_FACTOR.getDefaultValue(), 0.0, 10.0);
         BIG_GLOWSHROOM_GENERATION_WEIGHT.configObj = common
                 .comment("Weight of big glowshrooms generation.")
                 .defineInRange("bigGlowshroomGenerationWeight", BIG_GLOWSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
@@ -182,12 +177,9 @@ public class Config {
                 .comment("Weight of mega glowshrooms generation.")
                 .defineInRange("megaGlowshroomGenerationWeight", MEGA_GLOWSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
 
-        POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
-                .comment("Chance factor of poisonous mushrooms generation. (1.0: generation chance of vanilla brown mushroom)")
-                .defineInRange("poisonousMushroomGenerationChanceFactor", POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
-        POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR.configObj = common
-                .comment("Count factor of poisonous mushrooms generation. (1.0: generation count of vanilla brown mushroom)")
-                .defineInRange("poisonousMushroomGenerationCountFactor", POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR.getDefaultValue(), 0.0, 10.0);
+        POISONOUS_MUSHROOM_GENERATION_FACTOR.configObj = common
+                .comment("Factor of poisonous mushrooms generation. (1.0: generation chance of vanilla brown mushroom)")
+                .defineInRange("poisonousMushroomGenerationChanceFactor", POISONOUS_MUSHROOM_GENERATION_FACTOR.getDefaultValue(), 0.0, 10.0);
         BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.configObj = common
                 .comment("Weight of big poisonous mushrooms generation.")
                 .defineInRange("bigPoisonousMushroomGenerationWeight", BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
