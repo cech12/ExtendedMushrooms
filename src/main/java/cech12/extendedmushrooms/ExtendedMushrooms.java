@@ -104,7 +104,7 @@ public class ExtendedMushrooms {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
         ModBlocks.addBlocksToBiomes(event);
-        ModEntities.addEntitiesToBiomes();//TODO
+        ModEntities.addEntitiesToBiomes(event);
         ModFeatures.addFeaturesToBiomes();//TODO
     }
 

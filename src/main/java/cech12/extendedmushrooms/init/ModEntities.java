@@ -13,10 +13,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -55,20 +56,16 @@ public class ModEntities {
     /**
      * Add registered entities to biomes. Is called at mod initialisation.
      */
-    public static void addEntitiesToBiomes() {
+    public static void addEntitiesToBiomes(BiomeLoadingEvent event) {
         //add Mushroom Sheep to Mushroom Biomes
-        //TODO
-        /*
-        if (Config.MUSHROOM_SHEEP_ENABLED.getValue()) {
-            Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
-            for (Biome biome : biomes) {
-                biome.getSpawns(EntityClassification.CREATURE).add(
-                        new Biome.SpawnListEntry(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
+        if (event.getCategory().equals(Biome.Category.MUSHROOM)) {
+            if (Config.MUSHROOM_SHEEP_ENABLED.getValue()) {
+                event.getSpawns().func_242575_a(EntityClassification.CREATURE,
+                        new MobSpawnInfo.Spawners(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
                                 Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.getValue(),
                                 Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.getValue(),
                                 Config.MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.getValue()));
             }
         }
-         */
     }
 }
