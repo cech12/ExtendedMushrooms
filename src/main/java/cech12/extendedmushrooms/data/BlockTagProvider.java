@@ -114,9 +114,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
         //generate block categories
-        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS).add(Blocks.MYCELIUM).add(Blocks.PODZOL);
         getOrCreateBuilder(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL).add(Blocks.DIRT).add(Blocks.GRASS_BLOCK);
-        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_VALID_BLOCKS).add(Blocks.MYCELIUM).add(Blocks.PODZOL);
 
         //generate forge tags
         getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN).add(Blocks.BROWN_MUSHROOM_BLOCK);

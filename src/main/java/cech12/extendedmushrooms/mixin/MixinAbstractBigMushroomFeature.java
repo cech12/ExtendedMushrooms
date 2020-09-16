@@ -1,7 +1,6 @@
 package cech12.extendedmushrooms.mixin;
 
-import cech12.extendedmushrooms.init.ModTags;
-import net.minecraft.block.Block;
+import cech12.extendedmushrooms.MushroomUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
@@ -24,8 +23,7 @@ public abstract class MixinAbstractBigMushroomFeature {
     public void placeProxy(IWorld world, BlockPos pos, int p_227209_3_, BlockPos.Mutable p_227209_4_, BigMushroomFeatureConfig p_227209_5_, CallbackInfoReturnable<Boolean> cir) {
         int i = pos.getY();
         if (i >= 1 && i + p_227209_3_ + 1 < world.func_234938_ad_()) { //getMaxHeight
-            Block block = world.getBlockState(pos.down()).getBlock();
-            if (block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS) || block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL)) {
+            if (MushroomUtils.isValidMushroomPosition(world, pos)) {
                 for(int j = 0; j <= p_227209_3_; ++j) {
                     //int k = this.func_225563_a_(-1, -1, p_227209_5_.field_227274_c_, j);
                     int k = j <= 3 ? 0 : p_227209_5_.field_227274_c_;

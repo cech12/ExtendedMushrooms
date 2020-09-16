@@ -1,8 +1,7 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
-import cech12.extendedmushrooms.init.ModTags;
+import cech12.extendedmushrooms.MushroomUtils;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
 import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -36,24 +35,14 @@ public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfi
     }
 
     protected boolean hasValidGround(IWorld world, BlockPos mushroomPos) {
-        Block block = world.getBlockState(mushroomPos.down()).getBlock();
-        return block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS) || block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL);
+        return MushroomUtils.isValidMushroomPosition(world, mushroomPos);
     }
 
     protected boolean canGrow(IWorld world, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
-        if (!isInWorldBounds(world, blockPos, size)) {
-            return false;
-        }
-        if (!this.hasValidGround(world, blockPos)) {
-            return false;
-        }
-        if (!canPlaceTrunk(world, blockPos, size, mutableBlockPos, config)) {
-            return false;
-        }
-        if (!canPlaceCap(world, blockPos, size, capRadius, mutableBlockPos, config)) {
-            return false;
-        }
-        return true;
+        return isInWorldBounds(world, blockPos, size)
+                && this.hasValidGround(world, blockPos)
+                && canPlaceTrunk(world, blockPos, size, mutableBlockPos, config)
+                && canPlaceCap(world, blockPos, size, capRadius, mutableBlockPos, config);
     }
 
     protected abstract boolean canPlaceCap(IWorld world, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config);

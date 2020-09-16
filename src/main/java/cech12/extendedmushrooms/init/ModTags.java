@@ -60,9 +60,8 @@ public class ModTags {
 
         public static final ITag.INamedTag<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible"); // only mod intern edible mushrooms
 
-        public static final ITag.INamedTag<Block> MUSHROOM_GROWING_BLOCKS = tag("mushroom_growing_blocks");
+        //use "minecraft:mushroom_grow_block" tag (Blocktags,field_242171_aD) for lightlevel ignoring blocks
         public static final ITag.INamedTag<Block> MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL = tag("mushroom_growing_blocks_lightlevel");
-        public static final ITag.INamedTag<Block> MUSHROOM_VALID_BLOCKS = tag("mushroom_valid_blocks");
 
         private static ITag.INamedTag<Block> tag(@Nonnull String name) {
             return BlockTags.makeWrapperTag(ExtendedMushrooms.MOD_ID + ":" + name);
