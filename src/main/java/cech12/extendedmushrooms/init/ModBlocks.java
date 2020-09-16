@@ -25,18 +25,18 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.feature.Features;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -188,28 +188,22 @@ public final class ModBlocks {
         RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM_POTTED, RenderType.getCutout());
     }
 
-    public static void addBlocksToBiomes() {
-        //TODO!!!!
-        /*
-        //add infested grass to mushroom biomes
-        if (Config.INFESTED_GRASS_ENABLED.getValue()) {
-            BlockState infestedGrass = INFESTED_GRASS.getDefaultState();
-            BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedGrass), new SimpleBlockPlacer())).tries(32).build();
-            RegistryKey<Biome>[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
-            for (RegistryKey<Biome> biome : biomes) {
-                biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(config).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(2))));
+    public static void addBlocksToBiomes(BiomeLoadingEvent event) {
+        if (event.getCategory().equals(Biome.Category.MUSHROOM)) {
+            BiomeGenerationSettingsBuilder generation = event.getGeneration();
+            //add infested grass to mushroom biomes
+            if (Config.INFESTED_GRASS_ENABLED.getValue()) {
+                BlockState infestedGrass = INFESTED_GRASS.getDefaultState();
+                BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedGrass), new SimpleBlockPlacer())).tries(32).build();
+                generation.func_242513_a(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(config).withPlacement(Features.Placements.field_244002_m).func_242731_b(2));
+            }
+            //add infested flower to mushroom biomes
+            if (Config.INFESTED_FLOWER_ENABLED.getValue()) {
+                BlockState infestedFlower = INFESTED_FLOWER.getDefaultState();
+                BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedFlower), new SimpleBlockPlacer())).tries(32).build();
+                generation.func_242513_a(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.FLOWER.withConfiguration(config).withPlacement(Features.Placements.field_244000_k).withPlacement(Features.Placements.field_244001_l).func_242731_b(4));
             }
         }
-        //add infested flower to mushroom biomes
-        if (Config.INFESTED_FLOWER_ENABLED.getValue()) {
-            BlockState infestedFlower = INFESTED_FLOWER.getDefaultState();
-            BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedFlower), new SimpleBlockPlacer())).tries(32).build();
-            RegistryKey<Biome>[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
-            for (RegistryKey<Biome> biome : biomes) {
-                biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.FLOWER.withConfiguration(config).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(4))));
-            }
-        }
-         */
     }
 
 }

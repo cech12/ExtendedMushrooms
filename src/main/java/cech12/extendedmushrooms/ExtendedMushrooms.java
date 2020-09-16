@@ -33,6 +33,8 @@ import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -65,10 +67,7 @@ public class ExtendedMushrooms {
 
     private void setup(final FMLCommonSetupEvent event) {
         ModVanillaCompat.setup();
-        ModBlocks.addBlocksToBiomes();
         ModEntities.registerAttributes();
-        ModEntities.addEntitiesToBiomes();
-        ModFeatures.addFeaturesToBiomes();
 
         //add potion recipes
         //BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM, Potions.NIGHT_VISION)); //overpowered
@@ -100,6 +99,13 @@ public class ExtendedMushrooms {
         event.getRegistry().register(
                 new MushroomStemLootModifier.Serializer().setRegistryName(MOD_ID, "mushroom_stem_harvest")
         );
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
+        ModBlocks.addBlocksToBiomes(event);
+        ModEntities.addEntitiesToBiomes();//TODO
+        ModFeatures.addFeaturesToBiomes();//TODO
     }
 
     /**
