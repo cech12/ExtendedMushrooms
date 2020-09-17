@@ -102,9 +102,9 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         //generate tags for mod compatibility
         copy(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES, ModTags.OtherModItems.WOOLPLATES_WOOLPLATES);
-        getOrCreateBuilder(ModTags.OtherModItems.CORAIL_WOODCUTTER_ALLOWED_ITEMS)
-                .addTag(ModTags.ForgeItems.MUSHROOM_STEMS)
-                .addTag(ModTags.Items.MUSHROOM_PLANKS);
+        //getOrCreateBuilder(ModTags.OtherModItems.CORAIL_WOODCUTTER_ALLOWED_ITEMS)
+        //        .addTag(ModTags.ForgeItems.MUSHROOM_STEMS)
+        //        .addTag(ModTags.Items.MUSHROOM_PLANKS);
 
     }
 

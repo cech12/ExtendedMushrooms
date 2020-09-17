@@ -137,7 +137,7 @@ public class ModTags {
 
     public static class OtherModItems {
 
-        public static final ITag.INamedTag<Item> CORAIL_WOODCUTTER_ALLOWED_ITEMS = tag("corail_woodcutter", "allowed_items");
+        //public static final ITag.INamedTag<Item> CORAIL_WOODCUTTER_ALLOWED_ITEMS = tag("corail_woodcutter", "allowed_items");
         public static final ITag.INamedTag<Item> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static ITag.INamedTag<Item> tag(@Nonnull String mod, @Nonnull String name) {
