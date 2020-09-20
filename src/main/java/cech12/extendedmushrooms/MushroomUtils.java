@@ -12,7 +12,7 @@ public class MushroomUtils {
 
     public static boolean isValidMushroomPosition(IWorldReader world, BlockPos pos) {
         BlockState block = world.getBlockState(pos.down());
-        return block.isIn(BlockTags.field_242171_aD) ||
+        return block.isIn(BlockTags.MUSHROOM_GROW_BLOCK) ||
                 (block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL) && world.getLightSubtracted(pos, 0) < 13);
     }
 

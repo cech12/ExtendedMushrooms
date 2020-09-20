@@ -114,7 +114,7 @@ public class ModFeatures {
 
     private static boolean biomeHasNoMushrooms(BiomeLoadingEvent event) {
         Biome.Category category = event.getCategory();
-        Biome.TemperatureModifier temperatureModifier = event.getClimate().field_242462_d;
+        Biome.TemperatureModifier temperatureModifier = event.getClimate().temperatureModifier;
         return category == Biome.Category.THEEND
                 || (category == Biome.Category.OCEAN && temperatureModifier != Biome.TemperatureModifier.FROZEN);
     }
@@ -129,24 +129,24 @@ public class ModFeatures {
             //calculate chance
             int chance = Math.max(1, (int) (4.0 / mushroom.spawnFactor));
             //add mushrooms to all biomes
-            generation.func_242513_a(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.field_244002_m).func_242729_a(chance));
+            generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.PATCH_PLACEMENT).func_242729_a(chance));
             //add more mushrooms to some specific biomes
             ConfiguredFeature<?, ?> configuredFeature = null;
             switch (event.getCategory()) {
                 case MUSHROOM: //same as taiga
                 case TAIGA:
-                    configuredFeature = Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.field_244001_l).func_242729_a(chance);
+                    configuredFeature = Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(chance);
                     //TODO giant taiga? - same with an additional .func_242731_b(3)
                     break;
                 case SWAMP:
-                    configuredFeature = Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.field_244001_l).func_242729_a(chance).func_242731_b(8);
+                    configuredFeature = Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(chance).func_242731_b(8);
                     break;
                 case NETHER:
                     configuredFeature = Feature.RANDOM_PATCH.withConfiguration(mushroom.config).func_242733_d(128).func_242729_a(Math.max(1, chance / 2));
                     break;
             }
             if (configuredFeature != null) {
-                generation.func_242513_a(GenerationStage.Decoration.VEGETAL_DECORATION, configuredFeature);
+                generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, configuredFeature);
             }
 
             // TODO check mod biomes
@@ -175,7 +175,7 @@ public class ModFeatures {
                 for (BigMushroom bigMushroom : bigMushrooms) {
                     mushrooms.add(bigMushroom.config.withChance(bigMushroom.spawnFactor / fullSpawnFactor));
                 }
-                generation.func_242513_a(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, bigMushrooms.get(0).config)).withPlacement(Features.Placements.field_244001_l).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, 0.5F * fullSpawnFactor, 1))));
+                generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, bigMushrooms.get(0).config)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, 0.5F * fullSpawnFactor, 1))));
             }
         }
 
@@ -217,7 +217,7 @@ public class ModFeatures {
                 for (BigMushroom megaMushroom : megaMushrooms) {
                     mushrooms.add(megaMushroom.config.withChance(megaMushroom.spawnFactor / fullSpawnFactor));
                 }
-                generation.func_242513_a(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, bigMushrooms.get(0).config)).withPlacement(Features.Placements.field_244001_l).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, 0.3F, 1))));
+                generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, bigMushrooms.get(0).config)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, 0.3F, 1))));
             }
         }
     }

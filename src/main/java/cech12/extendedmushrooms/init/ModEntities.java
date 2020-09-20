@@ -60,7 +60,7 @@ public class ModEntities {
         //add Mushroom Sheep to Mushroom Biomes
         if (event.getCategory().equals(Biome.Category.MUSHROOM)) {
             if (Config.MUSHROOM_SHEEP_ENABLED.getValue()) {
-                event.getSpawns().func_242575_a(EntityClassification.CREATURE,
+                event.getSpawns().withSpawner(EntityClassification.CREATURE,
                         new MobSpawnInfo.Spawners(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
                                 Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.getValue(),
                                 Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.getValue(),

@@ -63,8 +63,7 @@ public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfi
         for(int i = 0; i < size; ++i) {
             mutableBlockPos.setPos(blockPos).move(Direction.UP, i);
             if (world.getBlockState(mutableBlockPos).canBeReplacedByLogs(world, mutableBlockPos)) {
-                //setBlockState
-                this.func_230367_a_(world, mutableBlockPos, config.field_227273_b_.getBlockState(random, blockPos));
+                this.setBlockState(world, mutableBlockPos, config.field_227273_b_.getBlockState(random, blockPos));
             }
         }
     }
@@ -90,8 +89,7 @@ public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfi
 
     protected void placeCapBlockIfPossible(IWorld world, Random random, BigMushroomFeatureConfig config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south, boolean up) {
         if (world.getBlockState(blockPos).canBeReplacedByLeaves(world, blockPos)) {
-            //setBlockState
-            this.func_230367_a_(world, blockPos, config.field_227272_a_.getBlockState(random, blockPos).with(HugeMushroomBlock.WEST, west).with(HugeMushroomBlock.EAST, east).with(HugeMushroomBlock.NORTH, north).with(HugeMushroomBlock.SOUTH, south).with(HugeMushroomBlock.UP, up));
+            this.setBlockState(world, blockPos, config.field_227272_a_.getBlockState(random, blockPos).with(HugeMushroomBlock.WEST, west).with(HugeMushroomBlock.EAST, east).with(HugeMushroomBlock.NORTH, north).with(HugeMushroomBlock.SOUTH, south).with(HugeMushroomBlock.UP, up));
         }
     }
 
