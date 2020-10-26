@@ -14,7 +14,7 @@ license="The MIT License (MIT)"
 [[dependencies.extendedmushrooms]]
     modId="forge"
     mandatory=true
-    versionRange="[34.0.5,)"
+    versionRange="[34.0.17,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.extendedmushrooms]]
