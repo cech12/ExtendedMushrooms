@@ -20,14 +20,10 @@ public class ModCompat {
             new Atmospheric(),
             new Autumnity(),
             new BiomesOPlenty(),
-            new ExtendedSlabs(),
             new ILikeWood(),
-            new Mubble(),
             new OhTheBiomesYoullGo(),
             new Quark(),
-            new Traverse(),
-            new VanillaThings(),
-            new Voyage()
+            new VanillaThings()
     };
 
     private static boolean inDevMode() {
