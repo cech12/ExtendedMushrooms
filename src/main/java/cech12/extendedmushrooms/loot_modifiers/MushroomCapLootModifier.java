@@ -59,7 +59,7 @@ public class MushroomCapLootModifier extends LootModifier {
 
         @Override
         public JsonObject write(MushroomCapLootModifier instance) {
-            //TODO ?
+            //maybe do something?
             return null;
         }
     }

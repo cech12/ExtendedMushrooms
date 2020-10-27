@@ -136,7 +136,7 @@ public class ModFeatures {
                 case MUSHROOM: //same as taiga
                 case TAIGA:
                     configuredFeature = Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(chance);
-                    //TODO giant taiga? - same with an additional .func_242731_b(3)
+                    //giant taiga? - same with an additional .func_242731_b(3)
                     break;
                 case SWAMP:
                     configuredFeature = Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242729_a(chance).func_242731_b(8);
@@ -148,17 +148,6 @@ public class ModFeatures {
             if (configuredFeature != null) {
                 generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, configuredFeature);
             }
-
-            // TODO check mod biomes
-            /*
-            //mod biomes
-            List<ModCompat.BiomeConfig> modBiomeConfigs = ModCompat.getBiomesWithMushrooms();
-            for (ModCompat.BiomeConfig biomeConfig : modBiomeConfigs) {
-                if (biomeConfig.biomeExist()) {
-                    biomeConfig.getBiome().addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroom.config).withPlacement(biomeConfig.getPlacement(mushroom.countFactor, mushroom.chanceFactor)));
-                }
-            }
-             */
         }
     }
 
@@ -178,30 +167,6 @@ public class ModFeatures {
                 generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, bigMushrooms.get(0).config)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, 0.5F * fullSpawnFactor, 1))));
             }
         }
-
-        //TODO filter DARK_FOREST & DARK_FOREST_HILLS and add big mushrooms there
-        /*
-        Biome[] biomesWithBigMushrooms = {Biomes.DARK_FOREST, Biomes.DARK_FOREST_HILLS};
-        ConfiguredFeature<?, ?> spawnBigMushroomsFeature = WEIGHT_RANDOM_SELECTOR
-                .withConfiguration(new WeightedRandomFeature(bigMushrooms))
-                .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Config.BIG_MUSHROOM_GENERATION_CHANCE.getValue())));
-        for (Biome biome : biomesWithBigMushrooms) {
-            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, spawnBigMushroomsFeature);
-        }
-         */
-
-        // TODO check mod biomes
-        //mod biomes
-        /*
-        List<ModCompat.BiomeConfig> modBiomeConfigs = ModCompat.getBiomesWithHugeMushrooms();
-        for (ModCompat.BiomeConfig biomeConfig : modBiomeConfigs) {
-            if (biomeConfig.biomeExist()) {
-                biomeConfig.getBiome().addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, WEIGHT_RANDOM_SELECTOR
-                        .withConfiguration(new WeightedRandomFeature(bigMushrooms))
-                        .withPlacement(biomeConfig.getPlacement(Config.BIG_MUSHROOM_GENERATION_CHANCE.getValue(), 0)));
-            }
-        }
-         */
     }
 
     private static void addMegaMushrooms(BiomeLoadingEvent event) {

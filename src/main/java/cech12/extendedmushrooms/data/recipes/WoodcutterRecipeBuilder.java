@@ -110,7 +110,7 @@ public class WoodcutterRecipeBuilder {
 
         @Nonnull
         public IRecipeSerializer<?> getSerializer() {
-            //TODO
+            //maybe another serializer?
             return IRecipeSerializer.CRAFTING_SHAPELESS;
         }
 
