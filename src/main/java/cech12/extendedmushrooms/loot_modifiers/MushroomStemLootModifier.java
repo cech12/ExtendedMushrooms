@@ -29,7 +29,7 @@ public class MushroomStemLootModifier extends LootModifier {
     @Nonnull
     @Override
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-        if (Config.MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED.getValue()) {
+        if (Config.MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED.get()) {
             BlockState blockState = context.get(LootParameters.BLOCK_STATE);
             if (blockState != null && blockState.isIn(ModTags.ForgeBlocks.MUSHROOM_STEMS)) {
                 ItemStack tool = context.get(LootParameters.TOOL);

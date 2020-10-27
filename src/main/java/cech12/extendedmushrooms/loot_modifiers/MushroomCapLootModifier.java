@@ -29,7 +29,7 @@ public class MushroomCapLootModifier extends LootModifier {
     @Override
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         //only called when shears are used
-        if (Config.MUSHROOM_CAPS_WITH_SHEARS_ENABLED.getValue()) {
+        if (Config.MUSHROOM_CAPS_WITH_SHEARS_ENABLED.get()) {
             BlockState blockState = context.get(LootParameters.BLOCK_STATE);
             if (blockState != null && blockState.isIn(ModTags.ForgeBlocks.MUSHROOM_CAPS)) {
                 ItemStack tool = context.get(LootParameters.TOOL);

@@ -79,29 +79,29 @@ public class ModFeatures {
             megaMushrooms = new LinkedList<>();
 
             //add vanilla mega mushrooms to mushroom biomes
-            if (Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.getValue()) {
-                megaMushrooms.add(new BigMushroom(MEGA_RED_MUSHROOM.withConfiguration(RedMushroom.getConfig()), (float) Config.MEGA_RED_MUSHROOM_GENERATION_WEIGHT.getValue()));
-                megaMushrooms.add(new BigMushroom(MEGA_BROWN_MUSHROOM.withConfiguration(BrownMushroom.getConfig()), (float) Config.MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.getValue()));
+            if (Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.get()) {
+                megaMushrooms.add(new BigMushroom(MEGA_RED_MUSHROOM.withConfiguration(RedMushroom.getConfig()), Config.MEGA_RED_MUSHROOM_GENERATION_WEIGHT.get()));
+                megaMushrooms.add(new BigMushroom(MEGA_BROWN_MUSHROOM.withConfiguration(BrownMushroom.getConfig()), Config.MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.get()));
             }
 
-            if (Config.GLOWSHROOM_GENERATION_ENABLED.getValue()) {
-                mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.GLOWSHROOM, (float) Config.GLOWSHROOM_GENERATION_FACTOR.getValue()));
+            if (Config.GLOWSHROOM_GENERATION_ENABLED.get()) {
+                mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.GLOWSHROOM, Config.GLOWSHROOM_GENERATION_FACTOR.get()));
             }
-            if (Config.BIG_GLOWSHROOM_GENERATION_ENABLED.getValue()) {
-                bigMushrooms.add(new BigMushroom(BIG_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), (float) Config.BIG_GLOWSHROOM_GENERATION_WEIGHT.getValue()));
+            if (Config.BIG_GLOWSHROOM_GENERATION_ENABLED.get()) {
+                bigMushrooms.add(new BigMushroom(BIG_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), Config.BIG_GLOWSHROOM_GENERATION_WEIGHT.get()));
             }
-            if (Config.MEGA_GLOWSHROOM_GENERATION_ENABLED.getValue()) {
-                megaMushrooms.add(new BigMushroom(MEGA_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), (float) Config.MEGA_GLOWSHROOM_GENERATION_WEIGHT.getValue()));
+            if (Config.MEGA_GLOWSHROOM_GENERATION_ENABLED.get()) {
+                megaMushrooms.add(new BigMushroom(MEGA_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), Config.MEGA_GLOWSHROOM_GENERATION_WEIGHT.get()));
             }
 
-            if (Config.POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
-                mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, (float) Config.POISONOUS_MUSHROOM_GENERATION_FACTOR.getValue()));
+            if (Config.POISONOUS_MUSHROOM_GENERATION_ENABLED.get()) {
+                mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, Config.POISONOUS_MUSHROOM_GENERATION_FACTOR.get()));
             }
-            if (Config.BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
-                bigMushrooms.add(new BigMushroom(BIG_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), (float) Config.BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getValue()));
+            if (Config.BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED.get()) {
+                bigMushrooms.add(new BigMushroom(BIG_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), Config.BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.get()));
             }
-            if (Config.MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
-                megaMushrooms.add(new BigMushroom(MEGA_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), (float) Config.MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getValue()));
+            if (Config.MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED.get()) {
+                megaMushrooms.add(new BigMushroom(MEGA_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), Config.MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT.get()));
             }
         }
 
@@ -156,15 +156,15 @@ public class ModFeatures {
         if (category == Biome.Category.MUSHROOM) {
             if (!bigMushrooms.isEmpty()) {
                 BiomeGenerationSettingsBuilder generation = event.getGeneration();
-                float fullSpawnFactor = 0F;
+                double fullSpawnFactor = 0D;
                 for (BigMushroom bigMushroom : bigMushrooms) {
                     fullSpawnFactor += bigMushroom.spawnFactor;
                 }
                 List<ConfiguredRandomFeatureList> mushrooms = new LinkedList<>();
                 for (BigMushroom bigMushroom : bigMushrooms) {
-                    mushrooms.add(bigMushroom.config.withChance(bigMushroom.spawnFactor / fullSpawnFactor));
+                    mushrooms.add(bigMushroom.config.withChance((float) (bigMushroom.spawnFactor / fullSpawnFactor)));
                 }
-                generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, bigMushrooms.get(0).config)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, 0.5F * fullSpawnFactor, 1))));
+                generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, bigMushrooms.get(0).config)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, (float) (0.5D * fullSpawnFactor), 1))));
             }
         }
     }
@@ -174,25 +174,25 @@ public class ModFeatures {
         if (category == Biome.Category.MUSHROOM) {
             if (!megaMushrooms.isEmpty()) {
                 BiomeGenerationSettingsBuilder generation = event.getGeneration();
-                float fullSpawnFactor = 0F;
+                double fullSpawnFactor = 0D;
                 for (BigMushroom megaMushroom : megaMushrooms) {
                     fullSpawnFactor += megaMushroom.spawnFactor;
                 }
                 List<ConfiguredRandomFeatureList> mushrooms = new LinkedList<>();
                 for (BigMushroom megaMushroom : megaMushrooms) {
-                    mushrooms.add(megaMushroom.config.withChance(megaMushroom.spawnFactor / fullSpawnFactor));
+                    mushrooms.add(megaMushroom.config.withChance((float) (megaMushroom.spawnFactor / fullSpawnFactor)));
                 }
-                generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, bigMushrooms.get(0).config)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, 0.3F, 1))));
+                generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(mushrooms, megaMushrooms.get(0).config)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.field_242902_f.configure(new AtSurfaceWithExtraConfig(0, 0.3F, 1))));
             }
         }
     }
 
     private static class Mushroom {
         Block block;
-        float spawnFactor;
+        double spawnFactor;
         BlockClusterFeatureConfig config;
 
-        private Mushroom(Block mushroomBlock, float spawnFactor) {
+        private Mushroom(Block mushroomBlock, double spawnFactor) {
             this.block = mushroomBlock;
             this.spawnFactor = spawnFactor;
             this.config = new BlockClusterFeatureConfig.Builder(
@@ -202,10 +202,10 @@ public class ModFeatures {
     }
 
     private static class BigMushroom {
-        float spawnFactor;
+        double spawnFactor;
         ConfiguredFeature<BigMushroomFeatureConfig, ?> config;
 
-        private BigMushroom(ConfiguredFeature<BigMushroomFeatureConfig, ?> config, float spawnFactor) {
+        private BigMushroom(ConfiguredFeature<BigMushroomFeatureConfig, ?> config, double spawnFactor) {
             this.spawnFactor = spawnFactor;
             this.config = config;
         }

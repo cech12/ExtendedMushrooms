@@ -189,7 +189,7 @@ public class MushroomSheepEntity extends SheepEntity {
     public @Nonnull ActionResultType func_230254_b_(PlayerEntity player, @Nonnull Hand hand) {
         Item item = player.getHeldItem(hand).getItem();
         ActionResultType superResult = super.func_230254_b_(player, hand); //processInteract
-        if (superResult.isSuccessOrConsume() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue() && item.isIn(Tags.Items.MUSHROOMS)) {
+        if (superResult.isSuccessOrConsume() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get() && item.isIn(Tags.Items.MUSHROOMS)) {
             //change mushroom type
             MushroomType type = MushroomType.byItemOrNull(item);
             if (type != null && type != this.getMushroomType()) {

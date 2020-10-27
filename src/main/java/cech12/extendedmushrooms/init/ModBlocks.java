@@ -192,13 +192,13 @@ public final class ModBlocks {
         if (event.getCategory().equals(Biome.Category.MUSHROOM)) {
             BiomeGenerationSettingsBuilder generation = event.getGeneration();
             //add infested grass to mushroom biomes
-            if (Config.INFESTED_GRASS_ENABLED.getValue()) {
+            if (Config.INFESTED_GRASS_ENABLED.get()) {
                 BlockState infestedGrass = INFESTED_GRASS.getDefaultState();
                 BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedGrass), new SimpleBlockPlacer())).tries(32).build();
                 generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(config).withPlacement(Features.Placements.PATCH_PLACEMENT).func_242731_b(2));
             }
             //add infested flower to mushroom biomes
-            if (Config.INFESTED_FLOWER_ENABLED.getValue()) {
+            if (Config.INFESTED_FLOWER_ENABLED.get()) {
                 BlockState infestedFlower = INFESTED_FLOWER.getDefaultState();
                 BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(infestedFlower), new SimpleBlockPlacer())).tries(32).build();
                 generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.FLOWER.withConfiguration(config).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(4));

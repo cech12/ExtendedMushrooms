@@ -2,7 +2,7 @@ package cech12.extendedmushrooms.compat;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.config.Config;
-import cech12.extendedmushrooms.config.ConfigType;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModList;
 
 public class ModCompat {
@@ -17,9 +17,9 @@ public class ModCompat {
         return ExtendedMushrooms.DEVELOPMENT_MODE;
     }
 
-    private static boolean checkValue(Class<?> clazz, ConfigType.Integer config) {
-        int configValue = config.getValue();
-        if (inDevMode() || configValue == 1) {
+    private static boolean checkValue(Class<?> clazz, ForgeConfigSpec.IntValue config) {
+        int configValue = config.get();
+        if (configValue == 1 || (inDevMode() && configValue != 0)) {
             return true;
         } else if (configValue == 2) {
             for (Mod mod : MODS) {

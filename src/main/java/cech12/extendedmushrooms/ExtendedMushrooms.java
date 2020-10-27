@@ -165,7 +165,7 @@ public class ExtendedMushrooms {
      */
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (Config.SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.getValue()) {
+        if (Config.SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.get()) {
             if (event.getEntity() instanceof SheepEntity) { //also mushroom sheep
                 SheepEntity sheep = ((SheepEntity) event.getEntity());
                 sheep.goalSelector.addGoal(5, new EatMushroomGoal(sheep));
