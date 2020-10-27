@@ -6,13 +6,13 @@
       "modid": "woodcutter"
     },
     {
-      "feature": "variantLadders",
+      "feature": "verticalPlanks",
       "type": "extendedmushrooms:mod_feature_enabled"
     }
   ],
   "ingredient": {
-    "tag": "forge:mushroom_stems/glowshroom"
+    "item": "extendedmushrooms:glowshroom_vertical_planks"
   },
-  "result": "extendedmushrooms:glowshroom_ladder",
-  "count": 4
+  "result": "extendedmushrooms:glowshroom_planks",
+  "count": 1
 }

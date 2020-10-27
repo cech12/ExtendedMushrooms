@@ -6,13 +6,13 @@
       "modid": "woodcutter"
     },
     {
-      "feature": "variantLadders",
+      "feature": "verticalPlanks",
       "type": "extendedmushrooms:mod_feature_enabled"
     }
   ],
   "ingredient": {
-    "tag": "forge:mushroom_stems/green"
+    "item": "extendedmushrooms:poisonous_mushroom_vertical_planks"
   },
-  "result": "extendedmushrooms:poisonous_mushroom_ladder",
-  "count": 4
+  "result": "extendedmushrooms:poisonous_mushroom_planks",
+  "count": 1
 }

@@ -7,8 +7,8 @@
     }
   ],
   "ingredient": {
-    "tag": "forge:mushroom_stems/green"
+    "item": "extendedmushrooms:glowshroom_stem"
   },
-  "result": "extendedmushrooms:poisonous_mushroom_trapdoor",
-  "count": 4
+  "result": "extendedmushrooms:glowshroom_stem_stripped",
+  "count": 1
 }

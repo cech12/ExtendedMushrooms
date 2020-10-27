@@ -7,8 +7,8 @@
     }
   ],
   "ingredient": {
-    "tag": "forge:mushroom_stems/glowshroom"
+    "item": "extendedmushrooms:glowshroom_planks"
   },
-  "result": "extendedmushrooms:glowshroom_stairs",
-  "count": 4
+  "result": "extendedmushrooms:glowshroom_fence_gate",
+  "count": 1
 }

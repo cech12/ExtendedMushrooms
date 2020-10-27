@@ -6,13 +6,13 @@
       "modid": "woodcutter"
     },
     {
-      "feature": "verticalSlabs",
+      "feature": "verticalPlanks",
       "type": "extendedmushrooms:mod_feature_enabled"
     }
   ],
   "ingredient": {
-    "tag": "forge:mushroom_stems/colorless"
+    "item": "extendedmushrooms:mushroom_vertical_planks"
   },
-  "result": "extendedmushrooms:mushroom_vertical_slab",
-  "count": 8
+  "result": "extendedmushrooms:mushroom_planks",
+  "count": 1
 }

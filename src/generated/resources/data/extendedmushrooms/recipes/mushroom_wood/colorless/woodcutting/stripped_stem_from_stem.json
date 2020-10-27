@@ -7,8 +7,8 @@
     }
   ],
   "ingredient": {
-    "tag": "extendedmushrooms:mushroom_planks"
+    "item": "minecraft:mushroom_stem"
   },
-  "result": "minecraft:stick",
-  "count": 2
+  "result": "extendedmushrooms:stripped_mushroom_stem",
+  "count": 1
 }

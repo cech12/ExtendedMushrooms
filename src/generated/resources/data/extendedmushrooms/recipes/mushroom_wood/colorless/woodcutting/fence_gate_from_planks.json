@@ -7,8 +7,8 @@
     }
   ],
   "ingredient": {
-    "tag": "forge:mushroom_stems/colorless"
+    "item": "extendedmushrooms:mushroom_planks"
   },
-  "result": "extendedmushrooms:mushroom_fence",
-  "count": 4
+  "result": "extendedmushrooms:mushroom_fence_gate",
+  "count": 1
 }

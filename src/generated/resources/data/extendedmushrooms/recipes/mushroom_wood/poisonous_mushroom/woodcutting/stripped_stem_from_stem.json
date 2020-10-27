@@ -7,8 +7,8 @@
     }
   ],
   "ingredient": {
-    "tag": "forge:mushroom_stems/glowshroom"
+    "item": "extendedmushrooms:poisonous_mushroom_stem"
   },
-  "result": "extendedmushrooms:glowshroom_pressure_plate",
-  "count": 4
+  "result": "extendedmushrooms:poisonous_mushroom_stem_stripped",
+  "count": 1
 }
