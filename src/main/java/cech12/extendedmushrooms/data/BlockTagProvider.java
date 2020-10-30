@@ -186,6 +186,7 @@ public class BlockTagProvider extends BlockTagsProvider {
         getOrCreateBuilder(BlockTags.WOOL).addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS);
 
         //generate tags for mod compatibility
+        getOrCreateBuilder(ModTags.OtherModBlocks.QUARK_LADDERS).addTag(ModTags.Blocks.MUSHROOM_LADDERS);
         getOrCreateBuilder(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES).addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
 
     }
