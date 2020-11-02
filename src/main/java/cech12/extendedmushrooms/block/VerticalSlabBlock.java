@@ -161,5 +161,17 @@ public class VerticalSlabBlock extends Block implements IWaterLoggable {
             }
             return null;
         }
+
     }
+
+    @Override
+    public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+        return 20;
+    }
+
+    @Override
+    public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+        return 5;
+    }
+
 }

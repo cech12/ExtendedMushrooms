@@ -17,41 +17,6 @@ public class ModVanillaCompat {
         registerFlammable(Blocks.RED_MUSHROOM_BLOCK, 30, 60);
         registerFlammable(Blocks.MUSHROOM_STEM, 5, 5);
 
-        registerFlammable(INFESTED_GRASS, 60, 100);
-
-        registerFlammable(MUSHROOM_FENCE, 5, 20);
-        registerFlammable(MUSHROOM_FENCE_GATE, 5, 20);
-        registerFlammable(MUSHROOM_PLANKS, 5, 20);
-        registerFlammable(MUSHROOM_SLAB, 5, 20);
-        registerFlammable(MUSHROOM_STAIRS, 5, 20);
-        registerFlammable(MUSHROOM_VERTICAL_PLANKS, 5, 20);
-        registerFlammable(MUSHROOM_VERTICAL_SLAB, 5, 20);
-        registerFlammable(STRIPPED_MUSHROOM_STEM, 5, 5);
-
-        registerFlammable(GLOWSHROOM_CAP, 30, 60);
-        registerFlammable(GLOWSHROOM_CAP_CARPET, 60, 20);
-        registerFlammable(GLOWSHROOM_STEM, 5, 5);
-        registerFlammable(GLOWSHROOM_STEM_STRIPPED, 5, 5);
-        registerFlammable(GLOWSHROOM_FENCE, 5, 20);
-        registerFlammable(GLOWSHROOM_FENCE_GATE, 5, 20);
-        registerFlammable(GLOWSHROOM_PLANKS, 5, 20);
-        registerFlammable(GLOWSHROOM_SLAB, 5, 20);
-        registerFlammable(GLOWSHROOM_STAIRS, 5, 20);
-        registerFlammable(GLOWSHROOM_VERTICAL_PLANKS, 5, 20);
-        registerFlammable(GLOWSHROOM_VERTICAL_SLAB, 5, 20);
-
-        registerFlammable(POISONOUS_MUSHROOM_CAP, 30, 60);
-        registerFlammable(POISONOUS_MUSHROOM_CAP_CARPET, 60, 20);
-        registerFlammable(POISONOUS_MUSHROOM_STEM, 5, 5);
-        registerFlammable(POISONOUS_MUSHROOM_STEM_STRIPPED, 5, 5);
-        registerFlammable(POISONOUS_MUSHROOM_FENCE, 5, 20);
-        registerFlammable(POISONOUS_MUSHROOM_FENCE_GATE, 5, 20);
-        registerFlammable(POISONOUS_MUSHROOM_PLANKS, 5, 20);
-        registerFlammable(POISONOUS_MUSHROOM_SLAB, 5, 20);
-        registerFlammable(POISONOUS_MUSHROOM_STAIRS, 5, 20);
-        registerFlammable(POISONOUS_MUSHROOM_VERTICAL_PLANKS, 5, 20);
-        registerFlammable(POISONOUS_MUSHROOM_VERTICAL_SLAB, 5, 20);
-
         registerCompostable(0.3F, INFESTED_GRASS);
 
         registerCompostable(0.15F, BROWN_MUSHROOM_BUTTON);
@@ -126,6 +91,5 @@ public class ModVanillaCompat {
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
         fireblock.setFireInfo(blockIn, encouragement, flammability);
     }
-
 
 }

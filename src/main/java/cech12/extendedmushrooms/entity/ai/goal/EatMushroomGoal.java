@@ -87,7 +87,7 @@ public class EatMushroomGoal extends Goal {
                     this.entityWorld.destroyBlock(blockPos, false);
                 }
                 this.eaterEntity.eatGrassBonus();
-                if (Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue()) {
+                if (Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get()) {
                     if (this.eaterEntity instanceof SheepEntity && mushroomType != null) {
                         if (this.eaterEntity instanceof MushroomSheepEntity) {
                             MushroomSheepEntity mushroomSheep = (MushroomSheepEntity) this.eaterEntity;

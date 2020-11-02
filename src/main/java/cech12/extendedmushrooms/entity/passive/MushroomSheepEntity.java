@@ -45,6 +45,7 @@ import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -136,6 +137,7 @@ public class MushroomSheepEntity extends SheepEntity {
     }
 
     @Nonnull
+    @Override
     public ResourceLocation getLootTable() {
         if (this.getSheared()) {
             return this.getType().getLootTable();
@@ -181,7 +183,7 @@ public class MushroomSheepEntity extends SheepEntity {
     public boolean processInteract(PlayerEntity player, @Nonnull Hand hand) {
         Item item = player.getHeldItem(hand).getItem();
         boolean superResult = super.processInteract(player, hand);
-        if (superResult && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getValue() && item.isIn(Tags.Items.MUSHROOMS)) {
+        if (superResult && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get() && item.isIn(Tags.Items.MUSHROOMS)) {
             //change mushroom type
             MushroomType type = MushroomType.byItemOrNull(item);
             if (type != null && type != this.getMushroomType()) {
@@ -208,7 +210,7 @@ public class MushroomSheepEntity extends SheepEntity {
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
+    public void writeAdditional(@Nonnull CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putBoolean("Sheared", this.getSheared());
         compound.putInt("Mushroom", this.getMushroomType().getId());
@@ -217,7 +219,8 @@ public class MushroomSheepEntity extends SheepEntity {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readAdditional(CompoundNBT compound) {
+    @Override
+    public void readAdditional(@Nonnull CompoundNBT compound) {
         super.readAdditional(compound);
         this.setSheared(compound.getBoolean("Sheared"));
         this.setMushroomType(MushroomType.byId(compound.getInt("Mushroom")));
@@ -251,13 +254,14 @@ public class MushroomSheepEntity extends SheepEntity {
      */
     @Deprecated
     @Override
-    public void setFleeceColor(DyeColor color) {
+    public void setFleeceColor(@Nonnull DyeColor color) {
         //disable setting the fleece color for mushroom sheeps
     }
 
     /**
      * returns true if a sheeps wool has been sheared
      */
+    @Override
     public boolean getSheared() {
         return this.dataManager.get(SHEARED);
     }
@@ -265,6 +269,7 @@ public class MushroomSheepEntity extends SheepEntity {
     /**
      * make a sheep sheared if set to true
      */
+    @Override
     public void setSheared(boolean sheared) {
         this.dataManager.set(SHEARED, sheared);
         super.setSheared(sheared); //set sheared value of super class to be compatible with other mods
@@ -274,12 +279,9 @@ public class MushroomSheepEntity extends SheepEntity {
      * Chooses a "vanilla" sheep color based on the provided random.
      */
     public static MushroomType getRandomMushroomType(Random random) {
-        int i = random.nextInt(100);
-        if (i < 3) {
-            return MushroomType.GLOWSHROOM;
-        } else if (i < 6) {
-            return MushroomType.POISONOUS_MUSHROOM;
-            //TODO more variants
+        if (random.nextInt(100) < 5) {
+            MushroomType[] specialTypes = MushroomType.getSpecialTypes();
+            return specialTypes[random.nextInt(specialTypes.length)];
         } else {
             if (random.nextBoolean()) {
                 return MushroomType.BROWN_MUSHROOM;
@@ -289,6 +291,7 @@ public class MushroomSheepEntity extends SheepEntity {
         }
     }
 
+    @Override
     public SheepEntity createChild(AgeableEntity ageable) {
         if (ageable instanceof MushroomSheepEntity) {
             // only create a mushroom sheep, when both parents are mushroom sheeps.
@@ -308,6 +311,7 @@ public class MushroomSheepEntity extends SheepEntity {
         return null;
     }
 
+    @Override
     @Nullable
     public ILivingEntityData onInitialSpawn(IWorld worldIn, @Nonnull DifficultyInstance difficultyIn, @Nonnull SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
         this.setMushroomType(getRandomMushroomType(worldIn.getRandom()));
@@ -327,8 +331,8 @@ public class MushroomSheepEntity extends SheepEntity {
 
     @Override
     @Nonnull
-    public List<ItemStack> onSheared(ItemStack item, IWorld world, BlockPos pos, int fortune) {
-        java.util.List<ItemStack> ret = new java.util.ArrayList<>();
+    public List<ItemStack> onSheared(@Nonnull ItemStack item, @Nonnull IWorld world, @Nonnull BlockPos pos, int fortune) {
+        List<ItemStack> ret = new ArrayList<>();
         if (!this.world.isRemote) {
             this.setSheared(true);
             int i = 1 + this.rand.nextInt(3);

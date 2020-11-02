@@ -22,7 +22,7 @@ public enum MushroomWoodType implements IStringSerializable {
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM,
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_PLANKS,
             ()->ExtendedMushroomsItems.GLOWSHROOM_BOAT,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getDefaultState())),
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getDefaultState(), null, null)),
     POISONOUS_MUSHROOM(2, "poisonous_mushroom",
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM,
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PLANKS,

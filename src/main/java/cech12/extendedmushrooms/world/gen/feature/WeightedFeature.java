@@ -15,9 +15,9 @@ import java.util.Random;
 public class WeightedFeature<FC extends IFeatureConfig> {
 
     public final ConfiguredFeature<FC, ?> configuredFeature;
-    public final float weight;
+    public final double weight;
 
-    public WeightedFeature(ConfiguredFeature<FC, ?> configuredFeature, float weight) {
+    public WeightedFeature(ConfiguredFeature<FC, ?> configuredFeature, double weight) {
         this.configuredFeature = configuredFeature;
         this.weight = weight;
     }
@@ -27,7 +27,7 @@ public class WeightedFeature<FC extends IFeatureConfig> {
     }
 
     public <T> Dynamic<T> serialize(DynamicOps<T> ops) {
-        return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("name"), ops.createString(this.configuredFeature.feature.getRegistryName().toString()), ops.createString("config"), this.configuredFeature.config.serialize(ops).getValue(), ops.createString("weight"), ops.createFloat(this.weight))));
+        return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(ops.createString("name"), ops.createString(this.configuredFeature.feature.getRegistryName().toString()), ops.createString("config"), this.configuredFeature.config.serialize(ops).getValue(), ops.createString("weight"), ops.createFloat((float) this.weight))));
     }
 
     public static <T> WeightedFeature<?> deserialize(Dynamic<T> ops) {

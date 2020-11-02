@@ -52,14 +52,14 @@ public class ModEntities {
      */
     public static void addEntitiesToBiomes() {
         //add Mushroom Sheep to Mushroom Biomes
-        if (Config.MUSHROOM_SHEEP_ENABLED.getValue()) {
+        if (Config.MUSHROOM_SHEEP_ENABLED.get()) {
             Biome[] biomes = {Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE};
             for (Biome biome : biomes) {
                 biome.getSpawns(EntityClassification.CREATURE).add(
                         new Biome.SpawnListEntry(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
-                                Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.getValue(),
-                                Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.getValue(),
-                                Config.MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.getValue()));
+                                Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.get(),
+                                Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.get(),
+                                Config.MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.get()));
             }
         }
     }

@@ -13,7 +13,7 @@ issueTrackerURL="https://github.com/cech12/ExtendedMushrooms/issues"
 [[dependencies.extendedmushrooms]]
     modId="forge"
     mandatory=true
-    versionRange="[31.1.18,)"
+    versionRange="[31.2.44,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.extendedmushrooms]]

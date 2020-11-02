@@ -4,7 +4,6 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import cech12.extendedmushrooms.block.BookshelfBlock;
-import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,6 +43,7 @@ import net.minecraft.world.storage.loot.conditions.TableBonus;
 import net.minecraft.world.storage.loot.functions.ExplosionDecay;
 import net.minecraft.world.storage.loot.functions.LimitCount;
 import net.minecraft.world.storage.loot.functions.SetCount;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -104,7 +104,7 @@ public class BlockLootProvider implements IDataProvider {
 
     private static LootTable.Builder dropOnlyWithShears(Block block) {
         LootEntry.Builder<?> entry = AlternativesLootEntry.builder(ItemLootEntry.builder(block)
-                .acceptCondition(MatchTool.builder(ItemPredicate.Builder.create().tag(ModTags.ForgeItems.SHEARS))));
+                .acceptCondition(MatchTool.builder(ItemPredicate.Builder.create().tag(Tags.Items.SHEARS))));
         return LootTable.builder().addLootPool(LootPool.builder().name("main").rolls(ConstantRange.of(1)).addEntry(entry));
     }
 

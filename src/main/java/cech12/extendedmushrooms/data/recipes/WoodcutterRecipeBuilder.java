@@ -31,7 +31,7 @@ public class WoodcutterRecipeBuilder {
 
         JsonObject object = new JsonObject();
         object.addProperty("type", ModLoadedCondition.Serializer.INSTANCE.getID().toString());
-        ModLoadedCondition.Serializer.INSTANCE.write(object, new ModLoadedCondition("corail_woodcutter"));
+        ModLoadedCondition.Serializer.INSTANCE.write(object, new ModLoadedCondition("woodcutter"));
         this.addCondition(object);
     }
 
@@ -94,7 +94,7 @@ public class WoodcutterRecipeBuilder {
         }
 
         public void serialize(JsonObject json) {
-            json.addProperty("type", "corail_woodcutter:woodcutting");
+            json.addProperty("type", "woodcutter:woodcutting");
 
             JsonArray conditionArray = new JsonArray();
             for (JsonObject jsonObject : this.conditions) {
@@ -110,7 +110,7 @@ public class WoodcutterRecipeBuilder {
 
         @Nonnull
         public IRecipeSerializer<?> getSerializer() {
-            //TODO
+            //maybe another serializer?
             return IRecipeSerializer.CRAFTING_SHAPELESS;
         }
 

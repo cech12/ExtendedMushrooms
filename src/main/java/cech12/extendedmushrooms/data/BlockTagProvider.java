@@ -115,7 +115,6 @@ public class BlockTagProvider extends BlockTagsProvider {
         //generate block categories
         getBuilder(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS).add(Blocks.MYCELIUM).add(Blocks.PODZOL);
         getBuilder(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL).add(Blocks.DIRT).add(Blocks.GRASS_BLOCK);
-        getBuilder(ModTags.Blocks.MUSHROOM_VALID_BLOCKS).add(Blocks.MYCELIUM).add(Blocks.PODZOL);
 
         //generate forge tags
         getBuilder(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN).add(Blocks.BROWN_MUSHROOM_BLOCK);
@@ -187,6 +186,7 @@ public class BlockTagProvider extends BlockTagsProvider {
         getBuilder(BlockTags.WOOL).add(ModTags.ForgeBlocks.MUSHROOM_CAPS);
 
         //generate tags for mod compatibility
+        getBuilder(ModTags.OtherModBlocks.QUARK_LADDERS).add(ModTags.Blocks.MUSHROOM_LADDERS);
         getBuilder(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES).add(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
 
     }

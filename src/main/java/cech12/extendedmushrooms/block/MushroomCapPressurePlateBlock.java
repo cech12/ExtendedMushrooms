@@ -39,14 +39,14 @@ public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
 
     @Override
     protected void playClickOnSound(IWorld world, @Nonnull BlockPos pos) {
-        if (Config.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.getValue()) {
+        if (Config.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
             world.playSound(null, pos, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.8F);
         }
     }
 
     @Override
     protected void playClickOffSound(IWorld world, @Nonnull BlockPos pos) {
-        if (Config.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.getValue()) {
+        if (Config.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
             world.playSound(null, pos, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.7F);
         }
     }

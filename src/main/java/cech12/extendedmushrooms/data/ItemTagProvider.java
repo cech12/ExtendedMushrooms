@@ -77,7 +77,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
 
         getBuilder(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
-        getBuilder(ModTags.ForgeItems.SHEARS).add(Items.SHEARS);
 
         //generate minecraft tags
         getBuilder(ItemTags.BOATS).add(ModTags.Items.MUSHROOM_BOATS);
@@ -101,10 +100,8 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.WOOL, ItemTags.WOOL);
 
         //generate tags for mod compatibility
+        copy(ModTags.OtherModBlocks.QUARK_LADDERS, ModTags.OtherModItems.QUARK_LADDERS);
         copy(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES, ModTags.OtherModItems.WOOLPLATES_WOOLPLATES);
-        getBuilder(ModTags.OtherModItems.CORAIL_WOODCUTTER_ALLOWED_ITEMS)
-                .add(ModTags.ForgeItems.MUSHROOM_STEMS)
-                .add(ModTags.Items.MUSHROOM_PLANKS);
 
     }
 

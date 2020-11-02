@@ -63,7 +63,6 @@ public class ModTags {
 
         public static final Tag<Block> MUSHROOM_GROWING_BLOCKS = tag("mushroom_growing_blocks");
         public static final Tag<Block> MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL = tag("mushroom_growing_blocks_lightlevel");
-        public static final Tag<Block> MUSHROOM_VALID_BLOCKS = tag("mushroom_valid_blocks");
 
         private static Tag<Block> tag(@Nonnull String name) {
             return new BlockTags.Wrapper(new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
@@ -72,6 +71,7 @@ public class ModTags {
 
     public static class OtherModBlocks {
 
+        public static final Tag<Block> QUARK_LADDERS = tag("quark", "ladders");
         public static final Tag<Block> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static Tag<Block> tag(@Nonnull String mod, @Nonnull String name) {
@@ -101,7 +101,6 @@ public class ModTags {
         public static final Tag<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
 
         public static final Tag<Item> BREAD = tag("bread");
-        public static final Tag<Item> SHEARS = tag("shears");
 
         private static Tag<Item> tag(@Nonnull String name) {
             return new ItemTags.Wrapper(new ResourceLocation("forge", name));
@@ -140,7 +139,7 @@ public class ModTags {
 
     public static class OtherModItems {
 
-        public static final Tag<Item> CORAIL_WOODCUTTER_ALLOWED_ITEMS = tag("corail_woodcutter", "allowed_items");
+        public static final Tag<Item> QUARK_LADDERS = tag("quark", "ladders");
         public static final Tag<Item> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static Tag<Item> tag(@Nonnull String mod, @Nonnull String name) {

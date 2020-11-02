@@ -78,36 +78,36 @@ public class ModFeatures {
         List<WeightedFeature<?>> megaMushrooms = new LinkedList<>();
 
         //add vanilla mega mushrooms to mushroom biomes
-        if (Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.getValue()) {
-            megaMushrooms.add(new WeightedFeature<>(MEGA_RED_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_RED_MUSHROOM), (float) Config.MEGA_RED_MUSHROOM_GENERATION_WEIGHT.getValue()));
-            megaMushrooms.add(new WeightedFeature<>(MEGA_BROWN_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_BROWN_MUSHROOM), (float) Config.MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.getValue()));
+        if (Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.get()) {
+            megaMushrooms.add(new WeightedFeature<>(MEGA_RED_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_RED_MUSHROOM), Config.MEGA_RED_MUSHROOM_GENERATION_WEIGHT.get()));
+            megaMushrooms.add(new WeightedFeature<>(MEGA_BROWN_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_BROWN_MUSHROOM), Config.MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.get()));
         }
 
-        if (Config.GLOWSHROOM_GENERATION_ENABLED.getValue()) {
-            mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.GLOWSHROOM, (float) Config.GLOWSHROOM_GENERATION_CHANCE_FACTOR.getValue(), (float) Config.GLOWSHROOM_GENERATION_COUNT_FACTOR.getValue()));
+        if (Config.GLOWSHROOM_GENERATION_ENABLED.get()) {
+            mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.GLOWSHROOM, Config.GLOWSHROOM_GENERATION_CHANCE_FACTOR.get(), Config.GLOWSHROOM_GENERATION_COUNT_FACTOR.get()));
         }
-        if (Config.BIG_GLOWSHROOM_GENERATION_ENABLED.getValue()) {
-            bigMushrooms.add(new WeightedFeature<>(BIG_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), (float) Config.BIG_GLOWSHROOM_GENERATION_WEIGHT.getValue()));
+        if (Config.BIG_GLOWSHROOM_GENERATION_ENABLED.get()) {
+            bigMushrooms.add(new WeightedFeature<>(BIG_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), Config.BIG_GLOWSHROOM_GENERATION_WEIGHT.get()));
         }
-        if (Config.MEGA_GLOWSHROOM_GENERATION_ENABLED.getValue()) {
-            megaMushrooms.add(new WeightedFeature<>(MEGA_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), (float) Config.MEGA_GLOWSHROOM_GENERATION_WEIGHT.getValue()));
+        if (Config.MEGA_GLOWSHROOM_GENERATION_ENABLED.get()) {
+            megaMushrooms.add(new WeightedFeature<>(MEGA_GLOWSHROOM.withConfiguration(Glowshroom.getConfig()), Config.MEGA_GLOWSHROOM_GENERATION_WEIGHT.get()));
         }
 
-        if (Config.POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
-            mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, (float) Config.POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR.getValue(), (float) Config.POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR.getValue()));
+        if (Config.POISONOUS_MUSHROOM_GENERATION_ENABLED.get()) {
+            mushrooms.add(new Mushroom(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, Config.POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR.get(), Config.POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR.get()));
         }
-        if (Config.BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
-            bigMushrooms.add(new WeightedFeature<>(BIG_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), (float) Config.BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getValue()));
+        if (Config.BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED.get()) {
+            bigMushrooms.add(new WeightedFeature<>(BIG_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), Config.BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.get()));
         }
-        if (Config.MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED.getValue()) {
-            megaMushrooms.add(new WeightedFeature<>(MEGA_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), (float) Config.MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getValue()));
+        if (Config.MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED.get()) {
+            megaMushrooms.add(new WeightedFeature<>(MEGA_POISONOUS_MUSHROOM.withConfiguration(PoisonousMushroom.getConfig()), Config.MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT.get()));
         }
 
         //add all collected mushrooms to biomes
         for (Mushroom mushroom : mushrooms) {
             //mushroom biomes
             addFeatureToMushroomBiomes(Feature.RANDOM_PATCH.withConfiguration(mushroom.config)
-                    .withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(1, 0.25F * mushroom.chanceFactor))));
+                    .withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(1, (float) (0.25D * mushroom.chanceFactor)))));
             //all other biomes with mushrooms
             addMushroomToAllBiomes(mushroom.config, mushroom.chanceFactor, mushroom.countFactor);
 
@@ -125,7 +125,7 @@ public class ModFeatures {
             Biome[] biomesWithBigMushrooms = {Biomes.DARK_FOREST, Biomes.DARK_FOREST_HILLS};
             ConfiguredFeature<?, ?> spawnBigMushroomsFeature = WEIGHT_RANDOM_SELECTOR
                     .withConfiguration(new WeightedRandomFeature(bigMushrooms))
-                    .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Config.BIG_MUSHROOM_GENERATION_CHANCE.getValue())));
+                    .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Config.BIG_MUSHROOM_GENERATION_CHANCE.get())));
             for (Biome biome : biomesWithBigMushrooms) {
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, spawnBigMushroomsFeature);
             }
@@ -139,7 +139,7 @@ public class ModFeatures {
                 if (biomeConfig.biomeExist()) {
                     biomeConfig.getBiome().addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, WEIGHT_RANDOM_SELECTOR
                             .withConfiguration(new WeightedRandomFeature(bigMushrooms))
-                            .withPlacement(biomeConfig.getPlacement(Config.BIG_MUSHROOM_GENERATION_CHANCE.getValue(), 0)));
+                            .withPlacement(biomeConfig.getPlacement(Config.BIG_MUSHROOM_GENERATION_CHANCE.get(), 0)));
                 }
             }
         }
@@ -148,7 +148,7 @@ public class ModFeatures {
         if (megaMushrooms.size() > 0) {
             addFeatureToMushroomBiomes(WEIGHT_RANDOM_SELECTOR
                     .withConfiguration(new WeightedRandomFeature(megaMushrooms))
-                    .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Config.MEGA_MUSHROOM_GENERATION_CHANCE.getValue()))));
+                    .withPlacement(Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Config.MEGA_MUSHROOM_GENERATION_CHANCE.get()))));
         }
 
     }
@@ -160,16 +160,16 @@ public class ModFeatures {
         }
     }
 
-    private static void addMushroomToAllBiomes(BlockClusterFeatureConfig mushroomConfig, float chanceFactor, float countFactor) {
+    private static void addMushroomToAllBiomes(BlockClusterFeatureConfig mushroomConfig, double chanceFactor, double countFactor) {
         //Taiga
         Biome[] taigaBiomes = {Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS, Biomes.TAIGA, Biomes.TAIGA_HILLS, Biomes.TAIGA_MOUNTAINS};
         for (Biome biome : taigaBiomes) {
-            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroomConfig).withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(Math.max(1, (int) countFactor), 0.25F * chanceFactor))));
+            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroomConfig).withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(Math.max(1, (int) countFactor), (float) (0.25D * chanceFactor)))));
         }
         //Giant Taiga
         Biome[] giantTaigaBiomes = {Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS};
         for (Biome biome : giantTaigaBiomes) {
-            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroomConfig).withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(Math.max(1, (int) (3 * countFactor)), 0.25F * chanceFactor))));
+            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(mushroomConfig).withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(Math.max(1, (int) (3 * countFactor)), (float) (0.25D * chanceFactor)))));
         }
         //normal biomes
         Biome[] biomes = {
@@ -192,11 +192,11 @@ public class ModFeatures {
     private static class Mushroom {
 
         Block block;
-        float chanceFactor;
-        float countFactor;
+        double chanceFactor;
+        double countFactor;
         BlockClusterFeatureConfig config;
 
-        private Mushroom(Block mushroomBlock, float chanceFactor, float countFactor) {
+        private Mushroom(Block mushroomBlock, double chanceFactor, double countFactor) {
             this.block = mushroomBlock;
             this.chanceFactor = chanceFactor;
             this.countFactor = countFactor;

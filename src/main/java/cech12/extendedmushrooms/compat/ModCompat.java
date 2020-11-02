@@ -2,13 +2,13 @@ package cech12.extendedmushrooms.compat;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.config.Config;
-import cech12.extendedmushrooms.config.ConfigType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.ConfiguredPlacement;
 import net.minecraft.world.gen.placement.HeightWithChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -35,8 +35,8 @@ public class ModCompat {
         return ExtendedMushrooms.DEVELOPMENT_MODE;
     }
 
-    private static boolean checkValue(Class<?> clazz, ConfigType.Integer config) {
-        int configValue = config.getValue();
+    private static boolean checkValue(Class<?> clazz, ForgeConfigSpec.IntValue config) {
+        int configValue = config.get();
         if (inDevMode() || configValue == 1) {
             return true;
         } else if (configValue == 2) {
@@ -150,11 +150,11 @@ public class ModCompat {
             return ForgeRegistries.BIOMES.getValue(location);
         }
 
-        public ConfiguredPlacement<?> getPlacement(float chanceFactor, float countFactor) {
+        public ConfiguredPlacement<?> getPlacement(double chanceFactor, double countFactor) {
             if (this.type == Type.CHANCE) {
                 return Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(Math.max(1, (int) (this.chance / chanceFactor))));
             } else if (this.type == Type.COUNT_CHANCE) {
-                return Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(Math.max(1, (int) (this.count * countFactor)), this.chance * chanceFactor));
+                return Placement.COUNT_CHANCE_HEIGHTMAP.configure(new HeightWithChanceConfig(Math.max(1, (int) (this.count * countFactor)), (float) (this.chance * chanceFactor)));
             } else { //Huge
                 return Placement.CHANCE_HEIGHTMAP.configure(new ChanceConfig(Math.max(1, (int) (this.chance * chanceFactor))));
             }

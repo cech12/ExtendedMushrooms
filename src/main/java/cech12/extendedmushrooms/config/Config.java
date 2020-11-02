@@ -2,207 +2,196 @@ package cech12.extendedmushrooms.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Config {
     public static ForgeConfigSpec COMMON;
 
-    public static List<IResettableConfigType> allValues = new ArrayList<>();
+    public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAPS_WITH_SHEARS_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED;
 
-    public static final ConfigType.Boolean MUSHROOM_CAPS_WITH_SHEARS_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Boolean MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED = new ConfigType.Boolean(true);
+    public static final ForgeConfigSpec.BooleanValue INFESTED_GRASS_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue INFESTED_FLOWER_ENABLED;
 
-    public static final ConfigType.Boolean INFESTED_GRASS_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Boolean INFESTED_FLOWER_ENABLED = new ConfigType.Boolean(true);
+    public static final ForgeConfigSpec.IntValue VARIANT_BOOKSHELF_ENABLED;
+    public static final ForgeConfigSpec.IntValue VARIANT_CHESTS_ENABLED;
+    public static final ForgeConfigSpec.IntValue VARIANT_TRAPPED_CHESTS_ENABLED;
+    public static final ForgeConfigSpec.IntValue VARIANT_LADDER_ENABLED;
+    public static final ForgeConfigSpec.IntValue VERTICAL_PLANKS_ENABLED;
+    public static final ForgeConfigSpec.IntValue VERTICAL_SLABS_ENABLED;
 
-    public static final ConfigType.Integer VARIANT_BOOKSHELF_ENABLED = new ConfigType.Integer(2);
-    public static final ConfigType.Integer VARIANT_CHESTS_ENABLED = new ConfigType.Integer(2);
-    public static final ConfigType.Integer VARIANT_TRAPPED_CHESTS_ENABLED = new ConfigType.Integer(2);
-    public static final ConfigType.Integer VARIANT_LADDER_ENABLED = new ConfigType.Integer(2);
-    public static final ConfigType.Integer VERTICAL_PLANKS_ENABLED = new ConfigType.Integer(2);
-    public static final ConfigType.Integer VERTICAL_SLABS_ENABLED = new ConfigType.Integer(2);
+    public static final ForgeConfigSpec.BooleanValue MUSHROOM_SHEEP_ENABLED;
+    public static final ForgeConfigSpec.IntValue MUSHROOM_SHEEP_SPAWN_WEIGHT;
+    public static final ForgeConfigSpec.IntValue MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT;
+    public static final ForgeConfigSpec.IntValue MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT;
+    public static final ForgeConfigSpec.BooleanValue SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED;
 
-    public static final ConfigType.Boolean MUSHROOM_SHEEP_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_WEIGHT = new ConfigType.Integer(8);
-    public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT = new ConfigType.Integer(4);
-    public static final ConfigType.Integer MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT = new ConfigType.Integer(8);
-    public static final ConfigType.Boolean SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Boolean SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED = new ConfigType.Boolean(true);
+    public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_BUTTON_PLAY_SOUND;
+    public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND;
 
-    public static final ConfigType.Boolean MUSHROOM_CAP_BUTTON_PLAY_SOUND = new ConfigType.Boolean(false);
-    public static final ConfigType.Boolean MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND = new ConfigType.Boolean(false);
+    public static final ForgeConfigSpec.IntValue BIG_MUSHROOM_GENERATION_CHANCE;
+    public static final ForgeConfigSpec.IntValue MEGA_MUSHROOM_GENERATION_CHANCE;
 
-    public static final ConfigType.Integer BIG_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
-    public static final ConfigType.Integer MEGA_MUSHROOM_GENERATION_CHANCE = new ConfigType.Integer(12);
+    public static final ForgeConfigSpec.BooleanValue VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT;
+    public static final ForgeConfigSpec.DoubleValue MEGA_RED_MUSHROOM_GENERATION_WEIGHT;
 
-    public static final ConfigType.Boolean VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT = new ConfigType.Double(1.0);
-    public static final ConfigType.Double MEGA_RED_MUSHROOM_GENERATION_WEIGHT = new ConfigType.Double(1.0);
+    public static final ForgeConfigSpec.BooleanValue GLOWSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue GLOWSHROOM_GENERATION_CHANCE_FACTOR;
+    public static final ForgeConfigSpec.DoubleValue GLOWSHROOM_GENERATION_COUNT_FACTOR;
+    public static final ForgeConfigSpec.BooleanValue BIG_GLOWSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue BIG_GLOWSHROOM_GENERATION_WEIGHT;
+    public static final ForgeConfigSpec.BooleanValue MEGA_GLOWSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue MEGA_GLOWSHROOM_GENERATION_WEIGHT;
 
-    public static final ConfigType.Boolean GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double GLOWSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.15);
-    public static final ConfigType.Double GLOWSHROOM_GENERATION_COUNT_FACTOR = new ConfigType.Double(0.15);
-    public static final ConfigType.Boolean BIG_GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double BIG_GLOWSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.15);
-    public static final ConfigType.Boolean MEGA_GLOWSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double MEGA_GLOWSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.15);
-
-    public static final ConfigType.Boolean POISONOUS_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR = new ConfigType.Double(0.25);
-    public static final ConfigType.Double POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR = new ConfigType.Double(0.25);
-    public static final ConfigType.Boolean BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.25);
-    public static final ConfigType.Boolean MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED = new ConfigType.Boolean(true);
-    public static final ConfigType.Double MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT = new ConfigType.Double(0.25);
+    public static final ForgeConfigSpec.BooleanValue POISONOUS_MUSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR;
+    public static final ForgeConfigSpec.DoubleValue POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR;
+    public static final ForgeConfigSpec.BooleanValue BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT;
+    public static final ForgeConfigSpec.BooleanValue MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT;
 
     static {
-        final ForgeConfigSpec.Builder common = new ForgeConfigSpec.Builder();
+        final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
-        common.comment("Various options that affect mod behaviour.").push("Behaviour Options");
+        builder.comment("Options that affect mod behavior.").push("behavior");
 
-        MUSHROOM_CAPS_WITH_SHEARS_ENABLED.configObj = common
+        MUSHROOM_CAPS_WITH_SHEARS_ENABLED = builder
                 .comment("Whether or not mushroom caps can be harvested with shears.")
-                .define("mushroomCapsWithShearsEnabled", MUSHROOM_CAPS_WITH_SHEARS_ENABLED.getDefaultValue());
-        MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED.configObj = common
+                .define("mushroomCapsWithShearsEnabled", true);
+        MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED = builder
                 .comment("Whether or not mushroom stems can be harvested without silk touch enchantment.")
-                .define("mushroomStemsWithoutSilkTouchEnabled", MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED.getDefaultValue());
+                .define("mushroomStemsWithoutSilkTouchEnabled", true);
 
-        common.pop();
+        builder.pop();
 
-        common.comment("Enable or disable certain blocks or entities.").push("Accessibility Config");
+        builder.comment("Enable or disable certain blocks or entities.").push("accessibility");
 
-        INFESTED_GRASS_ENABLED.configObj = common
+        INFESTED_GRASS_ENABLED = builder
                 .comment("Whether or not Infested Grass should be generated in mushroom biomes.")
-                .define("infestedGrassEnabled", INFESTED_GRASS_ENABLED.getDefaultValue());
-        INFESTED_FLOWER_ENABLED.configObj = common
+                .define("infestedGrassEnabled", true);
+        INFESTED_FLOWER_ENABLED = builder
                 .comment("Whether or not Infested Flower should be generated in mushroom biomes.")
-                .define("infestedFlowerEnabled", INFESTED_FLOWER_ENABLED.getDefaultValue());
+                .define("infestedFlowerEnabled", true);
 
-        VARIANT_BOOKSHELF_ENABLED.configObj = common
+        VARIANT_BOOKSHELF_ENABLED = builder
                 .comment("Whether or not variant bookshelves should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
-                .defineInRange("variantBookshelvesEnabled", VARIANT_BOOKSHELF_ENABLED.getDefaultValue(), 0, 2);
-        VARIANT_CHESTS_ENABLED.configObj = common
+                .defineInRange("variantBookshelvesEnabled", 2, 0, 2);
+        VARIANT_CHESTS_ENABLED = builder
                 .comment("Whether or not variant chests should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
-                .defineInRange("variantChestsEnabled", VARIANT_CHESTS_ENABLED.getDefaultValue(), 0, 2);
-        VARIANT_TRAPPED_CHESTS_ENABLED.configObj = common
+                .defineInRange("variantChestsEnabled",2, 0, 2);
+        VARIANT_TRAPPED_CHESTS_ENABLED = builder
                 .comment("Whether or not variant trapped chests should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
-                .defineInRange("variantTrappedChestsEnabled", VARIANT_TRAPPED_CHESTS_ENABLED.getDefaultValue(), 0, 2);
-        VARIANT_LADDER_ENABLED.configObj = common
+                .defineInRange("variantTrappedChestsEnabled", 2, 0, 2);
+        VARIANT_LADDER_ENABLED = builder
                 .comment("Whether or not variant ladders should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
-                .defineInRange("variantLaddersEnabled", VARIANT_LADDER_ENABLED.getDefaultValue(), 0, 2);
-        VERTICAL_PLANKS_ENABLED.configObj = common
+                .defineInRange("variantLaddersEnabled", 2, 0, 2);
+        VERTICAL_PLANKS_ENABLED = builder
                 .comment("Whether or not Vertical Planks should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
-                .defineInRange("verticalPlanksEnabled", VERTICAL_PLANKS_ENABLED.getDefaultValue(), 0, 2);
-        VERTICAL_SLABS_ENABLED.configObj = common
+                .defineInRange("verticalPlanksEnabled", 2, 0, 2);
+        VERTICAL_SLABS_ENABLED = builder
                 .comment("Whether or not Vertical Slabs should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
-                .defineInRange("verticalSlabsEnabled", VERTICAL_SLABS_ENABLED.getDefaultValue(), 0, 2);
+                .defineInRange("verticalSlabsEnabled", 2, 0, 2);
 
-        MUSHROOM_SHEEP_ENABLED.configObj = common
+        MUSHROOM_SHEEP_ENABLED = builder
                 .comment("Whether or not Mushroom Sheep entity should spawn in mushroom biomes.")
-                .define("mushroomSheepEnabled", MUSHROOM_SHEEP_ENABLED.getDefaultValue());
+                .define("mushroomSheepEnabled", true);
 
-        VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.configObj = common
+        VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED = builder
                 .comment("Whether or not vanilla mega mushrooms should be generated in mushroom biomes.")
-                .define("vanillaMegaMushroomGenerationEnabled", VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED.getDefaultValue());
+                .define("vanillaMegaMushroomGenerationEnabled", true);
 
-        GLOWSHROOM_GENERATION_ENABLED.configObj = common
+        GLOWSHROOM_GENERATION_ENABLED = builder
                 .comment("Whether or not glowshrooms should be generated.")
-                .define("glowshroomGenerationEnabled", GLOWSHROOM_GENERATION_ENABLED.getDefaultValue());
-        BIG_GLOWSHROOM_GENERATION_ENABLED.configObj = common
+                .define("glowshroomGenerationEnabled", true);
+        BIG_GLOWSHROOM_GENERATION_ENABLED = builder
                 .comment("Whether or not big glowshrooms should be generated.")
-                .define("bigGlowshroomGenerationEnabled", BIG_GLOWSHROOM_GENERATION_ENABLED.getDefaultValue());
-        MEGA_GLOWSHROOM_GENERATION_ENABLED.configObj = common
+                .define("bigGlowshroomGenerationEnabled", true);
+        MEGA_GLOWSHROOM_GENERATION_ENABLED = builder
                 .comment("Whether or not mega glowshrooms should be generated.")
-                .define("megaGlowshroomGenerationEnabled", MEGA_GLOWSHROOM_GENERATION_ENABLED.getDefaultValue());
+                .define("megaGlowshroomGenerationEnabled", true);
 
-        POISONOUS_MUSHROOM_GENERATION_ENABLED.configObj = common
+        POISONOUS_MUSHROOM_GENERATION_ENABLED = builder
                 .comment("Whether or not poisonous mushrooms should be generated.")
-                .define("poisonousMushroomGenerationEnabled", POISONOUS_MUSHROOM_GENERATION_ENABLED.getDefaultValue());
-        BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED.configObj = common
+                .define("poisonousMushroomGenerationEnabled", true);
+        BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED = builder
                 .comment("Whether or not big poisonous mushrooms should be generated.")
-                .define("bigPoisonousMushroomGenerationEnabled", BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED.getDefaultValue());
-        MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED.configObj = common
+                .define("bigPoisonousMushroomGenerationEnabled", true);
+        MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED = builder
                 .comment("Whether or not mega poisonous mushrooms should be generated.")
-                .define("megaPoisonousMushroomGenerationEnabled", MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED.getDefaultValue());
+                .define("megaPoisonousMushroomGenerationEnabled", true);
 
-        common.pop();
+        builder.pop();
 
-        common.comment("Various options that affect blocks and entities.").push("Balance Options");
+        builder.comment("Options that affect blocks and entities.").push("balancing");
 
-        MUSHROOM_SHEEP_SPAWN_WEIGHT.configObj = common
+        MUSHROOM_SHEEP_SPAWN_WEIGHT = builder
                 .comment("Spawn weight of Mushroom Sheep. (Example: Mooshroom in mushroom biome has weight of 8)")
-                .defineInRange("mushroomSheepSpawnWeight", MUSHROOM_SHEEP_SPAWN_WEIGHT.getDefaultValue(), 1, 100);
-        MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.configObj = common
+                .defineInRange("mushroomSheepSpawnWeight", 8, 1, 100);
+        MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT = builder
                 .comment("Minimal group size of spawning Mushroom Sheep herds.")
-                .defineInRange("mushroomSheepSpawnMinGroupCount", MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.getDefaultValue(), 1, 20);
-        MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.configObj = common
+                .defineInRange("mushroomSheepSpawnMinGroupCount", 4, 1, 20);
+        MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT = builder
                 .comment("Maximal group size of spawning Mushroom Sheep herds.")
-                .defineInRange("mushroomSheepSpawnMaxGroupCount", MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.getDefaultValue(), 1, 20);
+                .defineInRange("mushroomSheepSpawnMaxGroupCount", 8, 1, 20);
 
-        SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.configObj = common
+        SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED = builder
                 .comment("Whether or not sheeps and mushroom sheeps can eat mushrooms from ground.")
-                .define("sheepEatMushroomFromGroundEnabled", SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.getDefaultValue());
-        SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.configObj = common
+                .define("sheepEatMushroomFromGroundEnabled", true);
+        SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED = builder
                 .comment("Whether or not sheeps and mushroom sheeps change their fleece to the mushroom type when eating a mushroom from ground or while feeding.")
-                .define("sheepAbsorbMushroomTypeEnabled", SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.getDefaultValue());
+                .define("sheepAbsorbMushroomTypeEnabled", true);
 
-        MUSHROOM_CAP_BUTTON_PLAY_SOUND.configObj = common
+        MUSHROOM_CAP_BUTTON_PLAY_SOUND = builder
                 .comment("Whether or not mushroom cap buttons should play a sound when activated.")
-                .define("mushroomButtonPressurePlatePlaySound", MUSHROOM_CAP_BUTTON_PLAY_SOUND.getDefaultValue());
-        MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.configObj = common
+                .define("mushroomButtonPressurePlatePlaySound", false);
+        MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND = builder
                 .comment("Whether or not mushroom cap pressure plates should play a sound when stepped on or off.")
-                .define("mushroomCapPressurePlatePlaySound", MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.getDefaultValue());
+                .define("mushroomCapPressurePlatePlaySound", false);
 
-        BIG_MUSHROOM_GENERATION_CHANCE.configObj = common
+        BIG_MUSHROOM_GENERATION_CHANCE = builder
                 .comment("Generating chance of big mushrooms in biomes with big mushrooms. (1 - high chance; 100 - low chance)")
-                .defineInRange("bigMushroomGenerationChance", BIG_MUSHROOM_GENERATION_CHANCE.getDefaultValue(), 1, 100);
-        MEGA_MUSHROOM_GENERATION_CHANCE.configObj = common
+                .defineInRange("bigMushroomGenerationChance", 12, 1, 100);
+        MEGA_MUSHROOM_GENERATION_CHANCE = builder
                 .comment("Generating chance of mega mushrooms in mushroom biomes. (1 - high chance; 100 - low chance)")
-                .defineInRange("megaMushroomGenerationChance", MEGA_MUSHROOM_GENERATION_CHANCE.getDefaultValue(), 1, 100);
+                .defineInRange("megaMushroomGenerationChance", 12, 1, 100);
 
-
-        MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.configObj = common
+        MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT = builder
                 .comment("Weight of mega brown mushrooms generation.")
-                .defineInRange("megaBrownMushroomGenerationWeight", MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
-        MEGA_RED_MUSHROOM_GENERATION_WEIGHT.configObj = common
+                .defineInRange("megaBrownMushroomGenerationWeight", 1.0, 0.0, 10.0);
+        MEGA_RED_MUSHROOM_GENERATION_WEIGHT = builder
                 .comment("Weight of mega red mushrooms generation.")
-                .defineInRange("megaRedMushroomGenerationWeight", MEGA_RED_MUSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
+                .defineInRange("megaRedMushroomGenerationWeight", 1.0, 0.0, 10.0);
 
-        GLOWSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
+        GLOWSHROOM_GENERATION_CHANCE_FACTOR = builder
                 .comment("Chance factor of glowshrooms generation. (1.0: generation chance of vanilla brown mushroom)")
-                .defineInRange("glowshroomGenerationChanceFactor", GLOWSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
-        GLOWSHROOM_GENERATION_COUNT_FACTOR.configObj = common
+                .defineInRange("glowshroomGenerationChanceFactor", 0.15, 0.0, 10.0);
+        GLOWSHROOM_GENERATION_COUNT_FACTOR = builder
                 .comment("Count factor of glowshrooms generation. (1.0: generation count of vanilla brown mushroom)")
-                .defineInRange("glowshroomGenerationCountFactor", GLOWSHROOM_GENERATION_COUNT_FACTOR.getDefaultValue(), 0.0, 10.0);
-        BIG_GLOWSHROOM_GENERATION_WEIGHT.configObj = common
+                .defineInRange("glowshroomGenerationCountFactor", 0.15, 0.0, 10.0);
+        BIG_GLOWSHROOM_GENERATION_WEIGHT = builder
                 .comment("Weight of big glowshrooms generation.")
-                .defineInRange("bigGlowshroomGenerationWeight", BIG_GLOWSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
-        MEGA_GLOWSHROOM_GENERATION_WEIGHT.configObj = common
+                .defineInRange("bigGlowshroomGenerationWeight", 0.15, 0.0, 10.0);
+        MEGA_GLOWSHROOM_GENERATION_WEIGHT = builder
                 .comment("Weight of mega glowshrooms generation.")
-                .defineInRange("megaGlowshroomGenerationWeight", MEGA_GLOWSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
+                .defineInRange("megaGlowshroomGenerationWeight", 0.15, 0.0, 10.0);
 
-        POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR.configObj = common
+        POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR = builder
                 .comment("Chance factor of poisonous mushrooms generation. (1.0: generation chance of vanilla brown mushroom)")
-                .defineInRange("poisonousMushroomGenerationChanceFactor", POISONOUS_MUSHROOM_GENERATION_CHANCE_FACTOR.getDefaultValue(), 0.0, 10.0);
-        POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR.configObj = common
+                .defineInRange("poisonousMushroomGenerationChanceFactor", 0.25, 0.0, 10.0);
+        POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR = builder
                 .comment("Count factor of poisonous mushrooms generation. (1.0: generation count of vanilla brown mushroom)")
-                .defineInRange("poisonousMushroomGenerationCountFactor", POISONOUS_MUSHROOM_GENERATION_COUNT_FACTOR.getDefaultValue(), 0.0, 10.0);
-        BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.configObj = common
+                .defineInRange("poisonousMushroomGenerationCountFactor", 0.25, 0.0, 10.0);
+        BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT = builder
                 .comment("Weight of big poisonous mushrooms generation.")
-                .defineInRange("bigPoisonousMushroomGenerationWeight", BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
-        MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT.configObj = common
+                .defineInRange("bigPoisonousMushroomGenerationWeight", 0.25, 0.0, 10.0);
+        MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT = builder
                 .comment("Weight of mega poisonous mushrooms generation.")
-                .defineInRange("megaPoisonousMushroomGenerationWeight", MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT.getDefaultValue(), 0.0, 10.0);
+                .defineInRange("megaPoisonousMushroomGenerationWeight", 0.25, 0.0, 10.0);
 
-        common.pop();
+        builder.pop();
 
-        COMMON = common.build();
+        COMMON = builder.build();
     }
 
-    public static void resetConfig() {
-        for (IResettableConfigType par : allValues){
-            par.reset();
-        }
-    }
 }

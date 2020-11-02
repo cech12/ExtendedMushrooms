@@ -31,7 +31,7 @@ public class MushroomCapButtonBlock extends WoodButtonBlock {
     @Nonnull
     @Override
     protected SoundEvent getSoundEvent(boolean isPressed) {
-        if (Config.MUSHROOM_CAP_BUTTON_PLAY_SOUND.getValue()) {
+        if (Config.MUSHROOM_CAP_BUTTON_PLAY_SOUND.get()) {
             return super.getSoundEvent(isPressed);
         }
         return ModSounds.NO_SOUND;
