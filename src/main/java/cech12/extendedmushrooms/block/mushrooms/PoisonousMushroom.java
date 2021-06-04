@@ -18,13 +18,13 @@ public class PoisonousMushroom extends MegaMushroom {
     @Nonnull
     @Override
     protected ConfiguredFeature<?, ?> getBigMushroomFeature() {
-        return ModFeatures.BIG_POISONOUS_MUSHROOM.withConfiguration(getConfig());
+        return ModFeatures.Configured.BIG_POISONOUS_MUSHROOM;
     }
 
     @Nonnull
     @Override
     protected ConfiguredFeature<?, ?> getMegaMushroomFeature() {
-        return ModFeatures.MEGA_POISONOUS_MUSHROOM.withConfiguration(getConfig());
+        return ModFeatures.Configured.MEGA_POISONOUS_MUSHROOM;
     }
 
 }

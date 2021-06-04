@@ -18,13 +18,13 @@ public class Glowshroom extends MegaMushroom {
     @Nonnull
     @Override
     protected ConfiguredFeature<?, ?> getBigMushroomFeature() {
-        return ModFeatures.BIG_GLOWSHROOM.withConfiguration(getConfig());
+        return ModFeatures.Configured.BIG_GLOWSHROOM;
     }
 
     @Nonnull
     @Override
     protected ConfiguredFeature<?, ?> getMegaMushroomFeature() {
-        return ModFeatures.MEGA_GLOWSHROOM.withConfiguration(getConfig());
+        return ModFeatures.Configured.MEGA_GLOWSHROOM;
     }
 
 

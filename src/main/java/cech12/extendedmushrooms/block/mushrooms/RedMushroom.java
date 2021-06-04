@@ -2,6 +2,8 @@ package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.init.ModFeatures;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -19,14 +21,15 @@ public class RedMushroom extends MegaMushroom {
     @Nonnull
     @Override
     protected ConfiguredFeature<?, ?> getMegaMushroomFeature() {
-        return ModFeatures.MEGA_RED_MUSHROOM.withConfiguration(getConfig());
+        return ModFeatures.Configured.MEGA_RED_MUSHROOM;
     }
 
     @Nonnull
     @Override
     protected ConfiguredFeature<?, ?> getBigMushroomFeature() {
         //vanilla mushroom
-        return Feature.HUGE_RED_MUSHROOM.withConfiguration(getConfig());
+        return WorldGenRegistries.CONFIGURED_FEATURE.getOptional(new ResourceLocation("huge_red_mushroom"))
+                .orElseGet(() -> Feature.HUGE_RED_MUSHROOM.withConfiguration(getConfig()));
     }
 
 }
