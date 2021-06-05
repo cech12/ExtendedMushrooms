@@ -8,6 +8,9 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAPS_WITH_SHEARS_ENABLED;
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED;
 
+    public static final ForgeConfigSpec.BooleanValue INFESTED_GRASS_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue INFESTED_FLOWER_ENABLED;
+
     public static final ForgeConfigSpec.IntValue VARIANT_BOOKSHELF_ENABLED;
     public static final ForgeConfigSpec.IntValue VARIANT_CHESTS_ENABLED;
     public static final ForgeConfigSpec.IntValue VARIANT_TRAPPED_CHESTS_ENABLED;
@@ -25,16 +28,15 @@ public class Config {
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_BUTTON_PLAY_SOUND;
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND;
 
-    public static final ForgeConfigSpec.DoubleValue MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT;
-    public static final ForgeConfigSpec.DoubleValue MEGA_RED_MUSHROOM_GENERATION_WEIGHT;
+    public static final ForgeConfigSpec.BooleanValue VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED;
 
-    public static final ForgeConfigSpec.DoubleValue GLOWSHROOM_GENERATION_FACTOR;
-    public static final ForgeConfigSpec.DoubleValue BIG_GLOWSHROOM_GENERATION_WEIGHT;
-    public static final ForgeConfigSpec.DoubleValue MEGA_GLOWSHROOM_GENERATION_WEIGHT;
+    public static final ForgeConfigSpec.BooleanValue GLOWSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue BIG_GLOWSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue MEGA_GLOWSHROOM_GENERATION_ENABLED;
 
-    public static final ForgeConfigSpec.DoubleValue POISONOUS_MUSHROOM_GENERATION_FACTOR;
-    public static final ForgeConfigSpec.DoubleValue BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT;
-    public static final ForgeConfigSpec.DoubleValue MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT;
+    public static final ForgeConfigSpec.BooleanValue POISONOUS_MUSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED;
+    public static final ForgeConfigSpec.BooleanValue MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED;
 
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -51,6 +53,13 @@ public class Config {
         builder.pop();
 
         builder.comment("Enable or disable certain blocks or entities.").push("accessibility");
+
+        INFESTED_GRASS_ENABLED = builder
+                .comment("Whether or not Infested Grass should be generated in mushroom biomes.")
+                .define("infestedGrassEnabled", true);
+        INFESTED_FLOWER_ENABLED = builder
+                .comment("Whether or not Infested Flower should be generated in mushroom biomes.")
+                .define("infestedFlowerEnabled", true);
 
         VARIANT_BOOKSHELF_ENABLED = builder
                 .comment("Whether or not variant bookshelves should be enabled. (0 - disabled, 1 - enabled, 2 - enabled when mod with this feature is installed)")
@@ -74,6 +83,30 @@ public class Config {
         MUSHROOM_SHEEP_ENABLED = builder
                 .comment("Whether or not Mushroom Sheep entity should spawn in mushroom biomes.")
                 .define("mushroomSheepEnabled", true);
+
+        VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED = builder
+                .comment("Whether or not vanilla mega mushrooms should be generated in mushroom biomes.")
+                .define("vanillaMegaMushroomGenerationEnabled", true);
+
+        GLOWSHROOM_GENERATION_ENABLED = builder
+                .comment("Whether or not glowshrooms should be generated.")
+                .define("glowshroomGenerationEnabled", true);
+        BIG_GLOWSHROOM_GENERATION_ENABLED = builder
+                .comment("Whether or not big glowshrooms should be generated.")
+                .define("bigGlowshroomGenerationEnabled", true);
+        MEGA_GLOWSHROOM_GENERATION_ENABLED = builder
+                .comment("Whether or not mega glowshrooms should be generated.")
+                .define("megaGlowshroomGenerationEnabled", true);
+
+        POISONOUS_MUSHROOM_GENERATION_ENABLED = builder
+                .comment("Whether or not poisonous mushrooms should be generated.")
+                .define("poisonousMushroomGenerationEnabled", true);
+        BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED = builder
+                .comment("Whether or not big poisonous mushrooms should be generated.")
+                .define("bigPoisonousMushroomGenerationEnabled", true);
+        MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED = builder
+                .comment("Whether or not mega poisonous mushrooms should be generated.")
+                .define("megaPoisonousMushroomGenerationEnabled", true);
 
         builder.pop();
 
@@ -102,33 +135,6 @@ public class Config {
         MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND = builder
                 .comment("Whether or not mushroom cap pressure plates should play a sound when stepped on or off.")
                 .define("mushroomCapPressurePlatePlaySound", false);
-
-        MEGA_BROWN_MUSHROOM_GENERATION_WEIGHT = builder
-                .comment("Weight of mega brown mushrooms generation.")
-                .defineInRange("megaBrownMushroomGenerationWeight", 1.0, 0.0, 10.0);
-        MEGA_RED_MUSHROOM_GENERATION_WEIGHT = builder
-                .comment("Weight of mega red mushrooms generation.")
-                .defineInRange("megaRedMushroomGenerationWeight", 1.0, 0.0, 10.0);
-
-        GLOWSHROOM_GENERATION_FACTOR = builder
-                .comment("Factor of glowshrooms generation. (1.0: generation chance of vanilla brown mushroom)")
-                .defineInRange("glowshroomGenerationChanceFactor", 0.15, 0.0, 10.0);
-        BIG_GLOWSHROOM_GENERATION_WEIGHT = builder
-                .comment("Weight of big glowshrooms generation.")
-                .defineInRange("bigGlowshroomGenerationWeight", 0.15, 0.0, 10.0);
-        MEGA_GLOWSHROOM_GENERATION_WEIGHT = builder
-                .comment("Weight of mega glowshrooms generation.")
-                .defineInRange("megaGlowshroomGenerationWeight", 0.15, 0.0, 10.0);
-
-        POISONOUS_MUSHROOM_GENERATION_FACTOR = builder
-                .comment("Factor of poisonous mushrooms generation. (1.0: generation chance of vanilla brown mushroom)")
-                .defineInRange("poisonousMushroomGenerationChanceFactor", 0.25, 0.0, 10.0);
-        BIG_POISONOUS_MUSHROOM_GENERATION_WEIGHT = builder
-                .comment("Weight of big poisonous mushrooms generation.")
-                .defineInRange("bigPoisonousMushroomGenerationWeight", 0.25, 0.0, 10.0);
-        MEGA_POISONOUS_MUSHROOM_GENERATION_WEIGHT = builder
-                .comment("Weight of mega poisonous mushrooms generation.")
-                .defineInRange("megaPoisonousMushroomGenerationWeight", 0.25, 0.0, 10.0);
 
         builder.pop();
 
