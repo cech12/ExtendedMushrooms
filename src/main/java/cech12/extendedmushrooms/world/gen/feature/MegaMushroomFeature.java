@@ -54,7 +54,7 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
                 for (int z = 0; z < 2; z++) {
                     mutableBlockPos.setPos(blockPos).move(x, y, z);
                     if (world.getBlockState(mutableBlockPos).canBeReplacedByLogs(world, mutableBlockPos)) {
-                        this.setBlockState(world, mutableBlockPos, config.field_227273_b_.getBlockState(random, blockPos));
+                        this.setBlockState(world, mutableBlockPos, config.stemProvider.getBlockState(random, blockPos));
                     }
                 }
             }

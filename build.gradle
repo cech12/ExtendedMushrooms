@@ -92,7 +92,7 @@ sourceSets.main.resources {
 
 repositories {
     maven {
-        url = 'https://dist.creeper.host/Sponge/maven'
+        url = 'https://repo.spongepowered.org/maven'
     }
 }
 
@@ -102,7 +102,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${project.forge_version}"
 
-    compile 'org.spongepowered:mixin:0.8-SNAPSHOT'
+    implementation 'org.spongepowered:mixin:0.8.2'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

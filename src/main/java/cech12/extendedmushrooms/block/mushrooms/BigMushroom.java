@@ -31,7 +31,7 @@ public abstract class BigMushroom {
     public boolean growMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
         ConfiguredFeature<?, ?> feature = this.getBigMushroomFeature();
         world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 4);
-        if (feature.func_242765_a(world, chunkGenerator, random, blockPos)) { //place
+        if (feature.generate(world, chunkGenerator, random, blockPos)) {
             return true;
         } else {
             world.setBlockState(blockPos, blockState, 4);

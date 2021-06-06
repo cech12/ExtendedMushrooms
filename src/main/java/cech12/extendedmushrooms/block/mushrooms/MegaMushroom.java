@@ -39,7 +39,7 @@ public abstract class MegaMushroom extends BigMushroom {
         world.setBlockState(blockPos.add(x + 1, 0, z), lvt_9_1_, 4);
         world.setBlockState(blockPos.add(x, 0, z + 1), lvt_9_1_, 4);
         world.setBlockState(blockPos.add(x + 1, 0, z + 1), lvt_9_1_, 4);
-        if (feature.func_242765_a(world, chunkGenerator, random, blockPos.add(x, 0, z))) { //place
+        if (feature.generate(world, chunkGenerator, random, blockPos.add(x, 0, z))) {
             return true;
         } else {
             world.setBlockState(blockPos.add(x, 0, z), blockState, 4);

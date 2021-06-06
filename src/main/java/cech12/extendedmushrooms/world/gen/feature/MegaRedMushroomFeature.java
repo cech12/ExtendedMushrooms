@@ -53,15 +53,15 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
 
     private static class Cap {
 
-        private BlockPos center;
-        private int size;
-        private float radius;
+        private final BlockPos center;
+        private final int size;
+        private final float radius;
 
-        private float a_q;
-        private float b_q;
-        private float c_q;
+        private final float a_q;
+        private final float b_q;
+        private final float c_q;
 
-        private List<CapPosition> capPositions = new ArrayList<>();
+        private final List<CapPosition> capPositions = new ArrayList<>();
 
         Cap (BlockPos center, int size, int radius) {
             this.center = center;

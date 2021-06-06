@@ -26,7 +26,7 @@ public abstract class MixinAbstractBigMushroomFeature {
             if (MushroomUtils.isValidMushroomPosition(world, pos)) {
                 for(int j = 0; j <= p_227209_3_; ++j) {
                     //int k = this.func_225563_a_(-1, -1, p_227209_5_.field_227274_c_, j);
-                    int k = j <= 3 ? 0 : p_227209_5_.field_227274_c_;
+                    int k = j <= 3 ? 0 : p_227209_5_.foliageRadius;
 
                     for(int l = -k; l <= k; ++l) {
                         for(int i1 = -k; i1 <= k; ++i1) {
