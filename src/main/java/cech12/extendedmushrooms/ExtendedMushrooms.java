@@ -67,7 +67,6 @@ public class ExtendedMushrooms {
 
     private void setup(final FMLCommonSetupEvent event) {
         ModVanillaCompat.setup();
-        ModEntities.registerAttributes();
 
         //add potion recipes
         //BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM, Potions.NIGHT_VISION)); //overpowered
@@ -91,8 +90,7 @@ public class ExtendedMushrooms {
     /**
      * Add some loot modifiers to be compatible with other mods and change some loot behaviour of vanilla Minecraft.
      */
-    public void onRegisterModifierSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event)
-    {
+    public void onRegisterModifierSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
         event.getRegistry().register(
                 new MushroomCapLootModifier.Serializer().setRegistryName(MOD_ID, "mushroom_cap_harvest")
         );

@@ -10,13 +10,14 @@ import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -34,14 +35,14 @@ public class ModEntities {
         registerEntity("mushroom_boat", MUSHROOM_BOAT);
     }
 
-    private static <T extends Entity> EntityType<T> registerEntity(String key, EntityType<T> entityType) {
+    private static <T extends Entity> void registerEntity(String key, EntityType<T> entityType) {
         entityType.setRegistryName(new ResourceLocation(ExtendedMushrooms.MOD_ID, key));
         ForgeRegistries.ENTITIES.register(entityType);
-        return entityType;
     }
 
-    public static void registerAttributes() {
-        GlobalEntityTypeAttributes.put((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, MushroomSheepEntity.registerAttributes().create());
+    @SubscribeEvent
+    public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, SheepEntity.registerAttributes().create());
     }
 
     /**
