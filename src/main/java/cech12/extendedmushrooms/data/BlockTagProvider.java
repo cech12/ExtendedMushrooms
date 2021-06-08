@@ -157,14 +157,14 @@ public class BlockTagProvider extends BlockTagsProvider {
         getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
 
-        //generate standard minecraft tags
+        //generate standard forge tags
         getOrCreateBuilder(Tags.Blocks.CHESTS).addTag(ModTags.Blocks.MUSHROOM_CHESTS);
         getOrCreateBuilder(Tags.Blocks.CHESTS_TRAPPED).addTag(ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED);
         getOrCreateBuilder(Tags.Blocks.CHESTS_WOODEN).addTags(ModTags.Blocks.MUSHROOM_CHESTS, ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED);
         getOrCreateBuilder(Tags.Blocks.FENCE_GATES_WOODEN).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
         getOrCreateBuilder(Tags.Blocks.FENCE_GATES).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
 
-        //generate standard forge tags
+        //generate minecraft tags
         getOrCreateBuilder(BlockTags.BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
         getOrCreateBuilder(BlockTags.CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
         getOrCreateBuilder(BlockTags.CLIMBABLE).addTag(ModTags.Blocks.MUSHROOM_LADDERS);
