@@ -30,8 +30,6 @@ import javax.annotation.Nonnull;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-import static cech12.extendedmushrooms.init.ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED;
-
 public class BlockTagProvider extends BlockTagsProvider {
 
     public BlockTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
@@ -66,7 +64,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .filter(block -> block instanceof VariantChestBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
-        getOrCreateBuilder(MUSHROOM_CHESTS_TRAPPED).add(registry.stream().filter(extendedMushrooms)
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof VariantTrappedChestBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
@@ -159,15 +157,17 @@ public class BlockTagProvider extends BlockTagsProvider {
         getOrCreateBuilder(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
 
+        //generate standard minecraft tags
         getOrCreateBuilder(Tags.Blocks.CHESTS).addTag(ModTags.Blocks.MUSHROOM_CHESTS);
-        getOrCreateBuilder(Tags.Blocks.CHESTS_TRAPPED).addTag(MUSHROOM_CHESTS_TRAPPED);
-        getOrCreateBuilder(Tags.Blocks.CHESTS_WOODEN).addTags(ModTags.Blocks.MUSHROOM_CHESTS, MUSHROOM_CHESTS_TRAPPED);
+        getOrCreateBuilder(Tags.Blocks.CHESTS_TRAPPED).addTag(ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED);
+        getOrCreateBuilder(Tags.Blocks.CHESTS_WOODEN).addTags(ModTags.Blocks.MUSHROOM_CHESTS, ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED);
         getOrCreateBuilder(Tags.Blocks.FENCE_GATES_WOODEN).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
         getOrCreateBuilder(Tags.Blocks.FENCE_GATES).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
 
-        //generate minecraft tags
+        //generate standard forge tags
         getOrCreateBuilder(BlockTags.BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
         getOrCreateBuilder(BlockTags.CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
+        getOrCreateBuilder(BlockTags.CLIMBABLE).addTag(ModTags.Blocks.MUSHROOM_LADDERS);
         getOrCreateBuilder(BlockTags.DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
         getOrCreateBuilder(BlockTags.FENCES).addTag(ModTags.Blocks.MUSHROOM_FENCES);
         getOrCreateBuilder(BlockTags.LOGS).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
