@@ -47,6 +47,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOD);
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOL);
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES, ModTags.Items.MUSHROOM_PRESSURE_PLATES);
+        copy(ModTags.Blocks.MUSHROOM_SIGNS, ModTags.Items.MUSHROOM_SIGNS);
         copy(ModTags.Blocks.MUSHROOM_SLABS, ModTags.Items.MUSHROOM_SLABS);
         copy(ModTags.Blocks.MUSHROOM_STAIRS, ModTags.Items.MUSHROOM_STAIRS);
         copy(ModTags.Blocks.MUSHROOM_TRAPDOORS, ModTags.Items.MUSHROOM_TRAPDOORS);
@@ -87,6 +88,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.FENCES, ItemTags.FENCES);
         copy(BlockTags.LOGS, ItemTags.LOGS);
         copy(BlockTags.PLANKS, ItemTags.PLANKS);
+        copy(BlockTags.SIGNS, ItemTags.SIGNS);
         copy(BlockTags.SLABS, ItemTags.SLABS);
         copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
         copy(BlockTags.STAIRS, ItemTags.STAIRS);

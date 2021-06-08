@@ -7,8 +7,8 @@
     }
   ],
   "ingredient": {
-    "tag": "extendedmushrooms:mushroom_planks"
+    "item": "extendedmushrooms:mushroom_planks"
   },
-  "result": "minecraft:oak_sign",
+  "result": "extendedmushrooms:mushroom_sign",
   "count": 1
 }

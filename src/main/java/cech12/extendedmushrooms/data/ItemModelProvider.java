@@ -10,6 +10,7 @@ import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.block.LadderBlock;
+import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -75,6 +76,9 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
                             .transform(ModelBuilder.Perspective.THIRDPERSON_RIGHT).rotation(75, 315, 0).translation(0, 2.5F, 0).scale(0.375F, 0.375F, 0.375F).end()
                             .transform(ModelBuilder.Perspective.FIRSTPERSON_RIGHT).rotation(0, 315, 0).translation(0, 0, 0).scale(0.4F, 0.4F, 0.4F).end()
                             .end();
+                } else if (block instanceof StandingSignBlock) {
+                    //SignItem returns standing sign block in getBlock
+                    singleTexture(name, ITEM_GENERATED, "layer0", getItemResourceLocation(name));
                 } else if (block instanceof DoorBlock) {
                     //block items with item texture
                     singleTexture(name, ITEM_GENERATED, "layer0", getItemResourceLocation(name));

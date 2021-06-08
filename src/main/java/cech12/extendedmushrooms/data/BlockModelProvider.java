@@ -23,7 +23,9 @@ import net.minecraft.block.HugeMushroomBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.TrapDoorBlock;
+import net.minecraft.block.WallSignBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -205,6 +207,11 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                         .texture("bottom", texture)
                         .texture("top", texture)
                         .texture("side", texture);
+            } else if (block instanceof StandingSignBlock || block instanceof WallSignBlock) {
+                //only one model for both signs
+                if (block instanceof StandingSignBlock) {
+                    getBuilder(name).texture("particle", getBlockResourceLocation(name, "_sign", "_planks"));
+                }
             } else if (block instanceof HugeMushroomBlock) { // Stems & Stripped Stems. MushroomCapBlock is checked before
                 hugeMushroomBlock(name, getBlockResourceLocation(name));
             } else if (block instanceof TrapDoorBlock) {

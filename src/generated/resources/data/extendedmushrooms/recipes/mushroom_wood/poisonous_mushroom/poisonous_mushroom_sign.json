@@ -7,14 +7,14 @@
   ],
   "key": {
     "#": {
-      "tag": "extendedmushrooms:mushroom_planks"
+      "item": "extendedmushrooms:poisonous_mushroom_planks"
     },
     "|": {
       "tag": "forge:rods/wooden"
     }
   },
   "result": {
-    "item": "minecraft:oak_sign",
+    "item": "extendedmushrooms:poisonous_mushroom_sign",
     "count": 3
   }
 }

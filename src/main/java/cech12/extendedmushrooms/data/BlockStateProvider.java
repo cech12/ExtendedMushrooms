@@ -15,7 +15,9 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
+import net.minecraft.block.StandingSignBlock;
 import net.minecraft.block.TrapDoorBlock;
+import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.WoodButtonBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.BooleanProperty;
@@ -31,12 +33,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 public class BlockStateProvider extends net.minecraftforge.client.model.generators.BlockStateProvider {
@@ -158,6 +154,10 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile plate_down = models().getExistingFile(getBlockResourceLocation(name + "_down"));
                 getVariantBuilder(block).forAllStatesExcept(state ->
                         ConfiguredModel.builder().modelFile((state.get(BlockStateProperties.POWERED)) ? plate_down : plate).build());
+            } else if (block instanceof StandingSignBlock) {
+                simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
+            } else if (block instanceof WallSignBlock) {
+                simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name.replace("_wall", ""))));
             } else if (block instanceof SlabBlock) {
                 ModelFile bottom = models().getExistingFile(getBlockResourceLocation(name));
                 ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));

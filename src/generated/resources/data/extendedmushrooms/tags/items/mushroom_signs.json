@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "extendedmushrooms:glowshroom_sign",
+    "extendedmushrooms:mushroom_sign",
+    "extendedmushrooms:poisonous_mushroom_sign"
+  ]
+}

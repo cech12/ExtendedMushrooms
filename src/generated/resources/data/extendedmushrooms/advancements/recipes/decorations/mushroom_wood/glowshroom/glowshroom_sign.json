@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "extendedmushrooms:mushroom_wood/oak_sign"
+      "extendedmushrooms:mushroom_wood/glowshroom/glowshroom_sign"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "extendedmushrooms:mushroom_planks"
+            "item": "extendedmushrooms:glowshroom_planks"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "extendedmushrooms:mushroom_wood/oak_sign"
+        "recipe": "extendedmushrooms:mushroom_wood/glowshroom/glowshroom_sign"
       }
     }
   },

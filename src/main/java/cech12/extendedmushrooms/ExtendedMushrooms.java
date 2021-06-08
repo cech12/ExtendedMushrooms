@@ -35,6 +35,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -57,12 +58,16 @@ public class ExtendedMushrooms {
     public ExtendedMushrooms() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON, "extendedmushrooms-common.toml");
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(GlobalLootModifierSerializer.class, this::onRegisterModifierSerializers);
+        final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        eventBus.addListener(this::setup);
+        eventBus.addListener(this::clientSetup);
+        eventBus.addGenericListener(GlobalLootModifierSerializer.class, this::onRegisterModifierSerializers);
 
         // Register an event with the mod specific event bus for mod own recipes.
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
+        eventBus.addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
+
+        ModBlocks.registerBlocks(eventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -76,7 +81,7 @@ public class ExtendedMushrooms {
     private void clientSetup(final FMLClientSetupEvent event) {
         ModBlocks.setupRenderLayers();
         ModEntities.setupRenderers();
-        ModTileEntities.setupRenderers();
+        ModTileEntities.setupRenderers(event);
     }
 
     private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {

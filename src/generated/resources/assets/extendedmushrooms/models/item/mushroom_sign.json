@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extendedmushrooms:item/mushroom_sign"
+  }
+}

@@ -8,11 +8,9 @@ import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomCap;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
 import cech12.extendedmushrooms.compat.ModCompat;
-import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.item.MushroomType;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.SoundType;
@@ -25,20 +23,14 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.Effects;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
-import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.Features;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
@@ -51,6 +43,20 @@ import static cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks.*;
 public final class ModBlocks {
 
     public static Map<Block, Block> BLOCK_STRIPPING_MAP = new HashMap<>();
+
+    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ExtendedMushrooms.MOD_ID);
+
+    //TODO sign textures only work when the signs are registered like this. Change the other registrations to the same structure
+    public static final RegistryObject<MushroomStandingSignBlock> MUSHROOM_STANDING_SIGN = BLOCKS.register("mushroom_sign",() -> new MushroomStandingSignBlock(Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(1.0F).sound(SoundType.WOOD), MushroomWoodType.MUSHROOM.getWoodType()));
+    public static final RegistryObject<MushroomWallSignBlock> MUSHROOM_WALL_SIGN = BLOCKS.register("mushroom_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(1.0F).sound(SoundType.WOOD), MushroomWoodType.MUSHROOM.getWoodType()));
+    public static final RegistryObject<MushroomStandingSignBlock> GLOWSHROOM_STANDING_SIGN = BLOCKS.register("glowshroom_sign", () -> new MushroomStandingSignBlock(Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(1.0F).sound(SoundType.WOOD).setLightLevel((state) -> 8), MushroomWoodType.GLOWSHROOM.getWoodType()));
+    public static final RegistryObject<MushroomWallSignBlock> GLOWSHROOM_WALL_SIGN = BLOCKS.register("glowshroom_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(1.0F).sound(SoundType.WOOD).setLightLevel((state) -> 8), MushroomWoodType.GLOWSHROOM.getWoodType()));
+    public static final RegistryObject<MushroomStandingSignBlock> POISONOUS_MUSHROOM_STANDING_SIGN = BLOCKS.register("poisonous_mushroom_sign", () -> new MushroomStandingSignBlock(Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(1.0F).sound(SoundType.WOOD), MushroomWoodType.POISONOUS_MUSHROOM.getWoodType()));
+    public static final RegistryObject<MushroomWallSignBlock> POISONOUS_MUSHROOM_WALL_SIGN = BLOCKS.register("poisonous_mushroom_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(1.0F).sound(SoundType.WOOD), MushroomWoodType.POISONOUS_MUSHROOM.getWoodType()));
+
+    public static void registerBlocks(IEventBus bus) {
+        BLOCKS.register(bus);
+    }
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {

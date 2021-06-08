@@ -1,13 +1,17 @@
 package cech12.extendedmushrooms.item;
 
+import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.WoodType;
 import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Supplier;
@@ -36,6 +40,7 @@ public enum MushroomWoodType implements IStringSerializable {
     private final Supplier<Block> planksBlock;
     private final Supplier<IItemProvider> boatItem;
     private final Supplier<Integer> lightValue;
+    private final WoodType woodType;
 
     MushroomWoodType(int id, String name, Supplier<Block> stemBlock, Supplier<Block> planksBlock, Supplier<IItemProvider> boatItem) {
         this(id, name, stemBlock, planksBlock, boatItem, () -> 0);
@@ -48,6 +53,7 @@ public enum MushroomWoodType implements IStringSerializable {
         this.planksBlock = planksBlock;
         this.boatItem = boatItem;
         this.lightValue = lightValue;
+        this.woodType = WoodType.create(new ResourceLocation(ExtendedMushrooms.MOD_ID, name).toString());
     }
 
     public int getId() {
@@ -70,6 +76,11 @@ public enum MushroomWoodType implements IStringSerializable {
         return this.lightValue.get();
     }
 
+    public WoodType getWoodType() {
+        return this.woodType;
+    }
+
+    @Nonnull
     @Override
     public String getString() {
         return this.name;

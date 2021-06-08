@@ -4,9 +4,14 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.client.renderer.tileentity.VariantChestTileEntityRenderer;
 import cech12.extendedmushrooms.client.renderer.tileentity.VariantTrappedChestTileEntityRenderer;
+import cech12.extendedmushrooms.item.MushroomWoodType;
+import cech12.extendedmushrooms.tileentity.MushroomSignTileEntity;
 import cech12.extendedmushrooms.tileentity.VariantChestTileEntity;
 import cech12.extendedmushrooms.tileentity.VariantTrappedChestTileEntity;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.Atlases;
+import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
+import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,6 +20,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.function.Supplier;
 
@@ -25,6 +31,13 @@ public class ModTileEntities {
 
     @SubscribeEvent
     public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
+        MUSHROOM_SIGN = register(event, MushroomSignTileEntity::new, "mushroom_sign",
+                ModBlocks.MUSHROOM_STANDING_SIGN.get(),
+                ModBlocks.MUSHROOM_WALL_SIGN.get(),
+                ModBlocks.GLOWSHROOM_STANDING_SIGN.get(),
+                ModBlocks.GLOWSHROOM_WALL_SIGN.get(),
+                ModBlocks.POISONOUS_MUSHROOM_STANDING_SIGN.get(),
+                ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN.get());
         VARIANT_CHEST = register(event, VariantChestTileEntity::new, "variant_chest",
                 ExtendedMushroomsBlocks.MUSHROOM_CHEST,
                 ExtendedMushroomsBlocks.GLOWSHROOM_CHEST,
@@ -46,7 +59,13 @@ public class ModTileEntities {
      * Setup renderers for entities. Is called at mod initialisation.
      */
     @OnlyIn(Dist.CLIENT)
-    public static void setupRenderers() {
+    public static void setupRenderers(final FMLClientSetupEvent event) {
+        ClientRegistry.bindTileEntityRenderer((TileEntityType<SignTileEntity>) MUSHROOM_SIGN, SignTileEntityRenderer::new);
+        event.enqueueWork(() -> {
+            for (MushroomWoodType type : MushroomWoodType.values()) {
+                Atlases.addWoodType(type.getWoodType());
+            }
+        });
         ClientRegistry.bindTileEntityRenderer((TileEntityType<VariantChestTileEntity>) VARIANT_CHEST, VariantChestTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer((TileEntityType<VariantTrappedChestTileEntity>) VARIANT_TRAPPED_CHEST, VariantTrappedChestTileEntityRenderer::new);
     }

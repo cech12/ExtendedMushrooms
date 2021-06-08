@@ -5,6 +5,7 @@ import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
+import cech12.extendedmushrooms.block.MushroomStandingSignBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.MushroomWoodPressurePlateBlock;
 import cech12.extendedmushrooms.block.VariantChestBlock;
@@ -99,6 +100,10 @@ public class BlockTagProvider extends BlockTagsProvider {
         getOrCreateBuilder(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES)
                 .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD)
                 .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
+        getOrCreateBuilder(ModTags.Blocks.MUSHROOM_SIGNS).add(registry.stream().filter(extendedMushrooms)
+                .filter(block -> block instanceof MushroomStandingSignBlock)
+                .sorted(Comparator.comparing(Block::getRegistryName))
+                .toArray(Block[]::new));
         getOrCreateBuilder(ModTags.Blocks.MUSHROOM_SLABS).add(registry.stream().filter(extendedMushrooms)
                 .filter(block -> block instanceof SlabBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
@@ -172,6 +177,7 @@ public class BlockTagProvider extends BlockTagsProvider {
         getOrCreateBuilder(BlockTags.FENCES).addTag(ModTags.Blocks.MUSHROOM_FENCES);
         getOrCreateBuilder(BlockTags.LOGS).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
         getOrCreateBuilder(BlockTags.PLANKS).addTag(ModTags.Blocks.MUSHROOM_PLANKS);
+        getOrCreateBuilder(BlockTags.SIGNS).addTag(ModTags.Blocks.MUSHROOM_SIGNS);
         getOrCreateBuilder(BlockTags.SLABS).addTag(ModTags.Blocks.MUSHROOM_SLABS);
         getOrCreateBuilder(BlockTags.SMALL_FLOWERS).add(ExtendedMushroomsBlocks.INFESTED_FLOWER);
         getOrCreateBuilder(BlockTags.STAIRS).addTag(ModTags.Blocks.MUSHROOM_STAIRS);

@@ -54,6 +54,7 @@ public class ModTags {
         public static final ITag.INamedTag<Block> MUSHROOM_PRESSURE_PLATES_WOOD = tag("mushroom_pressure_plates/wood");
         public static final ITag.INamedTag<Block> MUSHROOM_PRESSURE_PLATES_WOOL = tag("mushroom_pressure_plates/wool");
         public static final ITag.INamedTag<Block> MUSHROOM_PRESSURE_PLATES = tag("mushroom_pressure_plates");
+        public static final ITag.INamedTag<Block> MUSHROOM_SIGNS = tag("mushroom_signs");
         public static final ITag.INamedTag<Block> MUSHROOM_SLABS = tag("mushroom_slabs");
         public static final ITag.INamedTag<Block> MUSHROOM_STAIRS = tag("mushroom_stairs");
         public static final ITag.INamedTag<Block> MUSHROOM_TRAPDOORS = tag("mushroom_trapdoors");
@@ -124,6 +125,7 @@ public class ModTags {
         public static final ITag.INamedTag<Item> MUSHROOM_PRESSURE_PLATES_WOOD = tag("mushroom_pressure_plates/wood");
         public static final ITag.INamedTag<Item> MUSHROOM_PRESSURE_PLATES_WOOL = tag("mushroom_pressure_plates/wool");
         public static final ITag.INamedTag<Item> MUSHROOM_PRESSURE_PLATES = tag("mushroom_pressure_plates");
+        public static final ITag.INamedTag<Item> MUSHROOM_SIGNS = tag("mushroom_signs");
         public static final ITag.INamedTag<Item> MUSHROOM_SLABS = tag("mushroom_slabs");
         public static final ITag.INamedTag<Item> MUSHROOM_STAIRS = tag("mushroom_stairs");
         public static final ITag.INamedTag<Item> MUSHROOM_TRAPDOORS = tag("mushroom_trapdoors");

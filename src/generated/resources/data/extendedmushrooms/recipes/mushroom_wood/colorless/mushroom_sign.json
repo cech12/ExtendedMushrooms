@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    " | "
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:mushroom_planks"
+    },
+    "|": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:mushroom_sign",
+    "count": 3
+  }
+}

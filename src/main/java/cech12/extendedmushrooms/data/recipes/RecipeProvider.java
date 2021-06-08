@@ -108,6 +108,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.MUSHROOM_LADDER.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_PLANKS.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_PRESSURE_PLATE.asItem(),
+                ExtendedMushroomsItems.MUSHROOM_SIGN,
                 ExtendedMushroomsBlocks.MUSHROOM_SLAB.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_STAIRS.asItem(),
                 ExtendedMushroomsBlocks.MUSHROOM_TRAPDOOR.asItem(),
@@ -143,6 +144,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.GLOWSHROOM_LADDER.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_PLANKS.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_PRESSURE_PLATE.asItem(),
+                ExtendedMushroomsItems.GLOWSHROOM_SIGN,
                 ExtendedMushroomsBlocks.GLOWSHROOM_SLAB.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_STAIRS.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_TRAPDOOR.asItem(),
@@ -182,6 +184,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_LADDER.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PLANKS.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PRESSURE_PLATE.asItem(),
+                ExtendedMushroomsItems.POISONOUS_MUSHROOM_SIGN,
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_SLAB.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STAIRS.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_TRAPDOOR.asItem(),
@@ -195,21 +198,8 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_CARPET.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.asItem());
 
-        //oak sign
-        String woodDirectory = "mushroom_wood/";
-        ShapedRecipeBuilder.shapedRecipe(Items.OAK_SIGN, 3)
-                .key('#', ModTags.Items.MUSHROOM_PLANKS)
-                .key('|', Tags.Items.RODS_WOODEN)
-                .patternLine("###")
-                .patternLine("###")
-                .patternLine(" | ")
-                .addCriterion("has_planks", hasItem(ModTags.Items.MUSHROOM_PLANKS))
-                .build(consumer, getResourceLocation(woodDirectory, Items.OAK_SIGN.getRegistryName().getPath()));
-
         //wood cutting
-        String woodcuttingDirectory = woodDirectory + "woodcutting/";
-        WoodcutterRecipeBuilder.woodcutterRecipe(Items.OAK_SIGN, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS))
-                .build(consumer, getResourceLocation(woodcuttingDirectory, "oak_sign_from_planks"));
+        //String woodcuttingDirectory = "mushroom_wood/woodcutting/";
         //WoodcutterRecipeBuilder.woodcutterRecipe(Items.STICK, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS), 2)
         //        .build(consumer, getResourceLocation(woodcuttingDirectory, "stick_from_planks"));
     }
@@ -218,7 +208,7 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
     private void mushroomWoodRecipes(Consumer<IFinishedRecipe> consumer, String name, ITag.INamedTag<Item> stems,
                                      Item stem, Item strippedStem, Item boat,
                                      Item bookshelf, Item button, Item chest, Item chestTrapped, Item door, Item fence,
-                                     Item fenceGate, Item ladder, Item planks, Item pressurePlate, Item slab,
+                                     Item fenceGate, Item ladder, Item planks, Item pressurePlate, Item sign, Item slab,
                                      Item stairs, Item trapdoor, Item verticalPlanks, Item verticalSlab) {
         String directory = "mushroom_wood/" + name + "/";
         ShapedRecipeBuilder.shapedRecipe(boat)
@@ -268,6 +258,14 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .setGroup("wooden_pressure_plate")
                 .addCriterion("has_planks", hasItem(planks))
                 .build(consumer, getResourceLocation(directory, pressurePlate.getRegistryName()));
+        ShapedRecipeBuilder.shapedRecipe(sign, 3)
+                .key('#', planks)
+                .key('|', Tags.Items.RODS_WOODEN)
+                .patternLine("###")
+                .patternLine("###")
+                .patternLine(" | ")
+                .addCriterion("has_planks", hasItem(planks))
+                .build(consumer, getResourceLocation(directory, sign.getRegistryName()));
         ShapedRecipeBuilder.shapedRecipe(slab, 6)
                 .key('#', planks)
                 .patternLine("###")
@@ -397,6 +395,8 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_gate_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(pressurePlate, Ingredient.fromItems(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "pressure_plate_from_planks"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(sign, Ingredient.fromItems(planks))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "sign_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(slab, Ingredient.fromItems(planks), 2)
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "slab_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(stairs, Ingredient.fromItems(planks))

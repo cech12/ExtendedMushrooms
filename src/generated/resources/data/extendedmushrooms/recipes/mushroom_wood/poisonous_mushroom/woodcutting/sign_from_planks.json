@@ -1,0 +1,14 @@
+{
+  "type": "woodcutter:woodcutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "woodcutter"
+    }
+  ],
+  "ingredient": {
+    "item": "extendedmushrooms:poisonous_mushroom_planks"
+  },
+  "result": "extendedmushrooms:poisonous_mushroom_sign",
+  "count": 1
+}
