@@ -2,7 +2,7 @@
 
 This is a **Minecraft Forge** mod and change some **mushroom behaviour** and adds mushroom related **blocks, items and recipes**.
 
-![Logo](https://raw.githubusercontent.com/cech12/ExtendedMushrooms/1.15/material/store.png)
+![Logo](material/store.png)
 
 ## Installation
 
@@ -19,7 +19,7 @@ The blocks of a **Huge Mushroom** have also a changed behaviour. **Mushroom Stem
 
 ## Blocks:
 
-![Wood Type](https://raw.githubusercontent.com/cech12/ExtendedMushrooms/1.15/material/wood.png)
+![Wood Type](material/wood.png)
 
 There are new blocks related to the new mushroom wood type:
 * Mushroom Button
