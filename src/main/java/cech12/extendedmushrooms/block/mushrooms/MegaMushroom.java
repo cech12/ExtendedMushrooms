@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
+import cech12.extendedmushrooms.MushroomUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -19,6 +20,9 @@ public abstract class MegaMushroom extends BigMushroom {
 
     @Override
     public boolean growMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
+        if (!MushroomUtils.isValidMushroomPosition(world, blockPos)) {
+            return false;
+        }
         for(int x = 0; x >= -1; --x) {
             for(int z = 0; z >= -1; --z) {
                 if (canMegaMushroomSpawnAt(blockState, world, blockPos, x, z)) {

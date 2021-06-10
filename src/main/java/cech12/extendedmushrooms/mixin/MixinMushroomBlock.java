@@ -29,9 +29,7 @@ public class MixinMushroomBlock {
         //Forge: prevent loading unloaded chunks
         if (world.isAreaLoaded(pos, 7) && random.nextInt(25) == 0) {
             if (state.getBlock() instanceof MushroomBlock) {
-                if (MushroomUtils.isValidMushroomPosition(world, pos)) {
-                    ((MushroomBlock) state.getBlock()).grow(world, random, pos, state);
-                }
+                ((MushroomBlock) state.getBlock()).grow(world, random, pos, state);
             }
         }
         //automatic multiplication follows in tick method when ci.canceled NOT called
@@ -43,7 +41,9 @@ public class MixinMushroomBlock {
      */
     @Inject(at = @At("HEAD"), method = "grow", cancellable = true)
     public void growProxy(ServerWorld world, BlockPos pos, BlockState state, Random random, CallbackInfoReturnable<Boolean> cir) {
-        if (state.getBlock() == Blocks.BROWN_MUSHROOM) {
+        if (!MushroomUtils.isValidMushroomPosition(world, pos)) {
+            cir.setReturnValue(false);
+        } else if (state.getBlock() == Blocks.BROWN_MUSHROOM) {
             (new BrownMushroom()).growMushroom(world, world.getChunkProvider().getChunkGenerator(), pos, state, random);
             cir.setReturnValue(true);
         } else if (state.getBlock() == Blocks.RED_MUSHROOM) {

@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
+import cech12.extendedmushrooms.MushroomUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -29,6 +30,9 @@ public abstract class BigMushroom {
     }
 
     public boolean growMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
+        if (!MushroomUtils.isValidMushroomPosition(world, blockPos)) {
+            return false;
+        }
         ConfiguredFeature<?, ?> feature = this.getBigMushroomFeature();
         world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 4);
         if (feature.generate(world, chunkGenerator, random, blockPos)) {

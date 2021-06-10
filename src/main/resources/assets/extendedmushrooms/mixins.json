@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.extendedmushrooms.refmap.json",
   "mixins": [
+    "IMixinAbstractBigMushroomFeature",
     "MixinMushroomBlock",
     "MixinAbstractBigMushroomFeature"
   ],

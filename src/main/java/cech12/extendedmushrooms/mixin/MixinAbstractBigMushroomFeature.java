@@ -23,10 +23,11 @@ public abstract class MixinAbstractBigMushroomFeature {
     public void placeProxy(IWorld world, BlockPos pos, int p_227209_3_, BlockPos.Mutable p_227209_4_, BigMushroomFeatureConfig p_227209_5_, CallbackInfoReturnable<Boolean> cir) {
         int i = pos.getY();
         if (i >= 1 && i + p_227209_3_ + 1 < world.func_234938_ad_()) { //getMaxHeight
-            if (MushroomUtils.isValidMushroomPosition(world, pos)) {
+            //dirt check for vanilla world generation (huge mushrooms in dark forests #49)
+            if (AbstractBigMushroomFeature.isDirtAt(world, pos.down()) || MushroomUtils.isValidMushroomPosition(world, pos)) {
+                IMixinAbstractBigMushroomFeature self = (IMixinAbstractBigMushroomFeature) this;
                 for(int j = 0; j <= p_227209_3_; ++j) {
-                    //int k = this.func_225563_a_(-1, -1, p_227209_5_.field_227274_c_, j);
-                    int k = j <= 3 ? 0 : p_227209_5_.foliageRadius;
+                    int k = self.invoke_func_225563_a_(-1, -1, p_227209_5_.foliageRadius, j);
 
                     for(int l = -k; l <= k; ++l) {
                         for(int i1 = -k; i1 <= k; ++i1) {
