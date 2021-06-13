@@ -1,7 +1,6 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.block.MushroomLadderBlock;
 import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
@@ -139,7 +138,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile post = models().getExistingFile(getBlockResourceLocation(name + "_post"));
                 ModelFile side = models().getExistingFile(getBlockResourceLocation(name + "_side"));
                 fourWayBlock((FenceBlock) block, post, side);
-            } else if (block instanceof MushroomLadderBlock) {
+            } else if (block instanceof LadderBlock) {
                 ModelFile ladder = models().getExistingFile(getBlockResourceLocation(name));
                 getVariantBuilder(block).forAllStatesExcept(state ->
                     ConfiguredModel.builder()

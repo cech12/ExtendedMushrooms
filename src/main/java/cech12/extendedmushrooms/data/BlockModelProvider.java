@@ -5,7 +5,6 @@ import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.EMMushroomBlock;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
-import cech12.extendedmushrooms.block.MushroomLadderBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
@@ -20,6 +19,7 @@ import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.HugeMushroomBlock;
+import net.minecraft.block.LadderBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
@@ -169,7 +169,7 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/flower_pot_cross")))
                         .texture("plant", getBlockResourceLocation(name, "_potted", ""));
-            } else if (block instanceof MushroomLadderBlock) {
+            } else if (block instanceof LadderBlock) {
                 ResourceLocation texture = getBlockResourceLocation(name);
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/ladder")))

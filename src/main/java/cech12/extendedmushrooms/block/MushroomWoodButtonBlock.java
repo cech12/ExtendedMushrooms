@@ -9,9 +9,6 @@ import javax.annotation.Nonnull;
 
 public class MushroomWoodButtonBlock extends WoodButtonBlock {
 
-    /**
-     * WoodenButtonBlock has protected constructor.
-     */
     public MushroomWoodButtonBlock() {
         super(generateBlockProperties());
     }

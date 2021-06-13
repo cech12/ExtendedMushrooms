@@ -8,9 +8,6 @@ import javax.annotation.Nonnull;
 
 public class MushroomWoodPressurePlateBlock extends PressurePlateBlock {
 
-    /**
-     * PressurePlateBlock has protected constructor.
-     */
     public MushroomWoodPressurePlateBlock() {
         super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties());
     }
