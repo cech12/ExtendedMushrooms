@@ -13,12 +13,12 @@ issueTrackerURL="https://github.com/cech12/ExtendedMushrooms/issues"
 [[dependencies.extendedmushrooms]]
     modId="forge"
     mandatory=true
-    versionRange="[31.2.44,)"
+    versionRange="[31.2.57,32)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.extendedmushrooms]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2,)"
+    versionRange="[1.15.2,1.16)"
     ordering="NONE"
     side="BOTH"
