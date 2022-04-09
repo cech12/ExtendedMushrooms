@@ -1,4 +1,9 @@
-# Extended Mushrooms [![Curseforge](http://cf.way2muchnoise.eu/full_extended-mushrooms_downloads(0D0D0D-F16436-fff-010101-fff).svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_extended-mushrooms_all(0D0D0D-F16436-fff-010101).svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms/files)  [![](https://img.shields.io/discord/752506676719910963.svg?style=flat&color=informational&logo=discord&label=Discord)](https://discord.gg/gRUFH5t) [![License](https://img.shields.io/github/license/cech12/ExtendedMushrooms)](http://opensource.org/licenses/MIT)
+# Extended Mushrooms
+
+[![Curseforge](http://cf.way2muchnoise.eu/full_365507_downloads(0D0D0D-F16436-fff-010101-fff).svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms)
+[![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_365507_all(0D0D0D-F16436-fff-010101).svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms/files)
+[![License](https://img.shields.io/github/license/cech12/ExtendedMushrooms)](http://opensource.org/licenses/MIT)
+[![](https://img.shields.io/discord/752506676719910963.svg?style=flat&color=informational&logo=discord&label=Discord)](https://discord.gg/gRUFH5t)
 
 This is a **Minecraft Forge** mod and change some **mushroom behaviour** and adds mushroom related **blocks, items and recipes**.
 
