@@ -1,0 +1,11 @@
+name: "Update Gradle Wrapper"
+
+on:
+  workflow_call:
+  schedule:
+    - cron: '03 12 * * 1'
+
+jobs:
+  analyze:
+    name: Update Gradle Wrapper
+    uses: cech12/MinecraftModActions/.github/workflows/codeql-analysis.yml@main
