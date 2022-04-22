@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "cech12.extendedmushrooms.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "unlitcampfire.refmap.json",
+  "mixins": [
+    "IMixinAbstractBigMushroomFeature",
+    "MixinAbstractBigMushroomFeature",
+    "MixinMushroomBlock"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
