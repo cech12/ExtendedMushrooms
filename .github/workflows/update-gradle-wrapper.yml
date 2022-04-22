@@ -5,6 +5,11 @@ on:
   schedule:
     - cron: '03 12 * * 1'
 
+permissions:
+  actions: read
+  packages: read
+  pull-requests: write
+
 jobs:
   analyze:
     name: Update Gradle Wrapper
