@@ -8,4 +8,4 @@ on:
 jobs:
   analyze:
     name: Update Gradle Wrapper
-    uses: cech12/MinecraftModActions/.github/workflows/codeql-analysis.yml@main
+    uses: cech12/MinecraftModActions/.github/workflows/update-gradle-wrapper.yml@main
