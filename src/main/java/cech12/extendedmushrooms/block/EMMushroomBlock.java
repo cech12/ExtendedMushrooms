@@ -8,6 +8,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class EMMushroomBlock extends MushroomBlock {
 
     BigMushroom bigMushroom;
@@ -18,7 +20,7 @@ public class EMMushroomBlock extends MushroomBlock {
     }
 
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos blockPos, BlockState state) {
-        this.bigMushroom.growMushroom(world, world.getChunkProvider().generator, blockPos, state, random);
+    public void performBonemeal(ServerWorld world, Random random, BlockPos blockPos, BlockState state) {
+        this.bigMushroom.growMushroom(world, world.getChunkSource().generator, blockPos, state, random);
     }
 }

@@ -22,7 +22,7 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
     protected boolean canPlaceCap(IWorld world, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         for (int x = -capRadius; x <= capRadius+1; ++x) {
             for (int z = -capRadius; z <= capRadius+1; ++z) {
-                mutableBlockPos.setPos(blockPos).move(x, size, z);
+                mutableBlockPos.set(blockPos).move(x, size, z);
                 if (!world.getBlockState(mutableBlockPos).canBeReplacedByLeaves(world, mutableBlockPos)) {
                     return false;
                 }
@@ -47,7 +47,7 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
                     boolean flag7 = flag1 || flag5 && x == radius;
                     boolean flag8 = flag2 || flag4 && z == 1 - radius;
                     boolean flag9 = flag3 || flag4 && z == radius;
-                    this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(x, size, z), flag6, flag7, flag8, flag9);
+                    this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(x, size, z), flag6, flag7, flag8, flag9);
                 }
             }
         }
@@ -55,15 +55,15 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
         for (int i = 0; i < radius*2; i++) {
             boolean begin = i == 0;
             boolean end = i == radius*2-1;
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(i-radius+1, size-1, -radius-1), begin, end, true, false);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(i-radius+1, size-1, radius+2), begin, end, false, true);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(-radius-1, size-1, i-radius+1), true, false, begin, end);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(radius+2, size-1, i-radius+1), false, true, begin, end);
+            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(i-radius+1, size-1, -radius-1), begin, end, true, false);
+            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(i-radius+1, size-1, radius+2), begin, end, false, true);
+            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(-radius-1, size-1, i-radius+1), true, false, begin, end);
+            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(radius+2, size-1, i-radius+1), false, true, begin, end);
         }
-        this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(-radius, size-1, -radius), true, false, true, false);
-        this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(-radius, size-1, radius+1), true, false , false, true);
-        this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(radius+1, size-1, -radius), false, true, true, false);
-        this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.setPos(blockPos).move(radius+1, size-1, radius+1), false, true, false, true);
+        this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(-radius, size-1, -radius), true, false, true, false);
+        this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(-radius, size-1, radius+1), true, false , false, true);
+        this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(radius+1, size-1, -radius), false, true, true, false);
+        this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(radius+1, size-1, radius+1), false, true, false, true);
     }
 
 }

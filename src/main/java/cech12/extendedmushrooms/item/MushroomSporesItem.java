@@ -30,18 +30,18 @@ public class MushroomSporesItem extends Item {
     }
 
     @Override
-    public @Nonnull ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        BlockPos blockPos = context.getPos();
+    public @Nonnull ActionResultType useOn(ItemUseContext context) {
+        World world = context.getLevel();
+        BlockPos blockPos = context.getClickedPos();
         Block block = world.getBlockState(blockPos).getBlock();
-        ItemStack itemStack = context.getItem();
+        ItemStack itemStack = context.getItemInHand();
 
         // replace dirt with mycelium
         if (block == Blocks.DIRT) {
             //play sound
-            world.playSound(context.getPlayer(), blockPos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(context.getPlayer(), blockPos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
             //change dirt to mycelium
-            world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState());
+            world.setBlockAndUpdate(blockPos, Blocks.MYCELIUM.defaultBlockState());
             //remove one item
             itemStack.setCount(itemStack.getCount() - 1);
             return ActionResultType.SUCCESS;
@@ -50,19 +50,19 @@ public class MushroomSporesItem extends Item {
     }
 
     @Override
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
         boolean itemUsed = false;
-        World world = target.world;
-        if (!world.isRemote && world instanceof ServerWorld) {
+        World world = target.level;
+        if (!world.isClientSide && world instanceof ServerWorld) {
             if (target instanceof CowEntity && !(target instanceof MooshroomEntity)) {
                 // Cow to Mooshroom
-                target.setAIMoveSpeed(0);
+                target.setSpeed(0);
                 //create mooshroom
-                MooshroomEntity mooshroom = EntityType.MOOSHROOM.create(target.world);
+                MooshroomEntity mooshroom = EntityType.MOOSHROOM.create(target.level);
                 if (mooshroom != null) {
-                    mooshroom.copyLocationAndAnglesFrom(target);
-                    mooshroom.onInitialSpawn((ServerWorld)world, world.getDifficultyForLocation(target.getPosition()), SpawnReason.CONVERSION, null, null);
-                    mooshroom.setGrowingAge(((CowEntity) target).getGrowingAge());
+                    mooshroom.copyPosition(target);
+                    mooshroom.finalizeSpawn((ServerWorld)world, world.getCurrentDifficultyAt(target.blockPosition()), SpawnReason.CONVERSION, null, null);
+                    mooshroom.setAge(((CowEntity) target).getAge());
                     if (target.hasCustomName()) {
                         mooshroom.setCustomName(target.getCustomName());
                         mooshroom.setCustomNameVisible(target.isCustomNameVisible());
@@ -70,8 +70,8 @@ public class MushroomSporesItem extends Item {
                     mooshroom.setHealth(target.getHealth());
                     //replace cow with new mooshroom
                     target.remove();
-                    world.addEntity(mooshroom);
-                    mooshroom.playSound(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 2.0F, 1.0F);
+                    world.addFreshEntity(mooshroom);
+                    mooshroom.playSound(SoundEvents.ZOMBIE_VILLAGER_CONVERTED, 2.0F, 1.0F);
                     //remove one item
                     stack.setCount(stack.getCount() - 1);
                     itemUsed = true;

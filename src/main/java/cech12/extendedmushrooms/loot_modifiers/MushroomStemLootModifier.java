@@ -30,19 +30,19 @@ public class MushroomStemLootModifier extends LootModifier {
     @Override
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         if (Config.MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED.get()) {
-            BlockState blockState = context.get(LootParameters.BLOCK_STATE);
-            if (blockState != null && blockState.isIn(ModTags.ForgeBlocks.MUSHROOM_STEMS)) {
-                ItemStack tool = context.get(LootParameters.TOOL);
+            BlockState blockState = context.getParamOrNull(LootParameters.BLOCK_STATE);
+            if (blockState != null && blockState.is(ModTags.ForgeBlocks.MUSHROOM_STEMS)) {
+                ItemStack tool = context.getParamOrNull(LootParameters.TOOL);
                 //to avoid endless loop: test for silk touch enchantment
-                if (tool == null || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
+                if (tool == null || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
                     //generate fake tool with silk touch enchantment
                     ItemStack fakeTool = (tool != null && tool.isEnchantable()) ? tool.copy() : new ItemStack(Items.DIAMOND_AXE);
-                    fakeTool.addEnchantment(Enchantments.SILK_TOUCH, 1);
+                    fakeTool.enchant(Enchantments.SILK_TOUCH, 1);
                     //generate loot with this tool
-                    LootContext ctx = new LootContext.Builder(context).withParameter(LootParameters.TOOL, fakeTool).build(LootParameterSets.BLOCK);
-                    LootTable loottable = context.getWorld().getServer().getLootTableManager()
-                            .getLootTableFromLocation(blockState.getBlock().getLootTable());
-                    return loottable.generate(ctx);
+                    LootContext ctx = new LootContext.Builder(context).withParameter(LootParameters.TOOL, fakeTool).create(LootParameterSets.BLOCK);
+                    LootTable loottable = context.getLevel().getServer().getLootTables()
+                            .get(blockState.getBlock().getLootTable());
+                    return loottable.getRandomItems(ctx);
                 }
             }
         }

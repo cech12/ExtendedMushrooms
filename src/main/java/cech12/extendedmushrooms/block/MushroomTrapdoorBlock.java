@@ -17,10 +17,10 @@ public class MushroomTrapdoorBlock extends TrapDoorBlock {
     //TODO workaround until https://github.com/MinecraftForge/MinecraftForge/issues/7775 is fixed!
     @Override
     public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity) {
-        if (state.get(OPEN)) {
-            BlockState down = world.getBlockState(pos.down());
+        if (state.getValue(OPEN)) {
+            BlockState down = world.getBlockState(pos.below());
             if (down.getBlock() instanceof LadderBlock)
-                return down.get(LadderBlock.FACING) == state.get(HORIZONTAL_FACING);
+                return down.getValue(LadderBlock.FACING) == state.getValue(FACING);
         }
         return super.isLadder(state, world, pos, entity);
     }

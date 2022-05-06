@@ -29,6 +29,6 @@ public class BrownMushroom extends MegaMushroom {
     protected ConfiguredFeature<?, ?> getBigMushroomFeature() {
         //vanilla mushroom
         return WorldGenRegistries.CONFIGURED_FEATURE.getOptional(new ResourceLocation("huge_brown_mushroom"))
-                .orElseGet(() -> Feature.HUGE_BROWN_MUSHROOM.withConfiguration(getConfig()));
+                .orElseGet(() -> Feature.HUGE_BROWN_MUSHROOM.configured(getConfig()));
     }
 }

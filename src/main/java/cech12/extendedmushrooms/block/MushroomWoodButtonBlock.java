@@ -7,6 +7,8 @@ import net.minecraft.block.material.Material;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class MushroomWoodButtonBlock extends WoodButtonBlock {
 
     public MushroomWoodButtonBlock() {
@@ -14,11 +16,11 @@ public class MushroomWoodButtonBlock extends WoodButtonBlock {
     }
 
     public MushroomWoodButtonBlock(final int lightValue) {
-        super(generateBlockProperties().setLightLevel((state) -> lightValue));
+        super(generateBlockProperties().lightLevel((state) -> lightValue));
     }
 
     @Nonnull
     static private Properties generateBlockProperties() {
-        return Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
+        return Block.Properties.of(Material.DECORATION).noCollission().strength(0.5F).sound(SoundType.WOOD);
     }
 }

@@ -31,7 +31,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     protected boolean canPlaceCap(IWorld world, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
-        Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, capCenterHeight, 0), capSize, radius);
+        Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
             if (!world.getBlockState(capPos.blockPos).canBeReplacedByLeaves(world, capPos.blockPos)) {
                 return false;
@@ -44,9 +44,9 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     protected void placeCap(IWorld world, Random random, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
-        Cap cap = new Cap(mutableBlockPos.setPos(blockPos).move(0, capCenterHeight, 0), capSize, radius);
+        Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
-            this.placeCapBlockIfPossible(world, random, config, capPos.blockPos, capPos.west, capPos.east, capPos.north, capPos.south, !cap.hasCapPosition(capPos.blockPos.up()));
+            this.placeCapBlockIfPossible(world, random, config, capPos.blockPos, capPos.west, capPos.east, capPos.north, capPos.south, !cap.hasCapPosition(capPos.blockPos.above()));
         }
     }
 
@@ -88,13 +88,13 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
                     for (int z = (int) (-this.radius - 1.5); z <= this.radius + 2; z++) {
                         BlockPos ellPos = new BlockPos(x, y, z);
                         if (!this.isInsideEllipsoid(ellPos)) {
-                            boolean down = this.isInsideEllipsoid(ellPos.down());
+                            boolean down = this.isInsideEllipsoid(ellPos.below());
                             boolean west = this.isInsideEllipsoid(ellPos.west());
                             boolean east = this.isInsideEllipsoid(ellPos.east());
                             boolean north = this.isInsideEllipsoid(ellPos.north());
                             boolean south = this.isInsideEllipsoid(ellPos.south());
                             if (down || west || east || north || south) {
-                                this.capPositions.add(new CapPosition(this.center.add(ellPos), !west, !east, !north, !south));
+                                this.capPositions.add(new CapPosition(this.center.offset(ellPos), !west, !east, !north, !south));
                             }
                         }
                     }

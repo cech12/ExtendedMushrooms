@@ -40,12 +40,12 @@ public class FairyRingBlock extends AirBlock {
     public static final Direction[] DIRECTIONS = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
     public FairyRingBlock() {
-        super(Block.Properties.create(Material.AIR).doesNotBlockMovement().noDrops());
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+        super(Block.Properties.of(Material.AIR).noCollission().noDrops());
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 
@@ -53,25 +53,25 @@ public class FairyRingBlock extends AirBlock {
     @Deprecated
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
     @Nonnull
     @Deprecated
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Nonnull
     @Deprecated
     @Override
-    public BlockRenderType getRenderType(@Nullable BlockState state) {
+    public BlockRenderType getRenderShape(@Nullable BlockState state) {
         return BlockRenderType.MODEL;
     }
 
@@ -88,8 +88,8 @@ public class FairyRingBlock extends AirBlock {
 
     @Deprecated
     @Override
-    public void onEntityCollision(@Nullable BlockState blockState, World world, @Nonnull BlockPos blockPos, @Nonnull Entity entity) {
-        TileEntity tileentity = world.getTileEntity(blockPos);
+    public void entityInside(@Nullable BlockState blockState, World world, @Nonnull BlockPos blockPos, @Nonnull Entity entity) {
+        TileEntity tileentity = world.getBlockEntity(blockPos);
         if (tileentity instanceof FairyRingTileEntity) {
             ((FairyRingTileEntity) tileentity).onEntityCollision(entity);
         }
@@ -97,15 +97,15 @@ public class FairyRingBlock extends AirBlock {
 
     @Deprecated
     @Override
-    public void onReplaced(BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof FairyRingTileEntity) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (FairyRingTileEntity)tileentity);
-                worldIn.updateComparatorOutputLevel(pos, this);
+                InventoryHelper.dropContents(worldIn, pos, (FairyRingTileEntity)tileentity);
+                worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onRemove(state, worldIn, pos, newState, isMoving);
         }
     }
 
@@ -115,7 +115,7 @@ public class FairyRingBlock extends AirBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(@Nonnull BlockState stateIn, World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (tileentity instanceof FairyRingTileEntity) {
             ((FairyRingTileEntity) tileentity).animateTick(worldIn, rand);
         }
@@ -123,10 +123,10 @@ public class FairyRingBlock extends AirBlock {
 
     @Deprecated
     @Override
-    public boolean eventReceived(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos, int id, int param) {
-        super.eventReceived(state, world, pos, id, param);
-        TileEntity tileentity = world.getTileEntity(pos);
-        return tileentity != null && tileentity.receiveClientEvent(id, param);
+    public boolean triggerEvent(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos, int id, int param) {
+        super.triggerEvent(state, world, pos, id, param);
+        TileEntity tileentity = world.getBlockEntity(pos);
+        return tileentity != null && tileentity.triggerEvent(id, param);
     }
 
     @Deprecated
@@ -140,7 +140,7 @@ public class FairyRingBlock extends AirBlock {
         int fairyRingBlocks = 0;
         boolean neighboursFound = false;
         for (Direction direction : DIRECTIONS) {
-            Block neighbourBlock = world.getBlockState(blockPos.offset(direction)).getBlock();
+            Block neighbourBlock = world.getBlockState(blockPos.relative(direction)).getBlock();
             if (neighbourBlock instanceof MushroomBlock) {
                 mushrooms++;
                 if (mushroomSeen) {
@@ -162,9 +162,9 @@ public class FairyRingBlock extends AirBlock {
             }
         }
 
-        if (!neighboursFound || mushrooms != 2 || fairyRingBlocks != 2 || !world.getBlockState(blockPos.down()).isSolid()) {
+        if (!neighboursFound || mushrooms != 2 || fairyRingBlocks != 2 || !world.getBlockState(blockPos.below()).canOcclude()) {
             //remove me
-            world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
+            world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
         }
 
         super.neighborChanged(blockState, world, blockPos, block, neighbourPos, isMoving);
@@ -181,7 +181,7 @@ public class FairyRingBlock extends AirBlock {
         for (Direction direction : DIRECTIONS) {
             for (boolean clockwise : clockwises) {
                 try {
-                    FairyRing fairyRing = new FairyRing(world, direction, clockwise, mutablePos.setPos(pos));
+                    FairyRing fairyRing = new FairyRing(world, direction, clockwise, mutablePos.set(pos));
                     fairyRing.placeBlocks(world);
                 } catch (FairyRing.CannotFormFairyRingException ignore) {}
             }
@@ -220,7 +220,7 @@ public class FairyRingBlock extends AirBlock {
          * @return list of all 12 important positions of the ring (parameter positions) - returns null, when ring cannot be placed
          */
         private static LinkedList<BlockPos> getFairyRingPositions(IWorld world, LinkedList<BlockPos> positions, Direction direction, boolean clockwise, BlockPos.Mutable mutablePos) {
-            Direction rotatedDirection = (clockwise) ? direction.rotateY() : direction.rotateYCCW();
+            Direction rotatedDirection = (clockwise) ? direction.getClockWise() : direction.getCounterClockWise();
             Direction newDirection = direction;
 
             //check if ring has mushrooms
@@ -229,7 +229,7 @@ public class FairyRingBlock extends AirBlock {
             } else
             //check if center is filled with air blocks and below must be a solid block
             if (positions.size() >= 8 && (world.getBlockState(mutablePos).getBlock() != Blocks.AIR ||
-                        !world.getBlockState(mutablePos.down()).isSolid())) {
+                        !world.getBlockState(mutablePos.below()).canOcclude())) {
                 return null;
             }
 
@@ -274,9 +274,9 @@ public class FairyRingBlock extends AirBlock {
         void placeBlocks(IWorld world) {
             List<BlockPos> list = getSortedCenterPositions();
             for (int i = 0; i < 4; i++) {
-                BlockState state = ExtendedMushroomsBlocks.FAIRY_RING.getDefaultState().with(FairyRingBlock.FACING, DIRECTIONS[i]);
+                BlockState state = ExtendedMushroomsBlocks.FAIRY_RING.defaultBlockState().setValue(FairyRingBlock.FACING, DIRECTIONS[i]);
                 //2 - no block updates to avoid to calling neighborChanged while placing
-                world.setBlockState(list.get(i), state, 2);
+                world.setBlock(list.get(i), state, 2);
             }
         }
 

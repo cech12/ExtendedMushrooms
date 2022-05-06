@@ -30,20 +30,20 @@ public class MushroomCapLootModifier extends LootModifier {
     protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
         //only called when shears are used
         if (Config.MUSHROOM_CAPS_WITH_SHEARS_ENABLED.get()) {
-            BlockState blockState = context.get(LootParameters.BLOCK_STATE);
-            if (blockState != null && blockState.isIn(ModTags.ForgeBlocks.MUSHROOM_CAPS)) {
-                ItemStack tool = context.get(LootParameters.TOOL);
+            BlockState blockState = context.getParamOrNull(LootParameters.BLOCK_STATE);
+            if (blockState != null && blockState.is(ModTags.ForgeBlocks.MUSHROOM_CAPS)) {
+                ItemStack tool = context.getParamOrNull(LootParameters.TOOL);
                 //to avoid endless loop: test for silk touch enchantment
-                if (tool != null && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
+                if (tool != null && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
                     //generate fake tool with silk touch enchantment
                     ItemStack fakeTool = tool.copy();
-                    fakeTool.addEnchantment(Enchantments.SILK_TOUCH, 1);
+                    fakeTool.enchant(Enchantments.SILK_TOUCH, 1);
                     //generate loot with this tool
                     LootContext.Builder builder = new LootContext.Builder(context).withParameter(LootParameters.TOOL, fakeTool);
-                    LootContext ctx = builder.build(LootParameterSets.BLOCK);
-                    LootTable loottable = context.getWorld().getServer().getLootTableManager()
-                            .getLootTableFromLocation(blockState.getBlock().getLootTable());
-                    return loottable.generate(ctx);
+                    LootContext ctx = builder.create(LootParameterSets.BLOCK);
+                    LootTable loottable = context.getLevel().getServer().getLootTables()
+                            .get(blockState.getBlock().getLootTable());
+                    return loottable.getRandomItems(ctx);
                 }
             }
         }

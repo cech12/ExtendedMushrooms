@@ -37,7 +37,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
 
     private Potion getPotionFromMushroom(Item mushroom) {
         for (Map.Entry<ITag.INamedTag<Item>, Potion> entry : MUSHROOM_POTION_MAP.entrySet()) {
-            if (mushroom.isIn(entry.getKey())) {
+            if (mushroom.is(entry.getKey())) {
                 return entry.getValue();
             }
         }
@@ -56,13 +56,13 @@ public class MushroomArrowRecipe extends SpecialRecipe {
 
     @Nonnull
     @Override
-    public ItemStack getCraftingResult(@Nonnull CraftingInventory inv) {
+    public ItemStack assemble(@Nonnull CraftingInventory inv) {
         try {
             RecipeIngredients ingredients = new RecipeIngredients(inv);
             Potion potion = getPotionFromMushroom(ingredients.mushroom.getItem());
             if (potion != null) {
                 ItemStack tippedArrow = new ItemStack(Items.TIPPED_ARROW, 1);
-                PotionUtils.addPotionToItemStack(tippedArrow, potion);
+                PotionUtils.setPotion(tippedArrow, potion);
                 return tippedArrow;
             } else {
                 return ItemStack.EMPTY;
@@ -73,7 +73,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return width * height >= 2;
     }
 
@@ -95,8 +95,8 @@ public class MushroomArrowRecipe extends SpecialRecipe {
         ItemStack mushroom = null;
 
         RecipeIngredients(@Nonnull CraftingInventory inv) throws Exception {
-            for (int i = 0; i < inv.getSizeInventory(); i++) {
-                ItemStack stack = inv.getStackInSlot(i);
+            for (int i = 0; i < inv.getContainerSize(); i++) {
+                ItemStack stack = inv.getItem(i);
                 if (!stack.isEmpty()) {
                     if (stack.getItem() == Items.ARROW) {
                         if (this.arrow == null) {

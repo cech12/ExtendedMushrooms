@@ -25,13 +25,13 @@ public class MushroomSheepWoolLayer extends LayerRenderer<MushroomSheepEntity, S
 
     public void render(@Nonnull MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn, MushroomSheepEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (!entitylivingbaseIn.isInvisible()) {
-            float[] color = entitylivingbaseIn.getMushroomType().getColor().getColorComponentValues();
-            renderCopyCutoutModel(this.getEntityModel(), this.sheepModel,
+            float[] color = entitylivingbaseIn.getMushroomType().getColor().getTextureDiffuseColors();
+            coloredCutoutModelCopyLayerRender(this.getParentModel(), this.sheepModel,
                     SHEEP_COLORING_TEXTURE, matrixStackIn, bufferIn, packedLightIn, entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
                     headPitch, partialTicks, color[0], color[1], color[2]);
-            if (!entitylivingbaseIn.getSheared()) {
-                renderCopyCutoutModel(this.getEntityModel(), this.sheepWoolModel,
-                        new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/sheep/" + entitylivingbaseIn.getMushroomType().getString() + ".png"),
+            if (!entitylivingbaseIn.isSheared()) {
+                coloredCutoutModelCopyLayerRender(this.getParentModel(), this.sheepWoolModel,
+                        new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/sheep/" + entitylivingbaseIn.getMushroomType().getSerializedName() + ".png"),
                         matrixStackIn, bufferIn, packedLightIn, entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, partialTicks, 1, 1, 1);
             }
         }

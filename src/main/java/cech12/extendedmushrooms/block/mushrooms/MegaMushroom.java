@@ -38,25 +38,25 @@ public abstract class MegaMushroom extends BigMushroom {
 
     protected boolean growMegaMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random, int x, int z) {
         ConfiguredFeature<?, ?> feature = this.getMegaMushroomFeature();
-        BlockState lvt_9_1_ = Blocks.AIR.getDefaultState();
-        world.setBlockState(blockPos.add(x, 0, z), lvt_9_1_, 4);
-        world.setBlockState(blockPos.add(x + 1, 0, z), lvt_9_1_, 4);
-        world.setBlockState(blockPos.add(x, 0, z + 1), lvt_9_1_, 4);
-        world.setBlockState(blockPos.add(x + 1, 0, z + 1), lvt_9_1_, 4);
-        if (feature.generate(world, chunkGenerator, random, blockPos.add(x, 0, z))) {
+        BlockState lvt_9_1_ = Blocks.AIR.defaultBlockState();
+        world.setBlock(blockPos.offset(x, 0, z), lvt_9_1_, 4);
+        world.setBlock(blockPos.offset(x + 1, 0, z), lvt_9_1_, 4);
+        world.setBlock(blockPos.offset(x, 0, z + 1), lvt_9_1_, 4);
+        world.setBlock(blockPos.offset(x + 1, 0, z + 1), lvt_9_1_, 4);
+        if (feature.place(world, chunkGenerator, random, blockPos.offset(x, 0, z))) {
             return true;
         } else {
-            world.setBlockState(blockPos.add(x, 0, z), blockState, 4);
-            world.setBlockState(blockPos.add(x + 1, 0, z), blockState, 4);
-            world.setBlockState(blockPos.add(x, 0, z + 1), blockState, 4);
-            world.setBlockState(blockPos.add(x + 1, 0, z + 1), blockState, 4);
+            world.setBlock(blockPos.offset(x, 0, z), blockState, 4);
+            world.setBlock(blockPos.offset(x + 1, 0, z), blockState, 4);
+            world.setBlock(blockPos.offset(x, 0, z + 1), blockState, 4);
+            world.setBlock(blockPos.offset(x + 1, 0, z + 1), blockState, 4);
             return false;
         }
     }
 
     public static boolean canMegaMushroomSpawnAt(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, int x, int z) {
         Block block = blockState.getBlock();
-        return block == blockReader.getBlockState(blockPos.add(x, 0, z)).getBlock() && block == blockReader.getBlockState(blockPos.add(x + 1, 0, z)).getBlock() && block == blockReader.getBlockState(blockPos.add(x, 0, z + 1)).getBlock() && block == blockReader.getBlockState(blockPos.add(x + 1, 0, z + 1)).getBlock();
+        return block == blockReader.getBlockState(blockPos.offset(x, 0, z)).getBlock() && block == blockReader.getBlockState(blockPos.offset(x + 1, 0, z)).getBlock() && block == blockReader.getBlockState(blockPos.offset(x, 0, z + 1)).getBlock() && block == blockReader.getBlockState(blockPos.offset(x + 1, 0, z + 1)).getBlock();
     }
 
 }

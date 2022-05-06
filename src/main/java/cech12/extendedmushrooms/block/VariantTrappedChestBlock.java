@@ -27,6 +27,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class VariantTrappedChestBlock extends ChestBlock {
 
     private final MushroomWoodType woodType;
@@ -37,7 +39,7 @@ public class VariantTrappedChestBlock extends ChestBlock {
     }
 
     @Override
-    public TileEntity createNewTileEntity(@Nonnull IBlockReader worldIn) {
+    public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
         return new VariantTrappedChestTileEntity();
     }
 
@@ -52,7 +54,7 @@ public class VariantTrappedChestBlock extends ChestBlock {
 
             @Override
             //render
-            public void func_239207_a_(@Nonnull ItemStack stack, ItemCameraTransforms.TransformType transformType, @Nonnull MatrixStack matrix, @Nonnull IRenderTypeBuffer buffer, int x, int y) {
+            public void renderByItem(@Nonnull ItemStack stack, ItemCameraTransforms.TransformType transformType, @Nonnull MatrixStack matrix, @Nonnull IRenderTypeBuffer buffer, int x, int y) {
                 if (tile == null) {
                     tile = new VariantTrappedChestTileEntity(woodType);
                 }
@@ -63,22 +65,22 @@ public class VariantTrappedChestBlock extends ChestBlock {
 
     @Override
     @Nonnull
-    protected Stat<ResourceLocation> getOpenStat() {
+    protected Stat<ResourceLocation> getOpenChestStat() {
         return Stats.CUSTOM.get(Stats.TRIGGER_TRAPPED_CHEST);
     }
 
     @Override
-    public boolean canProvidePower(@Nonnull BlockState state) {
+    public boolean isSignalSource(@Nonnull BlockState state) {
         return true;
     }
 
     @Override
-    public int getWeakPower(@Nonnull BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
-        return MathHelper.clamp(ChestTileEntity.getPlayersUsing(blockAccess, pos), 0, 15);
+    public int getSignal(@Nonnull BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
+        return MathHelper.clamp(ChestTileEntity.getOpenCount(blockAccess, pos), 0, 15);
     }
 
     @Override
-    public int getStrongPower(@Nonnull BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
-        return side == Direction.UP ? blockState.getWeakPower(blockAccess, pos, side) : 0;
+    public int getDirectSignal(@Nonnull BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
+        return side == Direction.UP ? blockState.getSignal(blockAccess, pos, side) : 0;
     }
 }

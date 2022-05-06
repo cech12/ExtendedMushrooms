@@ -20,7 +20,7 @@ public class MushroomWallSignBlock extends WallSignBlock {
     }
 
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity newBlockEntity(IBlockReader worldIn) {
         return new MushroomSignTileEntity();
     }
 

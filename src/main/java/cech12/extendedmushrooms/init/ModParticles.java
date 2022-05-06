@@ -32,7 +32,7 @@ public class ModParticles {
     public static class Factories {
         @SubscribeEvent
         public static void registerFactories(ParticleFactoryRegisterEvent evt) {
-            Minecraft.getInstance().particles.registerFactory(ModParticles.FAIRY_RING, FairyRingParticle.Factory::new);
+            Minecraft.getInstance().particleEngine.register(ModParticles.FAIRY_RING, FairyRingParticle.Factory::new);
         }
     }
 }

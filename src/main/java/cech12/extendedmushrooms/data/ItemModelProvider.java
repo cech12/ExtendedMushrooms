@@ -106,8 +106,8 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
     }
 
     @Override
-    public void act(DirectoryCache cache) throws IOException {
-        super.act(cache);
+    public void run(DirectoryCache cache) throws IOException {
+        super.run(cache);
     }
 
     @Override

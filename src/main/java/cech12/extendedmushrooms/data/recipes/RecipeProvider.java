@@ -48,50 +48,50 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
     }
 
     @Override
-    protected void registerRecipes(@Nonnull Consumer<IFinishedRecipe> consumer) {
+    protected void buildShapelessRecipes(@Nonnull Consumer<IFinishedRecipe> consumer) {
 
         //grilled mushroom
         String name = ExtendedMushroomsItems.GRILLED_MUSHROOM.getRegistryName().getPath();
         CookingRecipeBuilder
-                .smeltingRecipe(Ingredient.fromTag(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 150)
-                .addCriterion("has_mushroom", hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer);
+                .smelting(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 150)
+                .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer);
         CookingRecipeBuilder
-                .cookingRecipe(Ingredient.fromTag(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 450, IRecipeSerializer.CAMPFIRE_COOKING)
-                .addCriterion("has_mushroom", hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer, getResourceLocation(name + "_from_campfire_cooking"));
+                .cooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 450, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE)
+                .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer, getResourceLocation(name + "_from_campfire_cooking"));
         CookingRecipeBuilder
-                .cookingRecipe(Ingredient.fromTag(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 75, IRecipeSerializer.SMOKING)
-                .addCriterion("has_mushroom", hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).build(consumer, getResourceLocation(name + "_from_smoking"));
+                .cooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 75, IRecipeSerializer.SMOKING_RECIPE)
+                .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer, getResourceLocation(name + "_from_smoking"));
 
         //mushroom bread
-        ShapedRecipeBuilder.shapedRecipe(ExtendedMushroomsItems.MUSHROOM_BREAD)
-                .key('#', ModTags.ForgeItems.MUSHROOMS_EDIBLE)
-                .patternLine("###")
-                .setGroup("bread")
-                .addCriterion("has_mushroom", hasItem(ModTags.ForgeItems.MUSHROOMS_EDIBLE))
-                .build(consumer);
+        ShapedRecipeBuilder.shaped(ExtendedMushroomsItems.MUSHROOM_BREAD)
+                .define('#', ModTags.ForgeItems.MUSHROOMS_EDIBLE)
+                .pattern("###")
+                .group("bread")
+                .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE))
+                .save(consumer);
 
         //rabbit stew
-        ShapelessRecipeBuilder.shapelessRecipe(Items.RABBIT_STEW)
-                .addIngredient(Items.BAKED_POTATO)
-                .addIngredient(Items.COOKED_RABBIT)
-                .addIngredient(Items.BOWL)
-                .addIngredient(Items.CARROT)
-                .addIngredient(ModTags.Items.MUSHROOMS_EDIBLE) //only mod intern edible mushrooms
-                .setGroup("rabbit_stew")
-                .addCriterion("has_cooked_rabbit", hasItem(Items.COOKED_RABBIT))
-                .build(consumer, getResourceLocation(Items.RABBIT_STEW.getRegistryName().getPath() + "_from_edible_mushroom"));
+        ShapelessRecipeBuilder.shapeless(Items.RABBIT_STEW)
+                .requires(Items.BAKED_POTATO)
+                .requires(Items.COOKED_RABBIT)
+                .requires(Items.BOWL)
+                .requires(Items.CARROT)
+                .requires(ModTags.Items.MUSHROOMS_EDIBLE) //only mod intern edible mushrooms
+                .group("rabbit_stew")
+                .unlockedBy("has_cooked_rabbit", has(Items.COOKED_RABBIT))
+                .save(consumer, getResourceLocation(Items.RABBIT_STEW.getRegistryName().getPath() + "_from_edible_mushroom"));
 
         //brown dye from infested flower
-        ShapelessRecipeBuilder.shapelessRecipe(Items.BROWN_DYE)
-                .addIngredient(ExtendedMushroomsBlocks.INFESTED_FLOWER)
-                .addCriterion("has_flower", hasItem(ExtendedMushroomsBlocks.INFESTED_FLOWER))
-                .build(consumer, getResourceLocation(Items.BROWN_DYE.getRegistryName().getPath() + "_from_infested_flower"));
+        ShapelessRecipeBuilder.shapeless(Items.BROWN_DYE)
+                .requires(ExtendedMushroomsBlocks.INFESTED_FLOWER)
+                .unlockedBy("has_flower", has(ExtendedMushroomsBlocks.INFESTED_FLOWER))
+                .save(consumer, getResourceLocation(Items.BROWN_DYE.getRegistryName().getPath() + "_from_infested_flower"));
 
         //mushroom spores
-        ShapelessRecipeBuilder.shapelessRecipe(ExtendedMushroomsItems.MUSHROOM_SPORES, 2)
-                .addIngredient(Tags.Items.MUSHROOMS)
-                .addCriterion("has_mushroom", hasItem(Tags.Items.MUSHROOMS))
-                .build(consumer);
+        ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.MUSHROOM_SPORES, 2)
+                .requires(Tags.Items.MUSHROOMS)
+                .unlockedBy("has_mushroom", has(Tags.Items.MUSHROOMS))
+                .save(consumer);
 
         mushroomWoodRecipes(consumer, "colorless",
                 ModTags.ForgeItems.MUSHROOM_STEMS_COLORLESS,
@@ -158,16 +158,16 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.GLOWSHROOM_CAP_CARPET.asItem(),
                 ExtendedMushroomsBlocks.GLOWSHROOM_CAP_PRESSURE_PLATE.asItem());
         //glowstone crumbs recipes
-        ShapedRecipeBuilder.shapedRecipe(Items.GLOWSTONE_DUST)
-                .key('#', ExtendedMushroomsItems.GLOWSTONE_CRUMBS)
-                .patternLine("##")
-                .patternLine("##")
-                .addCriterion("has_crumbs", hasItem(ExtendedMushroomsItems.GLOWSTONE_CRUMBS))
-                .build(consumer, getResourceLocation(Items.GLOWSTONE_DUST.getRegistryName().getPath()));
-        ShapelessRecipeBuilder.shapelessRecipe(ExtendedMushroomsItems.GLOWSTONE_CRUMBS, 4)
-                .addIngredient(Items.GLOWSTONE_DUST)
-                .addCriterion("has_dust", hasItem(Items.GLOWSTONE_DUST))
-                .build(consumer);
+        ShapedRecipeBuilder.shaped(Items.GLOWSTONE_DUST)
+                .define('#', ExtendedMushroomsItems.GLOWSTONE_CRUMBS)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_crumbs", has(ExtendedMushroomsItems.GLOWSTONE_CRUMBS))
+                .save(consumer, getResourceLocation(Items.GLOWSTONE_DUST.getRegistryName().getPath()));
+        ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.GLOWSTONE_CRUMBS, 4)
+                .requires(Items.GLOWSTONE_DUST)
+                .unlockedBy("has_dust", has(Items.GLOWSTONE_DUST))
+                .save(consumer);
 
         mushroomWoodRecipes(consumer, "poisonous_mushroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
@@ -211,168 +211,168 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                                      Item fenceGate, Item ladder, Item planks, Item pressurePlate, Item sign, Item slab,
                                      Item stairs, Item trapdoor, Item verticalPlanks, Item verticalSlab) {
         String directory = "mushroom_wood/" + name + "/";
-        ShapedRecipeBuilder.shapedRecipe(boat)
-                .key('#', planks)
-                .patternLine("# #")
-                .patternLine("###")
-                .setGroup("boat")
-                .addCriterion("in_water", enteredBlock(Blocks.WATER))
-                .build(consumer, getResourceLocation(directory, boat.getRegistryName()));
-        ShapelessRecipeBuilder.shapelessRecipe(button)
-                .addIngredient(planks)
-                .setGroup("wooden_button")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, button.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(door, 3)
-                .key('#', planks)
-                .patternLine("##")
-                .patternLine("##")
-                .patternLine("##")
-                .setGroup("wooden_door")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, door.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(fence, 3)
-                .key('#', Tags.Items.RODS_WOODEN)
-                .key('W', planks)
-                .patternLine("W#W")
-                .patternLine("W#W")
-                .setGroup("wooden_fence")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, fence.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(fenceGate)
-                .key('#', Tags.Items.RODS_WOODEN)
-                .key('W', planks)
-                .patternLine("#W#")
-                .patternLine("#W#")
-                .setGroup("wooden_fence_gate")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, fenceGate.getRegistryName()));
-        ShapelessRecipeBuilder.shapelessRecipe(planks, 4)
-                .addIngredient(stems)
-                .setGroup("planks")
-                .addCriterion("has_logs", hasItem(stems))
-                .build(consumer, getResourceLocation(directory, planks.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(pressurePlate)
-                .key('#', planks)
-                .patternLine("##")
-                .setGroup("wooden_pressure_plate")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, pressurePlate.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(sign, 3)
-                .key('#', planks)
-                .key('|', Tags.Items.RODS_WOODEN)
-                .patternLine("###")
-                .patternLine("###")
-                .patternLine(" | ")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, sign.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(slab, 6)
-                .key('#', planks)
-                .patternLine("###")
-                .setGroup("wooden_slab")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, slab.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(stairs, 4)
-                .key('#', planks)
-                .patternLine("#  ")
-                .patternLine("## ")
-                .patternLine("###")
-                .setGroup("wooden_stairs")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, stairs.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(trapdoor, 2)
-                .key('#', planks)
-                .patternLine("###")
-                .patternLine("###")
-                .setGroup("wooden_trapdoor")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(consumer, getResourceLocation(directory, trapdoor.getRegistryName()));
+        ShapedRecipeBuilder.shaped(boat)
+                .define('#', planks)
+                .pattern("# #")
+                .pattern("###")
+                .group("boat")
+                .unlockedBy("in_water", insideOf(Blocks.WATER))
+                .save(consumer, getResourceLocation(directory, boat.getRegistryName()));
+        ShapelessRecipeBuilder.shapeless(button)
+                .requires(planks)
+                .group("wooden_button")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, button.getRegistryName()));
+        ShapedRecipeBuilder.shaped(door, 3)
+                .define('#', planks)
+                .pattern("##")
+                .pattern("##")
+                .pattern("##")
+                .group("wooden_door")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, door.getRegistryName()));
+        ShapedRecipeBuilder.shaped(fence, 3)
+                .define('#', Tags.Items.RODS_WOODEN)
+                .define('W', planks)
+                .pattern("W#W")
+                .pattern("W#W")
+                .group("wooden_fence")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, fence.getRegistryName()));
+        ShapedRecipeBuilder.shaped(fenceGate)
+                .define('#', Tags.Items.RODS_WOODEN)
+                .define('W', planks)
+                .pattern("#W#")
+                .pattern("#W#")
+                .group("wooden_fence_gate")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, fenceGate.getRegistryName()));
+        ShapelessRecipeBuilder.shapeless(planks, 4)
+                .requires(stems)
+                .group("planks")
+                .unlockedBy("has_logs", has(stems))
+                .save(consumer, getResourceLocation(directory, planks.getRegistryName()));
+        ShapedRecipeBuilder.shaped(pressurePlate)
+                .define('#', planks)
+                .pattern("##")
+                .group("wooden_pressure_plate")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, pressurePlate.getRegistryName()));
+        ShapedRecipeBuilder.shaped(sign, 3)
+                .define('#', planks)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern("###")
+                .pattern("###")
+                .pattern(" | ")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, sign.getRegistryName()));
+        ShapedRecipeBuilder.shaped(slab, 6)
+                .define('#', planks)
+                .pattern("###")
+                .group("wooden_slab")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, slab.getRegistryName()));
+        ShapedRecipeBuilder.shaped(stairs, 4)
+                .define('#', planks)
+                .pattern("#  ")
+                .pattern("## ")
+                .pattern("###")
+                .group("wooden_stairs")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, stairs.getRegistryName()));
+        ShapedRecipeBuilder.shaped(trapdoor, 2)
+                .define('#', planks)
+                .pattern("###")
+                .pattern("###")
+                .group("wooden_trapdoor")
+                .unlockedBy("has_planks", has(planks))
+                .save(consumer, getResourceLocation(directory, trapdoor.getRegistryName()));
 
         //recipes that are only active when other mods are installed
-        ShapedRecipeBuilder.shapedRecipe(bookshelf)
-                .key('#', planks)
-                .key('X', Items.BOOK)
-                .patternLine("###")
-                .patternLine("XXX")
-                .patternLine("###")
-                .addCriterion("has_book", hasItem(Items.BOOK))
-                .build(ResultWrapper.transformJson(consumer, json -> {
+        ShapedRecipeBuilder.shaped(bookshelf)
+                .define('#', planks)
+                .define('X', Items.BOOK)
+                .pattern("###")
+                .pattern("XXX")
+                .pattern("###")
+                .unlockedBy("has_book", has(Items.BOOK))
+                .save(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantBookshelves")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, bookshelf.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(chest)
-                .key('#', planks)
-                .key('|', Tags.Items.RODS_WOODEN)
-                .patternLine("###")
-                .patternLine("#|#")
-                .patternLine("###")
-                .setGroup("mushroom_chest")
-                .addCriterion("has_lots_of_items", new InventoryChangeTrigger.Instance(EntityPredicate.AndPredicate.ANY_AND, MinMaxBounds.IntBound.atLeast(10), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new ItemPredicate[0]))
-                .build(ResultWrapper.transformJson(consumer, json -> {
+        ShapedRecipeBuilder.shaped(chest)
+                .define('#', planks)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern("###")
+                .pattern("#|#")
+                .pattern("###")
+                .group("mushroom_chest")
+                .unlockedBy("has_lots_of_items", new InventoryChangeTrigger.Instance(EntityPredicate.AndPredicate.ANY, MinMaxBounds.IntBound.atLeast(10), MinMaxBounds.IntBound.ANY, MinMaxBounds.IntBound.ANY, new ItemPredicate[0]))
+                .save(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantChests")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, chest.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(chestTrapped)
-                .key('#', planks)
-                .key('|', Items.TRIPWIRE_HOOK)
-                .patternLine("###")
-                .patternLine("#|#")
-                .patternLine("###")
-                .addCriterion("has_tripwire_hook", hasItem(Items.TRIPWIRE_HOOK))
-                .setGroup("mushroom_trapped_chest")
-                .build(ResultWrapper.transformJson(consumer, json -> {
+        ShapedRecipeBuilder.shaped(chestTrapped)
+                .define('#', planks)
+                .define('|', Items.TRIPWIRE_HOOK)
+                .pattern("###")
+                .pattern("#|#")
+                .pattern("###")
+                .unlockedBy("has_tripwire_hook", has(Items.TRIPWIRE_HOOK))
+                .group("mushroom_trapped_chest")
+                .save(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantTrappedChests")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, chestTrapped.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(ladder, 4)
-                .key('#', planks)
-                .key('|', Tags.Items.RODS_WOODEN)
-                .patternLine("| |")
-                .patternLine("|#|")
-                .patternLine("| |")
-                .addCriterion("has_stick", hasItem(Tags.Items.RODS_WOODEN))
-                .build(ResultWrapper.transformJson(consumer, json -> {
+        ShapedRecipeBuilder.shaped(ladder, 4)
+                .define('#', planks)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern("| |")
+                .pattern("|#|")
+                .pattern("| |")
+                .unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+                .save(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("variantLadders")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, ladder.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(verticalPlanks, 3)
-                .key('#', planks)
-                .patternLine("#")
-                .patternLine("#")
-                .patternLine("#")
-                .addCriterion("has_planks", hasItem(planks))
-                .build(ResultWrapper.transformJson(consumer, json -> {
+        ShapedRecipeBuilder.shaped(verticalPlanks, 3)
+                .define('#', planks)
+                .pattern("#")
+                .pattern("#")
+                .pattern("#")
+                .unlockedBy("has_planks", has(planks))
+                .save(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, verticalPlanks.getRegistryName()));
-        ShapelessRecipeBuilder.shapelessRecipe(planks)
-                .addIngredient(verticalPlanks)
-                .addCriterion("has_vertical_planks", hasItem(verticalPlanks))
-                .build(ResultWrapper.transformJson(consumer, json -> {
+        ShapelessRecipeBuilder.shapeless(planks)
+                .requires(verticalPlanks)
+                .unlockedBy("has_vertical_planks", has(verticalPlanks))
+                .save(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, verticalPlanks.getRegistryName().getPath() + "_revert"));
-        ShapedRecipeBuilder.shapedRecipe(verticalSlab, 3)
-                .key('#', slab)
-                .patternLine("#")
-                .patternLine("#")
-                .patternLine("#")
-                .addCriterion("has_slab", hasItem(slab))
-                .build(ResultWrapper.transformJson(consumer, json -> {
+        ShapedRecipeBuilder.shaped(verticalSlab, 3)
+                .define('#', slab)
+                .pattern("#")
+                .pattern("#")
+                .pattern("#")
+                .unlockedBy("has_slab", has(slab))
+                .save(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlabs")));
                     json.add("conditions", array);
                 }), getResourceLocation(directory, verticalSlab.getRegistryName()));
-        ShapelessRecipeBuilder.shapelessRecipe(slab)
-                .addIngredient(verticalSlab)
-                .addCriterion("has_vertical_slab", hasItem(verticalSlab))
-                .build(ResultWrapper.transformJson(consumer, json -> {
+        ShapelessRecipeBuilder.shapeless(slab)
+                .requires(verticalSlab)
+                .unlockedBy("has_vertical_slab", has(verticalSlab))
+                .save(ResultWrapper.transformJson(consumer, json -> {
                     JsonArray array = new JsonArray();
                     array.add(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlabs")));
                     json.add("conditions", array);
@@ -380,42 +380,42 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
 
         //wood cutting
         String woodcuttingDirectory = directory + "woodcutting/";
-        WoodcutterRecipeBuilder.woodcutterRecipe(planks, Ingredient.fromTag(stems), 6)
+        WoodcutterRecipeBuilder.woodcutterRecipe(planks, Ingredient.of(stems), 6)
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "planks_from_stem"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(strippedStem, Ingredient.fromItems(stem))
+        WoodcutterRecipeBuilder.woodcutterRecipe(strippedStem, Ingredient.of(stem))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "stripped_stem_from_stem"));
 
-        WoodcutterRecipeBuilder.woodcutterRecipe(button, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(button, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "button_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(door, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(door, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "door_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(fence, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(fence, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(fenceGate, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(fenceGate, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_gate_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(pressurePlate, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(pressurePlate, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "pressure_plate_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(sign, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(sign, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "sign_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(slab, Ingredient.fromItems(planks), 2)
+        WoodcutterRecipeBuilder.woodcutterRecipe(slab, Ingredient.of(planks), 2)
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "slab_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(stairs, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(stairs, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "stairs_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(trapdoor, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(trapdoor, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "trapdoor_from_planks"));
 
         //wood cutting recipes that are only active when other mods are installed
-        WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.fromTag(stems), 6)
+        WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.of(stems), 6)
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_planks_from_stem"));
 
-        WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.fromItems(planks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.of(planks))
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_planks_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(planks, Ingredient.fromItems(verticalPlanks))
+        WoodcutterRecipeBuilder.woodcutterRecipe(planks, Ingredient.of(verticalPlanks))
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "planks_from_vertical_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(verticalSlab, Ingredient.fromItems(planks), 2)
+        WoodcutterRecipeBuilder.woodcutterRecipe(verticalSlab, Ingredient.of(planks), 2)
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalSlabs")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_slab_from_planks"));
     }
@@ -423,40 +423,40 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
     private void mushroomCapRecipes(Consumer<IFinishedRecipe> consumer, String name, ITag.INamedTag<Item> caps, Item banner,
                                     Item bed, Item button, Item carpet, Item pressure_plate) {
         String directory = "mushroom_cap/" + name + "/";
-        ShapedRecipeBuilder.shapedRecipe(banner)
-                .key('#', caps)
-                .key('|', Tags.Items.RODS_WOODEN)
-                .patternLine("###")
-                .patternLine("###")
-                .patternLine(" | ")
-                .setGroup("banner")
-                .addCriterion("has_cap", hasItem(caps))
-                .build(consumer, getResourceLocation(directory, banner.getRegistryName().getPath()));
-        ShapedRecipeBuilder.shapedRecipe(bed)
-                .key('#', caps)
-                .key('W', ItemTags.PLANKS)
-                .patternLine("###")
-                .patternLine("WWW")
-                .setGroup("bed")
-                .addCriterion("has_cap", hasItem(caps))
-                .build(consumer, getResourceLocation(directory, bed.getRegistryName().getPath()));
-        ShapelessRecipeBuilder.shapelessRecipe(button)
-                .addIngredient(caps)
-                .setGroup("wool_buttons")
-                .addCriterion("has_cap", hasItem(caps))
-                .build(consumer, getResourceLocation(directory, button.getRegistryName()));
-        ShapedRecipeBuilder.shapedRecipe(carpet, 3)
-                .key('#', caps)
-                .patternLine("##")
-                .setGroup("carpet")
-                .addCriterion("has_cap", hasItem(caps))
-                .build(consumer, getResourceLocation(directory, carpet.getRegistryName()));
-        ShapelessRecipeBuilder.shapelessRecipe(pressure_plate)
-                .addIngredient(ItemTags.WOODEN_PRESSURE_PLATES)
-                .addIngredient(caps)
-                .setGroup("wool_plates")
-                .addCriterion("has_cap", hasItem(caps))
-                .build(consumer, getResourceLocation(directory, pressure_plate.getRegistryName()));
+        ShapedRecipeBuilder.shaped(banner)
+                .define('#', caps)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern("###")
+                .pattern("###")
+                .pattern(" | ")
+                .group("banner")
+                .unlockedBy("has_cap", has(caps))
+                .save(consumer, getResourceLocation(directory, banner.getRegistryName().getPath()));
+        ShapedRecipeBuilder.shaped(bed)
+                .define('#', caps)
+                .define('W', ItemTags.PLANKS)
+                .pattern("###")
+                .pattern("WWW")
+                .group("bed")
+                .unlockedBy("has_cap", has(caps))
+                .save(consumer, getResourceLocation(directory, bed.getRegistryName().getPath()));
+        ShapelessRecipeBuilder.shapeless(button)
+                .requires(caps)
+                .group("wool_buttons")
+                .unlockedBy("has_cap", has(caps))
+                .save(consumer, getResourceLocation(directory, button.getRegistryName()));
+        ShapedRecipeBuilder.shaped(carpet, 3)
+                .define('#', caps)
+                .pattern("##")
+                .group("carpet")
+                .unlockedBy("has_cap", has(caps))
+                .save(consumer, getResourceLocation(directory, carpet.getRegistryName()));
+        ShapelessRecipeBuilder.shapeless(pressure_plate)
+                .requires(ItemTags.WOODEN_PRESSURE_PLATES)
+                .requires(caps)
+                .group("wool_plates")
+                .unlockedBy("has_cap", has(caps))
+                .save(consumer, getResourceLocation(directory, pressure_plate.getRegistryName()));
     }
 
 }

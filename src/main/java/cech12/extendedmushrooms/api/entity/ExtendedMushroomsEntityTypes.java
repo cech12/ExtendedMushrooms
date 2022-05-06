@@ -9,8 +9,8 @@ import net.minecraft.entity.EntityType;
 
 public class ExtendedMushroomsEntityTypes {
 
-    public static EntityType<? extends Entity> MUSHROOM_SHEEP = EntityType.Builder.create(MushroomSheepEntity::new, EntityClassification.CREATURE).size(0.9F, 1.3F).build("mushroom_sheep");
+    public static EntityType<? extends Entity> MUSHROOM_SHEEP = EntityType.Builder.of(MushroomSheepEntity::new, EntityClassification.CREATURE).sized(0.9F, 1.3F).build("mushroom_sheep");
 
-    public static EntityType<? extends Entity> MUSHROOM_BOAT = EntityType.Builder.create(MushroomBoatEntity::new, EntityClassification.MISC).size(1.375F, 0.5625F).build(ExtendedMushrooms.MOD_ID + ":mushroom_boat");
+    public static EntityType<? extends Entity> MUSHROOM_BOAT = EntityType.Builder.of(MushroomBoatEntity::new, EntityClassification.MISC).sized(1.375F, 0.5625F).build(ExtendedMushrooms.MOD_ID + ":mushroom_boat");
 
 }

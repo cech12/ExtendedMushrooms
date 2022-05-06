@@ -53,7 +53,7 @@ public class ModTileEntities {
 
 
     private static <T extends TileEntity> TileEntityType<T> register(RegistryEvent.Register<TileEntityType<?>> registryEvent, Supplier<T> supplier, String registryName, Block... blocks) {
-        TileEntityType<T> tileEntityType = TileEntityType.Builder.create(supplier, blocks).build(null);
+        TileEntityType<T> tileEntityType = TileEntityType.Builder.of(supplier, blocks).build(null);
         tileEntityType.setRegistryName(registryName);
         registryEvent.getRegistry().register(tileEntityType);
         return tileEntityType;

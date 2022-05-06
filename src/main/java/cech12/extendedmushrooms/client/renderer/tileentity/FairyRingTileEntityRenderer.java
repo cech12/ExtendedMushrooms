@@ -47,14 +47,14 @@ public class FairyRingTileEntityRenderer extends TileEntityRenderer<FairyRingTil
     public void render(@Nonnull FairyRingTileEntity fairyRing, float partticks, @Nonnull MatrixStack matrixStack, @Nonnull IRenderTypeBuffer iRenderTypeBuffer, int p1, int p2) {
         //only render inventory of master
         if (fairyRing.isMaster()) {
-            matrixStack.push();
+            matrixStack.pushPose();
             //move to ring center
             Vector3d centerTranslation = FairyRingTileEntity.CENTER_TRANSLATION_VECTOR;
             matrixStack.translate(centerTranslation.x, centerTranslation.y, centerTranslation.z);
 
             int itemCount = 0;
-            for (int i = 0; i < fairyRing.getSizeInventory(); i++) {
-                if (!fairyRing.getStackInSlot(i).isEmpty()) {
+            for (int i = 0; i < fairyRing.getContainerSize(); i++) {
+                if (!fairyRing.getItem(i).isEmpty()) {
                     itemCount++;
                 }
             }
@@ -72,24 +72,24 @@ public class FairyRingTileEntityRenderer extends TileEntityRenderer<FairyRingTil
             }
             float anglePerItem = 360F / itemCount;
             Minecraft mc = Minecraft.getInstance();
-            mc.textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
+            mc.textureManager.bind(AtlasTexture.LOCATION_BLOCKS);
             Vector3f yAxis = new Vector3f(0, 1, 0);
-            for(int i = 0; i < fairyRing.getSizeInventory(); i++) {
-                matrixStack.push();
+            for(int i = 0; i < fairyRing.getContainerSize(); i++) {
+                matrixStack.pushPose();
                 if (itemCount > 1) {
                     //deposit items in a circle, when more than one items are in inventory
-                    matrixStack.rotate(new Quaternion(yAxis, (float) Math.toRadians(anglePerItem * i), false));
+                    matrixStack.mulPose(new Quaternion(yAxis, (float) Math.toRadians(anglePerItem * i), false));
                     matrixStack.translate(0.75 * quadraticRecipeProgressInverse, 0, 0);
                 }
                 //add some (slow) motion
-                matrixStack.rotate(new Quaternion(yAxis, (float) Math.toRadians((time / 3 + i * 10) % 360), false));
+                matrixStack.mulPose(new Quaternion(yAxis, (float) Math.toRadians((time / 3 + i * 10) % 360), false));
                 matrixStack.translate(0, Math.sin((time + i * 10) / 10.0) * 0.01 + 0.05 + (1.1 * quadraticRecipeProgress), 0);
                 //render item
-                ItemStack stack = fairyRing.getStackInSlot(i);
+                ItemStack stack = fairyRing.getItem(i);
                 if(!stack.isEmpty()) {
-                    mc.getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.GROUND, p1, p2, matrixStack, iRenderTypeBuffer);
+                    mc.getItemRenderer().renderStatic(stack, ItemCameraTransforms.TransformType.GROUND, p1, p2, matrixStack, iRenderTypeBuffer);
                 }
-                matrixStack.pop();
+                matrixStack.popPose();
             }
 
             //render entity inside of ring
@@ -125,7 +125,7 @@ public class FairyRingTileEntityRenderer extends TileEntityRenderer<FairyRingTil
             }
              */
 
-            matrixStack.pop();
+            matrixStack.popPose();
         }
     }
 

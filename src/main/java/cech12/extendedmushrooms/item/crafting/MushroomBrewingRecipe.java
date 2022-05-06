@@ -23,12 +23,12 @@ public class MushroomBrewingRecipe implements IBrewingRecipe {
 
     @Override
     public boolean isInput(ItemStack input) {
-        return input.getItem() == Items.POTION && PotionUtils.getPotionFromItem(input) == Potions.AWKWARD;
+        return input.getItem() == Items.POTION && PotionUtils.getPotion(input) == Potions.AWKWARD;
     }
 
     @Override
     public boolean isIngredient(ItemStack ingredient) {
-        return ingredient.getItem().isIn(this.mushroomTag);
+        return ingredient.getItem().is(this.mushroomTag);
     }
 
     @Nonnull
@@ -36,7 +36,7 @@ public class MushroomBrewingRecipe implements IBrewingRecipe {
     public ItemStack getOutput(@Nonnull ItemStack input, @Nonnull ItemStack ingredient) {
         if (!input.isEmpty() && !ingredient.isEmpty() && isInput(input) && isIngredient(ingredient)) {
             ItemStack output = input.copy();
-            PotionUtils.addPotionToItemStack(output, this.result);
+            PotionUtils.setPotion(output, this.result);
             return output;
         }
         return ItemStack.EMPTY;

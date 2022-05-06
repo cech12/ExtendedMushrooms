@@ -99,26 +99,26 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
      */
     @Nonnull
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return this.resultStack.copy();
     }
 
     @Nonnull
     @Override
-    public ItemStack getIcon() {
+    public ItemStack getToastSymbol() {
         return new ItemStack(Items.RED_MUSHROOM);
     }
 
     public boolean isValid(FairyRingMode mode, IInventory inv) {
         // inventory must have a stack limit of 1
-        if (inv.getInventoryStackLimit() != 1) return false;
+        if (inv.getMaxStackSize() != 1) return false;
         // actual mode must fit to this recipe
         if (mode != this.getRequiredMode()) return false;
 
         //ingredients must be the same
         List<Ingredient> ingredientsMissing = new ArrayList<>(this.ingredients);
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack input = inv.getStackInSlot(i);
+        for (int i = 0; i < inv.getContainerSize(); i++) {
+            ItemStack input = inv.getItem(i);
             if (!input.isEmpty()) {
                 int index = -1;
                 for (int j = 0; j < ingredientsMissing.size(); j++) {
@@ -142,7 +142,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
      */
     @Deprecated
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         // This method is ignored.
         return false;
     }
@@ -163,7 +163,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
     @Nonnull
     @Deprecated
     @Override
-    public ItemStack getCraftingResult(@Nonnull IInventory inv) {
+    public ItemStack assemble(@Nonnull IInventory inv) {
         // This method is ignored. - getResultItemStack is used.
         return this.resultStack.copy();
     }
@@ -175,58 +175,58 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
         }
 
         @Nonnull
-        public FairyRingRecipe read(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
+        public FairyRingRecipe fromJson(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
             //deserialize required mode
             FairyRingMode requiredMode = readMode(json, FairyRingMode.NORMAL);
             //deserialize ingredients
-            NonNullList<Ingredient> ingredients = readIngredients(JSONUtils.getJsonArray(json, "ingredients"));
+            NonNullList<Ingredient> ingredients = readIngredients(JSONUtils.getAsJsonArray(json, "ingredients"));
             if (ingredients.isEmpty()) {
                 throw new JsonParseException("No ingredients for fairy ring recipe");
             } else if (ingredients.size() > FairyRingTileEntity.INVENTORY_SIZE) {
                 throw new JsonParseException("Too many ingredients for fairy ring recipe the max is " + FairyRingTileEntity.INVENTORY_SIZE);
             }
             //deserialize recipe time
-            int time = JSONUtils.getInt(json, "recipetime");
+            int time = JSONUtils.getAsInt(json, "recipetime");
             //deserialize result
-            JsonObject resultJson = JSONUtils.getJsonObject(json, "result");
+            JsonObject resultJson = JSONUtils.getAsJsonObject(json, "result");
             //deserialize result mode
             FairyRingMode resultMode = readMode(resultJson, requiredMode);
             //deserialize result item stack
             ItemStack resultStack = ItemStack.EMPTY;
-            if (JSONUtils.hasField(resultJson, "item")) {
-                resultStack = ShapedRecipe.deserializeItem(resultJson);
+            if (JSONUtils.isValidNode(resultJson, "item")) {
+                resultStack = ShapedRecipe.itemFromJson(resultJson);
             }
             return new FairyRingRecipe(recipeId, requiredMode, ingredients, time, resultMode, resultStack);
         }
 
-        public FairyRingRecipe read(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
-            FairyRingMode requiredMode = FairyRingMode.byName(buffer.readString(32767));
+        public FairyRingRecipe fromNetwork(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
+            FairyRingMode requiredMode = FairyRingMode.byName(buffer.readUtf(32767));
             int size = buffer.readVarInt();
             NonNullList<Ingredient> ingredients = NonNullList.withSize(size, Ingredient.EMPTY);
             for (int j = 0; j < ingredients.size(); ++j) {
-                ingredients.set(j, Ingredient.read(buffer));
+                ingredients.set(j, Ingredient.fromNetwork(buffer));
             }
             int time = buffer.readVarInt();
-            FairyRingMode resultMode = FairyRingMode.byName(buffer.readString(32767));
-            ItemStack resultStack = buffer.readItemStack();
+            FairyRingMode resultMode = FairyRingMode.byName(buffer.readUtf(32767));
+            ItemStack resultStack = buffer.readItem();
             return new FairyRingRecipe(recipeId, requiredMode, ingredients, time, resultMode, resultStack);
         }
 
-        public void write(PacketBuffer buffer, FairyRingRecipe recipe) {
-            buffer.writeString(recipe.requiredMode.getName());
+        public void toNetwork(PacketBuffer buffer, FairyRingRecipe recipe) {
+            buffer.writeUtf(recipe.requiredMode.getName());
             buffer.writeVarInt(recipe.ingredients.size());
             for (Ingredient ingredient : recipe.ingredients) {
-                ingredient.write(buffer);
+                ingredient.toNetwork(buffer);
             }
             buffer.writeVarInt(recipe.recipeTime);
-            buffer.writeString(recipe.resultMode.getName());
-            buffer.writeItemStack(recipe.resultStack);
+            buffer.writeUtf(recipe.resultMode.getName());
+            buffer.writeItem(recipe.resultStack);
         }
 
         private static FairyRingMode readMode(@Nonnull JsonObject jsonObject, @Nonnull FairyRingMode defaultMode) {
             FairyRingMode mode = defaultMode;
             try {
-                String modeString = JSONUtils.getString(jsonObject, "mode");
+                String modeString = JSONUtils.getAsString(jsonObject, "mode");
                 mode = FairyRingMode.byName(modeString);
                 if (mode == null) {
                     throw new JsonParseException("Mode " + modeString + " does not exist");
@@ -240,8 +240,8 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
             NonNullList<Ingredient> nonnulllist = NonNullList.create();
 
             for (int i = 0; i < jsonArray.size(); ++i) {
-                Ingredient ingredient = Ingredient.deserialize(jsonArray.get(i));
-                if (!ingredient.hasNoMatchingItems()) {
+                Ingredient ingredient = Ingredient.fromJson(jsonArray.get(i));
+                if (!ingredient.isEmpty()) {
                     nonnulllist.add(ingredient);
                 }
             }

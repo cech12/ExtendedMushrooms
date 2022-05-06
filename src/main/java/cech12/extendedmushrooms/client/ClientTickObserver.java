@@ -16,7 +16,7 @@ public final class ClientTickObserver {
     public static int ticksSinceStart = 0;
     public static float partialTicks = 0;
 
-    private static final Field RENDER_PARTIAL_TICKS_PAUSED = ObfuscationReflectionHelper.findField(Minecraft.class, "field_193996_ah");
+    private static final Field RENDER_PARTIAL_TICKS_PAUSED = ObfuscationReflectionHelper.findField(Minecraft.class, "pausePartialTick");
 
     private ClientTickObserver() {}
 
@@ -25,7 +25,7 @@ public final class ClientTickObserver {
         Minecraft mc = Minecraft.getInstance();
         if (event.phase == TickEvent.Phase.START) {
             partialTicks = event.renderTickTime;
-            if (mc.isGamePaused()) {
+            if (mc.isPaused()) {
                 // If game is paused, need to use the saved value. The event is always fired with the "true" value which
                 // keeps updating when paused. See RenderTickEvent fire site for details
                 try {
@@ -38,7 +38,7 @@ public final class ClientTickObserver {
     @SubscribeEvent
     public static void onClientTickEnd(TickEvent.ClientTickEvent event) {
         if(event.phase == TickEvent.Phase.END) {
-            if (!Minecraft.getInstance().isGamePaused()) {
+            if (!Minecraft.getInstance().isPaused()) {
                 ticksSinceStart++;
                 partialTicks = 0;
             }

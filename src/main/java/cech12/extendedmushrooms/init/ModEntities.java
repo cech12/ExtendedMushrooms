@@ -42,7 +42,7 @@ public class ModEntities {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, SheepEntity.registerAttributes().create());
+        event.put((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, SheepEntity.createAttributes().build());
     }
 
     /**
@@ -61,7 +61,7 @@ public class ModEntities {
         //add Mushroom Sheep to Mushroom Biomes
         if (event.getCategory().equals(Biome.Category.MUSHROOM)) {
             if (Config.MUSHROOM_SHEEP_ENABLED.get()) {
-                event.getSpawns().withSpawner(EntityClassification.CREATURE,
+                event.getSpawns().addSpawn(EntityClassification.CREATURE,
                         new MobSpawnInfo.Spawners(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
                                 Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.get(),
                                 Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.get(),

@@ -25,7 +25,7 @@ public class MixinMushroomBlock {
      * Add a tree like automatic growing.
      * The automatic multiplication still remaining.
      */
-    @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "randomTick", remap = false) //, cancellable = true)
     public void tickProxy(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         //automatic growing of mushrooms
         //Forge: prevent loading unloaded chunks
@@ -36,14 +36,14 @@ public class MixinMushroomBlock {
                 boolean partOfFairyRing = false;
                 BlockPos.Mutable mutablePos = new BlockPos.Mutable();
                 for (Direction direction : directions) {
-                    mutablePos.setPos(pos).move(direction);
+                    mutablePos.set(pos).move(direction);
                     if (world.getBlockState(mutablePos).getBlock() == ExtendedMushroomsBlocks.FAIRY_RING) {
                         partOfFairyRing = true;
                         break;
                     }
                 }
                 if (!partOfFairyRing) {
-                    ((MushroomBlock) state.getBlock()).grow(world, random, pos, state);
+                    ((MushroomBlock) state.getBlock()).performBonemeal(world, random, pos, state);
                 }
             }
         }
@@ -54,15 +54,15 @@ public class MixinMushroomBlock {
     /**
      * Change grow behaviour to enable mega mushrooms can be grown out of vanilla mushrooms.
      */
-    @Inject(at = @At("HEAD"), method = "grow", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "growMushroom", remap = false, cancellable = true)
     public void growProxy(ServerWorld world, BlockPos pos, BlockState state, Random random, CallbackInfoReturnable<Boolean> cir) {
         if (!MushroomUtils.isValidMushroomPosition(world, pos)) {
             cir.setReturnValue(false);
         } else if (state.getBlock() == Blocks.BROWN_MUSHROOM) {
-            (new BrownMushroom()).growMushroom(world, world.getChunkProvider().getChunkGenerator(), pos, state, random);
+            (new BrownMushroom()).growMushroom(world, world.getChunkSource().getGenerator(), pos, state, random);
             cir.setReturnValue(true);
         } else if (state.getBlock() == Blocks.RED_MUSHROOM) {
-            (new RedMushroom()).growMushroom(world, world.getChunkProvider().getChunkGenerator(), pos, state, random);
+            (new RedMushroom()).growMushroom(world, world.getChunkSource().getGenerator(), pos, state, random);
             cir.setReturnValue(true);
         } else {
             cir.setReturnValue(false);

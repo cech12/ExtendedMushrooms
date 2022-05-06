@@ -27,6 +27,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
 
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
@@ -35,26 +37,26 @@ public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
 
     public PoisonousMushroomCap(MushroomType type, Properties properties) {
         super(type, properties);
-        this.setDefaultState(this.getDefaultState().with(TRIGGERED, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(TRIGGERED, false));
     }
 
     @Override
-    public boolean ticksRandomly(BlockState state) {
-        return super.ticksRandomly(state) || !state.get(TRIGGERED);
+    public boolean isRandomlyTicking(BlockState state) {
+        return super.isRandomlyTicking(state) || !state.getValue(TRIGGERED);
     }
 
     @Override
     public void randomTick(BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
         super.randomTick(state, worldIn, pos, random);
         //reset TRIGGERED state
-        if (state.get(TRIGGERED)) {
-            worldIn.setBlockState(pos, state.with(TRIGGERED, false), 2);
+        if (state.getValue(TRIGGERED)) {
+            worldIn.setBlock(pos, state.setValue(TRIGGERED, false), 2);
         }
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(TRIGGERED);
     }
 
@@ -88,62 +90,62 @@ public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
             directions.remove(face);
             directions.addFirst(face);
             for (Direction direction : directions) {
-                effectPos.setPos(pos).move(direction);
-                if (!worldIn.getBlockState(effectPos).isSolid()) {
+                effectPos.set(pos).move(direction);
+                if (!worldIn.getBlockState(effectPos).canOcclude()) {
                     posFound = true;
                     break;
                 }
             }
         } else {
-            effectPos.setPos(pos);
-            if (!worldIn.getBlockState(effectPos).isSolid()) {
+            effectPos.set(pos);
+            if (!worldIn.getBlockState(effectPos).canOcclude()) {
                 posFound = true;
             }
         }
 
         if (posFound) {
             this.spawnEffectCloud(worldIn, effectPos, worldIn.getRandom());
-            worldIn.setBlockState(pos, state.with(TRIGGERED, true), 2);
+            worldIn.setBlock(pos, state.setValue(TRIGGERED, true), 2);
         }
     }
 
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn instanceof ServerWorld && !state.get(TRIGGERED) && !state.get(AbstractEffectMushroomCap.PERSISTENT)) {
-            this.generateEffectCloud((ServerWorld)worldIn, state, pos, hit.getFace());
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (worldIn instanceof ServerWorld && !state.getValue(TRIGGERED) && !state.getValue(AbstractEffectMushroomCap.PERSISTENT)) {
+            this.generateEffectCloud((ServerWorld)worldIn, state, pos, hit.getDirection());
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.use(state, worldIn, pos, player, handIn, hit);
     }
 
     @Override
-    public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        if (worldIn instanceof ServerWorld && !state.get(TRIGGERED) && !state.get(AbstractEffectMushroomCap.PERSISTENT)) {
+    public void attack(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+        if (worldIn instanceof ServerWorld && !state.getValue(TRIGGERED) && !state.getValue(AbstractEffectMushroomCap.PERSISTENT)) {
             this.generateEffectCloud((ServerWorld)worldIn, state, pos, Direction.UP);
         }
     }
 
     @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+    public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
         BlockState state = worldIn.getBlockState(pos);
-        if (worldIn instanceof ServerWorld && !state.get(TRIGGERED) && !state.get(AbstractEffectMushroomCap.PERSISTENT) && this.isTriggeringEntity(entityIn)) {
+        if (worldIn instanceof ServerWorld && !state.getValue(TRIGGERED) && !state.getValue(AbstractEffectMushroomCap.PERSISTENT) && this.isTriggeringEntity(entityIn)) {
             this.generateEffectCloud((ServerWorld)worldIn, state, pos, Direction.UP);
         }
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, @Nonnull BlockPos pos, BlockState state, @Nonnull PlayerEntity player) {
-        super.onBlockHarvested(worldIn, pos, state, player);
-        if (worldIn instanceof ServerWorld && !state.get(TRIGGERED) && !state.get(AbstractEffectMushroomCap.PERSISTENT)) {
+    public void playerWillDestroy(World worldIn, @Nonnull BlockPos pos, BlockState state, @Nonnull PlayerEntity player) {
+        super.playerWillDestroy(worldIn, pos, state, player);
+        if (worldIn instanceof ServerWorld && !state.getValue(TRIGGERED) && !state.getValue(AbstractEffectMushroomCap.PERSISTENT)) {
             this.generateEffectCloud((ServerWorld)worldIn, state, pos, null);
         }
     }
 
     @Override
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
+    public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        super.fallOn(worldIn, pos, entityIn, fallDistance);
         BlockState state = worldIn.getBlockState(pos);
-        if (worldIn instanceof ServerWorld && fallDistance >= 1 && !state.get(TRIGGERED) && this.isTriggeringEntity(entityIn)) { //also for persistent
+        if (worldIn instanceof ServerWorld && fallDistance >= 1 && !state.getValue(TRIGGERED) && this.isTriggeringEntity(entityIn)) { //also for persistent
             this.generateEffectCloud((ServerWorld)worldIn, state, pos, Direction.UP);
         }
     }

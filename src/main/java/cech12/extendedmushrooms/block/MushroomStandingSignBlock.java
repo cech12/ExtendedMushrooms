@@ -22,7 +22,7 @@ public class MushroomStandingSignBlock extends StandingSignBlock {
     }
 
     @Override
-    public TileEntity createNewTileEntity(@Nonnull IBlockReader worldIn) {
+    public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
         return new MushroomSignTileEntity();
     }
 

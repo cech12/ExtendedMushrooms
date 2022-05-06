@@ -26,7 +26,7 @@ public enum MushroomWoodType implements IStringSerializable {
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM,
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_PLANKS,
             ()->ExtendedMushroomsItems.GLOWSHROOM_BOAT,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getDefaultState(), null, null)),
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_STEM.defaultBlockState(), null, null)),
     POISONOUS_MUSHROOM(2, "poisonous_mushroom",
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM,
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PLANKS,
@@ -82,7 +82,7 @@ public enum MushroomWoodType implements IStringSerializable {
 
     @Nonnull
     @Override
-    public String getString() {
+    public String getSerializedName() {
         return this.name;
     }
 
@@ -95,7 +95,7 @@ public enum MushroomWoodType implements IStringSerializable {
 
     public static MushroomWoodType byName(String name) {
         for (MushroomWoodType mushroomType : VALUES) {
-            if (mushroomType.getString().equals(name)) {
+            if (mushroomType.getSerializedName().equals(name)) {
                 return mushroomType;
             }
         }

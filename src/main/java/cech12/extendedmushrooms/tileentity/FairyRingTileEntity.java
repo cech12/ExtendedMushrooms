@@ -63,7 +63,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     public void onLoad() {
         super.onLoad();
         //use onLoad only on server (setup of clients happens via nbt sync)
-        if (this.getWorld() != null && !this.getWorld().isRemote) {
+        if (this.getLevel() != null && !this.getLevel().isClientSide) {
             //if master value is already set, do nothing
             if (this.isMaster() || this.hasMaster()) {
                 this.loadRecipe();
@@ -71,11 +71,11 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
             }
             //initial loading of this tile entity.
             //search for a master, when not found, I am the master
-            World world = this.getWorld();
-            BlockPos pos = this.getPos();
+            World world = this.getLevel();
+            BlockPos pos = this.getBlockPos();
             if (world != null) {
                 for (Direction direction : FairyRingBlock.DIRECTIONS) {
-                    TileEntity tileEntity = world.getTileEntity(pos.offset(direction));
+                    TileEntity tileEntity = world.getBlockEntity(pos.relative(direction));
                     if (tileEntity instanceof FairyRingTileEntity) {
                         this.setMaster(((FairyRingTileEntity) tileEntity).getMaster());
                         break;
@@ -92,7 +92,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
      * Should only be called by master!
      */
     public Vector3d getCenter() {
-        BlockPos position = this.getPos();
+        BlockPos position = this.getBlockPos();
         return new Vector3d(position.getX(), position.getY(), position.getZ()).add(CENTER_TRANSLATION_VECTOR);
     }
 
@@ -107,14 +107,14 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     public void setMaster(FairyRingTileEntity tileEntity) {
         this.isMaster = false;
         this.hasMaster = true;
-        this.masterPos = tileEntity.getPos();
+        this.masterPos = tileEntity.getBlockPos();
         this.sendUpdates();
     }
 
     public void setAsMaster() {
         this.isMaster = true;
         this.hasMaster = false;
-        this.masterPos = this.getPos();
+        this.masterPos = this.getBlockPos();
         this.sendUpdates();
     }
 
@@ -122,8 +122,8 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
         if (this.isMaster()) {
             return this;
         }
-        if (this.hasMaster() && this.getWorld() != null) {
-            TileEntity tileEntity = this.getWorld().getTileEntity(this.masterPos);
+        if (this.hasMaster() && this.getLevel() != null) {
+            TileEntity tileEntity = this.getLevel().getBlockEntity(this.masterPos);
             if (tileEntity instanceof FairyRingTileEntity) {
                 return ((FairyRingTileEntity) tileEntity);
             }
@@ -132,8 +132,8 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public void read(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
-        super.read(state, compound);
+    public void load(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
+        super.load(state, compound);
         this.masterPos = new BlockPos(compound.getInt("MasterX"), compound.getInt("MasterY"), compound.getInt("MasterZ"));
         this.hasMaster = compound.getBoolean("HasMaster");
         this.isMaster = compound.getBoolean("IsMaster");
@@ -148,8 +148,8 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
 
     @Override
     @Nonnull
-    public CompoundNBT write(@Nonnull CompoundNBT compound) {
-        super.write(compound);
+    public CompoundNBT save(@Nonnull CompoundNBT compound) {
+        super.save(compound);
         compound.putInt("MasterX", this.masterPos.getX());
         compound.putInt("MasterY", this.masterPos.getY());
         compound.putInt("MasterZ", this.masterPos.getZ());
@@ -167,19 +167,19 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.getPos(), 3, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.getBlockPos(), 3, this.getUpdateTag());
     }
 
     @Nonnull
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return this.save(new CompoundNBT());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        if (this.world != null) {
-            this.read(this.world.getBlockState(pkt.getPos()), pkt.getNbtCompound());
+        if (this.level != null) {
+            this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
         }
     }
 
@@ -188,9 +188,9 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
      * Should be called every time when a state value is updated. (in setters)
      */
     private void sendUpdates() {
-        if (this.getWorld() != null) {
-            BlockState state = this.getWorld().getBlockState(this.getPos());
-            this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 3);
+        if (this.getLevel() != null) {
+            BlockState state = this.getLevel().getBlockState(this.getBlockPos());
+            this.getLevel().sendBlockUpdated(this.getBlockPos(), state, state, 3);
         }
     }
 
@@ -209,10 +209,10 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
             } else if (entity instanceof PlayerEntity) {
                 //Give entering player all stored items.
                 PlayerEntity playerEntity = (PlayerEntity) entity;
-                for (int i = 0; i < this.getSizeInventory(); i++) {
-                    ItemStack stack = this.getStackInSlot(i);
-                    if (playerEntity.inventory.addItemStackToInventory(stack)) {
-                        this.decrStackSize(i, stack.getCount());
+                for (int i = 0; i < this.getContainerSize(); i++) {
+                    ItemStack stack = this.getItem(i);
+                    if (playerEntity.inventory.add(stack)) {
+                        this.removeItem(i, stack.getCount());
                     }
                 }
                 boolean dirty = false;
@@ -241,10 +241,10 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
             itemEntity.setItem(remainingStack);
             //itemEntity shouldn't stay inside of FairyRingTileEntity (performance issue)
             //so, push remaining stack to border.
-            Vector3d centerToStack = itemEntity.getPositionVec().subtract(this.getCenter());
+            Vector3d centerToStack = itemEntity.position().subtract(this.getCenter());
             double scaleFactor = (1.8 - centerToStack.length()) * 0.08; //1.8 is sqrt(3) | 0.08 is speed
             Vector3d calculatedMotion = new Vector3d(centerToStack.x, 0, centerToStack.z).normalize().scale(scaleFactor);
-            itemEntity.setMotion(itemEntity.getMotion().add(calculatedMotion));
+            itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().add(calculatedMotion));
         }
 
         // check and update recipe
@@ -306,13 +306,13 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
      * @return a valid FairyRingRecipe or null when no valid recipe exist.
      */
     protected FairyRingRecipe getRecipe() {
-        if (!this.isMaster() || this.getWorld() == null || this.isEmpty()) {
+        if (!this.isMaster() || this.getLevel() == null || this.isEmpty()) {
             return null;
         }
         if (this.currentRecipe != null && this.currentRecipe.isValid(this.mode, this)) {
             return this.currentRecipe;
         } else {
-            Collection<IRecipe<?>> recipes = ExtendedMushrooms.getRecipes(ExtendedMushroomsRecipeTypes.FAIRY_RING, this.getWorld().getRecipeManager()).values();
+            Collection<IRecipe<?>> recipes = ExtendedMushrooms.getRecipes(ExtendedMushroomsRecipeTypes.FAIRY_RING, this.getLevel().getRecipeManager()).values();
             for (IRecipe<?> recipe : recipes) {
                 if (recipe instanceof FairyRingRecipe && ((FairyRingRecipe) recipe).isValid(this.mode, this)) {
                     return (FairyRingRecipe) recipe;
@@ -325,7 +325,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     @Override
     public void tick() {
         boolean dirty = false;
-        if (this.isMaster() && this.getWorld() != null && !this.getWorld().isRemote) {
+        if (this.isMaster() && this.getLevel() != null && !this.getLevel().isClientSide) {
             FairyRingRecipe recipe = this.getRecipe();
             if (recipe != null) {
                 //increase recipe time
@@ -340,13 +340,13 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
                         this.mode = this.currentRecipe.getResultMode();
                     }
                     //clear inventory and pop out result itemStack
-                    this.clear();
+                    this.clearContent();
                     Vector3d center = this.getCenter();
                     ItemStack resultStack = this.currentRecipe.getResultItemStack();
                     if (resultStack != null && resultStack != ItemStack.EMPTY) {
-                        ItemEntity itemEntity = new ItemEntity(this.getWorld(), center.x, center.y + 1.1, center.z, resultStack);
-                        itemEntity.setMotion(new Vector3d(0, 0.2, 0));
-                        this.getWorld().addEntity(itemEntity);
+                        ItemEntity itemEntity = new ItemEntity(this.getLevel(), center.x, center.y + 1.1, center.z, resultStack);
+                        itemEntity.setDeltaMovement(new Vector3d(0, 0.2, 0));
+                        this.getLevel().addFreshEntity(itemEntity);
                     }
                     //reset and update recipe
                     this.resetRecipe();
@@ -411,18 +411,18 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
      * @return Should return true, when event is correct and has an effect.
      */
     @Override
-    public boolean receiveClientEvent(int id, int param) {
+    public boolean triggerEvent(int id, int param) {
         //in tick() method
         //this.getWorld().addBlockEvent(this.getPos(), ExtendedMushroomsBlocks.FAIRY_RING, EFFECT_EVENT, 0);
         if (id == EFFECT_EVENT) {
-            if (this.getWorld() != null && this.getWorld().isRemote) {
+            if (this.getLevel() != null && this.getLevel().isClientSide) {
                 Vector3d center = this.getCenter();
                 //TODO some nice effects!
-                this.getWorld().addParticle(ParticleTypes.MYCELIUM, center.x, center.y, center.z, 0.0D, 0.0D, 0.0D);
+                this.getLevel().addParticle(ParticleTypes.MYCELIUM, center.x, center.y, center.z, 0.0D, 0.0D, 0.0D);
             }
             return true;
         }
-        return super.receiveClientEvent(id, param);
+        return super.triggerEvent(id, param);
     }
 
     public FairyRingMode getMode() {
@@ -449,7 +449,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
             //each slot has only a stack size of 1
             for (int i = 0; i < master.items.size(); i++) {
                 if (master.items.get(i).isEmpty()) {
-                    master.setInventorySlotContents(i, stack.split(1));
+                    master.setItem(i, stack.split(1));
                     dirty = true;
                     if (stack.isEmpty()) {
                         break;
@@ -464,7 +464,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         FairyRingTileEntity master = this.getMaster();
         if (master != null) {
             return master.items.size();
@@ -473,7 +473,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public int getInventoryStackLimit() {
+    public int getMaxStackSize() {
         return 1;
     }
 
@@ -492,7 +492,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
 
     @Override
     @Nonnull
-    public ItemStack getStackInSlot(int slot) {
+    public ItemStack getItem(int slot) {
         FairyRingTileEntity master = this.getMaster();
         if (master != null && slot >= 0 && slot < master.items.size()) {
             return master.items.get(slot);
@@ -502,11 +502,11 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
 
     @Override
     @Nonnull
-    public ItemStack decrStackSize(int slot, int count) {
+    public ItemStack removeItem(int slot, int count) {
         FairyRingTileEntity master = this.getMaster();
         ItemStack stack = ItemStack.EMPTY;
         if (master != null && count > 0 && slot >= 0 && slot < master.items.size()) {
-            stack = ItemStackHelper.getAndSplit(master.items, slot, count);
+            stack = ItemStackHelper.removeItem(master.items, slot, count);
             this.sendUpdates();
         }
         return stack;
@@ -514,16 +514,16 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
 
     @Override
     @Nonnull
-    public ItemStack removeStackFromSlot(int slot) {
+    public ItemStack removeItemNoUpdate(int slot) {
         FairyRingTileEntity master = this.getMaster();
         if (master != null && slot < master.items.size()) {
-            return ItemStackHelper.getAndRemove(master.items, slot);
+            return ItemStackHelper.takeItem(master.items, slot);
         }
         return ItemStack.EMPTY;
     }
 
     @Override
-    public void setInventorySlotContents(int slot, @Nonnull ItemStack itemStack) {
+    public void setItem(int slot, @Nonnull ItemStack itemStack) {
         FairyRingTileEntity master = this.getMaster();
         if (master != null && slot >= 0 && slot < master.items.size()) {
             master.items.set(slot, itemStack);
@@ -531,12 +531,12 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public boolean isUsableByPlayer(@Nonnull PlayerEntity playerEntity) {
+    public boolean stillValid(@Nonnull PlayerEntity playerEntity) {
         return false;
     }
 
     @Override
-    public void clear() {
+    public void clearContent() {
         FairyRingTileEntity master = this.getMaster();
         if (master != null) {
             master.items.clear();

@@ -140,29 +140,29 @@ public class ExtendedMushrooms {
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         BlockState blockState = event.getWorld().getBlockState(event.getPos());
-        ItemStack itemStack = event.getPlayer().getHeldItem(event.getHand());
+        ItemStack itemStack = event.getPlayer().getItemInHand(event.getHand());
         //check for mushroom stem and axe
         if (itemStack.getToolTypes().contains(ToolType.AXE)) {
             //get stripped block from stripping map
             Block strippedBlock = ModBlocks.BLOCK_STRIPPING_MAP.get(blockState.getBlock());
             if (strippedBlock != null) {
                 //play sound
-                event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                if (!event.getWorld().isRemote) {
+                event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                if (!event.getWorld().isClientSide) {
                     //copy block state orientation
-                    BlockState strippedBlockState = strippedBlock.getDefaultState();
-                    if (blockState.hasProperty(HugeMushroomBlock.UP)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.UP, blockState.get(HugeMushroomBlock.UP));
-                    if (blockState.hasProperty(HugeMushroomBlock.DOWN)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.DOWN, blockState.get(HugeMushroomBlock.DOWN));
-                    if (blockState.hasProperty(HugeMushroomBlock.NORTH)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.NORTH, blockState.get(HugeMushroomBlock.NORTH));
-                    if (blockState.hasProperty(HugeMushroomBlock.EAST)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.EAST, blockState.get(HugeMushroomBlock.EAST));
-                    if (blockState.hasProperty(HugeMushroomBlock.SOUTH)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.SOUTH, blockState.get(HugeMushroomBlock.SOUTH));
-                    if (blockState.hasProperty(HugeMushroomBlock.WEST)) strippedBlockState = strippedBlockState.with(HugeMushroomBlock.WEST, blockState.get(HugeMushroomBlock.WEST));
+                    BlockState strippedBlockState = strippedBlock.defaultBlockState();
+                    if (blockState.hasProperty(HugeMushroomBlock.UP)) strippedBlockState = strippedBlockState.setValue(HugeMushroomBlock.UP, blockState.getValue(HugeMushroomBlock.UP));
+                    if (blockState.hasProperty(HugeMushroomBlock.DOWN)) strippedBlockState = strippedBlockState.setValue(HugeMushroomBlock.DOWN, blockState.getValue(HugeMushroomBlock.DOWN));
+                    if (blockState.hasProperty(HugeMushroomBlock.NORTH)) strippedBlockState = strippedBlockState.setValue(HugeMushroomBlock.NORTH, blockState.getValue(HugeMushroomBlock.NORTH));
+                    if (blockState.hasProperty(HugeMushroomBlock.EAST)) strippedBlockState = strippedBlockState.setValue(HugeMushroomBlock.EAST, blockState.getValue(HugeMushroomBlock.EAST));
+                    if (blockState.hasProperty(HugeMushroomBlock.SOUTH)) strippedBlockState = strippedBlockState.setValue(HugeMushroomBlock.SOUTH, blockState.getValue(HugeMushroomBlock.SOUTH));
+                    if (blockState.hasProperty(HugeMushroomBlock.WEST)) strippedBlockState = strippedBlockState.setValue(HugeMushroomBlock.WEST, blockState.getValue(HugeMushroomBlock.WEST));
                     //replace block
-                    event.getWorld().setBlockState(event.getPos(), strippedBlockState, 11);
+                    event.getWorld().setBlock(event.getPos(), strippedBlockState, 11);
                     //do the item damage
                     if (event.getPlayer() != null) {
-                        itemStack.damageItem(1, event.getPlayer(), (p_220040_1_) -> {
-                            p_220040_1_.sendBreakAnimation(event.getHand());
+                        itemStack.hurtAndBreak(1, event.getPlayer(), (p_220040_1_) -> {
+                            p_220040_1_.broadcastBreakEvent(event.getHand());
                         });
                     }
                 }
@@ -177,7 +177,7 @@ public class ExtendedMushrooms {
      */
     @SubscribeEvent
     public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
-        ItemStack itemStack = event.getPlayer().getHeldItem(event.getHand());
+        ItemStack itemStack = event.getPlayer().getItemInHand(event.getHand());
         Entity entity = event.getTarget();
         //check for dye item and mushroom sheep entity
         if (entity instanceof MushroomSheepEntity && itemStack.getItem() instanceof DyeItem) {
@@ -209,13 +209,13 @@ public class ExtendedMushrooms {
         BlockState blockState = world.getBlockState(blockPos);
         if (blockState.getBlock() != ExtendedMushroomsBlocks.FAIRY_RING) {
             for (Direction direction : event.getNotifiedSides()) {
-                BlockPos neighbourPos = blockPos.offset(direction);
+                BlockPos neighbourPos = blockPos.relative(direction);
                 if (world.getBlockState(neighbourPos).getBlock() instanceof MushroomBlock) {
                     //neighbour is mushroom?
                     FairyRingBlock.fairyRingPlaceCheck(world, neighbourPos);
-                } else if (world.getBlockState(neighbourPos.up()).getBlock() instanceof MushroomBlock) {
+                } else if (world.getBlockState(neighbourPos.above()).getBlock() instanceof MushroomBlock) {
                     //for ground blocks - block above neighbour is mushroom?
-                    FairyRingBlock.fairyRingPlaceCheck(world, neighbourPos.up());
+                    FairyRingBlock.fairyRingPlaceCheck(world, neighbourPos.above());
                 }
             }
         }
@@ -236,7 +236,7 @@ public class ExtendedMushrooms {
      *         and can not be modified.
      */
     public static Map<ResourceLocation, IRecipe<?>> getRecipes(IRecipeType<?> recipeType, RecipeManager manager) {
-        final Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = ObfuscationReflectionHelper.getPrivateValue(RecipeManager.class, manager, "field_199522_d");
+        final Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = ObfuscationReflectionHelper.getPrivateValue(RecipeManager.class, manager, "recipes");
         return recipesMap.get(recipeType);
     }
 

@@ -33,7 +33,7 @@ public class ModTags {
         public static final ITag.INamedTag<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
 
         private static ITag.INamedTag<Block> tag(@Nonnull String name) {
-            return BlockTags.makeWrapperTag("forge:" + name);
+            return BlockTags.bind("forge:" + name);
         }
     }
 
@@ -61,11 +61,11 @@ public class ModTags {
 
         public static final ITag.INamedTag<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible"); // only mod intern edible mushrooms
 
-        //use "minecraft:mushroom_grow_block" tag (Blocktags,field_242171_aD) for lightlevel ignoring blocks
+        //use "minecraft:mushroom_grow_block" tag (Blocktags,MUSHROOM_GROW_BLOCK) for lightlevel ignoring blocks
         public static final ITag.INamedTag<Block> MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL = tag("mushroom_growing_blocks_lightlevel");
 
         private static ITag.INamedTag<Block> tag(@Nonnull String name) {
-            return BlockTags.makeWrapperTag(ExtendedMushrooms.MOD_ID + ":" + name);
+            return BlockTags.bind(ExtendedMushrooms.MOD_ID + ":" + name);
         }
     }
 
@@ -75,7 +75,7 @@ public class ModTags {
         public static final ITag.INamedTag<Block> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static ITag.INamedTag<Block> tag(@Nonnull String mod, @Nonnull String name) {
-            return BlockTags.makeWrapperTag(mod + ":" + name);
+            return BlockTags.bind(mod + ":" + name);
         }
     }
 
@@ -103,7 +103,7 @@ public class ModTags {
         public static final ITag.INamedTag<Item> BREAD = tag("bread");
 
         private static ITag.INamedTag<Item> tag(@Nonnull String name) {
-            return ItemTags.makeWrapperTag("forge:" + name);
+            return ItemTags.bind("forge:" + name);
         }
     }
 
@@ -133,7 +133,7 @@ public class ModTags {
         public static final ITag.INamedTag<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible"); // only mod intern edible mushrooms
 
         private static ITag.INamedTag<Item> tag(@Nonnull String name) {
-            return ItemTags.makeWrapperTag(ExtendedMushrooms.MOD_ID + ":" + name);
+            return ItemTags.bind(ExtendedMushrooms.MOD_ID + ":" + name);
         }
 
     }
@@ -144,7 +144,7 @@ public class ModTags {
         public static final ITag.INamedTag<Item> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static ITag.INamedTag<Item> tag(@Nonnull String mod, @Nonnull String name) {
-            return ItemTags.makeWrapperTag(mod + ":" + name);
+            return ItemTags.bind(mod + ":" + name);
         }
     }
 

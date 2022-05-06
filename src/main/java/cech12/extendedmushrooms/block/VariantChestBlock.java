@@ -20,6 +20,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class VariantChestBlock extends ChestBlock {
 
     private final MushroomWoodType woodType;
@@ -30,7 +32,7 @@ public class VariantChestBlock extends ChestBlock {
     }
 
     @Override
-    public TileEntity createNewTileEntity(@Nonnull IBlockReader worldIn) {
+    public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
         return new VariantChestTileEntity();
     }
 
@@ -45,7 +47,7 @@ public class VariantChestBlock extends ChestBlock {
 
             @Override
             //render
-            public void func_239207_a_(@Nonnull ItemStack stack, ItemCameraTransforms.TransformType transformType, @Nonnull MatrixStack matrix, @Nonnull IRenderTypeBuffer buffer, int x, int y) {
+            public void renderByItem(@Nonnull ItemStack stack, ItemCameraTransforms.TransformType transformType, @Nonnull MatrixStack matrix, @Nonnull IRenderTypeBuffer buffer, int x, int y) {
                 if (tile == null) {
                     tile = new VariantChestTileEntity(woodType);
                 }

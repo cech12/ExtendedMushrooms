@@ -8,6 +8,8 @@ import net.minecraft.world.IBlockReader;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class MushroomStairsBlock extends StairsBlock {
 
     public MushroomStairsBlock(Supplier<BlockState> state, Properties properties) {

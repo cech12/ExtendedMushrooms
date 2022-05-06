@@ -19,9 +19,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class InfestedGrassBlock extends BushBlock {
 
-    protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D);
+    protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D);
 
     /**
      * BushBlock has protected constructor.
@@ -33,12 +35,12 @@ public class InfestedGrassBlock extends BushBlock {
     @Nonnull
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         Vector3d vec3d = state.getOffset(worldIn, pos);
-        return SHAPE.withOffset(vec3d.x, vec3d.y, vec3d.z);
+        return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
     }
 
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        return block == Blocks.MYCELIUM || super.isValidGround(state, worldIn, pos);
+        return block == Blocks.MYCELIUM || super.mayPlaceOn(state, worldIn, pos);
     }
 
     @Override

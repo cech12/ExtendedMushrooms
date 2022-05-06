@@ -52,8 +52,8 @@ import java.util.Random;
 
 public class MushroomSheepEntity extends SheepEntity {
 
-    private static final DataParameter<Boolean> SHEARED = EntityDataManager.createKey(MushroomSheepEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<ItemStack> MUSHROOM_TYPE = EntityDataManager.createKey(MushroomSheepEntity.class, DataSerializers.ITEMSTACK);
+    private static final DataParameter<Boolean> SHEARED = EntityDataManager.defineId(MushroomSheepEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<ItemStack> MUSHROOM_TYPE = EntityDataManager.defineId(MushroomSheepEntity.class, DataSerializers.ITEM_STACK);
 
     private int sheepTimer;
     private EatMyceliumGoal eatMyceliumGoal;
@@ -66,14 +66,14 @@ public class MushroomSheepEntity extends SheepEntity {
      * Replaces the given sheep entity with a mushroom sheep entity.
      */
     public static void replaceSheep(@Nonnull SheepEntity sheep, @Nullable MushroomType mushroomType) {
-        sheep.setAIMoveSpeed(0);
-        World world = sheep.world;
+        sheep.setSpeed(0);
+        World world = sheep.level;
         //create mushroom sheep
         MushroomSheepEntity mushroomSheep = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(world);
         if (mushroomSheep != null && world instanceof ServerWorld) {
-            mushroomSheep.copyLocationAndAnglesFrom(sheep);
-            mushroomSheep.onInitialSpawn((ServerWorld)world, world.getDifficultyForLocation(sheep.getPosition()), SpawnReason.CONVERSION, null, null);
-            mushroomSheep.setGrowingAge(sheep.getGrowingAge());
+            mushroomSheep.copyPosition(sheep);
+            mushroomSheep.finalizeSpawn((ServerWorld)world, world.getCurrentDifficultyAt(sheep.blockPosition()), SpawnReason.CONVERSION, null, null);
+            mushroomSheep.setAge(sheep.getAge());
             if (sheep.hasCustomName()) {
                 mushroomSheep.setCustomName(sheep.getCustomName());
                 mushroomSheep.setCustomNameVisible(sheep.isCustomNameVisible());
@@ -86,22 +86,22 @@ public class MushroomSheepEntity extends SheepEntity {
             }
             //replace sheep with new mushroom sheep
             sheep.remove();
-            world.addEntity(mushroomSheep);
-            mushroomSheep.playSound(SoundEvents.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 2.0F, 1.0F);
+            world.addFreshEntity(mushroomSheep);
+            mushroomSheep.playSound(SoundEvents.ZOMBIE_VILLAGER_CONVERTED, 2.0F, 1.0F);
         }
     }
 
     @Override
     protected void registerGoals() {
         //only for super.updateAITasks() to avoid NullPointerException
-        this.eatGrassGoal = new EatGrassGoal(this); //changed field eatGrassGoal in accesstransformer.cfg
+        this.eatBlockGoal = new EatGrassGoal(this); //changed field eatGrassGoal in accesstransformer.cfg
         this.eatMyceliumGoal = new EatMyceliumGoal(this);
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         //add temptGoal for each mushroom
-        for (Item mushroom : Tags.Items.MUSHROOMS.getAllElements()) {
-            this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.fromItems(mushroom), false));
+        for (Item mushroom : Tags.Items.MUSHROOMS.getValues()) {
+            this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(mushroom), false));
         }
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, this.eatMyceliumGoal);
@@ -112,31 +112,31 @@ public class MushroomSheepEntity extends SheepEntity {
     }
 
     @Override
-    protected void updateAITasks() {
+    protected void customServerAiStep() {
         this.sheepTimer = this.eatMyceliumGoal.getEatingTimer();
-        super.updateAITasks();
+        super.customServerAiStep();
     }
 
     @Override
-    public void livingTick() {
-        if (this.world.isRemote) {
+    public void aiStep() {
+        if (this.level.isClientSide) {
             this.sheepTimer = Math.max(0, this.sheepTimer - 1);
         }
-        super.livingTick();
+        super.aiStep();
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(SHEARED, false);
-        this.dataManager.register(MUSHROOM_TYPE, new ItemStack(MushroomType.byId(0).getItem()));
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(SHEARED, false);
+        this.entityData.define(MUSHROOM_TYPE, new ItemStack(MushroomType.byId(0).getItem()));
     }
 
     @Nonnull
     @Override
-    public ResourceLocation getLootTable() {
-        if (this.getSheared()) {
-            return this.getType().getLootTable();
+    public ResourceLocation getDefaultLootTable() {
+        if (this.isSheared()) {
+            return this.getType().getDefaultLootTable();
         } else {
             return this.getMushroomType().getSheepLootTable();
         }
@@ -144,17 +144,17 @@ public class MushroomSheepEntity extends SheepEntity {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void handleStatusUpdate(byte id) {
+    public void handleEntityEvent(byte id) {
         if (id == 10) {
             this.sheepTimer = 40;
         } else {
-            super.handleStatusUpdate(id);
+            super.handleEntityEvent(id);
         }
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public float getHeadRotationPointY(float p_70894_1_) {
+    public float getHeadEatPositionScale(float p_70894_1_) {
         if (this.sheepTimer <= 0) {
             return 0.0F;
         } else if (this.sheepTimer >= 4 && this.sheepTimer <= 36) {
@@ -166,20 +166,20 @@ public class MushroomSheepEntity extends SheepEntity {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public float getHeadRotationAngleX(float p_70890_1_) {
+    public float getHeadEatAngleScale(float p_70890_1_) {
         if (this.sheepTimer > 4 && this.sheepTimer <= 36) {
             float f = ((float)(this.sheepTimer - 4) - p_70890_1_) / 32.0F;
             return ((float)Math.PI / 5F) + 0.21991149F * MathHelper.sin(f * 28.7F);
         } else {
-            return this.sheepTimer > 0 ? ((float)Math.PI / 5F) : this.rotationPitch * ((float)Math.PI / 180F);
+            return this.sheepTimer > 0 ? ((float)Math.PI / 5F) : this.xRot * ((float)Math.PI / 180F);
         }
     }
 
     @Override
-    public @Nonnull ActionResultType getEntityInteractionResult(PlayerEntity player, @Nonnull Hand hand) {
-        Item item = player.getHeldItem(hand).getItem();
-        ActionResultType superResult = super.getEntityInteractionResult(player, hand);
-        if (superResult.isSuccessOrConsume() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get() && item.isIn(Tags.Items.MUSHROOMS)) {
+    public @Nonnull ActionResultType mobInteract(PlayerEntity player, @Nonnull Hand hand) {
+        Item item = player.getItemInHand(hand).getItem();
+        ActionResultType superResult = super.mobInteract(player, hand);
+        if (superResult.consumesAction() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get() && item.is(Tags.Items.MUSHROOMS)) {
             //change mushroom type
             MushroomType type = MushroomType.byItemOrNull(item);
             if (type != null && type != this.getMushroomType()) {
@@ -196,20 +196,20 @@ public class MushroomSheepEntity extends SheepEntity {
      * When a given MushroomType has no effect, nothing happens.
      */
     public void activateMushroomEffect(MushroomType mushroomType) {
-        if (mushroomType.getItem().isIn(ModTags.ForgeItems.MUSHROOMS_POISONOUS)) {
-            this.addPotionEffect(new EffectInstance(Effects.POISON, 200));
+        if (mushroomType.getItem().is(ModTags.ForgeItems.MUSHROOMS_POISONOUS)) {
+            this.addEffect(new EffectInstance(Effects.POISON, 200));
         }
     }
 
     @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.getItem().isIn(Tags.Items.MUSHROOMS);
+    public boolean isFood(ItemStack stack) {
+        return stack.getItem().is(Tags.Items.MUSHROOMS);
     }
 
     @Override
-    public void writeAdditional(@Nonnull CompoundNBT compound) {
-        super.writeAdditional(compound);
-        compound.putBoolean("Sheared", this.getSheared());
+    public void addAdditionalSaveData(@Nonnull CompoundNBT compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putBoolean("Sheared", this.isSheared());
         compound.putInt("Mushroom", this.getMushroomType().getId());
     }
 
@@ -217,8 +217,8 @@ public class MushroomSheepEntity extends SheepEntity {
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     @Override
-    public void readAdditional(@Nonnull CompoundNBT compound) {
-        super.readAdditional(compound);
+    public void readAdditionalSaveData(@Nonnull CompoundNBT compound) {
+        super.readAdditionalSaveData(compound);
         this.setSheared(compound.getBoolean("Sheared"));
         this.setMushroomType(MushroomType.byId(compound.getInt("Mushroom")));
     }
@@ -227,21 +227,21 @@ public class MushroomSheepEntity extends SheepEntity {
      * Gets the wool color of this sheep.
      */
     public MushroomType getMushroomType() {
-        return MushroomType.byItem(this.dataManager.get(MUSHROOM_TYPE).getItem());
+        return MushroomType.byItem(this.entityData.get(MUSHROOM_TYPE).getItem());
     }
 
     /**
      * Sets the wool color of this sheep
      */
     public void setMushroomType(MushroomType mushroomType) {
-        this.dataManager.set(MUSHROOM_TYPE, new ItemStack(mushroomType.getItem()));
+        this.entityData.set(MUSHROOM_TYPE, new ItemStack(mushroomType.getItem()));
         //set also the DyeColor to be compatible with other mods
-        super.setFleeceColor(mushroomType.getColor());
+        super.setColor(mushroomType.getColor());
     }
 
     @Nonnull
     @Override
-    public DyeColor getFleeceColor() {
+    public DyeColor getColor() {
         //get the DyeColor from mushroom type to be compatible with other mods
         return this.getMushroomType().getColor();
     }
@@ -251,7 +251,7 @@ public class MushroomSheepEntity extends SheepEntity {
      */
     @Deprecated
     @Override
-    public void setFleeceColor(@Nonnull DyeColor color) {
+    public void setColor(@Nonnull DyeColor color) {
         //disable setting the fleece color for mushroom sheeps
     }
 
@@ -259,8 +259,8 @@ public class MushroomSheepEntity extends SheepEntity {
      * returns true if a sheeps wool has been sheared
      */
     @Override
-    public boolean getSheared() {
-        return this.dataManager.get(SHEARED);
+    public boolean isSheared() {
+        return this.entityData.get(SHEARED);
     }
 
     /**
@@ -268,7 +268,7 @@ public class MushroomSheepEntity extends SheepEntity {
      */
     @Override
     public void setSheared(boolean sheared) {
-        this.dataManager.set(SHEARED, sheared);
+        this.entityData.set(SHEARED, sheared);
         super.setSheared(sheared); //set sheared value of super class to be compatible with other mods
     }
 
@@ -289,7 +289,7 @@ public class MushroomSheepEntity extends SheepEntity {
     }
 
     @Override
-    public SheepEntity createChild(@Nonnull ServerWorld world, @Nonnull AgeableEntity ageable) {
+    public SheepEntity getBreedOffspring(@Nonnull ServerWorld world, @Nonnull AgeableEntity ageable) {
         if (ageable instanceof MushroomSheepEntity) {
             // only create a mushroom sheep, when both parents are mushroom sheeps.
             MushroomSheepEntity child = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(world);
@@ -301,7 +301,7 @@ public class MushroomSheepEntity extends SheepEntity {
             //when other entity is no mushroom sheep, create a normal sheep with its color.
             SheepEntity child = EntityType.SHEEP.create(world);
             if (child != null) {
-                child.setFleeceColor(((SheepEntity) ageable).getFleeceColor());
+                child.setColor(((SheepEntity) ageable).getColor());
                 return child;
             }
         }
@@ -310,16 +310,16 @@ public class MushroomSheepEntity extends SheepEntity {
 
     @Override
     @Nullable
-    public ILivingEntityData onInitialSpawn(IServerWorld worldIn, @Nonnull DifficultyInstance difficultyIn, @Nonnull SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+    public ILivingEntityData finalizeSpawn(IServerWorld worldIn, @Nonnull DifficultyInstance difficultyIn, @Nonnull SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
         this.setMushroomType(getRandomMushroomType(worldIn.getRandom()));
-        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
     /**
      * Attempts to mix both parent sheep to come up with a mixed dye color.
      */
     private MushroomType getMushroomTypeMixFromParents(MushroomSheepEntity father, MushroomSheepEntity mother) {
-        if (father.getRNG().nextBoolean()) {
+        if (father.getRandom().nextBoolean()) {
             return father.getMushroomType();
         } else {
             return mother.getMushroomType();
@@ -330,14 +330,14 @@ public class MushroomSheepEntity extends SheepEntity {
     @Nonnull
     public List<ItemStack> onSheared(@Nullable PlayerEntity player, @Nonnull ItemStack item, @Nonnull World world, @Nonnull BlockPos pos, int fortune) {
         List<ItemStack> ret = new ArrayList<>();
-        if (!this.world.isRemote) {
+        if (!this.level.isClientSide) {
             this.setSheared(true);
-            int i = 1 + this.rand.nextInt(3);
+            int i = 1 + this.random.nextInt(3);
             for(int j = 0; j < i; ++j) {
                 ret.add(new ItemStack(this.getMushroomType().getCapBlock()));
             }
         }
-        this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+        this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
         return ret;
     }
 

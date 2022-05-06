@@ -24,27 +24,29 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class PoisonousMushroomBlock extends EMMushroomBlock {
 
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
 
     public PoisonousMushroomBlock(Properties properties) {
         super(new PoisonousMushroom(), properties);
-        this.setDefaultState(this.getDefaultState().with(TRIGGERED, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(TRIGGERED, false));
     }
 
     @Override
     public void randomTick(@Nonnull BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
         super.randomTick(state, worldIn, pos, random);
         //reset TRIGGERED state
-        if (state.get(TRIGGERED)) {
-            worldIn.setBlockState(pos, state.with(TRIGGERED, false), 2);
+        if (state.getValue(TRIGGERED)) {
+            worldIn.setBlock(pos, state.setValue(TRIGGERED, false), 2);
         }
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(TRIGGERED);
     }
 
@@ -68,26 +70,26 @@ public class PoisonousMushroomBlock extends EMMushroomBlock {
         areaeffectcloudentity.setRadiusOnUse(-(0.4F + (random.nextFloat() * 0.2F)));
         areaeffectcloudentity.setWaitTime(10);
         areaeffectcloudentity.setRadiusPerTick(-areaeffectcloudentity.getRadius() / (float)areaeffectcloudentity.getDuration());
-        areaeffectcloudentity.setColor(PotionUtils.getPotionColorFromEffectList(effects));
+        areaeffectcloudentity.setFixedColor(PotionUtils.getColor(effects));
         for (EffectInstance effectinstance : effects) {
             areaeffectcloudentity.addEffect(new EffectInstance(effectinstance));
         }
-        worldIn.addEntity(areaeffectcloudentity);
+        worldIn.addFreshEntity(areaeffectcloudentity);
         //set state to triggered
-        worldIn.setBlockState(pos, state.with(TRIGGERED, true), 2);
+        worldIn.setBlock(pos, state.setValue(TRIGGERED, true), 2);
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-        if (worldIn instanceof ServerWorld && !state.get(TRIGGERED) && isTriggeringEntity(entityIn)) {
+    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+        if (worldIn instanceof ServerWorld && !state.getValue(TRIGGERED) && isTriggeringEntity(entityIn)) {
             generateEffectCloud((ServerWorld)worldIn, state, pos);
         }
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, @Nonnull BlockPos pos, BlockState state, @Nonnull PlayerEntity player) {
-        super.onBlockHarvested(worldIn, pos, state, player);
-        if (worldIn instanceof ServerWorld && !state.get(TRIGGERED)) {
+    public void playerWillDestroy(World worldIn, @Nonnull BlockPos pos, BlockState state, @Nonnull PlayerEntity player) {
+        super.playerWillDestroy(worldIn, pos, state, player);
+        if (worldIn instanceof ServerWorld && !state.getValue(TRIGGERED)) {
             generateEffectCloud((ServerWorld)worldIn, state, pos);
         }
     }

@@ -64,8 +64,8 @@ public class ModFeatureEnabledCondition implements ICondition {
         @Override
         public ModFeatureEnabledCondition read(JsonObject json) {
             return new ModFeatureEnabledCondition(
-                    JSONUtils.getString(json, "feature"),
-                    JSONUtils.getBoolean(json, "inverted", false));
+                    JSONUtils.getAsString(json, "feature"),
+                    JSONUtils.getAsBoolean(json, "inverted", false));
         }
 
         @Override

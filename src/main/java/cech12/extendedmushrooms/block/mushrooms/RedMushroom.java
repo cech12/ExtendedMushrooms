@@ -29,7 +29,7 @@ public class RedMushroom extends MegaMushroom {
     protected ConfiguredFeature<?, ?> getBigMushroomFeature() {
         //vanilla mushroom
         return WorldGenRegistries.CONFIGURED_FEATURE.getOptional(new ResourceLocation("huge_red_mushroom"))
-                .orElseGet(() -> Feature.HUGE_RED_MUSHROOM.withConfiguration(getConfig()));
+                .orElseGet(() -> Feature.HUGE_RED_MUSHROOM.configured(getConfig()));
     }
 
 }

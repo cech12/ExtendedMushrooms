@@ -16,6 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class InfestedFlowerBlock extends FlowerBlock {
 
     public InfestedFlowerBlock(Effect effect, int effectDuration, Properties properties) {
@@ -23,9 +25,9 @@ public class InfestedFlowerBlock extends FlowerBlock {
     }
 
     @Override
-    protected boolean isValidGround(BlockState state, IBlockReader world, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState state, IBlockReader world, BlockPos pos) {
         Block block = state.getBlock();
-        return block == Blocks.MYCELIUM || super.isValidGround(state, world, pos);
+        return block == Blocks.MYCELIUM || super.mayPlaceOn(state, world, pos);
     }
 
     @Override

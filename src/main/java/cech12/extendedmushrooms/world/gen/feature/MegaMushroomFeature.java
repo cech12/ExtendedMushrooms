@@ -27,7 +27,7 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
         BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable(mushroomPos.getX(), mushroomPos.getY(), mushroomPos.getZ());
         for (int x = 0; x < 2; x++) {
             for (int z = 0; z < 2; z++) {
-                if (!super.hasValidGround(world, mutableBlockPos.setPos(mushroomPos).move(x, 0, z))) {
+                if (!super.hasValidGround(world, mutableBlockPos.set(mushroomPos).move(x, 0, z))) {
                     return false;
                 }
             }
@@ -39,7 +39,7 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
     protected boolean canPlaceTrunk(IWorld world, BlockPos blockPos, int size, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         for (int x = 0; x < 2; x++) {
             for (int z = 0; z < 2; z++) {
-                if (!super.canPlaceTrunk(world, mutableBlockPos.setPos(blockPos).move(x, 0, z), size, mutableBlockPos, config)) {
+                if (!super.canPlaceTrunk(world, mutableBlockPos.set(blockPos).move(x, 0, z), size, mutableBlockPos, config)) {
                     return false;
                 }
             }
@@ -52,9 +52,9 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
         for(int y = 0; y < size; ++y) {
             for (int x = 0; x < 2; x++) {
                 for (int z = 0; z < 2; z++) {
-                    mutableBlockPos.setPos(blockPos).move(x, y, z);
+                    mutableBlockPos.set(blockPos).move(x, y, z);
                     if (world.getBlockState(mutableBlockPos).canBeReplacedByLogs(world, mutableBlockPos)) {
-                        this.setBlockState(world, mutableBlockPos, config.stemProvider.getBlockState(random, blockPos));
+                        this.setBlock(world, mutableBlockPos, config.stemProvider.getState(random, blockPos));
                     }
                 }
             }

@@ -11,9 +11,9 @@ public class MushroomUtils {
     private MushroomUtils() {}
 
     public static boolean isValidMushroomPosition(IWorldReader world, BlockPos pos) {
-        BlockState block = world.getBlockState(pos.down());
-        return block.isIn(BlockTags.MUSHROOM_GROW_BLOCK) ||
-                (block.isIn(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL) && world.getLightSubtracted(pos, 0) < 13);
+        BlockState block = world.getBlockState(pos.below());
+        return block.is(BlockTags.MUSHROOM_GROW_BLOCK) ||
+                (block.is(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL) && world.getRawBrightness(pos, 0) < 13);
     }
 
 }

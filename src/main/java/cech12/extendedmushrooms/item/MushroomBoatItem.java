@@ -29,13 +29,13 @@ import java.util.function.Predicate;
 
 public class MushroomBoatItem extends Item {
 
-    private static final Predicate<Entity> field_219989_a = EntityPredicates.NOT_SPECTATING.and(Entity::canBeCollidedWith);
+    private static final Predicate<Entity> ENTITY_PREDICATE = EntityPredicates.NO_SPECTATORS.and(Entity::isPickable);
     private final MushroomWoodType type;
 
     public MushroomBoatItem(MushroomWoodType type) {
-        super((new Item.Properties()).maxStackSize(1).group(ItemGroup.TRANSPORTATION));
+        super((new Item.Properties()).stacksTo(1).tab(ItemGroup.TAB_TRANSPORTATION));
         this.type = type;
-        DispenserBlock.registerDispenseBehavior(this, new DispenseBehavior(type));
+        DispenserBlock.registerBehavior(this, new DispenseBehavior(type));
     }
 
     /**
@@ -43,21 +43,21 @@ public class MushroomBoatItem extends Item {
      * {@link #onItemUse}.
      */
     @Nonnull
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
+    public ActionResult<ItemStack> use(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
+        ItemStack itemstack = playerIn.getItemInHand(handIn);
+        RayTraceResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
         if (raytraceresult.getType() == RayTraceResult.Type.MISS) {
-            return ActionResult.resultPass(itemstack);
+            return ActionResult.pass(itemstack);
         } else {
-            Vector3d vec3d = playerIn.getLook(1.0F);
-            List<Entity> list = worldIn.getEntitiesInAABBexcluding(playerIn, playerIn.getBoundingBox().expand(vec3d.scale(5.0D)).grow(1.0D), field_219989_a);
+            Vector3d vec3d = playerIn.getViewVector(1.0F);
+            List<Entity> list = worldIn.getEntities(playerIn, playerIn.getBoundingBox().expandTowards(vec3d.scale(5.0D)).inflate(1.0D), ENTITY_PREDICATE);
             if (!list.isEmpty()) {
                 Vector3d vec3d1 = playerIn.getEyePosition(1.0F);
 
                 for(Entity entity : list) {
-                    AxisAlignedBB axisalignedbb = entity.getBoundingBox().grow(entity.getCollisionBorderSize());
+                    AxisAlignedBB axisalignedbb = entity.getBoundingBox().inflate(entity.getPickRadius());
                     if (axisalignedbb.contains(vec3d1)) {
-                        return ActionResult.resultPass(itemstack);
+                        return ActionResult.pass(itemstack);
                     }
                 }
             }
@@ -65,25 +65,25 @@ public class MushroomBoatItem extends Item {
             if (raytraceresult.getType() == RayTraceResult.Type.BLOCK) {
                 MushroomBoatEntity boat = (MushroomBoatEntity) ExtendedMushroomsEntityTypes.MUSHROOM_BOAT.create(worldIn);
                 if (boat == null) {
-                    return ActionResult.resultPass(itemstack);
+                    return ActionResult.pass(itemstack);
                 }
-                boat.setPositionAndRotation(raytraceresult.getHitVec().x, raytraceresult.getHitVec().y, raytraceresult.getHitVec().z, playerIn.rotationYaw, 0);
+                boat.absMoveTo(raytraceresult.getLocation().x, raytraceresult.getLocation().y, raytraceresult.getLocation().z, playerIn.yRot, 0);
                 boat.setMushroomWoodType(this.type);
-                if (!worldIn.hasNoCollisions(boat, boat.getBoundingBox().grow(-0.1D))) {
-                    return ActionResult.resultFail(itemstack);
+                if (!worldIn.noCollision(boat, boat.getBoundingBox().inflate(-0.1D))) {
+                    return ActionResult.fail(itemstack);
                 } else {
-                    if (!worldIn.isRemote) {
-                        worldIn.addEntity(boat);
+                    if (!worldIn.isClientSide) {
+                        worldIn.addFreshEntity(boat);
                     }
-                    if (!playerIn.abilities.isCreativeMode) {
+                    if (!playerIn.abilities.instabuild) {
                         itemstack.shrink(1);
                     }
 
-                    playerIn.addStat(Stats.ITEM_USED.get(this));
-                    return ActionResult.resultSuccess(itemstack);
+                    playerIn.awardStat(Stats.ITEM_USED.get(this));
+                    return ActionResult.success(itemstack);
                 }
             } else {
-                return ActionResult.resultPass(itemstack);
+                return ActionResult.pass(itemstack);
             }
         }
     }
@@ -101,18 +101,18 @@ public class MushroomBoatItem extends Item {
          * Dispense the specified stack, play the dispense sound and spawn particles.
          */
         @Nonnull
-        public ItemStack dispenseStack(IBlockSource source, @Nonnull ItemStack stack) {
-            Direction direction = source.getBlockState().get(DispenserBlock.FACING);
-            World world = source.getWorld();
-            double d0 = source.getX() + (double)((float)direction.getXOffset() * 1.125F);
-            double d1 = source.getY() + (double)((float)direction.getYOffset() * 1.125F);
-            double d2 = source.getZ() + (double)((float)direction.getZOffset() * 1.125F);
-            BlockPos blockpos = source.getBlockPos().offset(direction);
+        public ItemStack execute(IBlockSource source, @Nonnull ItemStack stack) {
+            Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
+            World world = source.getLevel();
+            double d0 = source.x() + (double)((float)direction.getStepX() * 1.125F);
+            double d1 = source.y() + (double)((float)direction.getStepY() * 1.125F);
+            double d2 = source.z() + (double)((float)direction.getStepZ() * 1.125F);
+            BlockPos blockpos = source.getPos().relative(direction);
             double d3;
-            if (world.getFluidState(blockpos).isTagged(FluidTags.WATER)) {
+            if (world.getFluidState(blockpos).is(FluidTags.WATER)) {
                 d3 = 1.0D;
             } else {
-                if (!world.getBlockState(blockpos).isAir() || !world.getFluidState(blockpos.down()).isTagged(FluidTags.WATER)) {
+                if (!world.getBlockState(blockpos).isAir() || !world.getFluidState(blockpos.below()).is(FluidTags.WATER)) {
                     return this.dispenseItemBehaviour.dispense(source, stack);
                 }
 
@@ -120,9 +120,9 @@ public class MushroomBoatItem extends Item {
             }
             MushroomBoatEntity boat = (MushroomBoatEntity) ExtendedMushroomsEntityTypes.MUSHROOM_BOAT.create(world);
             if (boat != null) {
-                boat.setPositionAndRotation(d0, d1 + d3, d2, direction.getHorizontalAngle(), 0);
+                boat.absMoveTo(d0, d1 + d3, d2, direction.toYRot(), 0);
                 boat.setMushroomWoodType(this.type);
-                world.addEntity(boat);
+                world.addFreshEntity(boat);
                 stack.shrink(1);
             }
             return stack;
@@ -131,8 +131,8 @@ public class MushroomBoatItem extends Item {
         /**
          * Play the dispense sound from the specified block.
          */
-        protected void playDispenseSound(IBlockSource source) {
-            source.getWorld().playEvent(1000, source.getBlockPos(), 0);
+        protected void playSound(IBlockSource source) {
+            source.getLevel().levelEvent(1000, source.getPos(), 0);
         }
     }
 

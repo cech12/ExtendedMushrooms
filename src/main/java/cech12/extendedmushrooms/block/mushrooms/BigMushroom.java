@@ -22,11 +22,11 @@ public abstract class BigMushroom {
     protected abstract ConfiguredFeature<?, ?> getBigMushroomFeature();
 
     protected static BlockState getDefaultStemState(Block stemBlock) {
-        return stemBlock.getDefaultState().with(HugeMushroomBlock.UP, false).with(HugeMushroomBlock.DOWN, false);
+        return stemBlock.defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false);
     }
 
     protected static BlockState getDefaultCapState(Block capBlock) {
-        return capBlock.getDefaultState().with(HugeMushroomBlock.DOWN, false);
+        return capBlock.defaultBlockState().setValue(HugeMushroomBlock.DOWN, false);
     }
 
     public boolean growMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
@@ -34,11 +34,11 @@ public abstract class BigMushroom {
             return false;
         }
         ConfiguredFeature<?, ?> feature = this.getBigMushroomFeature();
-        world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 4);
-        if (feature.generate(world, chunkGenerator, random, blockPos)) {
+        world.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 4);
+        if (feature.place(world, chunkGenerator, random, blockPos)) {
             return true;
         } else {
-            world.setBlockState(blockPos, blockState, 4);
+            world.setBlock(blockPos, blockState, 4);
             return false;
         }
     }

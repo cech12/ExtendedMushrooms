@@ -13,6 +13,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.block.PressurePlateBlock.Sensitivity;
+
 public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
 
     /**
@@ -23,31 +26,31 @@ public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
     }
 
     public MushroomCapPressurePlateBlock(final int lightValue) {
-        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().setLightLevel((state) -> lightValue));
+        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().lightLevel((state) -> lightValue));
     }
 
     @Nonnull
     static private Properties generateBlockProperties() {
-        return Properties.create(Material.WOOL).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.CLOTH);
+        return Properties.of(Material.WOOL).noCollission().strength(0.5F).sound(SoundType.WOOL);
     }
 
     @Override
-    public void onFallenUpon(World world, BlockPos pos, Entity entity, float fallDistance) {
+    public void fallOn(World world, BlockPos pos, Entity entity, float fallDistance) {
         //negate some fall damage
-        super.onFallenUpon(world, pos, entity, fallDistance * 0.8F);
+        super.fallOn(world, pos, entity, fallDistance * 0.8F);
     }
 
     @Override
-    protected void playClickOnSound(IWorld world, @Nonnull BlockPos pos) {
+    protected void playOnSound(IWorld world, @Nonnull BlockPos pos) {
         if (Config.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
-            world.playSound(null, pos, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.8F);
+            world.playSound(null, pos, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.8F);
         }
     }
 
     @Override
-    protected void playClickOffSound(IWorld world, @Nonnull BlockPos pos) {
+    protected void playOffSound(IWorld world, @Nonnull BlockPos pos) {
         if (Config.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
-            world.playSound(null, pos, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.7F);
+            world.playSound(null, pos, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.7F);
         }
     }
 

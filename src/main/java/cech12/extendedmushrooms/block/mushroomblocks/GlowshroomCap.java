@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class GlowshroomCap extends AbstractEffectMushroomCap {
 
     public GlowshroomCap(MushroomType type, Properties properties) {
@@ -22,8 +24,8 @@ public class GlowshroomCap extends AbstractEffectMushroomCap {
     protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
         if (super.shouldDropEffectCloud(state, world, pos, random)) {
             //only drop effect at night or in dark areas
-            BlockPos up = pos.up();
-            return !world.isDaytime() || (!world.getBlockState(up).isSolid() && world.getLight(up) <= state.getLightValue());
+            BlockPos up = pos.above();
+            return !world.isDay() || (!world.getBlockState(up).canOcclude() && world.getMaxLocalRawBrightness(up) <= state.getLightEmission());
         }
         return false;
     }

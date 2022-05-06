@@ -6,6 +6,8 @@ import net.minecraft.block.material.Material;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class MushroomWoodPressurePlateBlock extends PressurePlateBlock {
 
     public MushroomWoodPressurePlateBlock() {
@@ -13,12 +15,12 @@ public class MushroomWoodPressurePlateBlock extends PressurePlateBlock {
     }
 
     public MushroomWoodPressurePlateBlock(final int lightValue) {
-        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().setLightLevel((state) -> lightValue));
+        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().lightLevel((state) -> lightValue));
     }
 
     @Nonnull
     static private Properties generateBlockProperties() {
-        return Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
+        return Properties.of(Material.WOOD).noCollission().strength(0.5F).sound(SoundType.WOOD);
     }
 
 }

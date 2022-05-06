@@ -83,17 +83,17 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 getVariantBuilder(block)
                         .forAllStates(state -> {
                             int xRot = 0;
-                            AttachFace face = state.get(BlockStateProperties.FACE);
+                            AttachFace face = state.getValue(BlockStateProperties.ATTACH_FACE);
                             if (face == AttachFace.WALL) {
                                 xRot = 90;
                             } else if (face == AttachFace.CEILING) {
                                 xRot = 180;
                             }
                             return ConfiguredModel.builder()
-                                    .modelFile((state.get(BlockStateProperties.POWERED)) ? pressed_button : button)
+                                    .modelFile((state.getValue(BlockStateProperties.POWERED)) ? pressed_button : button)
                                     .uvLock(face == AttachFace.WALL)
                                     .rotationX(xRot)
-                                    .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 180) % 360)
+                                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
                                     .build();
                         });
                 //Forge bug: VariantBlockStateBuilder.PartialBlockstate.toString method produces wrong values for AttachFace EnumProperty (CAPSLOCK)
@@ -104,7 +104,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile inside = models().getExistingFile(getInsideResourceLocation(name));
                 MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
                 for (boolean boolValue : new boolean[]{true, false}) {
-                    for (Map.Entry<Direction, BooleanProperty> entry : SixWayBlock.FACING_TO_PROPERTY_MAP.entrySet()) {
+                    for (Map.Entry<Direction, BooleanProperty> entry : SixWayBlock.PROPERTY_BY_DIRECTION.entrySet()) {
                         int xRot = 0;
                         int yRot = 0;
                         switch (entry.getKey()) {
@@ -143,7 +143,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 getVariantBuilder(block).forAllStatesExcept(state ->
                     ConfiguredModel.builder()
                             .modelFile(ladder)
-                            .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 180) % 360)
+                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
                             .build(),
                         LadderBlock.WATERLOGGED
                 );
@@ -152,7 +152,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile plate = models().getExistingFile(getBlockResourceLocation(name));
                 ModelFile plate_down = models().getExistingFile(getBlockResourceLocation(name + "_down"));
                 getVariantBuilder(block).forAllStatesExcept(state ->
-                        ConfiguredModel.builder().modelFile((state.get(BlockStateProperties.POWERED)) ? plate_down : plate).build());
+                        ConfiguredModel.builder().modelFile((state.getValue(BlockStateProperties.POWERED)) ? plate_down : plate).build());
             } else if (block instanceof StandingSignBlock) {
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
             } else if (block instanceof WallSignBlock) {

@@ -18,45 +18,47 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.item.BoatEntity.Type;
+
 public class MushroomBoatEntity extends BoatEntity {
 
-    private static final DataParameter<Integer> MUSHROOM_WOOD_TYPE = EntityDataManager.createKey(MushroomBoatEntity.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> MUSHROOM_WOOD_TYPE = EntityDataManager.defineId(MushroomBoatEntity.class, DataSerializers.INT);
 
     public MushroomBoatEntity(EntityType<? extends MushroomBoatEntity> p_i50129_1_, World p_i50129_2_) {
         super(p_i50129_1_, p_i50129_2_);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(MUSHROOM_WOOD_TYPE, MushroomWoodType.MUSHROOM.getId());
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(MUSHROOM_WOOD_TYPE, MushroomWoodType.MUSHROOM.getId());
     }
 
     @Nonnull
     @Override
-    public Item getItemBoat() {
+    public Item getDropItem() {
         return this.getMushroomWoodType().getBoatItem();
     }
 
     @Nullable
     @Override
-    public ItemEntity entityDropItem(IItemProvider itemIn) {
+    public ItemEntity spawnAtLocation(IItemProvider itemIn) {
         //replace planks
-        if (itemIn.asItem().isIn(ItemTags.PLANKS)) {
-            return super.entityDropItem(this.getMushroomWoodType().getPlanksBlock());
+        if (itemIn.asItem().is(ItemTags.PLANKS)) {
+            return super.spawnAtLocation(this.getMushroomWoodType().getPlanksBlock());
         }
-        return super.entityDropItem(itemIn);
+        return super.spawnAtLocation(itemIn);
     }
 
     @Override
-    protected void writeAdditional(@Nonnull CompoundNBT compound) {
-        super.writeAdditional(compound);
-        compound.putString("MushroomWoodType", this.getMushroomWoodType().getString());
+    protected void addAdditionalSaveData(@Nonnull CompoundNBT compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putString("MushroomWoodType", this.getMushroomWoodType().getSerializedName());
     }
 
     @Override
-    protected void readAdditional(@Nonnull CompoundNBT compound) {
-        super.readAdditional(compound);
+    protected void readAdditionalSaveData(@Nonnull CompoundNBT compound) {
+        super.readAdditionalSaveData(compound);
         if (compound.contains("MushroomWoodType", 8)) {
             this.setMushroomWoodType(MushroomWoodType.byName(compound.getString("MushroomWoodType")));
         }
@@ -64,14 +66,14 @@ public class MushroomBoatEntity extends BoatEntity {
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getAddEntityPacket() {
         //important!!!
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Deprecated
     @Override
-    public void setBoatType(@Nonnull BoatEntity.Type boatType) {
+    public void setType(@Nonnull BoatEntity.Type boatType) {
         //deactivate boat type
     }
 
@@ -84,11 +86,11 @@ public class MushroomBoatEntity extends BoatEntity {
     }
 
     public void setMushroomWoodType(MushroomWoodType type) {
-        this.dataManager.set(MUSHROOM_WOOD_TYPE, type.getId());
+        this.entityData.set(MUSHROOM_WOOD_TYPE, type.getId());
     }
 
     public MushroomWoodType getMushroomWoodType() {
-        return MushroomWoodType.byId(this.dataManager.get(MUSHROOM_WOOD_TYPE));
+        return MushroomWoodType.byId(this.entityData.get(MUSHROOM_WOOD_TYPE));
     }
 
 }

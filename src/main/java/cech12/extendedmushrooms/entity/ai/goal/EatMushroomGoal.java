@@ -13,6 +13,8 @@ import net.minecraftforge.common.Tags;
 
 import java.util.EnumSet;
 
+import net.minecraft.entity.ai.goal.Goal.Flag;
+
 public class EatMushroomGoal extends Goal {
 
     private final MobEntity eaterEntity;
@@ -25,36 +27,36 @@ public class EatMushroomGoal extends Goal {
 
     public EatMushroomGoal(MobEntity eaterEntity) {
         this.eaterEntity = eaterEntity;
-        this.entityWorld = eaterEntity.world;
-        this.setMutexFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
+        this.entityWorld = eaterEntity.level;
+        this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
     }
 
     private boolean isEntityOnMushroom() {
-        return this.entityWorld.getBlockState(this.eaterEntity.getPosition()).getBlock().asItem().isIn(Tags.Items.MUSHROOMS);
+        return this.entityWorld.getBlockState(this.eaterEntity.blockPosition()).getBlock().asItem().is(Tags.Items.MUSHROOMS);
     }
 
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute() {
-        return this.eaterEntity.getRNG().nextInt(this.eaterEntity.isChild() ? 50 : 1000) == 0 && this.isEntityOnMushroom();
+    public boolean canUse() {
+        return this.eaterEntity.getRandom().nextInt(this.eaterEntity.isBaby() ? 50 : 1000) == 0 && this.isEntityOnMushroom();
     }
 
     /**
      * Execute a one shot task or start executing a continuous task
      */
     @Override
-    public void startExecuting() {
+    public void start() {
         this.eatingTimer = 40;
-        this.entityWorld.setEntityState(this.eaterEntity, (byte) 10);
-        this.eaterEntity.getNavigator().clearPath();
+        this.entityWorld.broadcastEntityEvent(this.eaterEntity, (byte) 10);
+        this.eaterEntity.getNavigation().stop();
     }
 
     /**
      * Reset the task's internal state. Called when this task is interrupted by another one
      */
     @Override
-    public void resetTask() {
+    public void stop() {
         this.eatingTimer = 0;
     }
 
@@ -62,7 +64,7 @@ public class EatMushroomGoal extends Goal {
      * Returns whether an in-progress EntityAIBase should continue executing
      */
     @Override
-    public boolean shouldContinueExecuting() {
+    public boolean canContinueToUse() {
         return this.eatingTimer > 0;
     }
 
@@ -82,11 +84,11 @@ public class EatMushroomGoal extends Goal {
         if (this.eatingTimer == 4) {
             BlockPos blockPos = getBlockPos();
             if (this.isEntityOnMushroom()) {
-                MushroomType mushroomType = MushroomType.byItemOrNull(this.entityWorld.getBlockState(this.eaterEntity.getPosition()).getBlock().asItem());
-                if (this.entityWorld.getGameRules().getBoolean(GameRules.MOB_GRIEFING)) {
+                MushroomType mushroomType = MushroomType.byItemOrNull(this.entityWorld.getBlockState(this.eaterEntity.blockPosition()).getBlock().asItem());
+                if (this.entityWorld.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
                     this.entityWorld.destroyBlock(blockPos, false);
                 }
-                this.eaterEntity.eatGrassBonus();
+                this.eaterEntity.ate();
                 if (Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get()) {
                     if (this.eaterEntity instanceof SheepEntity && mushroomType != null) {
                         if (this.eaterEntity instanceof MushroomSheepEntity) {
@@ -103,7 +105,7 @@ public class EatMushroomGoal extends Goal {
     }
 
     private BlockPos getBlockPos() {
-        return new BlockPos(this.eaterEntity.getPosX(), this.eaterEntity.getPosY(), this.eaterEntity.getPosZ());
+        return new BlockPos(this.eaterEntity.getX(), this.eaterEntity.getY(), this.eaterEntity.getZ());
     }
 
 }

@@ -84,12 +84,12 @@ public class ModVanillaCompat {
     }
 
     public static void registerCompostable(float chance, IItemProvider itemIn) {
-        ComposterBlock.CHANCES.put(itemIn.asItem(), chance);
+        ComposterBlock.COMPOSTABLES.put(itemIn.asItem(), chance);
     }
 
     public static void registerFlammable(Block blockIn, int encouragement, int flammability) {
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
-        fireblock.setFireInfo(blockIn, encouragement, flammability);
+        fireblock.setFlammable(blockIn, encouragement, flammability);
     }
 
 }

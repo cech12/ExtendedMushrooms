@@ -20,7 +20,7 @@ public class MushroomSheepRenderer extends MobRenderer<MushroomSheepEntity, Shee
     }
 
     @Nonnull
-    public ResourceLocation getEntityTexture(@Nonnull MushroomSheepEntity entity) {
+    public ResourceLocation getTextureLocation(@Nonnull MushroomSheepEntity entity) {
         return SHEARED_SHEEP_TEXTURES;
     }
 

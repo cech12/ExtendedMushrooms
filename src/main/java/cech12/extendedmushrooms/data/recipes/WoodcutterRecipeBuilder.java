@@ -93,7 +93,7 @@ public class WoodcutterRecipeBuilder {
             this.conditions = conditionsIn;
         }
 
-        public void serialize(JsonObject json) {
+        public void serializeRecipeData(JsonObject json) {
             json.addProperty("type", "woodcutter:woodcutting");
 
             JsonArray conditionArray = new JsonArray();
@@ -102,23 +102,23 @@ public class WoodcutterRecipeBuilder {
             }
             json.add("conditions", conditionArray);
 
-            json.add("ingredient", ingredient.serialize());
+            json.add("ingredient", ingredient.toJson());
 
             json.addProperty("result", ForgeRegistries.ITEMS.getKey(this.result).toString());
             json.addProperty("count", this.count);
         }
 
         @Nonnull
-        public IRecipeSerializer<?> getSerializer() {
+        public IRecipeSerializer<?> getType() {
             //maybe another serializer?
-            return IRecipeSerializer.CRAFTING_SHAPELESS;
+            return IRecipeSerializer.SHAPELESS_RECIPE;
         }
 
         /**
          * Gets the ID for the recipe.
          */
         @Nonnull
-        public ResourceLocation getID() {
+        public ResourceLocation getId() {
             return this.id;
         }
 
@@ -126,7 +126,7 @@ public class WoodcutterRecipeBuilder {
          * Gets the JSON for the advancement that unlocks this recipe. Null if there is no advancement.
          */
         @Nullable
-        public JsonObject getAdvancementJson() {
+        public JsonObject serializeAdvancement() {
             return null;
         }
 
@@ -135,7 +135,7 @@ public class WoodcutterRecipeBuilder {
          * is non-null.
          */
         @Nullable
-        public ResourceLocation getAdvancementID() {
+        public ResourceLocation getAdvancementId() {
             return null;
         }
     }

@@ -1,1 +1,0 @@
-MixinConnector: cech12.extendedmushrooms.mixin.ModMixinConnector

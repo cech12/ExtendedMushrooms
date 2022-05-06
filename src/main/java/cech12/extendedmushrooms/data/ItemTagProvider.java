@@ -24,11 +24,11 @@ public class ItemTagProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         Predicate<Item> extendedMushrooms = item -> ExtendedMushrooms.MOD_ID.equals(item.getRegistryName().getNamespace());
 
         //generate mod intern tags
-        getOrCreateBuilder(ModTags.Items.MUSHROOM_BOATS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Items.MUSHROOM_BOATS).add(registry.stream().filter(extendedMushrooms)
                 .filter(item -> item instanceof MushroomBoatItem)
                 .sorted(Comparator.comparing(Item::getRegistryName))
                 .toArray(Item[]::new));
@@ -71,17 +71,17 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE, ModTags.ForgeItems.MUSHROOMS_EDIBLE);
         copy(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS, ModTags.ForgeItems.MUSHROOMS_POISONOUS);
 
-        getOrCreateBuilder(Tags.Items.BOOKSHELVES).addTag(ModTags.Items.MUSHROOM_BOOKSHELVES);
+        tag(Tags.Items.BOOKSHELVES).addTag(ModTags.Items.MUSHROOM_BOOKSHELVES);
         copy(Tags.Blocks.CHESTS, Tags.Items.CHESTS);
         copy(Tags.Blocks.CHESTS_TRAPPED, Tags.Items.CHESTS_TRAPPED);
         copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
         copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
         copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
 
-        getOrCreateBuilder(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
+        tag(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
 
         //generate minecraft tags
-        getOrCreateBuilder(ItemTags.BOATS).addTag(ModTags.Items.MUSHROOM_BOATS);
+        tag(ItemTags.BOATS).addTag(ModTags.Items.MUSHROOM_BOATS);
         copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
         copy(BlockTags.CARPETS, ItemTags.CARPETS);
         copy(BlockTags.DOORS, ItemTags.DOORS);

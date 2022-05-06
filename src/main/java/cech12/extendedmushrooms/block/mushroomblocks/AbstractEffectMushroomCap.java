@@ -18,13 +18,15 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
 
     public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 
     public AbstractEffectMushroomCap(MushroomType type, Properties properties) {
         super(type, properties);
-        this.setDefaultState(this.getDefaultState().with(PERSISTENT, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(PERSISTENT, false));
     }
 
     /**
@@ -38,7 +40,7 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
     }
 
     protected int getEffectCloudColor(List<EffectInstance> effects, @Nonnull Random random) {
-        return PotionUtils.getPotionColorFromEffectList(effects);
+        return PotionUtils.getColor(effects);
     }
 
     protected float getEffectCloudRadius(@Nonnull Random random) {
@@ -55,16 +57,16 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
 
     @Override
     public void randomTick(BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
-        if (!state.get(PERSISTENT) && this.shouldDropEffectCloud(state, worldIn, pos, random)) {
+        if (!state.getValue(PERSISTENT) && this.shouldDropEffectCloud(state, worldIn, pos, random)) {
             //find ground block below
-            BlockPos down = pos.down();
+            BlockPos down = pos.below();
             BlockPos.Mutable effectPos = new BlockPos.Mutable(down.getX(), down.getY(), down.getZ());
             //block below must not be a solid block
-            if (!worldIn.getBlockState(effectPos).isSolid()) {
+            if (!worldIn.getBlockState(effectPos).canOcclude()) {
                 //go down until reached a solid block or world bounds
                 do {
                     effectPos.move(Direction.DOWN);
-                } while (!worldIn.getBlockState(effectPos).isSolid() && effectPos.getY() >= 0);
+                } while (!worldIn.getBlockState(effectPos).canOcclude() && effectPos.getY() >= 0);
                 //to spawn effect, go one block up
                 if (effectPos.getY() >= 0) {
                     effectPos.move(Direction.UP);
@@ -84,28 +86,28 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
             areaeffectcloudentity.setRadiusOnUse(-this.getEffectCloudRadiusOnUse(random));
             areaeffectcloudentity.setWaitTime(10);
             areaeffectcloudentity.setRadiusPerTick(-areaeffectcloudentity.getRadius() / (float)areaeffectcloudentity.getDuration());
-            areaeffectcloudentity.setColor(this.getEffectCloudColor(effects, random));
+            areaeffectcloudentity.setFixedColor(this.getEffectCloudColor(effects, random));
             for (EffectInstance effectinstance : effects) {
                 areaeffectcloudentity.addEffect(new EffectInstance(effectinstance));
             }
-            worldIn.addEntity(areaeffectcloudentity);
+            worldIn.addFreshEntity(areaeffectcloudentity);
         }
     }
 
     @Override
-    public boolean ticksRandomly(BlockState state) {
-        return !state.get(PERSISTENT);
+    public boolean isRandomlyTicking(BlockState state) {
+        return !state.getValue(PERSISTENT);
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(PERSISTENT);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return super.getStateForPlacement(context).with(PERSISTENT, true);
+        return super.getStateForPlacement(context).setValue(PERSISTENT, true);
     }
 
 }
