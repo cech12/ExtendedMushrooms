@@ -1,0 +1,137 @@
+{
+    "parent": "block/block",
+    "elements": [
+        {
+            "from": [ 0, 0.01, 0 ],
+            "to": [ 16, 0.01, 16 ],
+            "shade": false,
+            "faces": {
+                "down":  { "uv": [ 0,  0, 16, 16 ], "texture": "#center", "cullface": "down" },
+                "up":    { "uv": [ 0,  0, 16, 16 ], "texture": "#center" }
+            }
+        },
+        {
+            "from": [ 16, 0.01, 0 ],
+            "to": [ 32, 0.01, 16 ],
+            "shade": false,
+            "faces": {
+                "down":  { "uv": [ 0,  0, 16, 16 ], "texture": "#side", "cullface": "down" },
+                "up":    { "uv": [ 0,  0, 16, 16 ], "texture": "#side" }
+            }
+        },
+        {
+            "from": [ 0, 0.01, 16 ],
+            "to": [ 16, 0.01, 32 ],
+            "shade": false,
+            "faces": {
+                "down":  { "uv": [ 16,  0, 0, 16 ], "rotation": 270, "texture": "#side", "cullface": "down" },
+                "up":    { "uv": [ 16,  0, 0, 16 ], "rotation": 270, "texture": "#side" }
+            }
+        },
+        {
+            "from": [ 16, 0.01, 16 ],
+            "to": [ 32, 0.01, 32 ],
+            "shade": false,
+            "faces": {
+                "down":  { "uv": [ 0,  0, 16, 16 ], "texture": "#corner", "cullface": "down" },
+                "up":    { "uv": [ 0,  0, 16, 16 ], "texture": "#corner" }
+            }
+        },
+
+
+        {
+            "from": [ 22, 0, 0 ],
+            "to": [ 28, 6, 0 ],
+            "rotation": { "origin": [ 25, 0, 0 ], "axis": "y", "angle": 45, "rescale": true },
+            "shade": false,
+            "faces": {
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom1" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom1" }
+            }
+        },
+        {
+            "from": [ 25, 0, -3 ],
+            "to": [ 25, 6, 3 ],
+            "rotation": { "origin": [ 25, 0, 0 ], "axis": "y", "angle": 45, "rescale": true },
+            "shade": false,
+            "faces": {
+                "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom1" },
+                "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom1" }
+            }
+        },
+
+
+        {
+            "from": [ 19, 0, 14 ],
+            "to": [ 25, 6, 14 ],
+            "rotation": { "origin": [ 22, 0, 14 ], "axis": "y", "angle": 45, "rescale": true },
+            "shade": false,
+            "faces": {
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom1" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom1" }
+            }
+        },
+        {
+            "from": [ 22, 0, 11 ],
+            "to": [ 22, 6, 17 ],
+            "rotation": { "origin": [ 22, 0, 14 ], "axis": "y", "angle": 45, "rescale": true },
+            "shade": false,
+            "faces": {
+                "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom1" },
+                "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom1" }
+            }
+        },
+
+
+        {
+            "from": [ 14, 0, 19 ],
+            "to": [ 24, 10, 19 ],
+            "rotation": { "origin": [ 19, 0, 19 ], "axis": "y", "angle": 45, "rescale": true },
+            "shade": false,
+            "faces": {
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom2" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom2" }
+            }
+        },
+        {
+            "from": [ 19, 0, 14 ],
+            "to": [ 19, 10, 24 ],
+            "rotation": { "origin": [ 19, 0, 19 ], "axis": "y", "angle": 45, "rescale": true },
+            "shade": false,
+            "faces": {
+                "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom2" },
+                "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom2" }
+            }
+        },
+
+
+        {
+            "from": [ 11, 0, 22 ],
+            "to": [ 17, 6, 22 ],
+            "rotation": { "origin": [ 14, 0, 22 ], "axis": "y", "angle": 45, "rescale": true },
+            "shade": false,
+            "faces": {
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom2" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom2" }
+            }
+        },
+        {
+            "from": [ 14, 0, 19 ],
+            "to": [ 14, 6, 25 ],
+            "rotation": { "origin": [ 14, 0, 22 ], "axis": "y", "angle": 45, "rescale": true },
+            "shade": false,
+            "faces": {
+                "west": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom2" },
+                "east": { "uv": [ 0, 0, 16, 16 ], "texture": "#mushroom2" }
+            }
+        }
+    ],
+    "textures": {
+        "particle": "extendedmushrooms:block/fairy_ring_center",
+        "center": "extendedmushrooms:block/fairy_ring_center",
+        "side": "extendedmushrooms:block/fairy_ring_side",
+        "corner": "extendedmushrooms:block/fairy_ring_corner",
+        "mushroom1": "minecraft:block/brown_mushroom",
+        "mushroom2": "minecraft:block/red_mushroom"
+    }
+}

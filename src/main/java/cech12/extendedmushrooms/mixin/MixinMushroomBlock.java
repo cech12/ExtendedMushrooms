@@ -1,11 +1,13 @@
 package cech12.extendedmushrooms.mixin;
 
 import cech12.extendedmushrooms.MushroomUtils;
+import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
 import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomBlock;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +31,20 @@ public class MixinMushroomBlock {
         //Forge: prevent loading unloaded chunks
         if (world.isAreaLoaded(pos, 7) && random.nextInt(25) == 0) {
             if (state.getBlock() instanceof MushroomBlock) {
-                ((MushroomBlock) state.getBlock()).grow(world, random, pos, state);
+                //only grow when not part of a fairy ring
+                Direction[] directions = { Direction.NORTH, Direction.EAST, Direction.WEST, Direction.SOUTH };
+                boolean partOfFairyRing = false;
+                BlockPos.Mutable mutablePos = new BlockPos.Mutable();
+                for (Direction direction : directions) {
+                    mutablePos.setPos(pos).move(direction);
+                    if (world.getBlockState(mutablePos).getBlock() == ExtendedMushroomsBlocks.FAIRY_RING) {
+                        partOfFairyRing = true;
+                        break;
+                    }
+                }
+                if (!partOfFairyRing) {
+                    ((MushroomBlock) state.getBlock()).grow(world, random, pos, state);
+                }
             }
         }
         //automatic multiplication follows in tick method when ci.canceled NOT called

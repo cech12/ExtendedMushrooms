@@ -1,0 +1,13 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "mode": "normal",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "recipetime": 200,
+  "result": {
+    "mode": "witch"
+  }
+}

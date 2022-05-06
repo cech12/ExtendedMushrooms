@@ -2,9 +2,11 @@ package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+import cech12.extendedmushrooms.client.renderer.tileentity.FairyRingTileEntityRenderer;
 import cech12.extendedmushrooms.client.renderer.tileentity.VariantChestTileEntityRenderer;
 import cech12.extendedmushrooms.client.renderer.tileentity.VariantTrappedChestTileEntityRenderer;
 import cech12.extendedmushrooms.item.MushroomWoodType;
+import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
 import cech12.extendedmushrooms.tileentity.MushroomSignTileEntity;
 import cech12.extendedmushrooms.tileentity.VariantChestTileEntity;
 import cech12.extendedmushrooms.tileentity.VariantTrappedChestTileEntity;
@@ -31,6 +33,7 @@ public class ModTileEntities {
 
     @SubscribeEvent
     public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
+        FAIRY_RING = register(event, FairyRingTileEntity::new, "fairy_ring", ExtendedMushroomsBlocks.FAIRY_RING);
         MUSHROOM_SIGN = register(event, MushroomSignTileEntity::new, "mushroom_sign",
                 ModBlocks.MUSHROOM_STANDING_SIGN.get(),
                 ModBlocks.MUSHROOM_WALL_SIGN.get(),
@@ -48,6 +51,7 @@ public class ModTileEntities {
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED);
     }
 
+
     private static <T extends TileEntity> TileEntityType<T> register(RegistryEvent.Register<TileEntityType<?>> registryEvent, Supplier<T> supplier, String registryName, Block... blocks) {
         TileEntityType<T> tileEntityType = TileEntityType.Builder.create(supplier, blocks).build(null);
         tileEntityType.setRegistryName(registryName);
@@ -60,6 +64,7 @@ public class ModTileEntities {
      */
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderers(final FMLClientSetupEvent event) {
+        ClientRegistry.bindTileEntityRenderer((TileEntityType<FairyRingTileEntity>) FAIRY_RING, FairyRingTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer((TileEntityType<SignTileEntity>) MUSHROOM_SIGN, SignTileEntityRenderer::new);
         event.enqueueWork(() -> {
             for (MushroomWoodType type : MushroomWoodType.values()) {

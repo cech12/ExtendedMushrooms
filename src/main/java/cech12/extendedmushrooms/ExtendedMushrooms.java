@@ -1,5 +1,9 @@
 package cech12.extendedmushrooms;
 
+import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+import cech12.extendedmushrooms.api.recipe.ExtendedMushroomsRecipeTypes;
+import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
+import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMushroomGoal;
@@ -17,15 +21,27 @@ import cech12.extendedmushrooms.loot_modifiers.MushroomStemLootModifier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HugeMushroomBlock;
+import net.minecraft.block.MushroomBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.potion.Potions;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.IWorld;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -33,17 +49,20 @@ import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import java.util.Map;
 import javax.annotation.Nonnull;
 
 @Mod(ExtendedMushrooms.MOD_ID)
@@ -88,8 +107,13 @@ public class ExtendedMushrooms {
         //serializer for conditions
         CraftingHelper.register(ModFeatureEnabledCondition.Serializer.INSTANCE);
 
+        // let other mods register recipes
+        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(ExtendedMushroomsRecipeTypes.FAIRY_RING.toString()),
+                ExtendedMushroomsRecipeTypes.FAIRY_RING);
+
         // Register the recipe serializer.
         event.getRegistry().register(MushroomArrowRecipe.SERIALIZER);
+        event.getRegistry().register(FairyRingRecipe.SERIALIZER);
     }
 
     /**
@@ -173,6 +197,47 @@ public class ExtendedMushrooms {
                 sheep.goalSelector.addGoal(5, new EatMushroomGoal(sheep));
             }
         }
+    }
+
+    /**
+     * Add Fairy Ring generation to all mushroom blocks
+     */
+    @SubscribeEvent
+    public static void onNeighbourChanged(BlockEvent.NeighborNotifyEvent event) {
+        IWorld world = event.getWorld();
+        BlockPos blockPos = event.getPos();
+        BlockState blockState = world.getBlockState(blockPos);
+        if (blockState.getBlock() != ExtendedMushroomsBlocks.FAIRY_RING) {
+            for (Direction direction : event.getNotifiedSides()) {
+                BlockPos neighbourPos = blockPos.offset(direction);
+                if (world.getBlockState(neighbourPos).getBlock() instanceof MushroomBlock) {
+                    //neighbour is mushroom?
+                    FairyRingBlock.fairyRingPlaceCheck(world, neighbourPos);
+                } else if (world.getBlockState(neighbourPos.up()).getBlock() instanceof MushroomBlock) {
+                    //for ground blocks - block above neighbour is mushroom?
+                    FairyRingBlock.fairyRingPlaceCheck(world, neighbourPos.up());
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Copy of https://github.com/Minecraft-Forge-Tutorials/Custom-Json-Recipes/blob/master/src/main/java/net/darkhax/customrecipeexample/CustomRecipesMod.java
+     *
+     * This method lets you get all of the recipe data for a given recipe type. The existing
+     * methods for this require an IInventory, and this allows you to skip that overhead. This
+     * method uses reflection to get the recipes map, but an access transformer would also
+     * work.
+     *
+     * @param recipeType The type of recipe to grab.
+     * @param manager The recipe manager. This is generally taken from a World.
+     * @return A map containing all recipes for the passed recipe type. This map is immutable
+     *         and can not be modified.
+     */
+    public static Map<ResourceLocation, IRecipe<?>> getRecipes(IRecipeType<?> recipeType, RecipeManager manager) {
+        final Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = ObfuscationReflectionHelper.getPrivateValue(RecipeManager.class, manager, "field_199522_d");
+        return recipesMap.get(recipeType);
     }
 
 }

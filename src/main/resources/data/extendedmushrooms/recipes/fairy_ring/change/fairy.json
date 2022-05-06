@@ -1,0 +1,13 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "mode": "normal",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:glowstone_crumbs"
+    }
+  ],
+  "recipetime": 200,
+  "result": {
+    "mode": "fairy"
+  }
+}

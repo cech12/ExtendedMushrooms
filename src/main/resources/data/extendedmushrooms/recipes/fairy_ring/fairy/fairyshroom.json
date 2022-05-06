@@ -1,0 +1,13 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "mode": "fairy",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:glowshroom"
+    }
+  ],
+  "recipetime": 200,
+  "result": {
+    "item": "extendedmushrooms:mushroom_spores"
+  }
+}

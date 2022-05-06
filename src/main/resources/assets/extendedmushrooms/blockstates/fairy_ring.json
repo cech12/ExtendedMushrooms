@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=west": { "model": "extendedmushrooms:block/fairy_ring" },
+        "facing=east": { "model": "extendedmushrooms:block/fairy_ring", "y": 90 },
+        "facing=north": { "model": "extendedmushrooms:block/fairy_ring", "y": 180 },
+        "facing=south": { "model": "extendedmushrooms:block/fairy_ring", "y": 270 }
+    }
+}

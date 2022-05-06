@@ -31,8 +31,8 @@ public class ModEntities {
 
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-        registerEntity("mushroom_sheep", MUSHROOM_SHEEP);
         registerEntity("mushroom_boat", MUSHROOM_BOAT);
+        registerEntity("mushroom_sheep", MUSHROOM_SHEEP);
     }
 
     private static <T extends Entity> void registerEntity(String key, EntityType<T> entityType) {
@@ -50,8 +50,8 @@ public class ModEntities {
      */
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, MushroomSheepRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler((EntityType<MushroomBoatEntity>) MUSHROOM_BOAT, MushroomBoatRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, MushroomSheepRenderer::new);
     }
 
     /**
