@@ -22,7 +22,7 @@ public class FairyRingParticle extends SpriteTexturedParticle {
         this.yd = motionY;
         this.zd = motionZ;
         this.lifetime = (int)(10.0D / (Math.random() * 0.8D + 0.2D));
-        this.quadSize *= 0.4;
+        this.quadSize *= 0.4F;
     }
 
     @Nonnull
@@ -47,12 +47,12 @@ public class FairyRingParticle extends SpriteTexturedParticle {
             }
 
             this.quadSize *= 0.96F;
-            this.xd *= (double)0.96F;
-            this.yd *= (double)0.96F;
-            this.zd *= (double)0.96F;
+            this.xd *= 0.96D;
+            this.yd *= 0.96D;
+            this.zd *= 0.96D;
             if (this.onGround) {
-                this.xd *= (double)0.7F;
-                this.zd *= (double)0.7F;
+                this.xd *= 0.7D;
+                this.zd *= 0.7D;
             }
 
         }
@@ -67,7 +67,7 @@ public class FairyRingParticle extends SpriteTexturedParticle {
         }
 
         public Particle createParticle(@Nonnull BasicParticleType typeIn, @Nonnull ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new FairyRingParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, 1.0F, this.spriteSet);
+            return new FairyRingParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, 1.0D, this.spriteSet);
         }
     }
 }
