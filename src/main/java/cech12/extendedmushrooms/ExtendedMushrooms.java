@@ -108,8 +108,8 @@ public class ExtendedMushrooms {
         CraftingHelper.register(ModFeatureEnabledCondition.Serializer.INSTANCE);
 
         // let other mods register recipes
-        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(ExtendedMushroomsRecipeTypes.FAIRY_RING.toString()),
-                ExtendedMushroomsRecipeTypes.FAIRY_RING);
+        ExtendedMushroomsRecipeTypes.FAIRY_RING = Registry.register(Registry.RECIPE_TYPE, ExtendedMushroomsRecipeTypes.FAIRY_RING_ID,
+                new IRecipeType<FairyRingRecipe>() {});
 
         // Register the recipe serializer.
         event.getRegistry().register(MushroomArrowRecipe.SERIALIZER);

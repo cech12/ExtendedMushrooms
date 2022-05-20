@@ -1,6 +1,5 @@
 {
   "type": "extendedmushrooms:fairy_ring_recipe",
-  "mode": "normal",
   "ingredients": [
     {
       "item": "minecraft:grass"
@@ -14,6 +13,7 @@
   ],
   "recipetime": 200,
   "result": {
-    "item": "extendedmushrooms:infested_grass"
+    "item": "extendedmushrooms:infested_grass",
+    "count": 3
   }
 }

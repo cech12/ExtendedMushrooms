@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.16.5-2.0.0.0] - ????-??-??
 ### Added
 - Fairy Ring crafting
+- JEI support for Fairy Ring recipes
 - Mushroom Trapdoors are now climbable for ladders of other mods 
 
 ### Changed

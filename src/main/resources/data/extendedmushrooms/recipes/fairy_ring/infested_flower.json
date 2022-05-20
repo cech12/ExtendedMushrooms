@@ -1,0 +1,22 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "tag": "minecraft:flowers"
+    },
+    {
+      "tag": "minecraft:flowers"
+    },
+    {
+      "tag": "minecraft:flowers"
+    },
+    {
+      "tag": "minecraft:flowers"
+    }
+  ],
+  "recipetime": 200,
+  "result": {
+    "item": "extendedmushrooms:infested_flower",
+    "count": 4
+  }
+}
