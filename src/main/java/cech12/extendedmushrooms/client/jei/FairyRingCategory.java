@@ -121,10 +121,10 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
     @Override
     public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull FairyRingRecipe recipe, @Nonnull IIngredients ingredients) {
         int index = 0;
-        Vector2f center = new Vector2f(22, 19);
+        Vector2f center = new Vector2f(23, 19);
         if (ingredients.getInputs(VanillaTypes.ITEM).size() > 1) {
             double angleBetweenEach = 360.0 / ingredients.getInputs(VanillaTypes.ITEM).size();
-            Vector2f point = new Vector2f(22, 4);
+            Vector2f point = new Vector2f(center.x, 4);
             for (List<ItemStack> o : ingredients.getInputs(VanillaTypes.ITEM)) {
                 recipeLayout.getItemStacks().init(index, true, (int) point.x, (int) point.y);
                 recipeLayout.getItemStacks().set(index, o);

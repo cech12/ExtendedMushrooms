@@ -47,9 +47,4 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new FairyRingCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
-    @Override
-    public void registerRecipeCatalysts(@Nonnull IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(Items.RED_MUSHROOM), ExtendedMushroomsRecipeTypes.FAIRY_RING_ID);
-    }
-
 }

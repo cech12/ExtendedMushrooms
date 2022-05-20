@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.6.1_1.16] - 2021-06-10
 ### Fixed
-- Bugfix: Huge mushrooms didn't spawn in dark forests. #49 (thanks to jahirtrap fopr the report)
+- Bugfix: Huge mushrooms didn't spawn in dark forests. #49 (thanks to jahirtrap for the report)
 
 ## [1.6.0_1.16] - 2021-06-09
 ### Added
