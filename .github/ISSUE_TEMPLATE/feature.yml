@@ -1,7 +1,7 @@
 name: Request a Feature
 description: Note that new features are only added to the latest Minecraft version.
 title: "[Feature]: "
-labels: [feature]
+labels: [enhancement]
 body:
   - type: textarea
     id: description
