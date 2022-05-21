@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
@@ -181,7 +182,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                         .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.SOUTH).addModels(new ConfiguredModel(slab, 0, 180, true))
                         .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.WEST).addModels(new ConfiguredModel(slab, 0, 270, true))
                         .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.DOUBLE).addModels(new ConfiguredModel(doubleSlab));
-            } else {
+            } else if (!(block instanceof FairyRingBlock)) { // Fairy Ring is hand made
                 //mushrooms, (vertical) planks, carpets, flower, potted flower, grass, bookshelf
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
             }

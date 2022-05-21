@@ -4,6 +4,7 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import cech12.extendedmushrooms.block.BookshelfBlock;
+import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -76,6 +77,8 @@ public class BlockLootProvider implements IDataProvider {
                 this.functionTable.put(block, BlockLootProvider::dropDoor);
             } else if (block instanceof MushroomStemBlock) {
                 this.functionTable.put(block, BlockLootProvider::dropStem);
+            } else if (block instanceof FairyRingBlock) {
+                this.functionTable.put(block, BlockLootProvider::dropNothing);
             }
         }
 

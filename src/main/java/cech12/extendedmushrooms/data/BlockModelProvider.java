@@ -5,9 +5,9 @@ import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.EMMushroomBlock;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
+import cech12.extendedmushrooms.block.MushroomPlanksBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.VariantChestBlock;
-import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.block.VerticalPlanksBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
@@ -133,8 +133,6 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 pressurePlateBlock(name, getCapResourceLocation(name, "_pressure_plate"));
             } else if (block instanceof VariantChestBlock) {
                 getBuilder(name).texture("particle", getBlockResourceLocation(name, "_chest", "_planks"));
-            } else if (block instanceof VariantTrappedChestBlock) {
-                //ignore
             } else if (block instanceof DoorBlock) {
                 ResourceLocation bottom = getBlockResourceLocation(name + "_bottom");
                 ResourceLocation top = getBlockResourceLocation(name + "_top");
@@ -236,10 +234,11 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/tinted_cross")))
                         .texture("cross", getBlockResourceLocation(name));
-            } else {
+            } else if (block instanceof MushroomPlanksBlock) {
                 //planks
                 cubeBlock(name, getBlockResourceLocation(name));
             }
+            // ignored: FairyRingBlock, VariantTrappedChestBlock
         }
 
         //special models
