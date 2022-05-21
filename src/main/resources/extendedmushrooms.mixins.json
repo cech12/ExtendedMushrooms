@@ -2,7 +2,7 @@
   "required": true,
   "package": "cech12.extendedmushrooms.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "unlitcampfire.refmap.json",
+  "refmap": "extendedmushrooms.refmap.json",
   "mixins": [
     "IMixinAbstractBigMushroomFeature",
     "MixinAbstractBigMushroomFeature",

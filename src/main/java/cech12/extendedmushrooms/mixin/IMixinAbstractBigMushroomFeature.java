@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(AbstractBigMushroomFeature.class)
 public interface IMixinAbstractBigMushroomFeature {
 
-    @Invoker(value = "getTreeRadiusForHeight", remap = false)
+    @Invoker(value = "getTreeRadiusForHeight")
     int invoke_getTreeRadiusForHeight(int p_225563_1_, int p_225563_2_, int p_225563_3_, int p_225563_4_);
 
 }

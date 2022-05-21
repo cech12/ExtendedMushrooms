@@ -19,7 +19,7 @@ public abstract class MixinAbstractBigMushroomFeature {
      * Remove dirt check and add tag check
      * The automatic multiplication still remaining.
      */
-    @Inject(at = @At("HEAD"), method = "isValidPosition", remap = false, cancellable = true)
+    @Inject(at = @At("HEAD"), method = "isValidPosition", cancellable = true)
     public void isValidPositionProxy(IWorld world, BlockPos pos, int p_227209_3_, BlockPos.Mutable p_227209_4_, BigMushroomFeatureConfig p_227209_5_, CallbackInfoReturnable<Boolean> cir) {
         int i = pos.getY();
         if (i >= 1 && i + p_227209_3_ + 1 < world.getHeight()) { //getMaxHeight
