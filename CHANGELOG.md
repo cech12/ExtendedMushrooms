@@ -5,9 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.16.5-2.0.0.0] - ????-??-??
 ### Added
-- Fairy Ring crafting
-- JEI support for Fairy Ring recipes
-- Mushroom Trapdoors are now climbable for ladders of other mods 
+- Fairy Ring crafting #12
+- JEI support for Fairy Ring recipes #56
+- Mushroom Trapdoors are now climbable for ladders of other mods
+- Support beehive recipe for Buzzier Bees mod #51 (thanks to nicholas_minecraft for the hint)
 
 ### Changed
 - update to Forge 1.16.5-36.2.26 (fix Log4J security issue)
