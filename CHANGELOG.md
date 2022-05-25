@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 - Fairy Ring crafting #12
 - JEI support for Fairy Ring recipes #56
+- some new recipes for Fairy Ring crafting #57
 - Fairy Ring crafting sounds #58
 - Mushroom Trapdoors are now climbable for ladders of other mods
 - Support beehive recipe for Buzzier Bees mod #51 (thanks to nicholas_minecraft for the hint)
