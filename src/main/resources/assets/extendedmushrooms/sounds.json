@@ -1,0 +1,28 @@
+{
+  "fairy_ring_crafting": {
+    "subtitle": "extendedmushrooms.subtitle.fairy_ring_crafting",
+    "sounds": [
+      {
+        "name": "extendedmushrooms:fairy_ring_crafting_1",
+        "volume": 1.00
+      },
+      {
+        "name": "extendedmushrooms:fairy_ring_crafting_2",
+        "volume": 1.00
+      },
+      {
+        "name": "extendedmushrooms:fairy_ring_crafting_3",
+        "volume": 1.00
+      }
+    ]
+  },
+  "fairy_ring_crafting_finish": {
+    "subtitle": "extendedmushrooms.subtitle.fairy_ring_crafting_finish",
+    "sounds": [
+      {
+        "name": "extendedmushrooms:fairy_ring_crafting_finish",
+        "volume": 1.00
+      }
+    ]
+  }
+}

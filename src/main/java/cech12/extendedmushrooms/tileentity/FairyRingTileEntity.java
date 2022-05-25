@@ -7,6 +7,7 @@ import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
 import cech12.extendedmushrooms.api.tileentity.ExtendedMushroomsTileEntities;
 import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.init.ModParticles;
+import cech12.extendedmushrooms.init.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
@@ -23,6 +24,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -40,6 +42,8 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     public static final int INVENTORY_SIZE = 16;
 
     private static final int EFFECT_EVENT = 0;
+
+    private static final int CRAFTING_SOUND_INTERVAL = 60; //in ticks
 
     private boolean hasMaster;
     private boolean isMaster;
@@ -324,14 +328,19 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
 
     @Override
     public void tick() {
-        boolean dirty = false;
         if (this.isMaster() && this.getLevel() != null && !this.getLevel().isClientSide) {
             FairyRingRecipe recipe = this.getRecipe();
             if (recipe != null) {
+                //play crafting sound every CRAFTING_SOUND_INTERVAL ticks (beginning with tick 1) until a new sound would overlap the finish sound
+                if (this.recipeTime % CRAFTING_SOUND_INTERVAL == 1 && this.recipeTimeTotal - this.recipeTime > CRAFTING_SOUND_INTERVAL / 2) {
+                    Vector3d center = this.getCenter();
+                    float volume = this.getLevel().getRandom().nextFloat() * 0.4F + 0.8F;
+                    float pitch = this.getLevel().getRandom().nextFloat() * 0.2F + 0.9F;
+                    this.getLevel().playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING, SoundCategory.AMBIENT, volume, pitch);
+                }
                 //increase recipe time
                 if (this.recipeTime < this.recipeTimeTotal) {
                     this.recipeTime++;
-                    dirty = true;
                 }
                 //detect finished recipe
                 if (this.recipeTime >= this.recipeTimeTotal) {
@@ -348,15 +357,14 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
                         itemEntity.setDeltaMovement(new Vector3d(0, 0.2, 0));
                         this.getLevel().addFreshEntity(itemEntity);
                     }
+                    //play sound
+                    this.getLevel().playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING_FINISH, SoundCategory.BLOCKS, 1.5F, 1.0F);
                     //reset and update recipe
                     this.resetRecipe();
                     this.updateRecipe();
-                    dirty = true;
                 }
+                this.sendUpdates();
             }
-        }
-        if (dirty) {
-            this.sendUpdates();
         }
     }
 
