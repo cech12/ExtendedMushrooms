@@ -186,7 +186,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
                 throw new JsonParseException("Too many ingredients for fairy ring recipe the max is " + FairyRingTileEntity.INVENTORY_SIZE);
             }
             //deserialize recipe time
-            int time = JSONUtils.getAsInt(json, "recipetime");
+            int time = JSONUtils.getAsInt(json, "recipeTime");
             //deserialize result
             JsonObject resultJson = JSONUtils.getAsJsonObject(json, "result");
             //deserialize result mode
@@ -203,9 +203,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
             FairyRingMode requiredMode = FairyRingMode.byName(buffer.readUtf(32767));
             int size = buffer.readVarInt();
             NonNullList<Ingredient> ingredients = NonNullList.withSize(size, Ingredient.EMPTY);
-            for (int j = 0; j < ingredients.size(); ++j) {
-                ingredients.set(j, Ingredient.fromNetwork(buffer));
-            }
+            ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
             int time = buffer.readVarInt();
             FairyRingMode resultMode = FairyRingMode.byName(buffer.readUtf(32767));
             ItemStack resultStack = buffer.readItem();

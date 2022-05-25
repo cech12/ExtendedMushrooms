@@ -101,6 +101,7 @@ public class ModTags {
         public static final ITag.INamedTag<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
 
         public static final ITag.INamedTag<Item> BREAD = tag("bread");
+        public static final ITag.INamedTag<Item> RAW_MEAT = tag("raw_meat");
 
         private static ITag.INamedTag<Item> tag(@Nonnull String name) {
             return ItemTags.bind("forge:" + name);

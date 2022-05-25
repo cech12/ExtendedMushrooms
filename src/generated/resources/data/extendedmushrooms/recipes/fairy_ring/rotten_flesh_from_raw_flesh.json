@@ -1,0 +1,12 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "tag": "forge:raw_meat"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "minecraft:rotten_flesh"
+  }
+}

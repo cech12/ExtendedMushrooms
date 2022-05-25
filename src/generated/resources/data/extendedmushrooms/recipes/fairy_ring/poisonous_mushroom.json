@@ -1,0 +1,21 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "tag": "forge:mushrooms"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "item": "minecraft:purple_dye"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "extendedmushrooms:poisonous_mushroom"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "tag": "forge:mushrooms"
+    },
+    {
+      "item": "minecraft:glowstone"
+    },
+    {
+      "item": "minecraft:golden_carrot"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "extendedmushrooms:glowshroom"
+  }
+}

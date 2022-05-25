@@ -1,0 +1,12 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "tag": "minecraft:saplings"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "minecraft:dead_bush"
+  }
+}

@@ -2,11 +2,11 @@
   "type": "extendedmushrooms:fairy_ring_recipe",
   "ingredients": [
     {
-      "item": "minecraft:dirt"
+      "item": "minecraft:grass"
     }
   ],
-  "recipetime": 200,
+  "recipeTime": 200,
   "result": {
-    "item": "minecraft:mycelium"
+    "item": "extendedmushrooms:infested_grass"
   }
 }

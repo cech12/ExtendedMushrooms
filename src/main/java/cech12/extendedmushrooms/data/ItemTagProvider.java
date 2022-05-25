@@ -8,6 +8,7 @@ import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
@@ -79,6 +80,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
 
         tag(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
+        tag(ModTags.ForgeItems.RAW_MEAT).add(Items.BEEF).add(Items.CHICKEN).add(Items.MUTTON).add(Items.PORKCHOP).add(Items.RABBIT);
 
         //generate minecraft tags
         tag(ItemTags.BOATS).addTag(ModTags.Items.MUSHROOM_BOATS);

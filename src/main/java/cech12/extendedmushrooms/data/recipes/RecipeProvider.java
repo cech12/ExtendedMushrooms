@@ -87,6 +87,27 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .unlockedBy("has_flower", has(ExtendedMushroomsBlocks.INFESTED_FLOWER))
                 .save(consumer, getResourceLocation(Items.BROWN_DYE.getRegistryName().getPath() + "_from_infested_flower"));
 
+        //some fairy ring recipes
+        FairyRingRecipeBuilder.normal(Items.MYCELIUM, 1)
+                .requires(Items.DIRT)
+                .save(consumer, getResourceLocation("mycelium_from_dirt"));
+        FairyRingRecipeBuilder.normal(Items.FERMENTED_SPIDER_EYE, 1)
+                .requires(Items.SUGAR)
+                .requires(Items.SPIDER_EYE)
+                .save(consumer, getResourceLocation("fermented_spider_eye"));
+        FairyRingRecipeBuilder.normal(Items.ROTTEN_FLESH, 1)
+                .requires(ModTags.ForgeItems.RAW_MEAT)
+                .save(consumer, getResourceLocation("rotten_flesh_from_raw_flesh"));
+        FairyRingRecipeBuilder.normal(Items.DEAD_BUSH, 1)
+                .requires(ItemTags.SAPLINGS)
+                .save(consumer, getResourceLocation("dead_bush_from_sapling"));
+        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.INFESTED_GRASS, 1)
+                .requires(Items.GRASS)
+                .save(consumer, getResourceLocation("infested_grass_from_grass"));
+        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.INFESTED_FLOWER, 1)
+                .requires(ItemTags.FLOWERS)
+                .save(consumer, getResourceLocation("infested_flower_from_flower"));
+
         //mushroom spores
         ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.MUSHROOM_SPORES, 2)
                 .requires(Tags.Items.MUSHROOMS)
@@ -129,6 +150,13 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.RED_MUSHROOM_CARPET.asItem(),
                 ExtendedMushroomsBlocks.RED_MUSHROOM_PRESSURE_PLATE.asItem());
 
+        //glowshroom
+        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.GLOWSHROOM, 1)
+                .requires(Tags.Items.MUSHROOMS)
+                .requires(Items.GLOWSTONE)
+                .requires(Items.GOLDEN_CARROT)
+                .requires(Items.LAPIS_LAZULI)
+                .save(consumer);
         mushroomWoodRecipes(consumer, "glowshroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM,
                 ExtendedMushroomsBlocks.GLOWSHROOM_STEM.asItem(),
@@ -169,6 +197,13 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 .unlockedBy("has_dust", has(Items.GLOWSTONE_DUST))
                 .save(consumer);
 
+        //poisonous mushroom
+        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, 1)
+                .requires(Tags.Items.MUSHROOMS)
+                .requires(Items.NETHER_WART)
+                .requires(Items.SPIDER_EYE)
+                .requires(Items.PURPLE_DYE)
+                .save(consumer);
         mushroomWoodRecipes(consumer, "poisonous_mushroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM.asItem(),
