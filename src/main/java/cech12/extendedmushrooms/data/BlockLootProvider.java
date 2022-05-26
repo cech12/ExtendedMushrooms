@@ -85,6 +85,8 @@ public class BlockLootProvider implements IDataProvider {
         //caps have other loot
         this.functionTable.put(ExtendedMushroomsBlocks.GLOWSHROOM_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.GLOWSHROOM, ExtendedMushroomsItems.GLOWSTONE_CRUMBS, 0.5F, 0.6F, 0.7F, 0.8F, 0.9F));
         this.functionTable.put(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.POISONOUS_MUSHROOM));
+        this.functionTable.put(ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.SLIME_FUNGUS)); //TODO other drops
+        this.functionTable.put(ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.HONEY_FUNGUS)); //TODO other drops
 
         //only with shears
         this.functionTable.put(ExtendedMushroomsBlocks.INFESTED_GRASS, BlockLootProvider::dropOnlyWithShears);

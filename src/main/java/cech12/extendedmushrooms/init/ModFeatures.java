@@ -4,8 +4,10 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
+import cech12.extendedmushrooms.block.mushrooms.HoneyFungus;
 import cech12.extendedmushrooms.block.mushrooms.PoisonousMushroom;
 import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
+import cech12.extendedmushrooms.block.mushrooms.SlimeFungus;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.world.gen.feature.BigGlowshroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.BigMushroomFeature;
@@ -53,6 +55,10 @@ public class ModFeatures {
 
         public static BigMushroomFeature BIG_POISONOUS_MUSHROOM = new BigPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC);
         public static BigMushroomFeature MEGA_POISONOUS_MUSHROOM = new MegaPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC);
+
+        public static BigMushroomFeature BIG_SLIME_FUNGUS = new BigPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC); //TODO
+
+        public static BigMushroomFeature BIG_HONEY_FUNGUS = new BigPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC); //TODO
     }
 
     public static final class Configured {
@@ -67,6 +73,10 @@ public class ModFeatures {
 
         public static ConfiguredFeature<BigMushroomFeatureConfig, ?> BIG_POISONOUS_MUSHROOM = NotConfigured.BIG_POISONOUS_MUSHROOM.configured(PoisonousMushroom.getConfig());
         public static ConfiguredFeature<BigMushroomFeatureConfig, ?> MEGA_POISONOUS_MUSHROOM = NotConfigured.MEGA_POISONOUS_MUSHROOM.configured(PoisonousMushroom.getConfig());
+
+        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> BIG_SLIME_FUNGUS = NotConfigured.BIG_SLIME_FUNGUS.configured(SlimeFungus.getConfig());
+
+        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> BIG_HONEY_FUNGUS = NotConfigured.BIG_HONEY_FUNGUS.configured(HoneyFungus.getConfig());
     }
 
     private static List<Mushroom> mushrooms = null;

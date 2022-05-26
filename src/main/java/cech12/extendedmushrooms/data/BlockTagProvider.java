@@ -147,14 +147,20 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(ModTags.ForgeBlocks.MUSHROOMS_BROWN).add(Blocks.BROWN_MUSHROOM);
         tag(ModTags.ForgeBlocks.MUSHROOMS_RED).add(Blocks.RED_MUSHROOM);
         tag(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM).add(ExtendedMushroomsBlocks.GLOWSHROOM);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_LIME).add(ExtendedMushroomsBlocks.SLIME_FUNGUS);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_ORANGE).add(ExtendedMushroomsBlocks.HONEY_FUNGUS);
         tag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE).add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
         tag(ModTags.ForgeBlocks.MUSHROOMS)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_BROWN)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_RED)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM)
+                .addTag(ModTags.ForgeBlocks.MUSHROOMS_LIME)
+                .addTag(ModTags.ForgeBlocks.MUSHROOMS_ORANGE)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE);
         tag(ModTags.Blocks.MUSHROOMS_EDIBLE) // add mod intern edible mushrooms
-                .add(ExtendedMushroomsBlocks.GLOWSHROOM);
+                .add(ExtendedMushroomsBlocks.GLOWSHROOM)
+                .add(ExtendedMushroomsBlocks.HONEY_FUNGUS)
+                .add(ExtendedMushroomsBlocks.SLIME_FUNGUS);
         tag(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE)
                 .add(Blocks.BROWN_MUSHROOM)
                 .add(Blocks.RED_MUSHROOM)

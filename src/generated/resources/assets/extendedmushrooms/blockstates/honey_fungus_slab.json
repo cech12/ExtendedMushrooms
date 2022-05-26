@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "extendedmushrooms:block/honey_fungus_slab_top"
+    },
+    "type=bottom": {
+      "model": "extendedmushrooms:block/honey_fungus_slab"
+    },
+    "type=double": {
+      "model": "extendedmushrooms:block/honey_fungus_planks"
+    }
+  }
+}

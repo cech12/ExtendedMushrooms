@@ -66,6 +66,8 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_BROWN, ModTags.ForgeItems.MUSHROOMS_BROWN);
         copy(ModTags.ForgeBlocks.MUSHROOMS_RED, ModTags.ForgeItems.MUSHROOMS_RED);
         copy(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM, ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM);
+        copy(ModTags.ForgeBlocks.MUSHROOMS_LIME, ModTags.ForgeItems.MUSHROOMS_LIME);
+        copy(ModTags.ForgeBlocks.MUSHROOMS_ORANGE, ModTags.ForgeItems.MUSHROOMS_ORANGE);
         copy(ModTags.ForgeBlocks.MUSHROOMS_PURPLE, ModTags.ForgeItems.MUSHROOMS_PURPLE);
         copy(ModTags.ForgeBlocks.MUSHROOMS, Tags.Items.MUSHROOMS);
         copy(ModTags.Blocks.MUSHROOMS_EDIBLE, ModTags.Items.MUSHROOMS_EDIBLE); // add mod intern edible mushrooms

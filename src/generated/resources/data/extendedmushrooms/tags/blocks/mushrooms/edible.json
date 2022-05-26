@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "extendedmushrooms:glowshroom"
+    "extendedmushrooms:glowshroom",
+    "extendedmushrooms:honey_fungus",
+    "extendedmushrooms:slime_fungus"
   ]
 }

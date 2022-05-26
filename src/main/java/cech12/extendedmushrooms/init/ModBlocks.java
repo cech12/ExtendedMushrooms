@@ -3,10 +3,14 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
 import cech12.extendedmushrooms.block.mushroomblocks.GlowshroomCap;
+import cech12.extendedmushrooms.block.mushroomblocks.HoneyFungusCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomCap;
+import cech12.extendedmushrooms.block.mushroomblocks.SlimeFungusCap;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
+import cech12.extendedmushrooms.block.mushrooms.HoneyFungus;
+import cech12.extendedmushrooms.block.mushrooms.SlimeFungus;
 import cech12.extendedmushrooms.compat.ModCompat;
 import cech12.extendedmushrooms.item.MushroomType;
 import cech12.extendedmushrooms.item.MushroomWoodType;
@@ -55,6 +59,8 @@ public final class ModBlocks {
     public static final RegistryObject<MushroomWallSignBlock> GLOWSHROOM_WALL_SIGN = BLOCKS.register("glowshroom_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.of(Material.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD).lightLevel((state) -> 8), MushroomWoodType.GLOWSHROOM.getWoodType()));
     public static final RegistryObject<MushroomStandingSignBlock> POISONOUS_MUSHROOM_STANDING_SIGN = BLOCKS.register("poisonous_mushroom_sign", () -> new MushroomStandingSignBlock(Block.Properties.of(Material.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD), MushroomWoodType.POISONOUS_MUSHROOM.getWoodType()));
     public static final RegistryObject<MushroomWallSignBlock> POISONOUS_MUSHROOM_WALL_SIGN = BLOCKS.register("poisonous_mushroom_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.of(Material.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD), MushroomWoodType.POISONOUS_MUSHROOM.getWoodType()));
+    public static final RegistryObject<MushroomStandingSignBlock> HONEY_FUNGUS_STANDING_SIGN = BLOCKS.register("honey_fungus_sign", () -> new MushroomStandingSignBlock(Block.Properties.of(Material.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD), MushroomWoodType.HONEY_FUNGUS.getWoodType()));
+    public static final RegistryObject<MushroomWallSignBlock> HONEY_FUNGUS_WALL_SIGN = BLOCKS.register("honey_fungus_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.of(Material.WOOD).noCollission().strength(1.0F).sound(SoundType.WOOD), MushroomWoodType.HONEY_FUNGUS.getWoodType()));
 
     public static void registerBlocks(IEventBus bus) {
         BLOCKS.register(bus);
@@ -147,6 +153,40 @@ public final class ModBlocks {
         POISONOUS_MUSHROOM_CAP_CARPET = registerBlock("poisonous_mushroom_cap_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.PURPLE, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_PURPLE).strength(0.1F).sound(SoundType.WOOL)));
         POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE = registerBlock("poisonous_mushroom_cap_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
 
+        SLIME_FUNGUS = registerBlock("slime_fungus", ItemGroup.TAB_DECORATIONS, new EMMushroomBlock(new SlimeFungus(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.SLIME_BLOCK).hasPostProcess((a, b, c)->true)));
+        SLIME_FUNGUS_POTTED = registerBlock("slime_fungus_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> SLIME_FUNGUS, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(SLIME_FUNGUS.getRegistryName()), () -> SLIME_FUNGUS_POTTED);
+        SLIME_FUNGUS_CAP = registerBlock("slime_fungus_cap", ItemGroup.TAB_DECORATIONS, new SlimeFungusCap(MushroomType.SLIME_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.GRASS).friction(0.8F).jumpFactor(1.5F).strength(0.2F).sound(SoundType.SLIME_BLOCK)));
+        SLIME_FUNGUS_CAP_BUTTON = registerBlock("slime_fungus_cap_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock());
+        SLIME_FUNGUS_CAP_CARPET = registerBlock("slime_fungus_cap_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.LIME, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_LIGHT_GREEN).strength(0.1F).sound(SoundType.WOOL)));
+        SLIME_FUNGUS_CAP_PRESSURE_PLATE = registerBlock("slime_fungus_cap_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
+
+        HONEY_FUNGUS = registerBlock("honey_fungus", ItemGroup.TAB_DECORATIONS, new EMMushroomBlock(new HoneyFungus(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.HONEY_BLOCK).hasPostProcess((a, b, c)->true)));
+        HONEY_FUNGUS_POTTED = registerBlock("honey_fungus_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> HONEY_FUNGUS, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(HONEY_FUNGUS.getRegistryName()), () -> HONEY_FUNGUS_POTTED);
+        HONEY_FUNGUS_CAP = registerBlock("honey_fungus_cap", ItemGroup.TAB_DECORATIONS, new HoneyFungusCap(MushroomType.HONEY_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.COLOR_ORANGE).strength(0.2F).speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.SLIME_BLOCK)));
+        HONEY_FUNGUS_STEM = registerBlock("honey_fungus_stem", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_STEM_STRIPPED = registerBlock("honey_fungus_stem_stripped", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        BLOCK_STRIPPING_MAP.put(HONEY_FUNGUS_STEM, HONEY_FUNGUS_STEM_STRIPPED);
+        HONEY_FUNGUS_BOOKSHELF = registerCompatBlock("honey_fungus_bookshelf", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
+        HONEY_FUNGUS_BUTTON = registerBlock("honey_fungus_button", ItemGroup.TAB_REDSTONE, new MushroomWoodButtonBlock());
+        HONEY_FUNGUS_CHEST = registerCompatBlock("honey_fungus_chest", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.CHEST)));
+        HONEY_FUNGUS_CHEST_TRAPPED = registerCompatBlock("honey_fungus_chest_trapped", ItemGroup.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
+        HONEY_FUNGUS_DOOR = registerBlock("honey_fungus_door", ItemGroup.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_FENCE = registerBlock("honey_fungus_fence", ItemGroup.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_FENCE_GATE = registerBlock("honey_fungus_fence_gate", ItemGroup.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_LADDER = registerCompatBlock("honey_fungus_ladder", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER)));
+        HONEY_FUNGUS_PLANKS = registerBlock("honey_fungus_planks", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_PRESSURE_PLATE = registerBlock("honey_fungus_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomWoodPressurePlateBlock());
+        HONEY_FUNGUS_SLAB = registerBlock("honey_fungus_slab", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.copy(HONEY_FUNGUS_PLANKS)));
+        HONEY_FUNGUS_STAIRS = registerBlock("honey_fungus_stairs", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> HONEY_FUNGUS_PLANKS.defaultBlockState(), Block.Properties.copy(HONEY_FUNGUS_PLANKS)));
+        HONEY_FUNGUS_TRAPDOOR = registerBlock("honey_fungus_trapdoor", ItemGroup.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_VERTICAL_PLANKS = registerCompatBlock("honey_fungus_vertical_planks", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_VERTICAL_SLAB = registerCompatBlock("honey_fungus_vertical_slab", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_CAP_BUTTON = registerBlock("honey_fungus_cap_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock());
+        HONEY_FUNGUS_CAP_CARPET = registerBlock("honey_fungus_cap_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.ORANGE, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_ORANGE).strength(0.1F).sound(SoundType.WOOL)));
+        HONEY_FUNGUS_CAP_PRESSURE_PLATE = registerBlock("honey_fungus_cap_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
+
     }
 
     private static Block registerBlock(String name, Block block) {
@@ -197,6 +237,14 @@ public final class ModBlocks {
         RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM_LADDER, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM_POTTED, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(SLIME_FUNGUS, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(SLIME_FUNGUS_POTTED, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(HONEY_FUNGUS, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(HONEY_FUNGUS_LADDER, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(HONEY_FUNGUS_POTTED, RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(SLIME_FUNGUS_CAP, RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(HONEY_FUNGUS_CAP, RenderType.translucent());
     }
 
 }

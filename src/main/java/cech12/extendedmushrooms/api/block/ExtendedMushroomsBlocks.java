@@ -82,4 +82,35 @@ public class ExtendedMushroomsBlocks {
     public static Block POISONOUS_MUSHROOM_CAP_CARPET;
     public static Block POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE;
 
+    public static Block SLIME_FUNGUS;
+    public static Block SLIME_FUNGUS_POTTED;
+    public static Block SLIME_FUNGUS_CAP;
+    public static Block SLIME_FUNGUS_CAP_BUTTON;
+    public static Block SLIME_FUNGUS_CAP_CARPET;
+    public static Block SLIME_FUNGUS_CAP_PRESSURE_PLATE;
+
+    public static Block HONEY_FUNGUS;
+    public static Block HONEY_FUNGUS_POTTED;
+    public static Block HONEY_FUNGUS_CAP;
+    public static Block HONEY_FUNGUS_STEM;
+    public static Block HONEY_FUNGUS_STEM_STRIPPED;
+    public static Block HONEY_FUNGUS_BOOKSHELF;
+    public static Block HONEY_FUNGUS_BUTTON;
+    public static Block HONEY_FUNGUS_CHEST;
+    public static Block HONEY_FUNGUS_CHEST_TRAPPED;
+    public static Block HONEY_FUNGUS_DOOR;
+    public static Block HONEY_FUNGUS_FENCE;
+    public static Block HONEY_FUNGUS_FENCE_GATE;
+    public static Block HONEY_FUNGUS_LADDER;
+    public static Block HONEY_FUNGUS_PLANKS;
+    public static Block HONEY_FUNGUS_PRESSURE_PLATE;
+    public static Block HONEY_FUNGUS_SLAB;
+    public static Block HONEY_FUNGUS_STAIRS;
+    public static Block HONEY_FUNGUS_TRAPDOOR;
+    public static Block HONEY_FUNGUS_VERTICAL_PLANKS;
+    public static Block HONEY_FUNGUS_VERTICAL_SLAB;
+    public static Block HONEY_FUNGUS_CAP_BUTTON;
+    public static Block HONEY_FUNGUS_CAP_CARPET;
+    public static Block HONEY_FUNGUS_CAP_PRESSURE_PLATE;
+
 }

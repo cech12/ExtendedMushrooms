@@ -28,6 +28,8 @@ public class ModTags {
         public static final ITag.INamedTag<Block> MUSHROOMS_BROWN = tag("mushrooms/brown");
         public static final ITag.INamedTag<Block> MUSHROOMS_RED = tag("mushrooms/red");
         public static final ITag.INamedTag<Block> MUSHROOMS_GLOWSHROOM = tag("mushrooms/glowshroom");
+        public static final ITag.INamedTag<Block> MUSHROOMS_LIME = tag("mushrooms/lime");
+        public static final ITag.INamedTag<Block> MUSHROOMS_ORANGE = tag("mushrooms/orange");
         public static final ITag.INamedTag<Block> MUSHROOMS_PURPLE = tag("mushrooms/purple");
         public static final ITag.INamedTag<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
         public static final ITag.INamedTag<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
@@ -96,6 +98,8 @@ public class ModTags {
         public static final ITag.INamedTag<Item> MUSHROOMS_BROWN = tag("mushrooms/brown");
         public static final ITag.INamedTag<Item> MUSHROOMS_RED = tag("mushrooms/red");
         public static final ITag.INamedTag<Item> MUSHROOMS_GLOWSHROOM = tag("mushrooms/glowshroom");
+        public static final ITag.INamedTag<Item> MUSHROOMS_LIME = tag("mushrooms/lime");
+        public static final ITag.INamedTag<Item> MUSHROOMS_ORANGE = tag("mushrooms/orange");
         public static final ITag.INamedTag<Item> MUSHROOMS_PURPLE = tag("mushrooms/purple");
         public static final ITag.INamedTag<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
         public static final ITag.INamedTag<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
