@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:honey_fungus_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:honey_fungus_slab"
+  },
+  "conditions": [
+    {
+      "feature": "verticalSlabs",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

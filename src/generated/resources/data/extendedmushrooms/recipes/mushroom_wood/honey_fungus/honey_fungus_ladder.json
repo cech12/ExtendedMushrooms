@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "| |",
+    "|#|",
+    "| |"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:honey_fungus_planks"
+    },
+    "|": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:honey_fungus_ladder",
+    "count": 4
+  },
+  "conditions": [
+    {
+      "feature": "variantLadders",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

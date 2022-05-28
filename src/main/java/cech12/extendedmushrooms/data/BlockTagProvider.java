@@ -123,11 +123,15 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN).add(Blocks.BROWN_MUSHROOM_BLOCK);
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_RED).add(Blocks.RED_MUSHROOM_BLOCK);
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM).add(ExtendedMushroomsBlocks.GLOWSHROOM_CAP);
+        tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_LIME).add(ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP);
+        tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_ORANGE).add(ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP);
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE).add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP);
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_RED)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_LIME)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_ORANGE)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE);
 
         tag(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS)
@@ -139,10 +143,14 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM_STRIPPED);
+        tag(ModTags.ForgeBlocks.MUSHROOM_STEMS_ORANGE)
+                .add(ExtendedMushroomsBlocks.HONEY_FUNGUS_STEM)
+                .add(ExtendedMushroomsBlocks.HONEY_FUNGUS_STEM_STRIPPED);
         tag(ModTags.ForgeBlocks.MUSHROOM_STEMS)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS_GLOWSHROOM)
-                .addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN);
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS_ORANGE);
 
         tag(ModTags.ForgeBlocks.MUSHROOMS_BROWN).add(Blocks.BROWN_MUSHROOM);
         tag(ModTags.ForgeBlocks.MUSHROOMS_RED).add(Blocks.RED_MUSHROOM);

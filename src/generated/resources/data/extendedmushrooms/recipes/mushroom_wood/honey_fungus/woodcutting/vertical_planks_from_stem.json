@@ -1,0 +1,18 @@
+{
+  "type": "woodcutter:woodcutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "woodcutter"
+    },
+    {
+      "feature": "verticalPlanks",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:mushroom_stems/orange"
+  },
+  "result": "extendedmushrooms:honey_fungus_vertical_planks",
+  "count": 6
+}

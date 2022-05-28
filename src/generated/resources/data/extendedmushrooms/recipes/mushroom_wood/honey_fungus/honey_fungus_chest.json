@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "mushroom_chest",
+  "pattern": [
+    "###",
+    "#|#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:honey_fungus_planks"
+    },
+    "|": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:honey_fungus_chest"
+  },
+  "conditions": [
+    {
+      "feature": "variantChests",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

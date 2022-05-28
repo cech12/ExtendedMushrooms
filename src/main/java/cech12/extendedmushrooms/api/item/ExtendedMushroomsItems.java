@@ -19,6 +19,9 @@ public class ExtendedMushroomsItems {
 
     public static Item MUSHROOM_SPORES;
     public static Item GLOWSTONE_CRUMBS;
+    public static Item SLIME_BLOB;
+    public static Item HONEY_BLOB;
+    public static Item HONEYCOMB_SHRED;
 
     public static Item MUSHROOM_SHEEP_SPAWN_EGG;
 

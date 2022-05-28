@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "extendedmushrooms:honeycomb"
+    ]
+  },
+  "criteria": {
+    "has_shreds": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "extendedmushrooms:honeycomb_shred"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "extendedmushrooms:honeycomb"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_shreds",
+      "has_the_recipe"
+    ]
+  ]
+}

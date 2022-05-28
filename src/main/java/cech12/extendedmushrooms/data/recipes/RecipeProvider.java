@@ -233,6 +233,90 @@ public class RecipeProvider extends net.minecraft.data.RecipeProvider {
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_CARPET.asItem(),
                 ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.asItem());
 
+        //slime fungus
+        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.SLIME_FUNGUS, 1)
+                .requires(Tags.Items.MUSHROOMS)
+                .requires(Items.SLIME_BLOCK)
+                .requires(Items.RABBIT_FOOT)
+                .requires(Items.LIME_DYE)
+                .save(consumer);
+        mushroomCapRecipes(consumer, "slime_fungus",
+                ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
+                Items.ORANGE_BANNER,
+                Items.ORANGE_BED,
+                ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP_BUTTON.asItem(),
+                ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP_CARPET.asItem(),
+                ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP_PRESSURE_PLATE.asItem());
+        //no wood for slime fungus
+        //slime blob recipes
+        ShapedRecipeBuilder.shaped(Items.SLIME_BALL)
+                .define('#', ExtendedMushroomsItems.SLIME_BLOB)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_blobs", has(ExtendedMushroomsItems.SLIME_BLOB))
+                .save(consumer, getResourceLocation(Items.SLIME_BALL.getRegistryName().getPath()));
+        ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.SLIME_BLOB, 4)
+                .requires(Items.SLIME_BALL)
+                .unlockedBy("has_slime", has(Items.SLIME_BALL))
+                .save(consumer);
+
+        //honey fungus
+        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.HONEY_FUNGUS, 1)
+                .requires(Tags.Items.MUSHROOMS)
+                .requires(Items.HONEYCOMB)
+                .requires(Items.HONEY_BOTTLE)
+                .requires(Items.ORANGE_DYE)
+                .save(consumer);
+        mushroomWoodRecipes(consumer, "honey_fungus",
+                ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE,
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_STEM.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_STEM_STRIPPED.asItem(),
+                ExtendedMushroomsItems.HONEY_FUNGUS_BOAT.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_BOOKSHELF.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_BUTTON.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_CHEST.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_CHEST_TRAPPED.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_DOOR.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_FENCE.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_FENCE_GATE.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_LADDER.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_PLANKS.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_PRESSURE_PLATE.asItem(),
+                ExtendedMushroomsItems.HONEY_FUNGUS_SIGN,
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_SLAB.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_STAIRS.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_TRAPDOOR.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_VERTICAL_PLANKS.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_VERTICAL_SLAB.asItem());
+        mushroomCapRecipes(consumer, "honey_fungus",
+                ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE,
+                Items.ORANGE_BANNER,
+                Items.ORANGE_BED,
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP_BUTTON.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP_CARPET.asItem(),
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP_PRESSURE_PLATE.asItem());
+        //honey blob recipes
+        ShapelessRecipeBuilder.shapeless(Items.HONEY_BOTTLE, 1)
+                .requires(Items.GLASS_BOTTLE)
+                .requires(ExtendedMushroomsItems.HONEY_BLOB, 3)
+                .unlockedBy("has_honey_blob", has(ExtendedMushroomsItems.HONEY_BLOB))
+                .save(consumer, getResourceLocation(Items.HONEY_BOTTLE.getRegistryName().getPath()));
+        ShapelessRecipeBuilder.shapeless(Items.SUGAR)
+                .requires(ExtendedMushroomsItems.HONEY_BLOB)
+                .unlockedBy("has_honey_blob", has(ExtendedMushroomsItems.HONEY_BLOB))
+                .save(consumer, getResourceLocation(Items.SUGAR.getRegistryName().getPath()));
+        //honeycomb shred recipes
+        ShapedRecipeBuilder.shaped(Items.HONEYCOMB)
+                .define('#', ExtendedMushroomsItems.HONEYCOMB_SHRED)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_shreds", has(ExtendedMushroomsItems.HONEYCOMB_SHRED))
+                .save(consumer, getResourceLocation(Items.HONEYCOMB.getRegistryName().getPath()));
+        ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.HONEYCOMB_SHRED, 4)
+                .requires(Items.HONEYCOMB)
+                .unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
+                .save(consumer);
+
         //wood cutting
         //String woodcuttingDirectory = "mushroom_wood/woodcutting/";
         //WoodcutterRecipeBuilder.woodcutterRecipe(Items.STICK, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS), 2)

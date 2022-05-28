@@ -57,11 +57,14 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN, ModTags.ForgeItems.MUSHROOM_CAPS_BROWN);
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_RED, ModTags.ForgeItems.MUSHROOM_CAPS_RED);
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM, ModTags.ForgeItems.MUSHROOM_CAPS_GLOWSHROOM);
+        copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_LIME, ModTags.ForgeItems.MUSHROOM_CAPS_LIME);
+        copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_ORANGE, ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE);
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE, ModTags.ForgeItems.MUSHROOM_CAPS_PURPLE);
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS, ModTags.ForgeItems.MUSHROOM_CAPS);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS, ModTags.ForgeItems.MUSHROOM_STEMS_COLORLESS);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_GLOWSHROOM, ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN, ModTags.ForgeItems.MUSHROOM_STEMS_GREEN);
+        copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_ORANGE, ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS, ModTags.ForgeItems.MUSHROOM_STEMS);
         copy(ModTags.ForgeBlocks.MUSHROOMS_BROWN, ModTags.ForgeItems.MUSHROOMS_BROWN);
         copy(ModTags.ForgeBlocks.MUSHROOMS_RED, ModTags.ForgeItems.MUSHROOMS_RED);

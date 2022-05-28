@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:honey_blob"
+    }
+  ],
+  "result": {
+    "item": "minecraft:sugar"
+  }
+}

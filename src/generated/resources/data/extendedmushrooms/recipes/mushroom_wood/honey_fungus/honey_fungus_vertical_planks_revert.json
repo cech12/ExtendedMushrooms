@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "extendedmushrooms:honey_fungus_vertical_planks"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:honey_fungus_planks"
+  },
+  "conditions": [
+    {
+      "feature": "verticalPlanks",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

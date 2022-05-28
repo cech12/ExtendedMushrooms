@@ -1,0 +1,21 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "tag": "forge:mushrooms"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "minecraft:orange_dye"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "extendedmushrooms:honey_fungus"
+  }
+}

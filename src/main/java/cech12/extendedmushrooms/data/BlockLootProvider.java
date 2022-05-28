@@ -8,6 +8,7 @@ import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ibm.icu.impl.Pair;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;
@@ -83,10 +84,14 @@ public class BlockLootProvider implements IDataProvider {
         }
 
         //caps have other loot
-        this.functionTable.put(ExtendedMushroomsBlocks.GLOWSHROOM_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.GLOWSHROOM, ExtendedMushroomsItems.GLOWSTONE_CRUMBS, 0.5F, 0.6F, 0.7F, 0.8F, 0.9F));
+        this.functionTable.put(ExtendedMushroomsBlocks.GLOWSHROOM_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.GLOWSHROOM,
+                Pair.of(ExtendedMushroomsItems.GLOWSTONE_CRUMBS, new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
         this.functionTable.put(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.POISONOUS_MUSHROOM));
-        this.functionTable.put(ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.SLIME_FUNGUS)); //TODO other drops
-        this.functionTable.put(ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.HONEY_FUNGUS)); //TODO other drops
+        this.functionTable.put(ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.SLIME_FUNGUS,
+                Pair.of(ExtendedMushroomsItems.SLIME_BLOB, new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
+        this.functionTable.put(ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.HONEY_FUNGUS,
+                Pair.of(ExtendedMushroomsItems.HONEY_BLOB, new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F}),
+                Pair.of(ExtendedMushroomsItems.HONEYCOMB_SHRED, new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
 
         //only with shears
         this.functionTable.put(ExtendedMushroomsBlocks.INFESTED_GRASS, BlockLootProvider::dropOnlyWithShears);
@@ -136,11 +141,8 @@ public class BlockLootProvider implements IDataProvider {
         return LootTable.lootTable().withPool(lootPool);
     }
 
-    private static LootTable.Builder dropCap(Block block, IItemProvider mushroom) {
-        return dropCap(block, mushroom, null, 0);
-    }
-
-    private static LootTable.Builder dropCap(Block block, IItemProvider mushroom, @Nullable IItemProvider additionalLoot, float... fortuneChances) {
+    @SafeVarargs
+    private static LootTable.Builder dropCap(Block block, IItemProvider mushroom, @Nullable Pair<IItemProvider, float[]>... additionalLoot) {
         ItemPredicate.Builder silkPredicate = ItemPredicate.Builder.item()
                 .hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1)));
         LootEntry.Builder<?> silkTouchAlternative = ItemLootEntry.lootTableItem(block)
@@ -155,12 +157,16 @@ public class BlockLootProvider implements IDataProvider {
 
         //add additional loot if set
         if (additionalLoot != null) {
-            LootEntry.Builder<?> additionalEntry = ItemLootEntry.lootTableItem(additionalLoot)
-                    .when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortuneChances))
-                    .apply(ExplosionDecay.explosionDecay());
-            LootPool.Builder additionalLootPool = LootPool.lootPool().name("additional").setRolls(ConstantRange.exactly(1)).add(additionalEntry)
-                    .when(Inverted.invert(Alternative.alternative(MatchTool.toolMatches(silkPredicate))));
-            lootTable.withPool(additionalLootPool);
+            for (Pair<IItemProvider, float[]> pair : additionalLoot) {
+                IItemProvider lootItem = pair.first;
+                float[] fortuneChances = pair.second;
+                LootEntry.Builder<?> additionalEntry = ItemLootEntry.lootTableItem(lootItem)
+                        .when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortuneChances))
+                        .apply(ExplosionDecay.explosionDecay());
+                LootPool.Builder additionalLootPool = LootPool.lootPool().name("additional").setRolls(ConstantRange.exactly(1)).add(additionalEntry)
+                        .when(Inverted.invert(Alternative.alternative(MatchTool.toolMatches(silkPredicate))));
+                lootTable.withPool(additionalLootPool);
+            }
         }
 
         return lootTable;

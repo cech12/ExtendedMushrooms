@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "XXX",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:honey_fungus_planks"
+    },
+    "X": {
+      "item": "minecraft:book"
+    }
+  },
+  "result": {
+    "item": "extendedmushrooms:honey_fungus_bookshelf"
+  },
+  "conditions": [
+    {
+      "feature": "variantBookshelves",
+      "type": "extendedmushrooms:mod_feature_enabled"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "tag": "forge:mushrooms"
+    },
+    {
+      "item": "minecraft:slime_block"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "item": "minecraft:lime_dye"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "extendedmushrooms:slime_fungus"
+  }
+}

@@ -37,6 +37,9 @@ public class ModItems {
 
         MUSHROOM_SPORES = registerItem("mushroom_spores", new MushroomSporesItem((new Item.Properties()).tab(ItemGroup.TAB_MATERIALS)));
         GLOWSTONE_CRUMBS = registerItem("glowstone_crumbs", new Item((new Item.Properties()).tab(ItemGroup.TAB_MATERIALS)));
+        SLIME_BLOB = registerItem("slime_blob", new Item((new Item.Properties()).tab(ItemGroup.TAB_MATERIALS)));
+        HONEY_BLOB = registerItem("honey_blob", new Item((new Item.Properties()).tab(ItemGroup.TAB_MATERIALS)));
+        HONEYCOMB_SHRED = registerItem("honeycomb_shred", new Item((new Item.Properties()).tab(ItemGroup.TAB_MATERIALS)));
 
         MUSHROOM_SHEEP_SPAWN_EGG = registerItem("mushroom_sheep_spawn_egg", new SpawnEggItem(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP, 10489616, 10051392, (new Item.Properties()).tab(ItemGroup.TAB_MISC)));
     }

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:slime_blob"
+    }
+  },
+  "result": {
+    "item": "minecraft:slime_ball"
+  }
+}

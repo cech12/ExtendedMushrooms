@@ -17,12 +17,15 @@ public class ModTags {
         public static final ITag.INamedTag<Block> MUSHROOM_CAPS_BROWN = tag("mushroom_caps/brown");
         public static final ITag.INamedTag<Block> MUSHROOM_CAPS_RED = tag("mushroom_caps/red");
         public static final ITag.INamedTag<Block> MUSHROOM_CAPS_GLOWSHROOM = tag("mushroom_caps/glowshroom");
+        public static final ITag.INamedTag<Block> MUSHROOM_CAPS_LIME = tag("mushroom_caps/lime");
+        public static final ITag.INamedTag<Block> MUSHROOM_CAPS_ORANGE = tag("mushroom_caps/orange");
         public static final ITag.INamedTag<Block> MUSHROOM_CAPS_PURPLE = tag("mushroom_caps/purple");
 
         public static final ITag.INamedTag<Block> MUSHROOM_STEMS = tag("mushroom_stems");
         public static final ITag.INamedTag<Block> MUSHROOM_STEMS_COLORLESS = tag("mushroom_stems/colorless");
         public static final ITag.INamedTag<Block> MUSHROOM_STEMS_GLOWSHROOM = tag("mushroom_stems/glowshroom");
         public static final ITag.INamedTag<Block> MUSHROOM_STEMS_GREEN = tag("mushroom_stems/green");
+        public static final ITag.INamedTag<Block> MUSHROOM_STEMS_ORANGE = tag("mushroom_stems/orange");
 
         public static final ITag.INamedTag<Block> MUSHROOMS = tag("mushrooms");
         public static final ITag.INamedTag<Block> MUSHROOMS_BROWN = tag("mushrooms/brown");
@@ -87,12 +90,15 @@ public class ModTags {
         public static final ITag.INamedTag<Item> MUSHROOM_CAPS_BROWN = tag("mushroom_caps/brown");
         public static final ITag.INamedTag<Item> MUSHROOM_CAPS_RED = tag("mushroom_caps/red");
         public static final ITag.INamedTag<Item> MUSHROOM_CAPS_GLOWSHROOM = tag("mushroom_caps/glowshroom");
+        public static final ITag.INamedTag<Item> MUSHROOM_CAPS_LIME = tag("mushroom_caps/lime");
+        public static final ITag.INamedTag<Item> MUSHROOM_CAPS_ORANGE = tag("mushroom_caps/orange");
         public static final ITag.INamedTag<Item> MUSHROOM_CAPS_PURPLE = tag("mushroom_caps/purple");
 
         public static final ITag.INamedTag<Item> MUSHROOM_STEMS = tag("mushroom_stems");
         public static final ITag.INamedTag<Item> MUSHROOM_STEMS_COLORLESS = tag("mushroom_stems/colorless");
         public static final ITag.INamedTag<Item> MUSHROOM_STEMS_GLOWSHROOM = tag("mushroom_stems/glowshroom");
         public static final ITag.INamedTag<Item> MUSHROOM_STEMS_GREEN = tag("mushroom_stems/green");
+        public static final ITag.INamedTag<Item> MUSHROOM_STEMS_ORANGE = tag("mushroom_stems/orange");
 
         // public static final ITag.INamedTag<Item> MUSHROOMS = tag("mushrooms"); // already there!
         public static final ITag.INamedTag<Item> MUSHROOMS_BROWN = tag("mushrooms/brown");
