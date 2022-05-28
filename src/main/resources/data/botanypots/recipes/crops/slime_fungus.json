@@ -1,0 +1,36 @@
+{
+  "type": "botanypots:crop",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "seed": {
+    "item": "extendedmushrooms:slime_fungus"
+  },
+  "categories":["mushroom"],
+  "growthTicks": 1600,
+  "lightLevel": 8,
+  "display": {
+    "block": "extendedmushrooms:slime_fungus"
+  },
+  "results": [
+    {
+      "chance": 0.75,
+      "output": {
+        "item": "extendedmushrooms:slime_fungus"
+      },
+      "minRolls": 1,
+      "maxRolls": 1
+    },
+    {
+      "chance": 0.05,
+      "output": {
+        "item": "extendedmushrooms:slime_fungus"
+      },
+      "minRolls": 1,
+      "maxRolls": 2
+    }
+  ]
+}

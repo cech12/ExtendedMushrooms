@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.16.5-2.0.0.0] - ????-??-??
 ### Added
 - Fairy Ring crafting #12
+- Honey Fungus #55 (new mushroom, new wood type, new orange cap type - drops honey blobs & honeycomb shreds)
+- Slime Fungus #55 (new mushroom, new lime cap type - drops slime blobs)
 - JEI support for Fairy Ring recipes #56
 - some new recipes for Fairy Ring crafting #57
 - Fairy Ring crafting sounds #58
