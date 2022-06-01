@@ -7,7 +7,7 @@ import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 
 import java.util.Random;
 
-public abstract class MegaMushroomFeature extends BigMushroomFeature {
+public abstract class MegaMushroomFeature extends SingleBigMushroomFeature {
 
     public MegaMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
         super(config);
@@ -23,11 +23,11 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
     }
 
     @Override
-    protected boolean hasValidGround(IWorld world, BlockPos mushroomPos) {
+    protected boolean hasValidGround(IWorld level, BlockPos mushroomPos) {
         BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable(mushroomPos.getX(), mushroomPos.getY(), mushroomPos.getZ());
         for (int x = 0; x < 2; x++) {
             for (int z = 0; z < 2; z++) {
-                if (!super.hasValidGround(world, mutableBlockPos.set(mushroomPos).move(x, 0, z))) {
+                if (!super.hasValidGround(level, mutableBlockPos.set(mushroomPos).move(x, 0, z))) {
                     return false;
                 }
             }
@@ -36,10 +36,10 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceTrunk(IWorld world, BlockPos blockPos, int size, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected boolean canPlaceTrunk(IWorld level, BlockPos blockPos, int size, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         for (int x = 0; x < 2; x++) {
             for (int z = 0; z < 2; z++) {
-                if (!super.canPlaceTrunk(world, mutableBlockPos.set(blockPos).move(x, 0, z), size, mutableBlockPos, config)) {
+                if (!super.canPlaceTrunk(level, mutableBlockPos.set(blockPos).move(x, 0, z), size, mutableBlockPos, config)) {
                     return false;
                 }
             }
@@ -48,13 +48,13 @@ public abstract class MegaMushroomFeature extends BigMushroomFeature {
     }
 
     @Override
-    protected void placeTrunk(IWorld world, Random random, BlockPos blockPos, BigMushroomFeatureConfig config, int size, BlockPos.Mutable mutableBlockPos) {
+    protected void placeTrunk(IWorld level, Random random, BlockPos blockPos, BigMushroomFeatureConfig config, int size, BlockPos.Mutable mutableBlockPos) {
         for(int y = 0; y < size; ++y) {
             for (int x = 0; x < 2; x++) {
                 for (int z = 0; z < 2; z++) {
                     mutableBlockPos.set(blockPos).move(x, y, z);
-                    if (world.getBlockState(mutableBlockPos).canBeReplacedByLogs(world, mutableBlockPos)) {
-                        this.setBlock(world, mutableBlockPos, config.stemProvider.getState(random, blockPos));
+                    if (level.getBlockState(mutableBlockPos).canBeReplacedByLogs(level, mutableBlockPos)) {
+                        this.setBlock(level, mutableBlockPos, config.stemProvider.getState(random, blockPos));
                     }
                 }
             }

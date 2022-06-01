@@ -28,12 +28,12 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceCap(IWorld world, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected boolean canPlaceCap(IWorld level, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
-            if (!world.getBlockState(capPos.blockPos).canBeReplacedByLeaves(world, capPos.blockPos)) {
+            if (!level.getBlockState(capPos.blockPos).canBeReplacedByLeaves(level, capPos.blockPos)) {
                 return false;
             }
         }
@@ -41,12 +41,12 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected void placeCap(IWorld world, Random random, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected void placeCap(IWorld level, Random random, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
-            this.placeCapBlockIfPossible(world, random, config, capPos.blockPos, capPos.west, capPos.east, capPos.north, capPos.south, !cap.hasCapPosition(capPos.blockPos.above()));
+            this.placeCapBlockIfPossible(level, random, config, capPos.blockPos, capPos.west, capPos.east, capPos.north, capPos.south, !cap.hasCapPosition(capPos.blockPos.above()));
         }
     }
 

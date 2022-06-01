@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 
 import java.util.Random;
 
-public class BigPoisonousMushroomFeature extends BigMushroomFeature {
+public class BigPoisonousMushroomFeature extends SingleBigMushroomFeature {
 
     public BigPoisonousMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
         super(config);
@@ -28,19 +28,19 @@ public class BigPoisonousMushroomFeature extends BigMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceCap(IWorld world, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected boolean canPlaceCap(IWorld level, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         for (int x = -capRadius; x <= capRadius; ++x) {
             for (int z = -capRadius; z <= capRadius; ++z) {
                 mutableBlockPos.set(blockPos).move(x, size, z);
-                if (!world.getBlockState(mutableBlockPos).canBeReplacedByLeaves(world, mutableBlockPos)) {
+                if (!level.getBlockState(mutableBlockPos).canBeReplacedByLeaves(level, mutableBlockPos)) {
                     return false;
                 }
                 mutableBlockPos.move(Direction.DOWN, 1);
-                if (!world.getBlockState(mutableBlockPos).canBeReplacedByLeaves(world, mutableBlockPos)) {
+                if (!level.getBlockState(mutableBlockPos).canBeReplacedByLeaves(level, mutableBlockPos)) {
                     return false;
                 }
                 mutableBlockPos.move(Direction.DOWN, 1);
-                if (!world.getBlockState(mutableBlockPos).canBeReplacedByLeaves(world, mutableBlockPos)) {
+                if (!level.getBlockState(mutableBlockPos).canBeReplacedByLeaves(level, mutableBlockPos)) {
                     return false;
                 }
             }
@@ -49,7 +49,7 @@ public class BigPoisonousMushroomFeature extends BigMushroomFeature {
     }
 
     @Override
-    protected void placeCap(IWorld world, Random random, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected void placeCap(IWorld level, Random random, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
         //top layer: "radius-1" blocks in each direction
         int topRadius = capRadius - 1;
         for(int x = -topRadius; x <= topRadius; ++x) {
@@ -58,7 +58,7 @@ public class BigPoisonousMushroomFeature extends BigMushroomFeature {
                 boolean flag1 = x == topRadius;
                 boolean flag2 = z == -topRadius;
                 boolean flag3 = z == topRadius;
-                this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(x, size, z), flag, flag1, flag2, flag3);
+                this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(x, size, z), flag, flag1, flag2, flag3);
             }
         }
         //layer below top: outer circle ("radius" away in each direction without corners
@@ -66,19 +66,19 @@ public class BigPoisonousMushroomFeature extends BigMushroomFeature {
         for (int i = 0; i < sideLength; i++) {
             boolean begin = i == 0;
             boolean end = i == sideLength - 1;
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(i - capRadius+1, size - 1, -capRadius), begin, end, true, false);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(i - capRadius+1, size - 1, capRadius), begin, end, false, true);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(-capRadius, size - 1, i - capRadius+1), true, false, begin, end);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(capRadius, size - 1, i - capRadius+1), false, true, begin, end);
+            this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(i - capRadius+1, size - 1, -capRadius), begin, end, true, false);
+            this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(i - capRadius+1, size - 1, capRadius), begin, end, false, true);
+            this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(-capRadius, size - 1, i - capRadius+1), true, false, begin, end);
+            this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(capRadius, size - 1, i - capRadius+1), false, true, begin, end);
         }
         //layer below second layer: outer circle
         for (int i = 0; i < sideLength; i++) {
             boolean begin = i == 0;
             boolean end = i == sideLength - 1;
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(i - capRadius+1, size - 2, -capRadius), begin, end, true, false, false);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(i - capRadius+1, size - 2, capRadius), begin, end, false, true, false);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(-capRadius, size - 2, i - capRadius+1), true, false, begin, end, false);
-            this.placeCapBlockIfPossible(world, random, config, mutableBlockPos.set(blockPos).move(capRadius, size - 2, i - capRadius+1), false, true, begin, end, false);
+            this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(i - capRadius+1, size - 2, -capRadius), begin, end, true, false, false);
+            this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(i - capRadius+1, size - 2, capRadius), begin, end, false, true, false);
+            this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(-capRadius, size - 2, i - capRadius+1), true, false, begin, end, false);
+            this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(blockPos).move(capRadius, size - 2, i - capRadius+1), false, true, begin, end, false);
         }
     }
 }

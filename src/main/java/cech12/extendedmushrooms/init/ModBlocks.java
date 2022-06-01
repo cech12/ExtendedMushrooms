@@ -156,7 +156,7 @@ public final class ModBlocks {
         SLIME_FUNGUS = registerBlock("slime_fungus", ItemGroup.TAB_DECORATIONS, new EMMushroomBlock(new SlimeFungus(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.SLIME_BLOCK).hasPostProcess((a, b, c)->true)));
         SLIME_FUNGUS_POTTED = registerBlock("slime_fungus_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> SLIME_FUNGUS, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(SLIME_FUNGUS.getRegistryName()), () -> SLIME_FUNGUS_POTTED);
-        SLIME_FUNGUS_CAP = registerBlock("slime_fungus_cap", ItemGroup.TAB_DECORATIONS, new SlimeFungusCap(MushroomType.SLIME_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.GRASS).friction(0.8F).jumpFactor(1.5F).strength(0.2F).sound(SoundType.SLIME_BLOCK)));
+        SLIME_FUNGUS_CAP = registerBlock("slime_fungus_cap", ItemGroup.TAB_DECORATIONS, new SlimeFungusCap(MushroomType.SLIME_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.GRASS).strength(0.2F).noOcclusion().jumpFactor(1.5F).friction(0.8F).sound(SoundType.SLIME_BLOCK)));
         SLIME_FUNGUS_CAP_BUTTON = registerBlock("slime_fungus_cap_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock());
         SLIME_FUNGUS_CAP_CARPET = registerBlock("slime_fungus_cap_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.LIME, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_LIGHT_GREEN).strength(0.1F).sound(SoundType.WOOL)));
         SLIME_FUNGUS_CAP_PRESSURE_PLATE = registerBlock("slime_fungus_cap_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
@@ -164,7 +164,7 @@ public final class ModBlocks {
         HONEY_FUNGUS = registerBlock("honey_fungus", ItemGroup.TAB_DECORATIONS, new EMMushroomBlock(new HoneyFungus(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.HONEY_BLOCK).hasPostProcess((a, b, c)->true)));
         HONEY_FUNGUS_POTTED = registerBlock("honey_fungus_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> HONEY_FUNGUS, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(HONEY_FUNGUS.getRegistryName()), () -> HONEY_FUNGUS_POTTED);
-        HONEY_FUNGUS_CAP = registerBlock("honey_fungus_cap", ItemGroup.TAB_DECORATIONS, new HoneyFungusCap(MushroomType.HONEY_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.COLOR_ORANGE).strength(0.2F).speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.SLIME_BLOCK)));
+        HONEY_FUNGUS_CAP = registerBlock("honey_fungus_cap", ItemGroup.TAB_DECORATIONS, new HoneyFungusCap(MushroomType.HONEY_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.COLOR_ORANGE).strength(0.2F).noOcclusion().speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.HONEY_BLOCK)));
         HONEY_FUNGUS_STEM = registerBlock("honey_fungus_stem", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
         HONEY_FUNGUS_STEM_STRIPPED = registerBlock("honey_fungus_stem_stripped", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
         BLOCK_STRIPPING_MAP.put(HONEY_FUNGUS_STEM, HONEY_FUNGUS_STEM_STRIPPED);

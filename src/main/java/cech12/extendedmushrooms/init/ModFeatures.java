@@ -10,8 +10,10 @@ import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
 import cech12.extendedmushrooms.block.mushrooms.SlimeFungus;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.world.gen.feature.BigGlowshroomFeature;
+import cech12.extendedmushrooms.world.gen.feature.BigHoneyFungusFeature;
 import cech12.extendedmushrooms.world.gen.feature.BigMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.BigPoisonousMushroomFeature;
+import cech12.extendedmushrooms.world.gen.feature.BigSlimeFungusFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaBrownMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaGlowshroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaPoisonousMushroomFeature;
@@ -56,9 +58,9 @@ public class ModFeatures {
         public static BigMushroomFeature BIG_POISONOUS_MUSHROOM = new BigPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC);
         public static BigMushroomFeature MEGA_POISONOUS_MUSHROOM = new MegaPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC);
 
-        public static BigMushroomFeature BIG_SLIME_FUNGUS = new BigPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC); //TODO
+        public static BigMushroomFeature BIG_SLIME_FUNGUS = new BigSlimeFungusFeature(BigMushroomFeatureConfig.CODEC);
 
-        public static BigMushroomFeature BIG_HONEY_FUNGUS = new BigPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC); //TODO
+        public static BigMushroomFeature BIG_HONEY_FUNGUS = new BigHoneyFungusFeature(BigMushroomFeatureConfig.CODEC);
     }
 
     public static final class Configured {
@@ -96,6 +98,10 @@ public class ModFeatures {
 
         register("big_poisonous_mushroom", NotConfigured.BIG_POISONOUS_MUSHROOM, Configured.BIG_POISONOUS_MUSHROOM);
         register("mega_poisonous_mushroom", NotConfigured.MEGA_POISONOUS_MUSHROOM, Configured.MEGA_POISONOUS_MUSHROOM);
+
+        register("big_slime_fungus", NotConfigured.BIG_SLIME_FUNGUS, Configured.BIG_SLIME_FUNGUS);
+
+        register("big_honey_fungus", NotConfigured.BIG_HONEY_FUNGUS, Configured.BIG_HONEY_FUNGUS);
 
         //register world generation features
         if (mushrooms == null || bigMushrooms == null || megaMushrooms == null) {
