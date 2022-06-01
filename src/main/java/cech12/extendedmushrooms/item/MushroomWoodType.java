@@ -31,7 +31,7 @@ public enum MushroomWoodType implements IStringSerializable {
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM,
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PLANKS,
             ()->ExtendedMushroomsItems.POISONOUS_MUSHROOM_BOAT),
-    HONEY_FUNGUS(2, "honey_fungus",
+    HONEY_FUNGUS(3, "honey_fungus",
             ()->ExtendedMushroomsBlocks.HONEY_FUNGUS_STEM,
             ()->ExtendedMushroomsBlocks.HONEY_FUNGUS_PLANKS,
             ()->ExtendedMushroomsItems.HONEY_FUNGUS_BOAT);

@@ -39,7 +39,7 @@ public enum MushroomType implements IStringSerializable {
             ()->ExtendedMushroomsBlocks.HONEY_FUNGUS,
             ()->ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP,
             MushroomWoodType.POISONOUS_MUSHROOM, DyeColor.LIME),
-    HONEY_FUNGUS(1,
+    HONEY_FUNGUS(5,
             ()->ExtendedMushroomsBlocks.HONEY_FUNGUS,
             ()->ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP,
             MushroomWoodType.HONEY_FUNGUS, DyeColor.ORANGE);
