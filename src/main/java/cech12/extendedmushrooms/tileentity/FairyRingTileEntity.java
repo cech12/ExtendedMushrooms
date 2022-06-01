@@ -326,11 +326,25 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
         return null;
     }
 
+    /**
+     * Set LIT property of FairyRingBlock.
+     * @param light
+     */
+    protected void setLight(boolean light) {
+        if (this.getLevel() != null) {
+            this.getLevel().setBlock(this.getBlockPos(), this.getBlockState().setValue(FairyRingBlock.LIT, light), 3);
+        }
+    }
+
     @Override
     public void tick() {
         if (this.isMaster() && this.getLevel() != null && !this.getLevel().isClientSide) {
             FairyRingRecipe recipe = this.getRecipe();
             if (recipe != null) {
+                //light up
+                if (!this.getBlockState().getValue(FairyRingBlock.LIT)) {
+                    setLight(true);
+                }
                 //play crafting sound every CRAFTING_SOUND_INTERVAL ticks (beginning with tick 1) until a new sound would overlap the finish sound
                 if (this.recipeTime % CRAFTING_SOUND_INTERVAL == 1 && this.recipeTimeTotal - this.recipeTime > CRAFTING_SOUND_INTERVAL / 2) {
                     Vector3d center = this.getCenter();
@@ -362,8 +376,13 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
                     //reset and update recipe
                     this.resetRecipe();
                     this.updateRecipe();
+                    setLight(false);
                 }
                 this.sendUpdates();
+            } else {
+                if (this.getBlockState().getValue(FairyRingBlock.LIT)) {
+                    setLight(false);
+                }
             }
         }
     }
