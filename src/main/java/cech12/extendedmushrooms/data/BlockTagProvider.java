@@ -173,8 +173,12 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .add(Blocks.BROWN_MUSHROOM)
                 .add(Blocks.RED_MUSHROOM)
                 .addTag(ModTags.Blocks.MUSHROOMS_EDIBLE);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_JUMP_BOOSTING)
+                .add(ExtendedMushroomsBlocks.SLIME_FUNGUS);
         tag(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS)
                 .add(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_SLOWING_DOWN)
+                .add(ExtendedMushroomsBlocks.HONEY_FUNGUS);
 
         //generate standard forge tags
         tag(Tags.Blocks.CHESTS).addTag(ModTags.Blocks.MUSHROOM_CHESTS);

@@ -35,7 +35,9 @@ public class ModTags {
         public static final ITag.INamedTag<Block> MUSHROOMS_ORANGE = tag("mushrooms/orange");
         public static final ITag.INamedTag<Block> MUSHROOMS_PURPLE = tag("mushrooms/purple");
         public static final ITag.INamedTag<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
+        public static final ITag.INamedTag<Block> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final ITag.INamedTag<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
+        public static final ITag.INamedTag<Block> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
 
         private static ITag.INamedTag<Block> tag(@Nonnull String name) {
             return BlockTags.bind("forge:" + name);
@@ -108,7 +110,9 @@ public class ModTags {
         public static final ITag.INamedTag<Item> MUSHROOMS_ORANGE = tag("mushrooms/orange");
         public static final ITag.INamedTag<Item> MUSHROOMS_PURPLE = tag("mushrooms/purple");
         public static final ITag.INamedTag<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
+        public static final ITag.INamedTag<Item> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final ITag.INamedTag<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
+        public static final ITag.INamedTag<Item> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
 
         public static final ITag.INamedTag<Item> BREAD = tag("bread");
         public static final ITag.INamedTag<Item> RAW_MEAT = tag("raw_meat");

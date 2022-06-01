@@ -28,7 +28,9 @@ public class MushroomArrowRecipe extends SpecialRecipe {
 
     static {
         MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM, Potions.NIGHT_VISION);
+        MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_JUMP_BOOSTING, Potions.LEAPING);
         MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_POISONOUS, Potions.POISON);
+        MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN, Potions.SLOWNESS);
     }
 
     public MushroomArrowRecipe(ResourceLocation idIn) {
