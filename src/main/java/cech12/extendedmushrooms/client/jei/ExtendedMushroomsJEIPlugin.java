@@ -10,11 +10,12 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nonnull;
 
@@ -45,6 +46,13 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new FairyRingCategory(registration.getJeiHelpers().getGuiHelper()));
+    }
+
+    @Override
+    public void registerRecipeCatalysts(@Nonnull IRecipeCatalystRegistration registration) {
+        for (Item mushroom : Tags.Items.MUSHROOMS.getValues()) {
+            registration.addRecipeCatalyst(new ItemStack(mushroom), ExtendedMushroomsRecipeTypes.FAIRY_RING_ID);
+        }
     }
 
 }
