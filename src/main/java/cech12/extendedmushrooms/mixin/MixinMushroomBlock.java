@@ -25,26 +25,22 @@ public class MixinMushroomBlock {
      * Add a tree like automatic growing.
      * The automatic multiplication still remaining.
      */
-    @Inject(at = @At("HEAD"), method = "randomTick") //, cancellable = true)
+    @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
     public void tickProxy(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        //skip growing & multiplication if part of Fairy Ring
+        BlockPos.Mutable mutablePos = new BlockPos.Mutable();
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            mutablePos.set(pos).move(direction);
+            if (world.getBlockState(mutablePos).getBlock() == ExtendedMushroomsBlocks.FAIRY_RING) {
+                ci.cancel();
+                return;
+            }
+        }
         //automatic growing of mushrooms
         //Forge: prevent loading unloaded chunks
         if (world.isAreaLoaded(pos, 7) && random.nextInt(25) == 0) {
             if (state.getBlock() instanceof MushroomBlock) {
-                //only grow when not part of a fairy ring
-                Direction[] directions = { Direction.NORTH, Direction.EAST, Direction.WEST, Direction.SOUTH };
-                boolean partOfFairyRing = false;
-                BlockPos.Mutable mutablePos = new BlockPos.Mutable();
-                for (Direction direction : directions) {
-                    mutablePos.set(pos).move(direction);
-                    if (world.getBlockState(mutablePos).getBlock() == ExtendedMushroomsBlocks.FAIRY_RING) {
-                        partOfFairyRing = true;
-                        break;
-                    }
-                }
-                if (!partOfFairyRing) {
-                    ((MushroomBlock) state.getBlock()).performBonemeal(world, random, pos, state);
-                }
+                ((MushroomBlock) state.getBlock()).performBonemeal(world, random, pos, state);
             }
         }
         //automatic multiplication follows in tick method when ci.canceled NOT called
