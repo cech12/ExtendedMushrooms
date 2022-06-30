@@ -1,10 +1,10 @@
 package cech12.extendedmushrooms.init;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ComposterBlock;
-import net.minecraft.block.FireBlock;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.FireBlock;
+import net.minecraft.world.level.ItemLike;
 
 import static cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks.*;
 import static cech12.extendedmushrooms.api.item.ExtendedMushroomsItems.*;
@@ -83,7 +83,7 @@ public class ModVanillaCompat {
 
     }
 
-    public static void registerCompostable(float chance, IItemProvider itemIn) {
+    public static void registerCompostable(float chance, ItemLike itemIn) {
         ComposterBlock.COMPOSTABLES.put(itemIn.asItem(), chance);
     }
 

@@ -1,12 +1,12 @@
 package cech12.extendedmushrooms.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.block.TrapDoorBlock;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
 
 public class MushroomTrapdoorBlock extends TrapDoorBlock {
 
@@ -16,7 +16,7 @@ public class MushroomTrapdoorBlock extends TrapDoorBlock {
 
     //TODO workaround until https://github.com/MinecraftForge/MinecraftForge/issues/7775 is fixed!
     @Override
-    public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity) {
+    public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, LivingEntity entity) {
         if (state.getValue(OPEN)) {
             BlockState down = world.getBlockState(pos.below());
             if (down.getBlock() instanceof LadderBlock)

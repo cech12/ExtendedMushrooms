@@ -1,15 +1,15 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import java.util.Random;
 
 public class MegaBrownMushroomFeature extends MegaMushroomFeature {
 
-    public MegaBrownMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
+    public MegaBrownMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -19,11 +19,11 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceCap(IWorld level, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         for (int x = -capRadius; x <= capRadius+1; ++x) {
             for (int z = -capRadius; z <= capRadius+1; ++z) {
                 mutableBlockPos.set(blockPos).move(x, size, z);
-                if (!level.getBlockState(mutableBlockPos).canBeReplacedByLeaves(level, mutableBlockPos)) {
+                if (!isReplaceable(level, mutableBlockPos, false)) {
                     return false;
                 }
             }
@@ -32,7 +32,7 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected void placeCap(IWorld level, Random random, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected void placeCap(LevelAccessor level, Random random, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         //top layer: "radius" blocks in each direction without corners
         for(int x = -radius; x <= radius+1; ++x) {
             for(int z = -radius; z <= radius+1; ++z) {

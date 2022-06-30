@@ -2,11 +2,11 @@ package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.item.MushroomType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.Direction;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.core.Direction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -40,13 +40,13 @@ public class SlimeFungusCap extends AbstractEffectMushroomCap {
 
     @Nonnull
     @Override
-    protected List<EffectInstance> getEffects(@Nonnull Random random) {
+    protected List<MobEffectInstance> getEffects(@Nonnull Random random) {
         int duration = 200 + random.nextInt(200);
         if (random.nextInt(100) == 0) {
             duration += 1200;
         }
-        List<EffectInstance> effects = new LinkedList<>();
-        effects.add(new EffectInstance(Effects.JUMP, duration));
+        List<MobEffectInstance> effects = new LinkedList<>();
+        effects.add(new MobEffectInstance(MobEffects.JUMP, duration));
         return effects;
     }
 

@@ -2,18 +2,19 @@ package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.item.MushroomType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -43,29 +44,29 @@ public class HoneyFungusCap extends AbstractEffectMushroomCap {
 
     @Nullable
     @Override
-    public PathNodeType getAiPathNodeType(BlockState state, IBlockReader world, BlockPos pos, @Nullable MobEntity entity) {
-        return PathNodeType.STICKY_HONEY;
+    public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
+        return BlockPathTypes.STICKY_HONEY;
     }
 
     @Nonnull
     @Override
-    protected List<EffectInstance> getEffects(@Nonnull Random random) {
+    protected List<MobEffectInstance> getEffects(@Nonnull Random random) {
         int duration = 200 + random.nextInt(200);
         if (random.nextInt(100) == 0) {
             duration += 1200;
         }
-        List<EffectInstance> effects = new LinkedList<>();
-        effects.add(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, duration));
+        List<MobEffectInstance> effects = new LinkedList<>();
+        effects.add(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration));
         return effects;
     }
 
     @Override
-    public void fallOn(World world, @Nonnull BlockPos blockPos, Entity entity, float fallDistance) {
+    public void fallOn(Level level, @Nonnull BlockState blockState, @Nonnull BlockPos blockPos, Entity entity, float fallDistance) {
         entity.playSound(SoundEvents.HONEY_BLOCK_SLIDE, 1.0F, 1.0F);
-        if (!world.isClientSide) {
-            world.broadcastEntityEvent(entity, (byte)54);
+        if (!level.isClientSide) {
+            level.broadcastEntityEvent(entity, (byte)54);
         }
-        if (entity.causeFallDamage(fallDistance, 0.2F)) {
+        if (entity.causeFallDamage(fallDistance, 0.2F, DamageSource.FALL)) {
             entity.playSound(this.soundType.getFallSound(), this.soundType.getVolume() * 0.5F, this.soundType.getPitch() * 0.75F);
         }
     }

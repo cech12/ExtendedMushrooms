@@ -1,51 +1,39 @@
 package cech12.extendedmushrooms.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.Effect;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class InfestedFlowerBlock extends FlowerBlock {
 
-    public InfestedFlowerBlock(Effect effect, int effectDuration, Properties properties) {
+    public InfestedFlowerBlock(MobEffect effect, int effectDuration, Properties properties) {
         super(effect, effectDuration, properties);
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState state, IBlockReader world, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos) {
         Block block = state.getBlock();
-        return block == Blocks.MYCELIUM || super.mayPlaceOn(state, world, pos);
-    }
-
-    @Override
-    public boolean canBeReplacedByLeaves(BlockState state, IWorldReader world, BlockPos pos) {
-        return true;
-    }
-
-    @Override
-    public boolean canBeReplacedByLogs(BlockState state, IWorldReader world, BlockPos pos) {
-        return true;
+        return block == Blocks.MYCELIUM || super.mayPlaceOn(state, level, pos);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
-        super.animateTick(blockState, world, blockPos, random);
+    public void animateTick(@Nonnull BlockState blockState, @Nonnull Level level, @Nonnull BlockPos blockPos, @Nonnull Random random) {
+        super.animateTick(blockState, level, blockPos, random);
         if (random.nextInt(15) == 0) {
-            Vector3d offset = blockState.getOffset(world, blockPos).add(0.3125, 0, 0.3125);
-            world.addParticle(ParticleTypes.MYCELIUM,
+            Vec3 offset = blockState.getOffset(level, blockPos).add(0.3125, 0, 0.3125);
+            level.addParticle(ParticleTypes.MYCELIUM,
                     blockPos.getX() + offset.x + (random.nextDouble() * 0.375),
                     blockPos.getY() + offset.y + (random.nextDouble() * 0.2),
                     blockPos.getZ() + offset.z + (random.nextDouble() * 0.375), 0.0D, 0.0D, 0.0D);

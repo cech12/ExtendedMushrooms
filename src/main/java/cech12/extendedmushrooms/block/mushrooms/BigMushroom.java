@@ -1,14 +1,16 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.MushroomUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HugeMushroomBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -19,7 +21,7 @@ public abstract class BigMushroom {
     }
 
     @Nonnull
-    protected abstract ConfiguredFeature<?, ?> getBigMushroomFeature();
+    public abstract Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature();
 
     protected static BlockState getDefaultStemState(Block stemBlock) {
         return stemBlock.defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false);
@@ -29,11 +31,11 @@ public abstract class BigMushroom {
         return capBlock.defaultBlockState().setValue(HugeMushroomBlock.DOWN, false);
     }
 
-    public boolean growMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
+    public boolean growMushroom(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
         if (!MushroomUtils.isValidMushroomPosition(world, blockPos)) {
             return false;
         }
-        ConfiguredFeature<?, ?> feature = this.getBigMushroomFeature();
+        ConfiguredFeature<?, ?> feature = this.getBigMushroomFeature().value();
         world.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 4);
         if (feature.place(world, chunkGenerator, random, blockPos)) {
             return true;

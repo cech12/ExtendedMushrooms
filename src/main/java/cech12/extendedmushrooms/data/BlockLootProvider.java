@@ -9,42 +9,42 @@ import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ibm.icu.impl.Pair;
-import net.minecraft.advancements.criterion.EnchantmentPredicate;
-import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.advancements.criterion.MinMaxBounds;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
-import net.minecraft.block.Block;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.SlabBlock;
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Items;
-import net.minecraft.loot.AlternativesLootEntry;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.IntClamper;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootEntry;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTableManager;
-import net.minecraft.loot.RandomValueRange;
-import net.minecraft.loot.conditions.Alternative;
-import net.minecraft.loot.conditions.BlockStateProperty;
-import net.minecraft.loot.conditions.Inverted;
-import net.minecraft.loot.conditions.MatchTool;
-import net.minecraft.loot.conditions.SurvivesExplosion;
-import net.minecraft.loot.conditions.TableBonus;
-import net.minecraft.loot.functions.ExplosionDecay;
-import net.minecraft.loot.functions.LimitCount;
-import net.minecraft.loot.functions.SetCount;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.state.properties.SlabType;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.IntRange;
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.predicates.AlternativeLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
+import net.minecraft.world.level.storage.loot.functions.LimitCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -56,7 +56,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class BlockLootProvider implements IDataProvider {
+public class BlockLootProvider implements DataProvider {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private final DataGenerator generator;
@@ -106,65 +106,65 @@ public class BlockLootProvider implements IDataProvider {
     }
 
     private static LootTable.Builder dropItself(Block block) {
-        LootEntry.Builder<?> entry = ItemLootEntry.lootTableItem(block);
-        LootPool.Builder pool = LootPool.lootPool().name("main").setRolls(ConstantRange.exactly(1)).add(entry)
-                .when(SurvivesExplosion.survivesExplosion());
+        LootPoolEntryContainer.Builder<?> entry = LootItem.lootTableItem(block);
+        LootPool.Builder pool = LootPool.lootPool().name("main").setRolls(ConstantValue.exactly(1)).add(entry)
+                .when(ExplosionCondition.survivesExplosion());
         return LootTable.lootTable().withPool(pool);
     }
 
     private static LootTable.Builder dropOnlyWithShears(Block block) {
-        LootEntry.Builder<?> entry = AlternativesLootEntry.alternatives(ItemLootEntry.lootTableItem(block)
+        LootPoolEntryContainer.Builder<?> entry = AlternativesEntry.alternatives(LootItem.lootTableItem(block)
                 .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS))));
-        return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantRange.exactly(1)).add(entry));
+        return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantValue.exactly(1)).add(entry));
     }
 
     private static LootTable.Builder dropSlab(Block block) {
-        LootEntry.Builder<?> entry = ItemLootEntry.lootTableItem(block)
-                .apply(SetCount.setCount(ConstantRange.exactly(2))
-                        .when(BlockStateProperty.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))))
-                .apply(ExplosionDecay.explosionDecay());
-        return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantRange.exactly(1)).add(entry));
+        LootPoolEntryContainer.Builder<?> entry = LootItem.lootTableItem(block)
+                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))))
+                .apply(ApplyExplosionDecay.explosionDecay());
+        return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantValue.exactly(1)).add(entry));
     }
 
     private static LootTable.Builder dropDoor(Block block) {
-        LootEntry.Builder<?> entry = ItemLootEntry.lootTableItem(block)
-                .when(BlockStateProperty.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)));
-        return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantRange.exactly(1)).add(entry).when(SurvivesExplosion.survivesExplosion()));
+        LootPoolEntryContainer.Builder<?> entry = LootItem.lootTableItem(block)
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)));
+        return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantValue.exactly(1)).add(entry).when(ExplosionCondition.survivesExplosion()));
     }
 
     private static LootTable.Builder dropStem(Block block) {
         ItemPredicate.Builder silkPredicate = ItemPredicate.Builder.item()
-                .hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1)));
-        LootEntry.Builder<?> entry = ItemLootEntry.lootTableItem(block);
-        LootPool.Builder lootPool = LootPool.lootPool().name("main").setRolls(ConstantRange.exactly(1)).add(entry)
+                .hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1)));
+        LootPoolEntryContainer.Builder<?> entry = LootItem.lootTableItem(block);
+        LootPool.Builder lootPool = LootPool.lootPool().name("main").setRolls(ConstantValue.exactly(1)).add(entry)
                 .when(MatchTool.toolMatches(silkPredicate));
         return LootTable.lootTable().withPool(lootPool);
     }
 
     @SafeVarargs
-    private static LootTable.Builder dropCap(Block block, IItemProvider mushroom, @Nullable Pair<IItemProvider, float[]>... additionalLoot) {
+    private static LootTable.Builder dropCap(Block block, ItemLike mushroom, @Nullable Pair<ItemLike, float[]>... additionalLoot) {
         ItemPredicate.Builder silkPredicate = ItemPredicate.Builder.item()
-                .hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1)));
-        LootEntry.Builder<?> silkTouchAlternative = ItemLootEntry.lootTableItem(block)
+                .hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1)));
+        LootPoolEntryContainer.Builder<?> silkTouchAlternative = LootItem.lootTableItem(block)
                 .when(MatchTool.toolMatches(silkPredicate));
-        LootEntry.Builder<?> decayAlternative = ItemLootEntry.lootTableItem(mushroom)
-                .apply(SetCount.setCount(RandomValueRange.between(-6, 2)))
-                .apply(LimitCount.limitCount(IntClamper.lowerBound(0)))
-                .apply(ExplosionDecay.explosionDecay());
+        LootPoolEntryContainer.Builder<?> decayAlternative = LootItem.lootTableItem(mushroom)
+                .apply(SetItemCountFunction.setCount(UniformGenerator.between(-6, 2)))
+                .apply(LimitCount.limitCount(IntRange.lowerBound(0)))
+                .apply(ApplyExplosionDecay.explosionDecay());
 
-        LootEntry.Builder<?> entry = AlternativesLootEntry.alternatives(silkTouchAlternative, decayAlternative);
-        LootTable.Builder lootTable = LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantRange.exactly(1)).add(entry));
+        LootPoolEntryContainer.Builder<?> entry = AlternativesEntry.alternatives(silkTouchAlternative, decayAlternative);
+        LootTable.Builder lootTable = LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantValue.exactly(1)).add(entry));
 
         //add additional loot if set
         if (additionalLoot != null) {
-            for (Pair<IItemProvider, float[]> pair : additionalLoot) {
-                IItemProvider lootItem = pair.first;
+            for (Pair<ItemLike, float[]> pair : additionalLoot) {
+                ItemLike lootItem = pair.first;
                 float[] fortuneChances = pair.second;
-                LootEntry.Builder<?> additionalEntry = ItemLootEntry.lootTableItem(lootItem)
-                        .when(TableBonus.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortuneChances))
-                        .apply(ExplosionDecay.explosionDecay());
-                LootPool.Builder additionalLootPool = LootPool.lootPool().name("additional").setRolls(ConstantRange.exactly(1)).add(additionalEntry)
-                        .when(Inverted.invert(Alternative.alternative(MatchTool.toolMatches(silkPredicate))));
+                LootPoolEntryContainer.Builder<?> additionalEntry = LootItem.lootTableItem(lootItem)
+                        .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortuneChances))
+                        .apply(ApplyExplosionDecay.explosionDecay());
+                LootPool.Builder additionalLootPool = LootPool.lootPool().name("additional").setRolls(ConstantValue.exactly(1)).add(additionalEntry)
+                        .when(InvertedLootItemCondition.invert(AlternativeLootItemCondition.alternative(MatchTool.toolMatches(silkPredicate))));
                 lootTable.withPool(additionalLootPool);
             }
         }
@@ -174,19 +174,19 @@ public class BlockLootProvider implements IDataProvider {
 
     private static LootTable.Builder dropBookshelf(Block block) {
         ItemPredicate.Builder silkPredicate = ItemPredicate.Builder.item()
-                .hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1)));
-        LootEntry.Builder<?> silkTouchAlternative = ItemLootEntry.lootTableItem(block)
+                .hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1)));
+        LootPoolEntryContainer.Builder<?> silkTouchAlternative = LootItem.lootTableItem(block)
                 .when(MatchTool.toolMatches(silkPredicate));
-        LootEntry.Builder<?> dropBooksAlternative = ItemLootEntry.lootTableItem(Items.BOOK)
-                .apply(SetCount.setCount(ConstantRange.exactly(3)))
-                .apply(ExplosionDecay.explosionDecay());
+        LootPoolEntryContainer.Builder<?> dropBooksAlternative = LootItem.lootTableItem(Items.BOOK)
+                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3)))
+                .apply(ApplyExplosionDecay.explosionDecay());
 
-        LootEntry.Builder<?> entry = AlternativesLootEntry.alternatives(silkTouchAlternative, dropBooksAlternative);
-        return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantRange.exactly(1)).add(entry));
+        LootPoolEntryContainer.Builder<?> entry = AlternativesEntry.alternatives(silkTouchAlternative, dropBooksAlternative);
+        return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantValue.exactly(1)).add(entry));
     }
 
     @Override
-    public void run(@Nonnull final DirectoryCache cache) throws IOException {
+    public void run(@Nonnull final HashCache cache) throws IOException {
         Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
 
         for (Block block : ForgeRegistries.BLOCKS) {
@@ -203,7 +203,7 @@ public class BlockLootProvider implements IDataProvider {
 
         for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
             Path path = getPath(generator.getOutputFolder(), e.getKey());
-            IDataProvider.save(GSON, cache, LootTableManager.serialize(e.getValue().setParamSet(LootParameterSets.BLOCK).build()), path);
+            DataProvider.save(GSON, cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.BLOCK).build()), path);
         }
     }
 

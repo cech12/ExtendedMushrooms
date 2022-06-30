@@ -1,25 +1,26 @@
 package cech12.extendedmushrooms.item;
 
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.MooshroomEntity;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.MushroomCow;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 
 import javax.annotation.Nonnull;
 
@@ -30,8 +31,8 @@ public class MushroomSporesItem extends Item {
     }
 
     @Override
-    public @Nonnull ActionResultType useOn(ItemUseContext context) {
-        World world = context.getLevel();
+    public @Nonnull InteractionResult useOn(UseOnContext context) {
+        Level world = context.getLevel();
         BlockPos blockPos = context.getClickedPos();
         Block block = world.getBlockState(blockPos).getBlock();
         ItemStack itemStack = context.getItemInHand();
@@ -39,55 +40,56 @@ public class MushroomSporesItem extends Item {
         // replace dirt with mycelium
         if (block == Blocks.DIRT) {
             //play sound
-            world.playSound(context.getPlayer(), blockPos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(context.getPlayer(), blockPos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
             //change dirt to mycelium
             world.setBlockAndUpdate(blockPos, Blocks.MYCELIUM.defaultBlockState());
             //remove one item
             itemStack.setCount(itemStack.getCount() - 1);
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 
+    @Nonnull
     @Override
-    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+    public InteractionResult interactLivingEntity(@Nonnull ItemStack stack, @Nonnull Player playerIn, LivingEntity target, @Nonnull InteractionHand hand) {
         boolean itemUsed = false;
-        World world = target.level;
-        if (!world.isClientSide && world instanceof ServerWorld) {
-            if (target instanceof CowEntity && !(target instanceof MooshroomEntity)) {
+        Level world = target.level;
+        if (!world.isClientSide && world instanceof ServerLevel) {
+            if (target instanceof Cow && !(target instanceof MushroomCow)) {
                 // Cow to Mooshroom
                 target.setSpeed(0);
                 //create mooshroom
-                MooshroomEntity mooshroom = EntityType.MOOSHROOM.create(target.level);
+                MushroomCow mooshroom = EntityType.MOOSHROOM.create(target.level);
                 if (mooshroom != null) {
                     mooshroom.copyPosition(target);
-                    mooshroom.finalizeSpawn((ServerWorld)world, world.getCurrentDifficultyAt(target.blockPosition()), SpawnReason.CONVERSION, null, null);
-                    mooshroom.setAge(((CowEntity) target).getAge());
+                    mooshroom.finalizeSpawn((ServerLevel)world, world.getCurrentDifficultyAt(target.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                    mooshroom.setAge(((Cow) target).getAge());
                     if (target.hasCustomName()) {
                         mooshroom.setCustomName(target.getCustomName());
                         mooshroom.setCustomNameVisible(target.isCustomNameVisible());
                     }
                     mooshroom.setHealth(target.getHealth());
                     //replace cow with new mooshroom
-                    target.remove();
+                    target.remove(Entity.RemovalReason.DISCARDED);
                     world.addFreshEntity(mooshroom);
                     mooshroom.playSound(SoundEvents.ZOMBIE_VILLAGER_CONVERTED, 2.0F, 1.0F);
                     //remove one item
                     stack.setCount(stack.getCount() - 1);
                     itemUsed = true;
                 }
-            } else if (target instanceof SheepEntity && !(target instanceof MushroomSheepEntity)) {
+            } else if (target instanceof Sheep && !(target instanceof MushroomSheepEntity)) {
                 //Sheep to Mushroom Sheep
-                MushroomSheepEntity.replaceSheep((SheepEntity) target, null);
+                MushroomSheepEntity.replaceSheep((Sheep) target, null);
                 itemUsed = true;
             }
         }
         if (itemUsed) {
             //remove one item
             stack.setCount(stack.getCount() - 1);
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 
 }

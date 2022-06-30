@@ -11,17 +11,17 @@ import cech12.extendedmushrooms.block.MushroomWoodPressurePlateBlock;
 import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.init.ModTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CarpetBlock;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.TrapDoorBlock;
-import net.minecraft.data.BlockTagsProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WoolCarpetBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
@@ -58,7 +58,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD)
                 .addTag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL);
         tag(ModTags.Blocks.MUSHROOM_CARPETS).add(registry.stream().filter(extendedMushrooms)
-                .filter(block -> block instanceof CarpetBlock)
+                .filter(block -> block instanceof WoolCarpetBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_CHESTS).add(registry.stream().filter(extendedMushrooms)
@@ -109,7 +109,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_STAIRS).add(registry.stream().filter(extendedMushrooms)
-                .filter(block -> block instanceof StairsBlock)
+                .filter(block -> block instanceof StairBlock)
                 .sorted(Comparator.comparing(Block::getRegistryName))
                 .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_TRAPDOORS).add(registry.stream().filter(extendedMushrooms)

@@ -1,9 +1,9 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class MegaRedMushroomFeature extends MegaMushroomFeature {
 
-    public MegaRedMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
+    public MegaRedMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -28,12 +28,12 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceCap(IWorld level, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
-            if (!level.getBlockState(capPos.blockPos).canBeReplacedByLeaves(level, capPos.blockPos)) {
+            if (!isReplaceable(level, mutableBlockPos, false)) {
                 return false;
             }
         }
@@ -41,7 +41,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected void placeCap(IWorld level, Random random, BlockPos blockPos, int size, int radius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected void placeCap(LevelAccessor level, Random random, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);

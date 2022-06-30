@@ -9,15 +9,16 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 @JeiPlugin
 public class ExtendedMushroomsJEIPlugin implements IModPlugin {
@@ -36,10 +37,10 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(@Nonnull IRecipeRegistration registration) {
-        ClientPlayerEntity player = Minecraft.getInstance().player;
+        LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
             RecipeManager manager = player.connection.getRecipeManager();
-            registration.addRecipes(manager.getAllRecipesFor((IRecipeType<FairyRingRecipe>) ExtendedMushroomsRecipeTypes.FAIRY_RING), ExtendedMushroomsRecipeTypes.FAIRY_RING_ID);
+            registration.addRecipes(manager.getAllRecipesFor((RecipeType<FairyRingRecipe>) ExtendedMushroomsRecipeTypes.FAIRY_RING), ExtendedMushroomsRecipeTypes.FAIRY_RING_ID);
         }
     }
 
@@ -50,9 +51,9 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(@Nonnull IRecipeCatalystRegistration registration) {
-        for (Item mushroom : Tags.Items.MUSHROOMS.getValues()) {
-            registration.addRecipeCatalyst(new ItemStack(mushroom), ExtendedMushroomsRecipeTypes.FAIRY_RING_ID);
-        }
+        Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(Tags.Items.MUSHROOMS).forEach(mushroom ->
+            registration.addRecipeCatalyst(new ItemStack(mushroom), ExtendedMushroomsRecipeTypes.FAIRY_RING_ID)
+        );
     }
 
 }

@@ -1,20 +1,17 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
 
-    public SingleBigMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
+    public SingleBigMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -29,28 +26,28 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
         return i;
     }
 
-    protected boolean canGrow(IWorld world, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected boolean canGrow(LevelAccessor world, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         return isInWorldBounds(world, blockPos, size)
                 && this.hasValidGround(world, blockPos)
                 && canPlaceTrunk(world, blockPos, size, mutableBlockPos, config)
                 && canPlaceCap(world, blockPos, size, capRadius, mutableBlockPos, config);
     }
 
-    protected abstract boolean canPlaceCap(IWorld level, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config);
+    protected abstract boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config);
 
-    protected abstract void placeCap(IWorld level, Random random, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config);
+    protected abstract void placeCap(LevelAccessor level, Random random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config);
 
-    protected boolean canPlaceTrunk(IWorld level, BlockPos blockPos, int size, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
-        for(int i = 0; i < size; ++i) {
+    protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, int size, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+        for (int i = 0; i < size; ++i) {
             mutableBlockPos.set(blockPos).move(Direction.UP, i);
-            if (!level.getBlockState(mutableBlockPos).canBeReplacedByLogs(level, mutableBlockPos)) {
+            if (!isReplaceable(level, mutableBlockPos, true)) {
                 return false;
             }
         }
         return true;
     }
 
-    protected void placeTrunk(IWorld level, Random random, BlockPos blockPos, BigMushroomFeatureConfig config, int size, BlockPos.Mutable mutableBlockPos) {
+    protected void placeTrunk(LevelAccessor level, Random random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
         for(int i = 0; i < size; ++i) {
             mutableBlockPos.set(blockPos).move(Direction.UP, i);
             placeTrunkBlockIfPossible(level, random, config, mutableBlockPos);
@@ -58,15 +55,15 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
     }
 
     @Override
-    public boolean place(@Nonnull ISeedReader level, @Nullable ChunkGenerator generator, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BigMushroomFeatureConfig config) {
-        int size = this.getSize(rand);
-        int capRadius = this.getCapRadius(rand);
-        BlockPos.Mutable mutableBlockPos = new BlockPos.Mutable();
-        if (!this.canGrow(level, pos, size, capRadius, mutableBlockPos, config)) {
+    public boolean place(FeaturePlaceContext<HugeMushroomFeatureConfiguration> context) {
+        int size = this.getSize(context.random());
+        int capRadius = this.getCapRadius(context.random());
+        BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
+        if (!this.canGrow(context.level(), context.origin(), size, capRadius, mutableBlockPos, context.config())) {
             return false;
         } else {
-            this.placeCap(level, rand, pos, size, capRadius, mutableBlockPos, config);
-            this.placeTrunk(level, rand, pos, config, size, mutableBlockPos);
+            this.placeCap(context.level(), context.random(), context.origin(), size, capRadius, mutableBlockPos, context.config());
+            this.placeTrunk(context.level(), context.random(), context.origin(), context.config(), size, mutableBlockPos);
             return true;
         }
     }

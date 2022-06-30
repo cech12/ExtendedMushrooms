@@ -3,44 +3,42 @@ package cech12.extendedmushrooms.block;
 import cech12.extendedmushrooms.api.tileentity.ExtendedMushroomsTileEntities;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import cech12.extendedmushrooms.tileentity.VariantTrappedChestTileEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
-import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class VariantTrappedChestBlock extends ChestBlock {
 
     private final MushroomWoodType woodType;
 
     public VariantTrappedChestBlock(MushroomWoodType woodType, Properties properties) {
-        super(properties, () -> (TileEntityType<? extends ChestTileEntity>) ExtendedMushroomsTileEntities.VARIANT_TRAPPED_CHEST);
+        super(properties, () -> (BlockEntityType<? extends ChestBlockEntity>) ExtendedMushroomsTileEntities.VARIANT_TRAPPED_CHEST);
         this.woodType = woodType;
     }
 
     @Override
-    public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
-        return new VariantTrappedChestTileEntity();
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new VariantTrappedChestTileEntity(pos, state);
     }
 
     public MushroomWoodType getWoodType() {
@@ -49,16 +47,16 @@ public class VariantTrappedChestBlock extends ChestBlock {
 
     @OnlyIn(Dist.CLIENT)
     public void setISTER(Item.Properties props) {
-        props.setISTER(() -> () -> new ItemStackTileEntityRenderer() {
+        props.setISTER(() -> () -> new BlockEntityWithoutLevelRenderer() {
             private VariantTrappedChestTileEntity tile;
 
             @Override
             //render
-            public void renderByItem(@Nonnull ItemStack stack, ItemCameraTransforms.TransformType transformType, @Nonnull MatrixStack matrix, @Nonnull IRenderTypeBuffer buffer, int x, int y) {
+            public void renderByItem(@Nonnull ItemStack stack, ItemTransforms.TransformType transformType, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource buffer, int x, int y) {
                 if (tile == null) {
                     tile = new VariantTrappedChestTileEntity(woodType);
                 }
-                TileEntityRendererDispatcher.instance.renderItem(tile, matrix, buffer, x, y);
+                BlockEntityRenderDispatcher.instance.renderItem(tile, matrix, buffer, x, y);
             }
         });
     }
@@ -75,12 +73,12 @@ public class VariantTrappedChestBlock extends ChestBlock {
     }
 
     @Override
-    public int getSignal(@Nonnull BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
-        return MathHelper.clamp(ChestTileEntity.getOpenCount(blockAccess, pos), 0, 15);
+    public int getSignal(@Nonnull BlockState blockState, @Nonnull BlockGetter blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
+        return Mth.clamp(ChestBlockEntity.getOpenCount(blockAccess, pos), 0, 15);
     }
 
     @Override
-    public int getDirectSignal(@Nonnull BlockState blockState, @Nonnull IBlockReader blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
+    public int getDirectSignal(@Nonnull BlockState blockState, @Nonnull BlockGetter blockAccess, @Nonnull BlockPos pos, @Nonnull Direction side) {
         return side == Direction.UP ? blockState.getSignal(blockAccess, pos, side) : 0;
     }
 }

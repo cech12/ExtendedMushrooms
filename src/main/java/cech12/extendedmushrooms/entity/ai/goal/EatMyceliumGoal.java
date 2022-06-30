@@ -1,24 +1,24 @@
 package cech12.extendedmushrooms.entity.ai.goal;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.pattern.BlockStateMatcher;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class EatMyceliumGoal extends Goal {
-    private static final Predicate<BlockState> IS_MYCELIUM = BlockStateMatcher.forBlock(Blocks.MYCELIUM);
-    private final MobEntity eaterEntity;
-    private final World entityWorld;
+    private static final Predicate<BlockState> IS_MYCELIUM = BlockStatePredicate.forBlock(Blocks.MYCELIUM);
+    private final Mob eaterEntity;
+    private final Level entityWorld;
     private int eatingTimer;
 
-    public EatMyceliumGoal(MobEntity eaterEntityIn) {
+    public EatMyceliumGoal(Mob eaterEntityIn) {
         this.eaterEntity = eaterEntityIn;
         this.entityWorld = eaterEntityIn.level;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));

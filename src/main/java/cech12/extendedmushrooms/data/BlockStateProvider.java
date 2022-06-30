@@ -5,26 +5,26 @@ import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.HugeMushroomBlock;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SixWayBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.StandingSignBlock;
-import net.minecraft.block.TrapDoorBlock;
-import net.minecraft.block.WallSignBlock;
-import net.minecraft.block.WoodButtonBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.WoodButtonBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.properties.AttachFace;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
@@ -105,7 +105,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile inside = models().getExistingFile(getInsideResourceLocation(name));
                 MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
                 for (boolean boolValue : new boolean[]{true, false}) {
-                    for (Map.Entry<Direction, BooleanProperty> entry : SixWayBlock.PROPERTY_BY_DIRECTION.entrySet()) {
+                    for (Map.Entry<Direction, BooleanProperty> entry : PipeBlock.PROPERTY_BY_DIRECTION.entrySet()) {
                         int xRot = 0;
                         int yRot = 0;
                         switch (entry.getKey()) {
@@ -163,11 +163,11 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));
                 ModelFile doubleSlab = models().getExistingFile(getBlockResourceLocation(name, "_slab", "_planks"));
                 slabBlock((SlabBlock) block, bottom, top, doubleSlab);
-            } else if (block instanceof StairsBlock) {
+            } else if (block instanceof StairBlock) {
                 ModelFile stair = models().getExistingFile(getBlockResourceLocation(name));
                 ModelFile inner = models().getExistingFile(getBlockResourceLocation(name + "_inner"));
                 ModelFile outer = models().getExistingFile(getBlockResourceLocation(name + "_outer"));
-                stairsBlock((StairsBlock) block, stair, inner, outer);
+                stairsBlock((StairBlock) block, stair, inner, outer);
             } else if (block instanceof TrapDoorBlock) {
                 ModelFile bottom = models().getExistingFile(getBlockResourceLocation(name + "_bottom"));
                 ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));

@@ -7,20 +7,19 @@ import cech12.extendedmushrooms.client.renderer.entity.MushroomSheepRenderer;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.item.MushroomBoatEntity;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.MobSpawnInfo;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -42,7 +41,7 @@ public class ModEntities {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, SheepEntity.createAttributes().build());
+        event.put((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, Sheep.createAttributes().build());
     }
 
     /**
@@ -59,10 +58,10 @@ public class ModEntities {
      */
     public static void addEntitiesToBiomes(BiomeLoadingEvent event) {
         //add Mushroom Sheep to Mushroom Biomes
-        if (event.getCategory().equals(Biome.Category.MUSHROOM)) {
+        if (event.getCategory().equals(Biome.BiomeCategory.MUSHROOM)) {
             if (Config.MUSHROOM_SHEEP_ENABLED.get()) {
-                event.getSpawns().addSpawn(EntityClassification.CREATURE,
-                        new MobSpawnInfo.Spawners(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
+                event.getSpawns().addSpawn(MobCategory.CREATURE,
+                        new MobSpawnSettings.SpawnerData(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
                                 Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.get(),
                                 Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.get(),
                                 Config.MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.get()));

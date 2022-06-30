@@ -18,31 +18,28 @@ import cech12.extendedmushrooms.item.crafting.MushroomArrowRecipe;
 import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
 import cech12.extendedmushrooms.loot_modifiers.MushroomCapLootModifier;
 import cech12.extendedmushrooms.loot_modifiers.MushroomStemLootModifier;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HugeMushroomBlock;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.potion.Potions;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.IWorld;
-import net.minecraft.util.registry.Registry;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
@@ -56,11 +53,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 import java.util.Map;
 import javax.annotation.Nonnull;
@@ -84,7 +81,7 @@ public class ExtendedMushrooms {
         eventBus.addGenericListener(GlobalLootModifierSerializer.class, this::onRegisterModifierSerializers);
 
         // Register an event with the mod specific event bus for mod own recipes.
-        eventBus.addGenericListener(IRecipeSerializer.class, this::registerRecipeSerializers);
+        eventBus.addGenericListener(RecipeSerializer.class, this::registerRecipeSerializers);
 
         ModBlocks.registerBlocks(eventBus);
     }
@@ -105,13 +102,13 @@ public class ExtendedMushrooms {
         ModTileEntities.setupRenderers(event);
     }
 
-    private void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+    private void registerRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event) {
         //serializer for conditions
         CraftingHelper.register(ModFeatureEnabledCondition.Serializer.INSTANCE);
 
         // let other mods register recipes
         ExtendedMushroomsRecipeTypes.FAIRY_RING = Registry.register(Registry.RECIPE_TYPE, ExtendedMushroomsRecipeTypes.FAIRY_RING_ID,
-                new IRecipeType<FairyRingRecipe>() {});
+                new RecipeType<FairyRingRecipe>() {});
 
         // Register the recipe serializer.
         event.getRegistry().register(MushroomArrowRecipe.SERIALIZER);
@@ -144,12 +141,12 @@ public class ExtendedMushrooms {
         BlockState blockState = event.getWorld().getBlockState(event.getPos());
         ItemStack itemStack = event.getPlayer().getItemInHand(event.getHand());
         //check for mushroom stem and axe
-        if (itemStack.getToolTypes().contains(ToolType.AXE)) {
+        if (itemStack.canPerformAction(ToolActions.AXE_STRIP)) {
             //get stripped block from stripping map
             Block strippedBlock = ModBlocks.BLOCK_STRIPPING_MAP.get(blockState.getBlock());
             if (strippedBlock != null) {
                 //play sound
-                event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
                 if (!event.getWorld().isClientSide) {
                     //copy block state orientation
                     BlockState strippedBlockState = strippedBlock.defaultBlockState();
@@ -163,13 +160,11 @@ public class ExtendedMushrooms {
                     event.getWorld().setBlock(event.getPos(), strippedBlockState, 11);
                     //do the item damage
                     if (event.getPlayer() != null) {
-                        itemStack.hurtAndBreak(1, event.getPlayer(), (p_220040_1_) -> {
-                            p_220040_1_.broadcastBreakEvent(event.getHand());
-                        });
+                        itemStack.hurtAndBreak(1, event.getPlayer(), (player) -> player.broadcastBreakEvent(event.getHand()));
                     }
                 }
                 event.setCanceled(true);
-                event.setCancellationResult(ActionResultType.SUCCESS);
+                event.setCancellationResult(InteractionResult.SUCCESS);
             }
         }
     }
@@ -184,7 +179,7 @@ public class ExtendedMushrooms {
         //check for dye item and mushroom sheep entity
         if (entity instanceof MushroomSheepEntity && itemStack.getItem() instanceof DyeItem) {
             event.setCanceled(true);
-            event.setCancellationResult(ActionResultType.FAIL);
+            event.setCancellationResult(InteractionResult.FAIL);
         }
     }
 
@@ -194,8 +189,7 @@ public class ExtendedMushrooms {
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if (Config.SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.get()) {
-            if (event.getEntity() instanceof SheepEntity) { //also mushroom sheep
-                SheepEntity sheep = ((SheepEntity) event.getEntity());
+            if (event.getEntity() instanceof Sheep sheep) { //also mushroom sheep
                 sheep.goalSelector.addGoal(5, new EatMushroomGoal(sheep));
             }
         }
@@ -206,7 +200,7 @@ public class ExtendedMushrooms {
      */
     @SubscribeEvent
     public static void onNeighbourChanged(BlockEvent.NeighborNotifyEvent event) {
-        IWorld world = event.getWorld();
+        LevelAccessor world = event.getWorld();
         BlockPos blockPos = event.getPos();
         BlockState blockState = world.getBlockState(blockPos);
         if (blockState.getBlock() != ExtendedMushroomsBlocks.FAIRY_RING) {
@@ -237,8 +231,8 @@ public class ExtendedMushrooms {
      * @return A map containing all recipes for the passed recipe type. This map is immutable
      *         and can not be modified.
      */
-    public static Map<ResourceLocation, IRecipe<?>> getRecipes(IRecipeType<?> recipeType, RecipeManager manager) {
-        final Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = ObfuscationReflectionHelper.getPrivateValue(RecipeManager.class, manager, "recipes");
+    public static Map<ResourceLocation, Recipe<?>> getRecipes(RecipeType<?> recipeType, RecipeManager manager) {
+        final Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipesMap = ObfuscationReflectionHelper.getPrivateValue(RecipeManager.class, manager, "recipes");
         return recipesMap.get(recipeType);
     }
 

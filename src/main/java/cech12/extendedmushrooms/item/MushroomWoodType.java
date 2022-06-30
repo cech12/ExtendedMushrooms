@@ -3,20 +3,20 @@ package cech12.extendedmushrooms.item;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.WoodType;
-import net.minecraft.item.Item;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Supplier;
 
-public enum MushroomWoodType implements IStringSerializable {
+public enum MushroomWoodType implements StringRepresentable {
 
     MUSHROOM(0, "mushroom",
             ()->Blocks.MUSHROOM_STEM,
@@ -26,7 +26,7 @@ public enum MushroomWoodType implements IStringSerializable {
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM,
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_PLANKS,
             ()->ExtendedMushroomsItems.GLOWSHROOM_BOAT,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_STEM.defaultBlockState(), null, null)),
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getLightEmission(ExtendedMushroomsBlocks.GLOWSHROOM_STEM.defaultBlockState(), null, null)),
     POISONOUS_MUSHROOM(2, "poisonous_mushroom",
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM,
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PLANKS,
@@ -42,15 +42,15 @@ public enum MushroomWoodType implements IStringSerializable {
     private final String name;
     private final Supplier<Block> stemBlock;
     private final Supplier<Block> planksBlock;
-    private final Supplier<IItemProvider> boatItem;
+    private final Supplier<ItemLike> boatItem;
     private final Supplier<Integer> lightValue;
     private final WoodType woodType;
 
-    MushroomWoodType(int id, String name, Supplier<Block> stemBlock, Supplier<Block> planksBlock, Supplier<IItemProvider> boatItem) {
+    MushroomWoodType(int id, String name, Supplier<Block> stemBlock, Supplier<Block> planksBlock, Supplier<ItemLike> boatItem) {
         this(id, name, stemBlock, planksBlock, boatItem, () -> 0);
     }
 
-    MushroomWoodType(int id, String name, Supplier<Block> stemBlock, Supplier<Block> planksBlock, Supplier<IItemProvider> boatItem, Supplier<Integer> lightValue) {
+    MushroomWoodType(int id, String name, Supplier<Block> stemBlock, Supplier<Block> planksBlock, Supplier<ItemLike> boatItem, Supplier<Integer> lightValue) {
         this.id = id;
         this.name = name;
         this.stemBlock = stemBlock;

@@ -1,15 +1,15 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import java.util.Random;
 
 public class BigHoneyFungusFeature extends SplitBigMushroomFeature {
 
-    public BigHoneyFungusFeature(Codec<BigMushroomFeatureConfig> config) {
+    public BigHoneyFungusFeature(Codec<HugeMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -41,7 +41,7 @@ public class BigHoneyFungusFeature extends SplitBigMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceCap(IWorld level, BlockPos center, BigMushroomFeatureConfig config, int capRadius, BlockPos.Mutable mutableBlockPos) {
+    protected boolean canPlaceCap(LevelAccessor level, BlockPos center, HugeMushroomFeatureConfiguration config, int capRadius, BlockPos.MutableBlockPos mutableBlockPos) {
         boolean hasCorners = capRadius > 2;
         for (int x = -capRadius; x <= capRadius; ++x) {
             for (int z = -capRadius; z <= capRadius; ++z) {
@@ -49,7 +49,7 @@ public class BigHoneyFungusFeature extends SplitBigMushroomFeature {
                     continue;
                 }
                 mutableBlockPos.set(center).move(x, 0, z);
-                if (!level.getBlockState(mutableBlockPos).canBeReplacedByLeaves(level, mutableBlockPos)) {
+                if (!isReplaceable(level, mutableBlockPos, false)) {
                     return false;
                 }
             }
@@ -62,7 +62,7 @@ public class BigHoneyFungusFeature extends SplitBigMushroomFeature {
                     continue;
                 }
                 mutableBlockPos.set(center).move(x, -2, z);
-                if (!level.getBlockState(mutableBlockPos).canBeReplacedByLeaves(level, mutableBlockPos)) {
+                if (!isReplaceable(level, mutableBlockPos, false)) {
                     return false;
                 }
             }
@@ -71,7 +71,7 @@ public class BigHoneyFungusFeature extends SplitBigMushroomFeature {
     }
 
     @Override
-    protected void placeCap(IWorld level, Random random, BlockPos center, BigMushroomFeatureConfig config, int capRadius, BlockPos.Mutable mutableBlockPos) {
+    protected void placeCap(LevelAccessor level, Random random, BlockPos center, HugeMushroomFeatureConfiguration config, int capRadius, BlockPos.MutableBlockPos mutableBlockPos) {
         boolean hasCorners = capRadius > 2;
         for (int x = -capRadius; x <= capRadius; ++x) {
             for (int z = -capRadius; z <= capRadius; ++z) {

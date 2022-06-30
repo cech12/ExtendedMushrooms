@@ -1,30 +1,28 @@
 package cech12.extendedmushrooms.entity.item;
 
 import cech12.extendedmushrooms.item.MushroomWoodType;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.item.BoatEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.entity.item.BoatEntity.Type;
+public class MushroomBoatEntity extends Boat {
 
-public class MushroomBoatEntity extends BoatEntity {
+    private static final EntityDataAccessor<Integer> MUSHROOM_WOOD_TYPE = SynchedEntityData.defineId(MushroomBoatEntity.class, EntityDataSerializers.INT);
 
-    private static final DataParameter<Integer> MUSHROOM_WOOD_TYPE = EntityDataManager.defineId(MushroomBoatEntity.class, DataSerializers.INT);
-
-    public MushroomBoatEntity(EntityType<? extends MushroomBoatEntity> p_i50129_1_, World p_i50129_2_) {
+    public MushroomBoatEntity(EntityType<? extends MushroomBoatEntity> p_i50129_1_, Level p_i50129_2_) {
         super(p_i50129_1_, p_i50129_2_);
     }
 
@@ -42,22 +40,22 @@ public class MushroomBoatEntity extends BoatEntity {
 
     @Nullable
     @Override
-    public ItemEntity spawnAtLocation(IItemProvider itemIn) {
+    public ItemEntity spawnAtLocation(ItemLike itemIn) {
         //replace planks
-        if (itemIn.asItem().is(ItemTags.PLANKS)) {
+        if (itemIn.asItem().getDefaultInstance().is(ItemTags.PLANKS)) {
             return super.spawnAtLocation(this.getMushroomWoodType().getPlanksBlock());
         }
         return super.spawnAtLocation(itemIn);
     }
 
     @Override
-    protected void addAdditionalSaveData(@Nonnull CompoundNBT compound) {
+    protected void addAdditionalSaveData(@Nonnull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putString("MushroomWoodType", this.getMushroomWoodType().getSerializedName());
     }
 
     @Override
-    protected void readAdditionalSaveData(@Nonnull CompoundNBT compound) {
+    protected void readAdditionalSaveData(@Nonnull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         if (compound.contains("MushroomWoodType", 8)) {
             this.setMushroomWoodType(MushroomWoodType.byName(compound.getString("MushroomWoodType")));
@@ -66,21 +64,21 @@ public class MushroomBoatEntity extends BoatEntity {
 
     @Nonnull
     @Override
-    public IPacket<?> getAddEntityPacket() {
+    public Packet<?> getAddEntityPacket() {
         //important!!!
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Deprecated
     @Override
-    public void setType(@Nonnull BoatEntity.Type boatType) {
+    public void setType(@Nonnull Boat.Type boatType) {
         //deactivate boat type
     }
 
     @Deprecated
     @Nonnull
     @Override
-    public BoatEntity.Type getBoatType() {
+    public Boat.Type getBoatType() {
         //deactivate boat type
         return Type.OAK;
     }

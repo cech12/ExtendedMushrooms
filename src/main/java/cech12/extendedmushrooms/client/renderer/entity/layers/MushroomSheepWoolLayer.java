@@ -2,28 +2,28 @@ package cech12.extendedmushrooms.client.renderer.entity.layers;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.client.renderer.entity.model.SheepModel;
-import net.minecraft.client.renderer.entity.model.SheepWoolModel;
-import net.minecraft.util.ResourceLocation;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.model.SheepModel;
+import net.minecraft.client.model.SheepFurModel;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class MushroomSheepWoolLayer extends LayerRenderer<MushroomSheepEntity, SheepModel<MushroomSheepEntity>> {
+public class MushroomSheepWoolLayer extends RenderLayer<MushroomSheepEntity, SheepModel<MushroomSheepEntity>> {
 
     private static final ResourceLocation SHEEP_COLORING_TEXTURE = new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/sheep/mushroom_sheep_coloring.png");
 
     private final SheepModel<MushroomSheepEntity> sheepModel = new SheepModel<>();
-    private final SheepWoolModel<MushroomSheepEntity> sheepWoolModel = new SheepWoolModel<>();
+    private final SheepFurModel<MushroomSheepEntity> sheepWoolModel = new SheepFurModel<>();
 
-    public MushroomSheepWoolLayer(IEntityRenderer<MushroomSheepEntity, SheepModel<MushroomSheepEntity>> rendererIn) {
+    public MushroomSheepWoolLayer(RenderLayerParent<MushroomSheepEntity, SheepModel<MushroomSheepEntity>> rendererIn) {
         super(rendererIn);
     }
 
-    public void render(@Nonnull MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn, MushroomSheepEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void render(@Nonnull PoseStack matrixStackIn, @Nonnull MultiBufferSource bufferIn, int packedLightIn, MushroomSheepEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (!entitylivingbaseIn.isInvisible()) {
             float[] color = entitylivingbaseIn.getMushroomType().getColor().getTextureDiffuseColors();
             coloredCutoutModelCopyLayerRender(this.getParentModel(), this.sheepModel,

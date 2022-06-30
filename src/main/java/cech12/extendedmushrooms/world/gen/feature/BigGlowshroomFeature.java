@@ -1,16 +1,16 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import java.util.Random;
 
 public class BigGlowshroomFeature extends SingleBigMushroomFeature {
 
-    public BigGlowshroomFeature(Codec<BigMushroomFeatureConfig> config) {
+    public BigGlowshroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -23,15 +23,15 @@ public class BigGlowshroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceCap(IWorld level, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         for (int x = -capRadius; x <= capRadius; ++x) {
             for (int z = -capRadius; z <= capRadius; ++z) {
                 mutableBlockPos.set(blockPos).move(x, size, z);
-                if (!level.getBlockState(mutableBlockPos).canBeReplacedByLeaves(level, mutableBlockPos)) {
+                if (!isReplaceable(level, mutableBlockPos, false)) {
                     return false;
                 }
                 mutableBlockPos.move(Direction.DOWN, 1);
-                if (!level.getBlockState(mutableBlockPos).canBeReplacedByLeaves(level, mutableBlockPos)) {
+                if (!isReplaceable(level, mutableBlockPos, false)) {
                     return false;
                 }
             }
@@ -40,7 +40,7 @@ public class BigGlowshroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected void placeCap(IWorld level, Random random, BlockPos blockPos, int size, int capRadius, BlockPos.Mutable mutableBlockPos, BigMushroomFeatureConfig config) {
+    protected void placeCap(LevelAccessor level, Random random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         //top layer: "radius-1" blocks in each direction
         int topRadius = capRadius - 1;
         for(int x = -topRadius; x <= topRadius; ++x) {

@@ -3,28 +3,28 @@ package cech12.extendedmushrooms.block;
 
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -47,7 +47,7 @@ public class FairyRingBlock extends AirBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, LIT);
     }
 
@@ -66,49 +66,38 @@ public class FairyRingBlock extends AirBlock {
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
         return state.getValue(LIT) ? 15 : 0;
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Nonnull
     @Deprecated
     @Override
-    public BlockRenderType getRenderShape(@Nullable BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new FairyRingTileEntity();
+    public RenderShape getRenderShape(@Nullable BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Deprecated
     @Override
-    public void entityInside(@Nullable BlockState blockState, World world, @Nonnull BlockPos blockPos, @Nonnull Entity entity) {
-        TileEntity tileentity = world.getBlockEntity(blockPos);
-        if (tileentity instanceof FairyRingTileEntity) {
-            ((FairyRingTileEntity) tileentity).onEntityCollision(entity);
+    public void entityInside(@Nullable BlockState blockState, Level world, @Nonnull BlockPos blockPos, @Nonnull Entity entity) {
+        BlockEntity blockEntity = world.getBlockEntity(blockPos);
+        if (blockEntity instanceof FairyRingTileEntity) {
+            ((FairyRingTileEntity) blockEntity).onEntityCollision(entity);
         }
     }
 
     @Deprecated
     @Override
-    public void onRemove(BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = worldIn.getBlockEntity(pos);
-            if (tileentity instanceof FairyRingTileEntity) {
-                InventoryHelper.dropContents(worldIn, pos, (FairyRingTileEntity)tileentity);
+            BlockEntity blockEntity = worldIn.getBlockEntity(pos);
+            if (blockEntity instanceof FairyRingTileEntity) {
+                Containers.dropContents(worldIn, pos, (FairyRingTileEntity)blockEntity);
                 worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 
@@ -121,24 +110,24 @@ public class FairyRingBlock extends AirBlock {
      */
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(@Nonnull BlockState stateIn, World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        TileEntity tileentity = worldIn.getBlockEntity(pos);
-        if (tileentity instanceof FairyRingTileEntity) {
-            ((FairyRingTileEntity) tileentity).animateTick(worldIn, rand);
+    public void animateTick(@Nonnull BlockState stateIn, Level worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
+        BlockEntity blockEntity = worldIn.getBlockEntity(pos);
+        if (blockEntity instanceof FairyRingTileEntity) {
+            ((FairyRingTileEntity) blockEntity).animateTick(worldIn, rand);
         }
     }
 
     @Deprecated
     @Override
-    public boolean triggerEvent(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos, int id, int param) {
+    public boolean triggerEvent(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, int id, int param) {
         super.triggerEvent(state, world, pos, id, param);
-        TileEntity tileentity = world.getBlockEntity(pos);
-        return tileentity != null && tileentity.triggerEvent(id, param);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        return blockEntity != null && blockEntity.triggerEvent(id, param);
     }
 
     @Deprecated
     @Override
-    public void neighborChanged(@Nonnull BlockState blockState, @Nonnull World world, @Nonnull BlockPos blockPos, @Nonnull Block block, @Nonnull BlockPos neighbourPos, boolean isMoving) {
+    public void neighborChanged(@Nonnull BlockState blockState, @Nonnull Level world, @Nonnull BlockPos blockPos, @Nonnull Block block, @Nonnull BlockPos neighbourPos, boolean isMoving) {
         //check for 2 mushrooms and 2 Fairy Ring blocks as neighbour. (diagonally the same)
         //check if block below is solid
         boolean mushroomSeen = false;
@@ -181,9 +170,9 @@ public class FairyRingBlock extends AirBlock {
     /**
      * Check for built fairy ring and if true, place fairy ring blocks.
      */
-    public static void fairyRingPlaceCheck(IWorld world, BlockPos pos) {
+    public static void fairyRingPlaceCheck(LevelAccessor world, BlockPos pos) {
         //check for formed fairy rings
-        BlockPos.Mutable mutablePos = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         boolean[] clockwises = new boolean[]{true, false};
         for (Direction direction : DIRECTIONS) {
             for (boolean clockwise : clockwises) {
@@ -211,7 +200,7 @@ public class FairyRingBlock extends AirBlock {
          * B C C B
          * # B B #
          */
-        FairyRing(IWorld world, Direction direction, boolean clockwise, BlockPos.Mutable mutablePos) throws CannotFormFairyRingException {
+        FairyRing(LevelAccessor world, Direction direction, boolean clockwise, BlockPos.MutableBlockPos mutablePos) throws CannotFormFairyRingException {
             this.ringPositions = getFairyRingPositions(world, new LinkedList<>(), direction, clockwise, mutablePos);
             if (this.ringPositions == null || ringPositions.size() != 12) {
                 throw new CannotFormFairyRingException();
@@ -226,7 +215,7 @@ public class FairyRingBlock extends AirBlock {
          * @param mutablePos - a mutable block position, where the position of the initial block is set
          * @return list of all 12 important positions of the ring (parameter positions) - returns null, when ring cannot be placed
          */
-        private static LinkedList<BlockPos> getFairyRingPositions(IWorld world, LinkedList<BlockPos> positions, Direction direction, boolean clockwise, BlockPos.Mutable mutablePos) {
+        private static LinkedList<BlockPos> getFairyRingPositions(LevelAccessor world, LinkedList<BlockPos> positions, Direction direction, boolean clockwise, BlockPos.MutableBlockPos mutablePos) {
             Direction rotatedDirection = (clockwise) ? direction.getClockWise() : direction.getCounterClockWise();
             Direction newDirection = direction;
 
@@ -278,7 +267,7 @@ public class FairyRingBlock extends AirBlock {
             return list;
         }
 
-        void placeBlocks(IWorld world) {
+        void placeBlocks(LevelAccessor world) {
             List<BlockPos> list = getSortedCenterPositions();
             for (int i = 0; i < 4; i++) {
                 BlockState state = ExtendedMushroomsBlocks.FAIRY_RING.defaultBlockState().setValue(FairyRingBlock.FACING, DIRECTIONS[i]);

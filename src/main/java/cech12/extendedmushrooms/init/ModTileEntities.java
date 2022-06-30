@@ -10,12 +10,12 @@ import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
 import cech12.extendedmushrooms.tileentity.MushroomSignTileEntity;
 import cech12.extendedmushrooms.tileentity.VariantChestTileEntity;
 import cech12.extendedmushrooms.tileentity.VariantTrappedChestTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.Atlases;
-import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
-import net.minecraft.tileentity.SignTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
@@ -32,7 +32,7 @@ import static cech12.extendedmushrooms.api.tileentity.ExtendedMushroomsTileEntit
 public class ModTileEntities {
 
     @SubscribeEvent
-    public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
+    public static void registerTileEntities(RegistryEvent.Register<BlockEntityType<?>> event) {
         FAIRY_RING = register(event, FairyRingTileEntity::new, "fairy_ring", ExtendedMushroomsBlocks.FAIRY_RING);
         MUSHROOM_SIGN = register(event, MushroomSignTileEntity::new, "mushroom_sign",
                 ModBlocks.MUSHROOM_STANDING_SIGN.get(),
@@ -52,8 +52,8 @@ public class ModTileEntities {
     }
 
 
-    private static <T extends TileEntity> TileEntityType<T> register(RegistryEvent.Register<TileEntityType<?>> registryEvent, Supplier<T> supplier, String registryName, Block... blocks) {
-        TileEntityType<T> tileEntityType = TileEntityType.Builder.of(supplier, blocks).build(null);
+    private static <T extends BlockEntity> BlockEntityType<T> register(RegistryEvent.Register<BlockEntityType<?>> registryEvent, BlockEntityType.BlockEntitySupplier<T> supplier, String registryName, Block... blocks) {
+        BlockEntityType<T> tileEntityType = BlockEntityType.Builder.of(supplier, blocks).build(null);
         tileEntityType.setRegistryName(registryName);
         registryEvent.getRegistry().register(tileEntityType);
         return tileEntityType;
@@ -64,15 +64,15 @@ public class ModTileEntities {
      */
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderers(final FMLClientSetupEvent event) {
-        ClientRegistry.bindTileEntityRenderer((TileEntityType<FairyRingTileEntity>) FAIRY_RING, FairyRingTileEntityRenderer::new);
-        ClientRegistry.bindTileEntityRenderer((TileEntityType<SignTileEntity>) MUSHROOM_SIGN, SignTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer((BlockEntityType<FairyRingTileEntity>) FAIRY_RING, FairyRingTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer((BlockEntityType<SignBlockEntity>) MUSHROOM_SIGN, SignRenderer::new);
         event.enqueueWork(() -> {
             for (MushroomWoodType type : MushroomWoodType.values()) {
-                Atlases.addWoodType(type.getWoodType());
+                Sheets.addWoodType(type.getWoodType());
             }
         });
-        ClientRegistry.bindTileEntityRenderer((TileEntityType<VariantChestTileEntity>) VARIANT_CHEST, VariantChestTileEntityRenderer::new);
-        ClientRegistry.bindTileEntityRenderer((TileEntityType<VariantTrappedChestTileEntity>) VARIANT_TRAPPED_CHEST, VariantTrappedChestTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer((BlockEntityType<VariantChestTileEntity>) VARIANT_CHEST, VariantChestTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer((BlockEntityType<VariantTrappedChestTileEntity>) VARIANT_TRAPPED_CHEST, VariantTrappedChestTileEntityRenderer::new);
     }
 
 

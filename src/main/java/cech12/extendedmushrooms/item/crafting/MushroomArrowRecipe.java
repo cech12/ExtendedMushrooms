@@ -2,29 +2,29 @@ package cech12.extendedmushrooms.item.crafting;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.init.ModTags;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.SpecialRecipe;
-import net.minecraft.item.crafting.SpecialRecipeSerializer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MushroomArrowRecipe extends SpecialRecipe {
+public class MushroomArrowRecipe extends CustomRecipe {
 
-    public static final SpecialRecipeSerializer<MushroomArrowRecipe> SERIALIZER = new Serializer();
+    public static final SimpleRecipeSerializer<MushroomArrowRecipe> SERIALIZER = new Serializer();
 
-    private static final Map<ITag.INamedTag<Item>, Potion> MUSHROOM_POTION_MAP = new HashMap<>();
+    private static final Map<TagKey<Item>, Potion> MUSHROOM_POTION_MAP = new HashMap<>();
 
     static {
         MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM, Potions.NIGHT_VISION);
@@ -38,8 +38,8 @@ public class MushroomArrowRecipe extends SpecialRecipe {
     }
 
     private Potion getPotionFromMushroom(Item mushroom) {
-        for (Map.Entry<ITag.INamedTag<Item>, Potion> entry : MUSHROOM_POTION_MAP.entrySet()) {
-            if (mushroom.is(entry.getKey())) {
+        for (Map.Entry<TagKey<Item>, Potion> entry : MUSHROOM_POTION_MAP.entrySet()) {
+            if (mushroom.getDefaultInstance().is(entry.getKey())) {
                 return entry.getValue();
             }
         }
@@ -47,7 +47,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
     }
 
     @Override
-    public boolean matches(@Nonnull CraftingInventory inv, @Nonnull World worldIn) {
+    public boolean matches(@Nonnull CraftingContainer inv, @Nonnull Level worldIn) {
         try {
             new RecipeIngredients(inv);
             return true;
@@ -58,7 +58,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
 
     @Nonnull
     @Override
-    public ItemStack assemble(@Nonnull CraftingInventory inv) {
+    public ItemStack assemble(@Nonnull CraftingContainer inv) {
         try {
             RecipeIngredients ingredients = new RecipeIngredients(inv);
             Potion potion = getPotionFromMushroom(ingredients.mushroom.getItem());
@@ -80,11 +80,11 @@ public class MushroomArrowRecipe extends SpecialRecipe {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return SERIALIZER;
     }
 
-    private static class Serializer extends SpecialRecipeSerializer<MushroomArrowRecipe> {
+    private static class Serializer extends SimpleRecipeSerializer<MushroomArrowRecipe> {
         public Serializer() {
             super(MushroomArrowRecipe::new);
             this.setRegistryName(ExtendedMushrooms.MOD_ID, "mushroom_arrow_recipe");
@@ -96,7 +96,7 @@ public class MushroomArrowRecipe extends SpecialRecipe {
         ItemStack arrow = null;
         ItemStack mushroom = null;
 
-        RecipeIngredients(@Nonnull CraftingInventory inv) throws Exception {
+        RecipeIngredients(@Nonnull CraftingContainer inv) throws Exception {
             for (int i = 0; i < inv.getContainerSize(); i++) {
                 ItemStack stack = inv.getItem(i);
                 if (!stack.isEmpty()) {

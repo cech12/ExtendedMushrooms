@@ -1,26 +1,25 @@
 package cech12.extendedmushrooms.block;
 
 import cech12.extendedmushrooms.block.mushrooms.BigMushroom;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class EMMushroomBlock extends MushroomBlock {
 
     BigMushroom bigMushroom;
 
     public EMMushroomBlock(BigMushroom bigMushroom, Properties properties) {
-        super(properties);
+        super(properties, bigMushroom::getBigMushroomFeature);
         this.bigMushroom = bigMushroom;
     }
 
     @Override
-    public void performBonemeal(ServerWorld world, Random random, BlockPos blockPos, BlockState state) {
-        this.bigMushroom.growMushroom(world, world.getChunkSource().generator, blockPos, state, random);
+    public void performBonemeal(@Nonnull ServerLevel world, @Nonnull Random random, @Nonnull BlockPos blockPos, @Nonnull BlockState state) {
+        this.bigMushroom.growMushroom(world, world.getChunkSource().getGenerator(), blockPos, state, random);
     }
 }

@@ -2,8 +2,8 @@ package cech12.extendedmushrooms.compat;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import com.google.gson.JsonObject;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
@@ -33,21 +33,15 @@ public class ModFeatureEnabledCondition implements ICondition {
 
     @Override
     public boolean test() {
-        switch (this.feature) {
-            case "variantBookshelves":
-                return this.inverted != ModCompat.isVariantBookshelvesModLoaded();
-            case "variantChests":
-                return this.inverted != ModCompat.isVariantChestsModLoaded();
-            case "variantTrappedChests":
-                return this.inverted != ModCompat.isVariantTrappedChestsModLoaded();
-            case "variantLadders":
-                return this.inverted != ModCompat.isVariantLaddersModLoaded();
-            case "verticalPlanks":
-                return this.inverted != ModCompat.isVerticalPlanksModLoaded();
-            case "verticalSlabs":
-                return this.inverted != ModCompat.isVerticalSlabsModLoaded();
-        }
-        return false;
+        return switch (this.feature) {
+            case "variantBookshelves" -> this.inverted != ModCompat.isVariantBookshelvesModLoaded();
+            case "variantChests" -> this.inverted != ModCompat.isVariantChestsModLoaded();
+            case "variantTrappedChests" -> this.inverted != ModCompat.isVariantTrappedChestsModLoaded();
+            case "variantLadders" -> this.inverted != ModCompat.isVariantLaddersModLoaded();
+            case "verticalPlanks" -> this.inverted != ModCompat.isVerticalPlanksModLoaded();
+            case "verticalSlabs" -> this.inverted != ModCompat.isVerticalSlabsModLoaded();
+            default -> false;
+        };
     }
 
     public static class Serializer implements IConditionSerializer<ModFeatureEnabledCondition> {
@@ -64,8 +58,8 @@ public class ModFeatureEnabledCondition implements ICondition {
         @Override
         public ModFeatureEnabledCondition read(JsonObject json) {
             return new ModFeatureEnabledCondition(
-                    JSONUtils.getAsString(json, "feature"),
-                    JSONUtils.getAsBoolean(json, "inverted", false));
+                    GsonHelper.getAsString(json, "feature"),
+                    GsonHelper.getAsBoolean(json, "inverted", false));
         }
 
         @Override

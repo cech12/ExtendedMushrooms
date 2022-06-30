@@ -3,9 +3,9 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.client.particle.FairyRingParticle;
 import net.minecraft.client.Minecraft;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -17,7 +17,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 @Mod.EventBusSubscriber(modid = ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModParticles {
 
-    public static BasicParticleType FAIRY_RING = new BasicParticleType(true);
+    public static SimpleParticleType FAIRY_RING = new SimpleParticleType(true);
 
     @SubscribeEvent
     public static void registerParticles(RegistryEvent.Register<ParticleType<?>> evt) {

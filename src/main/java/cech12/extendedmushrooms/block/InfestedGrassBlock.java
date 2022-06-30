@@ -1,25 +1,22 @@
 package cech12.extendedmushrooms.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BushBlock;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class InfestedGrassBlock extends BushBlock {
 
@@ -33,24 +30,14 @@ public class InfestedGrassBlock extends BushBlock {
     }
 
     @Nonnull
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        Vector3d vec3d = state.getOffset(worldIn, pos);
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        Vec3 vec3d = state.getOffset(worldIn, pos);
         return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
     }
 
-    protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
         Block block = state.getBlock();
         return block == Blocks.MYCELIUM || super.mayPlaceOn(state, worldIn, pos);
-    }
-
-    @Override
-    public boolean canBeReplacedByLeaves(BlockState state, IWorldReader world, BlockPos pos) {
-        return true;
-    }
-
-    @Override
-    public boolean canBeReplacedByLogs(BlockState state, IWorldReader world, BlockPos pos) {
-        return true;
     }
 
     /**
@@ -63,7 +50,7 @@ public class InfestedGrassBlock extends BushBlock {
 
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState blockState, World world, BlockPos blockPos, Random random) {
+    public void animateTick(BlockState blockState, Level world, BlockPos blockPos, Random random) {
         super.animateTick(blockState, world, blockPos, random);
         if (random.nextInt(15) == 0) {
             world.addParticle(ParticleTypes.MYCELIUM, (double)blockPos.getX() + (double)random.nextFloat(), (double)blockPos.getY() + 0.2D, (double)blockPos.getZ() + (double)random.nextFloat(), 0.0D, 0.0D, 0.0D);
@@ -71,12 +58,12 @@ public class InfestedGrassBlock extends BushBlock {
     }
 
     @Override
-    public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+    public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return 100;
     }
 
     @Override
-    public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+    public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return 60;
     }
 

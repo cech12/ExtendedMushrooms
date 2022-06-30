@@ -3,21 +3,21 @@ package cech12.extendedmushrooms.data;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
-import net.minecraft.block.AbstractButtonBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BushBlock;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.HugeMushroomBlock;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.block.StandingSignBlock;
-import net.minecraft.block.TrapDoorBlock;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -83,7 +83,7 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
                     //block items with item texture
                     singleTexture(name, ITEM_GENERATED, "layer0", getItemResourceLocation(name));
                 } else if (block instanceof HugeMushroomBlock //stems, caps
-                        || block instanceof AbstractButtonBlock
+                        || block instanceof ButtonBlock
                         || block instanceof FenceBlock) {
                     //block items with extra block inventory model
                     withExistingParent(name, getBlockResourceLocation(name + "_inventory"));
@@ -106,7 +106,7 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
     }
 
     @Override
-    public void run(DirectoryCache cache) throws IOException {
+    public void run(HashCache cache) throws IOException {
         super.run(cache);
     }
 

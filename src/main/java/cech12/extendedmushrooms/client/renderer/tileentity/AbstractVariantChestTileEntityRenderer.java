@@ -2,78 +2,78 @@ package cech12.extendedmushrooms.client.renderer.tileentity;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.item.MushroomWoodType;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.AbstractChestBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.world.level.block.AbstractChestBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.tileentity.DualBrightnessCallback;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.state.properties.ChestType;
-import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.TileEntityMerger;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.World;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.level.block.state.properties.ChestType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.DoubleBlockCombiner;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import com.mojang.math.Vector3f;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 
-public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestTileEntity> extends TileEntityRenderer<T> {
+public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestBlockEntity> implements BlockEntityRenderer<T> {
 
     private static final HashMap<MushroomWoodType, ChestTextures> TEXTURES = new HashMap<>();
 
-    private final ModelRenderer lid;
-    private final ModelRenderer bottom;
-    private final ModelRenderer lock;
-    private final ModelRenderer doubleLeftLid;
-    private final ModelRenderer doubleLeftBottom;
-    private final ModelRenderer doubleLeftLock;
-    private final ModelRenderer doubleRightLid;
-    private final ModelRenderer doubleRightBottom;
-    private final ModelRenderer doubleRightLock;
+    private final ModelPart lid;
+    private final ModelPart bottom;
+    private final ModelPart lock;
+    private final ModelPart doubleLeftLid;
+    private final ModelPart doubleLeftBottom;
+    private final ModelPart doubleLeftLock;
+    private final ModelPart doubleRightLid;
+    private final ModelPart doubleRightBottom;
+    private final ModelPart doubleRightLock;
 
-    public AbstractVariantChestTileEntityRenderer(TileEntityRendererDispatcher p_i226008_1_) {
+    public AbstractVariantChestTileEntityRenderer(BlockEntityRenderDispatcher p_i226008_1_) {
         super(p_i226008_1_);
 
-        this.bottom = new ModelRenderer(64, 64, 0, 19);
+        this.bottom = new ModelPart(64, 64, 0, 19);
         this.bottom.addBox(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
-        this.lid = new ModelRenderer(64, 64, 0, 0);
+        this.lid = new ModelPart(64, 64, 0, 0);
         this.lid.addBox(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
         this.lid.y = 9.0F;
         this.lid.z = 1.0F;
-        this.lock = new ModelRenderer(64, 64, 0, 0);
+        this.lock = new ModelPart(64, 64, 0, 0);
         this.lock.addBox(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
         this.lock.y = 8.0F;
-        this.doubleLeftBottom = new ModelRenderer(64, 64, 0, 19);
+        this.doubleLeftBottom = new ModelPart(64, 64, 0, 19);
         this.doubleLeftBottom.addBox(1.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
-        this.doubleLeftLid = new ModelRenderer(64, 64, 0, 0);
+        this.doubleLeftLid = new ModelPart(64, 64, 0, 0);
         this.doubleLeftLid.addBox(1.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
         this.doubleLeftLid.y = 9.0F;
         this.doubleLeftLid.z = 1.0F;
-        this.doubleLeftLock = new ModelRenderer(64, 64, 0, 0);
+        this.doubleLeftLock = new ModelPart(64, 64, 0, 0);
         this.doubleLeftLock.addBox(15.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
         this.doubleLeftLock.y = 8.0F;
-        this.doubleRightBottom = new ModelRenderer(64, 64, 0, 19);
+        this.doubleRightBottom = new ModelPart(64, 64, 0, 19);
         this.doubleRightBottom.addBox(0.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
-        this.doubleRightLid = new ModelRenderer(64, 64, 0, 0);
+        this.doubleRightLid = new ModelPart(64, 64, 0, 0);
         this.doubleRightLid.addBox(0.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
         this.doubleRightLid.y = 9.0F;
         this.doubleRightLid.z = 1.0F;
-        this.doubleRightLock = new ModelRenderer(64, 64, 0, 0);
+        this.doubleRightLock = new ModelPart(64, 64, 0, 0);
         this.doubleRightLock.addBox(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
         this.doubleRightLock.y = 8.0F;
     }
 
-    public void render(T tileEntityIn, float partialTicks, @Nonnull MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        World world = tileEntityIn.getLevel();
+    public void render(T tileEntityIn, float partialTicks, @Nonnull PoseStack matrixStackIn, @Nonnull MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        Level world = tileEntityIn.getLevel();
         boolean flag = world != null;
         BlockState blockstate = flag ? tileEntityIn.getBlockState() : Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
         ChestType chesttype = blockstate.hasProperty(ChestBlock.TYPE) ? blockstate.getValue(ChestBlock.TYPE) : ChestType.SINGLE;
@@ -86,18 +86,18 @@ public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestTile
             matrixStackIn.translate(0.5D, 0.5D, 0.5D);
             matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-f));
             matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
-            TileEntityMerger.ICallbackWrapper<? extends ChestTileEntity> icallbackwrapper;
+            DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> icallbackwrapper;
             if (flag) {
                 icallbackwrapper = abstractchestblock.combine(blockstate, world, tileEntityIn.getBlockPos(), true);
             } else {
-                icallbackwrapper = TileEntityMerger.ICallback::acceptNone;
+                icallbackwrapper = DoubleBlockCombiner.Combiner::acceptNone;
             }
 
             float f1 = icallbackwrapper.apply(ChestBlock.opennessCombiner(tileEntityIn)).get(partialTicks);
             f1 = 1.0F - f1;
             f1 = 1.0F - f1 * f1 * f1;
-            int i = icallbackwrapper.apply(new DualBrightnessCallback<>()).applyAsInt(combinedLightIn);
-            IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.entityTranslucent(this.getTexture(tileEntityIn, chesttype)));
+            int i = icallbackwrapper.apply(new BrightnessCombiner<>()).applyAsInt(combinedLightIn);
+            VertexConsumer ivertexbuilder = bufferIn.getBuffer(RenderType.entityTranslucent(this.getTexture(tileEntityIn, chesttype)));
             if (flag1) {
                 if (chesttype == ChestType.LEFT) {
                     this.render(matrixStackIn, ivertexbuilder, this.doubleRightLid, this.doubleRightLock, this.doubleRightBottom, f1, i, combinedOverlayIn);
@@ -112,7 +112,7 @@ public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestTile
         }
     }
 
-    private void render(MatrixStack p_228871_1_, IVertexBuilder p_228871_2_, ModelRenderer p_228871_3_, ModelRenderer p_228871_4_, ModelRenderer p_228871_5_, float p_228871_6_, int p_228871_7_, int p_228871_8_) {
+    private void render(PoseStack p_228871_1_, VertexConsumer p_228871_2_, ModelPart p_228871_3_, ModelPart p_228871_4_, ModelPart p_228871_5_, float p_228871_6_, int p_228871_7_, int p_228871_8_) {
         p_228871_3_.xRot = -(p_228871_6_ * ((float)Math.PI / 2F));
         p_228871_4_.xRot = p_228871_3_.xRot;
         p_228871_3_.render(p_228871_1_, p_228871_2_, p_228871_7_, p_228871_8_);

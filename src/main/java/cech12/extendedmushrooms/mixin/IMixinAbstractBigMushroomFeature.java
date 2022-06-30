@@ -1,10 +1,10 @@
 package cech12.extendedmushrooms.mixin;
 
-import net.minecraft.world.gen.feature.AbstractBigMushroomFeature;
+import net.minecraft.world.level.levelgen.feature.AbstractHugeMushroomFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(AbstractBigMushroomFeature.class)
+@Mixin(AbstractHugeMushroomFeature.class)
 public interface IMixinAbstractBigMushroomFeature {
 
     @Invoker(value = "getTreeRadiusForHeight")

@@ -2,26 +2,26 @@ package cech12.extendedmushrooms.client.renderer.tileentity;
 
 import cech12.extendedmushrooms.client.ClientTickObserver;
 import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.item.ItemStack;
+import com.mojang.math.Quaternion;
+import net.minecraft.world.phys.Vec3;
+import com.mojang.math.Vector3f;
 
 import javax.annotation.Nonnull;
 
-public class FairyRingTileEntityRenderer extends TileEntityRenderer<FairyRingTileEntity> {
+public class FairyRingTileEntityRenderer extends BlockEntityRenderer<FairyRingTileEntity> {
 
     //private FairyRingWitchRenderer witchRenderer;
     //private WitchEntity witchEntity;
 
-    public FairyRingTileEntityRenderer(TileEntityRendererDispatcher dispatcher) {
+    public FairyRingTileEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
     }
 
@@ -44,12 +44,12 @@ public class FairyRingTileEntityRenderer extends TileEntityRenderer<FairyRingTil
      */
 
     @Override
-    public void render(@Nonnull FairyRingTileEntity fairyRing, float partticks, @Nonnull MatrixStack matrixStack, @Nonnull IRenderTypeBuffer iRenderTypeBuffer, int p1, int p2) {
+    public void render(@Nonnull FairyRingTileEntity fairyRing, float partticks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource iRenderTypeBuffer, int p1, int p2) {
         //only render inventory of master
         if (fairyRing.isMaster()) {
             matrixStack.pushPose();
             //move to ring center
-            Vector3d centerTranslation = FairyRingTileEntity.CENTER_TRANSLATION_VECTOR;
+            Vec3 centerTranslation = FairyRingTileEntity.CENTER_TRANSLATION_VECTOR;
             matrixStack.translate(centerTranslation.x, centerTranslation.y, centerTranslation.z);
 
             int itemCount = 0;
@@ -72,7 +72,7 @@ public class FairyRingTileEntityRenderer extends TileEntityRenderer<FairyRingTil
             }
             float anglePerItem = 360F / itemCount;
             Minecraft mc = Minecraft.getInstance();
-            mc.textureManager.bind(AtlasTexture.LOCATION_BLOCKS);
+            mc.textureManager.bind(TextureAtlas.LOCATION_BLOCKS);
             Vector3f yAxis = new Vector3f(0, 1, 0);
             for(int i = 0; i < fairyRing.getContainerSize(); i++) {
                 matrixStack.pushPose();
@@ -87,7 +87,7 @@ public class FairyRingTileEntityRenderer extends TileEntityRenderer<FairyRingTil
                 //render item
                 ItemStack stack = fairyRing.getItem(i);
                 if(!stack.isEmpty()) {
-                    mc.getItemRenderer().renderStatic(stack, ItemCameraTransforms.TransformType.GROUND, p1, p2, matrixStack, iRenderTypeBuffer);
+                    mc.getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, p1, p2, matrixStack, iRenderTypeBuffer);
                 }
                 matrixStack.popPose();
             }

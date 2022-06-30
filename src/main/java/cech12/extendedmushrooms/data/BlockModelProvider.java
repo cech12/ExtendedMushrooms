@@ -11,24 +11,24 @@ import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VerticalPlanksBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BushBlock;
-import net.minecraft.block.CarpetBlock;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.HugeMushroomBlock;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.StandingSignBlock;
-import net.minecraft.block.TrapDoorBlock;
-import net.minecraft.block.WallSignBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.WoolCarpetBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -123,7 +123,7 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                         .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
             } else if (block instanceof MushroomCapButtonBlock) {
                 buttonBlock(name, getCapResourceLocation(name, "_button"));
-            } else if (block instanceof CarpetBlock) {
+            } else if (block instanceof WoolCarpetBlock) {
                 ResourceLocation texture = getCapResourceLocation(name, "_carpet");
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/carpet")))
@@ -188,7 +188,7 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                         .texture("bottom", texture)
                         .texture("top", texture)
                         .texture("side", texture);
-            } else if (block instanceof StairsBlock) {
+            } else if (block instanceof StairBlock) {
                 ResourceLocation texture = getBlockResourceLocation(name, "_stairs", "_planks");
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/stairs")))

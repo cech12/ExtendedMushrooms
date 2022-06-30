@@ -2,45 +2,54 @@ package cech12.extendedmushrooms.world.gen.feature;
 
 import cech12.extendedmushrooms.MushroomUtils;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.HugeMushroomBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.material.Material;
 
 import java.util.Random;
 
-public abstract class BigMushroomFeature extends Feature<BigMushroomFeatureConfig> {
+public abstract class BigMushroomFeature extends Feature<HugeMushroomFeatureConfiguration> {
 
-    public BigMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
+    public BigMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
         super(config);
     }
 
-    protected boolean isInWorldBounds(IWorld world, BlockPos mushroomPos, int size) {
-        int y = mushroomPos.getY();
-        return y >= 1 && y + size + 1 < world.getHeight(); //TODO 1.18 negative height
+
+    protected boolean isReplaceable(LevelAccessor level, BlockPos blockPos, boolean isTrunk) {
+        return level.isStateAtPosition(blockPos, (p_65966_) -> {
+            Material material = p_65966_.getMaterial();
+            return p_65966_.getMaterial().isReplaceable() || isTrunk && material == Material.PLANT;
+        });
     }
 
-    protected boolean hasValidGround(IWorld world, BlockPos mushroomPos) {
+    protected boolean isInWorldBounds(LevelAccessor level, BlockPos mushroomPos, int size) {
+        int y = mushroomPos.getY();
+        return y >= level.getMinBuildHeight() && y + size + 1 < level.getMaxBuildHeight();
+    }
+
+    protected boolean hasValidGround(LevelAccessor world, BlockPos mushroomPos) {
         return MushroomUtils.isValidMushroomPosition(world, mushroomPos);
     }
 
-    protected void placeTrunkBlockIfPossible(IWorld level, Random random, BigMushroomFeatureConfig config, BlockPos blockPos) {
+    protected void placeTrunkBlockIfPossible(LevelAccessor level, Random random, HugeMushroomFeatureConfiguration config, BlockPos blockPos) {
         this.placeTrunkBlockIfPossible(level, random, config, blockPos, false, false);
     }
 
-    protected void placeTrunkBlockIfPossible(IWorld level, Random random, BigMushroomFeatureConfig config, BlockPos blockPos, boolean up, boolean down) {
-        if (level.getBlockState(blockPos).canBeReplacedByLogs(level, blockPos)) {
+    protected void placeTrunkBlockIfPossible(LevelAccessor level, Random random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean up, boolean down) {
+        if (isReplaceable(level, blockPos, true)) {
             this.setBlock(level, blockPos, config.stemProvider.getState(random, blockPos).setValue(HugeMushroomBlock.UP, up).setValue(HugeMushroomBlock.DOWN, down));
         }
     }
 
-    protected void placeCapBlockIfPossible(IWorld level, Random random, BigMushroomFeatureConfig config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south) {
+    protected void placeCapBlockIfPossible(LevelAccessor level, Random random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south) {
         this.placeCapBlockIfPossible(level, random, config, blockPos, west, east, north, south, true);
     }
 
-    protected void placeCapBlockIfPossible(IWorld level, Random random, BigMushroomFeatureConfig config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south, boolean up) {
-        if (level.getBlockState(blockPos).canBeReplacedByLeaves(level, blockPos)) {
+    protected void placeCapBlockIfPossible(LevelAccessor level, Random random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south, boolean up) {
+        if (isReplaceable(level, blockPos, false)) {
             this.setBlock(level, blockPos, config.capProvider.getState(random, blockPos).setValue(HugeMushroomBlock.WEST, west).setValue(HugeMushroomBlock.EAST, east).setValue(HugeMushroomBlock.NORTH, north).setValue(HugeMushroomBlock.SOUTH, south).setValue(HugeMushroomBlock.UP, up));
         }
     }

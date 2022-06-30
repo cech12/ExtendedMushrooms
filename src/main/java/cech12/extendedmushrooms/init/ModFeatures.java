@@ -18,22 +18,28 @@ import cech12.extendedmushrooms.world.gen.feature.MegaBrownMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaGlowshroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaPoisonousMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaRedMushroomFeature;
-import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
-import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
-import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.Features;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.Placement;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.placement.BiomeFilter;
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.RegistryEvent;
@@ -42,43 +48,55 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid= ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModFeatures {
 
     public static final class NotConfigured {
-        public static BigMushroomFeature MEGA_BROWN_MUSHROOM = new MegaBrownMushroomFeature(BigMushroomFeatureConfig.CODEC);
-        public static BigMushroomFeature MEGA_RED_MUSHROOM= new MegaRedMushroomFeature(BigMushroomFeatureConfig.CODEC);
+        public static BigMushroomFeature MEGA_BROWN_MUSHROOM = new MegaBrownMushroomFeature(HugeMushroomFeatureConfiguration.CODEC);
+        public static BigMushroomFeature MEGA_RED_MUSHROOM= new MegaRedMushroomFeature(HugeMushroomFeatureConfiguration.CODEC);
 
-        public static BigMushroomFeature BIG_GLOWSHROOM = new BigGlowshroomFeature(BigMushroomFeatureConfig.CODEC);
-        public static BigMushroomFeature MEGA_GLOWSHROOM = new MegaGlowshroomFeature(BigMushroomFeatureConfig.CODEC);
+        public static BigMushroomFeature BIG_GLOWSHROOM = new BigGlowshroomFeature(HugeMushroomFeatureConfiguration.CODEC);
+        public static BigMushroomFeature MEGA_GLOWSHROOM = new MegaGlowshroomFeature(HugeMushroomFeatureConfiguration.CODEC);
 
-        public static BigMushroomFeature BIG_POISONOUS_MUSHROOM = new BigPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC);
-        public static BigMushroomFeature MEGA_POISONOUS_MUSHROOM = new MegaPoisonousMushroomFeature(BigMushroomFeatureConfig.CODEC);
+        public static BigMushroomFeature BIG_POISONOUS_MUSHROOM = new BigPoisonousMushroomFeature(HugeMushroomFeatureConfiguration.CODEC);
+        public static BigMushroomFeature MEGA_POISONOUS_MUSHROOM = new MegaPoisonousMushroomFeature(HugeMushroomFeatureConfiguration.CODEC);
 
-        public static BigMushroomFeature BIG_SLIME_FUNGUS = new BigSlimeFungusFeature(BigMushroomFeatureConfig.CODEC);
+        public static BigMushroomFeature BIG_SLIME_FUNGUS = new BigSlimeFungusFeature(HugeMushroomFeatureConfiguration.CODEC);
 
-        public static BigMushroomFeature BIG_HONEY_FUNGUS = new BigHoneyFungusFeature(BigMushroomFeatureConfig.CODEC);
+        public static BigMushroomFeature BIG_HONEY_FUNGUS = new BigHoneyFungusFeature(HugeMushroomFeatureConfiguration.CODEC);
     }
 
     public static final class Configured {
-        public static ConfiguredFeature<?, ?> INFESTED_FLOWER = Feature.FLOWER.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ExtendedMushroomsBlocks.INFESTED_FLOWER.defaultBlockState()), new SimpleBlockPlacer())).tries(32).build()).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4);
-        public static ConfiguredFeature<?, ?> INFESTED_GRASS = Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(ExtendedMushroomsBlocks.INFESTED_GRASS.defaultBlockState()), new SimpleBlockPlacer())).tries(32).build()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).count(2);
+        public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> INFESTED_FLOWER = FeatureUtils.register("infested_flower", Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ExtendedMushroomsBlocks.INFESTED_FLOWER)))));
+        public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> INFESTED_GRASS = FeatureUtils.register("infested_flower", Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ExtendedMushroomsBlocks.INFESTED_GRASS)))));
 
-        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> MEGA_BROWN_MUSHROOM = NotConfigured.MEGA_BROWN_MUSHROOM.configured(BrownMushroom.getConfig());
-        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> MEGA_RED_MUSHROOM= NotConfigured.MEGA_RED_MUSHROOM.configured(RedMushroom.getConfig());
+        public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_BROWN_MUSHROOM = register("mega_brown_mushroom", NotConfigured.MEGA_BROWN_MUSHROOM, BrownMushroom.getConfig());
+        public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_RED_MUSHROOM= register("mega_red_mushroom", NotConfigured.MEGA_RED_MUSHROOM, RedMushroom.getConfig());
 
-        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> BIG_GLOWSHROOM = NotConfigured.BIG_GLOWSHROOM.configured(Glowshroom.getConfig());
-        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> MEGA_GLOWSHROOM = NotConfigured.MEGA_GLOWSHROOM.configured(Glowshroom.getConfig());
+        public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> BIG_GLOWSHROOM = register("big_glowshroom", NotConfigured.BIG_GLOWSHROOM, Glowshroom.getConfig());
+        public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_GLOWSHROOM = register("mega_glowshroom", NotConfigured.MEGA_GLOWSHROOM, Glowshroom.getConfig());
 
-        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> BIG_POISONOUS_MUSHROOM = NotConfigured.BIG_POISONOUS_MUSHROOM.configured(PoisonousMushroom.getConfig());
-        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> MEGA_POISONOUS_MUSHROOM = NotConfigured.MEGA_POISONOUS_MUSHROOM.configured(PoisonousMushroom.getConfig());
+        public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> BIG_POISONOUS_MUSHROOM = register("big_poisonous_mushroom", NotConfigured.BIG_POISONOUS_MUSHROOM, PoisonousMushroom.getConfig());
+        public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_POISONOUS_MUSHROOM = register("mega_poisonous_mushroom", NotConfigured.MEGA_POISONOUS_MUSHROOM, PoisonousMushroom.getConfig());
 
-        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> BIG_SLIME_FUNGUS = NotConfigured.BIG_SLIME_FUNGUS.configured(SlimeFungus.getConfig());
+        public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> BIG_SLIME_FUNGUS = register("big_slime_fungus", NotConfigured.BIG_SLIME_FUNGUS, SlimeFungus.getConfig());
 
-        public static ConfiguredFeature<BigMushroomFeatureConfig, ?> BIG_HONEY_FUNGUS = NotConfigured.BIG_HONEY_FUNGUS.configured(HoneyFungus.getConfig());
+        public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> BIG_HONEY_FUNGUS = register("big_honey_fungus", NotConfigured.BIG_HONEY_FUNGUS, HoneyFungus.getConfig());
+    }
+
+    public static final class Placed {
+        public static Holder<PlacedFeature> INFESTED_FLOWER = PlacementUtils.register("patch_infested_flower", Configured.INFESTED_FLOWER, VegetationPlacements.worldSurfaceSquaredWithCount(4));
+        public static Holder<PlacedFeature> INFESTED_GRASS = PlacementUtils.register("patch_infested_grass", Configured.INFESTED_GRASS, VegetationPlacements.worldSurfaceSquaredWithCount(2));
+
+        public static Map<String, Holder<PlacedFeature>> MUSHROOM_FEATURES = new HashMap<>();
+        public static Map<String, Holder<PlacedFeature>> BIG_MUSHROOM_FEATURES = new HashMap<>();
+        public static Map<String, Holder<PlacedFeature>> MEGA_MUSHROOM_FEATURES = new HashMap<>();
     }
 
     private static List<Mushroom> mushrooms = null;
@@ -87,22 +105,6 @@ public class ModFeatures {
 
     @SubscribeEvent
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-        register("infested_grass", Configured.INFESTED_FLOWER);
-        register("infested_flower", Configured.INFESTED_GRASS);
-
-        register("mega_brown_mushroom", NotConfigured.MEGA_BROWN_MUSHROOM, Configured.MEGA_BROWN_MUSHROOM);
-        register("mega_red_mushroom", NotConfigured.MEGA_RED_MUSHROOM, Configured.MEGA_RED_MUSHROOM);
-
-        register("big_glowshroom", NotConfigured.BIG_GLOWSHROOM, Configured.BIG_GLOWSHROOM);
-        register("mega_glowshroom", NotConfigured.MEGA_GLOWSHROOM, Configured.MEGA_GLOWSHROOM);
-
-        register("big_poisonous_mushroom", NotConfigured.BIG_POISONOUS_MUSHROOM, Configured.BIG_POISONOUS_MUSHROOM);
-        register("mega_poisonous_mushroom", NotConfigured.MEGA_POISONOUS_MUSHROOM, Configured.MEGA_POISONOUS_MUSHROOM);
-
-        register("big_slime_fungus", NotConfigured.BIG_SLIME_FUNGUS, Configured.BIG_SLIME_FUNGUS);
-
-        register("big_honey_fungus", NotConfigured.BIG_HONEY_FUNGUS, Configured.BIG_HONEY_FUNGUS);
-
         //register world generation features
         if (mushrooms == null || bigMushrooms == null || megaMushrooms == null) {
             mushrooms = new LinkedList<>();
@@ -120,47 +122,43 @@ public class ModFeatures {
 
             //register small mushroom features
             for (Mushroom mushroom : mushrooms) {
-                //calculate chance
-                int chance = Math.max(1, (int) (4.0 / mushroom.spawnFactor));
-                register(mushroom.name + "_normal", Feature.RANDOM_PATCH.configured(mushroom.config).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).chance(chance));
-                register(mushroom.name + "_taiga", Feature.RANDOM_PATCH.configured(mushroom.config).decorated(Features.Placements.HEIGHTMAP_SQUARE).chance(chance));
-                register(mushroom.name + "_swamp", Feature.RANDOM_PATCH.configured(mushroom.config).decorated(Features.Placements.HEIGHTMAP_SQUARE).chance(chance).count(8));
-                register(mushroom.name + "_nether", Feature.RANDOM_PATCH.configured(mushroom.config).range(128).chance(Math.max(1, chance / 2)));
+                Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> patchFeature = FeatureUtils.register("patch_" + mushroom.name, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(mushroom.block))));
+                Placed.MUSHROOM_FEATURES.put(mushroom.name + "_normal", PlacementUtils.register(mushroom.name + "_normal", patchFeature, getMushroomPlacement((int) (512 * mushroom.spawnFactor), null)));
+                Placed.MUSHROOM_FEATURES.put(mushroom.name + "_taiga", PlacementUtils.register(mushroom.name + "_taiga", patchFeature, getMushroomPlacement((int) (256 * mushroom.spawnFactor), null)));
+                Placed.MUSHROOM_FEATURES.put(mushroom.name + "_swamp", PlacementUtils.register(mushroom.name + "_swamp", patchFeature, getMushroomPlacement((int) (64 * mushroom.spawnFactor), null)));
+                Placed.MUSHROOM_FEATURES.put(mushroom.name + "_nether", PlacementUtils.register(mushroom.name + "_nether", patchFeature, RarityFilter.onAverageOnceEvery(Math.max(1, (int) (2.0 * mushroom.spawnFactor))), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome()));
             }
 
             //register feature for big mushrooms random patch
             for (BigMushroom bigMushroom : bigMushrooms) {
-                register(bigMushroom.name + "_field", bigMushroom.config.decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, bigMushroom.spawnChance, 1))));
+                Placed.BIG_MUSHROOM_FEATURES.put("mushroom_island_" + bigMushroom.name, PlacementUtils.register("mushroom_island_" + bigMushroom.name, bigMushroom.config, VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery((int) (100 * bigMushroom.spawnChance)))));
             }
 
             //register feature for mega mushrooms random patch
             for (BigMushroom megaMushroom : megaMushrooms) {
-                register(megaMushroom.name + "_field", megaMushroom.config.decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, megaMushroom.spawnChance, 1))));
+                Placed.MEGA_MUSHROOM_FEATURES.put("mushroom_island_" + megaMushroom.name, PlacementUtils.register("mushroom_island_" + megaMushroom.name, megaMushroom.config, VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery((int) (10 * megaMushroom.spawnChance)))));
+                //register(megaMushroom.name + "_field", megaMushroom.config.decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, megaMushroom.spawnChance, 1))));
             }
         }
 
     }
 
-    private static <FC extends IFeatureConfig> void register(String key, Feature<?> feature, ConfiguredFeature<FC, ?> configuredFeature) {
+    private static <FC extends FeatureConfiguration> Holder<ConfiguredFeature<FC, ?>> register(String key, Feature<FC> feature, FC featureConfiguration) {
         feature.setRegistryName(new ResourceLocation(ExtendedMushrooms.MOD_ID, key));
         ForgeRegistries.FEATURES.register(feature);
-        register(key, configuredFeature);
-    }
-
-    private static <FC extends IFeatureConfig> void register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
-        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(ExtendedMushrooms.MOD_ID, key), configuredFeature);
+        return BuiltinRegistries.registerExact(BuiltinRegistries.CONFIGURED_FEATURE, ExtendedMushrooms.MOD_ID + ":" + key, new ConfiguredFeature<>(feature, featureConfiguration));
     }
 
     public static void addFeaturesToBiomes(BiomeLoadingEvent event) {
-        if (event.getCategory().equals(Biome.Category.MUSHROOM)) {
+        if (event.getCategory().equals(Biome.BiomeCategory.MUSHROOM)) {
             BiomeGenerationSettingsBuilder generation = event.getGeneration();
             //add infested grass to mushroom biomes
             if (Config.INFESTED_GRASS_ENABLED.get()) {
-                generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.INFESTED_GRASS);
+                generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Placed.INFESTED_GRASS);
             }
             //add infested flower to mushroom biomes
             if (Config.INFESTED_FLOWER_ENABLED.get()) {
-                generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.INFESTED_FLOWER);
+                generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Placed.INFESTED_FLOWER);
             }
         }
         //add mushrooms
@@ -171,10 +169,26 @@ public class ModFeatures {
     }
 
     private static boolean biomeHasNoMushrooms(BiomeLoadingEvent event) {
-        Biome.Category category = event.getCategory();
+        Biome.BiomeCategory category = event.getCategory();
         Biome.TemperatureModifier temperatureModifier = event.getClimate().temperatureModifier;
-        return category == Biome.Category.THEEND
-                || (category == Biome.Category.OCEAN && temperatureModifier != Biome.TemperatureModifier.FROZEN);
+        return category == Biome.BiomeCategory.THEEND
+                || (category == Biome.BiomeCategory.OCEAN && temperatureModifier != Biome.TemperatureModifier.FROZEN);
+    }
+
+    private static List<PlacementModifier> getMushroomPlacement(int chance, @Nullable PlacementModifier placementModifier) {
+        ImmutableList.Builder<PlacementModifier> builder = ImmutableList.builder();
+        if (placementModifier != null) {
+            builder.add(placementModifier);
+        }
+
+        if (chance != 0) {
+            builder.add(RarityFilter.onAverageOnceEvery(chance));
+        }
+
+        builder.add(InSquarePlacement.spread());
+        builder.add(PlacementUtils.HEIGHTMAP);
+        builder.add(BiomeFilter.biome());
+        return builder.build();
     }
 
     private static void addMushrooms(BiomeLoadingEvent event) {
@@ -189,51 +203,40 @@ public class ModFeatures {
                 continue;
             }
             //add mushrooms to all biomes
-            WorldGenRegistries.CONFIGURED_FEATURE.getOptional(new ResourceLocation(ExtendedMushrooms.MOD_ID, mushroom.name + "_normal"))
-                    .ifPresent(feature -> generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, feature));
+            generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Placed.MUSHROOM_FEATURES.get(mushroom.name + "_normal"));
             //add more mushrooms to some specific biomes
-            String suffix = null;
-            switch (event.getCategory()) {
-                case MUSHROOM: //same as taiga
-                case TAIGA:
-                    suffix = "_taiga";
-                    //giant taiga? - same with an additional .count(3)
-                    break;
-                case SWAMP:
-                    suffix = "_swamp";
-                    break;
-                case NETHER:
-                    suffix = "_nether";
-                    break;
-            }
+            String suffix = switch (event.getCategory()) { //same as taiga
+                case MUSHROOM, TAIGA -> "_taiga";
+                //giant taiga? - same with an additional .count(3)
+                case SWAMP -> "_swamp";
+                case NETHER -> "_nether";
+                default -> null;
+            };
             if (suffix != null) {
-                WorldGenRegistries.CONFIGURED_FEATURE.getOptional(new ResourceLocation(ExtendedMushrooms.MOD_ID, mushroom.name + suffix))
-                        .ifPresent(feature -> generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, feature));
+                generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Placed.MUSHROOM_FEATURES.get(mushroom.name + suffix));
             }
         }
     }
 
     private static void addBigMushrooms(BiomeLoadingEvent event) {
-        Biome.Category category = event.getCategory();
-        if (category == Biome.Category.MUSHROOM) {
+        Biome.BiomeCategory category = event.getCategory();
+        if (category == Biome.BiomeCategory.MUSHROOM) {
             BiomeGenerationSettingsBuilder generation = event.getGeneration();
             for (BigMushroom bigMushroom : bigMushrooms) {
                 if (bigMushroom.enableConfig.get()) {
-                    WorldGenRegistries.CONFIGURED_FEATURE.getOptional(new ResourceLocation(ExtendedMushrooms.MOD_ID, bigMushroom.name + "_field"))
-                            .ifPresent(feature -> generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, feature));
+                    generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Placed.BIG_MUSHROOM_FEATURES.get("mushroom_island_" + bigMushroom.name));
                 }
             }
         }
     }
 
     private static void addMegaMushrooms(BiomeLoadingEvent event) {
-        Biome.Category category = event.getCategory();
-        if (category == Biome.Category.MUSHROOM) {
+        Biome.BiomeCategory category = event.getCategory();
+        if (category == Biome.BiomeCategory.MUSHROOM) {
             BiomeGenerationSettingsBuilder generation = event.getGeneration();
             for (BigMushroom megaMushroom : megaMushrooms) {
                 if (megaMushroom.enableConfig.get()) {
-                    WorldGenRegistries.CONFIGURED_FEATURE.getOptional(new ResourceLocation(ExtendedMushrooms.MOD_ID, megaMushroom.name + "_field"))
-                            .ifPresent(feature -> generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, feature));
+                    generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, Placed.BIG_MUSHROOM_FEATURES.get("mushroom_island_" + megaMushroom.name));
                 }
             }
         }
@@ -244,7 +247,6 @@ public class ModFeatures {
         Block block;
         double spawnFactor;
         ForgeConfigSpec.BooleanValue enableConfig;
-        BlockClusterFeatureConfig config;
 
         /**
          * @param name name of this mushroom
@@ -258,19 +260,16 @@ public class ModFeatures {
             this.block = mushroomBlock;
             this.spawnFactor = spawnFactor;
             this.enableConfig = enableConfig;
-            this.config = new BlockClusterFeatureConfig.Builder(
-                    new SimpleBlockStateProvider(mushroomBlock.defaultBlockState()),
-                    new SimpleBlockPlacer()).tries(spawnTryCount).noProjection().build();
         }
     }
 
     private static class BigMushroom {
         String name;
-        ConfiguredFeature<BigMushroomFeatureConfig, ?> config;
+        Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> config;
         float spawnChance;
         ForgeConfigSpec.BooleanValue enableConfig;
 
-        private BigMushroom(String name, ConfiguredFeature<BigMushroomFeatureConfig, ?> config, float spawnChance, ForgeConfigSpec.BooleanValue enableConfig) {
+        private BigMushroom(String name, Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> config, float spawnChance, ForgeConfigSpec.BooleanValue enableConfig) {
             this.name = name;
             this.config = config;
             this.spawnChance = spawnChance;

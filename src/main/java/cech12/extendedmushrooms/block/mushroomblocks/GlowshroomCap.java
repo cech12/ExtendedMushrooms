@@ -1,18 +1,16 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.item.MushroomType;
-import net.minecraft.block.BlockState;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class GlowshroomCap extends AbstractEffectMushroomCap {
 
@@ -21,7 +19,7 @@ public class GlowshroomCap extends AbstractEffectMushroomCap {
     }
 
     @Override
-    protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
+    protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull Random random) {
         if (super.shouldDropEffectCloud(state, world, pos, random)) {
             //only drop effect at night or in dark areas
             BlockPos up = pos.above();
@@ -32,13 +30,13 @@ public class GlowshroomCap extends AbstractEffectMushroomCap {
 
     @Nonnull
     @Override
-    protected List<EffectInstance> getEffects(@Nonnull Random random) {
+    protected List<MobEffectInstance> getEffects(@Nonnull Random random) {
         int duration = 200 + random.nextInt(200);
         if (random.nextInt(100) == 0) {
             duration += 1200;
         }
-        List<EffectInstance> effects = new LinkedList<>();
-        effects.add(new EffectInstance(Effects.NIGHT_VISION, duration));
+        List<MobEffectInstance> effects = new LinkedList<>();
+        effects.add(new MobEffectInstance(MobEffects.NIGHT_VISION, duration));
         return effects;
     }
 }

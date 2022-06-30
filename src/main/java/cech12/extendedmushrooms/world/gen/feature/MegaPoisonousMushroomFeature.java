@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class MegaPoisonousMushroomFeature extends MegaRedMushroomFeature {
 
-    public MegaPoisonousMushroomFeature(Codec<BigMushroomFeatureConfig> config) {
+    public MegaPoisonousMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
         super(config);
     }
 

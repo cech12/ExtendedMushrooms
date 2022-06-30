@@ -8,26 +8,26 @@ import cech12.extendedmushrooms.api.tileentity.ExtendedMushroomsTileEntities;
 import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.init.ModParticles;
 import cech12.extendedmushrooms.init.ModSounds;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -36,9 +36,9 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Random;
 
-public class FairyRingTileEntity extends TileEntity implements IInventory, ITickableTileEntity {
+public class FairyRingTileEntity extends BlockEntity implements Container {
 
-    public static final Vector3d CENTER_TRANSLATION_VECTOR = new Vector3d(1, 0, 1);
+    public static final Vec3 CENTER_TRANSLATION_VECTOR = new Vec3(1, 0, 1);
     public static final int INVENTORY_SIZE = 16;
 
     private static final int EFFECT_EVENT = 0;
@@ -57,8 +57,8 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     //recipe caching
     protected FairyRingRecipe currentRecipe;
 
-    public FairyRingTileEntity() {
-        super(ExtendedMushroomsTileEntities.FAIRY_RING);
+    public FairyRingTileEntity(BlockPos pos, BlockState state) {
+        super(ExtendedMushroomsTileEntities.FAIRY_RING, pos, state);
         this.hasMaster = false;
         this.isMaster = false;
     }
@@ -75,11 +75,11 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
             }
             //initial loading of this tile entity.
             //search for a master, when not found, I am the master
-            World world = this.getLevel();
+            Level world = this.getLevel();
             BlockPos pos = this.getBlockPos();
             if (world != null) {
                 for (Direction direction : FairyRingBlock.DIRECTIONS) {
-                    TileEntity tileEntity = world.getBlockEntity(pos.relative(direction));
+                    BlockEntity tileEntity = world.getBlockEntity(pos.relative(direction));
                     if (tileEntity instanceof FairyRingTileEntity) {
                         this.setMaster(((FairyRingTileEntity) tileEntity).getMaster());
                         break;
@@ -95,9 +95,9 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     /**
      * Should only be called by master!
      */
-    public Vector3d getCenter() {
+    public Vec3 getCenter() {
         BlockPos position = this.getBlockPos();
-        return new Vector3d(position.getX(), position.getY(), position.getZ()).add(CENTER_TRANSLATION_VECTOR);
+        return new Vec3(position.getX(), position.getY(), position.getZ()).add(CENTER_TRANSLATION_VECTOR);
     }
 
     public boolean hasMaster() {
@@ -127,7 +127,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
             return this;
         }
         if (this.hasMaster() && this.getLevel() != null) {
-            TileEntity tileEntity = this.getLevel().getBlockEntity(this.masterPos);
+            BlockEntity tileEntity = this.getLevel().getBlockEntity(this.masterPos);
             if (tileEntity instanceof FairyRingTileEntity) {
                 return ((FairyRingTileEntity) tileEntity);
             }
@@ -136,14 +136,14 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public void load(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
-        super.load(state, compound);
+    public void load(@Nonnull CompoundTag compound) {
+        super.load(compound);
         this.masterPos = new BlockPos(compound.getInt("MasterX"), compound.getInt("MasterY"), compound.getInt("MasterZ"));
         this.hasMaster = compound.getBoolean("HasMaster");
         this.isMaster = compound.getBoolean("IsMaster");
         if (this.isMaster()) {
             this.items = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
-            ItemStackHelper.loadAllItems(compound, this.items);
+            ContainerHelper.loadAllItems(compound, this.items);
             this.mode = FairyRingMode.byName(compound.getString("Mode"));
             this.recipeTime = compound.getInt("RecipeTime");
             this.recipeTimeTotal = compound.getInt("RecipeTimeTotal");
@@ -151,39 +151,37 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    @Nonnull
-    public CompoundNBT save(@Nonnull CompoundNBT compound) {
-        super.save(compound);
+    public void saveAdditional(@Nonnull CompoundTag compound) {
+        super.saveAdditional(compound);
         compound.putInt("MasterX", this.masterPos.getX());
         compound.putInt("MasterY", this.masterPos.getY());
         compound.putInt("MasterZ", this.masterPos.getZ());
         compound.putBoolean("HasMaster", hasMaster);
         compound.putBoolean("IsMaster", isMaster);
         if (this.isMaster()) {
-            ItemStackHelper.saveAllItems(compound, this.items);
+            ContainerHelper.saveAllItems(compound, this.items);
             compound.putString("Mode", this.mode.getName());
             compound.putInt("RecipeTime", this.recipeTime);
             compound.putInt("RecipeTimeTotal", this.recipeTimeTotal);
         }
-        return compound;
     }
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.getBlockPos(), 3, this.getUpdateTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Nonnull
     @Override
-    public CompoundNBT getUpdateTag() {
-        return this.save(new CompoundNBT());
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        if (this.level != null) {
-            this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        if (this.level != null && pkt.getTag() != null) {
+            this.load(pkt.getTag());
         }
     }
 
@@ -210,12 +208,11 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
         } else {
             if (entity instanceof ItemEntity) {
                 this.onItemEntityCollision((ItemEntity) entity);
-            } else if (entity instanceof PlayerEntity) {
+            } else if (entity instanceof Player playerEntity) {
                 //Give entering player all stored items.
-                PlayerEntity playerEntity = (PlayerEntity) entity;
                 for (int i = 0; i < this.getContainerSize(); i++) {
                     ItemStack stack = this.getItem(i);
-                    if (playerEntity.inventory.add(stack)) {
+                    if (playerEntity.getInventory().add(stack)) {
                         this.removeItem(i, stack.getCount());
                     }
                 }
@@ -239,15 +236,15 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
         ItemStack remainingStack = this.addItemStack(itemEntity.getItem());
         if (remainingStack == ItemStack.EMPTY) {
             //when fully added, remove entity
-            itemEntity.remove();
+            itemEntity.remove(Entity.RemovalReason.DISCARDED);
         } else {
             //when not or partly added, set new stack
             itemEntity.setItem(remainingStack);
             //itemEntity shouldn't stay inside of FairyRingTileEntity (performance issue)
             //so, push remaining stack to border.
-            Vector3d centerToStack = itemEntity.position().subtract(this.getCenter());
+            Vec3 centerToStack = itemEntity.position().subtract(this.getCenter());
             double scaleFactor = (1.8 - centerToStack.length()) * 0.08; //1.8 is sqrt(3) | 0.08 is speed
-            Vector3d calculatedMotion = new Vector3d(centerToStack.x, 0, centerToStack.z).normalize().scale(scaleFactor);
+            Vec3 calculatedMotion = new Vec3(centerToStack.x, 0, centerToStack.z).normalize().scale(scaleFactor);
             itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().add(calculatedMotion));
         }
 
@@ -316,8 +313,8 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
         if (this.currentRecipe != null && this.currentRecipe.isValid(this.mode, this)) {
             return this.currentRecipe;
         } else {
-            Collection<IRecipe<?>> recipes = ExtendedMushrooms.getRecipes(ExtendedMushroomsRecipeTypes.FAIRY_RING, this.getLevel().getRecipeManager()).values();
-            for (IRecipe<?> recipe : recipes) {
+            Collection<Recipe<?>> recipes = ExtendedMushrooms.getRecipes(ExtendedMushroomsRecipeTypes.FAIRY_RING, this.getLevel().getRecipeManager()).values();
+            for (Recipe<?> recipe : recipes) {
                 if (recipe instanceof FairyRingRecipe && ((FairyRingRecipe) recipe).isValid(this.mode, this)) {
                     return (FairyRingRecipe) recipe;
                 }
@@ -347,10 +344,10 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
                 }
                 //play crafting sound every CRAFTING_SOUND_INTERVAL ticks (beginning with tick 1) until a new sound would overlap the finish sound
                 if (this.recipeTime % CRAFTING_SOUND_INTERVAL == 1 && this.recipeTimeTotal - this.recipeTime > CRAFTING_SOUND_INTERVAL / 2) {
-                    Vector3d center = this.getCenter();
+                    Vec3 center = this.getCenter();
                     float volume = this.getLevel().getRandom().nextFloat() * 0.4F + 0.8F;
                     float pitch = this.getLevel().getRandom().nextFloat() * 0.2F + 0.9F;
-                    this.getLevel().playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING, SoundCategory.AMBIENT, volume, pitch);
+                    this.getLevel().playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING, SoundSource.AMBIENT, volume, pitch);
                 }
                 //increase recipe time
                 if (this.recipeTime < this.recipeTimeTotal) {
@@ -364,15 +361,15 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
                     }
                     //clear inventory and pop out result itemStack
                     this.clearContent();
-                    Vector3d center = this.getCenter();
+                    Vec3 center = this.getCenter();
                     ItemStack resultStack = this.currentRecipe.getResultItemStack();
                     if (resultStack != null && resultStack != ItemStack.EMPTY) {
                         ItemEntity itemEntity = new ItemEntity(this.getLevel(), center.x, center.y + 1.1, center.z, resultStack);
-                        itemEntity.setDeltaMovement(new Vector3d(0, 0.2, 0));
+                        itemEntity.setDeltaMovement(new Vec3(0, 0.2, 0));
                         this.getLevel().addFreshEntity(itemEntity);
                     }
                     //play sound
-                    this.getLevel().playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING_FINISH, SoundCategory.BLOCKS, 1.5F, 1.0F);
+                    this.getLevel().playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING_FINISH, SoundSource.BLOCKS, 1.5F, 1.0F);
                     //reset and update recipe
                     this.resetRecipe();
                     this.updateRecipe();
@@ -391,9 +388,9 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
      * Called periodically client side by FairyRingBlocks near the player to show effects.
      */
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(World worldIn, Random rand) {
+    public void animateTick(Level worldIn, Random rand) {
         if (this.isMaster()) {
-            Vector3d center = this.getCenter();
+            Vec3 center = this.getCenter();
             boolean runningRecipe = this.recipeTime < this.recipeTimeTotal;
             if (this.mode == FairyRingMode.NORMAL && !runningRecipe) {
                 //normal mode without recipe process: some mycelium particles on ground
@@ -443,7 +440,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
         //this.getWorld().addBlockEvent(this.getPos(), ExtendedMushroomsBlocks.FAIRY_RING, EFFECT_EVENT, 0);
         if (id == EFFECT_EVENT) {
             if (this.getLevel() != null && this.getLevel().isClientSide) {
-                Vector3d center = this.getCenter();
+                Vec3 center = this.getCenter();
                 //TODO some nice effects!
                 this.getLevel().addParticle(ParticleTypes.MYCELIUM, center.x, center.y, center.z, 0.0D, 0.0D, 0.0D);
             }
@@ -533,7 +530,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
         FairyRingTileEntity master = this.getMaster();
         ItemStack stack = ItemStack.EMPTY;
         if (master != null && count > 0 && slot >= 0 && slot < master.items.size()) {
-            stack = ItemStackHelper.removeItem(master.items, slot, count);
+            stack = ContainerHelper.removeItem(master.items, slot, count);
             this.sendUpdates();
         }
         return stack;
@@ -544,7 +541,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     public ItemStack removeItemNoUpdate(int slot) {
         FairyRingTileEntity master = this.getMaster();
         if (master != null && slot < master.items.size()) {
-            return ItemStackHelper.takeItem(master.items, slot);
+            return ContainerHelper.takeItem(master.items, slot);
         }
         return ItemStack.EMPTY;
     }
@@ -558,7 +555,7 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
     }
 
     @Override
-    public boolean stillValid(@Nonnull PlayerEntity playerEntity) {
+    public boolean stillValid(@Nonnull Player playerEntity) {
         return false;
     }
 

@@ -4,12 +4,12 @@ import cech12.extendedmushrooms.MushroomUtils;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
 import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,9 +26,9 @@ public class MixinMushroomBlock {
      * The automatic multiplication still remaining.
      */
     @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
-    public void tickProxy(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    public void tickProxy(BlockState state, ServerLevel world, BlockPos pos, Random random, CallbackInfo ci) {
         //skip growing & multiplication if part of Fairy Ring
-        BlockPos.Mutable mutablePos = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             mutablePos.set(pos).move(direction);
             if (world.getBlockState(mutablePos).getBlock() == ExtendedMushroomsBlocks.FAIRY_RING) {
@@ -51,7 +51,7 @@ public class MixinMushroomBlock {
      * Change grow behaviour to enable mega mushrooms can be grown out of vanilla mushrooms.
      */
     @Inject(at = @At("HEAD"), method = "growMushroom", cancellable = true)
-    public void growProxy(ServerWorld world, BlockPos pos, BlockState state, Random random, CallbackInfoReturnable<Boolean> cir) {
+    public void growProxy(ServerLevel world, BlockPos pos, BlockState state, Random random, CallbackInfoReturnable<Boolean> cir) {
         if (!MushroomUtils.isValidMushroomPosition(world, pos)) {
             cir.setReturnValue(false);
         } else if (state.getBlock() == Blocks.BROWN_MUSHROOM) {

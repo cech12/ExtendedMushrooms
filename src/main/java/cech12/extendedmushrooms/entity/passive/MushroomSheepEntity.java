@@ -5,74 +5,75 @@ import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMyceliumGoal;
 import cech12.extendedmushrooms.item.MushroomType;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.BreedGoal;
-import net.minecraft.entity.ai.goal.EatGrassGoal;
-import net.minecraft.entity.ai.goal.FollowParentGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.EatBlockGoal;
+import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
-public class MushroomSheepEntity extends SheepEntity {
+public class MushroomSheepEntity extends Sheep {
 
-    private static final DataParameter<Boolean> SHEARED = EntityDataManager.defineId(MushroomSheepEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<ItemStack> MUSHROOM_TYPE = EntityDataManager.defineId(MushroomSheepEntity.class, DataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(MushroomSheepEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<ItemStack> MUSHROOM_TYPE = SynchedEntityData.defineId(MushroomSheepEntity.class, EntityDataSerializers.ITEM_STACK);
 
     private int sheepTimer;
     private EatMyceliumGoal eatMyceliumGoal;
 
-    public MushroomSheepEntity(EntityType<? extends SheepEntity> type, World worldIn) {
+    public MushroomSheepEntity(EntityType<? extends Sheep> type, Level worldIn) {
         super(type, worldIn);
     }
 
     /**
      * Replaces the given sheep entity with a mushroom sheep entity.
      */
-    public static void replaceSheep(@Nonnull SheepEntity sheep, @Nullable MushroomType mushroomType) {
+    public static void replaceSheep(@Nonnull Sheep sheep, @Nullable MushroomType mushroomType) {
         sheep.setSpeed(0);
-        World world = sheep.level;
+        Level world = sheep.level;
         //create mushroom sheep
         MushroomSheepEntity mushroomSheep = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(world);
-        if (mushroomSheep != null && world instanceof ServerWorld) {
+        if (mushroomSheep != null && world instanceof ServerLevel) {
             mushroomSheep.copyPosition(sheep);
-            mushroomSheep.finalizeSpawn((ServerWorld)world, world.getCurrentDifficultyAt(sheep.blockPosition()), SpawnReason.CONVERSION, null, null);
+            mushroomSheep.finalizeSpawn((ServerLevel)world, world.getCurrentDifficultyAt(sheep.blockPosition()), MobSpawnType.CONVERSION, null, null);
             mushroomSheep.setAge(sheep.getAge());
             if (sheep.hasCustomName()) {
                 mushroomSheep.setCustomName(sheep.getCustomName());
@@ -85,7 +86,7 @@ public class MushroomSheepEntity extends SheepEntity {
                 mushroomSheep.activateMushroomEffect(mushroomType);
             }
             //replace sheep with new mushroom sheep
-            sheep.remove();
+            sheep.remove(RemovalReason.DISCARDED);
             world.addFreshEntity(mushroomSheep);
             mushroomSheep.playSound(SoundEvents.ZOMBIE_VILLAGER_CONVERTED, 2.0F, 1.0F);
         }
@@ -94,21 +95,21 @@ public class MushroomSheepEntity extends SheepEntity {
     @Override
     protected void registerGoals() {
         //only for super.updateAITasks() to avoid NullPointerException
-        this.eatBlockGoal = new EatGrassGoal(this); //changed field eatGrassGoal in accesstransformer.cfg
+        this.eatBlockGoal = new EatBlockGoal(this); //changed field eatGrassGoal in accesstransformer.cfg
         this.eatMyceliumGoal = new EatMyceliumGoal(this);
-        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         //add temptGoal for each mushroom
-        for (Item mushroom : Tags.Items.MUSHROOMS.getValues()) {
-            this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(mushroom), false));
-        }
+        Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(Tags.Items.MUSHROOMS).forEach(mushroom ->
+                this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(mushroom), false))
+        );
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, this.eatMyceliumGoal);
         // EatMushroomGoal is added via LivingSpawnEvent.EnteringChunk event!
-        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -169,23 +170,23 @@ public class MushroomSheepEntity extends SheepEntity {
     public float getHeadEatAngleScale(float p_70890_1_) {
         if (this.sheepTimer > 4 && this.sheepTimer <= 36) {
             float f = ((float)(this.sheepTimer - 4) - p_70890_1_) / 32.0F;
-            return ((float)Math.PI / 5F) + 0.21991149F * MathHelper.sin(f * 28.7F);
+            return ((float)Math.PI / 5F) + 0.21991149F * Mth.sin(f * 28.7F);
         } else {
-            return this.sheepTimer > 0 ? ((float)Math.PI / 5F) : this.xRot * ((float)Math.PI / 180F);
+            return this.sheepTimer > 0 ? ((float)Math.PI / 5F) : this.getXRot() * ((float)Math.PI / 180F);
         }
     }
 
     @Override
-    public @Nonnull ActionResultType mobInteract(PlayerEntity player, @Nonnull Hand hand) {
-        Item item = player.getItemInHand(hand).getItem();
-        ActionResultType superResult = super.mobInteract(player, hand);
-        if (superResult.consumesAction() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get() && item.is(Tags.Items.MUSHROOMS)) {
+    public @Nonnull InteractionResult mobInteract(Player player, @Nonnull InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        InteractionResult superResult = super.mobInteract(player, hand);
+        if (superResult.consumesAction() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get() && itemStack.is(Tags.Items.MUSHROOMS)) {
             //change mushroom type
-            MushroomType type = MushroomType.byItemOrNull(item);
+            MushroomType type = MushroomType.byItemOrNull(itemStack.getItem());
             if (type != null && type != this.getMushroomType()) {
                 this.setMushroomType(type);
                 this.activateMushroomEffect(type);
-                return ActionResultType.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
         return superResult;
@@ -196,18 +197,18 @@ public class MushroomSheepEntity extends SheepEntity {
      * When a given MushroomType has no effect, nothing happens.
      */
     public void activateMushroomEffect(MushroomType mushroomType) {
-        if (mushroomType.getItem().is(ModTags.ForgeItems.MUSHROOMS_POISONOUS)) {
-            this.addEffect(new EffectInstance(Effects.POISON, 200));
+        if (new ItemStack(mushroomType.getItem()).is(ModTags.ForgeItems.MUSHROOMS_POISONOUS)) {
+            this.addEffect(new MobEffectInstance(MobEffects.POISON, 200));
         }
     }
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.getItem().is(Tags.Items.MUSHROOMS);
+        return stack.is(Tags.Items.MUSHROOMS);
     }
 
     @Override
-    public void addAdditionalSaveData(@Nonnull CompoundNBT compound) {
+    public void addAdditionalSaveData(@Nonnull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("Sheared", this.isSheared());
         compound.putInt("Mushroom", this.getMushroomType().getId());
@@ -217,7 +218,7 @@ public class MushroomSheepEntity extends SheepEntity {
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     @Override
-    public void readAdditionalSaveData(@Nonnull CompoundNBT compound) {
+    public void readAdditionalSaveData(@Nonnull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setSheared(compound.getBoolean("Sheared"));
         this.setMushroomType(MushroomType.byId(compound.getInt("Mushroom")));
@@ -289,7 +290,7 @@ public class MushroomSheepEntity extends SheepEntity {
     }
 
     @Override
-    public SheepEntity getBreedOffspring(@Nonnull ServerWorld world, @Nonnull AgeableEntity ageable) {
+    public Sheep getBreedOffspring(@Nonnull ServerLevel world, @Nonnull AgeableMob ageable) {
         if (ageable instanceof MushroomSheepEntity) {
             // only create a mushroom sheep, when both parents are mushroom sheeps.
             MushroomSheepEntity child = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(world);
@@ -299,9 +300,9 @@ public class MushroomSheepEntity extends SheepEntity {
             }
         } else {
             //when other entity is no mushroom sheep, create a normal sheep with its color.
-            SheepEntity child = EntityType.SHEEP.create(world);
+            Sheep child = EntityType.SHEEP.create(world);
             if (child != null) {
-                child.setColor(((SheepEntity) ageable).getColor());
+                child.setColor(((Sheep) ageable).getColor());
                 return child;
             }
         }
@@ -310,7 +311,7 @@ public class MushroomSheepEntity extends SheepEntity {
 
     @Override
     @Nullable
-    public ILivingEntityData finalizeSpawn(IServerWorld worldIn, @Nonnull DifficultyInstance difficultyIn, @Nonnull SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, @Nonnull DifficultyInstance difficultyIn, @Nonnull MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
         this.setMushroomType(getRandomMushroomType(worldIn.getRandom()));
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
@@ -328,7 +329,7 @@ public class MushroomSheepEntity extends SheepEntity {
 
     @Override
     @Nonnull
-    public List<ItemStack> onSheared(@Nullable PlayerEntity player, @Nonnull ItemStack item, @Nonnull World world, @Nonnull BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(@Nullable Player player, @Nonnull ItemStack item, @Nonnull Level world, @Nonnull BlockPos pos, int fortune) {
         List<ItemStack> ret = new ArrayList<>();
         if (!this.level.isClientSide) {
             this.setSheared(true);

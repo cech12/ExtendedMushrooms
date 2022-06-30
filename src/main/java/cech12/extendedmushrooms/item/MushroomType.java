@@ -2,21 +2,21 @@ package cech12.extendedmushrooms.item;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Supplier;
 
-public enum MushroomType implements IStringSerializable {
+public enum MushroomType implements StringRepresentable {
 
     BROWN_MUSHROOM(0,
             ()->Items.BROWN_MUSHROOM,
@@ -30,7 +30,7 @@ public enum MushroomType implements IStringSerializable {
             ()->ExtendedMushroomsBlocks.GLOWSHROOM,
             ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP,
             MushroomWoodType.GLOWSHROOM, DyeColor.BLUE,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightValue(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.defaultBlockState(), null, null)),
+            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightEmission(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.defaultBlockState(), null, null)),
     POISONOUS_MUSHROOM(3,
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM,
             ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP,
@@ -47,17 +47,17 @@ public enum MushroomType implements IStringSerializable {
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 
     private final int id;
-    private final Supplier<IItemProvider> item;
+    private final Supplier<ItemLike> item;
     private final Supplier<Block> capBlock;
     private final MushroomWoodType woodType;
     private final DyeColor color;
     private final Supplier<Integer> lightValue;
 
-    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color) {
+    MushroomType(int id, Supplier<ItemLike> item, Supplier<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color) {
         this(id, item, capBlock, woodType, color, () -> 0);
     }
 
-    MushroomType(int id, Supplier<IItemProvider> item, Supplier<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
+    MushroomType(int id, Supplier<ItemLike> item, Supplier<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
         this.id = id;
         this.item = item;
         this.capBlock = capBlock;

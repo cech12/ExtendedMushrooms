@@ -3,36 +3,34 @@ package cech12.extendedmushrooms.entity.ai.goal;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import cech12.extendedmushrooms.item.MushroomType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.ai.goal.Goal.Flag;
-
 public class EatMushroomGoal extends Goal {
 
-    private final MobEntity eaterEntity;
-    private final World entityWorld;
+    private final Mob eaterEntity;
+    private final Level entityWorld;
 
     /**
      * Number of ticks since the entity started to eat a mushroom
      */
     int eatingTimer;
 
-    public EatMushroomGoal(MobEntity eaterEntity) {
+    public EatMushroomGoal(Mob eaterEntity) {
         this.eaterEntity = eaterEntity;
         this.entityWorld = eaterEntity.level;
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
     }
 
     private boolean isEntityOnMushroom() {
-        return this.entityWorld.getBlockState(this.eaterEntity.blockPosition()).getBlock().asItem().is(Tags.Items.MUSHROOMS);
+        return this.entityWorld.getBlockState(this.eaterEntity.blockPosition()).getBlock().asItem().getDefaultInstance().is(Tags.Items.MUSHROOMS);
     }
 
     /**
@@ -90,13 +88,12 @@ public class EatMushroomGoal extends Goal {
                 }
                 this.eaterEntity.ate();
                 if (Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get()) {
-                    if (this.eaterEntity instanceof SheepEntity && mushroomType != null) {
-                        if (this.eaterEntity instanceof MushroomSheepEntity) {
-                            MushroomSheepEntity mushroomSheep = (MushroomSheepEntity) this.eaterEntity;
+                    if (this.eaterEntity instanceof Sheep && mushroomType != null) {
+                        if (this.eaterEntity instanceof MushroomSheepEntity mushroomSheep) {
                             mushroomSheep.setMushroomType(mushroomType);
                             mushroomSheep.activateMushroomEffect(mushroomType);
                         } else {
-                            MushroomSheepEntity.replaceSheep((SheepEntity) this.eaterEntity, mushroomType);
+                            MushroomSheepEntity.replaceSheep((Sheep) this.eaterEntity, mushroomType);
                         }
                     }
                 }

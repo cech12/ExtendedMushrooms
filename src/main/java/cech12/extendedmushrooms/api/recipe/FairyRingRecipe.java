@@ -5,19 +5,19 @@ import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
+public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
 
     public static final Serializer SERIALIZER = new Serializer();
 
@@ -53,13 +53,13 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
 
     @Nonnull
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return SERIALIZER;
     }
 
     @Nonnull
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ExtendedMushroomsRecipeTypes.FAIRY_RING;
     }
 
@@ -109,7 +109,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
         return new ItemStack(Items.RED_MUSHROOM);
     }
 
-    public boolean isValid(FairyRingMode mode, IInventory inv) {
+    public boolean isValid(FairyRingMode mode, Container inv) {
         // inventory must have a stack limit of 1
         if (inv.getMaxStackSize() != 1) return false;
         // actual mode must fit to this recipe
@@ -152,7 +152,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
      */
     @Deprecated
     @Override
-    public boolean matches(@Nonnull IInventory inv, @Nonnull World worldIn) {
+    public boolean matches(@Nonnull Container inv, @Nonnull Level worldIn) {
         // This method is ignored. - isValid is used.
         return false;
     }
@@ -163,12 +163,12 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
     @Nonnull
     @Deprecated
     @Override
-    public ItemStack assemble(@Nonnull IInventory inv) {
+    public ItemStack assemble(@Nonnull Container inv) {
         // This method is ignored. - getResultItemStack is used.
         return this.resultStack.copy();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<FairyRingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FairyRingRecipe> {
 
         Serializer() {
             this.setRegistryName(new ResourceLocation(ExtendedMushrooms.MOD_ID, "fairy_ring_recipe"));
@@ -179,27 +179,27 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
             //deserialize required mode
             FairyRingMode requiredMode = readMode(json, FairyRingMode.NORMAL);
             //deserialize ingredients
-            NonNullList<Ingredient> ingredients = readIngredients(JSONUtils.getAsJsonArray(json, "ingredients"));
+            NonNullList<Ingredient> ingredients = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
             if (ingredients.isEmpty()) {
                 throw new JsonParseException("No ingredients for fairy ring recipe");
             } else if (ingredients.size() > FairyRingTileEntity.INVENTORY_SIZE) {
                 throw new JsonParseException("Too many ingredients for fairy ring recipe the max is " + FairyRingTileEntity.INVENTORY_SIZE);
             }
             //deserialize recipe time
-            int time = JSONUtils.getAsInt(json, "recipeTime");
+            int time = GsonHelper.getAsInt(json, "recipeTime");
             //deserialize result
-            JsonObject resultJson = JSONUtils.getAsJsonObject(json, "result");
+            JsonObject resultJson = GsonHelper.getAsJsonObject(json, "result");
             //deserialize result mode
             FairyRingMode resultMode = readMode(resultJson, requiredMode);
             //deserialize result item stack
             ItemStack resultStack = ItemStack.EMPTY;
-            if (JSONUtils.isValidNode(resultJson, "item")) {
-                resultStack = ShapedRecipe.itemFromJson(resultJson);
+            if (GsonHelper.isValidNode(resultJson, "item")) {
+                resultStack = ShapedRecipe.itemStackFromJson(resultJson);
             }
             return new FairyRingRecipe(recipeId, requiredMode, ingredients, time, resultMode, resultStack);
         }
 
-        public FairyRingRecipe fromNetwork(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
+        public FairyRingRecipe fromNetwork(@Nonnull ResourceLocation recipeId, FriendlyByteBuf buffer) {
             FairyRingMode requiredMode = FairyRingMode.byName(buffer.readUtf(32767));
             int size = buffer.readVarInt();
             NonNullList<Ingredient> ingredients = NonNullList.withSize(size, Ingredient.EMPTY);
@@ -210,7 +210,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
             return new FairyRingRecipe(recipeId, requiredMode, ingredients, time, resultMode, resultStack);
         }
 
-        public void toNetwork(PacketBuffer buffer, FairyRingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, FairyRingRecipe recipe) {
             buffer.writeUtf(recipe.requiredMode.getName());
             buffer.writeVarInt(recipe.ingredients.size());
             for (Ingredient ingredient : recipe.ingredients) {
@@ -224,7 +224,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, IRecipe<IInventory> {
         private static FairyRingMode readMode(@Nonnull JsonObject jsonObject, @Nonnull FairyRingMode defaultMode) {
             FairyRingMode mode = defaultMode;
             try {
-                String modeString = JSONUtils.getAsString(jsonObject, "mode");
+                String modeString = GsonHelper.getAsString(jsonObject, "mode");
                 mode = FairyRingMode.byName(modeString);
                 if (mode == null) {
                     throw new JsonParseException("Mode " + modeString + " does not exist");

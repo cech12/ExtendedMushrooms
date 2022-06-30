@@ -1,22 +1,22 @@
 package cech12.extendedmushrooms.item.crafting;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
-import net.minecraft.tags.ITag;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 
 import javax.annotation.Nonnull;
 
 public class MushroomBrewingRecipe implements IBrewingRecipe {
 
-    ITag<Item> mushroomTag;
+    TagKey<Item> mushroomTag;
     Potion result;
 
-    public MushroomBrewingRecipe(ITag<Item> mushroomTag, Potion result) {
+    public MushroomBrewingRecipe(TagKey<Item> mushroomTag, Potion result) {
         this.mushroomTag = mushroomTag;
         this.result = result;
     }
@@ -28,7 +28,7 @@ public class MushroomBrewingRecipe implements IBrewingRecipe {
 
     @Override
     public boolean isIngredient(ItemStack ingredient) {
-        return ingredient.getItem().is(this.mushroomTag);
+        return ingredient.is(this.mushroomTag);
     }
 
     @Nonnull

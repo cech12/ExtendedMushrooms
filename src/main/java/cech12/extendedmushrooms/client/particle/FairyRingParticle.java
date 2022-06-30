@@ -1,21 +1,21 @@
 package cech12.extendedmushrooms.client.particle;
 
-import net.minecraft.client.particle.IAnimatedSprite;
-import net.minecraft.client.particle.IParticleFactory;
-import net.minecraft.client.particle.IParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.SpriteTexturedParticle;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particles.BasicParticleType;
+import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
-public class FairyRingParticle extends SpriteTexturedParticle {
+public class FairyRingParticle extends TextureSheetParticle {
 
-    protected FairyRingParticle(ClientWorld world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, double maxAge, IAnimatedSprite sprite) {
+    protected FairyRingParticle(ClientLevel world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, double maxAge, SpriteSet sprite) {
         super(world, posX, posY, posZ);
         this.pickSprite(sprite);
         this.xd = motionX;
@@ -27,8 +27,8 @@ public class FairyRingParticle extends SpriteTexturedParticle {
 
     @Nonnull
     @Override
-    public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
 
@@ -59,14 +59,14 @@ public class FairyRingParticle extends SpriteTexturedParticle {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class Factory implements IParticleFactory<BasicParticleType> {
-        private final IAnimatedSprite spriteSet;
+    public static class Factory implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet spriteSet;
 
-        public Factory(IAnimatedSprite p_i51045_1_) {
+        public Factory(SpriteSet p_i51045_1_) {
             this.spriteSet = p_i51045_1_;
         }
 
-        public Particle createParticle(@Nonnull BasicParticleType typeIn, @Nonnull ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(@Nonnull SimpleParticleType typeIn, @Nonnull ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new FairyRingParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, 1.0D, this.spriteSet);
         }
     }

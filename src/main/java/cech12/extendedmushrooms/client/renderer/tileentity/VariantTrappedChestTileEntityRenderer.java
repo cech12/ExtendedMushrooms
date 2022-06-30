@@ -3,15 +3,15 @@ package cech12.extendedmushrooms.client.renderer.tileentity;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import cech12.extendedmushrooms.tileentity.VariantTrappedChestTileEntity;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.state.properties.ChestType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.level.block.state.properties.ChestType;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
 public class VariantTrappedChestTileEntityRenderer extends AbstractVariantChestTileEntityRenderer<VariantTrappedChestTileEntity> {
 
-    public VariantTrappedChestTileEntityRenderer(TileEntityRendererDispatcher dispatcher) {
+    public VariantTrappedChestTileEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
     }
 

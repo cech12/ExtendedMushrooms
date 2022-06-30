@@ -1,14 +1,16 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.MushroomUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -19,7 +21,7 @@ public abstract class MegaMushroom extends BigMushroom {
     }
 
     @Override
-    public boolean growMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
+    public boolean growMushroom(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
         if (!MushroomUtils.isValidMushroomPosition(world, blockPos)) {
             return false;
         }
@@ -34,10 +36,10 @@ public abstract class MegaMushroom extends BigMushroom {
     }
 
     @Nonnull
-    protected abstract ConfiguredFeature<?, ?> getMegaMushroomFeature();
+    protected abstract Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getMegaMushroomFeature();
 
-    protected boolean growMegaMushroom(ServerWorld world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random, int x, int z) {
-        ConfiguredFeature<?, ?> feature = this.getMegaMushroomFeature();
+    protected boolean growMegaMushroom(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random, int x, int z) {
+        ConfiguredFeature<?, ?> feature = this.getMegaMushroomFeature().value();
         BlockState lvt_9_1_ = Blocks.AIR.defaultBlockState();
         world.setBlock(blockPos.offset(x, 0, z), lvt_9_1_, 4);
         world.setBlock(blockPos.offset(x + 1, 0, z), lvt_9_1_, 4);
@@ -54,7 +56,7 @@ public abstract class MegaMushroom extends BigMushroom {
         }
     }
 
-    public static boolean canMegaMushroomSpawnAt(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, int x, int z) {
+    public static boolean canMegaMushroomSpawnAt(BlockState blockState, BlockGetter blockReader, BlockPos blockPos, int x, int z) {
         Block block = blockState.getBlock();
         return block == blockReader.getBlockState(blockPos.offset(x, 0, z)).getBlock() && block == blockReader.getBlockState(blockPos.offset(x + 1, 0, z)).getBlock() && block == blockReader.getBlockState(blockPos.offset(x, 0, z + 1)).getBlock() && block == blockReader.getBlockState(blockPos.offset(x + 1, 0, z + 1)).getBlock();
     }

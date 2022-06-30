@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   push:
     branches: [ "*" ]
-    tags: ["1.16*"]
+    tags: ["1.18*"]
   pull_request:
     branches: [ "*" ]
 
@@ -15,20 +15,20 @@ jobs:
     name: Build
     uses: cech12/MinecraftModActions/.github/workflows/build.yml@main
     with:
-      java-version: 8
+      java-version: 17
   codeql:
     needs: build
     name: CodeQL
     uses: cech12/MinecraftModActions/.github/workflows/codeql-analysis.yml@main
     with:
-      java-version: 8
+      java-version: 17
   publish-github:
     needs: codeql
     if: startsWith(github.ref, 'refs/tags/')
     name: Publish Github
     uses: cech12/MinecraftModActions/.github/workflows/publish-github.yml@main
     with:
-      java-version: 8
+      java-version: 17
       mod-name: Extended Mushrooms
       mod-id: extendedmushrooms
     secrets:
@@ -39,6 +39,6 @@ jobs:
     name: Publish Curseforge
     uses: cech12/MinecraftModActions/.github/workflows/publish-curseforge.yml@main
     with:
-      java-version: 8
+      java-version: 17
     secrets:
       curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}

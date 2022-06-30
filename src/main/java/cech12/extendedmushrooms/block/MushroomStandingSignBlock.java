@@ -1,29 +1,23 @@
 package cech12.extendedmushrooms.block;
 
 import cech12.extendedmushrooms.tileentity.MushroomSignTileEntity;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.StandingSignBlock;
-import net.minecraft.block.WoodType;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import javax.annotation.Nonnull;
 
 public class MushroomStandingSignBlock extends StandingSignBlock {
 
-    public MushroomStandingSignBlock(AbstractBlock.Properties propertiesIn, WoodType woodTypeIn) {
+    public MushroomStandingSignBlock(BlockBehaviour.Properties propertiesIn, WoodType woodTypeIn) {
         super(propertiesIn, woodTypeIn);
     }
 
     @Override
-    public boolean hasTileEntity(BlockState stateIn) {
-        return true;
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new MushroomSignTileEntity(pos, state);
     }
-
-    @Override
-    public TileEntity newBlockEntity(@Nonnull IBlockReader worldIn) {
-        return new MushroomSignTileEntity();
-    }
-
 }

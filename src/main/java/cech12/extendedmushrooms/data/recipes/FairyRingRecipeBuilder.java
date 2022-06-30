@@ -4,14 +4,13 @@ import cech12.extendedmushrooms.api.recipe.FairyRingMode;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.ShapelessRecipeBuilder;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -29,7 +28,7 @@ public class FairyRingRecipeBuilder {
     private int recipeTime;
     private FairyRingMode resultMode;
 
-    private FairyRingRecipeBuilder(IItemProvider result, int resultCount, FairyRingMode requiredMode) {
+    private FairyRingRecipeBuilder(ItemLike result, int resultCount, FairyRingMode requiredMode) {
         this.result = result.asItem();
         this.resultCount = resultCount;
         this.resultMode = requiredMode;
@@ -38,29 +37,29 @@ public class FairyRingRecipeBuilder {
         this.recipeTime = 200;
     }
 
-    public static FairyRingRecipeBuilder normal(IItemProvider result, int resultCount) {
+    public static FairyRingRecipeBuilder normal(ItemLike result, int resultCount) {
         return new FairyRingRecipeBuilder(result, resultCount, FairyRingMode.NORMAL);
     }
 
-    public static FairyRingRecipeBuilder fairy(IItemProvider result, int resultCount) {
+    public static FairyRingRecipeBuilder fairy(ItemLike result, int resultCount) {
         return new FairyRingRecipeBuilder(result, resultCount, FairyRingMode.FAIRY);
     }
 
-    public static FairyRingRecipeBuilder witch(IItemProvider result, int resultCount) {
+    public static FairyRingRecipeBuilder witch(ItemLike result, int resultCount) {
         return new FairyRingRecipeBuilder(result, resultCount, FairyRingMode.WITCH);
     }
 
 
 
-    public FairyRingRecipeBuilder requires(ITag<Item> tag) {
+    public FairyRingRecipeBuilder requires(TagKey<Item> tag) {
         return this.requires(Ingredient.of(tag));
     }
 
-    public FairyRingRecipeBuilder requires(IItemProvider iItemProvider) {
+    public FairyRingRecipeBuilder requires(ItemLike iItemProvider) {
         return this.requires(iItemProvider, 1);
     }
 
-    public FairyRingRecipeBuilder requires(IItemProvider itemProvider, int count) {
+    public FairyRingRecipeBuilder requires(ItemLike itemProvider, int count) {
         return this.requires(Ingredient.of(itemProvider), count);
     }
 
@@ -86,11 +85,11 @@ public class FairyRingRecipeBuilder {
         return this;
     }
 
-    public void save(Consumer<IFinishedRecipe> consumer) {
+    public void save(Consumer<FinishedRecipe> consumer) {
         this.save(consumer, ForgeRegistries.ITEMS.getKey(this.result));
     }
 
-    public void save(Consumer<IFinishedRecipe> consumer, String location) {
+    public void save(Consumer<FinishedRecipe> consumer, String location) {
         ResourceLocation resourceLocation = new ResourceLocation(location);
         if (resourceLocation.equals(ForgeRegistries.ITEMS.getKey(this.result))) {
             throw new IllegalStateException("Recipe " + resourceLocation + " should remove its 'save' argument");
@@ -99,11 +98,11 @@ public class FairyRingRecipeBuilder {
         }
     }
 
-    public void save(Consumer<IFinishedRecipe> consumer, ResourceLocation resourceLocation) {
+    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation resourceLocation) {
         consumer.accept(new Result(resourceLocation, this.result, this.resultCount, this.resultMode, this.ingredients, this.requiredMode, this.recipeTime));
     }
 
-    public static class Result implements IFinishedRecipe {
+    public static class Result implements FinishedRecipe {
         private final ResourceLocation resourceLocation;
         private final Item result;
         private final int resultCount;
@@ -147,7 +146,7 @@ public class FairyRingRecipeBuilder {
         }
 
         @Nonnull
-        public IRecipeSerializer<?> getType() {
+        public RecipeSerializer<?> getType() {
             return FairyRingRecipe.SERIALIZER;
         }
 

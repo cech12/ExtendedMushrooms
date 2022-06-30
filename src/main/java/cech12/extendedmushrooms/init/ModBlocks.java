@@ -14,30 +14,30 @@ import cech12.extendedmushrooms.block.mushrooms.SlimeFungus;
 import cech12.extendedmushrooms.compat.ModCompat;
 import cech12.extendedmushrooms.item.MushroomType;
 import cech12.extendedmushrooms.item.MushroomWoodType;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.potion.Effects;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,121 +71,121 @@ public final class ModBlocks {
 
         FAIRY_RING = registerBlock("fairy_ring", new FairyRingBlock());
 
-        INFESTED_GRASS = registerBlock("infested_grass", ItemGroup.TAB_DECORATIONS, new InfestedGrassBlock(Block.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS)));
-        INFESTED_FLOWER = registerBlock("infested_flower", ItemGroup.TAB_DECORATIONS, new InfestedFlowerBlock(Effects.MOVEMENT_SLOWDOWN, 9, Block.Properties.of(Material.PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS)));
+        INFESTED_GRASS = registerBlock("infested_grass", CreativeModeTab.TAB_DECORATIONS, new InfestedGrassBlock(Block.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS)));
+        INFESTED_FLOWER = registerBlock("infested_flower", CreativeModeTab.TAB_DECORATIONS, new InfestedFlowerBlock(MobEffects.MOVEMENT_SLOWDOWN, 9, Block.Properties.of(Material.PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS)));
         INFESTED_FLOWER_POTTED = registerBlock("infested_flower_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> INFESTED_FLOWER, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(INFESTED_FLOWER.getRegistryName()), () -> INFESTED_FLOWER_POTTED);
 
-        MUSHROOM_BOOKSHELF = registerCompatBlock("mushroom_bookshelf", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
-        MUSHROOM_BUTTON = registerBlock("mushroom_button", ItemGroup.TAB_REDSTONE, new MushroomWoodButtonBlock());
-        MUSHROOM_CHEST = registerCompatBlock("mushroom_chest", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.MUSHROOM, Block.Properties.copy(Blocks.CHEST)));
-        MUSHROOM_CHEST_TRAPPED = registerCompatBlock("mushroom_chest_trapped", ItemGroup.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.MUSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
-        MUSHROOM_DOOR = registerBlock("mushroom_door", ItemGroup.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(3.0F).sound(SoundType.WOOD)));
-        MUSHROOM_FENCE = registerBlock("mushroom_fence", ItemGroup.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        MUSHROOM_FENCE_GATE = registerBlock("mushroom_fence_gate", ItemGroup.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        MUSHROOM_LADDER = registerCompatBlock("mushroom_ladder", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER)));
-        MUSHROOM_PLANKS = registerBlock("mushroom_planks", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(0.2F).sound(SoundType.WOOD)));
-        MUSHROOM_PRESSURE_PLATE = registerBlock("mushroom_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomWoodPressurePlateBlock());
-        MUSHROOM_SLAB = registerBlock("mushroom_slab", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        MUSHROOM_STAIRS = registerBlock("mushroom_stairs", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> MUSHROOM_PLANKS.defaultBlockState(), Block.Properties.copy(MUSHROOM_PLANKS)));
-        MUSHROOM_TRAPDOOR = registerBlock("mushroom_trapdoor", ItemGroup.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(3.0F).sound(SoundType.WOOD)));
-        STRIPPED_MUSHROOM_STEM = registerBlock("stripped_mushroom_stem", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.MUSHROOM, Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        MUSHROOM_BOOKSHELF = registerCompatBlock("mushroom_bookshelf", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
+        MUSHROOM_BUTTON = registerBlock("mushroom_button", CreativeModeTab.TAB_REDSTONE, new MushroomWoodButtonBlock());
+        MUSHROOM_CHEST = registerCompatBlock("mushroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.MUSHROOM, Block.Properties.copy(Blocks.CHEST)));
+        MUSHROOM_CHEST_TRAPPED = registerCompatBlock("mushroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.MUSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
+        MUSHROOM_DOOR = registerBlock("mushroom_door", CreativeModeTab.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_FENCE = registerBlock("mushroom_fence", CreativeModeTab.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_FENCE_GATE = registerBlock("mushroom_fence_gate", CreativeModeTab.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_LADDER = registerCompatBlock("mushroom_ladder", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER)));
+        MUSHROOM_PLANKS = registerBlock("mushroom_planks", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(0.2F).sound(SoundType.WOOD)));
+        MUSHROOM_PRESSURE_PLATE = registerBlock("mushroom_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomWoodPressurePlateBlock());
+        MUSHROOM_SLAB = registerBlock("mushroom_slab", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_STAIRS = registerBlock("mushroom_stairs", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> MUSHROOM_PLANKS.defaultBlockState(), Block.Properties.copy(MUSHROOM_PLANKS)));
+        MUSHROOM_TRAPDOOR = registerBlock("mushroom_trapdoor", CreativeModeTab.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(3.0F).sound(SoundType.WOOD)));
+        STRIPPED_MUSHROOM_STEM = registerBlock("stripped_mushroom_stem", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.MUSHROOM, Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
         BLOCK_STRIPPING_MAP.put(Blocks.MUSHROOM_STEM, STRIPPED_MUSHROOM_STEM);
-        MUSHROOM_VERTICAL_PLANKS = registerCompatBlock("mushroom_vertical_planks", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-        MUSHROOM_VERTICAL_SLAB = registerCompatBlock("mushroom_vertical_slab", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        MUSHROOM_VERTICAL_PLANKS = registerCompatBlock("mushroom_vertical_planks", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        MUSHROOM_VERTICAL_SLAB = registerCompatBlock("mushroom_vertical_slab", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
 
-        BROWN_MUSHROOM_BUTTON = registerBlock("brown_mushroom_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock());
-        BROWN_MUSHROOM_CARPET = registerBlock("brown_mushroom_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.BROWN, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_BROWN).strength(0.1F).sound(SoundType.WOOL)));
-        BROWN_MUSHROOM_PRESSURE_PLATE = registerBlock("brown_mushroom_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
-        RED_MUSHROOM_BUTTON = registerBlock("red_mushroom_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock());
-        RED_MUSHROOM_CARPET = registerBlock("red_mushroom_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.RED, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_RED).strength(0.1F).sound(SoundType.WOOL)));
-        RED_MUSHROOM_PRESSURE_PLATE = registerBlock("red_mushroom_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
+        BROWN_MUSHROOM_BUTTON = registerBlock("brown_mushroom_button", CreativeModeTab.TAB_REDSTONE, new MushroomCapButtonBlock());
+        BROWN_MUSHROOM_CARPET = registerBlock("brown_mushroom_carpet", CreativeModeTab.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.BROWN, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_BROWN).strength(0.1F).sound(SoundType.WOOL)));
+        BROWN_MUSHROOM_PRESSURE_PLATE = registerBlock("brown_mushroom_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
+        RED_MUSHROOM_BUTTON = registerBlock("red_mushroom_button", CreativeModeTab.TAB_REDSTONE, new MushroomCapButtonBlock());
+        RED_MUSHROOM_CARPET = registerBlock("red_mushroom_carpet", CreativeModeTab.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.RED, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_RED).strength(0.1F).sound(SoundType.WOOL)));
+        RED_MUSHROOM_PRESSURE_PLATE = registerBlock("red_mushroom_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
 
-        GLOWSHROOM = registerBlock("glowshroom", ItemGroup.TAB_DECORATIONS, new EMMushroomBlock(new Glowshroom(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS).lightLevel((state) -> 8).hasPostProcess((a,b,c)->true)));
+        GLOWSHROOM = registerBlock("glowshroom", CreativeModeTab.TAB_DECORATIONS, new EMMushroomBlock(new Glowshroom(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS).lightLevel((state) -> 8).hasPostProcess((a,b,c)->true)));
         GLOWSHROOM_POTTED = registerBlock("glowshroom_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> GLOWSHROOM, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion().lightLevel((state) -> 8)));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(GLOWSHROOM.getRegistryName()), () -> GLOWSHROOM_POTTED);
-        GLOWSHROOM_CAP = registerBlock("glowshroom_cap", ItemGroup.TAB_DECORATIONS, new GlowshroomCap(MushroomType.GLOWSHROOM, Block.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE).strength(0.2F).sound(SoundType.WOOL).lightLevel((state) -> 8)));
-        GLOWSHROOM_STEM = registerBlock("glowshroom_stem", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_STEM_STRIPPED = registerBlock("glowshroom_stem_stripped", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_CAP = registerBlock("glowshroom_cap", CreativeModeTab.TAB_DECORATIONS, new GlowshroomCap(MushroomType.GLOWSHROOM, Block.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE).strength(0.2F).sound(SoundType.WOOL).lightLevel((state) -> 8)));
+        GLOWSHROOM_STEM = registerBlock("glowshroom_stem", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_STEM_STRIPPED = registerBlock("glowshroom_stem_stripped", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
         BLOCK_STRIPPING_MAP.put(GLOWSHROOM_STEM, GLOWSHROOM_STEM_STRIPPED);
-        GLOWSHROOM_BOOKSHELF = registerCompatBlock("glowshroom_bookshelf", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF).lightLevel((state) -> 8)));
-        GLOWSHROOM_BUTTON = registerBlock("glowshroom_button", ItemGroup.TAB_REDSTONE, new MushroomWoodButtonBlock(8));
-        GLOWSHROOM_CHEST = registerCompatBlock("glowshroom_chest", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.copy(Blocks.CHEST).lightLevel((state) -> 8)));
-        GLOWSHROOM_CHEST_TRAPPED = registerCompatBlock("glowshroom_chest_trapped", ItemGroup.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST).lightLevel((state) -> 8)));
-        GLOWSHROOM_DOOR = registerBlock("glowshroom_door", ItemGroup.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_FENCE = registerBlock("glowshroom_fence", ItemGroup.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_FENCE_GATE = registerBlock("glowshroom_fence_gate", ItemGroup.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_LADDER = registerCompatBlock("glowshroom_ladder", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER).lightLevel((state) -> 8)));
-        GLOWSHROOM_PLANKS = registerBlock("glowshroom_planks", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_PRESSURE_PLATE = registerBlock("glowshroom_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomWoodPressurePlateBlock(8));
-        GLOWSHROOM_SLAB = registerBlock("glowshroom_slab", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_STAIRS = registerBlock("glowshroom_stairs", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> GLOWSHROOM_PLANKS.defaultBlockState(), Block.Properties.copy(GLOWSHROOM_PLANKS)));
-        GLOWSHROOM_TRAPDOOR = registerBlock("glowshroom_trapdoor", ItemGroup.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_VERTICAL_PLANKS = registerCompatBlock("glowshroom_vertical_planks", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_VERTICAL_SLAB = registerCompatBlock("glowshroom_vertical_slab", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
-        GLOWSHROOM_CAP_BUTTON = registerBlock("glowshroom_cap_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock(8));
-        GLOWSHROOM_CAP_CARPET = registerBlock("glowshroom_cap_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.BLUE, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_BLUE).strength(0.1F).sound(SoundType.WOOL).lightLevel((state) -> 8)));
-        GLOWSHROOM_CAP_PRESSURE_PLATE = registerBlock("glowshroom_cap_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock(8));
+        GLOWSHROOM_BOOKSHELF = registerCompatBlock("glowshroom_bookshelf", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF).lightLevel((state) -> 8)));
+        GLOWSHROOM_BUTTON = registerBlock("glowshroom_button", CreativeModeTab.TAB_REDSTONE, new MushroomWoodButtonBlock(8));
+        GLOWSHROOM_CHEST = registerCompatBlock("glowshroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.copy(Blocks.CHEST).lightLevel((state) -> 8)));
+        GLOWSHROOM_CHEST_TRAPPED = registerCompatBlock("glowshroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST).lightLevel((state) -> 8)));
+        GLOWSHROOM_DOOR = registerBlock("glowshroom_door", CreativeModeTab.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_FENCE = registerBlock("glowshroom_fence", CreativeModeTab.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_FENCE_GATE = registerBlock("glowshroom_fence_gate", CreativeModeTab.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_LADDER = registerCompatBlock("glowshroom_ladder", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER).lightLevel((state) -> 8)));
+        GLOWSHROOM_PLANKS = registerBlock("glowshroom_planks", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_PRESSURE_PLATE = registerBlock("glowshroom_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomWoodPressurePlateBlock(8));
+        GLOWSHROOM_SLAB = registerBlock("glowshroom_slab", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_STAIRS = registerBlock("glowshroom_stairs", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> GLOWSHROOM_PLANKS.defaultBlockState(), Block.Properties.copy(GLOWSHROOM_PLANKS)));
+        GLOWSHROOM_TRAPDOOR = registerBlock("glowshroom_trapdoor", CreativeModeTab.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_VERTICAL_PLANKS = registerCompatBlock("glowshroom_vertical_planks", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_VERTICAL_SLAB = registerCompatBlock("glowshroom_vertical_slab", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
+        GLOWSHROOM_CAP_BUTTON = registerBlock("glowshroom_cap_button", CreativeModeTab.TAB_REDSTONE, new MushroomCapButtonBlock(8));
+        GLOWSHROOM_CAP_CARPET = registerBlock("glowshroom_cap_carpet", CreativeModeTab.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.BLUE, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_BLUE).strength(0.1F).sound(SoundType.WOOL).lightLevel((state) -> 8)));
+        GLOWSHROOM_CAP_PRESSURE_PLATE = registerBlock("glowshroom_cap_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomCapPressurePlateBlock(8));
 
-        POISONOUS_MUSHROOM = registerBlock("poisonous_mushroom", ItemGroup.TAB_DECORATIONS, new PoisonousMushroomBlock(Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS).hasPostProcess((a,b,c)->true)));
+        POISONOUS_MUSHROOM = registerBlock("poisonous_mushroom", CreativeModeTab.TAB_DECORATIONS, new PoisonousMushroomBlock(Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS).hasPostProcess((a,b,c)->true)));
         POISONOUS_MUSHROOM_POTTED = registerBlock("poisonous_mushroom_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> POISONOUS_MUSHROOM, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(POISONOUS_MUSHROOM.getRegistryName()), () -> POISONOUS_MUSHROOM_POTTED);
-        POISONOUS_MUSHROOM_CAP = registerBlock("poisonous_mushroom_cap", ItemGroup.TAB_DECORATIONS, new PoisonousMushroomCap(MushroomType.POISONOUS_MUSHROOM, Block.Properties.of(Material.WOOD, MaterialColor.COLOR_PURPLE).strength(0.2F).sound(SoundType.WOOL)));
-        POISONOUS_MUSHROOM_STEM = registerBlock("poisonous_mushroom_stem", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-        POISONOUS_MUSHROOM_STEM_STRIPPED = registerBlock("poisonous_mushroom_stem_stripped", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_CAP = registerBlock("poisonous_mushroom_cap", CreativeModeTab.TAB_DECORATIONS, new PoisonousMushroomCap(MushroomType.POISONOUS_MUSHROOM, Block.Properties.of(Material.WOOD, MaterialColor.COLOR_PURPLE).strength(0.2F).sound(SoundType.WOOL)));
+        POISONOUS_MUSHROOM_STEM = registerBlock("poisonous_mushroom_stem", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_STEM_STRIPPED = registerBlock("poisonous_mushroom_stem_stripped", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
         BLOCK_STRIPPING_MAP.put(POISONOUS_MUSHROOM_STEM, POISONOUS_MUSHROOM_STEM_STRIPPED);
-        POISONOUS_MUSHROOM_BOOKSHELF = registerCompatBlock("poisonous_mushroom_bookshelf", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
-        POISONOUS_MUSHROOM_BUTTON = registerBlock("poisonous_mushroom_button", ItemGroup.TAB_REDSTONE, new MushroomWoodButtonBlock());
-        POISONOUS_MUSHROOM_CHEST = registerCompatBlock("poisonous_mushroom_chest", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.copy(Blocks.CHEST)));
-        POISONOUS_MUSHROOM_CHEST_TRAPPED = registerCompatBlock("poisonous_mushroom_chest_trapped", ItemGroup.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
-        POISONOUS_MUSHROOM_DOOR = registerBlock("poisonous_mushroom_door", ItemGroup.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
-        POISONOUS_MUSHROOM_FENCE = registerBlock("poisonous_mushroom_fence", ItemGroup.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        POISONOUS_MUSHROOM_FENCE_GATE = registerBlock("poisonous_mushroom_fence_gate", ItemGroup.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        POISONOUS_MUSHROOM_LADDER = registerCompatBlock("poisonous_mushroom_ladder", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER)));
-        POISONOUS_MUSHROOM_PLANKS = registerBlock("poisonous_mushroom_planks", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-        POISONOUS_MUSHROOM_PRESSURE_PLATE = registerBlock("poisonous_mushroom_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomWoodPressurePlateBlock());
-        POISONOUS_MUSHROOM_SLAB = registerBlock("poisonous_mushroom_slab", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.copy(POISONOUS_MUSHROOM_PLANKS)));
-        POISONOUS_MUSHROOM_STAIRS = registerBlock("poisonous_mushroom_stairs", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> POISONOUS_MUSHROOM_PLANKS.defaultBlockState(), Block.Properties.copy(POISONOUS_MUSHROOM_PLANKS)));
-        POISONOUS_MUSHROOM_TRAPDOOR = registerBlock("poisonous_mushroom_trapdoor", ItemGroup.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
-        POISONOUS_MUSHROOM_VERTICAL_PLANKS = registerCompatBlock("poisonous_mushroom_vertical_planks", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-        POISONOUS_MUSHROOM_VERTICAL_SLAB = registerCompatBlock("poisonous_mushroom_vertical_slab", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        POISONOUS_MUSHROOM_CAP_BUTTON = registerBlock("poisonous_mushroom_cap_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock());
-        POISONOUS_MUSHROOM_CAP_CARPET = registerBlock("poisonous_mushroom_cap_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.PURPLE, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_PURPLE).strength(0.1F).sound(SoundType.WOOL)));
-        POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE = registerBlock("poisonous_mushroom_cap_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
+        POISONOUS_MUSHROOM_BOOKSHELF = registerCompatBlock("poisonous_mushroom_bookshelf", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
+        POISONOUS_MUSHROOM_BUTTON = registerBlock("poisonous_mushroom_button", CreativeModeTab.TAB_REDSTONE, new MushroomWoodButtonBlock());
+        POISONOUS_MUSHROOM_CHEST = registerCompatBlock("poisonous_mushroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.copy(Blocks.CHEST)));
+        POISONOUS_MUSHROOM_CHEST_TRAPPED = registerCompatBlock("poisonous_mushroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
+        POISONOUS_MUSHROOM_DOOR = registerBlock("poisonous_mushroom_door", CreativeModeTab.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_FENCE = registerBlock("poisonous_mushroom_fence", CreativeModeTab.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_FENCE_GATE = registerBlock("poisonous_mushroom_fence_gate", CreativeModeTab.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_LADDER = registerCompatBlock("poisonous_mushroom_ladder", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER)));
+        POISONOUS_MUSHROOM_PLANKS = registerBlock("poisonous_mushroom_planks", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_PRESSURE_PLATE = registerBlock("poisonous_mushroom_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomWoodPressurePlateBlock());
+        POISONOUS_MUSHROOM_SLAB = registerBlock("poisonous_mushroom_slab", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.copy(POISONOUS_MUSHROOM_PLANKS)));
+        POISONOUS_MUSHROOM_STAIRS = registerBlock("poisonous_mushroom_stairs", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> POISONOUS_MUSHROOM_PLANKS.defaultBlockState(), Block.Properties.copy(POISONOUS_MUSHROOM_PLANKS)));
+        POISONOUS_MUSHROOM_TRAPDOOR = registerBlock("poisonous_mushroom_trapdoor", CreativeModeTab.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_VERTICAL_PLANKS = registerCompatBlock("poisonous_mushroom_vertical_planks", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_VERTICAL_SLAB = registerCompatBlock("poisonous_mushroom_vertical_slab", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        POISONOUS_MUSHROOM_CAP_BUTTON = registerBlock("poisonous_mushroom_cap_button", CreativeModeTab.TAB_REDSTONE, new MushroomCapButtonBlock());
+        POISONOUS_MUSHROOM_CAP_CARPET = registerBlock("poisonous_mushroom_cap_carpet", CreativeModeTab.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.PURPLE, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_PURPLE).strength(0.1F).sound(SoundType.WOOL)));
+        POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE = registerBlock("poisonous_mushroom_cap_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
 
-        SLIME_FUNGUS = registerBlock("slime_fungus", ItemGroup.TAB_DECORATIONS, new EMMushroomBlock(new SlimeFungus(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.SLIME_BLOCK).hasPostProcess((a, b, c)->true)));
+        SLIME_FUNGUS = registerBlock("slime_fungus", CreativeModeTab.TAB_DECORATIONS, new EMMushroomBlock(new SlimeFungus(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.SLIME_BLOCK).hasPostProcess((a, b, c)->true)));
         SLIME_FUNGUS_POTTED = registerBlock("slime_fungus_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> SLIME_FUNGUS, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(SLIME_FUNGUS.getRegistryName()), () -> SLIME_FUNGUS_POTTED);
-        SLIME_FUNGUS_CAP = registerBlock("slime_fungus_cap", ItemGroup.TAB_DECORATIONS, new SlimeFungusCap(MushroomType.SLIME_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.GRASS).strength(0.2F).noOcclusion().jumpFactor(1.5F).friction(0.8F).sound(SoundType.SLIME_BLOCK)));
-        SLIME_FUNGUS_CAP_BUTTON = registerBlock("slime_fungus_cap_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock());
-        SLIME_FUNGUS_CAP_CARPET = registerBlock("slime_fungus_cap_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.LIME, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_LIGHT_GREEN).strength(0.1F).sound(SoundType.WOOL)));
-        SLIME_FUNGUS_CAP_PRESSURE_PLATE = registerBlock("slime_fungus_cap_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
+        SLIME_FUNGUS_CAP = registerBlock("slime_fungus_cap", CreativeModeTab.TAB_DECORATIONS, new SlimeFungusCap(MushroomType.SLIME_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.GRASS).strength(0.2F).noOcclusion().jumpFactor(1.5F).friction(0.8F).sound(SoundType.SLIME_BLOCK)));
+        SLIME_FUNGUS_CAP_BUTTON = registerBlock("slime_fungus_cap_button", CreativeModeTab.TAB_REDSTONE, new MushroomCapButtonBlock());
+        SLIME_FUNGUS_CAP_CARPET = registerBlock("slime_fungus_cap_carpet", CreativeModeTab.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.LIME, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_LIGHT_GREEN).strength(0.1F).sound(SoundType.WOOL)));
+        SLIME_FUNGUS_CAP_PRESSURE_PLATE = registerBlock("slime_fungus_cap_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
 
-        HONEY_FUNGUS = registerBlock("honey_fungus", ItemGroup.TAB_DECORATIONS, new EMMushroomBlock(new HoneyFungus(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.HONEY_BLOCK).hasPostProcess((a, b, c)->true)));
+        HONEY_FUNGUS = registerBlock("honey_fungus", CreativeModeTab.TAB_DECORATIONS, new EMMushroomBlock(new HoneyFungus(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.HONEY_BLOCK).hasPostProcess((a, b, c)->true)));
         HONEY_FUNGUS_POTTED = registerBlock("honey_fungus_potted", new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, () -> HONEY_FUNGUS, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(HONEY_FUNGUS.getRegistryName()), () -> HONEY_FUNGUS_POTTED);
-        HONEY_FUNGUS_CAP = registerBlock("honey_fungus_cap", ItemGroup.TAB_DECORATIONS, new HoneyFungusCap(MushroomType.HONEY_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.COLOR_ORANGE).strength(0.2F).noOcclusion().speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.HONEY_BLOCK)));
-        HONEY_FUNGUS_STEM = registerBlock("honey_fungus_stem", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-        HONEY_FUNGUS_STEM_STRIPPED = registerBlock("honey_fungus_stem_stripped", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_CAP = registerBlock("honey_fungus_cap", CreativeModeTab.TAB_DECORATIONS, new HoneyFungusCap(MushroomType.HONEY_FUNGUS, Block.Properties.of(Material.CLAY, MaterialColor.COLOR_ORANGE).strength(0.2F).noOcclusion().speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.HONEY_BLOCK)));
+        HONEY_FUNGUS_STEM = registerBlock("honey_fungus_stem", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_STEM_STRIPPED = registerBlock("honey_fungus_stem_stripped", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
         BLOCK_STRIPPING_MAP.put(HONEY_FUNGUS_STEM, HONEY_FUNGUS_STEM_STRIPPED);
-        HONEY_FUNGUS_BOOKSHELF = registerCompatBlock("honey_fungus_bookshelf", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
-        HONEY_FUNGUS_BUTTON = registerBlock("honey_fungus_button", ItemGroup.TAB_REDSTONE, new MushroomWoodButtonBlock());
-        HONEY_FUNGUS_CHEST = registerCompatBlock("honey_fungus_chest", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.CHEST)));
-        HONEY_FUNGUS_CHEST_TRAPPED = registerCompatBlock("honey_fungus_chest_trapped", ItemGroup.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
-        HONEY_FUNGUS_DOOR = registerBlock("honey_fungus_door", ItemGroup.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
-        HONEY_FUNGUS_FENCE = registerBlock("honey_fungus_fence", ItemGroup.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        HONEY_FUNGUS_FENCE_GATE = registerBlock("honey_fungus_fence_gate", ItemGroup.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        HONEY_FUNGUS_LADDER = registerCompatBlock("honey_fungus_ladder", ItemGroup.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER)));
-        HONEY_FUNGUS_PLANKS = registerBlock("honey_fungus_planks", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-        HONEY_FUNGUS_PRESSURE_PLATE = registerBlock("honey_fungus_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomWoodPressurePlateBlock());
-        HONEY_FUNGUS_SLAB = registerBlock("honey_fungus_slab", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.copy(HONEY_FUNGUS_PLANKS)));
-        HONEY_FUNGUS_STAIRS = registerBlock("honey_fungus_stairs", ItemGroup.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> HONEY_FUNGUS_PLANKS.defaultBlockState(), Block.Properties.copy(HONEY_FUNGUS_PLANKS)));
-        HONEY_FUNGUS_TRAPDOOR = registerBlock("honey_fungus_trapdoor", ItemGroup.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
-        HONEY_FUNGUS_VERTICAL_PLANKS = registerCompatBlock("honey_fungus_vertical_planks", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-        HONEY_FUNGUS_VERTICAL_SLAB = registerCompatBlock("honey_fungus_vertical_slab", ItemGroup.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-        HONEY_FUNGUS_CAP_BUTTON = registerBlock("honey_fungus_cap_button", ItemGroup.TAB_REDSTONE, new MushroomCapButtonBlock());
-        HONEY_FUNGUS_CAP_CARPET = registerBlock("honey_fungus_cap_carpet", ItemGroup.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.ORANGE, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_ORANGE).strength(0.1F).sound(SoundType.WOOL)));
-        HONEY_FUNGUS_CAP_PRESSURE_PLATE = registerBlock("honey_fungus_cap_pressure_plate", ItemGroup.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
+        HONEY_FUNGUS_BOOKSHELF = registerCompatBlock("honey_fungus_bookshelf", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
+        HONEY_FUNGUS_BUTTON = registerBlock("honey_fungus_button", CreativeModeTab.TAB_REDSTONE, new MushroomWoodButtonBlock());
+        HONEY_FUNGUS_CHEST = registerCompatBlock("honey_fungus_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), new VariantChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.CHEST)));
+        HONEY_FUNGUS_CHEST_TRAPPED = registerCompatBlock("honey_fungus_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), new VariantTrappedChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
+        HONEY_FUNGUS_DOOR = registerBlock("honey_fungus_door", CreativeModeTab.TAB_REDSTONE, new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_FENCE = registerBlock("honey_fungus_fence", CreativeModeTab.TAB_DECORATIONS, new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_FENCE_GATE = registerBlock("honey_fungus_fence_gate", CreativeModeTab.TAB_REDSTONE, new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_LADDER = registerCompatBlock("honey_fungus_ladder", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantLaddersModLoaded(), new LadderBlock(Block.Properties.copy(Blocks.LADDER)));
+        HONEY_FUNGUS_PLANKS = registerBlock("honey_fungus_planks", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_PRESSURE_PLATE = registerBlock("honey_fungus_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomWoodPressurePlateBlock());
+        HONEY_FUNGUS_SLAB = registerBlock("honey_fungus_slab", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomSlabBlock(Block.Properties.copy(HONEY_FUNGUS_PLANKS)));
+        HONEY_FUNGUS_STAIRS = registerBlock("honey_fungus_stairs", CreativeModeTab.TAB_BUILDING_BLOCKS, new MushroomStairsBlock(() -> HONEY_FUNGUS_PLANKS.defaultBlockState(), Block.Properties.copy(HONEY_FUNGUS_PLANKS)));
+        HONEY_FUNGUS_TRAPDOOR = registerBlock("honey_fungus_trapdoor", CreativeModeTab.TAB_REDSTONE, new MushroomTrapdoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_VERTICAL_PLANKS = registerCompatBlock("honey_fungus_vertical_planks", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVerticalPlanksModLoaded(), new VerticalPlanksBlock(Block.Properties.of(Material.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_VERTICAL_SLAB = registerCompatBlock("honey_fungus_vertical_slab", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVerticalSlabsModLoaded(), new VerticalSlabBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+        HONEY_FUNGUS_CAP_BUTTON = registerBlock("honey_fungus_cap_button", CreativeModeTab.TAB_REDSTONE, new MushroomCapButtonBlock());
+        HONEY_FUNGUS_CAP_CARPET = registerBlock("honey_fungus_cap_carpet", CreativeModeTab.TAB_DECORATIONS, new MushroomCarpetBlock(DyeColor.ORANGE, Block.Properties.of(Material.CLOTH_DECORATION, MaterialColor.COLOR_ORANGE).strength(0.1F).sound(SoundType.WOOL)));
+        HONEY_FUNGUS_CAP_PRESSURE_PLATE = registerBlock("honey_fungus_cap_pressure_plate", CreativeModeTab.TAB_REDSTONE, new MushroomCapPressurePlateBlock());
 
     }
 
@@ -195,12 +195,12 @@ public final class ModBlocks {
         return block;
     }
 
-    private static Block registerCompatBlock(String name, ItemGroup itemGroup, boolean isActive, Block block) {
-        ItemGroup determinedGroup = (isActive) ? itemGroup : null;
+    private static Block registerCompatBlock(String name, CreativeModeTab itemGroup, boolean isActive, Block block) {
+        CreativeModeTab determinedGroup = (isActive) ? itemGroup : null;
         return registerBlock(name, determinedGroup, block);
     }
 
-    private static Block registerBlock(String name, ItemGroup itemGroup, Block block) {
+    private static Block registerBlock(String name, CreativeModeTab itemGroup, Block block) {
         Item.Properties itemProperties = new Item.Properties().tab(itemGroup);
         try {
             if (block instanceof VariantChestBlock) {
@@ -226,25 +226,25 @@ public final class ModBlocks {
         //RenderTypeLookup.setRenderLayer(MUSHROOM_DOOR, RenderType.getCutout()); //unfortunately buggy - so, texture without transparency
         //RenderTypeLookup.setRenderLayer(MUSHROOM_TRAPDOOR, RenderType.getCutout()); //unfortunately buggy - so, texture without transparency
 
-        RenderTypeLookup.setRenderLayer(FAIRY_RING, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(INFESTED_GRASS, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(INFESTED_FLOWER, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(INFESTED_FLOWER_POTTED, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(MUSHROOM_LADDER, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(GLOWSHROOM, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(GLOWSHROOM_LADDER, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(GLOWSHROOM_POTTED, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM_LADDER, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(POISONOUS_MUSHROOM_POTTED, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(SLIME_FUNGUS, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(SLIME_FUNGUS_POTTED, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(HONEY_FUNGUS, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(HONEY_FUNGUS_LADDER, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(HONEY_FUNGUS_POTTED, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(FAIRY_RING, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(INFESTED_GRASS, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(INFESTED_FLOWER, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(INFESTED_FLOWER_POTTED, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(MUSHROOM_LADDER, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(GLOWSHROOM, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(GLOWSHROOM_LADDER, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(GLOWSHROOM_POTTED, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(POISONOUS_MUSHROOM, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(POISONOUS_MUSHROOM_LADDER, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(POISONOUS_MUSHROOM_POTTED, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(SLIME_FUNGUS, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(SLIME_FUNGUS_POTTED, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(HONEY_FUNGUS, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(HONEY_FUNGUS_LADDER, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(HONEY_FUNGUS_POTTED, RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(SLIME_FUNGUS_CAP, RenderType.translucent());
-        RenderTypeLookup.setRenderLayer(HONEY_FUNGUS_CAP, RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(SLIME_FUNGUS_CAP, RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(HONEY_FUNGUS_CAP, RenderType.translucent());
     }
 
 }
