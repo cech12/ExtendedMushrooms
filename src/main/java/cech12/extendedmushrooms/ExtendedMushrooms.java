@@ -223,23 +223,4 @@ public class ExtendedMushrooms {
         }
     }
 
-
-    /**
-     * Copy of https://github.com/Minecraft-Forge-Tutorials/Custom-Json-Recipes/blob/master/src/main/java/net/darkhax/customrecipeexample/CustomRecipesMod.java
-     *
-     * This method lets you get all of the recipe data for a given recipe type. The existing
-     * methods for this require an IInventory, and this allows you to skip that overhead. This
-     * method uses reflection to get the recipes map, but an access transformer would also
-     * work.
-     *
-     * @param recipeType The type of recipe to grab.
-     * @param manager The recipe manager. This is generally taken from a World.
-     * @return A map containing all recipes for the passed recipe type. This map is immutable
-     *         and can not be modified.
-     */
-    public static Map<ResourceLocation, IRecipe<?>> getRecipes(IRecipeType<?> recipeType, RecipeManager manager) {
-        final Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipesMap = ObfuscationReflectionHelper.getPrivateValue(RecipeManager.class, manager, "recipes");
-        return recipesMap.get(recipeType);
-    }
-
 }

@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms.tileentity;
 
-import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.recipe.ExtendedMushroomsRecipeTypes;
 import cech12.extendedmushrooms.api.recipe.FairyRingMode;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
@@ -15,7 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -33,7 +32,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 public class FairyRingTileEntity extends TileEntity implements IInventory, ITickableTileEntity {
@@ -316,10 +315,10 @@ public class FairyRingTileEntity extends TileEntity implements IInventory, ITick
         if (this.currentRecipe != null && this.currentRecipe.isValid(this.mode, this)) {
             return this.currentRecipe;
         } else {
-            Collection<IRecipe<?>> recipes = ExtendedMushrooms.getRecipes(ExtendedMushroomsRecipeTypes.FAIRY_RING, this.getLevel().getRecipeManager()).values();
-            for (IRecipe<?> recipe : recipes) {
-                if (recipe instanceof FairyRingRecipe && ((FairyRingRecipe) recipe).isValid(this.mode, this)) {
-                    return (FairyRingRecipe) recipe;
+            List<FairyRingRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor((IRecipeType<FairyRingRecipe>) ExtendedMushroomsRecipeTypes.FAIRY_RING);
+            for (FairyRingRecipe recipe : recipes) {
+                if (recipe.isValid(this.mode, this)) {
+                    return recipe;
                 }
             }
         }
