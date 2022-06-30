@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Update to Minecraft 1.18.2 and Forge 40.1.0. 
 
+## [1.16.5-1.7.0.2] - 2022-06-30
+### Fixed
+- Server crashed when placing an item into Fairy Ring.
+
 ## [1.16.5-1.7.0.1] - 2022-06-05
 ### Fixed
 - Mushrooms that are part of a Fairy Ring could multiply and break the Fairy Ring

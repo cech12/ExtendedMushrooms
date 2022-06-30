@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms.tileentity;
 
-import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.api.recipe.ExtendedMushroomsRecipeTypes;
 import cech12.extendedmushrooms.api.recipe.FairyRingMode;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
@@ -8,7 +7,7 @@ import cech12.extendedmushrooms.api.tileentity.ExtendedMushroomsTileEntities;
 import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.init.ModParticles;
 import cech12.extendedmushrooms.init.ModSounds;
-import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -16,7 +15,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -33,7 +31,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 public class FairyRingTileEntity extends BlockEntity implements Container {
@@ -313,10 +311,10 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
         if (this.currentRecipe != null && this.currentRecipe.isValid(this.mode, this)) {
             return this.currentRecipe;
         } else {
-            Collection<Recipe<?>> recipes = ExtendedMushrooms.getRecipes(ExtendedMushroomsRecipeTypes.FAIRY_RING, this.getLevel().getRecipeManager()).values();
-            for (Recipe<?> recipe : recipes) {
-                if (recipe instanceof FairyRingRecipe && ((FairyRingRecipe) recipe).isValid(this.mode, this)) {
-                    return (FairyRingRecipe) recipe;
+            List<FairyRingRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor((RecipeType<FairyRingRecipe>) ExtendedMushroomsRecipeTypes.FAIRY_RING);
+            for (FairyRingRecipe recipe : recipes) {
+                if (recipe.isValid(this.mode, this)) {
+                    return recipe;
                 }
             }
         }
