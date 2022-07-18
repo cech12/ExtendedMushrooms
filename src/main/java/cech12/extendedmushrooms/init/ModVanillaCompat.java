@@ -6,8 +6,9 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.ItemLike;
 
-import static cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks.*;
-import static cech12.extendedmushrooms.api.item.ExtendedMushroomsItems.*;
+import static cech12.extendedmushrooms.init.ModBlocks.*;
+import static cech12.extendedmushrooms.init.ModItems.*;
+
 
 public class ModVanillaCompat {
 
@@ -17,69 +18,69 @@ public class ModVanillaCompat {
         registerFlammable(Blocks.RED_MUSHROOM_BLOCK, 30, 60);
         registerFlammable(Blocks.MUSHROOM_STEM, 5, 5);
 
-        registerCompostable(0.3F, INFESTED_GRASS);
+        registerCompostable(0.3F, INFESTED_GRASS.get());
 
-        registerCompostable(0.15F, BROWN_MUSHROOM_BUTTON);
-        registerCompostable(0.3F, BROWN_MUSHROOM_CARPET);
-        registerCompostable(0.15F, BROWN_MUSHROOM_PRESSURE_PLATE);
-        registerCompostable(0.15F, RED_MUSHROOM_BUTTON);
-        registerCompostable(0.3F, RED_MUSHROOM_CARPET);
-        registerCompostable(0.15F, RED_MUSHROOM_PRESSURE_PLATE);
+        registerCompostable(0.15F, BROWN_MUSHROOM_BUTTON.get());
+        registerCompostable(0.3F, BROWN_MUSHROOM_CARPET.get());
+        registerCompostable(0.15F, BROWN_MUSHROOM_PRESSURE_PLATE.get());
+        registerCompostable(0.15F, RED_MUSHROOM_BUTTON.get());
+        registerCompostable(0.3F, RED_MUSHROOM_CARPET.get());
+        registerCompostable(0.15F, RED_MUSHROOM_PRESSURE_PLATE.get());
 
-        registerCompostable(0.15F, MUSHROOM_BUTTON);
-        registerCompostable(0.3F, MUSHROOM_DOOR);
-        registerCompostable(0.3F, MUSHROOM_FENCE);
-        registerCompostable(0.3F, MUSHROOM_FENCE_GATE);
-        registerCompostable(0.3F, MUSHROOM_PLANKS);
-        registerCompostable(0.15F, MUSHROOM_PRESSURE_PLATE);
-        registerCompostable(0.15F, MUSHROOM_SLAB);
-        registerCompostable(0.15F, MUSHROOM_STAIRS);
-        registerCompostable(0.15F, MUSHROOM_TRAPDOOR);
-        registerCompostable(0.15F, MUSHROOM_VERTICAL_PLANKS);
-        registerCompostable(0.15F, MUSHROOM_VERTICAL_SLAB);
-        registerCompostable(0.65F, STRIPPED_MUSHROOM_STEM);
+        registerCompostable(0.15F, MUSHROOM_BUTTON.get());
+        registerCompostable(0.3F, MUSHROOM_DOOR.get());
+        registerCompostable(0.3F, MUSHROOM_FENCE.get());
+        registerCompostable(0.3F, MUSHROOM_FENCE_GATE.get());
+        registerCompostable(0.3F, MUSHROOM_PLANKS.get());
+        registerCompostable(0.15F, MUSHROOM_PRESSURE_PLATE.get());
+        registerCompostable(0.15F, MUSHROOM_SLAB.get());
+        registerCompostable(0.15F, MUSHROOM_STAIRS.get());
+        registerCompostable(0.15F, MUSHROOM_TRAPDOOR.get());
+        registerCompostable(0.15F, MUSHROOM_VERTICAL_PLANKS.get());
+        registerCompostable(0.15F, MUSHROOM_VERTICAL_SLAB.get());
+        registerCompostable(0.65F, STRIPPED_MUSHROOM_STEM.get());
 
-        registerCompostable(0.65F, GLOWSHROOM);
-        registerCompostable(0.85F, GLOWSHROOM_CAP);
-        registerCompostable(0.15F, GLOWSHROOM_CAP_BUTTON);
-        registerCompostable(0.3F, GLOWSHROOM_CAP_CARPET);
-        registerCompostable(0.15F, GLOWSHROOM_CAP_PRESSURE_PLATE);
-        registerCompostable(0.65F, GLOWSHROOM_STEM);
-        registerCompostable(0.65F, GLOWSHROOM_STEM_STRIPPED);
-        registerCompostable(0.15F, GLOWSHROOM_BUTTON);
-        registerCompostable(0.3F, GLOWSHROOM_DOOR);
-        registerCompostable(0.3F, GLOWSHROOM_FENCE);
-        registerCompostable(0.3F, GLOWSHROOM_FENCE_GATE);
-        registerCompostable(0.3F, GLOWSHROOM_PLANKS);
-        registerCompostable(0.15F, GLOWSHROOM_PRESSURE_PLATE);
-        registerCompostable(0.15F, GLOWSHROOM_SLAB);
-        registerCompostable(0.15F, GLOWSHROOM_STAIRS);
-        registerCompostable(0.15F, GLOWSHROOM_TRAPDOOR);
-        registerCompostable(0.15F, GLOWSHROOM_VERTICAL_PLANKS);
-        registerCompostable(0.15F, GLOWSHROOM_VERTICAL_SLAB);
+        registerCompostable(0.65F, GLOWSHROOM.get());
+        registerCompostable(0.85F, GLOWSHROOM_CAP.get());
+        registerCompostable(0.15F, GLOWSHROOM_CAP_BUTTON.get());
+        registerCompostable(0.3F, GLOWSHROOM_CAP_CARPET.get());
+        registerCompostable(0.15F, GLOWSHROOM_CAP_PRESSURE_PLATE.get());
+        registerCompostable(0.65F, GLOWSHROOM_STEM.get());
+        registerCompostable(0.65F, GLOWSHROOM_STEM_STRIPPED.get());
+        registerCompostable(0.15F, GLOWSHROOM_BUTTON.get());
+        registerCompostable(0.3F, GLOWSHROOM_DOOR.get());
+        registerCompostable(0.3F, GLOWSHROOM_FENCE.get());
+        registerCompostable(0.3F, GLOWSHROOM_FENCE_GATE.get());
+        registerCompostable(0.3F, GLOWSHROOM_PLANKS.get());
+        registerCompostable(0.15F, GLOWSHROOM_PRESSURE_PLATE.get());
+        registerCompostable(0.15F, GLOWSHROOM_SLAB.get());
+        registerCompostable(0.15F, GLOWSHROOM_STAIRS.get());
+        registerCompostable(0.15F, GLOWSHROOM_TRAPDOOR.get());
+        registerCompostable(0.15F, GLOWSHROOM_VERTICAL_PLANKS.get());
+        registerCompostable(0.15F, GLOWSHROOM_VERTICAL_SLAB.get());
 
-        registerCompostable(0.65F, POISONOUS_MUSHROOM);
-        registerCompostable(0.85F, POISONOUS_MUSHROOM_CAP);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_CAP_BUTTON);
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_CAP_CARPET);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE);
-        registerCompostable(0.65F, POISONOUS_MUSHROOM_STEM);
-        registerCompostable(0.65F, POISONOUS_MUSHROOM_STEM_STRIPPED);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_BUTTON);
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_DOOR);
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_FENCE);
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_FENCE_GATE);
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_PLANKS);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_PRESSURE_PLATE);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_SLAB);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_STAIRS);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_TRAPDOOR);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_VERTICAL_PLANKS);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_VERTICAL_SLAB);
+        registerCompostable(0.65F, POISONOUS_MUSHROOM.get());
+        registerCompostable(0.85F, POISONOUS_MUSHROOM_CAP.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_CAP_BUTTON.get());
+        registerCompostable(0.3F, POISONOUS_MUSHROOM_CAP_CARPET.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.get());
+        registerCompostable(0.65F, POISONOUS_MUSHROOM_STEM.get());
+        registerCompostable(0.65F, POISONOUS_MUSHROOM_STEM_STRIPPED.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_BUTTON.get());
+        registerCompostable(0.3F, POISONOUS_MUSHROOM_DOOR.get());
+        registerCompostable(0.3F, POISONOUS_MUSHROOM_FENCE.get());
+        registerCompostable(0.3F, POISONOUS_MUSHROOM_FENCE_GATE.get());
+        registerCompostable(0.3F, POISONOUS_MUSHROOM_PLANKS.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_PRESSURE_PLATE.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_SLAB.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_STAIRS.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_TRAPDOOR.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_VERTICAL_PLANKS.get());
+        registerCompostable(0.15F, POISONOUS_MUSHROOM_VERTICAL_SLAB.get());
 
-        registerCompostable(0.65F, GRILLED_MUSHROOM);
-        registerCompostable(0.85F, MUSHROOM_BREAD);
-        registerCompostable(0.15F, MUSHROOM_SPORES);
+        registerCompostable(0.65F, GRILLED_MUSHROOM.get());
+        registerCompostable(0.85F, MUSHROOM_BREAD.get());
+        registerCompostable(0.15F, MUSHROOM_SPORES.get());
 
     }
 

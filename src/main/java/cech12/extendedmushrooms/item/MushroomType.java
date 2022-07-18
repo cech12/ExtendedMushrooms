@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.item;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.DyeColor;
@@ -10,6 +10,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -19,45 +21,45 @@ import java.util.function.Supplier;
 public enum MushroomType implements StringRepresentable {
 
     BROWN_MUSHROOM(0,
-            ()->Items.BROWN_MUSHROOM,
-            ()->Blocks.BROWN_MUSHROOM_BLOCK,
+            () -> Items.BROWN_MUSHROOM,
+            RegistryObject.create(Blocks.BROWN_MUSHROOM_BLOCK.getRegistryName(), ForgeRegistries.BLOCKS),
             MushroomWoodType.MUSHROOM, DyeColor.BROWN),
     RED_MUSHROOM(1,
-            ()->Items.RED_MUSHROOM,
-            ()->Blocks.RED_MUSHROOM_BLOCK,
+            () -> Items.RED_MUSHROOM,
+            RegistryObject.create(Blocks.RED_MUSHROOM_BLOCK.getRegistryName(), ForgeRegistries.BLOCKS),
             MushroomWoodType.MUSHROOM, DyeColor.RED),
     GLOWSHROOM(2,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP,
+            () -> ModBlocks.GLOWSHROOM.get().asItem(),
+            ModBlocks.GLOWSHROOM_CAP,
             MushroomWoodType.GLOWSHROOM, DyeColor.BLUE,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_CAP.getLightEmission(ExtendedMushroomsBlocks.GLOWSHROOM_CAP.defaultBlockState(), null, null)),
+            () -> ModBlocks.GLOWSHROOM_CAP.get().getLightEmission(ModBlocks.GLOWSHROOM_CAP.get().defaultBlockState(), null, null)),
     POISONOUS_MUSHROOM(3,
-            ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM,
-            ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP,
+            () -> ModBlocks.POISONOUS_MUSHROOM.get().asItem(),
+            ModBlocks.POISONOUS_MUSHROOM_CAP,
             MushroomWoodType.POISONOUS_MUSHROOM, DyeColor.PURPLE),
     SLIME_FUNGUS(4,
-            ()->ExtendedMushroomsBlocks.HONEY_FUNGUS,
-            ()->ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP,
+            () -> ModBlocks.HONEY_FUNGUS.get().asItem(),
+            ModBlocks.HONEY_FUNGUS_CAP,
             MushroomWoodType.POISONOUS_MUSHROOM, DyeColor.LIME),
     HONEY_FUNGUS(5,
-            ()->ExtendedMushroomsBlocks.HONEY_FUNGUS,
-            ()->ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP,
+            () -> ModBlocks.HONEY_FUNGUS.get().asItem(),
+            ModBlocks.HONEY_FUNGUS_CAP,
             MushroomWoodType.HONEY_FUNGUS, DyeColor.ORANGE);
 
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 
     private final int id;
     private final Supplier<ItemLike> item;
-    private final Supplier<Block> capBlock;
+    private final RegistryObject<Block> capBlock;
     private final MushroomWoodType woodType;
     private final DyeColor color;
     private final Supplier<Integer> lightValue;
 
-    MushroomType(int id, Supplier<ItemLike> item, Supplier<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color) {
+    MushroomType(int id, Supplier<ItemLike> item, RegistryObject<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color) {
         this(id, item, capBlock, woodType, color, () -> 0);
     }
 
-    MushroomType(int id, Supplier<ItemLike> item, Supplier<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
+    MushroomType(int id, Supplier<ItemLike> item, RegistryObject<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
         this.id = id;
         this.item = item;
         this.capBlock = capBlock;

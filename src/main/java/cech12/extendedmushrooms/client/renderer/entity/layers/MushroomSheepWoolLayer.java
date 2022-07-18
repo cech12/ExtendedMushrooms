@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.client.renderer.entity.layers;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -16,7 +17,7 @@ public class MushroomSheepWoolLayer extends RenderLayer<MushroomSheepEntity, She
 
     private static final ResourceLocation SHEEP_COLORING_TEXTURE = new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/sheep/mushroom_sheep_coloring.png");
 
-    private final SheepModel<MushroomSheepEntity> sheepModel = new SheepModel<>();
+    private final SheepModel<MushroomSheepEntity> sheepModel = new SheepModel<>(ModelLayers.SHEEP);
     private final SheepFurModel<MushroomSheepEntity> sheepWoolModel = new SheepFurModel<>();
 
     public MushroomSheepWoolLayer(RenderLayerParent<MushroomSheepEntity, SheepModel<MushroomSheepEntity>> rendererIn) {

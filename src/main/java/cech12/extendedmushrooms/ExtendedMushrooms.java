@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms;
 
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.api.recipe.ExtendedMushroomsRecipeTypes;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
 import cech12.extendedmushrooms.block.FairyRingBlock;
@@ -11,6 +10,7 @@ import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModEntities;
 import cech12.extendedmushrooms.init.ModFeatures;
+import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.init.ModTileEntities;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
@@ -78,7 +78,8 @@ public class ExtendedMushrooms {
         // Register an event with the mod specific event bus for mod own recipes.
         eventBus.addGenericListener(RecipeSerializer.class, this::registerRecipeSerializers);
 
-        ModBlocks.registerBlocks(eventBus);
+        ModBlocks.BLOCKS.register(eventBus);
+        ModItems.ITEMS.register(eventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -138,7 +139,7 @@ public class ExtendedMushrooms {
         //check for mushroom stem and axe
         if (itemStack.canPerformAction(ToolActions.AXE_STRIP)) {
             //get stripped block from stripping map
-            Block strippedBlock = ModBlocks.BLOCK_STRIPPING_MAP.get(blockState.getBlock());
+            Block strippedBlock = ModBlocks.getStrippedBlock(blockState.getBlock());
             if (strippedBlock != null) {
                 //play sound
                 event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -198,7 +199,7 @@ public class ExtendedMushrooms {
         LevelAccessor world = event.getWorld();
         BlockPos blockPos = event.getPos();
         BlockState blockState = world.getBlockState(blockPos);
-        if (blockState.getBlock() != ExtendedMushroomsBlocks.FAIRY_RING) {
+        if (blockState.getBlock() != ModBlocks.FAIRY_RING.get()) {
             for (Direction direction : event.getNotifiedSides()) {
                 BlockPos neighbourPos = blockPos.relative(direction);
                 if (world.getBlockState(neighbourPos).getBlock() instanceof MushroomBlock) {

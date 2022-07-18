@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModFeatures;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -12,8 +12,8 @@ import javax.annotation.Nonnull;
 public class Glowshroom extends MegaMushroom {
 
     public static HugeMushroomFeatureConfiguration getConfig() {
-        return new HugeMushroomFeatureConfiguration(BlockStateProvider.simple(getDefaultCapState(ExtendedMushroomsBlocks.GLOWSHROOM_CAP)),
-                BlockStateProvider.simple(getDefaultStemState(ExtendedMushroomsBlocks.GLOWSHROOM_STEM)), 2);
+        return new HugeMushroomFeatureConfiguration(BlockStateProvider.simple(getDefaultCapState(ModBlocks.GLOWSHROOM_CAP.get())),
+                BlockStateProvider.simple(getDefaultStemState(ModBlocks.GLOWSHROOM_STEM.get())), 2);
     }
 
     @Nonnull

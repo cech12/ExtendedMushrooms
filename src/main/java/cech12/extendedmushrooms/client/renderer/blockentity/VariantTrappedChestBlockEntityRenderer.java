@@ -1,4 +1,4 @@
-package cech12.extendedmushrooms.client.renderer.tileentity;
+package cech12.extendedmushrooms.client.renderer.blockentity;
 
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
 import cech12.extendedmushrooms.item.MushroomWoodType;
@@ -9,9 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class VariantTrappedChestTileEntityRenderer extends AbstractVariantChestTileEntityRenderer<VariantTrappedChestTileEntity> {
+public class VariantTrappedChestBlockEntityRenderer extends AbstractVariantChestBlockEntityRenderer<VariantTrappedChestTileEntity> {
 
-    public VariantTrappedChestTileEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
+    public VariantTrappedChestBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
     }
 
@@ -23,13 +23,10 @@ public class VariantTrappedChestTileEntityRenderer extends AbstractVariantChestT
             woodType = ((VariantTrappedChestBlock) tileEntity.getBlockState().getBlock()).getWoodType();
         }
         ChestTextures textures = getCachedTextures(woodType);
-        switch(chestType) {
-            case LEFT:
-                return textures.trapped_left;
-            case RIGHT:
-                return textures.trapped_right;
-            default:
-                return textures.trapped_single;
-        }
+        return switch (chestType) {
+            case LEFT -> textures.trapped_left;
+            case RIGHT -> textures.trapped_right;
+            default -> textures.trapped_single;
+        };
     }
 }

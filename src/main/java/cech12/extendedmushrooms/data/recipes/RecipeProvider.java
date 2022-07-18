@@ -1,9 +1,9 @@
 package cech12.extendedmushrooms.data.recipes;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
-import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
+import cech12.extendedmushrooms.init.ModBlocks;
+import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModTags;
 import com.google.gson.JsonArray;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -51,19 +51,19 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     protected void buildCraftingRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
 
         //grilled mushroom
-        String name = ExtendedMushroomsItems.GRILLED_MUSHROOM.getRegistryName().getPath();
+        String name = ModItems.GRILLED_MUSHROOM.getId().getPath();
         SimpleCookingRecipeBuilder
-                .smelting(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 150)
+                .smelting(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ModItems.GRILLED_MUSHROOM.get(), 0.15F, 150)
                 .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer);
         SimpleCookingRecipeBuilder
-                .cooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 450, RecipeSerializer.CAMPFIRE_COOKING_RECIPE)
+                .cooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ModItems.GRILLED_MUSHROOM.get(), 0.15F, 450, RecipeSerializer.CAMPFIRE_COOKING_RECIPE)
                 .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer, getResourceLocation(name + "_from_campfire_cooking"));
         SimpleCookingRecipeBuilder
-                .cooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ExtendedMushroomsItems.GRILLED_MUSHROOM, 0.15F, 75, RecipeSerializer.SMOKING_RECIPE)
+                .cooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ModItems.GRILLED_MUSHROOM.get(), 0.15F, 75, RecipeSerializer.SMOKING_RECIPE)
                 .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer, getResourceLocation(name + "_from_smoking"));
 
         //mushroom bread
-        ShapedRecipeBuilder.shaped(ExtendedMushroomsItems.MUSHROOM_BREAD)
+        ShapedRecipeBuilder.shaped(ModItems.MUSHROOM_BREAD.get())
                 .define('#', ModTags.ForgeItems.MUSHROOMS_EDIBLE)
                 .pattern("###")
                 .group("bread")
@@ -83,8 +83,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         //brown dye from infested flower
         ShapelessRecipeBuilder.shapeless(Items.BROWN_DYE)
-                .requires(ExtendedMushroomsBlocks.INFESTED_FLOWER)
-                .unlockedBy("has_flower", has(ExtendedMushroomsBlocks.INFESTED_FLOWER))
+                .requires(ModBlocks.INFESTED_FLOWER.get())
+                .unlockedBy("has_flower", has(ModBlocks.INFESTED_FLOWER.get()))
                 .save(consumer, getResourceLocation(Items.BROWN_DYE.getRegistryName().getPath() + "_from_infested_flower"));
 
         //some fairy ring recipes
@@ -101,15 +101,15 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         FairyRingRecipeBuilder.normal(Items.DEAD_BUSH, 1)
                 .requires(ItemTags.SAPLINGS)
                 .save(consumer, getResourceLocation("dead_bush_from_sapling"));
-        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.INFESTED_GRASS, 1)
+        FairyRingRecipeBuilder.normal(ModBlocks.INFESTED_GRASS.get(), 1)
                 .requires(Items.GRASS)
                 .save(consumer, getResourceLocation("infested_grass_from_grass"));
-        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.INFESTED_FLOWER, 1)
+        FairyRingRecipeBuilder.normal(ModBlocks.INFESTED_FLOWER.get(), 1)
                 .requires(ItemTags.FLOWERS)
                 .save(consumer, getResourceLocation("infested_flower_from_flower"));
 
         //mushroom spores
-        ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.MUSHROOM_SPORES, 2)
+        ShapelessRecipeBuilder.shapeless(ModItems.MUSHROOM_SPORES.get(), 2)
                 .requires(Tags.Items.MUSHROOMS)
                 .unlockedBy("has_mushroom", has(Tags.Items.MUSHROOMS))
                 .save(consumer);
@@ -117,41 +117,41 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         mushroomWoodRecipes(consumer, "colorless",
                 ModTags.ForgeItems.MUSHROOM_STEMS_COLORLESS,
                 Blocks.MUSHROOM_STEM.asItem(),
-                ExtendedMushroomsBlocks.STRIPPED_MUSHROOM_STEM.asItem(),
-                ExtendedMushroomsItems.MUSHROOM_BOAT.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_BOOKSHELF.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_CHEST.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_CHEST_TRAPPED.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_DOOR.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_FENCE.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_FENCE_GATE.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_LADDER.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_PLANKS.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_PRESSURE_PLATE.asItem(),
-                ExtendedMushroomsItems.MUSHROOM_SIGN,
-                ExtendedMushroomsBlocks.MUSHROOM_SLAB.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_STAIRS.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_TRAPDOOR.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_VERTICAL_PLANKS.asItem(),
-                ExtendedMushroomsBlocks.MUSHROOM_VERTICAL_SLAB.asItem());
+                ModBlocks.STRIPPED_MUSHROOM_STEM.get().asItem(),
+                ModItems.MUSHROOM_BOAT.get().asItem(),
+                ModBlocks.MUSHROOM_BOOKSHELF.get().asItem(),
+                ModBlocks.MUSHROOM_BUTTON.get().asItem(),
+                ModBlocks.MUSHROOM_CHEST.get().asItem(),
+                ModBlocks.MUSHROOM_CHEST_TRAPPED.get().asItem(),
+                ModBlocks.MUSHROOM_DOOR.get().asItem(),
+                ModBlocks.MUSHROOM_FENCE.get().asItem(),
+                ModBlocks.MUSHROOM_FENCE_GATE.get().asItem(),
+                ModBlocks.MUSHROOM_LADDER.get().asItem(),
+                ModBlocks.MUSHROOM_PLANKS.get().asItem(),
+                ModBlocks.MUSHROOM_PRESSURE_PLATE.get().asItem(),
+                ModItems.MUSHROOM_SIGN.get(),
+                ModBlocks.MUSHROOM_SLAB.get().asItem(),
+                ModBlocks.MUSHROOM_STAIRS.get().asItem(),
+                ModBlocks.MUSHROOM_TRAPDOOR.get().asItem(),
+                ModBlocks.MUSHROOM_VERTICAL_PLANKS.get().asItem(),
+                ModBlocks.MUSHROOM_VERTICAL_SLAB.get().asItem());
         mushroomCapRecipes(consumer, "brown",
                 ModTags.ForgeItems.MUSHROOM_CAPS_BROWN,
                 Items.BROWN_BANNER,
                 Items.BROWN_BED,
-                ExtendedMushroomsBlocks.BROWN_MUSHROOM_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.BROWN_MUSHROOM_CARPET.asItem(),
-                ExtendedMushroomsBlocks.BROWN_MUSHROOM_PRESSURE_PLATE.asItem());
+                ModBlocks.BROWN_MUSHROOM_BUTTON.get().asItem(),
+                ModBlocks.BROWN_MUSHROOM_CARPET.get().asItem(),
+                ModBlocks.BROWN_MUSHROOM_PRESSURE_PLATE.get().asItem());
         mushroomCapRecipes(consumer, "red",
                 ModTags.ForgeItems.MUSHROOM_CAPS_RED,
                 Items.RED_BANNER,
                 Items.RED_BED,
-                ExtendedMushroomsBlocks.RED_MUSHROOM_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.RED_MUSHROOM_CARPET.asItem(),
-                ExtendedMushroomsBlocks.RED_MUSHROOM_PRESSURE_PLATE.asItem());
+                ModBlocks.RED_MUSHROOM_BUTTON.get().asItem(),
+                ModBlocks.RED_MUSHROOM_CARPET.get().asItem(),
+                ModBlocks.RED_MUSHROOM_PRESSURE_PLATE.get().asItem());
 
         //glowshroom
-        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.GLOWSHROOM, 1)
+        FairyRingRecipeBuilder.normal(ModBlocks.GLOWSHROOM.get(), 1)
                 .requires(Tags.Items.MUSHROOMS)
                 .requires(Items.GLOWSTONE)
                 .requires(Items.GOLDEN_CARROT)
@@ -159,46 +159,46 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer);
         mushroomWoodRecipes(consumer, "glowshroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM,
-                ExtendedMushroomsBlocks.GLOWSHROOM_STEM.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_STEM_STRIPPED.asItem(),
-                ExtendedMushroomsItems.GLOWSHROOM_BOAT.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_BOOKSHELF.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_CHEST.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_CHEST_TRAPPED.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_DOOR.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_FENCE.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_FENCE_GATE.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_LADDER.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_PLANKS.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_PRESSURE_PLATE.asItem(),
-                ExtendedMushroomsItems.GLOWSHROOM_SIGN,
-                ExtendedMushroomsBlocks.GLOWSHROOM_SLAB.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_STAIRS.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_TRAPDOOR.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_VERTICAL_PLANKS.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_VERTICAL_SLAB.asItem());
+                ModBlocks.GLOWSHROOM_STEM.get().asItem(),
+                ModBlocks.GLOWSHROOM_STEM_STRIPPED.get().asItem(),
+                ModItems.GLOWSHROOM_BOAT.get().asItem(),
+                ModBlocks.GLOWSHROOM_BOOKSHELF.get().asItem(),
+                ModBlocks.GLOWSHROOM_BUTTON.get().asItem(),
+                ModBlocks.GLOWSHROOM_CHEST.get().asItem(),
+                ModBlocks.GLOWSHROOM_CHEST_TRAPPED.get().asItem(),
+                ModBlocks.GLOWSHROOM_DOOR.get().asItem(),
+                ModBlocks.GLOWSHROOM_FENCE.get().asItem(),
+                ModBlocks.GLOWSHROOM_FENCE_GATE.get().asItem(),
+                ModBlocks.GLOWSHROOM_LADDER.get().asItem(),
+                ModBlocks.GLOWSHROOM_PLANKS.get().asItem(),
+                ModBlocks.GLOWSHROOM_PRESSURE_PLATE.get().asItem(),
+                ModItems.GLOWSHROOM_SIGN.get(),
+                ModBlocks.GLOWSHROOM_SLAB.get().asItem(),
+                ModBlocks.GLOWSHROOM_STAIRS.get().asItem(),
+                ModBlocks.GLOWSHROOM_TRAPDOOR.get().asItem(),
+                ModBlocks.GLOWSHROOM_VERTICAL_PLANKS.get().asItem(),
+                ModBlocks.GLOWSHROOM_VERTICAL_SLAB.get().asItem());
         mushroomCapRecipes(consumer, "glowshroom",
                 ModTags.ForgeItems.MUSHROOM_CAPS_GLOWSHROOM,
                 Items.BLUE_BANNER,
                 Items.BLUE_BED,
-                ExtendedMushroomsBlocks.GLOWSHROOM_CAP_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_CAP_CARPET.asItem(),
-                ExtendedMushroomsBlocks.GLOWSHROOM_CAP_PRESSURE_PLATE.asItem());
+                ModBlocks.GLOWSHROOM_CAP_BUTTON.get().asItem(),
+                ModBlocks.GLOWSHROOM_CAP_CARPET.get().asItem(),
+                ModBlocks.GLOWSHROOM_CAP_PRESSURE_PLATE.get().asItem());
         //glowstone crumbs recipes
         ShapedRecipeBuilder.shaped(Items.GLOWSTONE_DUST)
-                .define('#', ExtendedMushroomsItems.GLOWSTONE_CRUMBS)
+                .define('#', ModItems.GLOWSTONE_CRUMBS.get())
                 .pattern("##")
                 .pattern("##")
-                .unlockedBy("has_crumbs", has(ExtendedMushroomsItems.GLOWSTONE_CRUMBS))
+                .unlockedBy("has_crumbs", has(ModItems.GLOWSTONE_CRUMBS.get()))
                 .save(consumer, getResourceLocation(Items.GLOWSTONE_DUST.getRegistryName().getPath()));
-        ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.GLOWSTONE_CRUMBS, 4)
+        ShapelessRecipeBuilder.shapeless(ModItems.GLOWSTONE_CRUMBS.get(), 4)
                 .requires(Items.GLOWSTONE_DUST)
                 .unlockedBy("has_dust", has(Items.GLOWSTONE_DUST))
                 .save(consumer);
 
         //poisonous mushroom
-        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, 1)
+        FairyRingRecipeBuilder.normal(ModBlocks.POISONOUS_MUSHROOM.get(), 1)
                 .requires(Tags.Items.MUSHROOMS)
                 .requires(Items.NETHER_WART)
                 .requires(Items.SPIDER_EYE)
@@ -206,35 +206,35 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer);
         mushroomWoodRecipes(consumer, "poisonous_mushroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM_STRIPPED.asItem(),
-                ExtendedMushroomsItems.POISONOUS_MUSHROOM_BOAT.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_BOOKSHELF.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_DOOR.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_FENCE.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_FENCE_GATE.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_LADDER.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PLANKS.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PRESSURE_PLATE.asItem(),
-                ExtendedMushroomsItems.POISONOUS_MUSHROOM_SIGN,
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_SLAB.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STAIRS.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_TRAPDOOR.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_VERTICAL_PLANKS.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_VERTICAL_SLAB.asItem());
+                ModBlocks.POISONOUS_MUSHROOM_STEM.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_STEM_STRIPPED.get().asItem(),
+                ModItems.POISONOUS_MUSHROOM_BOAT.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_BOOKSHELF.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_BUTTON.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_CHEST.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_DOOR.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_FENCE.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_FENCE_GATE.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_LADDER.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_PLANKS.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_PRESSURE_PLATE.get().asItem(),
+                ModItems.POISONOUS_MUSHROOM_SIGN.get(),
+                ModBlocks.POISONOUS_MUSHROOM_SLAB.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_STAIRS.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_TRAPDOOR.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_VERTICAL_PLANKS.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_VERTICAL_SLAB.get().asItem());
         mushroomCapRecipes(consumer, "poisonous_mushroom",
                 ModTags.ForgeItems.MUSHROOM_CAPS_PURPLE,
                 Items.PURPLE_BANNER,
                 Items.PURPLE_BED,
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_CARPET.asItem(),
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.asItem());
+                ModBlocks.POISONOUS_MUSHROOM_CAP_BUTTON.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_CAP_CARPET.get().asItem(),
+                ModBlocks.POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.get().asItem());
 
         //slime fungus
-        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.SLIME_FUNGUS, 1)
+        FairyRingRecipeBuilder.normal(ModBlocks.SLIME_FUNGUS.get(), 1)
                 .requires(Tags.Items.MUSHROOMS)
                 .requires(Items.SLIME_BLOCK)
                 .requires(Items.RABBIT_FOOT)
@@ -244,24 +244,24 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
                 Items.ORANGE_BANNER,
                 Items.ORANGE_BED,
-                ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP_CARPET.asItem(),
-                ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP_PRESSURE_PLATE.asItem());
+                ModBlocks.SLIME_FUNGUS_CAP_BUTTON.get().asItem(),
+                ModBlocks.SLIME_FUNGUS_CAP_CARPET.get().asItem(),
+                ModBlocks.SLIME_FUNGUS_CAP_PRESSURE_PLATE.get().asItem());
         //no wood for slime fungus
         //slime blob recipes
         ShapedRecipeBuilder.shaped(Items.SLIME_BALL)
-                .define('#', ExtendedMushroomsItems.SLIME_BLOB)
+                .define('#', ModItems.SLIME_BLOB.get())
                 .pattern("##")
                 .pattern("##")
-                .unlockedBy("has_blobs", has(ExtendedMushroomsItems.SLIME_BLOB))
+                .unlockedBy("has_blobs", has(ModItems.SLIME_BLOB.get()))
                 .save(consumer, getResourceLocation(Items.SLIME_BALL.getRegistryName().getPath()));
-        ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.SLIME_BLOB, 4)
+        ShapelessRecipeBuilder.shapeless(ModItems.SLIME_BLOB.get(), 4)
                 .requires(Items.SLIME_BALL)
                 .unlockedBy("has_slime", has(Items.SLIME_BALL))
                 .save(consumer);
 
         //honey fungus
-        FairyRingRecipeBuilder.normal(ExtendedMushroomsBlocks.HONEY_FUNGUS, 1)
+        FairyRingRecipeBuilder.normal(ModBlocks.HONEY_FUNGUS.get(), 1)
                 .requires(Tags.Items.MUSHROOMS)
                 .requires(Items.HONEYCOMB)
                 .requires(Items.HONEY_BOTTLE)
@@ -269,50 +269,50 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer);
         mushroomWoodRecipes(consumer, "honey_fungus",
                 ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE,
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_STEM.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_STEM_STRIPPED.asItem(),
-                ExtendedMushroomsItems.HONEY_FUNGUS_BOAT.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_BOOKSHELF.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_CHEST.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_CHEST_TRAPPED.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_DOOR.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_FENCE.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_FENCE_GATE.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_LADDER.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_PLANKS.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_PRESSURE_PLATE.asItem(),
-                ExtendedMushroomsItems.HONEY_FUNGUS_SIGN,
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_SLAB.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_STAIRS.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_TRAPDOOR.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_VERTICAL_PLANKS.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_VERTICAL_SLAB.asItem());
+                ModBlocks.HONEY_FUNGUS_STEM.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_STEM_STRIPPED.get().asItem(),
+                ModItems.HONEY_FUNGUS_BOAT.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_BOOKSHELF.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_BUTTON.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_CHEST.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_CHEST_TRAPPED.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_DOOR.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_FENCE.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_FENCE_GATE.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_LADDER.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_PLANKS.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_PRESSURE_PLATE.get().asItem(),
+                ModItems.HONEY_FUNGUS_SIGN.get(),
+                ModBlocks.HONEY_FUNGUS_SLAB.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_STAIRS.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_TRAPDOOR.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_VERTICAL_PLANKS.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_VERTICAL_SLAB.get().asItem());
         mushroomCapRecipes(consumer, "honey_fungus",
                 ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE,
                 Items.ORANGE_BANNER,
                 Items.ORANGE_BED,
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP_BUTTON.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP_CARPET.asItem(),
-                ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP_PRESSURE_PLATE.asItem());
+                ModBlocks.HONEY_FUNGUS_CAP_BUTTON.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_CAP_CARPET.get().asItem(),
+                ModBlocks.HONEY_FUNGUS_CAP_PRESSURE_PLATE.get().asItem());
         //honey blob recipes
         ShapelessRecipeBuilder.shapeless(Items.HONEY_BOTTLE, 1)
                 .requires(Items.GLASS_BOTTLE)
-                .requires(ExtendedMushroomsItems.HONEY_BLOB, 3)
-                .unlockedBy("has_honey_blob", has(ExtendedMushroomsItems.HONEY_BLOB))
+                .requires(ModItems.HONEY_BLOB.get(), 3)
+                .unlockedBy("has_honey_blob", has(ModItems.HONEY_BLOB.get()))
                 .save(consumer, getResourceLocation(Items.HONEY_BOTTLE.getRegistryName().getPath()));
         ShapelessRecipeBuilder.shapeless(Items.SUGAR)
-                .requires(ExtendedMushroomsItems.HONEY_BLOB)
-                .unlockedBy("has_honey_blob", has(ExtendedMushroomsItems.HONEY_BLOB))
+                .requires(ModItems.HONEY_BLOB.get())
+                .unlockedBy("has_honey_blob", has(ModItems.HONEY_BLOB.get()))
                 .save(consumer, getResourceLocation(Items.SUGAR.getRegistryName().getPath()));
         //honeycomb shred recipes
         ShapedRecipeBuilder.shaped(Items.HONEYCOMB)
-                .define('#', ExtendedMushroomsItems.HONEYCOMB_SHRED)
+                .define('#', ModItems.HONEYCOMB_SHRED.get())
                 .pattern("##")
                 .pattern("##")
-                .unlockedBy("has_shreds", has(ExtendedMushroomsItems.HONEYCOMB_SHRED))
+                .unlockedBy("has_shreds", has(ModItems.HONEYCOMB_SHRED.get()))
                 .save(consumer, getResourceLocation(Items.HONEYCOMB.getRegistryName().getPath()));
-        ShapelessRecipeBuilder.shapeless(ExtendedMushroomsItems.HONEYCOMB_SHRED, 4)
+        ShapelessRecipeBuilder.shapeless(ModItems.HONEYCOMB_SHRED.get(), 4)
                 .requires(Items.HONEYCOMB)
                 .unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
                 .save(consumer);

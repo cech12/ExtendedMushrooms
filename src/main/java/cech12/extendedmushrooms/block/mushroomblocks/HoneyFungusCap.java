@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
+import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,7 +38,7 @@ public class HoneyFungusCap extends AbstractEffectMushroomCap {
     @Override
     public boolean canStickTo(BlockState state, BlockState other) {
         //TODO When this block is pushed by a piston, an adjacent slime block still sticks to it (mixin slime block?)
-        if (other.getBlock() == Blocks.SLIME_BLOCK || other.getBlock() == ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP) return false;
+        if (other.getBlock() == Blocks.SLIME_BLOCK || other.getBlock() == ModBlocks.SLIME_FUNGUS_CAP.get()) return false;
         return state.isStickyBlock() || other.isStickyBlock();
     }
 

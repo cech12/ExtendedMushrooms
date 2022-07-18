@@ -1,10 +1,9 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
-import cech12.extendedmushrooms.client.renderer.tileentity.FairyRingTileEntityRenderer;
-import cech12.extendedmushrooms.client.renderer.tileentity.VariantChestTileEntityRenderer;
-import cech12.extendedmushrooms.client.renderer.tileentity.VariantTrappedChestTileEntityRenderer;
+import cech12.extendedmushrooms.client.renderer.blockentity.FairyRingBlockEntityRenderer;
+import cech12.extendedmushrooms.client.renderer.blockentity.VariantChestBlockEntityRenderer;
+import cech12.extendedmushrooms.client.renderer.blockentity.VariantTrappedChestBlockEntityRenderer;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
 import cech12.extendedmushrooms.tileentity.MushroomSignTileEntity;
@@ -24,8 +23,6 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-import java.util.function.Supplier;
-
 import static cech12.extendedmushrooms.api.tileentity.ExtendedMushroomsTileEntities.*;
 
 @Mod.EventBusSubscriber(modid= ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -33,7 +30,7 @@ public class ModTileEntities {
 
     @SubscribeEvent
     public static void registerTileEntities(RegistryEvent.Register<BlockEntityType<?>> event) {
-        FAIRY_RING = register(event, FairyRingTileEntity::new, "fairy_ring", ExtendedMushroomsBlocks.FAIRY_RING);
+        FAIRY_RING = register(event, FairyRingTileEntity::new, "fairy_ring", ModBlocks.FAIRY_RING);
         MUSHROOM_SIGN = register(event, MushroomSignTileEntity::new, "mushroom_sign",
                 ModBlocks.MUSHROOM_STANDING_SIGN.get(),
                 ModBlocks.MUSHROOM_WALL_SIGN.get(),
@@ -42,13 +39,13 @@ public class ModTileEntities {
                 ModBlocks.POISONOUS_MUSHROOM_STANDING_SIGN.get(),
                 ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN.get());
         VARIANT_CHEST = register(event, VariantChestTileEntity::new, "variant_chest",
-                ExtendedMushroomsBlocks.MUSHROOM_CHEST,
-                ExtendedMushroomsBlocks.GLOWSHROOM_CHEST,
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST);
+                ModBlocks.MUSHROOM_CHEST.get(),
+                ModBlocks.GLOWSHROOM_CHEST.get(),
+                ModBlocks.POISONOUS_MUSHROOM_CHEST.get());
         VARIANT_TRAPPED_CHEST = register(event, VariantTrappedChestTileEntity::new, "variant_trapped_chest",
-                ExtendedMushroomsBlocks.MUSHROOM_CHEST_TRAPPED,
-                ExtendedMushroomsBlocks.GLOWSHROOM_CHEST_TRAPPED,
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED);
+                ModBlocks.MUSHROOM_CHEST_TRAPPED.get(),
+                ModBlocks.GLOWSHROOM_CHEST_TRAPPED.get(),
+                ModBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED.get());
     }
 
 
@@ -64,15 +61,15 @@ public class ModTileEntities {
      */
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderers(final FMLClientSetupEvent event) {
-        ClientRegistry.bindTileEntityRenderer((BlockEntityType<FairyRingTileEntity>) FAIRY_RING, FairyRingTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer((BlockEntityType<FairyRingTileEntity>) FAIRY_RING, FairyRingBlockEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer((BlockEntityType<SignBlockEntity>) MUSHROOM_SIGN, SignRenderer::new);
         event.enqueueWork(() -> {
             for (MushroomWoodType type : MushroomWoodType.values()) {
                 Sheets.addWoodType(type.getWoodType());
             }
         });
-        ClientRegistry.bindTileEntityRenderer((BlockEntityType<VariantChestTileEntity>) VARIANT_CHEST, VariantChestTileEntityRenderer::new);
-        ClientRegistry.bindTileEntityRenderer((BlockEntityType<VariantTrappedChestTileEntity>) VARIANT_TRAPPED_CHEST, VariantTrappedChestTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer((BlockEntityType<VariantChestTileEntity>) VARIANT_CHEST, VariantChestBlockEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer((BlockEntityType<VariantTrappedChestTileEntity>) VARIANT_TRAPPED_CHEST, VariantTrappedChestBlockEntityRenderer::new);
     }
 
 

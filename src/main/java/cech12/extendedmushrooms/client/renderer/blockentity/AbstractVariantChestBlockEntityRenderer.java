@@ -1,4 +1,4 @@
-package cech12.extendedmushrooms.client.renderer.tileentity;
+package cech12.extendedmushrooms.client.renderer.blockentity;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.item.MushroomWoodType;
@@ -26,7 +26,7 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 
-public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestBlockEntity> implements BlockEntityRenderer<T> {
+public abstract class AbstractVariantChestBlockEntityRenderer<T extends ChestBlockEntity> implements BlockEntityRenderer<T> {
 
     private static final HashMap<MushroomWoodType, ChestTextures> TEXTURES = new HashMap<>();
 
@@ -40,7 +40,7 @@ public abstract class AbstractVariantChestTileEntityRenderer<T extends ChestBloc
     private final ModelPart doubleRightBottom;
     private final ModelPart doubleRightLock;
 
-    public AbstractVariantChestTileEntityRenderer(BlockEntityRenderDispatcher p_i226008_1_) {
+    public AbstractVariantChestBlockEntityRenderer(BlockEntityRenderDispatcher p_i226008_1_) {
         super(p_i226008_1_);
 
         this.bottom = new ModelPart(64, 64, 0, 19);

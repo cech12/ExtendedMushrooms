@@ -1,11 +1,11 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
-import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
 import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
+import cech12.extendedmushrooms.init.ModBlocks;
+import cech12.extendedmushrooms.init.ModItems;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ibm.icu.impl.Pair;
@@ -84,17 +84,17 @@ public class BlockLootProvider implements DataProvider {
         }
 
         //caps have other loot
-        this.functionTable.put(ExtendedMushroomsBlocks.GLOWSHROOM_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.GLOWSHROOM,
-                Pair.of(ExtendedMushroomsItems.GLOWSTONE_CRUMBS, new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-        this.functionTable.put(ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.POISONOUS_MUSHROOM));
-        this.functionTable.put(ExtendedMushroomsBlocks.SLIME_FUNGUS_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.SLIME_FUNGUS,
-                Pair.of(ExtendedMushroomsItems.SLIME_BLOB, new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-        this.functionTable.put(ExtendedMushroomsBlocks.HONEY_FUNGUS_CAP, block -> dropCap(block, ExtendedMushroomsBlocks.HONEY_FUNGUS,
-                Pair.of(ExtendedMushroomsItems.HONEY_BLOB, new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F}),
-                Pair.of(ExtendedMushroomsItems.HONEYCOMB_SHRED, new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
+        this.functionTable.put(ModBlocks.GLOWSHROOM_CAP.get(), block -> dropCap(block, ModBlocks.GLOWSHROOM.get(),
+                Pair.of(ModItems.GLOWSTONE_CRUMBS.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
+        this.functionTable.put(ModBlocks.POISONOUS_MUSHROOM_CAP.get(), block -> dropCap(block, ModBlocks.POISONOUS_MUSHROOM.get()));
+        this.functionTable.put(ModBlocks.SLIME_FUNGUS_CAP.get(), block -> dropCap(block, ModBlocks.SLIME_FUNGUS.get(),
+                Pair.of(ModItems.SLIME_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
+        this.functionTable.put(ModBlocks.HONEY_FUNGUS_CAP.get(), block -> dropCap(block, ModBlocks.HONEY_FUNGUS.get(),
+                Pair.of(ModItems.HONEY_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F}),
+                Pair.of(ModItems.HONEYCOMB_SHRED.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
 
         //only with shears
-        this.functionTable.put(ExtendedMushroomsBlocks.INFESTED_GRASS, BlockLootProvider::dropOnlyWithShears);
+        this.functionTable.put(ModBlocks.INFESTED_GRASS.get(), BlockLootProvider::dropOnlyWithShears);
     }
 
     private static Path getPath(Path root, ResourceLocation id) {

@@ -1,15 +1,16 @@
 package cech12.extendedmushrooms.item;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
-import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
+import cech12.extendedmushrooms.init.ModBlocks;
+import cech12.extendedmushrooms.init.ModItems;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -19,38 +20,38 @@ import java.util.function.Supplier;
 public enum MushroomWoodType implements StringRepresentable {
 
     MUSHROOM(0, "mushroom",
-            ()->Blocks.MUSHROOM_STEM,
-            ()->ExtendedMushroomsBlocks.MUSHROOM_PLANKS,
-            ()->ExtendedMushroomsItems.MUSHROOM_BOAT),
+            RegistryObject.create(Blocks.MUSHROOM_STEM.getRegistryName(), ForgeRegistries.BLOCKS),
+            ModBlocks.MUSHROOM_PLANKS,
+            ModItems.MUSHROOM_BOAT),
     GLOWSHROOM(1, "glowshroom",
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_PLANKS,
-            ()->ExtendedMushroomsItems.GLOWSHROOM_BOAT,
-            ()->ExtendedMushroomsBlocks.GLOWSHROOM_STEM.getLightEmission(ExtendedMushroomsBlocks.GLOWSHROOM_STEM.defaultBlockState(), null, null)),
+            ModBlocks.GLOWSHROOM_STEM,
+            ModBlocks.GLOWSHROOM_PLANKS,
+            ModItems.GLOWSHROOM_BOAT,
+            () -> ModBlocks.GLOWSHROOM_STEM.get().getLightEmission(ModBlocks.GLOWSHROOM_STEM.get().defaultBlockState(), null, null)),
     POISONOUS_MUSHROOM(2, "poisonous_mushroom",
-            ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_STEM,
-            ()->ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_PLANKS,
-            ()->ExtendedMushroomsItems.POISONOUS_MUSHROOM_BOAT),
+            ModBlocks.POISONOUS_MUSHROOM_STEM,
+            ModBlocks.POISONOUS_MUSHROOM_PLANKS,
+            ModItems.POISONOUS_MUSHROOM_BOAT),
     HONEY_FUNGUS(3, "honey_fungus",
-            ()->ExtendedMushroomsBlocks.HONEY_FUNGUS_STEM,
-            ()->ExtendedMushroomsBlocks.HONEY_FUNGUS_PLANKS,
-            ()->ExtendedMushroomsItems.HONEY_FUNGUS_BOAT);
+            ModBlocks.HONEY_FUNGUS_STEM,
+            ModBlocks.HONEY_FUNGUS_PLANKS,
+            ModItems.HONEY_FUNGUS_BOAT);
 
     private static final MushroomWoodType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomWoodType::getId)).toArray(MushroomWoodType[]::new);
 
     private final int id;
     private final String name;
-    private final Supplier<Block> stemBlock;
-    private final Supplier<Block> planksBlock;
-    private final Supplier<ItemLike> boatItem;
+    private final RegistryObject<Block> stemBlock;
+    private final RegistryObject<Block> planksBlock;
+    private final RegistryObject<Item> boatItem;
     private final Supplier<Integer> lightValue;
     private final WoodType woodType;
 
-    MushroomWoodType(int id, String name, Supplier<Block> stemBlock, Supplier<Block> planksBlock, Supplier<ItemLike> boatItem) {
+    MushroomWoodType(int id, String name, RegistryObject<Block> stemBlock, RegistryObject<Block> planksBlock, RegistryObject<Item> boatItem) {
         this(id, name, stemBlock, planksBlock, boatItem, () -> 0);
     }
 
-    MushroomWoodType(int id, String name, Supplier<Block> stemBlock, Supplier<Block> planksBlock, Supplier<ItemLike> boatItem, Supplier<Integer> lightValue) {
+    MushroomWoodType(int id, String name, RegistryObject<Block> stemBlock, RegistryObject<Block> planksBlock, RegistryObject<Item> boatItem, Supplier<Integer> lightValue) {
         this.id = id;
         this.name = name;
         this.stemBlock = stemBlock;

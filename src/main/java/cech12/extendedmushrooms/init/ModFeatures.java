@@ -1,7 +1,6 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
 import cech12.extendedmushrooms.block.mushrooms.HoneyFungus;
@@ -73,8 +72,8 @@ public class ModFeatures {
     }
 
     public static final class Configured {
-        public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> INFESTED_FLOWER = FeatureUtils.register("infested_flower", Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ExtendedMushroomsBlocks.INFESTED_FLOWER)))));
-        public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> INFESTED_GRASS = FeatureUtils.register("infested_flower", Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ExtendedMushroomsBlocks.INFESTED_GRASS)))));
+        public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> INFESTED_FLOWER = FeatureUtils.register("infested_flower", Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.INFESTED_FLOWER.get())))));
+        public static Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> INFESTED_GRASS = FeatureUtils.register("infested_flower", Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.INFESTED_GRASS.get())))));
 
         public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_BROWN_MUSHROOM = register("mega_brown_mushroom", NotConfigured.MEGA_BROWN_MUSHROOM, BrownMushroom.getConfig());
         public static Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_RED_MUSHROOM= register("mega_red_mushroom", NotConfigured.MEGA_RED_MUSHROOM, RedMushroom.getConfig());
@@ -113,10 +112,10 @@ public class ModFeatures {
 
             megaMushrooms.add(new BigMushroom("mega_red_mushroom", Configured.MEGA_RED_MUSHROOM, 0.2F, Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED));
             megaMushrooms.add(new BigMushroom("mega_brown_mushroom", Configured.MEGA_BROWN_MUSHROOM, 0.2F, Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED));
-            mushrooms.add(new Mushroom("glowshroom", ExtendedMushroomsBlocks.GLOWSHROOM, 0.4F, 32, Config.GLOWSHROOM_GENERATION_ENABLED));
+            mushrooms.add(new Mushroom("glowshroom", ModBlocks.GLOWSHROOM.get(), 0.4F, 32, Config.GLOWSHROOM_GENERATION_ENABLED));
             bigMushrooms.add(new BigMushroom("big_glowshroom", Configured.BIG_GLOWSHROOM, 0.15F, Config.BIG_GLOWSHROOM_GENERATION_ENABLED));
             megaMushrooms.add(new BigMushroom("mega_glowshroom", Configured.MEGA_GLOWSHROOM, 0.02F, Config.MEGA_GLOWSHROOM_GENERATION_ENABLED));
-            mushrooms.add(new Mushroom("poisonous_mushroom", ExtendedMushroomsBlocks.POISONOUS_MUSHROOM, 0.5F, 32,  Config.POISONOUS_MUSHROOM_GENERATION_ENABLED));
+            mushrooms.add(new Mushroom("poisonous_mushroom", ModBlocks.POISONOUS_MUSHROOM.get(), 0.5F, 32,  Config.POISONOUS_MUSHROOM_GENERATION_ENABLED));
             bigMushrooms.add(new BigMushroom("big_poisonous_mushroom", Configured.BIG_POISONOUS_MUSHROOM, 0.1F, Config.BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED));
             megaMushrooms.add(new BigMushroom("mega_poisonous_mushroom", Configured.MEGA_POISONOUS_MUSHROOM, 0.02F, Config.MEGA_POISONOUS_MUSHROOM_GENERATION_ENABLED));
 

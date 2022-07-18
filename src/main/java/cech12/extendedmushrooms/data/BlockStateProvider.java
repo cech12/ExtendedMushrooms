@@ -109,12 +109,13 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                         int xRot = 0;
                         int yRot = 0;
                         switch (entry.getKey()) {
-                            case EAST: yRot = 90; break;
-                            case SOUTH: yRot = 180; break;
-                            case WEST: yRot = 270; break;
-                            case UP: xRot = 270; break;
-                            case DOWN: xRot = 90; break;
-                            default: break;
+                            case EAST -> yRot = 90;
+                            case SOUTH -> yRot = 180;
+                            case WEST -> yRot = 270;
+                            case UP -> xRot = 270;
+                            case DOWN -> xRot = 90;
+                            default -> {
+                            }
                         }
                         builder.part()
                                 .modelFile((boolValue) ? outside : inside).rotationX(xRot).rotationY(yRot).uvLock(boolValue).addModel()

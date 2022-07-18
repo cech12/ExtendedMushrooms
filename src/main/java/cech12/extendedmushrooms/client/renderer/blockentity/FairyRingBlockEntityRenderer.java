@@ -1,4 +1,4 @@
-package cech12.extendedmushrooms.client.renderer.tileentity;
+package cech12.extendedmushrooms.client.renderer.blockentity;
 
 import cech12.extendedmushrooms.client.ClientTickObserver;
 import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemStack;
 import com.mojang.math.Quaternion;
 import net.minecraft.world.phys.Vec3;
@@ -16,13 +15,12 @@ import com.mojang.math.Vector3f;
 
 import javax.annotation.Nonnull;
 
-public class FairyRingTileEntityRenderer extends BlockEntityRenderer<FairyRingTileEntity> {
+public class FairyRingBlockEntityRenderer implements BlockEntityRenderer<FairyRingTileEntity> {
 
     //private FairyRingWitchRenderer witchRenderer;
     //private WitchEntity witchEntity;
 
-    public FairyRingTileEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+    public FairyRingBlockEntityRenderer() {
     }
 
     /*
@@ -72,7 +70,7 @@ public class FairyRingTileEntityRenderer extends BlockEntityRenderer<FairyRingTi
             }
             float anglePerItem = 360F / itemCount;
             Minecraft mc = Minecraft.getInstance();
-            mc.textureManager.bind(TextureAtlas.LOCATION_BLOCKS);
+            mc.textureManager.bindForSetup(TextureAtlas.LOCATION_BLOCKS);
             Vector3f yAxis = new Vector3f(0, 1, 0);
             for(int i = 0; i < fairyRing.getContainerSize(); i++) {
                 matrixStack.pushPose();
@@ -87,7 +85,7 @@ public class FairyRingTileEntityRenderer extends BlockEntityRenderer<FairyRingTi
                 //render item
                 ItemStack stack = fairyRing.getItem(i);
                 if(!stack.isEmpty()) {
-                    mc.getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, p1, p2, matrixStack, iRenderTypeBuffer);
+                    mc.getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, p1, p2, matrixStack, iRenderTypeBuffer, 0);
                 }
                 matrixStack.popPose();
             }
