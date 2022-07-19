@@ -70,18 +70,20 @@ public class ExtendedMushrooms {
 
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModBlocks.BLOCKS.register(eventBus);
+        ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(eventBus);
+        ModItems.ITEMS.register(eventBus);
+        ModEntityTypes.ENTITY_TYPES.register(eventBus);
+        ModFeatures.CONFIGURED_FEATURES.register(eventBus);
+        ModFeatures.PLACED_FEATURES.register(eventBus);
+        ModRecipeTypes.RECIPE_SERIALIZERS.register(eventBus);
+
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
         eventBus.addGenericListener(GlobalLootModifierSerializer.class, this::onRegisterModifierSerializers);
 
         // Register an event with the mod specific event bus for mod own recipes.
         eventBus.addGenericListener(RecipeSerializer.class, this::registerRecipeSerializers);
-
-        ModBlocks.BLOCKS.register(eventBus);
-        ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(eventBus);
-        ModItems.ITEMS.register(eventBus);
-        ModEntityTypes.ENTITY_TYPES.register(eventBus);
-        ModRecipeTypes.RECIPE_SERIALIZERS.register(eventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

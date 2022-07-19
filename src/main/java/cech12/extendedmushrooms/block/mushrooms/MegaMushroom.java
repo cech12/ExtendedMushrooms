@@ -1,7 +1,6 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.MushroomUtils;
-import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -11,6 +10,7 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -36,10 +36,10 @@ public abstract class MegaMushroom extends BigMushroom {
     }
 
     @Nonnull
-    protected abstract Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getMegaMushroomFeature();
+    protected abstract RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getMegaMushroomFeature();
 
     protected boolean growMegaMushroom(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random, int x, int z) {
-        ConfiguredFeature<?, ?> feature = this.getMegaMushroomFeature().value();
+        ConfiguredFeature<?, ?> feature = this.getMegaMushroomFeature().get();
         BlockState lvt_9_1_ = Blocks.AIR.defaultBlockState();
         world.setBlock(blockPos.offset(x, 0, z), lvt_9_1_, 4);
         world.setBlock(blockPos.offset(x + 1, 0, z), lvt_9_1_, 4);

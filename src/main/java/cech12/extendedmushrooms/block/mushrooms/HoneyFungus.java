@@ -2,10 +2,10 @@ package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModFeatures;
-import net.minecraft.core.Holder;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 
@@ -18,7 +18,7 @@ public class HoneyFungus extends BigMushroom {
 
     @Nonnull
     @Override
-    public Holder<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature() {
+    public RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature() {
         return ModFeatures.Configured.BIG_HONEY_FUNGUS;
     }
 

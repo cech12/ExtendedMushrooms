@@ -14,7 +14,7 @@ public class EMMushroomBlock extends MushroomBlock {
     BigMushroom bigMushroom;
 
     public EMMushroomBlock(BigMushroom bigMushroom, Properties properties) {
-        super(properties, bigMushroom::getBigMushroomFeature);
+        super(properties, () -> bigMushroom.getBigMushroomFeature().getHolder().get());
         this.bigMushroom = bigMushroom;
     }
 
