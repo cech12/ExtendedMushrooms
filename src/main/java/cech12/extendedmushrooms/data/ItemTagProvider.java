@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.item.ExtendedMushroomsItems;
+import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.item.MushroomBoatItem;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -86,7 +86,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
         copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
 
-        tag(ModTags.ForgeItems.BREAD).add(ExtendedMushroomsItems.MUSHROOM_BREAD);
+        tag(ModTags.ForgeItems.BREAD).add(ModItems.MUSHROOM_BREAD.get());
         tag(ModTags.ForgeItems.RAW_MEAT).add(Items.BEEF).add(Items.CHICKEN).add(Items.MUTTON).add(Items.PORKCHOP).add(Items.RABBIT);
 
         //generate minecraft tags

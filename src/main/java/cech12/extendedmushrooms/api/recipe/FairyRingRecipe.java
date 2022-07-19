@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.api.recipe;
 
-import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
+import cech12.extendedmushrooms.blockentity.FairyRingBlockEntity;
+import cech12.extendedmushrooms.init.ModRecipeTypes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -60,7 +60,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
     @Nonnull
     @Override
     public RecipeType<?> getType() {
-        return ExtendedMushroomsRecipeTypes.FAIRY_RING;
+        return ModRecipeTypes.FAIRY_RING;
     }
 
     @Nonnull
@@ -171,7 +171,6 @@ public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
     public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FairyRingRecipe> {
 
         Serializer() {
-            this.setRegistryName(new ResourceLocation(ExtendedMushrooms.MOD_ID, "fairy_ring_recipe"));
         }
 
         @Nonnull
@@ -182,8 +181,8 @@ public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
             NonNullList<Ingredient> ingredients = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
             if (ingredients.isEmpty()) {
                 throw new JsonParseException("No ingredients for fairy ring recipe");
-            } else if (ingredients.size() > FairyRingTileEntity.INVENTORY_SIZE) {
-                throw new JsonParseException("Too many ingredients for fairy ring recipe the max is " + FairyRingTileEntity.INVENTORY_SIZE);
+            } else if (ingredients.size() > FairyRingBlockEntity.INVENTORY_SIZE) {
+                throw new JsonParseException("Too many ingredients for fairy ring recipe the max is " + FairyRingBlockEntity.INVENTORY_SIZE);
             }
             //deserialize recipe time
             int time = GsonHelper.getAsInt(json, "recipeTime");

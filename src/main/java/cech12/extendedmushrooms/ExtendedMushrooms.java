@@ -1,20 +1,19 @@
 package cech12.extendedmushrooms;
 
-import cech12.extendedmushrooms.api.recipe.ExtendedMushroomsRecipeTypes;
+import cech12.extendedmushrooms.init.ModRecipeTypes;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
 import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMushroomGoal;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
+import cech12.extendedmushrooms.init.ModBlockEntityTypes;
 import cech12.extendedmushrooms.init.ModBlocks;
-import cech12.extendedmushrooms.init.ModEntities;
+import cech12.extendedmushrooms.init.ModEntityTypes;
 import cech12.extendedmushrooms.init.ModFeatures;
 import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModTags;
-import cech12.extendedmushrooms.init.ModTileEntities;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
-import cech12.extendedmushrooms.item.crafting.MushroomArrowRecipe;
 import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
 import cech12.extendedmushrooms.loot_modifiers.MushroomCapLootModifier;
 import cech12.extendedmushrooms.loot_modifiers.MushroomStemLootModifier;
@@ -79,7 +78,10 @@ public class ExtendedMushrooms {
         eventBus.addGenericListener(RecipeSerializer.class, this::registerRecipeSerializers);
 
         ModBlocks.BLOCKS.register(eventBus);
+        ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(eventBus);
         ModItems.ITEMS.register(eventBus);
+        ModEntityTypes.ENTITY_TYPES.register(eventBus);
+        ModRecipeTypes.RECIPE_SERIALIZERS.register(eventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -94,8 +96,8 @@ public class ExtendedMushrooms {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ModBlocks.setupRenderLayers();
-        ModEntities.setupRenderers();
-        ModTileEntities.setupRenderers(event);
+        ModEntityTypes.setupRenderers();
+        ModBlockEntityTypes.setupRenderers(event);
     }
 
     private void registerRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event) {
@@ -103,12 +105,7 @@ public class ExtendedMushrooms {
         CraftingHelper.register(ModFeatureEnabledCondition.Serializer.INSTANCE);
 
         // let other mods register recipes
-        ExtendedMushroomsRecipeTypes.FAIRY_RING = Registry.register(Registry.RECIPE_TYPE, ExtendedMushroomsRecipeTypes.FAIRY_RING_ID,
-                new RecipeType<FairyRingRecipe>() {});
-
-        // Register the recipe serializer.
-        event.getRegistry().register(MushroomArrowRecipe.SERIALIZER);
-        event.getRegistry().register(FairyRingRecipe.SERIALIZER);
+        ModRecipeTypes.FAIRY_RING = Registry.register(Registry.RECIPE_TYPE, ModRecipeTypes.FAIRY_RING_ID, new RecipeType<FairyRingRecipe>() {});
     }
 
     /**
@@ -125,7 +122,7 @@ public class ExtendedMushrooms {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onBiomeLoadingEvent(final BiomeLoadingEvent event) {
-        ModEntities.addEntitiesToBiomes(event);
+        ModEntityTypes.addEntitiesToBiomes(event);
         ModFeatures.addFeaturesToBiomes(event);
     }
 

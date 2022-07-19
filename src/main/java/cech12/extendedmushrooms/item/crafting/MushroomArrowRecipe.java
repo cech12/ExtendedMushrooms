@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms.item.crafting;
 
-import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.init.ModTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -87,7 +86,6 @@ public class MushroomArrowRecipe extends CustomRecipe {
     private static class Serializer extends SimpleRecipeSerializer<MushroomArrowRecipe> {
         public Serializer() {
             super(MushroomArrowRecipe::new);
-            this.setRegistryName(ExtendedMushrooms.MOD_ID, "mushroom_arrow_recipe");
         }
     }
 

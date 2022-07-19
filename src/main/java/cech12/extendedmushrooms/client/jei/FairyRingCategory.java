@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.client.jei;
 
-import cech12.extendedmushrooms.api.recipe.ExtendedMushroomsRecipeTypes;
+import cech12.extendedmushrooms.init.ModRecipeTypes;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -66,7 +66,7 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
     @Override
     @Nonnull
     public ResourceLocation getUid() {
-        return ExtendedMushroomsRecipeTypes.FAIRY_RING_ID;
+        return ModRecipeTypes.FAIRY_RING_ID;
     }
 
     @Override

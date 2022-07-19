@@ -4,6 +4,8 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.AbstractChestBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,7 +16,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
@@ -40,36 +41,19 @@ public abstract class AbstractVariantChestBlockEntityRenderer<T extends ChestBlo
     private final ModelPart doubleRightBottom;
     private final ModelPart doubleRightLock;
 
-    public AbstractVariantChestBlockEntityRenderer(BlockEntityRenderDispatcher p_i226008_1_) {
-        super(p_i226008_1_);
-
-        this.bottom = new ModelPart(64, 64, 0, 19);
-        this.bottom.addBox(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
-        this.lid = new ModelPart(64, 64, 0, 0);
-        this.lid.addBox(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
-        this.lid.y = 9.0F;
-        this.lid.z = 1.0F;
-        this.lock = new ModelPart(64, 64, 0, 0);
-        this.lock.addBox(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
-        this.lock.y = 8.0F;
-        this.doubleLeftBottom = new ModelPart(64, 64, 0, 19);
-        this.doubleLeftBottom.addBox(1.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
-        this.doubleLeftLid = new ModelPart(64, 64, 0, 0);
-        this.doubleLeftLid.addBox(1.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
-        this.doubleLeftLid.y = 9.0F;
-        this.doubleLeftLid.z = 1.0F;
-        this.doubleLeftLock = new ModelPart(64, 64, 0, 0);
-        this.doubleLeftLock.addBox(15.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
-        this.doubleLeftLock.y = 8.0F;
-        this.doubleRightBottom = new ModelPart(64, 64, 0, 19);
-        this.doubleRightBottom.addBox(0.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
-        this.doubleRightLid = new ModelPart(64, 64, 0, 0);
-        this.doubleRightLid.addBox(0.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
-        this.doubleRightLid.y = 9.0F;
-        this.doubleRightLid.z = 1.0F;
-        this.doubleRightLock = new ModelPart(64, 64, 0, 0);
-        this.doubleRightLock.addBox(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
-        this.doubleRightLock.y = 8.0F;
+    public AbstractVariantChestBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        ModelPart modelpart = context.bakeLayer(ModelLayers.CHEST);
+        this.bottom = modelpart.getChild("bottom");
+        this.lid = modelpart.getChild("lid");
+        this.lock = modelpart.getChild("lock");
+        ModelPart modelpart1 = context.bakeLayer(ModelLayers.DOUBLE_CHEST_LEFT);
+        this.doubleLeftBottom = modelpart1.getChild("bottom");
+        this.doubleLeftLid = modelpart1.getChild("lid");
+        this.doubleLeftLock = modelpart1.getChild("lock");
+        ModelPart modelpart2 = context.bakeLayer(ModelLayers.DOUBLE_CHEST_RIGHT);
+        this.doubleRightBottom = modelpart2.getChild("bottom");
+        this.doubleRightLid = modelpart2.getChild("lid");
+        this.doubleRightLock = modelpart2.getChild("lock");
     }
 
     public void render(T tileEntityIn, float partialTicks, @Nonnull PoseStack matrixStackIn, @Nonnull MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {

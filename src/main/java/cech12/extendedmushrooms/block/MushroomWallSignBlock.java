@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.block;
 
-import cech12.extendedmushrooms.tileentity.MushroomSignTileEntity;
+import cech12.extendedmushrooms.blockentity.MushroomSignBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,6 +18,6 @@ public class MushroomWallSignBlock extends WallSignBlock {
 
     @Override
     public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-        return new MushroomSignTileEntity(pos, state);
+        return new MushroomSignBlockEntity(pos, state);
     }
 }

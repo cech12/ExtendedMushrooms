@@ -1,14 +1,18 @@
 package cech12.extendedmushrooms.block;
 
-
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
-import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
+import cech12.extendedmushrooms.init.ModBlockEntityTypes;
+import cech12.extendedmushrooms.init.ModBlocks;
+import cech12.extendedmushrooms.blockentity.FairyRingBlockEntity;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.Containers;
@@ -34,7 +38,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class FairyRingBlock extends AirBlock {
+public class FairyRingBlock extends AirBlock implements EntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -49,6 +53,29 @@ public class FairyRingBlock extends AirBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, LIT);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new FairyRingBlockEntity(pos, state);
+    }
+
+    @Override
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockEntityType<T> entityType) {
+        return createTickerHelper(entityType, ModBlockEntityTypes.FAIRY_RING.get(), FairyRingBlockEntity::tick);
+    }
+
+    @Nullable
+    private static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> p_152133_, BlockEntityType<E> p_152134_, BlockEntityTicker<? super E> p_152135_) {
+        return p_152134_ == p_152133_ ? (BlockEntityTicker<A>)p_152135_ : null;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> GameEventListener getListener(@Nonnull Level level, @Nonnull T blockEntity) {
+        return null;
     }
 
     @Nonnull
@@ -86,8 +113,8 @@ public class FairyRingBlock extends AirBlock {
     @Override
     public void entityInside(@Nullable BlockState blockState, Level world, @Nonnull BlockPos blockPos, @Nonnull Entity entity) {
         BlockEntity blockEntity = world.getBlockEntity(blockPos);
-        if (blockEntity instanceof FairyRingTileEntity) {
-            ((FairyRingTileEntity) blockEntity).onEntityCollision(entity);
+        if (blockEntity instanceof FairyRingBlockEntity) {
+            ((FairyRingBlockEntity) blockEntity).onEntityCollision(entity);
         }
     }
 
@@ -96,8 +123,8 @@ public class FairyRingBlock extends AirBlock {
     public void onRemove(BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = worldIn.getBlockEntity(pos);
-            if (blockEntity instanceof FairyRingTileEntity) {
-                Containers.dropContents(worldIn, pos, (FairyRingTileEntity)blockEntity);
+            if (blockEntity instanceof FairyRingBlockEntity) {
+                Containers.dropContents(worldIn, pos, (FairyRingBlockEntity)blockEntity);
                 worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 
@@ -112,8 +139,8 @@ public class FairyRingBlock extends AirBlock {
     @OnlyIn(Dist.CLIENT)
     public void animateTick(@Nonnull BlockState stateIn, Level worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         BlockEntity blockEntity = worldIn.getBlockEntity(pos);
-        if (blockEntity instanceof FairyRingTileEntity) {
-            ((FairyRingTileEntity) blockEntity).animateTick(worldIn, rand);
+        if (blockEntity instanceof FairyRingBlockEntity) {
+            ((FairyRingBlockEntity) blockEntity).animateTick(worldIn, rand);
         }
     }
 
@@ -145,7 +172,7 @@ public class FairyRingBlock extends AirBlock {
                     mushroomSeen = true;
                     fairyRingBlockSeen = false;
                 }
-            } else if (neighbourBlock == ExtendedMushroomsBlocks.FAIRY_RING) {
+            } else if (neighbourBlock == ModBlocks.FAIRY_RING.get()) {
                 fairyRingBlocks++;
                 if (fairyRingBlockSeen) {
                     neighboursFound = true;
@@ -270,7 +297,7 @@ public class FairyRingBlock extends AirBlock {
         void placeBlocks(LevelAccessor world) {
             List<BlockPos> list = getSortedCenterPositions();
             for (int i = 0; i < 4; i++) {
-                BlockState state = ExtendedMushroomsBlocks.FAIRY_RING.defaultBlockState().setValue(FairyRingBlock.FACING, DIRECTIONS[i]);
+                BlockState state = ModBlocks.FAIRY_RING.get().defaultBlockState().setValue(FairyRingBlock.FACING, DIRECTIONS[i]);
                 //2 - no block updates to avoid to calling neighborChanged while placing
                 world.setBlock(list.get(i), state, 2);
             }

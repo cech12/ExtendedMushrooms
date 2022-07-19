@@ -1,11 +1,12 @@
 package cech12.extendedmushrooms.client.renderer.blockentity;
 
 import cech12.extendedmushrooms.client.ClientTickObserver;
-import cech12.extendedmushrooms.tileentity.FairyRingTileEntity;
+import cech12.extendedmushrooms.blockentity.FairyRingBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.item.ItemStack;
@@ -15,12 +16,12 @@ import com.mojang.math.Vector3f;
 
 import javax.annotation.Nonnull;
 
-public class FairyRingBlockEntityRenderer implements BlockEntityRenderer<FairyRingTileEntity> {
+public class FairyRingBlockEntityRenderer implements BlockEntityRenderer<FairyRingBlockEntity> {
 
     //private FairyRingWitchRenderer witchRenderer;
     //private WitchEntity witchEntity;
 
-    public FairyRingBlockEntityRenderer() {
+    public FairyRingBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     }
 
     /*
@@ -42,12 +43,12 @@ public class FairyRingBlockEntityRenderer implements BlockEntityRenderer<FairyRi
      */
 
     @Override
-    public void render(@Nonnull FairyRingTileEntity fairyRing, float partticks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource iRenderTypeBuffer, int p1, int p2) {
+    public void render(@Nonnull FairyRingBlockEntity fairyRing, float partticks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource iRenderTypeBuffer, int p1, int p2) {
         //only render inventory of master
         if (fairyRing.isMaster()) {
             matrixStack.pushPose();
             //move to ring center
-            Vec3 centerTranslation = FairyRingTileEntity.CENTER_TRANSLATION_VECTOR;
+            Vec3 centerTranslation = FairyRingBlockEntity.CENTER_TRANSLATION_VECTOR;
             matrixStack.translate(centerTranslation.x, centerTranslation.y, centerTranslation.z);
 
             int itemCount = 0;

@@ -11,9 +11,18 @@ import cech12.extendedmushrooms.block.mushroomblocks.SlimeFungusCap;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
 import cech12.extendedmushrooms.block.mushrooms.HoneyFungus;
 import cech12.extendedmushrooms.block.mushrooms.SlimeFungus;
+import cech12.extendedmushrooms.blockentity.VariantChestBlockEntity;
+import cech12.extendedmushrooms.blockentity.VariantTrappedChestBlockEntity;
 import cech12.extendedmushrooms.compat.ModCompat;
 import cech12.extendedmushrooms.item.MushroomType;
 import cech12.extendedmushrooms.item.MushroomWoodType;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
@@ -31,19 +40,19 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid= ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModBlocks {
-
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ExtendedMushrooms.MOD_ID);
 
@@ -55,8 +64,8 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> MUSHROOM_BOOKSHELF = registerCompatBlock("mushroom_bookshelf", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), () -> new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
     public static final RegistryObject<Block> MUSHROOM_BUTTON = registerBlock("mushroom_button", CreativeModeTab.TAB_REDSTONE, MushroomWoodButtonBlock::new);
-    public static final RegistryObject<Block> MUSHROOM_CHEST = registerCompatBlock("mushroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), () -> new VariantChestBlock(MushroomWoodType.MUSHROOM, Block.Properties.copy(Blocks.CHEST)));
-    public static final RegistryObject<Block> MUSHROOM_CHEST_TRAPPED = registerCompatBlock("mushroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), () -> new VariantTrappedChestBlock(MushroomWoodType.MUSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
+    public static final RegistryObject<Block> MUSHROOM_CHEST = registerVariantChest("mushroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), () -> new VariantChestBlock(MushroomWoodType.MUSHROOM, Block.Properties.copy(Blocks.CHEST)));
+    public static final RegistryObject<Block> MUSHROOM_CHEST_TRAPPED = registerTrappedVariantChest("mushroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), () -> new VariantTrappedChestBlock(MushroomWoodType.MUSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
     public static final RegistryObject<Block> MUSHROOM_DOOR = registerBlock("mushroom_door", CreativeModeTab.TAB_REDSTONE, () -> new DoorBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(3.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> MUSHROOM_FENCE = registerBlock("mushroom_fence", CreativeModeTab.TAB_DECORATIONS, () -> new MushroomFenceBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> MUSHROOM_FENCE_GATE = registerBlock("mushroom_fence_gate", CreativeModeTab.TAB_REDSTONE, () -> new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
@@ -89,8 +98,8 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> GLOWSHROOM_BOOKSHELF = registerCompatBlock("glowshroom_bookshelf", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), () -> new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF).lightLevel((state) -> 8)));
     public static final RegistryObject<Block> GLOWSHROOM_BUTTON = registerBlock("glowshroom_button", CreativeModeTab.TAB_REDSTONE, () -> new MushroomWoodButtonBlock(8));
-    public static final RegistryObject<Block> GLOWSHROOM_CHEST = registerCompatBlock("glowshroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), () -> new VariantChestBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.copy(Blocks.CHEST).lightLevel((state) -> 8)));
-    public static final RegistryObject<Block> GLOWSHROOM_CHEST_TRAPPED = registerCompatBlock("glowshroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), () -> new VariantTrappedChestBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST).lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> GLOWSHROOM_CHEST = registerVariantChest("glowshroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), () -> new VariantChestBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.copy(Blocks.CHEST).lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> GLOWSHROOM_CHEST_TRAPPED = registerTrappedVariantChest("glowshroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), () -> new VariantTrappedChestBlock(MushroomWoodType.GLOWSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST).lightLevel((state) -> 8)));
     public static final RegistryObject<Block> GLOWSHROOM_DOOR = registerBlock("glowshroom_door", CreativeModeTab.TAB_REDSTONE, () -> new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
     public static final RegistryObject<Block> GLOWSHROOM_FENCE = registerBlock("glowshroom_fence", CreativeModeTab.TAB_DECORATIONS, () -> new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
     public static final RegistryObject<Block> GLOWSHROOM_FENCE_GATE = registerBlock("glowshroom_fence_gate", CreativeModeTab.TAB_REDSTONE, () -> new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD).lightLevel((state) -> 8)));
@@ -117,8 +126,8 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> POISONOUS_MUSHROOM_BOOKSHELF = registerCompatBlock("poisonous_mushroom_bookshelf", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), () -> new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
     public static final RegistryObject<Block> POISONOUS_MUSHROOM_BUTTON = registerBlock("poisonous_mushroom_button", CreativeModeTab.TAB_REDSTONE, MushroomWoodButtonBlock::new);
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_CHEST = registerCompatBlock("poisonous_mushroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), () -> new VariantChestBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.copy(Blocks.CHEST)));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_CHEST_TRAPPED = registerCompatBlock("poisonous_mushroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), () -> new VariantTrappedChestBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
+    public static final RegistryObject<Block> POISONOUS_MUSHROOM_CHEST = registerVariantChest("poisonous_mushroom_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), () -> new VariantChestBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.copy(Blocks.CHEST)));
+    public static final RegistryObject<Block> POISONOUS_MUSHROOM_CHEST_TRAPPED = registerTrappedVariantChest("poisonous_mushroom_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), () -> new VariantTrappedChestBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
     public static final RegistryObject<Block> POISONOUS_MUSHROOM_DOOR = registerBlock("poisonous_mushroom_door", CreativeModeTab.TAB_REDSTONE, () -> new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> POISONOUS_MUSHROOM_FENCE = registerBlock("poisonous_mushroom_fence", CreativeModeTab.TAB_DECORATIONS, () -> new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> POISONOUS_MUSHROOM_FENCE_GATE = registerBlock("poisonous_mushroom_fence_gate", CreativeModeTab.TAB_REDSTONE, () -> new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
@@ -153,8 +162,8 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> HONEY_FUNGUS_BOOKSHELF = registerCompatBlock("honey_fungus_bookshelf", CreativeModeTab.TAB_BUILDING_BLOCKS, ModCompat.isVariantBookshelvesModLoaded(), () -> new BookshelfBlock(Block.Properties.copy(Blocks.BOOKSHELF)));
     public static final RegistryObject<Block> HONEY_FUNGUS_BUTTON = registerBlock("honey_fungus_button", CreativeModeTab.TAB_REDSTONE, MushroomWoodButtonBlock::new);
-    public static final RegistryObject<Block> HONEY_FUNGUS_CHEST = registerCompatBlock("honey_fungus_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), () -> new VariantChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.CHEST)));
-    public static final RegistryObject<Block> HONEY_FUNGUS_CHEST_TRAPPED = registerCompatBlock("honey_fungus_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), () -> new VariantTrappedChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
+    public static final RegistryObject<Block> HONEY_FUNGUS_CHEST = registerVariantChest("honey_fungus_chest", CreativeModeTab.TAB_DECORATIONS, ModCompat.isVariantChestsModLoaded(), () -> new VariantChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.CHEST)));
+    public static final RegistryObject<Block> HONEY_FUNGUS_CHEST_TRAPPED = registerTrappedVariantChest("honey_fungus_chest_trapped", CreativeModeTab.TAB_REDSTONE, ModCompat.isVariantTrappedChestsModLoaded(), () -> new VariantTrappedChestBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.copy(Blocks.TRAPPED_CHEST)));
     public static final RegistryObject<Block> HONEY_FUNGUS_DOOR = registerBlock("honey_fungus_door", CreativeModeTab.TAB_REDSTONE, () -> new DoorBlock(Block.Properties.of(Material.WOOD).strength(3.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> HONEY_FUNGUS_FENCE = registerBlock("honey_fungus_fence", CreativeModeTab.TAB_DECORATIONS, () -> new MushroomFenceBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> HONEY_FUNGUS_FENCE_GATE = registerBlock("honey_fungus_fence_gate", CreativeModeTab.TAB_REDSTONE, () -> new MushroomFenceGateBlock(Block.Properties.of(Material.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
@@ -201,15 +210,66 @@ public final class ModBlocks {
 
     private static RegistryObject<Block> registerBlock(String name, CreativeModeTab itemGroup, Supplier<? extends Block> block) {
         Item.Properties itemProperties = new Item.Properties().tab(itemGroup);
-        try {
-            if (block instanceof VariantChestBlock) {
-                ((VariantChestBlock)block).setISTER(itemProperties);
-            } else if (block instanceof VariantTrappedChestBlock) {
-                ((VariantTrappedChestBlock)block).setISTER(itemProperties);
-            }
-        } catch (NoSuchMethodError ignore) {}
         RegistryObject<Block> registeredBlock = BLOCKS.register(name, block);
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), itemProperties));
+        return registeredBlock;
+    }
+
+    private static RegistryObject<Block> registerVariantChest(String name, CreativeModeTab itemGroup, boolean isActive, Supplier<? extends VariantChestBlock> block) {
+        RegistryObject<Block> registeredBlock = BLOCKS.register(name, block);
+        Item.Properties itemProperties = new Item.Properties().tab((isActive) ? itemGroup : null);
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), itemProperties) {
+            @Override
+            public void initializeClient(@Nonnull Consumer<IItemRenderProperties> consumer) {
+                consumer.accept(new IItemRenderProperties() {
+                    final BlockEntityWithoutLevelRenderer myRenderer = new BlockEntityWithoutLevelRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels()) {
+                        private VariantChestBlockEntity blockEntity;
+
+                        @Override
+                        public void renderByItem(@Nonnull ItemStack stack, @Nonnull ItemTransforms.TransformType transformType, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource buffer, int x, int y) {
+                            if (blockEntity == null) {
+                                blockEntity = new VariantChestBlockEntity(block.get().getWoodType(), BlockPos.ZERO, block.get().defaultBlockState());
+                            }
+                            Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(blockEntity, matrix, buffer, x, y);
+                        }
+                    };
+
+                    @Override
+                    public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+                        return myRenderer;
+                    }
+                });
+            }
+        });
+        return registeredBlock;
+    }
+
+    private static RegistryObject<Block> registerTrappedVariantChest(String name, CreativeModeTab itemGroup, boolean isActive, Supplier<? extends VariantTrappedChestBlock> block) {
+        RegistryObject<Block> registeredBlock = BLOCKS.register(name, block);
+        Item.Properties itemProperties = new Item.Properties().tab((isActive) ? itemGroup : null);
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), itemProperties) {
+            @Override
+            public void initializeClient(@Nonnull Consumer<IItemRenderProperties> consumer) {
+                consumer.accept(new IItemRenderProperties() {
+                    final BlockEntityWithoutLevelRenderer myRenderer = new BlockEntityWithoutLevelRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels()) {
+                        private VariantTrappedChestBlockEntity blockEntity;
+
+                        @Override
+                        public void renderByItem(@Nonnull ItemStack stack, @Nonnull ItemTransforms.TransformType transformType, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource buffer, int x, int y) {
+                            if (blockEntity == null) {
+                                blockEntity = new VariantTrappedChestBlockEntity(block.get().getWoodType(), BlockPos.ZERO, block.get().defaultBlockState());
+                            }
+                            Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(blockEntity, matrix, buffer, x, y);
+                        }
+                    };
+
+                    @Override
+                    public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+                        return myRenderer;
+                    }
+                });
+            }
+        });
         return registeredBlock;
     }
 

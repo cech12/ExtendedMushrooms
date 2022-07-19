@@ -1,6 +1,6 @@
-package cech12.extendedmushrooms.tileentity;
+package cech12.extendedmushrooms.blockentity;
 
-import cech12.extendedmushrooms.api.tileentity.ExtendedMushroomsTileEntities;
+import cech12.extendedmushrooms.init.ModBlockEntityTypes;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -10,15 +10,15 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 
-public class VariantTrappedChestTileEntity extends ChestBlockEntity {
+public class VariantTrappedChestBlockEntity extends ChestBlockEntity {
 
     public MushroomWoodType woodType;
 
-    public VariantTrappedChestTileEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-        super(ExtendedMushroomsTileEntities.VARIANT_TRAPPED_CHEST, pos, state);
+    public VariantTrappedChestBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        super(ModBlockEntityTypes.VARIANT_TRAPPED_CHEST.get(), pos, state);
     }
 
-    public VariantTrappedChestTileEntity(MushroomWoodType woodType, @Nonnull BlockPos pos, @Nonnull BlockState state) {
+    public VariantTrappedChestBlockEntity(MushroomWoodType woodType, @Nonnull BlockPos pos, @Nonnull BlockState state) {
         this(pos, state);
         this.woodType = woodType;
     }

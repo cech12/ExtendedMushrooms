@@ -1,7 +1,6 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
 import cech12.extendedmushrooms.item.MushroomBoatItem;
 import cech12.extendedmushrooms.item.MushroomSporesItem;
 import cech12.extendedmushrooms.item.MushroomWoodType;
@@ -9,18 +8,11 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.SignItem;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import static cech12.extendedmushrooms.api.item.ExtendedMushroomsItems.*;
-
-@Mod.EventBusSubscriber(modid= ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ExtendedMushrooms.MOD_ID);
@@ -44,6 +36,6 @@ public class ModItems {
     public static final RegistryObject<Item> HONEY_BLOB = ITEMS.register("honey_blob", () -> new Item((new Item.Properties()).tab(CreativeModeTab.TAB_MATERIALS)));
     public static final RegistryObject<Item> HONEYCOMB_SHRED = ITEMS.register("honeycomb_shred", () -> new Item((new Item.Properties()).tab(CreativeModeTab.TAB_MATERIALS)));
 
-    public static final RegistryObject<Item> MUSHROOM_SHEEP_SPAWN_EGG = ITEMS.register("mushroom_sheep_spawn_egg", () -> new ForgeSpawnEggItem(() -> ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP, 10489616, 10051392, (new Item.Properties()).tab(CreativeModeTab.TAB_MISC)));
+    public static final RegistryObject<Item> MUSHROOM_SHEEP_SPAWN_EGG = ITEMS.register("mushroom_sheep_spawn_egg", () -> new ForgeSpawnEggItem(() -> ModEntityTypes.MUSHROOM_SHEEP.get(), 10489616, 10051392, (new Item.Properties()).tab(CreativeModeTab.TAB_MISC)));
 
 }

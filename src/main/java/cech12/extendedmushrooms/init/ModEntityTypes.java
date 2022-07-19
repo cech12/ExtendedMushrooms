@@ -1,47 +1,38 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
 import cech12.extendedmushrooms.client.renderer.entity.MushroomBoatRenderer;
 import cech12.extendedmushrooms.client.renderer.entity.MushroomSheepRenderer;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.item.MushroomBoatEntity;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import static cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes.*;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid= ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModEntities {
+public class ModEntityTypes {
 
-    @SubscribeEvent
-    public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-        registerEntity("mushroom_boat", MUSHROOM_BOAT);
-        registerEntity("mushroom_sheep", MUSHROOM_SHEEP);
-    }
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, ExtendedMushrooms.MOD_ID);
 
-    private static <T extends Entity> void registerEntity(String key, EntityType<T> entityType) {
-        entityType.setRegistryName(new ResourceLocation(ExtendedMushrooms.MOD_ID, key));
-        ForgeRegistries.ENTITIES.register(entityType);
-    }
+    public static RegistryObject<EntityType<MushroomBoatEntity>> MUSHROOM_BOAT = ENTITY_TYPES.register("mushroom_boat", () -> EntityType.Builder.of(MushroomBoatEntity::new, MobCategory.MISC).sized(1.375F, 0.5625F).build(ExtendedMushrooms.MOD_ID + ":mushroom_boat"));
+    public static RegistryObject<EntityType<MushroomSheepEntity>> MUSHROOM_SHEEP = ENTITY_TYPES.register("mushroom_sheep", () -> EntityType.Builder.of(MushroomSheepEntity::new, MobCategory.CREATURE).sized(0.9F, 1.3F).build("mushroom_sheep"));
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, Sheep.createAttributes().build());
+        event.put(MUSHROOM_SHEEP.get(), Sheep.createAttributes().build());
     }
 
     /**
@@ -49,8 +40,8 @@ public class ModEntities {
      */
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler((EntityType<MushroomBoatEntity>) MUSHROOM_BOAT, MushroomBoatRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler((EntityType<MushroomSheepEntity>) MUSHROOM_SHEEP, MushroomSheepRenderer::new);
+        EntityRenderers.register(MUSHROOM_BOAT.get(), MushroomBoatRenderer::new);
+        EntityRenderers.register(MUSHROOM_SHEEP.get(), MushroomSheepRenderer::new);
     }
 
     /**
@@ -61,7 +52,7 @@ public class ModEntities {
         if (event.getCategory().equals(Biome.BiomeCategory.MUSHROOM)) {
             if (Config.MUSHROOM_SHEEP_ENABLED.get()) {
                 event.getSpawns().addSpawn(MobCategory.CREATURE,
-                        new MobSpawnSettings.SpawnerData(ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP,
+                        new MobSpawnSettings.SpawnerData(MUSHROOM_SHEEP.get(),
                                 Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.get(),
                                 Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.get(),
                                 Config.MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.get()));

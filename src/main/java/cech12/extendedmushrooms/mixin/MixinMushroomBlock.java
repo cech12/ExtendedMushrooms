@@ -1,9 +1,9 @@
 package cech12.extendedmushrooms.mixin;
 
 import cech12.extendedmushrooms.MushroomUtils;
-import cech12.extendedmushrooms.api.block.ExtendedMushroomsBlocks;
 import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
 import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
+import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MushroomBlock;
@@ -31,7 +31,7 @@ public class MixinMushroomBlock {
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             mutablePos.set(pos).move(direction);
-            if (world.getBlockState(mutablePos).getBlock() == ExtendedMushroomsBlocks.FAIRY_RING) {
+            if (world.getBlockState(mutablePos).getBlock() == ModBlocks.FAIRY_RING.get()) {
                 ci.cancel();
                 return;
             }

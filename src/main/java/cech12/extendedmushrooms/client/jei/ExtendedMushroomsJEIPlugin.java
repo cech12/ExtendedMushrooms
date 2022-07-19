@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.client.jei;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.api.recipe.ExtendedMushroomsRecipeTypes;
+import cech12.extendedmushrooms.init.ModRecipeTypes;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -40,7 +40,7 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
             RecipeManager manager = player.connection.getRecipeManager();
-            registration.addRecipes(manager.getAllRecipesFor((RecipeType<FairyRingRecipe>) ExtendedMushroomsRecipeTypes.FAIRY_RING), ExtendedMushroomsRecipeTypes.FAIRY_RING_ID);
+            registration.addRecipes(manager.getAllRecipesFor((RecipeType<FairyRingRecipe>) ModRecipeTypes.FAIRY_RING), ModRecipeTypes.FAIRY_RING_ID);
         }
     }
 
@@ -52,7 +52,7 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(@Nonnull IRecipeCatalystRegistration registration) {
         Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(Tags.Items.MUSHROOMS).forEach(mushroom ->
-            registration.addRecipeCatalyst(new ItemStack(mushroom), ExtendedMushroomsRecipeTypes.FAIRY_RING_ID)
+            registration.addRecipeCatalyst(new ItemStack(mushroom), ModRecipeTypes.FAIRY_RING_ID)
         );
     }
 

@@ -1,23 +1,23 @@
 package cech12.extendedmushrooms.client.renderer.blockentity;
 
 import cech12.extendedmushrooms.block.VariantChestBlock;
+import cech12.extendedmushrooms.blockentity.VariantChestBlockEntity;
 import cech12.extendedmushrooms.item.MushroomWoodType;
-import cech12.extendedmushrooms.tileentity.VariantChestTileEntity;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class VariantChestBlockEntityRenderer extends AbstractVariantChestBlockEntityRenderer<VariantChestTileEntity> {
+public class VariantChestBlockEntityRenderer extends AbstractVariantChestBlockEntityRenderer<VariantChestBlockEntity> {
 
-    public VariantChestBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+    public VariantChestBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        super(context);
     }
 
     @Override
     @Nonnull
-    protected ResourceLocation getTexture(VariantChestTileEntity tileEntity, ChestType chestType) {
+    protected ResourceLocation getTexture(VariantChestBlockEntity tileEntity, ChestType chestType) {
         MushroomWoodType woodType = tileEntity.woodType;
         if (woodType == null) {
             woodType = ((VariantChestBlock) tileEntity.getBlockState().getBlock()).getWoodType();

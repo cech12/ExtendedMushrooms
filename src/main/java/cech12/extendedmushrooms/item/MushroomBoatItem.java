@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.item;
 
-import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
 import cech12.extendedmushrooms.entity.item.MushroomBoatEntity;
+import cech12.extendedmushrooms.init.ModEntityTypes;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.BlockSource;
@@ -59,7 +59,7 @@ public class MushroomBoatItem extends Item {
             }
 
             if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-                MushroomBoatEntity boat = (MushroomBoatEntity) ExtendedMushroomsEntityTypes.MUSHROOM_BOAT.create(worldIn);
+                MushroomBoatEntity boat = ModEntityTypes.MUSHROOM_BOAT.get().create(worldIn);
                 if (boat == null) {
                     return InteractionResultHolder.pass(itemstack);
                 }
@@ -114,7 +114,7 @@ public class MushroomBoatItem extends Item {
 
                 d3 = 0.0D;
             }
-            MushroomBoatEntity boat = (MushroomBoatEntity) ExtendedMushroomsEntityTypes.MUSHROOM_BOAT.create(world);
+            MushroomBoatEntity boat = ModEntityTypes.MUSHROOM_BOAT.get().create(world);
             if (boat != null) {
                 boat.absMoveTo(d0, d1 + d3, d2, direction.toYRot(), 0);
                 boat.setMushroomWoodType(this.type);

@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.entity.passive;
 
-import cech12.extendedmushrooms.api.entity.ExtendedMushroomsEntityTypes;
+import cech12.extendedmushrooms.init.ModEntityTypes;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMyceliumGoal;
@@ -70,7 +70,7 @@ public class MushroomSheepEntity extends Sheep {
         sheep.setSpeed(0);
         Level world = sheep.level;
         //create mushroom sheep
-        MushroomSheepEntity mushroomSheep = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(world);
+        MushroomSheepEntity mushroomSheep = ModEntityTypes.MUSHROOM_SHEEP.get().create(world);
         if (mushroomSheep != null && world instanceof ServerLevel) {
             mushroomSheep.copyPosition(sheep);
             mushroomSheep.finalizeSpawn((ServerLevel)world, world.getCurrentDifficultyAt(sheep.blockPosition()), MobSpawnType.CONVERSION, null, null);
@@ -293,7 +293,7 @@ public class MushroomSheepEntity extends Sheep {
     public Sheep getBreedOffspring(@Nonnull ServerLevel world, @Nonnull AgeableMob ageable) {
         if (ageable instanceof MushroomSheepEntity) {
             // only create a mushroom sheep, when both parents are mushroom sheeps.
-            MushroomSheepEntity child = (MushroomSheepEntity) ExtendedMushroomsEntityTypes.MUSHROOM_SHEEP.create(world);
+            MushroomSheepEntity child = ModEntityTypes.MUSHROOM_SHEEP.get().create(world);
             if (child != null) {
                 child.setMushroomType(this.getMushroomTypeMixFromParents(this, (MushroomSheepEntity) ageable));
                 return child;

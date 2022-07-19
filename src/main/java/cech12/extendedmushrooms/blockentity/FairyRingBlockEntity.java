@@ -1,10 +1,10 @@
-package cech12.extendedmushrooms.tileentity;
+package cech12.extendedmushrooms.blockentity;
 
-import cech12.extendedmushrooms.api.recipe.ExtendedMushroomsRecipeTypes;
+import cech12.extendedmushrooms.init.ModRecipeTypes;
 import cech12.extendedmushrooms.api.recipe.FairyRingMode;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
-import cech12.extendedmushrooms.api.tileentity.ExtendedMushroomsTileEntities;
 import cech12.extendedmushrooms.block.FairyRingBlock;
+import cech12.extendedmushrooms.init.ModBlockEntityTypes;
 import cech12.extendedmushrooms.init.ModParticles;
 import cech12.extendedmushrooms.init.ModSounds;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class FairyRingTileEntity extends BlockEntity implements Container {
+public class FairyRingBlockEntity extends BlockEntity implements Container {
 
     public static final Vec3 CENTER_TRANSLATION_VECTOR = new Vec3(1, 0, 1);
     public static final int INVENTORY_SIZE = 16;
@@ -55,8 +55,8 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
     //recipe caching
     protected FairyRingRecipe currentRecipe;
 
-    public FairyRingTileEntity(BlockPos pos, BlockState state) {
-        super(ExtendedMushroomsTileEntities.FAIRY_RING, pos, state);
+    public FairyRingBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntityTypes.FAIRY_RING.get(), pos, state);
         this.hasMaster = false;
         this.isMaster = false;
     }
@@ -78,8 +78,8 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
             if (world != null) {
                 for (Direction direction : FairyRingBlock.DIRECTIONS) {
                     BlockEntity tileEntity = world.getBlockEntity(pos.relative(direction));
-                    if (tileEntity instanceof FairyRingTileEntity) {
-                        this.setMaster(((FairyRingTileEntity) tileEntity).getMaster());
+                    if (tileEntity instanceof FairyRingBlockEntity) {
+                        this.setMaster(((FairyRingBlockEntity) tileEntity).getMaster());
                         break;
                     }
                 }
@@ -106,7 +106,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
         return isMaster;
     }
 
-    public void setMaster(FairyRingTileEntity tileEntity) {
+    public void setMaster(FairyRingBlockEntity tileEntity) {
         this.isMaster = false;
         this.hasMaster = true;
         this.masterPos = tileEntity.getBlockPos();
@@ -120,14 +120,14 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
         this.sendUpdates();
     }
 
-    public FairyRingTileEntity getMaster() {
+    public FairyRingBlockEntity getMaster() {
         if (this.isMaster()) {
             return this;
         }
         if (this.hasMaster() && this.getLevel() != null) {
             BlockEntity tileEntity = this.getLevel().getBlockEntity(this.masterPos);
-            if (tileEntity instanceof FairyRingTileEntity) {
-                return ((FairyRingTileEntity) tileEntity);
+            if (tileEntity instanceof FairyRingBlockEntity) {
+                return ((FairyRingBlockEntity) tileEntity);
             }
         }
         return null;
@@ -199,7 +199,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
      */
     public void onEntityCollision(Entity entity) {
         if (!this.isMaster()) {
-            FairyRingTileEntity master = this.getMaster();
+            FairyRingBlockEntity master = this.getMaster();
             if (master != null) {
                 master.onEntityCollision(entity);
             }
@@ -311,7 +311,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
         if (this.currentRecipe != null && this.currentRecipe.isValid(this.mode, this)) {
             return this.currentRecipe;
         } else {
-            List<FairyRingRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor((RecipeType<FairyRingRecipe>) ExtendedMushroomsRecipeTypes.FAIRY_RING);
+            List<FairyRingRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor((RecipeType<FairyRingRecipe>) ModRecipeTypes.FAIRY_RING);
             for (FairyRingRecipe recipe : recipes) {
                 if (recipe.isValid(this.mode, this)) {
                     return recipe;
@@ -331,52 +331,51 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
         }
     }
 
-    @Override
-    public void tick() {
-        if (this.isMaster() && this.getLevel() != null && !this.getLevel().isClientSide) {
-            FairyRingRecipe recipe = this.getRecipe();
+    public static void tick(Level level, BlockPos pos, BlockState state, FairyRingBlockEntity entity) {
+        if (entity.isMaster() && level != null && !level.isClientSide) {
+            FairyRingRecipe recipe = entity.getRecipe();
             if (recipe != null) {
                 //light up
-                if (!this.getBlockState().getValue(FairyRingBlock.LIT)) {
-                    setLight(true);
+                if (!state.getValue(FairyRingBlock.LIT)) {
+                    entity.setLight(true);
                 }
                 //play crafting sound every CRAFTING_SOUND_INTERVAL ticks (beginning with tick 1) until a new sound would overlap the finish sound
-                if (this.recipeTime % CRAFTING_SOUND_INTERVAL == 1 && this.recipeTimeTotal - this.recipeTime > CRAFTING_SOUND_INTERVAL / 2) {
-                    Vec3 center = this.getCenter();
-                    float volume = this.getLevel().getRandom().nextFloat() * 0.4F + 0.8F;
-                    float pitch = this.getLevel().getRandom().nextFloat() * 0.2F + 0.9F;
-                    this.getLevel().playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING, SoundSource.AMBIENT, volume, pitch);
+                if (entity.recipeTime % CRAFTING_SOUND_INTERVAL == 1 && entity.recipeTimeTotal - entity.recipeTime > CRAFTING_SOUND_INTERVAL / 2) {
+                    Vec3 center = entity.getCenter();
+                    float volume = level.getRandom().nextFloat() * 0.4F + 0.8F;
+                    float pitch = level.getRandom().nextFloat() * 0.2F + 0.9F;
+                    level.playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING, SoundSource.AMBIENT, volume, pitch);
                 }
                 //increase recipe time
-                if (this.recipeTime < this.recipeTimeTotal) {
-                    this.recipeTime++;
+                if (entity.recipeTime < entity.recipeTimeTotal) {
+                    entity.recipeTime++;
                 }
                 //detect finished recipe
-                if (this.recipeTime >= this.recipeTimeTotal) {
+                if (entity.recipeTime >= entity.recipeTimeTotal) {
                     //update fairy ring mode
-                    if (this.mode != this.currentRecipe.getResultMode()) {
-                        this.mode = this.currentRecipe.getResultMode();
+                    if (entity.mode != entity.currentRecipe.getResultMode()) {
+                        entity.mode = entity.currentRecipe.getResultMode();
                     }
                     //clear inventory and pop out result itemStack
-                    this.clearContent();
-                    Vec3 center = this.getCenter();
-                    ItemStack resultStack = this.currentRecipe.getResultItemStack();
+                    entity.clearContent();
+                    Vec3 center = entity.getCenter();
+                    ItemStack resultStack = entity.currentRecipe.getResultItemStack();
                     if (resultStack != null && resultStack != ItemStack.EMPTY) {
-                        ItemEntity itemEntity = new ItemEntity(this.getLevel(), center.x, center.y + 1.1, center.z, resultStack);
+                        ItemEntity itemEntity = new ItemEntity(level, center.x, center.y + 1.1, center.z, resultStack);
                         itemEntity.setDeltaMovement(new Vec3(0, 0.2, 0));
-                        this.getLevel().addFreshEntity(itemEntity);
+                        level.addFreshEntity(itemEntity);
                     }
                     //play sound
-                    this.getLevel().playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING_FINISH, SoundSource.BLOCKS, 1.5F, 1.0F);
+                    level.playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING_FINISH, SoundSource.BLOCKS, 1.5F, 1.0F);
                     //reset and update recipe
-                    this.resetRecipe();
-                    this.updateRecipe();
-                    setLight(false);
+                    entity.resetRecipe();
+                    entity.updateRecipe();
+                    entity.setLight(false);
                 }
-                this.sendUpdates();
+                entity.sendUpdates();
             } else {
-                if (this.getBlockState().getValue(FairyRingBlock.LIT)) {
-                    setLight(false);
+                if (state.getValue(FairyRingBlock.LIT)) {
+                    entity.setLight(false);
                 }
             }
         }
@@ -465,7 +464,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
      * @return The remaining ItemStack, which cannot be added or ItemStack.EMPTY when fully added
      */
     public ItemStack addItemStack(ItemStack stack) {
-        FairyRingTileEntity master = this.getMaster();
+        FairyRingBlockEntity master = this.getMaster();
         if (stack != null && master != null && !stack.isEmpty()) {
             boolean dirty = false;
             //each slot has only a stack size of 1
@@ -487,7 +486,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
 
     @Override
     public int getContainerSize() {
-        FairyRingTileEntity master = this.getMaster();
+        FairyRingBlockEntity master = this.getMaster();
         if (master != null) {
             return master.items.size();
         }
@@ -501,7 +500,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
 
     @Override
     public boolean isEmpty() {
-        FairyRingTileEntity master = this.getMaster();
+        FairyRingBlockEntity master = this.getMaster();
         if (master != null) {
             for (ItemStack itemstack : master.items) {
                 if (!itemstack.isEmpty()) {
@@ -515,7 +514,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
     @Override
     @Nonnull
     public ItemStack getItem(int slot) {
-        FairyRingTileEntity master = this.getMaster();
+        FairyRingBlockEntity master = this.getMaster();
         if (master != null && slot >= 0 && slot < master.items.size()) {
             return master.items.get(slot);
         }
@@ -525,7 +524,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
     @Override
     @Nonnull
     public ItemStack removeItem(int slot, int count) {
-        FairyRingTileEntity master = this.getMaster();
+        FairyRingBlockEntity master = this.getMaster();
         ItemStack stack = ItemStack.EMPTY;
         if (master != null && count > 0 && slot >= 0 && slot < master.items.size()) {
             stack = ContainerHelper.removeItem(master.items, slot, count);
@@ -537,7 +536,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
     @Override
     @Nonnull
     public ItemStack removeItemNoUpdate(int slot) {
-        FairyRingTileEntity master = this.getMaster();
+        FairyRingBlockEntity master = this.getMaster();
         if (master != null && slot < master.items.size()) {
             return ContainerHelper.takeItem(master.items, slot);
         }
@@ -546,7 +545,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
 
     @Override
     public void setItem(int slot, @Nonnull ItemStack itemStack) {
-        FairyRingTileEntity master = this.getMaster();
+        FairyRingBlockEntity master = this.getMaster();
         if (master != null && slot >= 0 && slot < master.items.size()) {
             master.items.set(slot, itemStack);
         }
@@ -559,7 +558,7 @@ public class FairyRingTileEntity extends BlockEntity implements Container {
 
     @Override
     public void clearContent() {
-        FairyRingTileEntity master = this.getMaster();
+        FairyRingBlockEntity master = this.getMaster();
         if (master != null) {
             master.items.clear();
         }
