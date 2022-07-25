@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Mushroom wood and all related blocks cannot burn any longer (like vanilla fungus wood)
 
 ### Fixed
+- Slime Fungus Baashrooms dropped the wrong mushroom cap block
 - Honey Fungus & Slime Fungus blocks were not compostable
 - Infested Flower was not flammable
 
