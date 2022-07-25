@@ -19,13 +19,13 @@ public class PoisonousMushroom extends MegaMushroom {
     @Nonnull
     @Override
     public RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature() {
-        return ModFeatures.Configured.BIG_POISONOUS_MUSHROOM;
+        return ModFeatures.BIG_POISONOUS_MUSHROOM_CONFIGURED;
     }
 
     @Nonnull
     @Override
     protected RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getMegaMushroomFeature() {
-        return ModFeatures.Configured.MEGA_POISONOUS_MUSHROOM;
+        return ModFeatures.MEGA_POISONOUS_MUSHROOM_CONFIGURED;
     }
 
 }

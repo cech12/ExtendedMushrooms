@@ -19,13 +19,13 @@ public class Glowshroom extends MegaMushroom {
     @Nonnull
     @Override
     public RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature() {
-        return ModFeatures.Configured.BIG_GLOWSHROOM;
+        return ModFeatures.BIG_GLOWSHROOM_CONFIGURED;
     }
 
     @Nonnull
     @Override
     protected RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getMegaMushroomFeature() {
-        return ModFeatures.Configured.MEGA_GLOWSHROOM;
+        return ModFeatures.MEGA_GLOWSHROOM_CONFIGURED;
     }
 
 

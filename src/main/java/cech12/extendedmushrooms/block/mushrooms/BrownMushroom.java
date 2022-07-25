@@ -21,7 +21,7 @@ public class BrownMushroom extends MegaMushroom {
     @Nonnull
     @Override
     protected RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getMegaMushroomFeature() {
-        return ModFeatures.Configured.MEGA_BROWN_MUSHROOM;
+        return ModFeatures.MEGA_BROWN_MUSHROOM_CONFIGURED;
     }
 
     @Nonnull
