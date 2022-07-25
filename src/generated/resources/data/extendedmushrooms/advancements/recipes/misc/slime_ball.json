@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "extendedmushrooms:slime_blob"
+            "items": [
+              "extendedmushrooms:slime_blob"
+            ]
           }
         ]
       }

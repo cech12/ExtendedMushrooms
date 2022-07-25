@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "extendedmushrooms:poisonous_mushroom_planks"
+            "items": [
+              "extendedmushrooms:poisonous_mushroom_planks"
+            ]
           }
         ]
       }

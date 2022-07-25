@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "extendedmushrooms:mushroom_slab"
+            "items": [
+              "extendedmushrooms:mushroom_slab"
+            ]
           }
         ]
       }
