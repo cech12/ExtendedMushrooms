@@ -2,32 +2,42 @@ package cech12.extendedmushrooms.client.renderer.entity;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.entity.item.MushroomBoatEntity;
+import cech12.extendedmushrooms.item.MushroomWoodType;
+import com.google.common.collect.ImmutableMap;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class MushroomBoatRenderer extends BoatRenderer {
 
-    private static final HashMap<String, ResourceLocation> TEXTURES = new HashMap<>();
+    private final Map<MushroomWoodType, Pair<ResourceLocation, BoatModel>> BOAT_RESOURCES;
 
-    public MushroomBoatRenderer(EntityRendererProvider.Context renderManagerIn) {
-        super(renderManagerIn);
+    public MushroomBoatRenderer(EntityRendererProvider.Context context) {
+        super(context);
+        this.BOAT_RESOURCES = Stream.of(MushroomWoodType.values()).collect(ImmutableMap.toImmutableMap(
+                (woodType) -> woodType,
+                (woodType) -> Pair.of(new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/boat/" + woodType.getSerializedName() + ".png"),
+                        new BoatModel(context.bakeLayer(ModelLayers.createBoatModelName(Boat.Type.OAK))))
+        ));
     }
 
     @Nonnull
     @Override
-    public ResourceLocation getTextureLocation(@Nonnull Boat entity) {
+    public Pair<ResourceLocation, BoatModel> getModelWithLocation(@Nonnull Boat entity) {
         if (entity instanceof MushroomBoatEntity) {
-            String name = ((MushroomBoatEntity) entity).getMushroomWoodType().getSerializedName();
-            if (!TEXTURES.containsKey(name)) {
-                TEXTURES.put(name, new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/boat/" + name + ".png"));
+            MushroomWoodType woodType = ((MushroomBoatEntity) entity).getMushroomWoodType();
+            if (BOAT_RESOURCES.containsKey(woodType)) {
+                return BOAT_RESOURCES.get(woodType);
             }
-            return TEXTURES.get(name);
         }
-        return super.getTextureLocation(entity);
+        return super.getModelWithLocation(entity);
     }
 }
