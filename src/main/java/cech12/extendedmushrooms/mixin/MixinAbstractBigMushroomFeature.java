@@ -22,16 +22,17 @@ public abstract class MixinAbstractBigMushroomFeature {
     @Inject(at = @At("HEAD"), method = "isValidPosition", cancellable = true)
     public void isValidPositionProxy(LevelAccessor level, BlockPos pos, int p_227209_3_, BlockPos.MutableBlockPos p_227209_4_, HugeMushroomFeatureConfiguration p_227209_5_, CallbackInfoReturnable<Boolean> cir) {
         int i = pos.getY();
-        if (i >= 1 && i + p_227209_3_ + 1 < level.getHeight()) { //getMaxHeight
+        if (i >= level.getMinBuildHeight() + 1 && i + p_227209_3_ + 1 < level.getMaxBuildHeight()) {
+            BlockState belowBlockState = level.getBlockState(pos.below());
             //dirt check for vanilla world generation (huge mushrooms in dark forests #49)
-            if (AbstractHugeMushroomFeature.isGrassOrDirt(level, pos.below()) || MushroomUtils.isValidMushroomPosition(level, pos)) {
+            if (belowBlockState.is(BlockTags.DIRT) || MushroomUtils.isValidMushroomPosition(level, pos)) {
                 IMixinAbstractBigMushroomFeature self = (IMixinAbstractBigMushroomFeature) this;
                 for(int j = 0; j <= p_227209_3_; ++j) {
                     int k = self.invoke_getTreeRadiusForHeight(-1, -1, p_227209_5_.foliageRadius, j);
 
                     for(int l = -k; l <= k; ++l) {
                         for(int i1 = -k; i1 <= k; ++i1) {
-                            BlockState blockstate = level.getBlockState(p_227209_4_.set(pos).move(l, j, i1));
+                            BlockState blockstate = level.getBlockState(p_227209_4_.setWithOffset(pos, l, j, i1));
                             if (!blockstate.isAir() && !blockstate.is(BlockTags.LEAVES)) {
                                 cir.setReturnValue(false);
                                 cir.cancel();
