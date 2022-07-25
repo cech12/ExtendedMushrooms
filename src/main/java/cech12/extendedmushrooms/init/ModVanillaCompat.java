@@ -1,96 +1,52 @@
 package cech12.extendedmushrooms.init;
 
+import cech12.extendedmushrooms.block.EMMushroomBlock;
+import cech12.extendedmushrooms.block.InfestedGrassBlock;
+import cech12.extendedmushrooms.block.MushroomPlanksBlock;
+import cech12.extendedmushrooms.block.VerticalPlanksBlock;
+import cech12.extendedmushrooms.block.VerticalSlabBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.ItemLike;
-
-import static cech12.extendedmushrooms.init.ModBlocks.*;
-import static cech12.extendedmushrooms.init.ModItems.*;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.WoolCarpetBlock;
 
 
 public class ModVanillaCompat {
 
     public static void setup() {
+        registerCompostable(0.65F, ModItems.GRILLED_MUSHROOM.get());
+        registerCompostable(0.85F, ModItems.MUSHROOM_BREAD.get());
+        registerCompostable(0.15F, ModItems.MUSHROOM_SPORES.get());
 
-        registerFlammable(Blocks.BROWN_MUSHROOM_BLOCK, 30, 60);
-        registerFlammable(Blocks.RED_MUSHROOM_BLOCK, 30, 60);
-        registerFlammable(Blocks.MUSHROOM_STEM, 5, 5);
-
-        registerCompostable(0.3F, INFESTED_GRASS.get());
-
-        registerCompostable(0.15F, BROWN_MUSHROOM_BUTTON.get());
-        registerCompostable(0.3F, BROWN_MUSHROOM_CARPET.get());
-        registerCompostable(0.15F, BROWN_MUSHROOM_PRESSURE_PLATE.get());
-        registerCompostable(0.15F, RED_MUSHROOM_BUTTON.get());
-        registerCompostable(0.3F, RED_MUSHROOM_CARPET.get());
-        registerCompostable(0.15F, RED_MUSHROOM_PRESSURE_PLATE.get());
-
-        registerCompostable(0.15F, MUSHROOM_BUTTON.get());
-        registerCompostable(0.3F, MUSHROOM_DOOR.get());
-        registerCompostable(0.3F, MUSHROOM_FENCE.get());
-        registerCompostable(0.3F, MUSHROOM_FENCE_GATE.get());
-        registerCompostable(0.3F, MUSHROOM_PLANKS.get());
-        registerCompostable(0.15F, MUSHROOM_PRESSURE_PLATE.get());
-        registerCompostable(0.15F, MUSHROOM_SLAB.get());
-        registerCompostable(0.15F, MUSHROOM_STAIRS.get());
-        registerCompostable(0.15F, MUSHROOM_TRAPDOOR.get());
-        registerCompostable(0.15F, MUSHROOM_VERTICAL_PLANKS.get());
-        registerCompostable(0.15F, MUSHROOM_VERTICAL_SLAB.get());
-        registerCompostable(0.65F, STRIPPED_MUSHROOM_STEM.get());
-
-        registerCompostable(0.65F, GLOWSHROOM.get());
-        registerCompostable(0.85F, GLOWSHROOM_CAP.get());
-        registerCompostable(0.15F, GLOWSHROOM_CAP_BUTTON.get());
-        registerCompostable(0.3F, GLOWSHROOM_CAP_CARPET.get());
-        registerCompostable(0.15F, GLOWSHROOM_CAP_PRESSURE_PLATE.get());
-        registerCompostable(0.65F, GLOWSHROOM_STEM.get());
-        registerCompostable(0.65F, GLOWSHROOM_STEM_STRIPPED.get());
-        registerCompostable(0.15F, GLOWSHROOM_BUTTON.get());
-        registerCompostable(0.3F, GLOWSHROOM_DOOR.get());
-        registerCompostable(0.3F, GLOWSHROOM_FENCE.get());
-        registerCompostable(0.3F, GLOWSHROOM_FENCE_GATE.get());
-        registerCompostable(0.3F, GLOWSHROOM_PLANKS.get());
-        registerCompostable(0.15F, GLOWSHROOM_PRESSURE_PLATE.get());
-        registerCompostable(0.15F, GLOWSHROOM_SLAB.get());
-        registerCompostable(0.15F, GLOWSHROOM_STAIRS.get());
-        registerCompostable(0.15F, GLOWSHROOM_TRAPDOOR.get());
-        registerCompostable(0.15F, GLOWSHROOM_VERTICAL_PLANKS.get());
-        registerCompostable(0.15F, GLOWSHROOM_VERTICAL_SLAB.get());
-
-        registerCompostable(0.65F, POISONOUS_MUSHROOM.get());
-        registerCompostable(0.85F, POISONOUS_MUSHROOM_CAP.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_CAP_BUTTON.get());
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_CAP_CARPET.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.get());
-        registerCompostable(0.65F, POISONOUS_MUSHROOM_STEM.get());
-        registerCompostable(0.65F, POISONOUS_MUSHROOM_STEM_STRIPPED.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_BUTTON.get());
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_DOOR.get());
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_FENCE.get());
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_FENCE_GATE.get());
-        registerCompostable(0.3F, POISONOUS_MUSHROOM_PLANKS.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_PRESSURE_PLATE.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_SLAB.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_STAIRS.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_TRAPDOOR.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_VERTICAL_PLANKS.get());
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_VERTICAL_SLAB.get());
-
-        registerCompostable(0.65F, GRILLED_MUSHROOM.get());
-        registerCompostable(0.85F, MUSHROOM_BREAD.get());
-        registerCompostable(0.15F, MUSHROOM_SPORES.get());
-
+        ModBlocks.BLOCKS.getEntries().forEach(blockRegistryObject -> {
+            Block block = blockRegistryObject.get();
+            if (block instanceof ButtonBlock || block instanceof PressurePlateBlock || block instanceof SlabBlock
+                    || block instanceof StairBlock || block instanceof TrapDoorBlock || block instanceof VerticalSlabBlock) {
+                registerCompostable(0.15F, block);
+            } else if (block instanceof WoolCarpetBlock || block instanceof DoorBlock || block instanceof FenceBlock
+                    || block instanceof FenceGateBlock || block instanceof MushroomPlanksBlock || block instanceof VerticalPlanksBlock
+                    || block instanceof InfestedGrassBlock) {
+                registerCompostable(0.3F, block);
+            } else if (block instanceof MushroomStemBlock || block instanceof EMMushroomBlock) {
+                registerCompostable(0.65F, block);
+            } else if (block instanceof MushroomCapBlock) {
+                registerCompostable(0.85F, block);
+            }
+        });
     }
 
     public static void registerCompostable(float chance, ItemLike itemIn) {
         ComposterBlock.COMPOSTABLES.put(itemIn.asItem(), chance);
-    }
-
-    public static void registerFlammable(Block blockIn, int encouragement, int flammability) {
-        FireBlock fireblock = (FireBlock) Blocks.FIRE;
-        fireblock.setFlammable(blockIn, encouragement, flammability);
     }
 
 }

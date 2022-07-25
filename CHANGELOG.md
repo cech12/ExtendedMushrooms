@@ -5,7 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.18.2-2.0.0.0] - 2022-??-??
 ### Changed
-- Update to Minecraft 1.18.2 and Forge 40.1.0. 
+- Update to Minecraft 1.18.2 and Forge 40.1.0.
+- Mushroom wood and all related blocks cannot burn any longer (like vanilla fungus wood)
+
+### Fixed
+- Honey Fungus & Slime Fungus blocks were not compostable
+- Infested Flower was not flammable
 
 ## [1.16.5-1.7.0.2] - 2022-06-30
 ### Fixed
