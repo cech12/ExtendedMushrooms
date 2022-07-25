@@ -40,15 +40,19 @@ public class ModTileEntities {
                 ModBlocks.GLOWSHROOM_STANDING_SIGN.get(),
                 ModBlocks.GLOWSHROOM_WALL_SIGN.get(),
                 ModBlocks.POISONOUS_MUSHROOM_STANDING_SIGN.get(),
-                ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN.get());
+                ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN.get(),
+                ModBlocks.HONEY_FUNGUS_STANDING_SIGN.get(),
+                ModBlocks.HONEY_FUNGUS_WALL_SIGN.get());
         VARIANT_CHEST = register(event, VariantChestTileEntity::new, "variant_chest",
                 ExtendedMushroomsBlocks.MUSHROOM_CHEST,
                 ExtendedMushroomsBlocks.GLOWSHROOM_CHEST,
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST);
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST,
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_CHEST);
         VARIANT_TRAPPED_CHEST = register(event, VariantTrappedChestTileEntity::new, "variant_trapped_chest",
                 ExtendedMushroomsBlocks.MUSHROOM_CHEST_TRAPPED,
                 ExtendedMushroomsBlocks.GLOWSHROOM_CHEST_TRAPPED,
-                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED);
+                ExtendedMushroomsBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED,
+                ExtendedMushroomsBlocks.HONEY_FUNGUS_CHEST_TRAPPED);
     }
 
 

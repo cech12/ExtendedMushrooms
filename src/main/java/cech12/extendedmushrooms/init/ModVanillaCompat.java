@@ -35,7 +35,7 @@ public class ModVanillaCompat {
         registerCompostable(0.15F, MUSHROOM_SLAB);
         registerCompostable(0.15F, MUSHROOM_STAIRS);
         registerCompostable(0.15F, MUSHROOM_TRAPDOOR);
-        registerCompostable(0.15F, MUSHROOM_VERTICAL_PLANKS);
+        registerCompostable(0.3F, MUSHROOM_VERTICAL_PLANKS);
         registerCompostable(0.15F, MUSHROOM_VERTICAL_SLAB);
         registerCompostable(0.65F, STRIPPED_MUSHROOM_STEM);
 
@@ -55,8 +55,27 @@ public class ModVanillaCompat {
         registerCompostable(0.15F, GLOWSHROOM_SLAB);
         registerCompostable(0.15F, GLOWSHROOM_STAIRS);
         registerCompostable(0.15F, GLOWSHROOM_TRAPDOOR);
-        registerCompostable(0.15F, GLOWSHROOM_VERTICAL_PLANKS);
+        registerCompostable(0.3F, GLOWSHROOM_VERTICAL_PLANKS);
         registerCompostable(0.15F, GLOWSHROOM_VERTICAL_SLAB);
+
+        registerCompostable(0.65F, HONEY_FUNGUS);
+        registerCompostable(0.85F, HONEY_FUNGUS_CAP);
+        registerCompostable(0.15F, HONEY_FUNGUS_CAP_BUTTON);
+        registerCompostable(0.3F, HONEY_FUNGUS_CAP_CARPET);
+        registerCompostable(0.15F, HONEY_FUNGUS_CAP_PRESSURE_PLATE);
+        registerCompostable(0.65F, HONEY_FUNGUS_STEM);
+        registerCompostable(0.65F, HONEY_FUNGUS_STEM_STRIPPED);
+        registerCompostable(0.15F, HONEY_FUNGUS_BUTTON);
+        registerCompostable(0.3F, HONEY_FUNGUS_DOOR);
+        registerCompostable(0.3F, HONEY_FUNGUS_FENCE);
+        registerCompostable(0.3F, HONEY_FUNGUS_FENCE_GATE);
+        registerCompostable(0.3F, HONEY_FUNGUS_PLANKS);
+        registerCompostable(0.15F, HONEY_FUNGUS_PRESSURE_PLATE);
+        registerCompostable(0.15F, HONEY_FUNGUS_SLAB);
+        registerCompostable(0.15F, HONEY_FUNGUS_STAIRS);
+        registerCompostable(0.15F, HONEY_FUNGUS_TRAPDOOR);
+        registerCompostable(0.3F, HONEY_FUNGUS_VERTICAL_PLANKS);
+        registerCompostable(0.15F, HONEY_FUNGUS_VERTICAL_SLAB);
 
         registerCompostable(0.65F, POISONOUS_MUSHROOM);
         registerCompostable(0.85F, POISONOUS_MUSHROOM_CAP);
@@ -74,8 +93,14 @@ public class ModVanillaCompat {
         registerCompostable(0.15F, POISONOUS_MUSHROOM_SLAB);
         registerCompostable(0.15F, POISONOUS_MUSHROOM_STAIRS);
         registerCompostable(0.15F, POISONOUS_MUSHROOM_TRAPDOOR);
-        registerCompostable(0.15F, POISONOUS_MUSHROOM_VERTICAL_PLANKS);
+        registerCompostable(0.3F, POISONOUS_MUSHROOM_VERTICAL_PLANKS);
         registerCompostable(0.15F, POISONOUS_MUSHROOM_VERTICAL_SLAB);
+
+        registerCompostable(0.65F, SLIME_FUNGUS);
+        registerCompostable(0.85F, SLIME_FUNGUS_CAP);
+        registerCompostable(0.15F, SLIME_FUNGUS_CAP_BUTTON);
+        registerCompostable(0.3F, SLIME_FUNGUS_CAP_CARPET);
+        registerCompostable(0.15F, SLIME_FUNGUS_CAP_PRESSURE_PLATE);
 
         registerCompostable(0.65F, GRILLED_MUSHROOM);
         registerCompostable(0.85F, MUSHROOM_BREAD);
