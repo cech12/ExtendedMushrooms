@@ -58,7 +58,7 @@ public enum MushroomWoodType implements StringRepresentable {
         this.planksBlock = planksBlock;
         this.boatItem = boatItem;
         this.lightValue = lightValue;
-        this.woodType = WoodType.create(new ResourceLocation(ExtendedMushrooms.MOD_ID, name).toString());
+        this.woodType = WoodType.register(WoodType.create(new ResourceLocation(ExtendedMushrooms.MOD_ID, name).toString()));
     }
 
     public int getId() {

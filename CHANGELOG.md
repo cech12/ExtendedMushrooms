@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Slime Fungus Baashrooms dropped the wrong mushroom cap block
 - Honey Fungus & Slime Fungus blocks were not compostable
 - Infested Flower was not flammable
+- Honey Fungus chests & signs were not registered correctly
 
 ## [1.16.5-1.7.0.2] - 2022-06-30
 ### Fixed

@@ -36,15 +36,19 @@ public class ModBlockEntityTypes {
             ModBlocks.GLOWSHROOM_STANDING_SIGN,
             ModBlocks.GLOWSHROOM_WALL_SIGN,
             ModBlocks.POISONOUS_MUSHROOM_STANDING_SIGN,
-            ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN);
+            ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN,
+            ModBlocks.HONEY_FUNGUS_STANDING_SIGN,
+            ModBlocks.HONEY_FUNGUS_WALL_SIGN);
     public static RegistryObject<BlockEntityType<VariantChestBlockEntity>> VARIANT_CHEST = register("variant_chest", VariantChestBlockEntity::new,
             ModBlocks.MUSHROOM_CHEST,
             ModBlocks.GLOWSHROOM_CHEST,
-            ModBlocks.POISONOUS_MUSHROOM_CHEST);
+            ModBlocks.POISONOUS_MUSHROOM_CHEST,
+            ModBlocks.HONEY_FUNGUS_CHEST);
     public static RegistryObject<BlockEntityType<VariantTrappedChestBlockEntity>> VARIANT_TRAPPED_CHEST = register("variant_trapped_chest", VariantTrappedChestBlockEntity::new,
             ModBlocks.MUSHROOM_CHEST_TRAPPED,
             ModBlocks.GLOWSHROOM_CHEST_TRAPPED,
-            ModBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED);
+            ModBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED,
+            ModBlocks.HONEY_FUNGUS_CHEST_TRAPPED);
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String registryName, BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<Block>... blocks) {
         return BLOCK_ENTITY_TYPES.register(registryName, () -> BlockEntityType.Builder.of(supplier, Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)).build(null));
