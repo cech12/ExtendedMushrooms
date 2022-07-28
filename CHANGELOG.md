@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.18.2-2.0.0.0] - 2022-??-??
 ### Added
 - Bonsai Trees 3 support
+- re-add Corail Woodcutter support
 
 ### Changed
 - Update to Minecraft 1.18.2 and Forge 40.1.0.
@@ -13,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Removed
 - removed support for VanillaThings mod
+- removed support for Woodcutter mod by Tfarcenim 
 
 ## [1.16.5-1.7.0.3] - 2022-07-26
 ### Fixed

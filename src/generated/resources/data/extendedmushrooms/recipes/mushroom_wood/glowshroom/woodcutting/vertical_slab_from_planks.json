@@ -1,9 +1,9 @@
 {
-  "type": "woodcutter:woodcutting",
+  "type": "corail_woodcutter:woodcutting",
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "woodcutter"
+      "modid": "corail_woodcutter"
     },
     {
       "feature": "verticalSlabs",

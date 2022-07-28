@@ -1,9 +1,9 @@
 {
-  "type": "woodcutter:woodcutting",
+  "type": "corail_woodcutter:woodcutting",
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "woodcutter"
+      "modid": "corail_woodcutter"
     },
     {
       "feature": "verticalPlanks",
@@ -14,5 +14,5 @@
     "tag": "forge:mushroom_stems/glowshroom"
   },
   "result": "extendedmushrooms:glowshroom_vertical_planks",
-  "count": 6
+  "count": 4
 }

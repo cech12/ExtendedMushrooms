@@ -1,14 +1,14 @@
 {
-  "type": "woodcutter:woodcutting",
+  "type": "corail_woodcutter:woodcutting",
   "conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "woodcutter"
+      "modid": "corail_woodcutter"
     }
   ],
   "ingredient": {
     "tag": "forge:mushroom_stems/colorless"
   },
   "result": "extendedmushrooms:mushroom_planks",
-  "count": 6
+  "count": 4
 }

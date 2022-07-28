@@ -499,10 +499,28 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         //wood cutting
         String woodcuttingDirectory = directory + "woodcutting/";
-        WoodcutterRecipeBuilder.woodcutterRecipe(planks, Ingredient.of(stems), 6)
+        WoodcutterRecipeBuilder.woodcutterRecipe(boat, Ingredient.of(stems))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "boat_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(button, Ingredient.of(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "button_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(door, Ingredient.of(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "door_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(fence, Ingredient.of(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(fenceGate, Ingredient.of(stems))
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_gate_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(planks, Ingredient.of(stems), 4)
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "planks_from_stem"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(strippedStem, Ingredient.of(stem))
-                .build(consumer, getResourceLocation(woodcuttingDirectory, "stripped_stem_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(pressurePlate, Ingredient.of(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "pressure_plate_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(sign, Ingredient.of(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "sign_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(slab, Ingredient.of(stems), 8)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "slab_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(stairs, Ingredient.of(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "stairs_from_stem"));
+        WoodcutterRecipeBuilder.woodcutterRecipe(trapdoor, Ingredient.of(stems), 4)
+                .build(consumer, getResourceLocation(woodcuttingDirectory, "trapdoor_from_stem"));
 
         WoodcutterRecipeBuilder.woodcutterRecipe(button, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "button_from_planks"));
@@ -510,8 +528,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "door_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(fence, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_from_planks"));
-        WoodcutterRecipeBuilder.woodcutterRecipe(fenceGate, Ingredient.of(planks))
-                .build(consumer, getResourceLocation(woodcuttingDirectory, "fence_gate_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(pressurePlate, Ingredient.of(planks))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "pressure_plate_from_planks"));
         WoodcutterRecipeBuilder.woodcutterRecipe(sign, Ingredient.of(planks))
@@ -524,7 +540,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "trapdoor_from_planks"));
 
         //wood cutting recipes that are only active when other mods are installed
-        WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.of(stems), 6)
+        WoodcutterRecipeBuilder.woodcutterRecipe(verticalPlanks, Ingredient.of(stems), 4)
                 .addCondition(ModFeatureEnabledCondition.Serializer.INSTANCE.getJson(new ModFeatureEnabledCondition("verticalPlanks")))
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "vertical_planks_from_stem"));
 
