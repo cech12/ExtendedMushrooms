@@ -9,8 +9,7 @@ public class ModCompat {
 
     public static final Mod[] MODS = {
             new ILikeWood(),
-            new Quark(),
-            new VanillaThings()
+            new Quark()
     };
 
     private static boolean inDevMode() {

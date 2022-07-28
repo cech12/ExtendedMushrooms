@@ -11,6 +11,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Update to Minecraft 1.18.2 and Forge 40.1.0.
 - Mushroom wood and all related blocks cannot burn any longer (like vanilla fungus wood)
 
+### Removed
+- removed support for VanillaThings mod
+
 ## [1.16.5-1.7.0.3] - 2022-07-26
 ### Fixed
 - Mushroom wood signs were not rendered correctly
