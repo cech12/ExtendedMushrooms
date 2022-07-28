@@ -74,6 +74,7 @@ public class ExtendedMushrooms {
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(eventBus);
         ModItems.ITEMS.register(eventBus);
         ModEntityTypes.ENTITY_TYPES.register(eventBus);
+        ModFeatures.FEATURES.register(eventBus);
         ModFeatures.CONFIGURED_FEATURES.register(eventBus);
         ModFeatures.PLACED_FEATURES.register(eventBus);
         ModRecipeTypes.RECIPE_SERIALIZERS.register(eventBus);
