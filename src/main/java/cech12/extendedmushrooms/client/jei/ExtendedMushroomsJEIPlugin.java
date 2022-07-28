@@ -40,7 +40,7 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
             RecipeManager manager = player.connection.getRecipeManager();
-            registration.addRecipes(manager.getAllRecipesFor((RecipeType<FairyRingRecipe>) ModRecipeTypes.FAIRY_RING), ModRecipeTypes.FAIRY_RING_ID);
+            registration.addRecipes(manager.getAllRecipesFor(ModRecipeTypes.FAIRY_RING), ModRecipeTypes.FAIRY_RING_ID);
         }
     }
 

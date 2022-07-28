@@ -26,8 +26,6 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
@@ -113,32 +111,22 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
 
     @Override
     public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull FairyRingRecipe recipe, @Nonnull IFocusGroup focuses) {
-        List<List<ItemStack>> ingredients = new ArrayList<>();
-        for (Ingredient ingr : recipe.getIngredients()) {
-            ingredients.add(Arrays.asList(ingr.getItems()));
-        }
-
-        int index = 0;
-        Vec2 center = new Vec2(23, 19);
+        Vec2 center = new Vec2(24, 20);
+        List<Ingredient> ingredients = recipe.getIngredients();
         if (ingredients.size() > 1) {
-            double angleBetweenEach = 360.0 / recipe.getIngredients().size();
+            double angleBetweenEach = 360.0 / ingredients.size();
             Vec2 point = new Vec2(center.x, 4);
-            for (List<ItemStack> o : ingredients) {
-                builder.addSlot(RecipeIngredientRole.INPUT, (int) point.x, (int) point.y);
-                //recipeLayout.getItemStacks().init(index, true, (int) point.x, (int) point.y);
-                //recipeLayout.getItemStacks().set(index, o);
+            for (Ingredient ingredient : ingredients) {
+                builder.addSlot(RecipeIngredientRole.INPUT, (int) point.x, (int) point.y)
+                        .addIngredients(ingredient);
                 point = rotatePointAbout(point, center, angleBetweenEach);
-                index++;
             }
         } else {
-            builder.addSlot(RecipeIngredientRole.INPUT, (int) center.x, (int) center.y);
-            //recipeLayout.getItemStacks().init(index, true, (int) center.x, (int) center.y);
-            //recipeLayout.getItemStacks().set(index, ingredients.get(0));
-            index++;
+            builder.addSlot(RecipeIngredientRole.INPUT, (int) center.x, (int) center.y)
+                    .addIngredients(ingredients.get(0));
         }
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 90, 25);
-        //recipeLayout.getItemStacks().init(index, false, 90, 25);
-        //recipeLayout.getItemStacks().set(index, ingredients.get(0));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 91, 26)
+                .addItemStack(recipe.getResultItem());
     }
 
     public static Vec2 rotatePointAbout(Vec2 in, Vec2 about, double degrees) {
