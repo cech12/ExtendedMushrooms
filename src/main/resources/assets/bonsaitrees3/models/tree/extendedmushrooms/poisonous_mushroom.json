@@ -1,0 +1,61 @@
+{
+  "type": "bonsaitrees3:sapling/extendedmushrooms/poisonous_mushroom",
+  "version": 3,
+  "ref": {
+    "a": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"false","triggered":"false","up":"false","west":"true"}},
+    "b": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"true","triggered":"false","up":"true","west":"true"}},
+    "c": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"true","persistent":"false","south":"false","triggered":"false","up":"false","west":"false"}},
+    "d": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"true","north":"true","persistent":"false","south":"false","triggered":"false","up":"true","west":"false"}},
+    "e": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"false","triggered":"false","up":"true","west":"false"}},
+    "f": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"true","triggered":"false","up":"false","west":"true"}},
+    "g": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"true","north":"true","persistent":"false","south":"false","triggered":"false","up":"false","west":"false"}},
+    "h": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"true","triggered":"false","up":"true","west":"false"}},
+    "i": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"true","north":"false","persistent":"false","south":"false","triggered":"false","up":"true","west":"false"}},
+    "j": {"block":"extendedmushrooms:poisonous_mushroom_stem","properties":{"down":"false","east":"true","north":"true","south":"true","up":"false","west":"true"}},
+    "k": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"true","north":"false","persistent":"false","south":"true","triggered":"false","up":"true","west":"false"}},
+    "l": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"true","triggered":"false","up":"false","west":"false"}},
+    "m": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"true","north":"false","persistent":"false","south":"false","triggered":"false","up":"false","west":"false"}},
+    "n": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"true","north":"false","persistent":"false","south":"true","triggered":"false","up":"false","west":"false"}},
+    "o": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"true","persistent":"false","south":"false","triggered":"false","up":"true","west":"true"}},
+    "p": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"false","triggered":"false","up":"true","west":"true"}},
+    "q": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"true","persistent":"false","south":"false","triggered":"false","up":"true","west":"false"}},
+    "r": {"block":"extendedmushrooms:poisonous_mushroom_cap","properties":{"down":"false","east":"false","north":"true","persistent":"false","south":"false","triggered":"false","up":"false","west":"true"}}
+  },
+  "shape": [
+    [
+      "     ",
+      " dik ",
+      " gmn ",
+      "     ",
+      "     "
+    ],
+    [
+      " dik ",
+      "d   k",
+      "g   n",
+      "     ",
+      "     "
+    ],
+    [
+      " qeh ",
+      "q j h",
+      "c j l",
+      "  j  ",
+      "  j  "
+    ],
+    [
+      " opb ",
+      "o   b",
+      "r   f",
+      "     ",
+      "     "
+    ],
+    [
+      "     ",
+      " opb ",
+      " raf ",
+      "     ",
+      "     "
+    ]
+  ]
+}

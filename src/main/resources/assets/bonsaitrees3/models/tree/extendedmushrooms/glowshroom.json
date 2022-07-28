@@ -1,0 +1,53 @@
+{
+  "type": "bonsaitrees3:sapling/extendedmushrooms/glowshroom",
+  "version": 3,
+  "ref": {
+    "a": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"true","up":"true","west":"true"}},
+    "b": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"true","north":"true","persistent":"false","south":"false","up":"true","west":"false"}},
+    "c": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"false","up":"true","west":"false"}},
+    "d": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"true","up":"true","west":"false"}},
+    "e": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"true","north":"false","persistent":"false","south":"false","up":"true","west":"false"}},
+    "f": {"block":"extendedmushrooms:glowshroom_stem","properties":{"down":"false","east":"true","north":"true","south":"true","up":"false","west":"true"}},
+    "g": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"true","north":"false","persistent":"false","south":"true","up":"true","west":"false"}},
+    "h": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"false","north":"true","persistent":"false","south":"false","up":"true","west":"true"}},
+    "i": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"false","up":"true","west":"true"}},
+    "j": {"block":"extendedmushrooms:glowshroom_cap","properties":{"down":"false","east":"false","north":"true","persistent":"false","south":"false","up":"true","west":"false"}}
+  },
+  "shape": [
+    [
+      "     ",
+      " beg ",
+      "     ",
+      "     ",
+      "     "
+    ],
+    [
+      " beg ",
+      "b   g",
+      "     ",
+      "     ",
+      "     "
+    ],
+    [
+      " jcd ",
+      "j f d",
+      "  f  ",
+      "  f  ",
+      "  f  "
+    ],
+    [
+      " hia ",
+      "h   a",
+      "     ",
+      "     ",
+      "     "
+    ],
+    [
+      "     ",
+      " hia ",
+      "     ",
+      "     ",
+      "     "
+    ]
+  ]
+}

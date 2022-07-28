@@ -1,0 +1,42 @@
+{
+  "type": "bonsaitrees3:sapling",
+  "mod": "minecraft",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bonsaitrees3"
+    }
+  ],
+  "sapling": {
+    "item": "minecraft:brown_mushroom"
+  },
+  "drops": [
+    {
+      "rolls": 3,
+      "chance": 0.2,
+      "result": {
+        "item": "minecraft:brown_mushroom"
+      }
+    },
+    {
+      "rolls": 1,
+      "chance": 0.75,
+      "result": {
+        "item": "minecraft:mushroom_stem"
+      }
+    },
+    {
+      "rolls": 2,
+      "chance": 0.2,
+      "result": {
+        "item": "minecraft:brown_mushroom_block"
+      },
+      "requiresSilkTouch": true
+    }
+  ],
+  "compatibleSoilTags": [
+    "mycelium",
+    "podzol"
+  ],
+  "ticks": 300
+}

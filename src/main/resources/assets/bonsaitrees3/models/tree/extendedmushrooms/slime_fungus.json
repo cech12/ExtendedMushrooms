@@ -1,0 +1,98 @@
+{
+  "type": "bonsaitrees3:sapling/extendedmushrooms/slime_fungus",
+  "version": 3,
+  "ref": {
+    "a": {"block":"extendedmushrooms:poisonous_mushroom_stem","properties":{"down":"false","east":"true","north":"true","south":"true","up":"false","west":"true"}},
+    "b": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"true","up":"true","west":"false"}},
+    "c": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"false","up":"true","west":"false"}},
+    "d": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"true","north":"false","persistent":"false","south":"false","up":"true","west":"false"}},
+    "e": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"true","north":"false","persistent":"false","south":"true","up":"true","west":"false"}},
+    "f": {"block":"extendedmushrooms:poisonous_mushroom_stem","properties":{"down":"true","east":"true","north":"true","south":"true","up":"false","west":"true"}},
+    "g": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"false","north":"true","persistent":"false","south":"false","up":"true","west":"true"}},
+    "h": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"false","north":"true","persistent":"false","south":"false","up":"true","west":"false"}},
+    "i": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"true","up":"true","west":"true"}},
+    "j": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"true","north":"true","persistent":"false","south":"false","up":"true","west":"false"}},
+    "k": {"block":"extendedmushrooms:poisonous_mushroom_stem","properties":{"down":"true","east":"true","north":"true","south":"true","up":"true","west":"true"}},
+    "l": {"block":"extendedmushrooms:slime_fungus_cap","properties":{"down":"false","east":"false","north":"false","persistent":"false","south":"false","up":"true","west":"true"}},
+    "m": {"block":"extendedmushrooms:poisonous_mushroom_stem","properties":{"down":"false","east":"true","north":"true","south":"true","up":"true","west":"true"}}
+  },
+  "shape": [
+    [
+      " jddde ",
+      "       ",
+      "       ",
+      "       ",
+      "    jde",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      "jccccce",
+      "       ",
+      "       ",
+      "       ",
+      "    hcb",
+      "     a ",
+      "     f ",
+      "    k  ",
+      "   m   "
+    ],
+    [
+      "hcccccb",
+      "       ",
+      "       ",
+      "       ",
+      "    gli",
+      "       ",
+      "       ",
+      "   k   ",
+      "       "
+    ],
+    [
+      "hcccccb",
+      "   a   ",
+      "   a   ",
+      "   a   ",
+      "   a   ",
+      "   a   ",
+      "   f   ",
+      "       ",
+      "       "
+    ],
+    [
+      "hcccccb",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      "gccccci",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ],
+    [
+      " gllli ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       ",
+      "       "
+    ]
+  ]
+}
