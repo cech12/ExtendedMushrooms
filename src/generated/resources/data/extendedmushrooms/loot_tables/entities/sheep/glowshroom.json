@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:entity",
+  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:red_mushroom_block"
+          "name": "extendedmushrooms:glowshroom_cap"
         }
       ]
     },
@@ -15,7 +15,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "extendedmushrooms:entities/mushroom_sheep"
+          "name": "minecraft:entities/sheep"
         }
       ]
     }
