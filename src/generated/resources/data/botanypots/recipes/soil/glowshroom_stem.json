@@ -15,5 +15,6 @@
   "categories": [
     "mushroom"
   ],
-  "growthModifier": 0.95
+  "growthModifier": 0.95,
+  "lightLevel": 8
 }

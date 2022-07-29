@@ -18,9 +18,11 @@ public class BotanyPotsCropBuilder {
 
     private final List<JsonObject> conditions = new ArrayList<>();
     private final Item mushroom;
+    private final int lightLevel;
 
-    private BotanyPotsCropBuilder(Item mushroom) {
+    private BotanyPotsCropBuilder(Item mushroom, int lightLevel) {
         this.mushroom = mushroom;
+        this.lightLevel = lightLevel;
 
         JsonObject object = new JsonObject();
         object.addProperty("type", ModLoadedCondition.Serializer.INSTANCE.getID().toString());
@@ -28,23 +30,25 @@ public class BotanyPotsCropBuilder {
         conditions.add(object);
     }
 
-    public static BotanyPotsCropBuilder create(Item mushroom) {
-        return new BotanyPotsCropBuilder(mushroom);
+    public static BotanyPotsCropBuilder create(Item mushroom, int lightLevel) {
+        return new BotanyPotsCropBuilder(mushroom, lightLevel);
     }
 
     public void save(Consumer<FinishedRecipe> consumer) {
-        consumer.accept(new Crop(this.conditions, this.mushroom));
+        consumer.accept(new Crop(this.conditions, this.mushroom, this.lightLevel));
     }
 
     public static class Crop implements FinishedRecipe {
         private final ResourceLocation resourceLocation;
         private final List<JsonObject> conditions;
         private final Item mushroom;
+        private final int lightLevel;
 
-        public Crop(List<JsonObject> conditions, Item mushroom) {
+        public Crop(List<JsonObject> conditions, Item mushroom, int lightLevel) {
             this.resourceLocation = new ResourceLocation("botanypots", "crops/" + mushroom.getRegistryName().getPath());
             this.conditions = conditions;
             this.mushroom = mushroom;
+            this.lightLevel = lightLevel;
         }
 
         public void serializeRecipeData(@Nonnull JsonObject json) {
@@ -67,6 +71,9 @@ public class BotanyPotsCropBuilder {
             json.add("categories", jsonCategories);
 
             json.addProperty("growthTicks", 1200);
+            if (this.lightLevel > 0) {
+                json.addProperty("lightLevel", this.lightLevel);
+            }
 
             JsonObject jsonDisplay = new JsonObject();
             jsonDisplay.addProperty("block", this.mushroom.getRegistryName().toString());

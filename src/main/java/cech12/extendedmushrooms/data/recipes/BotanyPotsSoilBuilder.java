@@ -18,9 +18,11 @@ public class BotanyPotsSoilBuilder {
 
     private final List<JsonObject> conditions = new ArrayList<>();
     private final Block soil;
+    private final int lightLevel;
 
-    private BotanyPotsSoilBuilder(Block soil) {
+    private BotanyPotsSoilBuilder(Block soil, int lightLevel) {
         this.soil = soil;
+        this.lightLevel = lightLevel;
 
         JsonObject object = new JsonObject();
         object.addProperty("type", ModLoadedCondition.Serializer.INSTANCE.getID().toString());
@@ -28,23 +30,25 @@ public class BotanyPotsSoilBuilder {
         conditions.add(object);
     }
 
-    public static BotanyPotsSoilBuilder create(Block mushroom) {
-        return new BotanyPotsSoilBuilder(mushroom);
+    public static BotanyPotsSoilBuilder create(Block mushroom, int lightLevel) {
+        return new BotanyPotsSoilBuilder(mushroom, lightLevel);
     }
 
     public void save(Consumer<FinishedRecipe> consumer) {
-        consumer.accept(new Soil(this.conditions, this.soil));
+        consumer.accept(new Soil(this.conditions, this.soil, this.lightLevel));
     }
 
     public static class Soil implements FinishedRecipe {
         private final ResourceLocation resourceLocation;
         private final List<JsonObject> conditions;
         private final Block soil;
+        private final int lightLevel;
 
-        public Soil(List<JsonObject> conditions, Block soil) {
+        public Soil(List<JsonObject> conditions, Block soil, int lightLevel) {
             this.resourceLocation = new ResourceLocation("botanypots", "soil/" + soil.getRegistryName().getPath());
             this.conditions = conditions;
             this.soil = soil;
+            this.lightLevel = lightLevel;
         }
 
         public void serializeRecipeData(@Nonnull JsonObject json) {
@@ -69,6 +73,9 @@ public class BotanyPotsSoilBuilder {
             json.add("categories", jsonCategories);
 
             json.addProperty("growthModifier", 0.95);
+            if (this.lightLevel > 0) {
+                json.addProperty("lightLevel", this.lightLevel);
+            }
         }
 
         @Nonnull

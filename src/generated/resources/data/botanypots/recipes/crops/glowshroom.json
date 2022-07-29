@@ -15,6 +15,7 @@
     "mulch"
   ],
   "growthTicks": 1200,
+  "lightLevel": 8,
   "display": {
     "block": "extendedmushrooms:glowshroom"
   },

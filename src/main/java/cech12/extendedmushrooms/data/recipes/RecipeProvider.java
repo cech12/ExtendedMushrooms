@@ -324,14 +324,14 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
             if (mushroomType == MushroomType.BROWN_MUSHROOM || mushroomType == MushroomType.RED_MUSHROOM) {
                 continue;
             }
-            BotanyPotsCropBuilder.create(mushroomType.getItem()).save(consumer);
-            BotanyPotsSoilBuilder.create(mushroomType.getCapBlock()).save(consumer);
+            BotanyPotsCropBuilder.create(mushroomType.getItem(), mushroomType.getLightValue()).save(consumer);
+            BotanyPotsSoilBuilder.create(mushroomType.getCapBlock(), mushroomType.getLightValue()).save(consumer);
         }
         for (MushroomWoodType mushroomWoodType : MushroomWoodType.values()) {
             if (mushroomWoodType == MushroomWoodType.MUSHROOM) {
                 continue;
             }
-            BotanyPotsSoilBuilder.create(mushroomWoodType.getStemBlock()).save(consumer);
+            BotanyPotsSoilBuilder.create(mushroomWoodType.getStemBlock(), mushroomWoodType.getLightValue()).save(consumer);
         }
     }
 
