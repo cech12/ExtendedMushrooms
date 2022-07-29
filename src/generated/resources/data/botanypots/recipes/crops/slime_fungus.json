@@ -9,27 +9,21 @@
   "seed": {
     "item": "extendedmushrooms:slime_fungus"
   },
-  "categories":["mushroom"],
-  "growthTicks": 1600,
+  "categories": [
+    "stone",
+    "mushroom",
+    "mulch"
+  ],
+  "growthTicks": 1200,
   "display": {
     "block": "extendedmushrooms:slime_fungus"
   },
-  "results": [
+  "drops": [
     {
-      "chance": 0.75,
+      "chance": 1.0,
       "output": {
         "item": "extendedmushrooms:slime_fungus"
-      },
-      "minRolls": 1,
-      "maxRolls": 1
-    },
-    {
-      "chance": 0.05,
-      "output": {
-        "item": "extendedmushrooms:slime_fungus"
-      },
-      "minRolls": 1,
-      "maxRolls": 2
+      }
     }
   ]
 }

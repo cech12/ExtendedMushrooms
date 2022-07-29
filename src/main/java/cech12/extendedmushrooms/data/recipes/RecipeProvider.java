@@ -5,6 +5,8 @@ import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModTags;
+import cech12.extendedmushrooms.item.MushroomType;
+import cech12.extendedmushrooms.item.MushroomWoodType;
 import com.google.gson.JsonArray;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -317,10 +319,20 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
                 .save(consumer);
 
-        //wood cutting
-        //String woodcuttingDirectory = "mushroom_wood/woodcutting/";
-        //WoodcutterRecipeBuilder.woodcutterRecipe(Items.STICK, Ingredient.fromTag(ModTags.Items.MUSHROOM_PLANKS), 2)
-        //        .build(consumer, getResourceLocation(woodcuttingDirectory, "stick_from_planks"));
+        //botany pots
+        for (MushroomType mushroomType : MushroomType.values()) {
+            if (mushroomType == MushroomType.BROWN_MUSHROOM || mushroomType == MushroomType.RED_MUSHROOM) {
+                continue;
+            }
+            BotanyPotsCropBuilder.create(mushroomType.getItem()).save(consumer);
+            BotanyPotsSoilBuilder.create(mushroomType.getCapBlock()).save(consumer);
+        }
+        for (MushroomWoodType mushroomWoodType : MushroomWoodType.values()) {
+            if (mushroomWoodType == MushroomWoodType.MUSHROOM) {
+                continue;
+            }
+            BotanyPotsSoilBuilder.create(mushroomWoodType.getStemBlock()).save(consumer);
+        }
     }
 
 
