@@ -2,20 +2,22 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:brown_mushroom_block"
+          "name": "extendedmushrooms:poisonous_mushroom_cap"
         }
       ]
     },
     {
-      "rolls": 1,
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "extendedmushrooms:entities/mushroom_sheep"
+          "name": "minecraft:entities/sheep"
         }
       ]
     }

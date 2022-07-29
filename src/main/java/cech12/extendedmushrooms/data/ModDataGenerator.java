@@ -21,6 +21,7 @@ public class ModDataGenerator {
             evt.getGenerator().addProvider(new BlockStateProvider(gen, existingFileHelper));
             BlockTagProvider blockTags = new BlockTagProvider(gen, existingFileHelper);
             evt.getGenerator().addProvider(blockTags);
+            evt.getGenerator().addProvider(new EntityLootProvider(gen));
             evt.getGenerator().addProvider(new ItemModelProvider(gen, existingFileHelper));
             evt.getGenerator().addProvider(new ItemTagProvider(gen, blockTags, existingFileHelper));
             evt.getGenerator().addProvider(new RecipeProvider(gen));
