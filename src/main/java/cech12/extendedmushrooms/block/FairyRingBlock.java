@@ -3,6 +3,8 @@ package cech12.extendedmushrooms.block;
 import cech12.extendedmushrooms.init.ModBlockEntityTypes;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.blockentity.FairyRingBlockEntity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -36,7 +38,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class FairyRingBlock extends AirBlock implements EntityBlock {
 
@@ -46,7 +47,7 @@ public class FairyRingBlock extends AirBlock implements EntityBlock {
     public static final Direction[] DIRECTIONS = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
     public FairyRingBlock() {
-        super(Block.Properties.of(Material.AIR).noCollission().noDrops());
+        super(Block.Properties.of(Material.AIR).noCollission().noLootTable());
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 
@@ -74,7 +75,7 @@ public class FairyRingBlock extends AirBlock implements EntityBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> GameEventListener getListener(@Nonnull Level level, @Nonnull T blockEntity) {
+    public <T extends BlockEntity> GameEventListener getListener(@Nonnull ServerLevel level, @Nonnull T blockEntity) {
         return null;
     }
 
@@ -137,7 +138,7 @@ public class FairyRingBlock extends AirBlock implements EntityBlock {
      */
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(@Nonnull BlockState stateIn, Level worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
+    public void animateTick(@Nonnull BlockState stateIn, Level worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource rand) {
         BlockEntity blockEntity = worldIn.getBlockEntity(pos);
         if (blockEntity instanceof FairyRingBlockEntity) {
             ((FairyRingBlockEntity) blockEntity).animateTick(worldIn, rand);

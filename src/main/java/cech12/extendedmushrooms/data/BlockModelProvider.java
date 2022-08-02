@@ -10,7 +10,10 @@ import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VerticalPlanksBlock;
 import cech12.extendedmushrooms.block.VerticalSlabBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.HoneyFungusCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.SlimeFungusCap;
+import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.WoolCarpetBlock;
@@ -32,6 +35,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 
@@ -96,16 +100,15 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 });
 
         //block models
-        for (Block block : ForgeRegistries.BLOCKS) {
-            if (!ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace())) {
-                continue;
-            }
-            String name = block.getRegistryName().getPath();
+        for (RegistryObject<Block> blockSupplier : ModBlocks.BLOCKS.getEntries()) {
+            Block block = blockSupplier.get();
+            String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
 
             if (block instanceof EMMushroomBlock) {
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/cross")))
-                        .texture("cross", getBlockResourceLocation(name));
+                        .texture("cross", getBlockResourceLocation(name))
+                        .renderType("cutout");
             } else if (block instanceof BookshelfBlock) {
                 ResourceLocation side = getBlockResourceLocation(name);
                 ResourceLocation end = getBlockResourceLocation(name, "_bookshelf", "_planks");
@@ -113,14 +116,26 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof MushroomWoodButtonBlock) {
                 buttonBlock(name, getBlockResourceLocation(name, "_button", "_planks"));
             } else if (block instanceof MushroomCapBlock) {
-                hugeMushroomBlock(name, getBlockResourceLocation(name));
-                // & inside variant
-                ResourceLocation texture = getBlockResourceLocation(name, "_cap", "_inside");
-                getBuilder(texture.getPath())
-                        .ao(false)
-                        .texture("texture", texture)
-                        .texture("particle", texture)
-                        .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+                if (block instanceof HoneyFungusCap || block instanceof SlimeFungusCap) {
+                    translucentHugeMushroomBlock(name, getBlockResourceLocation(name));
+                    // & inside variant
+                    ResourceLocation texture = getBlockResourceLocation(name, "_cap", "_inside");
+                    getBuilder(texture.getPath())
+                            .ao(false)
+                            .texture("texture", texture)
+                            .texture("particle", texture)
+                            .renderType("translucent")
+                            .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+                } else {
+                    hugeMushroomBlock(name, getBlockResourceLocation(name));
+                    // & inside variant
+                    ResourceLocation texture = getBlockResourceLocation(name, "_cap", "_inside");
+                    getBuilder(texture.getPath())
+                            .ao(false)
+                            .texture("texture", texture)
+                            .texture("particle", texture)
+                            .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+                }
             } else if (block instanceof MushroomCapButtonBlock) {
                 buttonBlock(name, getCapResourceLocation(name, "_button"));
             } else if (block instanceof WoolCarpetBlock) {
@@ -136,22 +151,14 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof DoorBlock) {
                 ResourceLocation bottom = getBlockResourceLocation(name + "_bottom");
                 ResourceLocation top = getBlockResourceLocation(name + "_top");
-                getBuilder(name + "_bottom")
-                        .parent(getExistingFile(new ResourceLocation("block/door_bottom")))
-                        .texture("bottom", bottom)
-                        .texture("top", top);
-                getBuilder(name + "_bottom_hinge")
-                        .parent(getExistingFile(new ResourceLocation("block/door_bottom_rh")))
-                        .texture("bottom", bottom)
-                        .texture("top", top);
-                getBuilder(name + "_top")
-                        .parent(getExistingFile(new ResourceLocation("block/door_top")))
-                        .texture("bottom", bottom)
-                        .texture("top", top);
-                getBuilder(name + "_top_hinge")
-                        .parent(getExistingFile(new ResourceLocation("block/door_top_rh")))
-                        .texture("bottom", bottom)
-                        .texture("top", top);
+                getBuilder(name + "_bottom_left").parent(getExistingFile(new ResourceLocation("block/door_bottom_left"))).texture("bottom", bottom).texture("top", top);
+                getBuilder(name + "_bottom_left_open").parent(getExistingFile(new ResourceLocation("block/door_bottom_left_open"))).texture("bottom", bottom).texture("top", top);
+                getBuilder(name + "_bottom_right").parent(getExistingFile(new ResourceLocation("block/door_bottom_right"))).texture("bottom", bottom).texture("top", top);
+                getBuilder(name + "_bottom_right_open").parent(getExistingFile(new ResourceLocation("block/door_bottom_right_open"))).texture("bottom", bottom).texture("top", top);
+                getBuilder(name + "_top_left").parent(getExistingFile(new ResourceLocation("block/door_top_left"))).texture("bottom", bottom).texture("top", top);
+                getBuilder(name + "_top_left_open").parent(getExistingFile(new ResourceLocation("block/door_top_left_open"))).texture("bottom", bottom).texture("top", top);
+                getBuilder(name + "_top_right").parent(getExistingFile(new ResourceLocation("block/door_top_right"))).texture("bottom", bottom).texture("top", top);
+                getBuilder(name + "_top_right_open").parent(getExistingFile(new ResourceLocation("block/door_top_right_open"))).texture("bottom", bottom).texture("top", top);
             } else if (block instanceof FenceGateBlock) {
                 ResourceLocation texture = getBlockResourceLocation(name, "_fence_gate", "_planks");
                 simpleTexturedBlock(name, "template_fence_gate", texture);
@@ -166,14 +173,16 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof FlowerPotBlock) {
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/flower_pot_cross")))
-                        .texture("plant", getBlockResourceLocation(name, "_potted", ""));
+                        .texture("plant", getBlockResourceLocation(name, "_potted", ""))
+                        .renderType("cutout");
             } else if (block instanceof LadderBlock) {
                 ResourceLocation texture = getBlockResourceLocation(name);
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/ladder")))
                         .ao(false)
                         .texture("particle", texture)
-                        .texture("texture", texture);
+                        .texture("texture", texture)
+                        .renderType("cutout");
             } else if (block instanceof PressurePlateBlock) {
                 pressurePlateBlock(name, getBlockResourceLocation(name, "_pressure_plate", "_planks"));
             } else if (block instanceof SlabBlock) {
@@ -233,7 +242,8 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 //flower & grass
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/tinted_cross")))
-                        .texture("cross", getBlockResourceLocation(name));
+                        .texture("cross", getBlockResourceLocation(name))
+                        .renderType("cutout");
             } else if (block instanceof MushroomPlanksBlock) {
                 //planks
                 cubeBlock(name, getBlockResourceLocation(name));
@@ -246,7 +256,8 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
         ResourceLocation triggeredPoisonousMushroom = getBlockResourceLocation("poisonous_mushroom_triggered");
         getBuilder(triggeredPoisonousMushroom.getPath())
                 .parent(getExistingFile(new ResourceLocation("block/cross")))
-                .texture("cross", triggeredPoisonousMushroom);
+                .texture("cross", triggeredPoisonousMushroom)
+                .renderType("cutout");
         ResourceLocation triggeredPoisonousMushroomCap = getBlockResourceLocation("poisonous_mushroom_cap_triggered");
         getBuilder(triggeredPoisonousMushroomCap.getPath())
                 .texture("texture", triggeredPoisonousMushroomCap)
@@ -284,6 +295,15 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
         getBuilder(name)
                 .texture("texture", texture)
                 .texture("particle", texture)
+                .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+        cubeBlock(name + "_inventory", texture);
+    }
+
+    private void translucentHugeMushroomBlock(String name, ResourceLocation texture) {
+        getBuilder(name)
+                .texture("texture", texture)
+                .texture("particle", texture)
+                .renderType("translucent")
                 .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
         cubeBlock(name + "_inventory", texture);
     }

@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.block.EMMushroomBlock;
 import cech12.extendedmushrooms.block.mushrooms.PoisonousMushroom;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.AreaEffectCloud;
@@ -22,7 +23,6 @@ import net.minecraft.server.level.ServerLevel;
 import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class PoisonousMushroomBlock extends EMMushroomBlock {
 
@@ -34,7 +34,7 @@ public class PoisonousMushroomBlock extends EMMushroomBlock {
     }
 
     @Override
-    public void randomTick(@Nonnull BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
+    public void randomTick(@Nonnull BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         //reset TRIGGERED state
         if (state.getValue(TRIGGERED)) {
@@ -54,7 +54,7 @@ public class PoisonousMushroomBlock extends EMMushroomBlock {
     }
 
     private void generateEffectCloud(@Nonnull ServerLevel worldIn, @Nonnull BlockState state, BlockPos pos) {
-        Random random = worldIn.getRandom();
+        RandomSource random = worldIn.getRandom();
         int duration = 200 + random.nextInt(200);
         if (random.nextInt(100) == 0) {
             duration += 1200;

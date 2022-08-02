@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -45,7 +46,7 @@ public class BotanyPotsSoilBuilder {
         private final int lightLevel;
 
         public Soil(List<JsonObject> conditions, Block soil, int lightLevel) {
-            this.resourceLocation = new ResourceLocation("botanypots", "soil/" + soil.getRegistryName().getPath());
+            this.resourceLocation = new ResourceLocation("botanypots", "soil/" + ForgeRegistries.BLOCKS.getKey(soil).getPath());
             this.conditions = conditions;
             this.soil = soil;
             this.lightLevel = lightLevel;
@@ -61,11 +62,11 @@ public class BotanyPotsSoilBuilder {
             json.add("conditions", conditionArray);
 
             JsonObject jsonSeed = new JsonObject();
-            jsonSeed.addProperty("item", this.soil.asItem().getRegistryName().toString());
+            jsonSeed.addProperty("item", ForgeRegistries.BLOCKS.getKey(this.soil).toString());
             json.add("input", jsonSeed);
 
             JsonObject jsonDisplay = new JsonObject();
-            jsonDisplay.addProperty("block", this.soil.getRegistryName().toString());
+            jsonDisplay.addProperty("block", ForgeRegistries.BLOCKS.getKey(this.soil).toString());
             json.add("display", jsonDisplay);
 
             JsonArray jsonCategories = new JsonArray();

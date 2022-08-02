@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "boat",
-  "pattern": [
-    "# #",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "extendedmushrooms:poisonous_mushroom_planks"
     }
   },
+  "pattern": [
+    "# #",
+    "###"
+  ],
   "result": {
     "item": "extendedmushrooms:poisonous_mushroom_boat"
   }

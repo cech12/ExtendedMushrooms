@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 150,
+  "experience": 0.15,
   "ingredient": {
     "tag": "forge:mushrooms/edible"
   },
-  "result": "extendedmushrooms:grilled_mushroom",
-  "experience": 0.15,
-  "cookingtime": 150
+  "result": "extendedmushrooms:grilled_mushroom"
 }

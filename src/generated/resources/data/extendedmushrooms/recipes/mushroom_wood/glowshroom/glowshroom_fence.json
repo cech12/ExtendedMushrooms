@@ -1,10 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "wooden_fence",
-  "pattern": [
-    "W#W",
-    "W#W"
-  ],
   "key": {
     "#": {
       "tag": "forge:rods/wooden"
@@ -13,8 +9,12 @@
       "item": "extendedmushrooms:glowshroom_planks"
     }
   },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
   "result": {
-    "item": "extendedmushrooms:glowshroom_fence",
-    "count": 3
+    "count": 3,
+    "item": "extendedmushrooms:glowshroom_fence"
   }
 }

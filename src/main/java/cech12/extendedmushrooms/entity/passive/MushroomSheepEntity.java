@@ -5,6 +5,7 @@ import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMyceliumGoal;
 import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -49,7 +50,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class MushroomSheepEntity extends Sheep {
 
@@ -276,7 +276,7 @@ public class MushroomSheepEntity extends Sheep {
     /**
      * Chooses a "vanilla" sheep color based on the provided random.
      */
-    public static MushroomType getRandomMushroomType(Random random) {
+    public static MushroomType getRandomMushroomType(RandomSource random) {
         if (random.nextInt(100) < 5) {
             MushroomType[] specialTypes = MushroomType.getSpecialTypes();
             return specialTypes[random.nextInt(specialTypes.length)];

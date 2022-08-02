@@ -1,11 +1,13 @@
 {
   "ambientocclusion": false,
-  "textures": {
-    "texture": "extendedmushrooms:block/slime_fungus_inside",
-    "particle": "extendedmushrooms:block/slime_fungus_inside"
-  },
   "elements": [
     {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#texture"
+        }
+      },
       "from": [
         0,
         0,
@@ -15,13 +17,12 @@
         16,
         16,
         0
-      ],
-      "faces": {
-        "north": {
-          "texture": "#texture",
-          "cullface": "north"
-        }
-      }
+      ]
     }
-  ]
+  ],
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "particle": "extendedmushrooms:block/slime_fungus_inside",
+    "texture": "extendedmushrooms:block/slime_fungus_inside"
+  }
 }

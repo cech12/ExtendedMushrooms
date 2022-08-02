@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms.block;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -16,7 +17,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 public class InfestedGrassBlock extends BushBlock {
 
@@ -29,6 +29,7 @@ public class InfestedGrassBlock extends BushBlock {
         super(properties);
     }
 
+    @Override
     @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         Vec3 vec3d = state.getOffset(worldIn, pos);
@@ -40,17 +41,9 @@ public class InfestedGrassBlock extends BushBlock {
         return block == Blocks.MYCELIUM || super.mayPlaceOn(state, worldIn, pos);
     }
 
-    /**
-     * Get the OffsetType for this Block. Determines if the model is rendered slightly offset.
-     */
-    @Nonnull
-    public Block.OffsetType getOffsetType() {
-        return Block.OffsetType.XYZ;
-    }
-
-
+    @Override
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState blockState, Level world, BlockPos blockPos, Random random) {
+    public void animateTick(BlockState blockState, Level world, BlockPos blockPos, RandomSource random) {
         super.animateTick(blockState, world, blockPos, random);
         if (random.nextInt(15) == 0) {
             world.addParticle(ParticleTypes.MYCELIUM, (double)blockPos.getX() + (double)random.nextFloat(), (double)blockPos.getY() + 0.2D, (double)blockPos.getZ() + (double)random.nextFloat(), 0.0D, 0.0D, 0.0D);

@@ -6,7 +6,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModDataGenerator {
@@ -16,15 +16,15 @@ public class ModDataGenerator {
         if (evt.includeServer()) {
             DataGenerator gen = evt.getGenerator();
             ExistingFileHelper existingFileHelper = evt.getExistingFileHelper();
-            evt.getGenerator().addProvider(new BlockLootProvider(gen));
-            evt.getGenerator().addProvider(new BlockModelProvider(gen, existingFileHelper));
-            evt.getGenerator().addProvider(new BlockStateProvider(gen, existingFileHelper));
+            evt.getGenerator().addProvider(true, new BlockLootProvider(gen));
+            evt.getGenerator().addProvider(true, new BlockModelProvider(gen, existingFileHelper));
+            evt.getGenerator().addProvider(true, new BlockStateProvider(gen, existingFileHelper));
             BlockTagProvider blockTags = new BlockTagProvider(gen, existingFileHelper);
-            evt.getGenerator().addProvider(blockTags);
-            evt.getGenerator().addProvider(new EntityLootProvider(gen));
-            evt.getGenerator().addProvider(new ItemModelProvider(gen, existingFileHelper));
-            evt.getGenerator().addProvider(new ItemTagProvider(gen, blockTags, existingFileHelper));
-            evt.getGenerator().addProvider(new RecipeProvider(gen));
+            evt.getGenerator().addProvider(true, blockTags);
+            evt.getGenerator().addProvider(true, new EntityLootProvider(gen));
+            evt.getGenerator().addProvider(true, new ItemModelProvider(gen, existingFileHelper));
+            evt.getGenerator().addProvider(true, new ItemTagProvider(gen, blockTags, existingFileHelper));
+            evt.getGenerator().addProvider(true, new RecipeProvider(gen));
         }
     }
 

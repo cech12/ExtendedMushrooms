@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "wooden_trapdoor",
-  "pattern": [
-    "###",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "extendedmushrooms:mushroom_planks"
     }
   },
+  "pattern": [
+    "###",
+    "###"
+  ],
   "result": {
-    "item": "extendedmushrooms:mushroom_trapdoor",
-    "count": 2
+    "count": 2,
+    "item": "extendedmushrooms:mushroom_trapdoor"
   }
 }

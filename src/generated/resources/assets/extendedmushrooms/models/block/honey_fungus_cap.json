@@ -1,10 +1,12 @@
 {
-  "textures": {
-    "texture": "extendedmushrooms:block/honey_fungus_cap",
-    "particle": "extendedmushrooms:block/honey_fungus_cap"
-  },
   "elements": [
     {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#texture"
+        }
+      },
       "from": [
         0,
         0,
@@ -14,13 +16,12 @@
         16,
         16,
         0
-      ],
-      "faces": {
-        "north": {
-          "texture": "#texture",
-          "cullface": "north"
-        }
-      }
+      ]
     }
-  ]
+  ],
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "particle": "extendedmushrooms:block/honey_fungus_cap",
+    "texture": "extendedmushrooms:block/honey_fungus_cap"
+  }
 }

@@ -6,9 +6,9 @@
       "modid": "corail_woodcutter"
     }
   ],
+  "count": 1,
   "ingredient": {
     "item": "extendedmushrooms:glowshroom_planks"
   },
-  "result": "extendedmushrooms:glowshroom_pressure_plate",
-  "count": 1
+  "result": "extendedmushrooms:glowshroom_pressure_plate"
 }

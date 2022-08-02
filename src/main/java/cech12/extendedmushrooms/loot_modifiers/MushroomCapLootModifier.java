@@ -2,7 +2,10 @@ package cech12.extendedmushrooms.loot_modifiers;
 
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.config.Config;
-import com.google.gson.JsonObject;
+import com.google.common.base.Suppliers;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -12,14 +15,17 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 
 import javax.annotation.Nonnull;
-import java.util.List;
+import java.util.function.Supplier;
 
 public class MushroomCapLootModifier extends LootModifier {
+
+    public static final Supplier<Codec<MushroomCapLootModifier>> CODEC = Suppliers.memoize(() ->
+            RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, MushroomCapLootModifier::new))
+    );
 
     public MushroomCapLootModifier(LootItemCondition[] conditionsIn) {
         super(conditionsIn);
@@ -27,14 +33,14 @@ public class MushroomCapLootModifier extends LootModifier {
 
     @Nonnull
     @Override
-    protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+    protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         //only called when shears are used
         if (Config.MUSHROOM_CAPS_WITH_SHEARS_ENABLED.get()) {
             BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
             if (blockState != null && blockState.is(ModTags.ForgeBlocks.MUSHROOM_CAPS)) {
                 ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
                 //to avoid endless loop: test for silk touch enchantment
-                if (tool != null && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
+                if (tool != null && EnchantmentHelper.getTagEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
                     //generate fake tool with silk touch enchantment
                     ItemStack fakeTool = tool.copy();
                     fakeTool.enchant(Enchantments.SILK_TOUCH, 1);
@@ -50,18 +56,9 @@ public class MushroomCapLootModifier extends LootModifier {
         return generatedLoot;
     }
 
-    public static class Serializer extends GlobalLootModifierSerializer<MushroomCapLootModifier> {
-        @Override
-        public MushroomCapLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditions)
-        {
-            return new MushroomCapLootModifier(conditions);
-        }
-
-        @Override
-        public JsonObject write(MushroomCapLootModifier instance) {
-            //maybe do something?
-            return null;
-        }
+    @Override
+    public Codec<? extends IGlobalLootModifier> codec() {
+        return CODEC.get();
     }
 
 }

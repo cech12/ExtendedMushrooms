@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "extendedmushrooms:block/glowshroom_planks",
-    "top": "extendedmushrooms:block/glowshroom_planks",
-    "side": "extendedmushrooms:block/glowshroom_planks"
+    "side": "extendedmushrooms:block/glowshroom_planks",
+    "top": "extendedmushrooms:block/glowshroom_planks"
   }
 }

@@ -6,9 +6,9 @@
       "modid": "corail_woodcutter"
     }
   ],
+  "count": 1,
   "ingredient": {
     "item": "extendedmushrooms:honey_fungus_planks"
   },
-  "result": "extendedmushrooms:honey_fungus_stairs",
-  "count": 1
+  "result": "extendedmushrooms:honey_fungus_stairs"
 }

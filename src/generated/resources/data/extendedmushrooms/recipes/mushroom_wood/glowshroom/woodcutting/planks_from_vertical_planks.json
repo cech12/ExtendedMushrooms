@@ -6,13 +6,13 @@
       "modid": "corail_woodcutter"
     },
     {
-      "feature": "verticalPlanks",
-      "type": "extendedmushrooms:mod_feature_enabled"
+      "type": "extendedmushrooms:mod_feature_enabled",
+      "feature": "verticalPlanks"
     }
   ],
+  "count": 1,
   "ingredient": {
     "item": "extendedmushrooms:glowshroom_vertical_planks"
   },
-  "result": "extendedmushrooms:glowshroom_planks",
-  "count": 1
+  "result": "extendedmushrooms:glowshroom_planks"
 }

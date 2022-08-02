@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "side": "extendedmushrooms:block/glowshroom_bookshelf",
-    "end": "extendedmushrooms:block/glowshroom_planks"
+    "end": "extendedmushrooms:block/glowshroom_planks",
+    "side": "extendedmushrooms:block/glowshroom_bookshelf"
   }
 }

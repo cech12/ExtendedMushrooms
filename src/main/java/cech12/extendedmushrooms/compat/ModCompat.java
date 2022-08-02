@@ -5,6 +5,8 @@ import cech12.extendedmushrooms.config.Config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModList;
 
+import java.util.function.Supplier;
+
 public class ModCompat {
 
     public static final Mod[] MODS = {
@@ -30,28 +32,28 @@ public class ModCompat {
         return false;
     }
 
-    public static boolean isVariantBookshelvesModLoaded() {
-        return checkValue(VariantBookshelfMod.class, Config.VARIANT_BOOKSHELF_ENABLED);
+    public static Supplier<Boolean> isVariantBookshelvesModLoaded() {
+        return () -> checkValue(VariantBookshelfMod.class, Config.VARIANT_BOOKSHELF_ENABLED);
     }
 
-    public static boolean isVariantChestsModLoaded() {
-        return checkValue(VariantChestsMod.class, Config.VARIANT_CHESTS_ENABLED);
+    public static Supplier<Boolean> isVariantChestsModLoaded() {
+        return () -> checkValue(VariantChestsMod.class, Config.VARIANT_CHESTS_ENABLED);
     }
 
-    public static boolean isVariantTrappedChestsModLoaded() {
-        return checkValue(VariantTrappedChestsMod.class, Config.VARIANT_TRAPPED_CHESTS_ENABLED);
+    public static Supplier<Boolean> isVariantTrappedChestsModLoaded() {
+        return () -> checkValue(VariantTrappedChestsMod.class, Config.VARIANT_TRAPPED_CHESTS_ENABLED);
     }
 
-    public static boolean isVariantLaddersModLoaded() {
-        return checkValue(VariantLadderMod.class, Config.VARIANT_LADDER_ENABLED);
+    public static Supplier<Boolean> isVariantLaddersModLoaded() {
+        return () -> checkValue(VariantLadderMod.class, Config.VARIANT_LADDER_ENABLED);
     }
 
-    public static boolean isVerticalPlanksModLoaded() {
-        return checkValue(VerticalPlanksMod.class, Config.VERTICAL_PLANKS_ENABLED);
+    public static Supplier<Boolean> isVerticalPlanksModLoaded() {
+        return () -> checkValue(VerticalPlanksMod.class, Config.VERTICAL_PLANKS_ENABLED);
     }
 
-    public static boolean isVerticalSlabsModLoaded() {
-        return checkValue(VerticalSlabsMod.class, Config.VERTICAL_SLABS_ENABLED);
+    public static Supplier<Boolean> isVerticalSlabsModLoaded() {
+        return () -> checkValue(VerticalSlabsMod.class, Config.VERTICAL_SLABS_ENABLED);
     }
 
     public static class Mod {

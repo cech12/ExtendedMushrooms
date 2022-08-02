@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
@@ -25,7 +26,6 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
 
@@ -44,7 +44,7 @@ public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
     }
 
     @Override
-    public void randomTick(BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
+    public void randomTick(BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         //reset TRIGGERED state
         if (state.getValue(TRIGGERED)) {
@@ -60,7 +60,7 @@ public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
 
     @Nonnull
     @Override
-    protected List<MobEffectInstance> getEffects(@Nonnull Random random) {
+    protected List<MobEffectInstance> getEffects(@Nonnull RandomSource random) {
         int duration = 200 + random.nextInt(200);
         if (random.nextInt(100) == 0) {
             duration += 1200;

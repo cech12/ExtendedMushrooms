@@ -13,6 +13,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
@@ -26,12 +27,12 @@ public class ItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
-        Predicate<Item> extendedMushrooms = item -> ExtendedMushrooms.MOD_ID.equals(item.getRegistryName().getNamespace());
+        Predicate<Item> extendedMushrooms = item -> ExtendedMushrooms.MOD_ID.equals(ForgeRegistries.ITEMS.getKey(item).getNamespace());
 
         //generate mod intern tags
         tag(ModTags.Items.MUSHROOM_BOATS).add(registry.stream().filter(extendedMushrooms)
                 .filter(item -> item instanceof MushroomBoatItem)
-                .sorted(Comparator.comparing(Item::getRegistryName))
+                .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item)))
                 .toArray(Item[]::new));
         copy(ModTags.Blocks.MUSHROOM_BOOKSHELVES, ModTags.Items.MUSHROOM_BOOKSHELVES);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD, ModTags.Items.MUSHROOM_BUTTONS_WOOD);
@@ -92,7 +93,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         //generate minecraft tags
         tag(ItemTags.BOATS).addTag(ModTags.Items.MUSHROOM_BOATS);
         copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
-        copy(BlockTags.CARPETS, ItemTags.CARPETS);
+        copy(BlockTags.WOOL_CARPETS, ItemTags.WOOL_CARPETS);
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.FENCES, ItemTags.FENCES);
         copy(BlockTags.LOGS, ItemTags.LOGS);

@@ -22,11 +22,11 @@ public enum MushroomType implements StringRepresentable {
 
     BROWN_MUSHROOM(0,
             () -> Items.BROWN_MUSHROOM,
-            RegistryObject.create(Blocks.BROWN_MUSHROOM_BLOCK.getRegistryName(), ForgeRegistries.BLOCKS),
+            RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.BROWN_MUSHROOM_BLOCK), ForgeRegistries.BLOCKS),
             MushroomWoodType.MUSHROOM, DyeColor.BROWN),
     RED_MUSHROOM(1,
             () -> Items.RED_MUSHROOM,
-            RegistryObject.create(Blocks.RED_MUSHROOM_BLOCK.getRegistryName(), ForgeRegistries.BLOCKS),
+            RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.RED_MUSHROOM_BLOCK), ForgeRegistries.BLOCKS),
             MushroomWoodType.MUSHROOM, DyeColor.RED),
     GLOWSHROOM(2,
             () -> ModBlocks.GLOWSHROOM.get().asItem(),
@@ -93,12 +93,12 @@ public enum MushroomType implements StringRepresentable {
     }
 
     public ResourceLocation getSheepLootTable() {
-        return new ResourceLocation(ExtendedMushrooms.MOD_ID, "entities/sheep/" + this.getItem().getRegistryName().getPath());
+        return new ResourceLocation(ExtendedMushrooms.MOD_ID, "entities/sheep/" + ForgeRegistries.ITEMS.getKey(this.getItem()).getPath());
     }
 
     @Override
     public String getSerializedName() {
-        return this.getItem().getRegistryName().getPath();
+        return ForgeRegistries.ITEMS.getKey(this.getItem()).getPath();
     }
 
     public static MushroomType byId(int id) {

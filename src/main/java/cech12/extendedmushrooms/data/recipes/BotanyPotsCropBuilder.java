@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -45,7 +46,7 @@ public class BotanyPotsCropBuilder {
         private final int lightLevel;
 
         public Crop(List<JsonObject> conditions, Item mushroom, int lightLevel) {
-            this.resourceLocation = new ResourceLocation("botanypots", "crops/" + mushroom.getRegistryName().getPath());
+            this.resourceLocation = new ResourceLocation("botanypots", "crops/" + ForgeRegistries.ITEMS.getKey(mushroom).getPath());
             this.conditions = conditions;
             this.mushroom = mushroom;
             this.lightLevel = lightLevel;
@@ -61,7 +62,7 @@ public class BotanyPotsCropBuilder {
             json.add("conditions", conditionArray);
 
             JsonObject jsonSeed = new JsonObject();
-            jsonSeed.addProperty("item", this.mushroom.asItem().getRegistryName().toString());
+            jsonSeed.addProperty("item", ForgeRegistries.ITEMS.getKey(this.mushroom).toString());
             json.add("seed", jsonSeed);
 
             JsonArray jsonCategories = new JsonArray();
@@ -76,13 +77,13 @@ public class BotanyPotsCropBuilder {
             }
 
             JsonObject jsonDisplay = new JsonObject();
-            jsonDisplay.addProperty("block", this.mushroom.getRegistryName().toString());
+            jsonDisplay.addProperty("block", ForgeRegistries.ITEMS.getKey(this.mushroom).toString());
             json.add("display", jsonDisplay);
 
             JsonObject jsonDrop = new JsonObject();
             jsonDrop.addProperty("chance", 1.00);
             JsonObject jsonOutput = new JsonObject();
-            jsonOutput.addProperty("item", this.mushroom.asItem().getRegistryName().toString());
+            jsonOutput.addProperty("item", ForgeRegistries.ITEMS.getKey(this.mushroom).toString());
             jsonDrop.add("output", jsonOutput);
             JsonArray jsonDrops = new JsonArray();
             jsonDrops.add(jsonDrop);

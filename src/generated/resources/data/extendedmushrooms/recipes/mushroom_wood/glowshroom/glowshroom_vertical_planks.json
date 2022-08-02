@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#",
-    "#",
-    "#"
+  "conditions": [
+    {
+      "type": "extendedmushrooms:mod_feature_enabled",
+      "feature": "verticalPlanks"
+    }
   ],
   "key": {
     "#": {
       "item": "extendedmushrooms:glowshroom_planks"
     }
   },
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
   "result": {
-    "item": "extendedmushrooms:glowshroom_vertical_planks",
-    "count": 3
-  },
-  "conditions": [
-    {
-      "feature": "verticalPlanks",
-      "type": "extendedmushrooms:mod_feature_enabled"
-    }
-  ]
+    "count": 3,
+    "item": "extendedmushrooms:glowshroom_vertical_planks"
+  }
 }

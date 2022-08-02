@@ -6,9 +6,9 @@
       "modid": "corail_woodcutter"
     }
   ],
+  "count": 2,
   "ingredient": {
     "item": "extendedmushrooms:mushroom_planks"
   },
-  "result": "extendedmushrooms:mushroom_slab",
-  "count": 2
+  "result": "extendedmushrooms:mushroom_slab"
 }

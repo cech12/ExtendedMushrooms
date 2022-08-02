@@ -2,10 +2,9 @@ package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
-
-import java.util.Random;
 
 public class MegaBrownMushroomFeature extends MegaMushroomFeature {
 
@@ -14,7 +13,7 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected int getCapRadius(Random random) {
+    protected int getCapRadius(RandomSource random) {
         return 3 + random.nextInt(2);
     }
 
@@ -32,7 +31,7 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected void placeCap(LevelAccessor level, Random random, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         //top layer: "radius" blocks in each direction without corners
         for(int x = -radius; x <= radius+1; ++x) {
             for(int z = -radius; z <= radius+1; ++z) {

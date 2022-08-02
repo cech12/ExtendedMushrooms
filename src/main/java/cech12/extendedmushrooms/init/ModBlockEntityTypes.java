@@ -26,7 +26,7 @@ import java.util.Arrays;
 
 public class ModBlockEntityTypes {
 
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, ExtendedMushrooms.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ExtendedMushrooms.MOD_ID);
 
     public static RegistryObject<BlockEntityType<FairyRingBlockEntity>> FAIRY_RING = register("fairy_ring", FairyRingBlockEntity::new,
             ModBlocks.FAIRY_RING);

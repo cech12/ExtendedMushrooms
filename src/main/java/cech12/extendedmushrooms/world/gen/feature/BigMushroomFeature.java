@@ -2,14 +2,13 @@ package cech12.extendedmushrooms.world.gen.feature;
 
 import cech12.extendedmushrooms.MushroomUtils;
 import com.mojang.serialization.Codec;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Material;
-
-import java.util.Random;
 
 public abstract class BigMushroomFeature extends Feature<HugeMushroomFeatureConfiguration> {
 
@@ -34,21 +33,21 @@ public abstract class BigMushroomFeature extends Feature<HugeMushroomFeatureConf
         return MushroomUtils.isValidMushroomPosition(world, mushroomPos);
     }
 
-    protected void placeTrunkBlockIfPossible(LevelAccessor level, Random random, HugeMushroomFeatureConfiguration config, BlockPos blockPos) {
+    protected void placeTrunkBlockIfPossible(LevelAccessor level, RandomSource random, HugeMushroomFeatureConfiguration config, BlockPos blockPos) {
         this.placeTrunkBlockIfPossible(level, random, config, blockPos, false, false);
     }
 
-    protected void placeTrunkBlockIfPossible(LevelAccessor level, Random random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean up, boolean down) {
+    protected void placeTrunkBlockIfPossible(LevelAccessor level, RandomSource random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean up, boolean down) {
         if (isReplaceable(level, blockPos, true)) {
             this.setBlock(level, blockPos, config.stemProvider.getState(random, blockPos).setValue(HugeMushroomBlock.UP, up).setValue(HugeMushroomBlock.DOWN, down));
         }
     }
 
-    protected void placeCapBlockIfPossible(LevelAccessor level, Random random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south) {
+    protected void placeCapBlockIfPossible(LevelAccessor level, RandomSource random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south) {
         this.placeCapBlockIfPossible(level, random, config, blockPos, west, east, north, south, true);
     }
 
-    protected void placeCapBlockIfPossible(LevelAccessor level, Random random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south, boolean up) {
+    protected void placeCapBlockIfPossible(LevelAccessor level, RandomSource random, HugeMushroomFeatureConfiguration config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south, boolean up) {
         if (isReplaceable(level, blockPos, false)) {
             this.setBlock(level, blockPos, config.capProvider.getState(random, blockPos).setValue(HugeMushroomBlock.WEST, west).setValue(HugeMushroomBlock.EAST, east).setValue(HugeMushroomBlock.NORTH, north).setValue(HugeMushroomBlock.SOUTH, south).setValue(HugeMushroomBlock.UP, up));
         }

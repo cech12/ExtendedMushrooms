@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "wooden_pressure_plate",
-  "pattern": [
-    "##"
-  ],
   "key": {
     "#": {
       "item": "extendedmushrooms:poisonous_mushroom_planks"
     }
   },
+  "pattern": [
+    "##"
+  ],
   "result": {
     "item": "extendedmushrooms:poisonous_mushroom_pressure_plate"
   }

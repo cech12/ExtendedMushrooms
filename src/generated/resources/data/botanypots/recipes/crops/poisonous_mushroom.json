@@ -1,20 +1,16 @@
 {
   "type": "botanypots:crop",
+  "categories": [
+    "stone",
+    "mushroom",
+    "mulch"
+  ],
   "conditions": [
     {
       "type": "forge:mod_loaded",
       "modid": "botanypots"
     }
   ],
-  "seed": {
-    "item": "extendedmushrooms:poisonous_mushroom"
-  },
-  "categories": [
-    "stone",
-    "mushroom",
-    "mulch"
-  ],
-  "growthTicks": 1200,
   "display": {
     "block": "extendedmushrooms:poisonous_mushroom"
   },
@@ -25,5 +21,9 @@
         "item": "extendedmushrooms:poisonous_mushroom"
       }
     }
-  ]
+  ],
+  "growthTicks": 1200,
+  "seed": {
+    "item": "extendedmushrooms:poisonous_mushroom"
+  }
 }

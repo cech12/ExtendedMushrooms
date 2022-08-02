@@ -37,8 +37,6 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -115,13 +113,7 @@ public class ModFeatures {
             //register(megaMushroom.name + "_field", megaMushroom.config.decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, megaMushroom.spawnChance, 1))));
         }
     }
-
-    @SubscribeEvent
-    public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-        //register world generation features
-
-    }
-
+/* TODO
     public static void addFeaturesToBiomes(BiomeLoadingEvent event) {
         if (event.getCategory().equals(Biome.BiomeCategory.MUSHROOM)) {
             BiomeGenerationSettingsBuilder generation = event.getGeneration();
@@ -148,6 +140,8 @@ public class ModFeatures {
                 || (category == Biome.BiomeCategory.OCEAN && temperatureModifier != Biome.TemperatureModifier.FROZEN);
     }
 
+ */
+
     private static List<PlacementModifier> getMushroomPlacement(int chance, @Nullable PlacementModifier placementModifier) {
         ImmutableList.Builder<PlacementModifier> builder = ImmutableList.builder();
         if (placementModifier != null) {
@@ -163,7 +157,7 @@ public class ModFeatures {
         builder.add(BiomeFilter.biome());
         return builder.build();
     }
-
+/* TODO
     private static void addMushrooms(BiomeLoadingEvent event) {
         //skip biomes with no mushrooms
         if (biomeHasNoMushrooms(event)) {
@@ -215,6 +209,8 @@ public class ModFeatures {
             }
         }
     }
+
+ */
 
     private static class Mushroom {
         String name;

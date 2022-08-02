@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "extendedmushrooms:block/glowshroom_slab_top"
-    },
     "type=bottom": {
       "model": "extendedmushrooms:block/glowshroom_slab"
     },
     "type=double": {
       "model": "extendedmushrooms:block/glowshroom_planks"
+    },
+    "type=top": {
+      "model": "extendedmushrooms:block/glowshroom_slab_top"
     }
   }
 }

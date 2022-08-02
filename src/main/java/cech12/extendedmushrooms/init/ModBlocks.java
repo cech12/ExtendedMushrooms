@@ -37,21 +37,19 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -64,7 +62,7 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> FAIRY_RING = registerBlock("fairy_ring", FairyRingBlock::new);
 
-    public static final RegistryObject<Block> INFESTED_GRASS = registerBlock("infested_grass", CreativeModeTab.TAB_DECORATIONS, () -> new InfestedGrassBlock(Block.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> INFESTED_GRASS = registerBlock("infested_grass", CreativeModeTab.TAB_DECORATIONS, () -> new InfestedGrassBlock(Block.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS).offsetType(Block.OffsetType.XYZ)));
     public static final RegistryObject<Block> INFESTED_FLOWER = registerBlock("infested_flower", CreativeModeTab.TAB_DECORATIONS, () -> new InfestedFlowerBlock(MobEffects.MOVEMENT_SLOWDOWN, 9, Block.Properties.of(Material.PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS)));
     public static final RegistryObject<Block> INFESTED_FLOWER_POTTED = registerBlock("infested_flower_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, INFESTED_FLOWER, Block.Properties.of(Material.DECORATION).strength(0.0F).noOcclusion()));
 
@@ -195,7 +193,7 @@ public final class ModBlocks {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(POISONOUS_MUSHROOM.getId()), POISONOUS_MUSHROOM_POTTED);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(SLIME_FUNGUS.getId()), SLIME_FUNGUS_POTTED);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(HONEY_FUNGUS.getId()), HONEY_FUNGUS_POTTED);
-        BLOCK_STRIPPING_MAP.put(RegistryObject.create(Blocks.MUSHROOM_STEM.getRegistryName(), ForgeRegistries.BLOCKS), STRIPPED_MUSHROOM_STEM);
+        BLOCK_STRIPPING_MAP.put(RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.MUSHROOM_STEM), ForgeRegistries.BLOCKS), STRIPPED_MUSHROOM_STEM);
         BLOCK_STRIPPING_MAP.put(GLOWSHROOM_STEM, GLOWSHROOM_STEM_STRIPPED);
         BLOCK_STRIPPING_MAP.put(POISONOUS_MUSHROOM_STEM, POISONOUS_MUSHROOM_STEM_STRIPPED);
         BLOCK_STRIPPING_MAP.put(HONEY_FUNGUS_STEM, HONEY_FUNGUS_STEM_STRIPPED);
@@ -209,25 +207,31 @@ public final class ModBlocks {
         return BLOCKS.register(name, block);
     }
 
-    private static RegistryObject<Block> registerCompatBlock(String name, CreativeModeTab itemGroup, boolean isActive, Supplier<? extends Block> block) {
-        CreativeModeTab determinedGroup = (isActive) ? itemGroup : null;
-        return registerBlock(name, determinedGroup, block);
+    private static RegistryObject<Block> registerCompatBlock(String name, CreativeModeTab itemGroup, Supplier<Boolean> isActive, Supplier<? extends Block> block) {
+        return registerBlock(name, () -> itemGroup, block);
     }
 
     private static RegistryObject<Block> registerBlock(String name, CreativeModeTab itemGroup, Supplier<? extends Block> block) {
-        Item.Properties itemProperties = new Item.Properties().tab(itemGroup);
+        return registerBlock(name, () -> itemGroup, block); //TODO make item group relative to isActive
+    }
+
+    private static RegistryObject<Block> registerBlock(String name, Supplier<CreativeModeTab> itemGroup, Supplier<? extends Block> block) {
         RegistryObject<Block> registeredBlock = BLOCKS.register(name, block);
-        ModItems.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), itemProperties));
+        ModItems.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), new Item.Properties().tab(itemGroup.get())));
         return registeredBlock;
     }
 
-    private static RegistryObject<Block> registerVariantChest(String name, boolean isActive, Supplier<? extends VariantChestBlock> block) {
+    private static RegistryObject<Block> registerVariantChest(String name, Supplier<Boolean> isActive, Supplier<? extends VariantChestBlock> block) {
         RegistryObject<Block> registeredBlock = BLOCKS.register(name, block);
-        Item.Properties itemProperties = new Item.Properties().tab((isActive) ? CreativeModeTab.TAB_DECORATIONS : null);
-        ModItems.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), itemProperties) {
+        ModItems.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), new Item.Properties().tab((CreativeModeTab.TAB_DECORATIONS))) {
             @Override
-            public void initializeClient(@Nonnull Consumer<IItemRenderProperties> consumer) {
-                consumer.accept(new IItemRenderProperties() {
+            public Collection<CreativeModeTab> getCreativeTabs() {
+                return (isActive.get()) ? super.getCreativeTabs() : Collections.emptyList();
+            }
+
+            @Override
+            public void initializeClient(@Nonnull Consumer<IClientItemExtensions> consumer) {
+                consumer.accept(new IClientItemExtensions() {
                     final BlockEntityWithoutLevelRenderer myRenderer = new BlockEntityWithoutLevelRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels()) {
                         private VariantChestBlockEntity blockEntity;
 
@@ -241,7 +245,7 @@ public final class ModBlocks {
                     };
 
                     @Override
-                    public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+                    public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                         return myRenderer;
                     }
                 });
@@ -250,13 +254,17 @@ public final class ModBlocks {
         return registeredBlock;
     }
 
-    private static RegistryObject<Block> registerTrappedVariantChest(String name, boolean isActive, Supplier<? extends VariantTrappedChestBlock> block) {
+    private static RegistryObject<Block> registerTrappedVariantChest(String name, Supplier<Boolean> isActive, Supplier<? extends VariantTrappedChestBlock> block) {
         RegistryObject<Block> registeredBlock = BLOCKS.register(name, block);
-        Item.Properties itemProperties = new Item.Properties().tab((isActive) ? CreativeModeTab.TAB_REDSTONE : null);
-        ModItems.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), itemProperties) {
+        ModItems.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), new Item.Properties().tab((CreativeModeTab.TAB_REDSTONE))) {
             @Override
-            public void initializeClient(@Nonnull Consumer<IItemRenderProperties> consumer) {
-                consumer.accept(new IItemRenderProperties() {
+            public Collection<CreativeModeTab> getCreativeTabs() {
+                return (isActive.get()) ? super.getCreativeTabs() : Collections.emptyList();
+            }
+
+            @Override
+            public void initializeClient(@Nonnull Consumer<IClientItemExtensions> consumer) {
+                consumer.accept(new IClientItemExtensions() {
                     final BlockEntityWithoutLevelRenderer myRenderer = new BlockEntityWithoutLevelRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels()) {
                         private VariantTrappedChestBlockEntity blockEntity;
 
@@ -270,43 +278,13 @@ public final class ModBlocks {
                     };
 
                     @Override
-                    public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+                    public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                         return myRenderer;
                     }
                 });
             }
         });
         return registeredBlock;
-    }
-
-    /**
-     * Setup render layers of blocks which are not solid blocks.
-     * Method is called at mod initialisation (client side).
-     */
-    @OnlyIn(Dist.CLIENT)
-    public static void setupRenderLayers() {
-        //RenderTypeLookup.setRenderLayer(MUSHROOM_DOOR, RenderType.getCutout()); //unfortunately buggy - so, texture without transparency
-        //RenderTypeLookup.setRenderLayer(MUSHROOM_TRAPDOOR, RenderType.getCutout()); //unfortunately buggy - so, texture without transparency
-
-        ItemBlockRenderTypes.setRenderLayer(FAIRY_RING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(INFESTED_GRASS.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(INFESTED_FLOWER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(INFESTED_FLOWER_POTTED.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(MUSHROOM_LADDER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(GLOWSHROOM.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(GLOWSHROOM_LADDER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(GLOWSHROOM_POTTED.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(POISONOUS_MUSHROOM.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(POISONOUS_MUSHROOM_LADDER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(POISONOUS_MUSHROOM_POTTED.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(SLIME_FUNGUS.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(SLIME_FUNGUS_POTTED.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(HONEY_FUNGUS.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(HONEY_FUNGUS_LADDER.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(HONEY_FUNGUS_POTTED.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(SLIME_FUNGUS_CAP.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(HONEY_FUNGUS_CAP.get(), RenderType.translucent());
     }
 
 }

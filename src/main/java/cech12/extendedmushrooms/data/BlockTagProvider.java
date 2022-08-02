@@ -26,10 +26,11 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
-import java.util.function.Predicate;
 
 public class BlockTagProvider extends BlockTagsProvider {
 
@@ -39,82 +40,80 @@ public class BlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        Predicate<Block> extendedMushrooms = block -> ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace());
-
         //generate mod intern tags
-        tag(ModTags.Blocks.MUSHROOM_BOOKSHELVES).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_BOOKSHELVES).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof BookshelfBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomWoodButtonBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomCapButtonBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_BUTTONS)
                 .addTag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD)
                 .addTag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL);
-        tag(ModTags.Blocks.MUSHROOM_CARPETS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_CARPETS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof WoolCarpetBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_CHESTS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_CHESTS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof VariantChestBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof VariantTrappedChestBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_DOORS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_DOORS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof DoorBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_FENCE_GATES).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_FENCE_GATES).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof FenceGateBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_FENCES).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_FENCES).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof FenceBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_LADDERS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_LADDERS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof LadderBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_PLANKS).add(registry.stream().filter(extendedMushrooms)
-                .filter(block -> block.getRegistryName().getPath().contains("_planks"))
-                .sorted(Comparator.comparing(Block::getRegistryName))
+        tag(ModTags.Blocks.MUSHROOM_PLANKS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+                .filter(block -> ForgeRegistries.BLOCKS.getKey(block).getPath().contains("_planks"))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomWoodPressurePlateBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomCapPressurePlateBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES)
                 .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD)
                 .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
-        tag(ModTags.Blocks.MUSHROOM_SIGNS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_SIGNS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomStandingSignBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_SLABS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_SLABS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof SlabBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_STAIRS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_STAIRS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof StairBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_TRAPDOORS).add(registry.stream().filter(extendedMushrooms)
+        tag(ModTags.Blocks.MUSHROOM_TRAPDOORS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof TrapDoorBlock)
-                .sorted(Comparator.comparing(Block::getRegistryName))
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
         //generate block categories
         tag(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL).add(Blocks.DIRT).add(Blocks.GRASS_BLOCK);
@@ -189,7 +188,7 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         //generate minecraft tags
         tag(BlockTags.BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
-        tag(BlockTags.CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
+        tag(BlockTags.WOOL_CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
         tag(BlockTags.CLIMBABLE).addTag(ModTags.Blocks.MUSHROOM_LADDERS);
         tag(BlockTags.DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
         tag(BlockTags.FENCES).addTag(ModTags.Blocks.MUSHROOM_FENCES);

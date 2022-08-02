@@ -6,9 +6,9 @@
       "modid": "corail_woodcutter"
     }
   ],
+  "count": 4,
   "ingredient": {
     "tag": "forge:mushroom_stems/colorless"
   },
-  "result": "extendedmushrooms:mushroom_stairs",
-  "count": 4
+  "result": "extendedmushrooms:mushroom_stairs"
 }

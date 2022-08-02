@@ -1,10 +1,12 @@
 {
-  "textures": {
-    "texture": "extendedmushrooms:block/poisonous_mushroom_cap",
-    "particle": "extendedmushrooms:block/poisonous_mushroom_cap"
-  },
   "elements": [
     {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#texture"
+        }
+      },
       "from": [
         0,
         0,
@@ -14,13 +16,11 @@
         16,
         16,
         0
-      ],
-      "faces": {
-        "north": {
-          "texture": "#texture",
-          "cullface": "north"
-        }
-      }
+      ]
     }
-  ]
+  ],
+  "textures": {
+    "particle": "extendedmushrooms:block/poisonous_mushroom_cap",
+    "texture": "extendedmushrooms:block/poisonous_mushroom_cap"
+  }
 }

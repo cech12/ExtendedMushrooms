@@ -7,7 +7,7 @@ import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.init.ModBlockEntityTypes;
 import cech12.extendedmushrooms.init.ModParticles;
 import cech12.extendedmushrooms.init.ModSounds;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -32,7 +32,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Random;
 
 public class FairyRingBlockEntity extends BlockEntity implements Container {
 
@@ -311,7 +310,7 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
         if (this.currentRecipe != null && this.currentRecipe.isValid(this.mode, this)) {
             return this.currentRecipe;
         } else {
-            List<FairyRingRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor((RecipeType<FairyRingRecipe>) ModRecipeTypes.FAIRY_RING);
+            List<FairyRingRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.FAIRY_RING.get());
             for (FairyRingRecipe recipe : recipes) {
                 if (recipe.isValid(this.mode, this)) {
                     return recipe;
@@ -344,7 +343,7 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
                     Vec3 center = entity.getCenter();
                     float volume = level.getRandom().nextFloat() * 0.4F + 0.8F;
                     float pitch = level.getRandom().nextFloat() * 0.2F + 0.9F;
-                    level.playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING, SoundSource.AMBIENT, volume, pitch);
+                    level.playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING.get(), SoundSource.AMBIENT, volume, pitch);
                 }
                 //increase recipe time
                 if (entity.recipeTime < entity.recipeTimeTotal) {
@@ -366,7 +365,7 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
                         level.addFreshEntity(itemEntity);
                     }
                     //play sound
-                    level.playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING_FINISH, SoundSource.BLOCKS, 1.5F, 1.0F);
+                    level.playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING_FINISH.get(), SoundSource.BLOCKS, 1.5F, 1.0F);
                     //reset and update recipe
                     entity.resetRecipe();
                     entity.updateRecipe();
@@ -385,7 +384,7 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
      * Called periodically client side by FairyRingBlocks near the player to show effects.
      */
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(Level worldIn, Random rand) {
+    public void animateTick(Level worldIn, RandomSource rand) {
         if (this.isMaster()) {
             Vec3 center = this.getCenter();
             boolean runningRecipe = this.recipeTime < this.recipeTimeTotal;
@@ -397,14 +396,14 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
             } else {
                 //normal mode with recipe process or fairy/witch mode: white mycelium particles on ground
                 for (int i = 0; i < 4; i++) {
-                    worldIn.addParticle(ModParticles.FAIRY_RING, -1.5 + center.x + rand.nextFloat() * 3, center.y, -1.5 + center.z + rand.nextFloat() * 3, (rand.nextDouble() - 0.5) * 0.001, 0.0005, (rand.nextDouble() - 0.5) * 0.001);
+                    worldIn.addParticle(ModParticles.FAIRY_RING.get(), -1.5 + center.x + rand.nextFloat() * 3, center.y, -1.5 + center.z + rand.nextFloat() * 3, (rand.nextDouble() - 0.5) * 0.001, 0.0005, (rand.nextDouble() - 0.5) * 0.001);
                 }
             }
 
             if (this.mode == FairyRingMode.NORMAL && runningRecipe) {
                 //normal mode with recipe process: in center some sprinkling white particles
                 for (int i = 0; i < 4; i++) {
-                    worldIn.addParticle(ModParticles.FAIRY_RING, center.x, center.y, center.z, (rand.nextDouble() - 0.5) * 0.05, 0.05D + rand.nextDouble() * 0.05, (rand.nextDouble() - 0.5) * 0.05);
+                    worldIn.addParticle(ModParticles.FAIRY_RING.get(), center.x, center.y, center.z, (rand.nextDouble() - 0.5) * 0.05, 0.05D + rand.nextDouble() * 0.05, (rand.nextDouble() - 0.5) * 0.05);
                 }
             }
 
@@ -421,7 +420,7 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
                     double rad = Math.toRadians(anglePerParticle * i + (rand.nextDouble() - variance / 2) * variance);
                     double x = 1.5 * Math.cos(rad) + center.x;
                     double z = 1.5 * Math.sin(rad) + center.z;
-                    worldIn.addParticle(ModParticles.FAIRY_RING, x, center.y, z, 0, 0.05D * factor, 0);
+                    worldIn.addParticle(ModParticles.FAIRY_RING.get(), x, center.y, z, 0, 0.05D * factor, 0);
                 }
             }
         }

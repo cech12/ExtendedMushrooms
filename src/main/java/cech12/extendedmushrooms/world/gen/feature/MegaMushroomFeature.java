@@ -2,10 +2,9 @@ package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
-
-import java.util.Random;
 
 public abstract class MegaMushroomFeature extends SingleBigMushroomFeature {
 
@@ -14,7 +13,7 @@ public abstract class MegaMushroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected int getSize(Random random) {
+    protected int getSize(RandomSource random) {
         int i = random.nextInt(5) + 10;
         if (random.nextInt(12) == 0) {
             i = random.nextInt(7) + 15;
@@ -48,7 +47,7 @@ public abstract class MegaMushroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected void placeTrunk(LevelAccessor level, Random random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
         for(int y = 0; y < size; ++y) {
             for (int x = 0; x < 2; x++) {
                 for (int z = 0; z < 2; z++) {

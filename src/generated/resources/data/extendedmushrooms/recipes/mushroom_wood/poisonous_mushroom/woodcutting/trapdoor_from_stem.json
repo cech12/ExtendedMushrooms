@@ -6,9 +6,9 @@
       "modid": "corail_woodcutter"
     }
   ],
+  "count": 4,
   "ingredient": {
     "tag": "forge:mushroom_stems/green"
   },
-  "result": "extendedmushrooms:poisonous_mushroom_trapdoor",
-  "count": 4
+  "result": "extendedmushrooms:poisonous_mushroom_trapdoor"
 }

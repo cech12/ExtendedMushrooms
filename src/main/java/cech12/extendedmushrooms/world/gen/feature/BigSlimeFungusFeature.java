@@ -2,10 +2,9 @@ package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
-
-import java.util.Random;
 
 public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
 
@@ -14,7 +13,7 @@ public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
     }
 
     @Override
-    protected int getSize(Random random) {
+    protected int getSize(RandomSource random) {
         int size = 7;
         if (random.nextInt(12) == 0) {
             size = 11;
@@ -23,7 +22,7 @@ public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
     }
 
     @Override
-    protected int getCapRadius(Random random) {
+    protected int getCapRadius(RandomSource random) {
         if (random.nextInt(12) == 0) {
             return 4;
         }
@@ -31,12 +30,12 @@ public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
     }
 
     @Override
-    protected int getSmallSize(Random random) {
+    protected int getSmallSize(RandomSource random) {
         return 4 + random.nextInt(1);
     }
 
     @Override
-    protected int getSmallCapRadius(Random random) {
+    protected int getSmallCapRadius(RandomSource random) {
         return 1;
     }
 
@@ -58,7 +57,7 @@ public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
     }
 
     @Override
-    protected void placeCap(LevelAccessor level, Random random, BlockPos center, HugeMushroomFeatureConfiguration config, int capRadius, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected void placeCap(LevelAccessor level, RandomSource random, BlockPos center, HugeMushroomFeatureConfiguration config, int capRadius, BlockPos.MutableBlockPos mutableBlockPos) {
         boolean hasCorners = capRadius > 2;
         for (int x = -capRadius; x <= capRadius; ++x) {
             for (int z = -capRadius; z <= capRadius; ++z) {

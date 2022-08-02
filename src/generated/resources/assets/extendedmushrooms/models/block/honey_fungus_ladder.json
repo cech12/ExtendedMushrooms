@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/ladder",
   "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "extendedmushrooms:block/honey_fungus_ladder",
     "texture": "extendedmushrooms:block/honey_fungus_ladder"

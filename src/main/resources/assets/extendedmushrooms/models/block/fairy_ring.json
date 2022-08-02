@@ -1,5 +1,6 @@
 {
     "parent": "block/block",
+    "render_type": "minecraft:cutout",
     "elements": [
         {
             "from": [ 0, 0.01, 0 ],

@@ -1,19 +1,19 @@
 {
   "type": "botanypots:soil",
+  "categories": [
+    "mushroom"
+  ],
   "conditions": [
     {
       "type": "forge:mod_loaded",
       "modid": "botanypots"
     }
   ],
-  "input": {
-    "item": "extendedmushrooms:slime_fungus_cap"
-  },
   "display": {
     "block": "extendedmushrooms:slime_fungus_cap"
   },
-  "categories": [
-    "mushroom"
-  ],
-  "growthModifier": 0.95
+  "growthModifier": 0.95,
+  "input": {
+    "item": "extendedmushrooms:slime_fungus_cap"
+  }
 }

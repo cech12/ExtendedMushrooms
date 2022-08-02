@@ -4,6 +4,7 @@ import cech12.extendedmushrooms.MushroomUtils;
 import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
 import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
 import cech12.extendedmushrooms.init.ModBlocks;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MushroomBlock;
@@ -16,8 +17,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Random;
-
 @Mixin(MushroomBlock.class)
 public class MixinMushroomBlock {
 
@@ -26,7 +25,7 @@ public class MixinMushroomBlock {
      * The automatic multiplication still remaining.
      */
     @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
-    public void tickProxy(BlockState state, ServerLevel world, BlockPos pos, Random random, CallbackInfo ci) {
+    public void tickProxy(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
         //skip growing & multiplication if part of Fairy Ring
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         for (Direction direction : Direction.Plane.HORIZONTAL) {
@@ -51,7 +50,7 @@ public class MixinMushroomBlock {
      * Change grow behaviour to enable mega mushrooms can be grown out of vanilla mushrooms.
      */
     @Inject(at = @At("HEAD"), method = "growMushroom", cancellable = true)
-    public void growProxy(ServerLevel world, BlockPos pos, BlockState state, Random random, CallbackInfoReturnable<Boolean> cir) {
+    public void growProxy(ServerLevel world, BlockPos pos, BlockState state, RandomSource random, CallbackInfoReturnable<Boolean> cir) {
         if (!MushroomUtils.isValidMushroomPosition(world, pos)) {
             cir.setReturnValue(false);
         } else if (state.getBlock() == Blocks.BROWN_MUSHROOM) {

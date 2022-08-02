@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#",
-    "#",
-    "#"
+  "conditions": [
+    {
+      "type": "extendedmushrooms:mod_feature_enabled",
+      "feature": "verticalSlabs"
+    }
   ],
   "key": {
     "#": {
       "item": "extendedmushrooms:mushroom_slab"
     }
   },
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
   "result": {
-    "item": "extendedmushrooms:mushroom_vertical_slab",
-    "count": 3
-  },
-  "conditions": [
-    {
-      "feature": "verticalSlabs",
-      "type": "extendedmushrooms:mod_feature_enabled"
-    }
-  ]
+    "count": 3,
+    "item": "extendedmushrooms:mushroom_vertical_slab"
+  }
 }

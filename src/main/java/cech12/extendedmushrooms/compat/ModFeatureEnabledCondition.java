@@ -32,14 +32,14 @@ public class ModFeatureEnabledCondition implements ICondition {
     }
 
     @Override
-    public boolean test() {
+    public boolean test(IContext context) {
         return switch (this.feature) {
-            case "variantBookshelves" -> this.inverted != ModCompat.isVariantBookshelvesModLoaded();
-            case "variantChests" -> this.inverted != ModCompat.isVariantChestsModLoaded();
-            case "variantTrappedChests" -> this.inverted != ModCompat.isVariantTrappedChestsModLoaded();
-            case "variantLadders" -> this.inverted != ModCompat.isVariantLaddersModLoaded();
-            case "verticalPlanks" -> this.inverted != ModCompat.isVerticalPlanksModLoaded();
-            case "verticalSlabs" -> this.inverted != ModCompat.isVerticalSlabsModLoaded();
+            case "variantBookshelves" -> this.inverted != ModCompat.isVariantBookshelvesModLoaded().get();
+            case "variantChests" -> this.inverted != ModCompat.isVariantChestsModLoaded().get();
+            case "variantTrappedChests" -> this.inverted != ModCompat.isVariantTrappedChestsModLoaded().get();
+            case "variantLadders" -> this.inverted != ModCompat.isVariantLaddersModLoaded().get();
+            case "verticalPlanks" -> this.inverted != ModCompat.isVerticalPlanksModLoaded().get();
+            case "verticalSlabs" -> this.inverted != ModCompat.isVerticalSlabsModLoaded().get();
             default -> false;
         };
     }

@@ -18,7 +18,6 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -60,7 +59,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
     @Nonnull
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeTypes.FAIRY_RING;
+        return ModRecipeTypes.FAIRY_RING.get();
     }
 
     @Nonnull
@@ -168,7 +167,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
         return this.resultStack.copy();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FairyRingRecipe> {
+    public static class Serializer implements RecipeSerializer<FairyRingRecipe> {
 
         Serializer() {
         }

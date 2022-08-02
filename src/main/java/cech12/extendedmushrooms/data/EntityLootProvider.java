@@ -2,11 +2,9 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.item.MushroomType;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -16,6 +14,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -25,8 +24,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class EntityLootProvider implements DataProvider {
-
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private final DataGenerator generator;
     private final Map<MushroomType, Function<MushroomType, LootTable.Builder>> functionTable = new HashMap<>();
 
@@ -49,17 +46,17 @@ public class EntityLootProvider implements DataProvider {
     }
 
     @Override
-    public void run(@Nonnull final HashCache cache) throws IOException {
+    public void run(@Nonnull final CachedOutput cache) throws IOException {
         Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
 
         for (MushroomType mushroomType : MushroomType.values()) {
             Function<MushroomType, LootTable.Builder> func = functionTable.get(mushroomType);
-            tables.put(mushroomType.getItem().getRegistryName(), func.apply(mushroomType));
+            tables.put(ForgeRegistries.ITEMS.getKey(mushroomType.getItem()), func.apply(mushroomType));
         }
 
         for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
             Path path = getSheepPath(generator.getOutputFolder(), e.getKey());
-            DataProvider.save(GSON, cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.ENTITY).build()), path);
+            DataProvider.saveStable(cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.ENTITY).build()), path);
         }
     }
 

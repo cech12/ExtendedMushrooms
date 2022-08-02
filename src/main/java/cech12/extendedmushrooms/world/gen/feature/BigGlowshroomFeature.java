@@ -3,10 +3,9 @@ package cech12.extendedmushrooms.world.gen.feature;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
-
-import java.util.Random;
 
 public class BigGlowshroomFeature extends SingleBigMushroomFeature {
 
@@ -15,7 +14,7 @@ public class BigGlowshroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected int getCapRadius(Random random) {
+    protected int getCapRadius(RandomSource random) {
         if (random.nextInt(12) == 0) {
             return 3;
         }
@@ -40,7 +39,7 @@ public class BigGlowshroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected void placeCap(LevelAccessor level, Random random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         //top layer: "radius-1" blocks in each direction
         int topRadius = capRadius - 1;
         for(int x = -topRadius; x <= topRadius; ++x) {

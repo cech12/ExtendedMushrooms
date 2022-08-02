@@ -1,11 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "mushroom_chest",
-  "pattern": [
-    "###",
-    "#|#",
-    "###"
+  "conditions": [
+    {
+      "type": "extendedmushrooms:mod_feature_enabled",
+      "feature": "variantChests"
+    }
   ],
+  "group": "mushroom_chest",
   "key": {
     "#": {
       "item": "extendedmushrooms:poisonous_mushroom_planks"
@@ -14,13 +15,12 @@
       "tag": "forge:rods/wooden"
     }
   },
+  "pattern": [
+    "###",
+    "#|#",
+    "###"
+  ],
   "result": {
     "item": "extendedmushrooms:poisonous_mushroom_chest"
-  },
-  "conditions": [
-    {
-      "feature": "variantChests",
-      "type": "extendedmushrooms:mod_feature_enabled"
-    }
-  ]
+  }
 }

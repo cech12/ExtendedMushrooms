@@ -3,33 +3,23 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.util.ArrayList;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModSounds {
 
-    private static final ArrayList<SoundEvent> EVENTS = new ArrayList<>(); //must be here at the beginning to initialize the array
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ExtendedMushrooms.MOD_ID);
 
-    public static SoundEvent FAIRY_RING_CRAFTING = makeSoundEvent("fairy_ring_crafting");
-    public static SoundEvent FAIRY_RING_CRAFTING_FINISH = makeSoundEvent("fairy_ring_crafting_finish");
-    public static SoundEvent NO_SOUND = makeSoundEvent("no_sound");
+    public static RegistryObject<SoundEvent> FAIRY_RING_CRAFTING = makeSoundEvent("fairy_ring_crafting");
+    public static RegistryObject<SoundEvent> FAIRY_RING_CRAFTING_FINISH = makeSoundEvent("fairy_ring_crafting_finish");
+    public static RegistryObject<SoundEvent> NO_SOUND = makeSoundEvent("no_sound");
 
-    private static SoundEvent makeSoundEvent(String name) {
+    private static RegistryObject<SoundEvent> makeSoundEvent(String name) {
         ResourceLocation resourceLocation = new ResourceLocation(ExtendedMushrooms.MOD_ID, name);
-        SoundEvent soundEvent = new SoundEvent(resourceLocation).setRegistryName(resourceLocation);
-        EVENTS.add(soundEvent);
-        return soundEvent;
-    }
-
-    @SubscribeEvent
-    public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
-        for (SoundEvent soundEvent : EVENTS) {
-            event.getRegistry().register(soundEvent);
-        }
+        return SOUND_EVENTS.register(name, () -> new SoundEvent(resourceLocation));
     }
 
 }

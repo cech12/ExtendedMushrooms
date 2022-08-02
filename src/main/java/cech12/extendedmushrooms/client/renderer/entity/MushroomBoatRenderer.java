@@ -20,12 +20,12 @@ public class MushroomBoatRenderer extends BoatRenderer {
 
     private final Map<MushroomWoodType, Pair<ResourceLocation, BoatModel>> BOAT_RESOURCES;
 
-    public MushroomBoatRenderer(EntityRendererProvider.Context context) {
-        super(context);
+    public MushroomBoatRenderer(EntityRendererProvider.Context context, boolean withChest) {
+        super(context, withChest);
         this.BOAT_RESOURCES = Stream.of(MushroomWoodType.values()).collect(ImmutableMap.toImmutableMap(
                 (woodType) -> woodType,
                 (woodType) -> Pair.of(new ResourceLocation(ExtendedMushrooms.MOD_ID, "textures/entity/boat/" + woodType.getSerializedName() + ".png"),
-                        new BoatModel(context.bakeLayer(ModelLayers.createBoatModelName(Boat.Type.OAK))))
+                        new BoatModel(context.bakeLayer(ModelLayers.createBoatModelName(Boat.Type.OAK)), withChest))
         ));
     }
 

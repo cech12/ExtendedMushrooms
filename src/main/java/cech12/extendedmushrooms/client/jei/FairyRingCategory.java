@@ -14,6 +14,7 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -21,9 +22,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
-import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -38,9 +37,9 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
 
     public FairyRingCategory(IGuiHelper guiHelper) {
         this.regularCookTime = 200;
-        this.localizedName = new TranslatableComponent("jei.extendedmushrooms.fairy_ring");
+        this.localizedName = Component.translatable("jei.extendedmushrooms.fairy_ring");
         this.background = guiHelper.createDrawable(ExtendedMushroomsJEIPlugin.RECIPE_GUI_FAIRY_RING, 0, 0, 112, 61);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(Items.RED_MUSHROOM));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Items.RED_MUSHROOM));
         this.cachedBubbles = CacheBuilder.newBuilder()
                 .maximumSize(25)
                 .build(new CacheLoader<>() {
@@ -61,16 +60,10 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
         return this.cachedBubbles.getUnchecked(cookTime);
     }
 
-    @Override
     @Nonnull
-    public ResourceLocation getUid() {
-        return ModRecipeTypes.FAIRY_RING_ID;
-    }
-
     @Override
-    @Nonnull
-    public Class<? extends FairyRingRecipe> getRecipeClass() {
-        return FairyRingRecipe.class;
+    public RecipeType<FairyRingRecipe> getRecipeType() {
+        return new RecipeType<>(ModRecipeTypes.FAIRY_RING.getId(), FairyRingRecipe.class);
     }
 
     @Override
@@ -102,7 +95,7 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
         int cookTime = recipe.getRecipeTime();
         if (cookTime > 0) {
             int cookTimeSeconds = cookTime / 20;
-            TranslatableComponent timeString = new TranslatableComponent("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
+            Component timeString = Component.translatable("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
             Font fontRenderer = Minecraft.getInstance().font;
             int stringWidth = fontRenderer.width(timeString);
             fontRenderer.draw(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);

@@ -6,19 +6,17 @@ import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModItems;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ibm.icu.impl.Pair;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
 import net.minecraft.data.DataProvider;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.Items;
@@ -57,8 +55,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class BlockLootProvider implements DataProvider {
-
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private final DataGenerator generator;
     private final Map<Block, Function<Block, LootTable.Builder>> functionTable = new HashMap<>();
 
@@ -66,7 +62,7 @@ public class BlockLootProvider implements DataProvider {
         this.generator = generator;
 
         for (Block block : ForgeRegistries.BLOCKS) {
-            if (!ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace())) {
+            if (!ExtendedMushrooms.MOD_ID.equals(ForgeRegistries.BLOCKS.getKey(block).getNamespace())) {
                 continue;
             }
 
@@ -186,11 +182,11 @@ public class BlockLootProvider implements DataProvider {
     }
 
     @Override
-    public void run(@Nonnull final HashCache cache) throws IOException {
+    public void run(@Nonnull final CachedOutput cache) throws IOException {
         Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
 
         for (Block block : ForgeRegistries.BLOCKS) {
-            if (!ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace())) {
+            if (!ExtendedMushrooms.MOD_ID.equals(ForgeRegistries.BLOCKS.getKey(block).getNamespace())) {
                 continue;
             }
             if (block instanceof FlowerPotBlock) {
@@ -198,12 +194,12 @@ public class BlockLootProvider implements DataProvider {
                 continue;
             }
             Function<Block, LootTable.Builder> func = functionTable.getOrDefault(block, BlockLootProvider::dropItself);
-            tables.put(block.getRegistryName(), func.apply(block));
+            tables.put(ForgeRegistries.BLOCKS.getKey(block), func.apply(block));
         }
 
         for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
             Path path = getPath(generator.getOutputFolder(), e.getKey());
-            DataProvider.save(GSON, cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.BLOCK).build()), path);
+            DataProvider.saveStable(cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.BLOCK).build()), path);
         }
     }
 

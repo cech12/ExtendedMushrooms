@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "extendedmushrooms:block/mushroom_planks",
-    "top": "extendedmushrooms:block/mushroom_planks",
-    "side": "extendedmushrooms:block/mushroom_planks"
+    "side": "extendedmushrooms:block/mushroom_planks",
+    "top": "extendedmushrooms:block/mushroom_planks"
   }
 }

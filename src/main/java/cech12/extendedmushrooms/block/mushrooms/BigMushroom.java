@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.MushroomUtils;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -13,7 +14,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFea
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 public abstract class BigMushroom {
 
@@ -31,7 +31,7 @@ public abstract class BigMushroom {
         return capBlock.defaultBlockState().setValue(HugeMushroomBlock.DOWN, false);
     }
 
-    public boolean growMushroom(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
+    public boolean growMushroom(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, RandomSource random) {
         if (!MushroomUtils.isValidMushroomPosition(world, blockPos)) {
             return false;
         }

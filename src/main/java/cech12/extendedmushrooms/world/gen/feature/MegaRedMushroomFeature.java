@@ -2,12 +2,12 @@ package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MegaRedMushroomFeature extends MegaMushroomFeature {
 
@@ -16,7 +16,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected int getCapRadius(Random random) {
+    protected int getCapRadius(RandomSource random) {
         return 4 + random.nextInt(2);
     }
 
@@ -41,7 +41,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected void placeCap(LevelAccessor level, Random random, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);

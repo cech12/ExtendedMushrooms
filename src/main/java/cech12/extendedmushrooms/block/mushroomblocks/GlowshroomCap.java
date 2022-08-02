@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -10,7 +11,6 @@ import net.minecraft.server.level.ServerLevel;
 import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class GlowshroomCap extends AbstractEffectMushroomCap {
 
@@ -19,7 +19,7 @@ public class GlowshroomCap extends AbstractEffectMushroomCap {
     }
 
     @Override
-    protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull Random random) {
+    protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         if (super.shouldDropEffectCloud(state, world, pos, random)) {
             //only drop effect at night or in dark areas
             BlockPos up = pos.above();
@@ -30,7 +30,7 @@ public class GlowshroomCap extends AbstractEffectMushroomCap {
 
     @Nonnull
     @Override
-    protected List<MobEffectInstance> getEffects(@Nonnull Random random) {
+    protected List<MobEffectInstance> getEffects(@Nonnull RandomSource random) {
         int duration = 200 + random.nextInt(200);
         if (random.nextInt(100) == 0) {
             duration += 1200;

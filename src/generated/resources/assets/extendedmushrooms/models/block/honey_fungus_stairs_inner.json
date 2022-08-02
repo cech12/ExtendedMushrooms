@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "extendedmushrooms:block/honey_fungus_planks",
-    "top": "extendedmushrooms:block/honey_fungus_planks",
-    "side": "extendedmushrooms:block/honey_fungus_planks"
+    "side": "extendedmushrooms:block/honey_fungus_planks",
+    "top": "extendedmushrooms:block/honey_fungus_planks"
   }
 }

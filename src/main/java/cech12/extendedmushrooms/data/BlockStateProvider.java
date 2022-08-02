@@ -72,10 +72,10 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
     @Override
     protected void registerStatesAndModels() {
         for (Block block : ForgeRegistries.BLOCKS) {
-            if (!ExtendedMushrooms.MOD_ID.equals(block.getRegistryName().getNamespace())) {
+            if (!ExtendedMushrooms.MOD_ID.equals(ForgeRegistries.BLOCKS.getKey(block).getNamespace())) {
                 continue;
             }
-            String name = block.getRegistryName().getPath();
+            String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
 
             if (block instanceof WoodButtonBlock) {
                 // cap buttons, wood buttons
@@ -125,11 +125,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof VariantChestBlock || block instanceof VariantTrappedChestBlock) {
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name.replace("_trapped", ""))));
             } else if (block instanceof DoorBlock) {
-                ModelFile bottom = models().getExistingFile(getBlockResourceLocation(name + "_bottom"));
-                ModelFile bottomHinge = models().getExistingFile(getBlockResourceLocation(name + "_bottom_hinge"));
-                ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));
-                ModelFile topHinge = models().getExistingFile(getBlockResourceLocation(name + "_top_hinge"));
-                doorBlock((DoorBlock) block, bottom, bottomHinge, top, topHinge);
+                doorBlock((DoorBlock) block, name, getBlockResourceLocation(name + "_bottom"), getBlockResourceLocation(name + "_top"));
             } else if (block instanceof FenceGateBlock) {
                 ModelFile gate = models().getExistingFile(getBlockResourceLocation(name));
                 ModelFile gateOpen = models().getExistingFile(getBlockResourceLocation(name + "_open"));

@@ -2,7 +2,7 @@ package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.init.ModFeatures;
 import net.minecraft.core.Registry;
-import net.minecraft.data.worldgen.features.TreeFeatures;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
@@ -28,7 +28,7 @@ public class RedMushroom extends MegaMushroom {
     @Override
     public RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature() {
         //vanilla mushroom
-        return RegistryObject.of(TreeFeatures.HUGE_RED_MUSHROOM.value().feature().getRegistryName(), Registry.CONFIGURED_FEATURE_REGISTRY, "minecraft");
+        return RegistryObject.create(new ResourceLocation("huge_red_mushroom"), Registry.CONFIGURED_FEATURE_REGISTRY, "minecraft");
     }
 
 }

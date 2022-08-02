@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "wooden_stairs",
-  "pattern": [
-    "#  ",
-    "## ",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "extendedmushrooms:honey_fungus_planks"
     }
   },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
   "result": {
-    "item": "extendedmushrooms:honey_fungus_stairs",
-    "count": 4
+    "count": 4,
+    "item": "extendedmushrooms:honey_fungus_stairs"
   }
 }

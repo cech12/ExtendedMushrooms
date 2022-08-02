@@ -1,11 +1,13 @@
 {
   "ambientocclusion": false,
-  "textures": {
-    "texture": "extendedmushrooms:block/poisonous_mushroom_inside",
-    "particle": "extendedmushrooms:block/poisonous_mushroom_inside"
-  },
   "elements": [
     {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#texture"
+        }
+      },
       "from": [
         0,
         0,
@@ -15,13 +17,11 @@
         16,
         16,
         0
-      ],
-      "faces": {
-        "north": {
-          "texture": "#texture",
-          "cullface": "north"
-        }
-      }
+      ]
     }
-  ]
+  ],
+  "textures": {
+    "particle": "extendedmushrooms:block/poisonous_mushroom_inside",
+    "texture": "extendedmushrooms:block/poisonous_mushroom_inside"
+  }
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "extendedmushrooms:block/poisonous_mushroom_planks",
-    "top": "extendedmushrooms:block/poisonous_mushroom_planks",
-    "side": "extendedmushrooms:block/poisonous_mushroom_planks"
+    "side": "extendedmushrooms:block/poisonous_mushroom_planks",
+    "top": "extendedmushrooms:block/poisonous_mushroom_planks"
   }
 }

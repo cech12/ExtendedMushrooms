@@ -1,10 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "bed",
-  "pattern": [
-    "###",
-    "WWW"
-  ],
   "key": {
     "#": {
       "tag": "forge:mushroom_caps/lime"
@@ -13,6 +9,10 @@
       "tag": "minecraft:planks"
     }
   },
+  "pattern": [
+    "###",
+    "WWW"
+  ],
   "result": {
     "item": "minecraft:orange_bed"
   }

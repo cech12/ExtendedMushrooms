@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.block;
 
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -15,7 +16,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 public class InfestedFlowerBlock extends FlowerBlock {
 
@@ -29,8 +29,9 @@ public class InfestedFlowerBlock extends FlowerBlock {
         return block == Blocks.MYCELIUM || super.mayPlaceOn(state, level, pos);
     }
 
+    @Override
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(@Nonnull BlockState blockState, @Nonnull Level level, @Nonnull BlockPos blockPos, @Nonnull Random random) {
+    public void animateTick(@Nonnull BlockState blockState, @Nonnull Level level, @Nonnull BlockPos blockPos, @Nonnull RandomSource random) {
         super.animateTick(blockState, level, blockPos, random);
         if (random.nextInt(15) == 0) {
             Vec3 offset = blockState.getOffset(level, blockPos).add(0.3125, 0, 0.3125);

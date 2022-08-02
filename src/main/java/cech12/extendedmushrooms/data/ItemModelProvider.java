@@ -3,6 +3,8 @@ package cech12.extendedmushrooms.data;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.VariantChestBlock;
 import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
@@ -13,12 +15,10 @@ import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -54,12 +54,12 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
     @Override
     protected void registerModels() {
         for (Item item : ForgeRegistries.ITEMS) {
-            if (!ExtendedMushrooms.MOD_ID.equals(item.getRegistryName().getNamespace())) {
+            ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(item);
+            if (!ExtendedMushrooms.MOD_ID.equals(resourceLocation.getNamespace())) {
                 continue;
             }
-            String name = item.getRegistryName().getPath();
-            if (item instanceof BlockItem) {
-                BlockItem blockItem = (BlockItem) item;
+            String name = resourceLocation.getPath();
+            if (item instanceof BlockItem blockItem) {
                 Block block = blockItem.getBlock();
                 if (block instanceof BushBlock || block instanceof LadderBlock) { //mushrooms, grass, flowers, ladders
                     //block items with block texture
@@ -69,12 +69,12 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
                             .parent(new ModelFile.UncheckedModelFile("builtin/entity"))
                             .texture("particle", getBlockResourceLocation(name.replace("_trapped", ""), "_chest", "_planks"))
                             .transforms()
-                            .transform(ModelBuilder.Perspective.GUI).rotation(30, 45, 0).translation(0, 0, 0).scale(0.625F, 0.625F, 0.625F).end()
-                            .transform(ModelBuilder.Perspective.GROUND).rotation(0, 0, 0).translation(0, 3, 0).scale(0.25F, 0.25F, 0.25F).end()
-                            .transform(ModelBuilder.Perspective.HEAD).rotation(0, 180, 0).translation(0, 0, 0).scale(1, 1, 1).end()
-                            .transform(ModelBuilder.Perspective.FIXED).rotation(0, 180, 0).translation(0, 0, 0).scale(0.5F, 0.5F, 0.5F).end()
-                            .transform(ModelBuilder.Perspective.THIRDPERSON_RIGHT).rotation(75, 315, 0).translation(0, 2.5F, 0).scale(0.375F, 0.375F, 0.375F).end()
-                            .transform(ModelBuilder.Perspective.FIRSTPERSON_RIGHT).rotation(0, 315, 0).translation(0, 0, 0).scale(0.4F, 0.4F, 0.4F).end()
+                            .transform(ItemTransforms.TransformType.GUI).rotation(30, 45, 0).translation(0, 0, 0).scale(0.625F, 0.625F, 0.625F).end()
+                            .transform(ItemTransforms.TransformType.GROUND).rotation(0, 0, 0).translation(0, 3, 0).scale(0.25F, 0.25F, 0.25F).end()
+                            .transform(ItemTransforms.TransformType.HEAD).rotation(0, 180, 0).translation(0, 0, 0).scale(1, 1, 1).end()
+                            .transform(ItemTransforms.TransformType.FIXED).rotation(0, 180, 0).translation(0, 0, 0).scale(0.5F, 0.5F, 0.5F).end()
+                            .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75, 315, 0).translation(0, 2.5F, 0).scale(0.375F, 0.375F, 0.375F).end()
+                            .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0, 315, 0).translation(0, 0, 0).scale(0.4F, 0.4F, 0.4F).end()
                             .end();
                 } else if (block instanceof StandingSignBlock) {
                     //SignItem returns standing sign block in getBlock
@@ -106,7 +106,7 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
     }
 
     @Override
-    public void run(HashCache cache) throws IOException {
+    public void run(CachedOutput cache) throws IOException {
         super.run(cache);
     }
 

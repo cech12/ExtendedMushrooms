@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.AreaEffectCloud;
@@ -16,7 +17,6 @@ import net.minecraft.server.level.ServerLevel;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Random;
 
 public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
 
@@ -31,30 +31,30 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
      * @return Returns a list of effects that the effect cloud has.
      */
     @Nonnull
-    abstract protected List<MobEffectInstance> getEffects(@Nonnull Random random);
+    abstract protected List<MobEffectInstance> getEffects(@Nonnull RandomSource random);
 
-    protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull Random random) {
+    protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         return random.nextDouble() < 0.05;
     }
 
-    protected int getEffectCloudColor(List<MobEffectInstance> effects, @Nonnull Random random) {
+    protected int getEffectCloudColor(List<MobEffectInstance> effects, @Nonnull RandomSource random) {
         return PotionUtils.getColor(effects);
     }
 
-    protected float getEffectCloudRadius(@Nonnull Random random) {
+    protected float getEffectCloudRadius(@Nonnull RandomSource random) {
         return 1.5F + (random.nextFloat() * 0.5F);
     }
 
-    protected float getEffectCloudRadiusOnUse(@Nonnull Random random) {
+    protected float getEffectCloudRadiusOnUse(@Nonnull RandomSource random) {
         return 0.4F + (random.nextFloat() * 0.2F);
     }
 
-    protected int getEffectCloudDuration(@Nonnull Random random) {
+    protected int getEffectCloudDuration(@Nonnull RandomSource random) {
         return 600 + random.nextInt(600);
     }
 
     @Override
-    public void randomTick(BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
+    public void randomTick(BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         if (!state.getValue(PERSISTENT) && this.shouldDropEffectCloud(state, worldIn, pos, random)) {
             //find ground block below
             BlockPos down = pos.below();
@@ -74,7 +74,7 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
         }
     }
 
-    protected void spawnEffectCloud(@Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull Random random) {
+    protected void spawnEffectCloud(@Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         List<MobEffectInstance> effects = this.getEffects(random);
         if (!effects.isEmpty()) {
             AreaEffectCloud areaeffectcloudentity = new AreaEffectCloud(worldIn, pos.getX() + random.nextDouble(), pos.getY(), pos.getZ() + random.nextDouble());

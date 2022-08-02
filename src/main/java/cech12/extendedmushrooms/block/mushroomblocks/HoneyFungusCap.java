@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -22,7 +23,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class HoneyFungusCap extends AbstractEffectMushroomCap {
 
@@ -44,13 +44,13 @@ public class HoneyFungusCap extends AbstractEffectMushroomCap {
 
     @Nullable
     @Override
-    public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
+    public BlockPathTypes getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
         return BlockPathTypes.STICKY_HONEY;
     }
 
     @Nonnull
     @Override
-    protected List<MobEffectInstance> getEffects(@Nonnull Random random) {
+    protected List<MobEffectInstance> getEffects(@Nonnull RandomSource random) {
         int duration = 200 + random.nextInt(200);
         if (random.nextInt(100) == 0) {
             duration += 1200;

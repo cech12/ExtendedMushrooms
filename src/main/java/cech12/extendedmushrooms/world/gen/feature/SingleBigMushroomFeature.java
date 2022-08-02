@@ -3,11 +3,10 @@ package cech12.extendedmushrooms.world.gen.feature;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
-
-import java.util.Random;
 
 public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
 
@@ -16,9 +15,9 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
     }
 
 
-    protected abstract int getCapRadius(Random random);
+    protected abstract int getCapRadius(RandomSource random);
 
-    protected int getSize(Random random) {
+    protected int getSize(RandomSource random) {
         int i = random.nextInt(3) + 4;
         if (random.nextInt(12) == 0) {
             i *= 2;
@@ -35,7 +34,7 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
 
     protected abstract boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config);
 
-    protected abstract void placeCap(LevelAccessor level, Random random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config);
+    protected abstract void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config);
 
     protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, int size, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
         for (int i = 0; i < size; ++i) {
@@ -47,7 +46,7 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
         return true;
     }
 
-    protected void placeTrunk(LevelAccessor level, Random random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
         for(int i = 0; i < size; ++i) {
             mutableBlockPos.set(blockPos).move(Direction.UP, i);
             placeTrunkBlockIfPossible(level, random, config, mutableBlockPos);

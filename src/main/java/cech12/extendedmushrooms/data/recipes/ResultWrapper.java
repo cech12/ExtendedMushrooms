@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -49,7 +50,7 @@ public class ResultWrapper implements FinishedRecipe {
             return FinishedRecipe.super.serializeRecipe();
         }
         JsonObject jsonobject = new JsonObject();
-        jsonobject.addProperty("type", this.type.getRegistryName().toString());
+        jsonobject.addProperty("type", ForgeRegistries.RECIPE_SERIALIZERS.getKey(this.type).toString());
         this.serializeRecipeData(jsonobject);
         return jsonobject;
     }

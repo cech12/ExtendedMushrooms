@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 public enum MushroomWoodType implements StringRepresentable {
 
     MUSHROOM(0, "mushroom",
-            RegistryObject.create(Blocks.MUSHROOM_STEM.getRegistryName(), ForgeRegistries.BLOCKS),
+            RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.MUSHROOM_STEM), ForgeRegistries.BLOCKS),
             ModBlocks.MUSHROOM_PLANKS,
             ModItems.MUSHROOM_BOAT),
     GLOWSHROOM(1, "glowshroom",

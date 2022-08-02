@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class SlimeFungusCap extends AbstractEffectMushroomCap {
 
@@ -40,7 +40,7 @@ public class SlimeFungusCap extends AbstractEffectMushroomCap {
 
     @Nonnull
     @Override
-    protected List<MobEffectInstance> getEffects(@Nonnull Random random) {
+    protected List<MobEffectInstance> getEffects(@Nonnull RandomSource random) {
         int duration = 200 + random.nextInt(200);
         if (random.nextInt(100) == 0) {
             duration += 1200;

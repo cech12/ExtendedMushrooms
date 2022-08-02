@@ -1,9 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "XXX",
-    "###"
+  "conditions": [
+    {
+      "type": "extendedmushrooms:mod_feature_enabled",
+      "feature": "variantBookshelves"
+    }
   ],
   "key": {
     "#": {
@@ -13,13 +14,12 @@
       "item": "minecraft:book"
     }
   },
+  "pattern": [
+    "###",
+    "XXX",
+    "###"
+  ],
   "result": {
     "item": "extendedmushrooms:mushroom_bookshelf"
-  },
-  "conditions": [
-    {
-      "feature": "variantBookshelves",
-      "type": "extendedmushrooms:mod_feature_enabled"
-    }
-  ]
+  }
 }

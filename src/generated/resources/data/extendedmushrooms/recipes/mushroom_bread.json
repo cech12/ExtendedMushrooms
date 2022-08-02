@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "bread",
-  "pattern": [
-    "###"
-  ],
   "key": {
     "#": {
       "tag": "forge:mushrooms/edible"
     }
   },
+  "pattern": [
+    "###"
+  ],
   "result": {
     "item": "extendedmushrooms:mushroom_bread"
   }

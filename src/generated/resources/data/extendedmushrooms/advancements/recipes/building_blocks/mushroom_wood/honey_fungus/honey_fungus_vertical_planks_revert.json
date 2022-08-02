@@ -1,13 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "extendedmushrooms:mushroom_wood/honey_fungus/honey_fungus_vertical_planks_revert"
-    ]
-  },
   "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extendedmushrooms:mushroom_wood/honey_fungus/honey_fungus_vertical_planks_revert"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
     "has_vertical_planks": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -16,13 +16,8 @@
             ]
           }
         ]
-      }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "extendedmushrooms:mushroom_wood/honey_fungus/honey_fungus_vertical_planks_revert"
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
@@ -30,5 +25,10 @@
       "has_vertical_planks",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extendedmushrooms:mushroom_wood/honey_fungus/honey_fungus_vertical_planks_revert"
+    ]
+  }
 }

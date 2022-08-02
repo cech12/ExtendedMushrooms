@@ -1,9 +1,8 @@
 package cech12.extendedmushrooms.world.gen.feature;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
-
-import java.util.Random;
 
 /**
  * Like MegaRedMushroomFeature, only size and cap height is different
@@ -15,7 +14,7 @@ public class MegaPoisonousMushroomFeature extends MegaRedMushroomFeature {
     }
 
     @Override
-    protected int getSize(Random random) {
+    protected int getSize(RandomSource random) {
         return (int) (super.getSize(random) * 1.2);
     }
 
