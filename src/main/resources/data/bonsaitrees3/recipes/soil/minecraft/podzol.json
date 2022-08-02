@@ -1,6 +1,12 @@
 {
   "type": "bonsaitrees3:soil",
   "mod": "minecraft",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bonsaitrees3"
+    }
+  ],
   "tickModifier": 1.0,
   "soil": {
     "item": "minecraft:podzol"
