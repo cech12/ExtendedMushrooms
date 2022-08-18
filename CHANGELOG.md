@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.19-3.0.0.0] - 2022-??-??
 ### Changed
-- Update to Minecraft 1.19 and Forge 41.0.106
+- Update to Minecraft 1.19 and Forge 41.0.106 #63
+- Moved world generation code to biome modifiers #63
+
+### Removed
+- Enabling configurations for world generation options (can be done by changing biome modifiers with datapacks)
 
 ## [1.18.2-2.0.0.1] - 2022-08-18
 ### Fixed

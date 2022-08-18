@@ -3,23 +3,14 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.client.renderer.entity.MushroomBoatRenderer;
 import cech12.extendedmushrooms.client.renderer.entity.MushroomSheepRenderer;
-import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.item.MushroomBoatEntity;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
-import com.mojang.serialization.Codec;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ModifiableBiomeInfo;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -48,25 +39,5 @@ public class ModEntityTypes {
         EntityRenderers.register(MUSHROOM_BOAT.get(), (context) -> new MushroomBoatRenderer(context, false));
         //TODO mushroom chest boat
         EntityRenderers.register(MUSHROOM_SHEEP.get(), MushroomSheepRenderer::new);
-    }
-
-    public record MushroomSheepBiomeModifier(HolderSet<Biome> biomes) implements BiomeModifier {
-
-        public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
-            if (biome.containsTag(Tags.Biomes.IS_MUSHROOM)) {
-                if (Config.MUSHROOM_SHEEP_ENABLED.get()) {
-                    builder.getMobSpawnSettings().addSpawn(MobCategory.CREATURE,
-                            new MobSpawnSettings.SpawnerData(MUSHROOM_SHEEP.get(),
-                                    Config.MUSHROOM_SHEEP_SPAWN_WEIGHT.get(),
-                                    Config.MUSHROOM_SHEEP_SPAWN_MIN_GROUP_COUNT.get(),
-                                    Config.MUSHROOM_SHEEP_SPAWN_MAX_GROUP_COUNT.get()));
-                }
-            }
-        }
-
-        @Override
-        public Codec<? extends BiomeModifier> codec() {
-            return ModBiomeModifiers.MUSHROOM_SHEEP.get();
-        }
     }
 }

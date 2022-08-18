@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#extendedmushrooms:has_mushrooms",
+  "features": [
+    "extendedmushrooms:poisonous_mushroom_normal",
+    "extendedmushrooms:glowshroom_normal"
+  ],
+  "step": "vegetal_decoration"
+}

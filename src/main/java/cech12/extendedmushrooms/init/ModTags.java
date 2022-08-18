@@ -1,8 +1,10 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
 import net.minecraft.tags.BlockTags;
@@ -11,6 +13,15 @@ import net.minecraft.tags.ItemTags;
 import javax.annotation.Nonnull;
 
 public class ModTags {
+
+    public static class Biomes {
+
+        public static final TagKey<Biome> HAS_MUSHROOMS = tag("has_mushrooms");
+
+        private static TagKey<Biome> tag(@Nonnull String name) {
+            return TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
+        }
+    }
 
     public static class ForgeBlocks {
 

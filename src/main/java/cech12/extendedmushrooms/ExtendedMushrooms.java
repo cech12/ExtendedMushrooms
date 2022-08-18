@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms;
 
-import cech12.extendedmushrooms.init.ModBiomeModifiers;
 import cech12.extendedmushrooms.init.ModLootModifiers;
 import cech12.extendedmushrooms.init.ModParticles;
 import cech12.extendedmushrooms.init.ModRecipeTypes;
@@ -69,7 +68,6 @@ public class ExtendedMushrooms {
         ModFeatures.FEATURES.register(eventBus);
         ModFeatures.CONFIGURED_FEATURES.register(eventBus);
         ModFeatures.PLACED_FEATURES.register(eventBus);
-        ModBiomeModifiers.BIOME_MODIFIERS.register(eventBus);
         ModRecipeTypes.RECIPE_TYPES.register(eventBus);
         ModRecipeTypes.RECIPE_SERIALIZERS.register(eventBus);
         ModLootModifiers.SERIALIZERS.register(eventBus);

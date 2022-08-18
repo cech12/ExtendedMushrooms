@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#extendedmushrooms:has_mushrooms",
+  "features": [
+    "extendedmushrooms:glowshroom_taiga",
+    "extendedmushrooms:poisonous_mushroom_taiga"
+  ],
+  "step": "vegetal_decoration"
+}

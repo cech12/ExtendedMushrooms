@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#forge:is_mushroom",
+  "spawners": {
+    "type": "extendedmushrooms:mushroom_sheep",
+    "maxCount": 8,
+    "minCount": 4,
+    "weight": 8
+  }
+}
