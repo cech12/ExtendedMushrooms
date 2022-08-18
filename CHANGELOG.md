@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Update to Minecraft 1.19 and Forge 41.0.106
 
+## [1.18.2-2.0.0.1] - 2022-08-18
+### Fixed
+- Glowshroom generated Poisonous Mushroom Stem in Bonsai Trees 3 mod (thanks to FoggyWizard for the report) #63
+
 ## [1.18.2-2.0.0.0] - 2022-08-02
 ### Added
 - Bonsai Trees 3 support
