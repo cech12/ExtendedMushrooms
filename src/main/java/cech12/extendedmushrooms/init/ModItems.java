@@ -17,10 +17,14 @@ public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ExtendedMushrooms.MOD_ID);
 
-    public static final RegistryObject<Item> MUSHROOM_BOAT = ITEMS.register("mushroom_boat", () -> new MushroomBoatItem(MushroomWoodType.MUSHROOM));
-    public static final RegistryObject<Item> GLOWSHROOM_BOAT = ITEMS.register("glowshroom_boat", () -> new MushroomBoatItem(MushroomWoodType.GLOWSHROOM));
-    public static final RegistryObject<Item> POISONOUS_MUSHROOM_BOAT = ITEMS.register("poisonous_mushroom_boat", () -> new MushroomBoatItem(MushroomWoodType.POISONOUS_MUSHROOM));
-    public static final RegistryObject<Item> HONEY_FUNGUS_BOAT = ITEMS.register("honey_fungus_boat", () -> new MushroomBoatItem(MushroomWoodType.HONEY_FUNGUS));
+    public static final RegistryObject<Item> MUSHROOM_BOAT = ITEMS.register("mushroom_boat", () -> new MushroomBoatItem(MushroomWoodType.MUSHROOM, false));
+    public static final RegistryObject<Item> MUSHROOM_CHEST_BOAT = ITEMS.register("mushroom_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.MUSHROOM, true));
+    public static final RegistryObject<Item> GLOWSHROOM_BOAT = ITEMS.register("glowshroom_boat", () -> new MushroomBoatItem(MushroomWoodType.GLOWSHROOM, false));
+    public static final RegistryObject<Item> GLOWSHROOM_CHEST_BOAT = ITEMS.register("glowshroom_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.GLOWSHROOM, true));
+    public static final RegistryObject<Item> POISONOUS_MUSHROOM_BOAT = ITEMS.register("poisonous_mushroom_boat", () -> new MushroomBoatItem(MushroomWoodType.POISONOUS_MUSHROOM, false));
+    public static final RegistryObject<Item> POISONOUS_MUSHROOM_CHEST_BOAT = ITEMS.register("poisonous_mushroom_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.POISONOUS_MUSHROOM, true));
+    public static final RegistryObject<Item> HONEY_FUNGUS_BOAT = ITEMS.register("honey_fungus_boat", () -> new MushroomBoatItem(MushroomWoodType.HONEY_FUNGUS, false));
+    public static final RegistryObject<Item> HONEY_FUNGUS_CHEST_BOAT = ITEMS.register("honey_fungus_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.HONEY_FUNGUS, true));
 
     public static final RegistryObject<Item> MUSHROOM_SIGN = ITEMS.register("mushroom_sign", () -> new SignItem((new Item.Properties()).stacksTo(16).tab(CreativeModeTab.TAB_DECORATIONS), ModBlocks.MUSHROOM_STANDING_SIGN.get(), ModBlocks.MUSHROOM_WALL_SIGN.get()));
     public static final RegistryObject<Item> GLOWSHROOM_SIGN = ITEMS.register("glowshroom_sign", () -> new SignItem((new Item.Properties()).stacksTo(16).tab(CreativeModeTab.TAB_DECORATIONS), ModBlocks.GLOWSHROOM_STANDING_SIGN.get(), ModBlocks.GLOWSHROOM_WALL_SIGN.get()));

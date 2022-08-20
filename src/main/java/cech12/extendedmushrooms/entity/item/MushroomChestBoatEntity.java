@@ -1,16 +1,16 @@
 package cech12.extendedmushrooms.entity.item;
 
 import cech12.extendedmushrooms.item.MushroomWoodType;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.vehicle.ChestBoat;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
@@ -18,11 +18,11 @@ import net.minecraftforge.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class MushroomBoatEntity extends Boat implements MushroomWoodTypable {
+public class MushroomChestBoatEntity extends ChestBoat implements MushroomWoodTypable {
 
-    private static final EntityDataAccessor<Integer> MUSHROOM_WOOD_TYPE = SynchedEntityData.defineId(MushroomBoatEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> MUSHROOM_WOOD_TYPE = SynchedEntityData.defineId(MushroomChestBoatEntity.class, EntityDataSerializers.INT);
 
-    public MushroomBoatEntity(EntityType<? extends MushroomBoatEntity> p_i50129_1_, Level p_i50129_2_) {
+    public MushroomChestBoatEntity(EntityType<? extends MushroomChestBoatEntity> p_i50129_1_, Level p_i50129_2_) {
         super(p_i50129_1_, p_i50129_2_);
     }
 
@@ -35,7 +35,7 @@ public class MushroomBoatEntity extends Boat implements MushroomWoodTypable {
     @Nonnull
     @Override
     public Item getDropItem() {
-        return this.getMushroomWoodType().getBoatItem();
+        return this.getMushroomWoodType().getChestBoatItem();
     }
 
     @Nullable
@@ -71,14 +71,14 @@ public class MushroomBoatEntity extends Boat implements MushroomWoodTypable {
 
     @Deprecated
     @Override
-    public void setType(@Nonnull Boat.Type boatType) {
+    public void setType(@Nonnull Type boatType) {
         //deactivate boat type
     }
 
     @Deprecated
     @Nonnull
     @Override
-    public Boat.Type getBoatType() {
+    public Type getBoatType() {
         //deactivate boat type
         return Type.OAK;
     }

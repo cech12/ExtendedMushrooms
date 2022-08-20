@@ -31,7 +31,7 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         //generate mod intern tags
         tag(ModTags.Items.MUSHROOM_BOATS).add(registry.stream().filter(extendedMushrooms)
-                .filter(item -> item instanceof MushroomBoatItem)
+                .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && !mushroomBoatItem.hasChest())
                 .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item)))
                 .toArray(Item[]::new));
         copy(ModTags.Blocks.MUSHROOM_BOOKSHELVES, ModTags.Items.MUSHROOM_BOOKSHELVES);
@@ -39,6 +39,10 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL, ModTags.Items.MUSHROOM_BUTTONS_WOOL);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS, ModTags.Items.MUSHROOM_BUTTONS);
         copy(ModTags.Blocks.MUSHROOM_CARPETS, ModTags.Items.MUSHROOM_CARPETS);
+        tag(ModTags.Items.MUSHROOM_CHEST_BOATS).add(registry.stream().filter(extendedMushrooms)
+                .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && mushroomBoatItem.hasChest())
+                .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item)))
+                .toArray(Item[]::new));
         copy(ModTags.Blocks.MUSHROOM_CHESTS, ModTags.Items.MUSHROOM_CHESTS);
         copy(ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED, ModTags.Items.MUSHROOM_CHESTS_TRAPPED);
         copy(ModTags.Blocks.MUSHROOM_DOORS, ModTags.Items.MUSHROOM_DOORS);
@@ -93,6 +97,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         //generate minecraft tags
         tag(ItemTags.BOATS).addTag(ModTags.Items.MUSHROOM_BOATS);
         copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
+        tag(ItemTags.CHEST_BOATS).addTag(ModTags.Items.MUSHROOM_CHEST_BOATS);
         copy(BlockTags.WOOL_CARPETS, ItemTags.WOOL_CARPETS);
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.FENCES, ItemTags.FENCES);

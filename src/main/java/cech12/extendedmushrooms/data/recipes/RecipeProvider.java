@@ -122,6 +122,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 Blocks.MUSHROOM_STEM.asItem(),
                 ModBlocks.STRIPPED_MUSHROOM_STEM.get().asItem(),
                 ModItems.MUSHROOM_BOAT.get().asItem(),
+                ModItems.MUSHROOM_CHEST_BOAT.get().asItem(),
                 ModBlocks.MUSHROOM_BOOKSHELF.get().asItem(),
                 ModBlocks.MUSHROOM_BUTTON.get().asItem(),
                 ModBlocks.MUSHROOM_CHEST.get().asItem(),
@@ -165,6 +166,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.GLOWSHROOM_STEM.get().asItem(),
                 ModBlocks.GLOWSHROOM_STEM_STRIPPED.get().asItem(),
                 ModItems.GLOWSHROOM_BOAT.get().asItem(),
+                ModItems.GLOWSHROOM_CHEST_BOAT.get().asItem(),
                 ModBlocks.GLOWSHROOM_BOOKSHELF.get().asItem(),
                 ModBlocks.GLOWSHROOM_BUTTON.get().asItem(),
                 ModBlocks.GLOWSHROOM_CHEST.get().asItem(),
@@ -212,6 +214,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.POISONOUS_MUSHROOM_STEM.get().asItem(),
                 ModBlocks.POISONOUS_MUSHROOM_STEM_STRIPPED.get().asItem(),
                 ModItems.POISONOUS_MUSHROOM_BOAT.get().asItem(),
+                ModItems.POISONOUS_MUSHROOM_CHEST_BOAT.get().asItem(),
                 ModBlocks.POISONOUS_MUSHROOM_BOOKSHELF.get().asItem(),
                 ModBlocks.POISONOUS_MUSHROOM_BUTTON.get().asItem(),
                 ModBlocks.POISONOUS_MUSHROOM_CHEST.get().asItem(),
@@ -275,6 +278,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.HONEY_FUNGUS_STEM.get().asItem(),
                 ModBlocks.HONEY_FUNGUS_STEM_STRIPPED.get().asItem(),
                 ModItems.HONEY_FUNGUS_BOAT.get().asItem(),
+                ModItems.HONEY_FUNGUS_CHEST_BOAT.get().asItem(),
                 ModBlocks.HONEY_FUNGUS_BOOKSHELF.get().asItem(),
                 ModBlocks.HONEY_FUNGUS_BUTTON.get().asItem(),
                 ModBlocks.HONEY_FUNGUS_CHEST.get().asItem(),
@@ -338,7 +342,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
 
     private void mushroomWoodRecipes(Consumer<FinishedRecipe> consumer, String name, TagKey<Item> stems,
-                                     Item stem, Item strippedStem, Item boat,
+                                     Item stem, Item strippedStem, Item boat, Item chestBoat,
                                      Item bookshelf, Item button, Item chest, Item chestTrapped, Item door, Item fence,
                                      Item fenceGate, Item ladder, Item planks, Item pressurePlate, Item sign, Item slab,
                                      Item stairs, Item trapdoor, Item verticalPlanks, Item verticalSlab) {
@@ -350,6 +354,12 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("boat")
                 .unlockedBy("in_water", insideOf(Blocks.WATER))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(boat)));
+        ShapelessRecipeBuilder.shapeless(chestBoat)
+                .requires(Tags.Items.CHESTS_WOODEN)
+                .requires(boat)
+                .group("chest_boat")
+                .unlockedBy("has_boat", has(ItemTags.BOATS))
+                .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(chestBoat)));
         ShapelessRecipeBuilder.shapeless(button)
                 .requires(planks)
                 .group("wooden_button")

@@ -142,6 +142,7 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOM_BUTTONS_WOOL = tag("mushroom_buttons/wool");
         public static final TagKey<Item> MUSHROOM_BUTTONS = tag("mushroom_buttons");
         public static final TagKey<Item> MUSHROOM_CARPETS = tag("mushroom_carpets");
+        public static final TagKey<Item> MUSHROOM_CHEST_BOATS = tag("mushroom_chest_boats");
         public static final TagKey<Item> MUSHROOM_CHESTS = tag("mushroom_chests");
         public static final TagKey<Item> MUSHROOM_CHESTS_TRAPPED = tag("mushroom_chests_trapped");
         public static final TagKey<Item> MUSHROOM_DOORS = tag("mushroom_doors");

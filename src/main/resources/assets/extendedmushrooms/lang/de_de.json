@@ -34,7 +34,9 @@
   "block.extendedmushrooms.mushroom_vertical_slab": "Vertikale Pilzstufe",
   "block.extendedmushrooms.stripped_mushroom_stem": "Entrindeter Pilzstiel",
   "item.extendedmushrooms.mushroom_boat": "Pilzboot",
+  "item.extendedmushrooms.mushroom_chest_boat": "Pilztruhenboot",
   "entity.extendedmushrooms.mushroom_boat": "Pilzboot",
+  "entity.extendedmushrooms.mushroom_chest_boat": "Pilztruhenboot",
 
   "block.extendedmushrooms.brown_mushroom_button": "Brauner Pilzknopf",
   "block.extendedmushrooms.brown_mushroom_carpet": "Brauner Pilzteppich",
@@ -67,7 +69,9 @@
   "block.extendedmushrooms.glowshroom_cap_carpet": "Leuchtpilzhutteppich",
   "block.extendedmushrooms.glowshroom_cap_pressure_plate": "Leuchtpilzhutdruckplatte",
   "item.extendedmushrooms.glowshroom_boat": "Leuchtpilzboot",
+  "item.extendedmushrooms.glowshroom_chest_boat": "Leuchtpilztruhenboot",
   "entity.extendedmushrooms.glowshroom_boat": "Leuchtpilzboot",
+  "entity.extendedmushrooms.glowshroom_chest_boat": "Leuchtpilztruhenboot",
 
   "block.extendedmushrooms.poisonous_mushroom": "Giftpilz",
   "block.extendedmushrooms.poisonous_mushroom_cap": "Giftpilzhut",
@@ -93,15 +97,15 @@
   "block.extendedmushrooms.poisonous_mushroom_cap_carpet": "Giftpilzhutteppich",
   "block.extendedmushrooms.poisonous_mushroom_cap_pressure_plate": "Giftpilzhutdruckplatte",
   "item.extendedmushrooms.poisonous_mushroom_boat": "Giftpilzboot",
+  "item.extendedmushrooms.poisonous_mushroom_chest_boat": "Giftpilztruhenboot",
   "entity.extendedmushrooms.poisonous_mushroom_boat": "Giftpilzboot",
+  "entity.extendedmushrooms.poisonous_mushroom_chest_boat": "Giftpilztruhenboot",
 
   "block.extendedmushrooms.slime_fungus": "Schleimpilz",
   "block.extendedmushrooms.slime_fungus_cap": "Schleimpilzhut",
   "block.extendedmushrooms.slime_fungus_cap_button": "Schleimpilzhutknopf",
   "block.extendedmushrooms.slime_fungus_cap_carpet": "Schleimpilzhutteppich",
   "block.extendedmushrooms.slime_fungus_cap_pressure_plate": "Schleimpilzhutdruckplatte",
-  "item.extendedmushrooms.slime_fungus_boat": "Schleimpilzboot",
-  "entity.extendedmushrooms.slime_fungus_boat": "Schleimpilzboot",
 
   "block.extendedmushrooms.honey_fungus": "Honigpilz",
   "block.extendedmushrooms.honey_fungus_cap": "Honigpilzhut",
@@ -127,5 +131,7 @@
   "block.extendedmushrooms.honey_fungus_cap_carpet": "Honigpilzhutteppich",
   "block.extendedmushrooms.honey_fungus_cap_pressure_plate": "Honigpilzhutdruckplatte",
   "item.extendedmushrooms.honey_fungus_boat": "Honigpilzboot",
-  "entity.extendedmushrooms.honey_fungus_boat": "Honigpilzboot"
+  "item.extendedmushrooms.honey_fungus_chest_boat": "Honigpilztruhenboot",
+  "entity.extendedmushrooms.honey_fungus_boat": "Honigpilzboot",
+  "entity.extendedmushrooms.honey_fungus_chest_boat": "Honigpilztruhenboot"
 }

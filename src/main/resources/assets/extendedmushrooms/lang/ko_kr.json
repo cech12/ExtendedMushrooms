@@ -34,7 +34,9 @@
   "block.extendedmushrooms.mushroom_vertical_slab": "수직 버섯 반 블록",
   "block.extendedmushrooms.stripped_mushroom_stem": "껍질을 벗긴 버섯 줄기",
   "item.extendedmushrooms.mushroom_boat": "버섯 보트",
+  "item.extendedmushrooms.mushroom_chest_boat": "Mushroom Boat with Chest",
   "entity.extendedmushrooms.mushroom_boat": "버섯 보트",
+  "entity.extendedmushrooms.mushroom_chest_boat": "Mushroom Boat with Chest",
 
   "block.extendedmushrooms.brown_mushroom_button": "갈색 버섯 버튼",
   "block.extendedmushrooms.brown_mushroom_carpet": "갈색 버섯 카펫",
@@ -67,7 +69,9 @@
   "block.extendedmushrooms.glowshroom_vertical_slab": "수직 발광 버섯 반 블록",
   "block.extendedmushrooms.glowshroom_cap_pressure_plate": "발광 버섯 갓 압력판",
   "item.extendedmushrooms.glowshroom_boat": "발광 버섯 보트",
+  "item.extendedmushrooms.glowshroom_chest_boat": "Glowshroom Boat with Chest",
   "entity.extendedmushrooms.glowshroom_boat": "발광 버섯 보트",
+  "entity.extendedmushrooms.glowshroom_chest_boat": "Glowshroom Boat with Chest",
   
   "block.extendedmushrooms.poisonous_mushroom": "독버섯",
   "block.extendedmushrooms.poisonous_mushroom_cap": "독버섯 갓",
@@ -93,15 +97,15 @@
   "block.extendedmushrooms.poisonous_mushroom_cap_carpet": "독버섯 갓 카펫",
   "block.extendedmushrooms.poisonous_mushroom_cap_pressure_plate": "독버섯 갓 압력판",
   "item.extendedmushrooms.poisonous_mushroom_boat": "독버섯 보트",
+  "item.extendedmushrooms.poisonous_mushroom_chest_boat": "Poisonous Mushroom Boat with Chest",
   "entity.extendedmushrooms.poisonous_mushroom_boat": "독버섯 보트",
+  "entity.extendedmushrooms.poisonous_mushroom_chest_boat": "Poisonous Mushroom Boat with Chest",
 
   "block.extendedmushrooms.slime_fungus": "Slime Fungus",
   "block.extendedmushrooms.slime_fungus_cap": "Slime Fungus Cap",
   "block.extendedmushrooms.slime_fungus_cap_button": "Slime Fungus Cap Button",
   "block.extendedmushrooms.slime_fungus_cap_carpet": "Slime Fungus Cap Carpet",
   "block.extendedmushrooms.slime_fungus_cap_pressure_plate": "Slime Fungus Cap Pressure Plate",
-  "item.extendedmushrooms.slime_fungus_boat": "Slime Fungus Boat",
-  "entity.extendedmushrooms.slime_fungus_boat": "Slime Fungus Boat",
 
   "block.extendedmushrooms.honey_fungus": "Honey Fungus",
   "block.extendedmushrooms.honey_fungus_cap": "Honey Fungus Cap",
@@ -127,5 +131,7 @@
   "block.extendedmushrooms.honey_fungus_cap_carpet": "Honey Fungus Cap Carpet",
   "block.extendedmushrooms.honey_fungus_cap_pressure_plate": "Honey Fungus Cap Pressure Plate",
   "item.extendedmushrooms.honey_fungus_boat": "Honey Fungus Boat",
-  "entity.extendedmushrooms.honey_fungus_boat": "Honey Fungus Boat"
+  "item.extendedmushrooms.honey_fungus_chest_boat": "Honey Fungus Boat with Chest",
+  "entity.extendedmushrooms.honey_fungus_boat": "Honey Fungus Boat",
+  "entity.extendedmushrooms.honey_fungus_chest_boat": "Honey Fungus Boat with Chest"
 }

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "tag": "forge:chests/wooden"
+    },
+    {
+      "item": "extendedmushrooms:poisonous_mushroom_boat"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:poisonous_mushroom_chest_boat"
+  }
+}

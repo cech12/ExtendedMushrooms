@@ -1,7 +1,9 @@
 package cech12.extendedmushrooms.item;
 
 import cech12.extendedmushrooms.entity.item.MushroomBoatEntity;
+import cech12.extendedmushrooms.entity.item.MushroomWoodTypable;
 import cech12.extendedmushrooms.init.ModEntityTypes;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.BlockSource;
@@ -31,11 +33,17 @@ public class MushroomBoatItem extends Item {
 
     private static final Predicate<Entity> ENTITY_PREDICATE = EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
     private final MushroomWoodType type;
+    private final boolean hasChest;
 
-    public MushroomBoatItem(MushroomWoodType type) {
+    public MushroomBoatItem(MushroomWoodType type, boolean hasChest) {
         super((new Item.Properties()).stacksTo(1).tab(CreativeModeTab.TAB_TRANSPORTATION));
         this.type = type;
+        this.hasChest = hasChest;
         DispenserBlock.registerBehavior(this, new DispenseBehavior(type));
+    }
+
+    public boolean hasChest() {
+        return hasChest;
     }
 
     @Nonnull
@@ -59,12 +67,12 @@ public class MushroomBoatItem extends Item {
             }
 
             if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-                MushroomBoatEntity boat = ModEntityTypes.MUSHROOM_BOAT.get().create(worldIn);
+                Boat boat = this.hasChest ? ModEntityTypes.MUSHROOM_CHEST_BOAT.get().create(worldIn) : ModEntityTypes.MUSHROOM_BOAT.get().create(worldIn);
                 if (boat == null) {
                     return InteractionResultHolder.pass(itemstack);
                 }
                 boat.absMoveTo(raytraceresult.getLocation().x, raytraceresult.getLocation().y, raytraceresult.getLocation().z, playerIn.getYRot(), 0);
-                boat.setMushroomWoodType(this.type);
+                ((MushroomWoodTypable) boat).setMushroomWoodType(this.type);
                 if (!worldIn.noCollision(boat, boat.getBoundingBox().inflate(-0.1D))) {
                     return InteractionResultHolder.fail(itemstack);
                 } else {
