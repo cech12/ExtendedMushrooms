@@ -193,6 +193,7 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
         tag(BlockTags.FENCES).addTag(ModTags.Blocks.MUSHROOM_FENCES);
         tag(BlockTags.LOGS).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
+        tag(BlockTags.OVERWORLD_NATURAL_LOGS).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
         tag(BlockTags.PLANKS).addTag(ModTags.Blocks.MUSHROOM_PLANKS);
         tag(BlockTags.SIGNS).addTag(ModTags.Blocks.MUSHROOM_SIGNS);
         tag(BlockTags.SLABS).addTag(ModTags.Blocks.MUSHROOM_SLABS);

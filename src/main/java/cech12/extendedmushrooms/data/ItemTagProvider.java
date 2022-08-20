@@ -97,6 +97,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.FENCES, ItemTags.FENCES);
         copy(BlockTags.LOGS, ItemTags.LOGS);
+        copy(BlockTags.OVERWORLD_NATURAL_LOGS, ItemTags.OVERWORLD_NATURAL_LOGS);
         copy(BlockTags.PLANKS, ItemTags.PLANKS);
         copy(BlockTags.SIGNS, ItemTags.SIGNS);
         copy(BlockTags.SLABS, ItemTags.SLABS);
