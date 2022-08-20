@@ -33,7 +33,6 @@ public class SlimeFungusCap extends AbstractEffectMushroomCap {
 
     @Override
     public boolean canStickTo(BlockState state, BlockState other) {
-        //TODO When this block is pushed by a piston, an adjacent honey block still sticks to it (mixin honey block?)
         if (other.getBlock() == Blocks.HONEY_BLOCK || other.getBlock() == ModBlocks.HONEY_FUNGUS_CAP.get()) return false;
         return state.isStickyBlock() || other.isStickyBlock();
     }
