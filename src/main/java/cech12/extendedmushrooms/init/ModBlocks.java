@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -208,16 +209,28 @@ public final class ModBlocks {
     }
 
     private static RegistryObject<Block> registerCompatBlock(String name, CreativeModeTab itemGroup, Supplier<Boolean> isActive, Supplier<? extends Block> block) {
-        return registerBlock(name, () -> itemGroup, block);
+        return registerBlock(name, itemGroup, isActive, block);
     }
 
     private static RegistryObject<Block> registerBlock(String name, CreativeModeTab itemGroup, Supplier<? extends Block> block) {
-        return registerBlock(name, () -> itemGroup, block); //TODO make item group relative to isActive
+        return registerBlock(name, itemGroup, () -> true, block);
     }
 
-    private static RegistryObject<Block> registerBlock(String name, Supplier<CreativeModeTab> itemGroup, Supplier<? extends Block> block) {
+    private static RegistryObject<Block> registerBlock(String name, CreativeModeTab itemGroup, Supplier<Boolean> isActive, Supplier<? extends Block> block) {
         RegistryObject<Block> registeredBlock = BLOCKS.register(name, block);
-        ModItems.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), new Item.Properties().tab(itemGroup.get())));
+        ModItems.ITEMS.register(name, () -> new BlockItem(registeredBlock.get(), new Item.Properties().tab(itemGroup)) {
+            @Override
+            public Collection<CreativeModeTab> getCreativeTabs() {
+                return (isActive.get()) ? super.getCreativeTabs() : Collections.emptyList();
+            }
+
+            @Override
+            public void fillItemCategory(@Nonnull CreativeModeTab tab, @Nonnull NonNullList<ItemStack> stacks) {
+                if (isActive.get()) {
+                    super.fillItemCategory(tab, stacks);
+                }
+            }
+        });
         return registeredBlock;
     }
 
@@ -227,6 +240,13 @@ public final class ModBlocks {
             @Override
             public Collection<CreativeModeTab> getCreativeTabs() {
                 return (isActive.get()) ? super.getCreativeTabs() : Collections.emptyList();
+            }
+
+            @Override
+            public void fillItemCategory(@Nonnull CreativeModeTab tab, @Nonnull NonNullList<ItemStack> stacks) {
+                if (isActive.get()) {
+                    super.fillItemCategory(tab, stacks);
+                }
             }
 
             @Override
@@ -260,6 +280,13 @@ public final class ModBlocks {
             @Override
             public Collection<CreativeModeTab> getCreativeTabs() {
                 return (isActive.get()) ? super.getCreativeTabs() : Collections.emptyList();
+            }
+
+            @Override
+            public void fillItemCategory(@Nonnull CreativeModeTab tab, @Nonnull NonNullList<ItemStack> stacks) {
+                if (isActive.get()) {
+                    super.fillItemCategory(tab, stacks);
+                }
             }
 
             @Override
