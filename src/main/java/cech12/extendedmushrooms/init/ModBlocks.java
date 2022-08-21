@@ -208,10 +208,6 @@ public final class ModBlocks {
         return BLOCKS.register(name, block);
     }
 
-    private static RegistryObject<Block> registerCompatBlock(String name, CreativeModeTab itemGroup, Supplier<Boolean> isActive, Supplier<? extends Block> block) {
-        return registerBlock(name, itemGroup, isActive, block);
-    }
-
     private static RegistryObject<Block> registerBlock(String name, CreativeModeTab itemGroup, Supplier<? extends Block> block) {
         return registerBlock(name, itemGroup, () -> true, block);
     }
@@ -232,6 +228,10 @@ public final class ModBlocks {
             }
         });
         return registeredBlock;
+    }
+
+    private static RegistryObject<Block> registerCompatBlock(String name, CreativeModeTab itemGroup, Supplier<Boolean> isActive, Supplier<? extends Block> block) {
+        return registerBlock(name, itemGroup, isActive, block);
     }
 
     private static RegistryObject<Block> registerVariantChest(String name, Supplier<Boolean> isActive, Supplier<? extends VariantChestBlock> block) {
