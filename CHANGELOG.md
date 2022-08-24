@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.18.2-2.0.1.0] - 2022-08-24
 ### Added
-- re-added flammability behaviour of Mushroom wood & cap blocks and all related blocks
+- re-added flammability behaviour of Mushroom wood & cap blocks and all related blocks (thanks to AbsorbingSafe11 for the explanation)
+
+### Fixed
+- mega mushrooms generated too often
 
 ## [1.18.2-2.0.0.1] - 2022-08-18
 ### Fixed

@@ -91,7 +91,7 @@ public class ModFeatures {
     static {
         mushrooms.add(new Mushroom("glowshroom", ModBlocks.GLOWSHROOM, 0.4F, 32, Config.GLOWSHROOM_GENERATION_ENABLED));
         mushrooms.add(new Mushroom("poisonous_mushroom", ModBlocks.POISONOUS_MUSHROOM, 0.5F, 32,  Config.POISONOUS_MUSHROOM_GENERATION_ENABLED));
-        bigMushrooms.add(new BigMushroom("big_glowshroom", BIG_GLOWSHROOM_CONFIGURED, 0.15F, Config.BIG_GLOWSHROOM_GENERATION_ENABLED));
+        bigMushrooms.add(new BigMushroom("big_glowshroom", BIG_GLOWSHROOM_CONFIGURED, 0.125F, Config.BIG_GLOWSHROOM_GENERATION_ENABLED));
         bigMushrooms.add(new BigMushroom("big_poisonous_mushroom", BIG_POISONOUS_MUSHROOM_CONFIGURED, 0.1F, Config.BIG_POISONOUS_MUSHROOM_GENERATION_ENABLED));
         megaMushrooms.add(new BigMushroom("mega_red_mushroom", MEGA_RED_MUSHROOM_CONFIGURED, 0.2F, Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED));
         megaMushrooms.add(new BigMushroom("mega_brown_mushroom", MEGA_BROWN_MUSHROOM_CONFIGURED, 0.2F, Config.VANILLA_MEGA_MUSHROOM_GENERATION_ENABLED));
@@ -107,11 +107,11 @@ public class ModFeatures {
         }
         //register feature for big mushrooms random patch
         for (BigMushroom bigMushroom : bigMushrooms) {
-            BIG_MUSHROOM_PLACED_FEATURES.put("mushroom_island_" + bigMushroom.name, PLACED_FEATURES.register("mushroom_island_" + bigMushroom.name, () -> new PlacedFeature(Holder.direct(bigMushroom.feature.get()), List.copyOf(VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery((int) (100 * bigMushroom.spawnChance)))))));
+            BIG_MUSHROOM_PLACED_FEATURES.put("mushroom_island_" + bigMushroom.name, PLACED_FEATURES.register("mushroom_island_" + bigMushroom.name, () -> new PlacedFeature(Holder.direct(bigMushroom.feature.get()), List.copyOf(VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, bigMushroom.spawnChance, 1))))));
         }
         //register feature for mega mushrooms random patch
         for (BigMushroom megaMushroom : megaMushrooms) {
-            MEGA_MUSHROOM_PLACED_FEATURES.put("mushroom_island_" + megaMushroom.name, PLACED_FEATURES.register("mushroom_island_" + megaMushroom.name, () -> new PlacedFeature(Holder.direct(megaMushroom.feature.get()), List.copyOf(VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery((int) (10 * megaMushroom.spawnChance)))))));
+            MEGA_MUSHROOM_PLACED_FEATURES.put("mushroom_island_" + megaMushroom.name, PLACED_FEATURES.register("mushroom_island_" + megaMushroom.name, () -> new PlacedFeature(Holder.direct(megaMushroom.feature.get()), List.copyOf(VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, megaMushroom.spawnChance, 1))))));
             //register(megaMushroom.name + "_field", megaMushroom.config.decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, megaMushroom.spawnChance, 1))));
         }
     }
