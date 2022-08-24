@@ -1,14 +1,14 @@
 package cech12.extendedmushrooms.block;
 
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 
-public class VerticalPlanksBlock extends Block {
+public class MushroomFenceGateBlock extends FenceGateBlock {
 
-    public VerticalPlanksBlock(Properties properties) {
+    public MushroomFenceGateBlock(Properties properties) {
         super(properties);
     }
 
