@@ -8,22 +8,27 @@ import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 
-
 public class ModVanillaCompat {
 
     public static void setup() {
+        registerFlammable(Blocks.BROWN_MUSHROOM_BLOCK, 30, 60);
+        registerFlammable(Blocks.RED_MUSHROOM_BLOCK, 30, 60);
+        registerFlammable(Blocks.MUSHROOM_STEM, 5, 5);
+
         registerCompostable(0.65F, ModItems.GRILLED_MUSHROOM.get());
         registerCompostable(0.85F, ModItems.MUSHROOM_BREAD.get());
         registerCompostable(0.15F, ModItems.MUSHROOM_SPORES.get());
@@ -47,6 +52,11 @@ public class ModVanillaCompat {
 
     public static void registerCompostable(float chance, ItemLike itemIn) {
         ComposterBlock.COMPOSTABLES.put(itemIn.asItem(), chance);
+    }
+
+    public static void registerFlammable(Block blockIn, int encouragement, int flammability) {
+        FireBlock fireblock = (FireBlock) Blocks.FIRE;
+        fireblock.setFlammable(blockIn, encouragement, flammability);
     }
 
 }
