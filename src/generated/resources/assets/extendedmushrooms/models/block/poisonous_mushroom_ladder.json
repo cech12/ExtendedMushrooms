@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/ladder",
-  "ambientocclusion": false,
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "particle": "extendedmushrooms:block/poisonous_mushroom_ladder",
-    "texture": "extendedmushrooms:block/poisonous_mushroom_ladder"
-  }
-}

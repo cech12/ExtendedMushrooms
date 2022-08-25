@@ -34,7 +34,6 @@ public class ItemTagProvider extends ItemTagsProvider {
                 .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && !mushroomBoatItem.hasChest())
                 .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item)))
                 .toArray(Item[]::new));
-        copy(ModTags.Blocks.MUSHROOM_BOOKSHELVES, ModTags.Items.MUSHROOM_BOOKSHELVES);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD, ModTags.Items.MUSHROOM_BUTTONS_WOOD);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL, ModTags.Items.MUSHROOM_BUTTONS_WOOL);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS, ModTags.Items.MUSHROOM_BUTTONS);
@@ -43,12 +42,9 @@ public class ItemTagProvider extends ItemTagsProvider {
                 .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && mushroomBoatItem.hasChest())
                 .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item)))
                 .toArray(Item[]::new));
-        copy(ModTags.Blocks.MUSHROOM_CHESTS, ModTags.Items.MUSHROOM_CHESTS);
-        copy(ModTags.Blocks.MUSHROOM_CHESTS_TRAPPED, ModTags.Items.MUSHROOM_CHESTS_TRAPPED);
         copy(ModTags.Blocks.MUSHROOM_DOORS, ModTags.Items.MUSHROOM_DOORS);
         copy(ModTags.Blocks.MUSHROOM_FENCE_GATES, ModTags.Items.MUSHROOM_FENCE_GATES);
         copy(ModTags.Blocks.MUSHROOM_FENCES, ModTags.Items.MUSHROOM_FENCES);
-        copy(ModTags.Blocks.MUSHROOM_LADDERS, ModTags.Items.MUSHROOM_LADDERS);
         copy(ModTags.Blocks.MUSHROOM_PLANKS, ModTags.Items.MUSHROOM_PLANKS);
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOD);
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOL);
@@ -84,7 +80,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS, ModTags.ForgeItems.MUSHROOMS_POISONOUS);
         copy(ModTags.ForgeBlocks.MUSHROOMS_SLOWING_DOWN, ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN);
 
-        tag(Tags.Items.BOOKSHELVES).addTag(ModTags.Items.MUSHROOM_BOOKSHELVES);
         copy(Tags.Blocks.CHESTS, Tags.Items.CHESTS);
         copy(Tags.Blocks.CHESTS_TRAPPED, Tags.Items.CHESTS_TRAPPED);
         copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
@@ -119,7 +114,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.WOOL, ItemTags.WOOL);
 
         //generate tags for mod compatibility
-        copy(ModTags.OtherModBlocks.QUARK_LADDERS, ModTags.OtherModItems.QUARK_LADDERS);
         copy(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES, ModTags.OtherModItems.WOOLPLATES_WOOLPLATES);
 
     }

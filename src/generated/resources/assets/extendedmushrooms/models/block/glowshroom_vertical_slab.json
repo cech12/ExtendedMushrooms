@@ -1,8 +1,0 @@
-{
-  "parent": "extendedmushrooms:block/vertical_slab",
-  "textures": {
-    "bottom": "extendedmushrooms:block/glowshroom_planks",
-    "side": "extendedmushrooms:block/glowshroom_planks",
-    "top": "extendedmushrooms:block/glowshroom_planks"
-  }
-}

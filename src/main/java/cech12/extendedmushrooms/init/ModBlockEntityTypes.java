@@ -1,11 +1,7 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.blockentity.VariantChestBlockEntity;
-import cech12.extendedmushrooms.blockentity.VariantTrappedChestBlockEntity;
 import cech12.extendedmushrooms.client.renderer.blockentity.FairyRingBlockEntityRenderer;
-import cech12.extendedmushrooms.client.renderer.blockentity.VariantChestBlockEntityRenderer;
-import cech12.extendedmushrooms.client.renderer.blockentity.VariantTrappedChestBlockEntityRenderer;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import cech12.extendedmushrooms.blockentity.FairyRingBlockEntity;
 import cech12.extendedmushrooms.blockentity.MushroomSignBlockEntity;
@@ -39,16 +35,6 @@ public class ModBlockEntityTypes {
             ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN,
             ModBlocks.HONEY_FUNGUS_STANDING_SIGN,
             ModBlocks.HONEY_FUNGUS_WALL_SIGN);
-    public static RegistryObject<BlockEntityType<VariantChestBlockEntity>> VARIANT_CHEST = register("variant_chest", VariantChestBlockEntity::new,
-            ModBlocks.MUSHROOM_CHEST,
-            ModBlocks.GLOWSHROOM_CHEST,
-            ModBlocks.POISONOUS_MUSHROOM_CHEST,
-            ModBlocks.HONEY_FUNGUS_CHEST);
-    public static RegistryObject<BlockEntityType<VariantTrappedChestBlockEntity>> VARIANT_TRAPPED_CHEST = register("variant_trapped_chest", VariantTrappedChestBlockEntity::new,
-            ModBlocks.MUSHROOM_CHEST_TRAPPED,
-            ModBlocks.GLOWSHROOM_CHEST_TRAPPED,
-            ModBlocks.POISONOUS_MUSHROOM_CHEST_TRAPPED,
-            ModBlocks.HONEY_FUNGUS_CHEST_TRAPPED);
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String registryName, BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<Block>... blocks) {
         return BLOCK_ENTITY_TYPES.register(registryName, () -> BlockEntityType.Builder.of(supplier, Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)).build(null));
@@ -66,8 +52,6 @@ public class ModBlockEntityTypes {
                 Sheets.addWoodType(type.getWoodType());
             }
         });
-        BlockEntityRenderers.register(VARIANT_CHEST.get(), VariantChestBlockEntityRenderer::new);
-        BlockEntityRenderers.register(VARIANT_TRAPPED_CHEST.get(), VariantTrappedChestBlockEntityRenderer::new);
     }
 
 

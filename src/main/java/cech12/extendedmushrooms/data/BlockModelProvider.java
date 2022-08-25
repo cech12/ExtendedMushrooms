@@ -1,15 +1,11 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.EMMushroomBlock;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomPlanksBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
-import cech12.extendedmushrooms.block.VariantChestBlock;
-import cech12.extendedmushrooms.block.VerticalPlanksBlock;
-import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.HoneyFungusCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.SlimeFungusCap;
@@ -22,7 +18,6 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.HugeMushroomBlock;
-import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
@@ -109,10 +104,6 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                         .parent(getExistingFile(new ResourceLocation("block/cross")))
                         .texture("cross", getBlockResourceLocation(name))
                         .renderType("cutout");
-            } else if (block instanceof BookshelfBlock) {
-                ResourceLocation side = getBlockResourceLocation(name);
-                ResourceLocation end = getBlockResourceLocation(name, "_bookshelf", "_planks");
-                cubeColumn(name, side, end);
             } else if (block instanceof MushroomWoodButtonBlock) {
                 buttonBlock(name, getBlockResourceLocation(name, "_button", "_planks"));
             } else if (block instanceof MushroomCapBlock) {
@@ -146,8 +137,6 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                         .texture("wool", texture);
             } else if (block instanceof MushroomCapPressurePlateBlock) {
                 pressurePlateBlock(name, getCapResourceLocation(name, "_pressure_plate"));
-            } else if (block instanceof VariantChestBlock) {
-                getBuilder(name).texture("particle", getBlockResourceLocation(name, "_chest", "_planks"));
             } else if (block instanceof DoorBlock) {
                 ResourceLocation bottom = getBlockResourceLocation(name + "_bottom");
                 ResourceLocation top = getBlockResourceLocation(name + "_top");
@@ -174,14 +163,6 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/flower_pot_cross")))
                         .texture("plant", getBlockResourceLocation(name, "_potted", ""))
-                        .renderType("cutout");
-            } else if (block instanceof LadderBlock) {
-                ResourceLocation texture = getBlockResourceLocation(name);
-                getBuilder(name)
-                        .parent(getExistingFile(new ResourceLocation("block/ladder")))
-                        .ao(false)
-                        .texture("particle", texture)
-                        .texture("texture", texture)
                         .renderType("cutout");
             } else if (block instanceof PressurePlateBlock) {
                 pressurePlateBlock(name, getBlockResourceLocation(name, "_pressure_plate", "_planks"));
@@ -226,18 +207,6 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 simpleTexturedBlock(name + "_bottom", "template_orientable_trapdoor_bottom", texture);
                 simpleTexturedBlock(name + "_open", "template_orientable_trapdoor_open", texture);
                 simpleTexturedBlock(name + "_top", "template_orientable_trapdoor_top", texture);
-            } else if (block instanceof VerticalPlanksBlock) {
-                ResourceLocation texture = getBlockResourceLocation(name, "_vertical_planks", "_planks");
-                getBuilder(name)
-                        .parent(getExistingFile(verticalPlanks))
-                        .texture("all", texture);
-            } else if (block instanceof VerticalSlabBlock) {
-                ResourceLocation texture = getBlockResourceLocation(name, "_vertical_slab", "_planks");
-                getBuilder(name)
-                        .parent(getExistingFile(verticalSlab))
-                        .texture("bottom", texture)
-                        .texture("top", texture)
-                        .texture("side", texture);
             } else if (block instanceof BushBlock) {
                 //flower & grass
                 getBuilder(name)

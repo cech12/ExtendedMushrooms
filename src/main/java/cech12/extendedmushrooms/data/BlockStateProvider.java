@@ -2,15 +2,12 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.FairyRingBlock;
-import cech12.extendedmushrooms.block.VariantChestBlock;
-import cech12.extendedmushrooms.block.VariantTrappedChestBlock;
-import cech12.extendedmushrooms.block.VerticalSlabBlock;
+import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.HugeMushroomBlock;
-import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.SlabBlock;
@@ -60,12 +57,13 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
     }
 
     private static ResourceLocation getInsideResourceLocation(String name) {
-        if ("stripped_mushroom_stem".equals(name)) {
+        if (name.equals(ModBlocks.STRIPPED_MUSHROOM_STEM.getKey().location().getPath())) {
             return new ResourceLocation("block/mushroom_block_inside");
         }
         return getBlockResourceLocation(name
                 .replace("_cap", "")
                 .replace("_stem", "")
+                .replace("_log", "")
                 .replace("_stripped", "") + "_inside");
     }
 
@@ -122,8 +120,6 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                                 .condition(entry.getValue(), boolValue).end();
                     }
                 }
-            } else if (block instanceof VariantChestBlock || block instanceof VariantTrappedChestBlock) {
-                simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name.replace("_trapped", ""))));
             } else if (block instanceof DoorBlock) {
                 doorBlock((DoorBlock) block, name, getBlockResourceLocation(name + "_bottom"), getBlockResourceLocation(name + "_top"));
             } else if (block instanceof FenceGateBlock) {
@@ -136,15 +132,6 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile post = models().getExistingFile(getBlockResourceLocation(name + "_post"));
                 ModelFile side = models().getExistingFile(getBlockResourceLocation(name + "_side"));
                 fourWayBlock((FenceBlock) block, post, side);
-            } else if (block instanceof LadderBlock) {
-                ModelFile ladder = models().getExistingFile(getBlockResourceLocation(name));
-                getVariantBuilder(block).forAllStatesExcept(state ->
-                    ConfiguredModel.builder()
-                            .modelFile(ladder)
-                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
-                            .build(),
-                        LadderBlock.WATERLOGGED
-                );
             } else if (block instanceof PressurePlateBlock) {
                 // cap plates, wood plates
                 ModelFile plate = models().getExistingFile(getBlockResourceLocation(name));
@@ -170,15 +157,6 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile top = models().getExistingFile(getBlockResourceLocation(name + "_top"));
                 ModelFile open = models().getExistingFile(getBlockResourceLocation(name + "_open"));
                 trapdoorBlock((TrapDoorBlock) block, bottom, top, open, true);
-            } else if (block instanceof VerticalSlabBlock) {
-                ModelFile slab = models().getExistingFile(getBlockResourceLocation(name));
-                ModelFile doubleSlab = models().getExistingFile(getBlockResourceLocation(name, "_vertical_slab", "_planks"));
-                getVariantBuilder(block)
-                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.NORTH).addModels(new ConfiguredModel(slab, 0, 0, true))
-                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.EAST).addModels(new ConfiguredModel(slab, 0, 90, true))
-                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.SOUTH).addModels(new ConfiguredModel(slab, 0, 180, true))
-                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.WEST).addModels(new ConfiguredModel(slab, 0, 270, true))
-                        .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.DOUBLE).addModels(new ConfiguredModel(doubleSlab));
             } else if (!(block instanceof FairyRingBlock)) { // Fairy Ring is hand made
                 //mushrooms, (vertical) planks, carpets, flower, potted flower, grass, bookshelf
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));

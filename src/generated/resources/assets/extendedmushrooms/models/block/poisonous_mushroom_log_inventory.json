@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "extendedmushrooms:block/poisonous_mushroom_log"
+  }
+}

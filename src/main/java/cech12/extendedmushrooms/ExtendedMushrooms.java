@@ -4,7 +4,6 @@ import cech12.extendedmushrooms.init.ModLootModifiers;
 import cech12.extendedmushrooms.init.ModParticles;
 import cech12.extendedmushrooms.init.ModRecipeTypes;
 import cech12.extendedmushrooms.block.FairyRingBlock;
-import cech12.extendedmushrooms.compat.ModFeatureEnabledCondition;
 import cech12.extendedmushrooms.config.Config;
 import cech12.extendedmushrooms.entity.ai.goal.EatMushroomGoal;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
@@ -34,7 +33,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -86,9 +84,6 @@ public class ExtendedMushrooms {
         BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_JUMP_BOOSTING, Potions.LEAPING));
         BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_POISONOUS, Potions.POISON));
         BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN, Potions.SLOWNESS));
-
-        //serializer for conditions
-        CraftingHelper.register(ModFeatureEnabledCondition.Serializer.INSTANCE);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

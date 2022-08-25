@@ -3,8 +3,6 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.block.EMMushroomBlock;
 import cech12.extendedmushrooms.block.InfestedGrassBlock;
 import cech12.extendedmushrooms.block.MushroomPlanksBlock;
-import cech12.extendedmushrooms.block.VerticalPlanksBlock;
-import cech12.extendedmushrooms.block.VerticalSlabBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import net.minecraft.world.level.block.Block;
@@ -36,11 +34,10 @@ public class ModVanillaCompat {
         ModBlocks.BLOCKS.getEntries().forEach(blockRegistryObject -> {
             Block block = blockRegistryObject.get();
             if (block instanceof ButtonBlock || block instanceof PressurePlateBlock || block instanceof SlabBlock
-                    || block instanceof StairBlock || block instanceof TrapDoorBlock || block instanceof VerticalSlabBlock) {
+                    || block instanceof StairBlock || block instanceof TrapDoorBlock) {
                 registerCompostable(0.15F, block);
             } else if (block instanceof WoolCarpetBlock || block instanceof DoorBlock || block instanceof FenceBlock
-                    || block instanceof FenceGateBlock || block instanceof MushroomPlanksBlock || block instanceof VerticalPlanksBlock
-                    || block instanceof InfestedGrassBlock) {
+                    || block instanceof FenceGateBlock || block instanceof MushroomPlanksBlock || block instanceof InfestedGrassBlock) {
                 registerCompostable(0.3F, block);
             } else if (block instanceof MushroomStemBlock || block instanceof EMMushroomBlock) {
                 registerCompostable(0.65F, block);

@@ -1,7 +1,6 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.block.BookshelfBlock;
 import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.init.ModBlocks;
@@ -66,9 +65,7 @@ public class BlockLootProvider implements DataProvider {
                 continue;
             }
 
-            if (block instanceof BookshelfBlock) {
-                this.functionTable.put(block, BlockLootProvider::dropBookshelf);
-            } else if (block instanceof SlabBlock) {
+            if (block instanceof SlabBlock) {
                 this.functionTable.put(block, BlockLootProvider::dropSlab);
             } else if (block instanceof DoorBlock) {
                 this.functionTable.put(block, BlockLootProvider::dropDoor);

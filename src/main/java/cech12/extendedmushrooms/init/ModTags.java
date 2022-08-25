@@ -58,17 +58,13 @@ public class ModTags {
 
     public static class Blocks {
 
-        public static final TagKey<Block> MUSHROOM_BOOKSHELVES = tag("mushroom_bookshelves");
         public static final TagKey<Block> MUSHROOM_BUTTONS_WOOD = tag("mushroom_buttons/wood");
         public static final TagKey<Block> MUSHROOM_BUTTONS_WOOL = tag("mushroom_buttons/wool");
         public static final TagKey<Block> MUSHROOM_BUTTONS = tag("mushroom_buttons");
         public static final TagKey<Block> MUSHROOM_CARPETS = tag("mushroom_carpets");
-        public static final TagKey<Block> MUSHROOM_CHESTS = tag("mushroom_chests");
-        public static final TagKey<Block> MUSHROOM_CHESTS_TRAPPED = tag("mushroom_chests_trapped");
         public static final TagKey<Block> MUSHROOM_DOORS = tag("mushroom_doors");
         public static final TagKey<Block> MUSHROOM_FENCE_GATES = tag("mushroom_fence_gates");
         public static final TagKey<Block> MUSHROOM_FENCES = tag("mushroom_fences");
-        public static final TagKey<Block> MUSHROOM_LADDERS = tag("mushroom_ladders");
         public static final TagKey<Block> MUSHROOM_PLANKS = tag("mushroom_planks");
         public static final TagKey<Block> MUSHROOM_PRESSURE_PLATES_WOOD = tag("mushroom_pressure_plates/wood");
         public static final TagKey<Block> MUSHROOM_PRESSURE_PLATES_WOOL = tag("mushroom_pressure_plates/wool");
@@ -137,18 +133,14 @@ public class ModTags {
     public static class Items {
 
         public static final TagKey<Item> MUSHROOM_BOATS = tag("mushroom_boats");
-        public static final TagKey<Item> MUSHROOM_BOOKSHELVES = tag("mushroom_bookshelves");
         public static final TagKey<Item> MUSHROOM_BUTTONS_WOOD = tag("mushroom_buttons/wood");
         public static final TagKey<Item> MUSHROOM_BUTTONS_WOOL = tag("mushroom_buttons/wool");
         public static final TagKey<Item> MUSHROOM_BUTTONS = tag("mushroom_buttons");
         public static final TagKey<Item> MUSHROOM_CARPETS = tag("mushroom_carpets");
         public static final TagKey<Item> MUSHROOM_CHEST_BOATS = tag("mushroom_chest_boats");
-        public static final TagKey<Item> MUSHROOM_CHESTS = tag("mushroom_chests");
-        public static final TagKey<Item> MUSHROOM_CHESTS_TRAPPED = tag("mushroom_chests_trapped");
         public static final TagKey<Item> MUSHROOM_DOORS = tag("mushroom_doors");
         public static final TagKey<Item> MUSHROOM_FENCE_GATES = tag("mushroom_fence_gates");
         public static final TagKey<Item> MUSHROOM_FENCES = tag("mushroom_fences");
-        public static final TagKey<Item> MUSHROOM_LADDERS = tag("mushroom_ladders");
         public static final TagKey<Item> MUSHROOM_PLANKS = tag("mushroom_planks");
         public static final TagKey<Item> MUSHROOM_PRESSURE_PLATES_WOOD = tag("mushroom_pressure_plates/wood");
         public static final TagKey<Item> MUSHROOM_PRESSURE_PLATES_WOOL = tag("mushroom_pressure_plates/wool");
@@ -168,7 +160,6 @@ public class ModTags {
 
     public static class OtherModItems {
 
-        public static final TagKey<Item> QUARK_LADDERS = tag("quark", "ladders");
         public static final TagKey<Item> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static TagKey<Item> tag(@Nonnull String mod, @Nonnull String name) {
