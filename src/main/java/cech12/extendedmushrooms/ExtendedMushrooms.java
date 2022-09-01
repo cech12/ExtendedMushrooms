@@ -16,6 +16,7 @@ import cech12.extendedmushrooms.init.ModSounds;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.HugeMushroomBlock;
@@ -44,6 +45,10 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.MissingMappingsEvent;
+
+import java.util.Map;
 
 @Mod(ExtendedMushrooms.MOD_ID)
 @Mod.EventBusSubscriber
@@ -53,6 +58,49 @@ public class ExtendedMushrooms {
 
     // Use for data generation and development
     public static final boolean DEVELOPMENT_MODE = Boolean.parseBoolean(System.getProperty("extendedmushrooms.developmentMode", "false"));
+
+    static final Map<ResourceLocation, ResourceLocation> OLD_RESOURCE_LOCATION_MAP = Map.ofEntries(
+            Map.entry(loc("stripped_mushroom_stem"), loc("mushroom_stripped_log")),
+            Map.entry(loc("glowshroom_stem"), loc("glowshroom_log")),
+            Map.entry(loc("glowshroom_stem_stripped"), loc("glowshroom_stripped_log")),
+            Map.entry(loc("poisonous_mushroom_stem"), loc("poisonous_mushroom_log")),
+            Map.entry(loc("poisonous_mushroom_stem_stripped"), loc("poisonous_mushroom_stripped_log")),
+            Map.entry(loc("honey_fungus_stem"), loc("honey_fungus_log")),
+            Map.entry(loc("honey_fungus_stem_stripped"), loc("honey_fungus_stripped_log")),
+            //old compat blocks
+            Map.entry(loc("mushroom_bookshelf"), compatLoc("q/extendedmushrooms/mushshroom_bookshelf")),
+            Map.entry(loc("mushroom_chest"), compatLoc("q/extendedmushrooms/mushroom_chest")),
+            Map.entry(loc("mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/mushroom_trapped_chest")),
+            Map.entry(loc("mushroom_ladder"), compatLoc("q/extendedmushrooms/mushroom_ladder")),
+            Map.entry(loc("mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_mushroom_planks")),
+            Map.entry(loc("mushroom_vertical_slab"), compatLoc("q/extendedmushrooms/vertical_mushroom_slab")),
+            Map.entry(loc("glowshroom_bookshelf"), compatLoc("q/extendedmushrooms/glowshroom_bookshelf")),
+            Map.entry(loc("glowshroom_chest"), compatLoc("q/extendedmushrooms/glowshroom_chest")),
+            Map.entry(loc("glowshroom_chest_trapped"), compatLoc("q/extendedmushrooms/glowshroom_trapped_chest")),
+            Map.entry(loc("glowshroom_ladder"), compatLoc("q/extendedmushrooms/glowshroom_ladder")),
+            Map.entry(loc("glowshroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_glowshroom_planks")),
+            Map.entry(loc("glowshroom_vertical_slab"), compatLoc("q/extendedmushrooms/vertical_glowshroom_slab")),
+            Map.entry(loc("poisonous_mushroom_bookshelf"), compatLoc("q/extendedmushrooms/poisonous_mushroom_bookshelf")),
+            Map.entry(loc("poisonous_mushroom_chest"), compatLoc("q/extendedmushrooms/poisonous_mushroom_chest")),
+            Map.entry(loc("poisonous_mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/poisonous_mushroom_trapped_chest")),
+            Map.entry(loc("poisonous_mushroom_ladder"), compatLoc("q/extendedmushrooms/poisonous_mushroom_ladder")),
+            Map.entry(loc("poisonous_mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_poisonous_mushroom_planks")),
+            Map.entry(loc("poisonous_mushroom_vertical_slab"), compatLoc("q/extendedmushrooms/vertical_poisonous_mushroom_slab")),
+            Map.entry(loc("honey_fungus_bookshelf"), compatLoc("q/extendedmushrooms/honey_fungus_bookshelf")),
+            Map.entry(loc("honey_fungus_chest"), compatLoc("q/extendedmushrooms/honey_fungus_chest")),
+            Map.entry(loc("honey_fungus_chest_trapped"), compatLoc("q/extendedmushrooms/honey_fungus_trapped_chest")),
+            Map.entry(loc("honey_fungus_ladder"), compatLoc("q/extendedmushrooms/honey_fungus_ladder")),
+            Map.entry(loc("honey_fungus_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_honey_fungus_planks")),
+            Map.entry(loc("honey_fungus_vertical_slab"), compatLoc("q/extendedmushrooms/vertical_honey_fungus_slab"))
+    );
+
+    private static ResourceLocation loc(String path) {
+        return new ResourceLocation(MOD_ID, path);
+    }
+
+    private static ResourceLocation compatLoc(String path) {
+        return new ResourceLocation("everycomp", path);
+    }
 
     public ExtendedMushrooms() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON, "extendedmushrooms-common.toml");
@@ -89,6 +137,22 @@ public class ExtendedMushrooms {
     private void clientSetup(final FMLClientSetupEvent event) {
         ModEntityTypes.setupRenderers();
         ModBlockEntityTypes.setupRenderers(event);
+    }
+
+    @SubscribeEvent
+    public static void remapOldIds(MissingMappingsEvent event) {
+        event.getMappings(ForgeRegistries.ITEMS.getRegistryKey(), MOD_ID).forEach(itemMapping -> OLD_RESOURCE_LOCATION_MAP.entrySet().stream()
+                .filter(entry -> entry.getKey().equals(itemMapping.getKey()))
+                .map(Map.Entry::getValue)
+                .filter(ForgeRegistries.ITEMS::containsKey)
+                .findFirst()
+                .ifPresent(remap -> itemMapping.remap(ForgeRegistries.ITEMS.getValue(remap))));
+        event.getMappings(ForgeRegistries.BLOCKS.getRegistryKey(), MOD_ID).forEach(blockMapping -> OLD_RESOURCE_LOCATION_MAP.entrySet().stream()
+                .filter(entry -> entry.getKey().equals(blockMapping.getKey()))
+                .map(Map.Entry::getValue)
+                .filter(ForgeRegistries.BLOCKS::containsKey)
+                .findFirst()
+                .ifPresent(remap -> blockMapping.remap(ForgeRegistries.BLOCKS.getValue(remap))));
     }
 
     /**
