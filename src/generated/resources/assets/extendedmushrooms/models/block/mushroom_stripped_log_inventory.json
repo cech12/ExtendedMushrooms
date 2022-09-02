@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "extendedmushrooms:block/mushroom_stripped_log"
-  }
-}

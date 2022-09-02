@@ -61,14 +61,7 @@ public class ExtendedMushrooms {
     // Use for data generation and development
     public static final boolean DEVELOPMENT_MODE = Boolean.parseBoolean(System.getProperty("extendedmushrooms.developmentMode", "false"));
 
-    static final Map<ResourceLocation, ResourceLocation> OLD_RESOURCE_LOCATION_MAP = Map.ofEntries(
-            Map.entry(loc("stripped_mushroom_stem"), loc("mushroom_stripped_log")),
-            Map.entry(loc("glowshroom_stem"), loc("glowshroom_log")),
-            Map.entry(loc("glowshroom_stem_stripped"), loc("glowshroom_stripped_log")),
-            Map.entry(loc("poisonous_mushroom_stem"), loc("poisonous_mushroom_log")),
-            Map.entry(loc("poisonous_mushroom_stem_stripped"), loc("poisonous_mushroom_stripped_log")),
-            Map.entry(loc("honey_fungus_stem"), loc("honey_fungus_log")),
-            Map.entry(loc("honey_fungus_stem_stripped"), loc("honey_fungus_stripped_log")),
+    private static final Map<ResourceLocation, ResourceLocation> OLD_RESOURCE_LOCATION_MAP = Map.ofEntries(
             //old compat blocks
             Map.entry(loc("mushroom_bookshelf"), compatLoc("q/extendedmushrooms/mushshroom_bookshelf")),
             Map.entry(loc("mushroom_chest"), compatLoc("q/extendedmushrooms/mushroom_chest")),

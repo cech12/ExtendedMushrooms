@@ -1,0 +1,26 @@
+{
+  "elements": [
+    {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#texture"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        0
+      ]
+    }
+  ],
+  "textures": {
+    "particle": "extendedmushrooms:block/honey_fungus_stem_stripped",
+    "texture": "extendedmushrooms:block/honey_fungus_stem_stripped"
+  }
+}
