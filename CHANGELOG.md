@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Update to Minecraft 1.19.2 and Forge 43.1.3 #60
 - Moved world generation code to biome modifiers #60
 - mushroom boat item textures #60
+- moved remaining config options to server config file #60
 
 ### Removed
 - Enabling configurations for world generation options (can be done by changing biome modifiers with datapacks)

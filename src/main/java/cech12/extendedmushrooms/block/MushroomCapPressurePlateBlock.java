@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.block;
 
-import cech12.extendedmushrooms.config.Config;
+import cech12.extendedmushrooms.config.ServerConfig;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,14 +40,14 @@ public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
 
     @Override
     protected void playOnSound(LevelAccessor world, @Nonnull BlockPos pos) {
-        if (Config.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
+        if (ServerConfig.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
             world.playSound(null, pos, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundSource.BLOCKS, 0.3F, 0.8F);
         }
     }
 
     @Override
     protected void playOffSound(LevelAccessor world, @Nonnull BlockPos pos) {
-        if (Config.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
+        if (ServerConfig.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
             world.playSound(null, pos, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundSource.BLOCKS, 0.3F, 0.7F);
         }
     }

@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.block;
 
-import cech12.extendedmushrooms.config.Config;
+import cech12.extendedmushrooms.config.ServerConfig;
 import cech12.extendedmushrooms.init.ModSounds;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -31,7 +31,7 @@ public class MushroomCapButtonBlock extends WoodButtonBlock {
     @Nonnull
     @Override
     protected SoundEvent getSound(boolean isPressed) {
-        if (Config.MUSHROOM_CAP_BUTTON_PLAY_SOUND.get()) {
+        if (ServerConfig.MUSHROOM_CAP_BUTTON_PLAY_SOUND.get()) {
             return super.getSound(isPressed);
         }
         return ModSounds.NO_SOUND.get();

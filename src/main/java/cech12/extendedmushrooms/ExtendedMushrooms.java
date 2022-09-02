@@ -5,7 +5,7 @@ import cech12.extendedmushrooms.init.ModLootModifiers;
 import cech12.extendedmushrooms.init.ModParticles;
 import cech12.extendedmushrooms.init.ModRecipeTypes;
 import cech12.extendedmushrooms.block.FairyRingBlock;
-import cech12.extendedmushrooms.config.Config;
+import cech12.extendedmushrooms.config.ServerConfig;
 import cech12.extendedmushrooms.entity.ai.goal.EatMushroomGoal;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import cech12.extendedmushrooms.init.ModBlockEntityTypes;
@@ -47,6 +47,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLConfig;
+import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
@@ -57,9 +59,6 @@ import java.util.Map;
 public class ExtendedMushrooms {
 
     public static final String MOD_ID = "extendedmushrooms";
-
-    // Use for data generation and development
-    public static final boolean DEVELOPMENT_MODE = Boolean.parseBoolean(System.getProperty("extendedmushrooms.developmentMode", "false"));
 
     private static final Map<ResourceLocation, ResourceLocation> OLD_RESOURCE_LOCATION_MAP = Map.ofEntries(
             //old compat blocks
@@ -98,7 +97,8 @@ public class ExtendedMushrooms {
     }
 
     public ExtendedMushrooms() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON, "extendedmushrooms-common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_CONFIG);
+        ServerConfig.loadConfig(ServerConfig.SERVER_CONFIG, FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath()).resolve(MOD_ID + "-server.toml"));
 
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -210,7 +210,7 @@ public class ExtendedMushrooms {
      */
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
-        if (Config.SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.get()) {
+        if (ServerConfig.SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED.get()) {
             if (event.getEntity() instanceof Sheep sheep) { //also mushroom sheep
                 sheep.goalSelector.addGoal(5, new EatMushroomGoal(sheep));
             }

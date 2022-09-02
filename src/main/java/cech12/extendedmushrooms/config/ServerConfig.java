@@ -1,9 +1,13 @@
 package cech12.extendedmushrooms.config;
 
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.io.WritingMode;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class Config {
-    public static ForgeConfigSpec COMMON;
+import java.nio.file.Path;
+
+public class ServerConfig {
+    public static ForgeConfigSpec SERVER_CONFIG;
 
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAPS_WITH_SHEARS_ENABLED;
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED;
@@ -45,7 +49,13 @@ public class Config {
 
         builder.pop();
 
-        COMMON = builder.build();
+        SERVER_CONFIG = builder.build();
+    }
+
+    public static void loadConfig(ForgeConfigSpec spec, Path path) {
+        final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
+        configData.load();
+        spec.setConfig(configData);
     }
 
 }

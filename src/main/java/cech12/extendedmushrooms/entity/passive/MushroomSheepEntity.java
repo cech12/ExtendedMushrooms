@@ -2,7 +2,7 @@ package cech12.extendedmushrooms.entity.passive;
 
 import cech12.extendedmushrooms.init.ModEntityTypes;
 import cech12.extendedmushrooms.init.ModTags;
-import cech12.extendedmushrooms.config.Config;
+import cech12.extendedmushrooms.config.ServerConfig;
 import cech12.extendedmushrooms.entity.ai.goal.EatMyceliumGoal;
 import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.util.RandomSource;
@@ -180,7 +180,7 @@ public class MushroomSheepEntity extends Sheep {
     public @Nonnull InteractionResult mobInteract(Player player, @Nonnull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         InteractionResult superResult = super.mobInteract(player, hand);
-        if (superResult.consumesAction() && Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get() && itemStack.is(Tags.Items.MUSHROOMS)) {
+        if (superResult.consumesAction() && ServerConfig.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get() && itemStack.is(Tags.Items.MUSHROOMS)) {
             //change mushroom type
             MushroomType type = MushroomType.byItemOrNull(itemStack.getItem());
             if (type != null && type != this.getMushroomType()) {

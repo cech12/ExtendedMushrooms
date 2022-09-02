@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.entity.ai.goal;
 
-import cech12.extendedmushrooms.config.Config;
+import cech12.extendedmushrooms.config.ServerConfig;
 import cech12.extendedmushrooms.entity.passive.MushroomSheepEntity;
 import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.world.entity.Mob;
@@ -87,7 +87,7 @@ public class EatMushroomGoal extends Goal {
                     this.entityWorld.destroyBlock(blockPos, false);
                 }
                 this.eaterEntity.ate();
-                if (Config.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get()) {
+                if (ServerConfig.SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED.get()) {
                     if (this.eaterEntity instanceof Sheep && mushroomType != null) {
                         if (this.eaterEntity instanceof MushroomSheepEntity mushroomSheep) {
                             mushroomSheep.setMushroomType(mushroomType);

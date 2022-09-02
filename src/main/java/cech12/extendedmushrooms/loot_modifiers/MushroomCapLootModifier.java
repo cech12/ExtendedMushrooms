@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.loot_modifiers;
 
 import cech12.extendedmushrooms.init.ModTags;
-import cech12.extendedmushrooms.config.Config;
+import cech12.extendedmushrooms.config.ServerConfig;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -35,7 +35,7 @@ public class MushroomCapLootModifier extends LootModifier {
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         //only called when shears are used
-        if (Config.MUSHROOM_CAPS_WITH_SHEARS_ENABLED.get()) {
+        if (ServerConfig.MUSHROOM_CAPS_WITH_SHEARS_ENABLED.get()) {
             BlockState blockState = context.getParamOrNull(LootContextParams.BLOCK_STATE);
             if (blockState != null && blockState.is(ModTags.ForgeBlocks.MUSHROOM_CAPS)) {
                 ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
