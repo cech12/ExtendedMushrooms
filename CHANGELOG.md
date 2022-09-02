@@ -6,14 +6,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.19-3.0.0.0] - 2022-??-??
 ### Added
 - Mushroom Chest Boats #60
+- Every Compat support #60
 
 ### Changed
-- Update to Minecraft 1.19 and Forge 41.0.106 #60
+- Update to Minecraft 1.19.2 and Forge 43.1.3 #60
 - Moved world generation code to biome modifiers #60
 - mushroom boat item textures #60
 
 ### Removed
 - Enabling configurations for world generation options (can be done by changing biome modifiers with datapacks)
+- All compat blocks (bookshelves, chests, ladders, vertical planks/slabs) and the corresponding config options (included in Every Compat)
 
 ## [1.18.2-2.0.1.0] - 2022-08-24
 ### Added

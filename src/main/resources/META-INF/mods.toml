@@ -29,3 +29,9 @@ license="The MIT License (MIT)"
    versionRange="[11.0.0.211,)"
    ordering="NONE"
    side="BOTH"
+[[dependencies.extendedmushrooms]]
+   modId="moonlight"
+   mandatory=false
+   versionRange="[1.19.2-2.0.25,)"
+   ordering="NONE"
+   side="BOTH"

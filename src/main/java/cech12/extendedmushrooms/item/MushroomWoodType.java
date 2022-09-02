@@ -21,22 +21,26 @@ public enum MushroomWoodType implements StringRepresentable {
 
     MUSHROOM(0, "mushroom",
             RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.MUSHROOM_STEM), ForgeRegistries.BLOCKS),
+            ModBlocks.STRIPPED_MUSHROOM_STEM,
             ModBlocks.MUSHROOM_PLANKS,
             ModItems.MUSHROOM_BOAT,
             ModItems.MUSHROOM_CHEST_BOAT),
     GLOWSHROOM(1, "glowshroom",
             ModBlocks.GLOWSHROOM_STEM,
+            ModBlocks.GLOWSHROOM_STEM_STRIPPED,
             ModBlocks.GLOWSHROOM_PLANKS,
             ModItems.GLOWSHROOM_BOAT,
             ModItems.GLOWSHROOM_CHEST_BOAT,
             () -> ModBlocks.GLOWSHROOM_STEM.get().getLightEmission(ModBlocks.GLOWSHROOM_STEM.get().defaultBlockState(), null, null)),
     POISONOUS_MUSHROOM(2, "poisonous_mushroom",
             ModBlocks.POISONOUS_MUSHROOM_STEM,
+            ModBlocks.POISONOUS_MUSHROOM_STEM_STRIPPED,
             ModBlocks.POISONOUS_MUSHROOM_PLANKS,
             ModItems.POISONOUS_MUSHROOM_BOAT,
             ModItems.POISONOUS_MUSHROOM_CHEST_BOAT),
     HONEY_FUNGUS(3, "honey_fungus",
             ModBlocks.HONEY_FUNGUS_STEM,
+            ModBlocks.HONEY_FUNGUS_STEM_STRIPPED,
             ModBlocks.HONEY_FUNGUS_PLANKS,
             ModItems.HONEY_FUNGUS_BOAT,
             ModItems.HONEY_FUNGUS_CHEST_BOAT);
@@ -46,20 +50,22 @@ public enum MushroomWoodType implements StringRepresentable {
     private final int id;
     private final String name;
     private final RegistryObject<Block> stemBlock;
+    private final RegistryObject<Block> strippedStemBlock;
     private final RegistryObject<Block> planksBlock;
     private final RegistryObject<Item> boatItem;
     private final RegistryObject<Item> chestBoatItem;
     private final Supplier<Integer> lightValue;
     private final WoodType woodType;
 
-    MushroomWoodType(int id, String name, RegistryObject<Block> stemBlock, RegistryObject<Block> planksBlock, RegistryObject<Item> boatItem, RegistryObject<Item> chestBoatItem) {
-        this(id, name, stemBlock, planksBlock, boatItem, chestBoatItem, () -> 0);
+    MushroomWoodType(int id, String name, RegistryObject<Block> stemBlock, RegistryObject<Block> strippedStemBlock, RegistryObject<Block> planksBlock, RegistryObject<Item> boatItem, RegistryObject<Item> chestBoatItem) {
+        this(id, name, stemBlock, strippedStemBlock, planksBlock, boatItem, chestBoatItem, () -> 0);
     }
 
-    MushroomWoodType(int id, String name, RegistryObject<Block> stemBlock, RegistryObject<Block> planksBlock, RegistryObject<Item> boatItem, RegistryObject<Item> chestBoatItem, Supplier<Integer> lightValue) {
+    MushroomWoodType(int id, String name, RegistryObject<Block> stemBlock, RegistryObject<Block> strippedStemBlock, RegistryObject<Block> planksBlock, RegistryObject<Item> boatItem, RegistryObject<Item> chestBoatItem, Supplier<Integer> lightValue) {
         this.id = id;
         this.name = name;
         this.stemBlock = stemBlock;
+        this.strippedStemBlock = strippedStemBlock;
         this.planksBlock = planksBlock;
         this.boatItem = boatItem;
         this.chestBoatItem = chestBoatItem;
@@ -75,8 +81,20 @@ public enum MushroomWoodType implements StringRepresentable {
         return this.stemBlock.get();
     }
 
+    public ResourceLocation getStemBlockId() {
+        return this.stemBlock.getId();
+    }
+
+    public ResourceLocation getStrippedStemBlockId() {
+        return this.strippedStemBlock.getId();
+    }
+
     public Block getPlanksBlock() {
         return this.planksBlock.get();
+    }
+
+    public ResourceLocation getPlanksBlockId() {
+        return this.planksBlock.getId();
     }
 
     public Item getBoatItem() {
