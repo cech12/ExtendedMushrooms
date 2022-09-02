@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms;
 
+import cech12.extendedmushrooms.compat.Moonlight;
 import cech12.extendedmushrooms.init.ModLootModifiers;
 import cech12.extendedmushrooms.init.ModParticles;
 import cech12.extendedmushrooms.init.ModRecipeTypes;
@@ -15,7 +16,6 @@ import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModSounds;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
-import cech12.extendedmushrooms.item.MushroomWoodType;
 import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -125,7 +125,10 @@ public class ExtendedMushrooms {
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
 
-        everyCompatInit();
+        //Initialize Moonlight compatibility only if the library is loaded (Every Compat)
+        if (ModList.get().isLoaded("moonlight")) {
+            Moonlight.init();
+        }
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -141,19 +144,6 @@ public class ExtendedMushrooms {
     private void clientSetup(final FMLClientSetupEvent event) {
         ModEntityTypes.setupRenderers();
         ModBlockEntityTypes.setupRenderers(event);
-    }
-
-    private void everyCompatInit() {
-        //register wood type in moonlight library to be compatible with Every Compat
-        if (ModList.get().isLoaded("moonlight")) {
-            for (MushroomWoodType woodType : MushroomWoodType.values()) {
-                net.mehvahdjukaar.moonlight.api.set.wood.WoodType.Finder finder = net.mehvahdjukaar.moonlight.api.set.wood.WoodType.Finder.simple(new ResourceLocation(ExtendedMushrooms.MOD_ID, woodType.getSerializedName()), woodType.getPlanksBlockId(), woodType.getStemBlockId());
-                finder.addChild("wood", woodType.getStemBlockId());
-                finder.addChild("stripped_wood", woodType.getStrippedStemBlockId());
-                finder.addChild("stripped_log", woodType.getStrippedStemBlockId());
-                net.mehvahdjukaar.moonlight.api.set.BlockSetAPI.addBlockTypeFinder(net.mehvahdjukaar.moonlight.api.set.wood.WoodType.class, finder);
-            }
-        }
     }
 
     @SubscribeEvent
