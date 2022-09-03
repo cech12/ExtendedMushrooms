@@ -3,10 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
-## [1.19-3.0.0.0] - 2022-??-??
+## [1.19.2-3.0.0.0] - 2022-09-03
 ### Added
 - Mushroom Chest Boats #60
-- Every Compat support #60
+- Every Compat support (compatibility of wood blocks of other mods) #60
 
 ### Changed
 - Update to Minecraft 1.19.2 and Forge 43.1.3 #60
