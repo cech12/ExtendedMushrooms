@@ -62,30 +62,31 @@ public class ExtendedMushrooms {
 
     private static final Map<ResourceLocation, ResourceLocation> OLD_RESOURCE_LOCATION_MAP = Map.ofEntries(
             //old compat blocks
-            Map.entry(loc("mushroom_bookshelf"), compatLoc("q/extendedmushrooms/mushshroom_bookshelf")),
-            Map.entry(loc("mushroom_chest"), compatLoc("q/extendedmushrooms/mushroom_chest")),
-            Map.entry(loc("mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/mushroom_trapped_chest")),
+            Map.entry(loc("mushroom_bookshelf"), compatLoc("q/extendedmushrooms/mushroom_bookshelf")),
             Map.entry(loc("mushroom_ladder"), compatLoc("q/extendedmushrooms/mushroom_ladder")),
             Map.entry(loc("mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_mushroom_planks")),
             Map.entry(loc("mushroom_vertical_slab"), compatLoc("q/extendedmushrooms/vertical_mushroom_slab")),
             Map.entry(loc("glowshroom_bookshelf"), compatLoc("q/extendedmushrooms/glowshroom_bookshelf")),
-            Map.entry(loc("glowshroom_chest"), compatLoc("q/extendedmushrooms/glowshroom_chest")),
-            Map.entry(loc("glowshroom_chest_trapped"), compatLoc("q/extendedmushrooms/glowshroom_trapped_chest")),
             Map.entry(loc("glowshroom_ladder"), compatLoc("q/extendedmushrooms/glowshroom_ladder")),
             Map.entry(loc("glowshroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_glowshroom_planks")),
             Map.entry(loc("glowshroom_vertical_slab"), compatLoc("q/extendedmushrooms/vertical_glowshroom_slab")),
             Map.entry(loc("poisonous_mushroom_bookshelf"), compatLoc("q/extendedmushrooms/poisonous_mushroom_bookshelf")),
-            Map.entry(loc("poisonous_mushroom_chest"), compatLoc("q/extendedmushrooms/poisonous_mushroom_chest")),
-            Map.entry(loc("poisonous_mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/poisonous_mushroom_trapped_chest")),
             Map.entry(loc("poisonous_mushroom_ladder"), compatLoc("q/extendedmushrooms/poisonous_mushroom_ladder")),
             Map.entry(loc("poisonous_mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_poisonous_mushroom_planks")),
             Map.entry(loc("poisonous_mushroom_vertical_slab"), compatLoc("q/extendedmushrooms/vertical_poisonous_mushroom_slab")),
             Map.entry(loc("honey_fungus_bookshelf"), compatLoc("q/extendedmushrooms/honey_fungus_bookshelf")),
-            Map.entry(loc("honey_fungus_chest"), compatLoc("q/extendedmushrooms/honey_fungus_chest")),
-            Map.entry(loc("honey_fungus_chest_trapped"), compatLoc("q/extendedmushrooms/honey_fungus_trapped_chest")),
             Map.entry(loc("honey_fungus_ladder"), compatLoc("q/extendedmushrooms/honey_fungus_ladder")),
             Map.entry(loc("honey_fungus_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_honey_fungus_planks")),
             Map.entry(loc("honey_fungus_vertical_slab"), compatLoc("q/extendedmushrooms/vertical_honey_fungus_slab"))
+            //Chests cannot be ported because of their block entity ("variant_chest" & "variant_trapped_chest")
+            //Map.entry(loc("mushroom_chest"), compatLoc("q/extendedmushrooms/mushroom_chest")),
+            //Map.entry(loc("mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/mushroom_trapped_chest")),
+            //Map.entry(loc("glowshroom_chest"), compatLoc("q/extendedmushrooms/glowshroom_chest")),
+            //Map.entry(loc("glowshroom_chest_trapped"), compatLoc("q/extendedmushrooms/glowshroom_trapped_chest")),
+            //Map.entry(loc("poisonous_mushroom_chest"), compatLoc("q/extendedmushrooms/poisonous_mushroom_chest")),
+            //Map.entry(loc("poisonous_mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/poisonous_mushroom_trapped_chest")),
+            //Map.entry(loc("honey_fungus_chest"), compatLoc("q/extendedmushrooms/honey_fungus_chest")),
+            //Map.entry(loc("honey_fungus_chest_trapped"), compatLoc("q/extendedmushrooms/honey_fungus_trapped_chest")),
     );
 
     private static ResourceLocation loc(String path) {
