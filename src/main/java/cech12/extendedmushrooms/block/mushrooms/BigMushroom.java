@@ -11,6 +11,9 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.level.SaplingGrowTreeEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
@@ -35,7 +38,9 @@ public abstract class BigMushroom {
         if (!MushroomUtils.isValidMushroomPosition(world, blockPos)) {
             return false;
         }
-        ConfiguredFeature<?, ?> feature = this.getBigMushroomFeature().get();
+        SaplingGrowTreeEvent event = ForgeEventFactory.blockGrowFeature(world, random, blockPos, this.getBigMushroomFeature().getHolder().get());
+        if (event.getResult().equals(Event.Result.DENY) || event.getFeature() == null) return false;
+        ConfiguredFeature<?, ?> feature = event.getFeature().value();
         world.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 4);
         if (feature.place(world, chunkGenerator, random, blockPos)) {
             return true;

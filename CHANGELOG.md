@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.19.2-3.0.1.0] - 2022-09-13
+### Added
+- Send SaplingGrowTreeEvent when mushrooms of this mod are growing
+
+### Changed
+- Update to Forge 1.19.2-43.1.23
+
 ## [1.19.2-3.0.0.0] - 2022-09-03
 ### Hints
 - If you are porting your savegame from a version below 3.0.0.0, all mushroom chests and their contents will be removed.
