@@ -11,6 +11,9 @@ import static cech12.extendedmushrooms.api.item.ExtendedMushroomsItems.*;
 
 public class ModVanillaCompat {
 
+    /**
+     * Should only be called in FMLCommonSetupEvent#enqueueWork. Reason: <a href="https://forums.minecraftforge.net/topic/98470-solved-registering-custom-flowers-as-compostable/">ComposterBlock.COMPOSTABLES is not thread safe</a>
+     */
     public static void setup() {
 
         registerFlammable(Blocks.BROWN_MUSHROOM_BLOCK, 30, 60);
@@ -108,11 +111,11 @@ public class ModVanillaCompat {
 
     }
 
-    public static void registerCompostable(float chance, IItemProvider itemIn) {
+    private static void registerCompostable(float chance, IItemProvider itemIn) {
         ComposterBlock.COMPOSTABLES.put(itemIn.asItem(), chance);
     }
 
-    public static void registerFlammable(Block blockIn, int encouragement, int flammability) {
+    private static void registerFlammable(Block blockIn, int encouragement, int flammability) {
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
         fireblock.setFlammable(blockIn, encouragement, flammability);
     }

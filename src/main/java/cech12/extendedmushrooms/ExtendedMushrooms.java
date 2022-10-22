@@ -90,7 +90,7 @@ public class ExtendedMushrooms {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        ModVanillaCompat.setup();
+        event.enqueueWork(ModVanillaCompat::setup);
 
         //add potion recipes
         //BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_GLOWSHROOM, Potions.NIGHT_VISION)); //overpowered
