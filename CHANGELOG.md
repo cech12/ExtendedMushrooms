@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.18.2-2.0.1.1] - 2022-10-22
+### Fixed
+- fixed occasional startup crash on dedicated servers (thanks to Tyrius1 for the report) #65
+
 ## [1.18.2-2.0.1.0] - 2022-08-24
 ### Added
 - re-added flammability behaviour of Mushroom wood & cap blocks and all related blocks (thanks to AbsorbingSafe11 for the explanation)
