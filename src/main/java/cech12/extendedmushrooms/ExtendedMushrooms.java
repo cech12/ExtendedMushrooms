@@ -65,19 +65,23 @@ public class ExtendedMushrooms {
             Map.entry(loc("mushroom_bookshelf"), compatLoc("q/extendedmushrooms/mushroom_bookshelf")),
             Map.entry(loc("mushroom_ladder"), compatLoc("q/extendedmushrooms/mushroom_ladder")),
             Map.entry(loc("mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_mushroom_planks")),
-            Map.entry(loc("mushroom_vertical_slab"), compatLoc("q/extendedmushrooms/mushroom_vertical_slab")),
+            Map.entry(loc("mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/mushroom_vertical_slab")),
+            Map.entry(compatLoc("q/extendedmushrooms/mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/mushroom_vertical_slab")),
             Map.entry(loc("glowshroom_bookshelf"), compatLoc("q/extendedmushrooms/glowshroom_bookshelf")),
             Map.entry(loc("glowshroom_ladder"), compatLoc("q/extendedmushrooms/glowshroom_ladder")),
             Map.entry(loc("glowshroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_glowshroom_planks")),
-            Map.entry(loc("glowshroom_vertical_slab"), compatLoc("q/extendedmushrooms/glowshroom_vertical_slab")),
+            Map.entry(loc("glowshroom_vertical_slab"), slabCompatLoc("extendedmushrooms/glowshroom_vertical_slab")),
+            Map.entry(compatLoc("q/extendedmushrooms/glowshroom_vertical_slab"), slabCompatLoc("extendedmushrooms/glowshroom_vertical_slab")),
             Map.entry(loc("poisonous_mushroom_bookshelf"), compatLoc("q/extendedmushrooms/poisonous_mushroom_bookshelf")),
             Map.entry(loc("poisonous_mushroom_ladder"), compatLoc("q/extendedmushrooms/poisonous_mushroom_ladder")),
             Map.entry(loc("poisonous_mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_poisonous_mushroom_planks")),
-            Map.entry(loc("poisonous_mushroom_vertical_slab"), compatLoc("q/extendedmushrooms/poisonous_mushroom_vertical_slab")),
+            Map.entry(loc("poisonous_mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/poisonous_mushroom_vertical_slab")),
+            Map.entry(compatLoc("q/extendedmushrooms/poisonous_mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/poisonous_mushroom_vertical_slab")),
             Map.entry(loc("honey_fungus_bookshelf"), compatLoc("q/extendedmushrooms/honey_fungus_bookshelf")),
             Map.entry(loc("honey_fungus_ladder"), compatLoc("q/extendedmushrooms/honey_fungus_ladder")),
             Map.entry(loc("honey_fungus_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_honey_fungus_planks")),
-            Map.entry(loc("honey_fungus_vertical_slab"), compatLoc("q/extendedmushrooms/honey_fungus_vertical_slab"))
+            Map.entry(loc("honey_fungus_vertical_slab"), slabCompatLoc("extendedmushrooms/honey_fungus_vertical_slab")),
+            Map.entry(compatLoc("q/extendedmushrooms/honey_fungus_vertical_slab"), slabCompatLoc("extendedmushrooms/honey_fungus_vertical_slab"))
             //Chests cannot be ported because of their block entity ("variant_chest" & "variant_trapped_chest")
             //Map.entry(loc("mushroom_chest"), compatLoc("q/extendedmushrooms/mushroom_chest")),
             //Map.entry(loc("mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/mushroom_trapped_chest")),
@@ -95,6 +99,10 @@ public class ExtendedMushrooms {
 
     private static ResourceLocation compatLoc(String path) {
         return new ResourceLocation("everycomp", path);
+    }
+
+    private static ResourceLocation slabCompatLoc(String path) {
+        return new ResourceLocation("v_slab_compat", path);
     }
 
     public ExtendedMushrooms() {
