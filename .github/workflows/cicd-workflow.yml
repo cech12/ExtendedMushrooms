@@ -56,7 +56,6 @@ jobs:
     with:
       java-version: 17
       modrinth-id: XInCrQsd
-      mod-name: Extended Mushrooms
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
       modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
