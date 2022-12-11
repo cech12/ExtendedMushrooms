@@ -13,7 +13,6 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'maven-publish'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
@@ -214,20 +213,6 @@ publishing {
     repositories {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-
-curseforge {
-    project {
-        def envApiKey = System.getenv('CURSEFORGE_API_KEY')
-        apiKey = envApiKey == null ? 'nope' : envApiKey
-        id = "${curseforge_id}"
-        changelog = file('CHANGELOG.md')
-        changelogType = "markdown"
-        releaseType = "${curseforge_release}"
-        "${curseforge_versions}".split(',').each {
-            addGameVersion "${it}"
         }
     }
 }

@@ -46,6 +46,10 @@ jobs:
     uses: cech12/MinecraftModActions/.github/workflows/publish-curseforge.yml@main
     with:
       java-version: 17
+      curseforge-id: 365507
+      game-versions: |
+        1.19.2
+      release-type: release
     secrets:
       curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
   publish-modrinth:
@@ -56,6 +60,9 @@ jobs:
     with:
       java-version: 17
       modrinth-id: XInCrQsd
+      game-versions: |
+        1.19.2
+      release-type: release
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
       modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
