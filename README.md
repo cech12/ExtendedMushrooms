@@ -2,6 +2,7 @@
 
 [![Curseforge](http://cf.way2muchnoise.eu/full_365507_downloads(0D0D0D-F16436-fff-010101-fff).svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms)
 [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_365507_all(0D0D0D-F16436-fff-010101).svg)](https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms/files)
+[![Modrinth](https://modrinth-utils.vercel.app/api/badge/downloads?id=XInCrQsd&logo=true)](https://modrinth.com/mod/extended-mushrooms)
 [![CI/CD](https://github.com/cech12/ExtendedMushrooms/actions/workflows/cicd-workflow.yml/badge.svg)](https://github.com/cech12/ExtendedMushrooms/actions/workflows/cicd-workflow.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/cech12/extendedmushrooms/badge)](https://www.codefactor.io/repository/github/cech12/extendedmushrooms)
 [![gitlocalized ](https://gitlocalize.com/repo/8144/whole_project/badge.svg)](https://gitlocalize.com/repo/8144/?utm_source=badge)
