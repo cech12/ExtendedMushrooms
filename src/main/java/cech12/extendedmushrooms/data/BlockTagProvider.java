@@ -4,10 +4,13 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomStandingSignBlock;
+import cech12.extendedmushrooms.block.MushroomWallSignBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.MushroomWoodPressurePlateBlock;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WoolCarpetBlock;
@@ -17,25 +20,25 @@ import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.data.tags.BlockTagsProvider;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
+import java.util.concurrent.CompletableFuture;
 
 public class BlockTagProvider extends BlockTagsProvider {
 
-    public BlockTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-        super(generatorIn, ExtendedMushrooms.MOD_ID, existingFileHelper);
+    public BlockTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+        super(packOutput, lookupProvider, ExtendedMushrooms.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(@Nonnull HolderLookup.Provider lookupProvider) {
         //generate mod intern tags
         tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomWoodButtonBlock)
@@ -79,10 +82,6 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES)
                 .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD)
                 .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
-        tag(ModTags.Blocks.MUSHROOM_SIGNS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
-                .filter(block -> block instanceof MushroomStandingSignBlock)
-                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
-                .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_SLABS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof SlabBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
@@ -91,8 +90,16 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .filter(block -> block instanceof StairBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
+        tag(ModTags.Blocks.MUSHROOM_STANDING_SIGNS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+                .filter(block -> block instanceof MushroomStandingSignBlock)
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
+                .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_TRAPDOORS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof TrapDoorBlock)
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
+                .toArray(Block[]::new));
+        tag(ModTags.Blocks.MUSHROOM_WALL_SIGNS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+                .filter(block -> block instanceof MushroomWallSignBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
         //generate block categories
@@ -168,14 +175,16 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.WOOL_CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
         tag(BlockTags.DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
         tag(BlockTags.FENCES).addTag(ModTags.Blocks.MUSHROOM_FENCES);
+        tag(BlockTags.FENCE_GATES).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
         tag(BlockTags.LOGS_THAT_BURN).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
         tag(BlockTags.OVERWORLD_NATURAL_LOGS).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
         tag(BlockTags.PLANKS).addTag(ModTags.Blocks.MUSHROOM_PLANKS);
-        tag(BlockTags.SIGNS).addTag(ModTags.Blocks.MUSHROOM_SIGNS);
         tag(BlockTags.SLABS).addTag(ModTags.Blocks.MUSHROOM_SLABS);
         tag(BlockTags.SMALL_FLOWERS).add(ModBlocks.INFESTED_FLOWER.get());
         tag(BlockTags.STAIRS).addTag(ModTags.Blocks.MUSHROOM_STAIRS);
+        tag(BlockTags.STANDING_SIGNS).addTag(ModTags.Blocks.MUSHROOM_STANDING_SIGNS);
         tag(BlockTags.TRAPDOORS).addTag(ModTags.Blocks.MUSHROOM_TRAPDOORS);
+        tag(BlockTags.WALL_SIGNS).addTag(ModTags.Blocks.MUSHROOM_WALL_SIGNS);
         tag(BlockTags.WOODEN_BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
         tag(BlockTags.WOODEN_DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
         tag(BlockTags.WOODEN_FENCES).addTag(ModTags.Blocks.MUSHROOM_FENCES);

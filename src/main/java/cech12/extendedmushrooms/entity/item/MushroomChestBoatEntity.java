@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.entity.item;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -64,21 +65,21 @@ public class MushroomChestBoatEntity extends ChestBoat implements MushroomWoodTy
 
     @Nonnull
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         //important!!!
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Deprecated
     @Override
-    public void setType(@Nonnull Type boatType) {
+    public void setVariant(@Nonnull Type boatType) {
         //deactivate boat type
     }
 
     @Deprecated
     @Nonnull
     @Override
-    public Type getBoatType() {
+    public Type getVariant() {
         //deactivate boat type
         return Type.OAK;
     }

@@ -19,7 +19,7 @@ public class ModSounds {
 
     private static RegistryObject<SoundEvent> makeSoundEvent(String name) {
         ResourceLocation resourceLocation = new ResourceLocation(ExtendedMushrooms.MOD_ID, name);
-        return SOUND_EVENTS.register(name, () -> new SoundEvent(resourceLocation));
+        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(resourceLocation));
     }
 
 }

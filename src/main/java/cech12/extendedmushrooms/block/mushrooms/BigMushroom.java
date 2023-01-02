@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.level.SaplingGrowTreeEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -24,7 +23,7 @@ public abstract class BigMushroom {
     }
 
     @Nonnull
-    public abstract RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature();
+    public abstract RegistryObject<ConfiguredFeature<?, ?>> getBigMushroomFeature();
 
     protected static BlockState getDefaultStemState(Block stemBlock) {
         return stemBlock.defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false);

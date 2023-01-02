@@ -18,7 +18,7 @@ public class SlimeFungus extends BigMushroom {
 
     @Nonnull
     @Override
-    public RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature() {
+    public RegistryObject<ConfiguredFeature<?, ?>> getBigMushroomFeature() {
         return ModFeatures.BIG_SLIME_FUNGUS_CONFIGURED;
     }
 

@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms.client.jei;
 
+/*
 import cech12.extendedmushrooms.init.ModRecipeTypes;
 import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
 import com.google.common.cache.CacheBuilder;
@@ -129,3 +130,4 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
         return new Vec2((float) newX, (float) newY);
     }
 }
+ */

@@ -1,24 +1,24 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.item.MushroomWoodType;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.HugeMushroomBlock;
-import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolAction;
 
 import javax.annotation.Nullable;
 
 /**
- * Same class as MushroomStrippedStemBlock, but it makes a difference for creative tab filling.
+ * Same class as MushroomStemBlock, but it makes a difference for creative tab filling.
  */
-public class MushroomStemBlock extends HugeMushroomBlock {
+public class MushroomStrippedStemBlock extends HugeMushroomBlock {
 
     private final MushroomWoodType type;
 
-    public MushroomStemBlock(MushroomWoodType type, Properties properties) {
+    public MushroomStrippedStemBlock(MushroomWoodType type, Properties properties) {
         super(properties);
         this.type = type;
     }

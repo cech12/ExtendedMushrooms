@@ -6,9 +6,10 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 public class MushroomArrowRecipe extends CustomRecipe {
 
-    public static final SimpleRecipeSerializer<MushroomArrowRecipe> SERIALIZER = new Serializer();
+    public static final SimpleCraftingRecipeSerializer<MushroomArrowRecipe> SERIALIZER = new Serializer();
 
     private static final Map<TagKey<Item>, Potion> MUSHROOM_POTION_MAP = new HashMap<>();
 
@@ -32,8 +33,8 @@ public class MushroomArrowRecipe extends CustomRecipe {
         MUSHROOM_POTION_MAP.putIfAbsent(ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN, Potions.SLOWNESS);
     }
 
-    public MushroomArrowRecipe(ResourceLocation idIn) {
-        super(idIn);
+    public MushroomArrowRecipe(ResourceLocation idIn, CraftingBookCategory category) {
+        super(idIn, category);
     }
 
     private Potion getPotionFromMushroom(Item mushroom) {
@@ -79,11 +80,12 @@ public class MushroomArrowRecipe extends CustomRecipe {
     }
 
     @Override
+    @Nonnull
     public RecipeSerializer<?> getSerializer() {
         return SERIALIZER;
     }
 
-    private static class Serializer extends SimpleRecipeSerializer<MushroomArrowRecipe> {
+    private static class Serializer extends SimpleCraftingRecipeSerializer<MushroomArrowRecipe> {
         public Serializer() {
             super(MushroomArrowRecipe::new);
         }

@@ -33,6 +33,7 @@ public class PoisonousMushroomBlock extends EMMushroomBlock {
         this.registerDefaultState(this.defaultBlockState().setValue(TRIGGERED, false));
     }
 
+    @Deprecated
     @Override
     public void randomTick(@Nonnull BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
@@ -43,7 +44,7 @@ public class PoisonousMushroomBlock extends EMMushroomBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(@Nonnull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(TRIGGERED);
     }
@@ -77,15 +78,16 @@ public class PoisonousMushroomBlock extends EMMushroomBlock {
         worldIn.setBlock(pos, state.setValue(TRIGGERED, true), 2);
     }
 
+    @Deprecated
     @Override
-    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+    public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (worldIn instanceof ServerLevel && !state.getValue(TRIGGERED) && isTriggeringEntity(entityIn)) {
             generateEffectCloud((ServerLevel)worldIn, state, pos);
         }
     }
 
     @Override
-    public void playerWillDestroy(Level worldIn, @Nonnull BlockPos pos, BlockState state, @Nonnull Player player) {
+    public void playerWillDestroy(@Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
         super.playerWillDestroy(worldIn, pos, state, player);
         if (worldIn instanceof ServerLevel && !state.getValue(TRIGGERED)) {
             generateEffectCloud((ServerLevel)worldIn, state, pos);

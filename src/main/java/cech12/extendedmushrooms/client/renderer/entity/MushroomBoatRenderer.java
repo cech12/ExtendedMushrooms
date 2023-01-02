@@ -6,6 +6,7 @@ import cech12.extendedmushrooms.item.MushroomWoodType;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ListModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -18,7 +19,7 @@ import java.util.stream.Stream;
 
 public class MushroomBoatRenderer extends BoatRenderer {
 
-    private final Map<MushroomWoodType, Pair<ResourceLocation, BoatModel>> BOAT_RESOURCES;
+    private final Map<MushroomWoodType, Pair<ResourceLocation, ListModel<Boat>>> BOAT_RESOURCES;
 
     public MushroomBoatRenderer(EntityRendererProvider.Context context, boolean withChest) {
         super(context, withChest);
@@ -26,7 +27,7 @@ public class MushroomBoatRenderer extends BoatRenderer {
                 (woodType) -> woodType,
                 (woodType) -> Pair.of(new ResourceLocation(ExtendedMushrooms.MOD_ID, getTextureLocation(woodType, withChest)),
                         new BoatModel(context.bakeLayer((withChest) ? ModelLayers.createChestBoatModelName(Boat.Type.OAK) :
-                                ModelLayers.createBoatModelName(Boat.Type.OAK)), withChest))
+                                ModelLayers.createBoatModelName(Boat.Type.OAK))))
         ));
     }
 
@@ -36,7 +37,7 @@ public class MushroomBoatRenderer extends BoatRenderer {
 
     @Nonnull
     @Override
-    public Pair<ResourceLocation, BoatModel> getModelWithLocation(@Nonnull Boat entity) {
+    public Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(@Nonnull Boat entity) {
         if (entity instanceof MushroomWoodTypable) {
             MushroomWoodType woodType = ((MushroomWoodTypable) entity).getMushroomWoodType();
             if (BOAT_RESOURCES.containsKey(woodType)) {

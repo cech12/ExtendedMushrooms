@@ -10,6 +10,7 @@ import cech12.extendedmushrooms.block.mushroomblocks.HoneyFungusCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.SlimeFungusCap;
 import cech12.extendedmushrooms.init.ModBlocks;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.WoolCarpetBlock;
@@ -24,7 +25,6 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallSignBlock;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ModelBuilder;
@@ -36,8 +36,8 @@ import javax.annotation.Nonnull;
 
 public class BlockModelProvider extends net.minecraftforge.client.model.generators.BlockModelProvider {
 
-    public BlockModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, ExtendedMushrooms.MOD_ID, existingFileHelper);
+    public BlockModelProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
+        super(packOutput, ExtendedMushrooms.MOD_ID, existingFileHelper);
     }
 
     @Nonnull

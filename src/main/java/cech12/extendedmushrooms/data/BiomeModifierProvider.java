@@ -7,12 +7,13 @@ import cech12.extendedmushrooms.init.ModTags;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -30,14 +31,14 @@ import java.util.Map;
 public class BiomeModifierProvider {
 
     public static void generateBiomeModifiers(GatherDataEvent event) {
-        final RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, RegistryAccess.builtinCopy());
+        final RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, (HolderLookup.Provider) event.getLookupProvider());
         Map<ResourceLocation, BiomeModifier> modifierMap = new HashMap<>();
 
-        HolderSet<Biome> isTaigaTag = new HolderSet.Named<>(ops.registry(Registry.BIOME_REGISTRY).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
-        HolderSet<Biome> isSwampTag = new HolderSet.Named<>(ops.registry(Registry.BIOME_REGISTRY).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
-        HolderSet<Biome> isNetherTag = new HolderSet.Named<>(ops.registry(Registry.BIOME_REGISTRY).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
-        HolderSet<Biome> isMushroomTag = new HolderSet.Named<>(ops.registry(Registry.BIOME_REGISTRY).orElseThrow(), Tags.Biomes.IS_MUSHROOM);
-        HolderSet<Biome> hasMushroomsTag = new HolderSet.Named<>(ops.registry(Registry.BIOME_REGISTRY).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
+        HolderSet<Biome> isTaigaTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
+        HolderSet<Biome> isSwampTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
+        HolderSet<Biome> isNetherTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
+        HolderSet<Biome> isMushroomTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), Tags.Biomes.IS_MUSHROOM);
+        HolderSet<Biome> hasMushroomsTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
 
         HolderSet<PlacedFeature> infestedFlowerFeature = HolderSet.direct(placedFeature(ops, ModFeatures.INFESTED_FLOWER_PLACED.getId()));
         HolderSet<PlacedFeature> infestedGrassFeature = HolderSet.direct(placedFeature(ops, ModFeatures.INFESTED_GRASS_PLACED.getId()));
@@ -91,8 +92,8 @@ public class BiomeModifierProvider {
         modifierMap.put(prefix("mega_mushroom_addition"),
                 new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isMushroomTag, megaMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
 
-        event.getGenerator().addProvider(event.includeServer(), JsonCodecProvider.forDatapackRegistry(event.getGenerator(), event.getExistingFileHelper(), ExtendedMushrooms.MOD_ID,
-                ops, ForgeRegistries.Keys.BIOME_MODIFIERS, modifierMap));
+        event.getGenerator().addProvider(event.includeServer(), new JsonCodecProvider<>(event.getGenerator().getPackOutput(), event.getExistingFileHelper(), ExtendedMushrooms.MOD_ID,
+                ops, PackType.SERVER_DATA, "biome_modifier", BiomeModifier.DIRECT_CODEC, modifierMap));
     }
 
     private static ResourceLocation prefix(String name) {
@@ -100,7 +101,7 @@ public class BiomeModifierProvider {
     }
 
     private static Holder<PlacedFeature> placedFeature(RegistryOps<JsonElement> ops, ResourceLocation id) {
-        return ops.registry(Registry.PLACED_FEATURE_REGISTRY).get().getOrCreateHolderOrThrow(ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY, id));
+        return ops.getter(Registries.PLACED_FEATURE).get().getOrThrow(ResourceKey.create(Registries.PLACED_FEATURE, id));
     }
 
 }

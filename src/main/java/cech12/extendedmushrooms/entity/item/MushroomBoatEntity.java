@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.entity.item;
 
 import cech12.extendedmushrooms.item.MushroomWoodType;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -64,21 +65,21 @@ public class MushroomBoatEntity extends Boat implements MushroomWoodTypable {
 
     @Nonnull
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         //important!!!
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Deprecated
     @Override
-    public void setType(@Nonnull Boat.Type boatType) {
+    public void setVariant(@Nonnull Boat.Type boatType) {
         //deactivate boat type
     }
 
     @Deprecated
     @Nonnull
     @Override
-    public Boat.Type getBoatType() {
+    public Boat.Type getVariant() {
         //deactivate boat type
         return Type.OAK;
     }

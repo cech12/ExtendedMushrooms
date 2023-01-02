@@ -18,7 +18,7 @@ public class HoneyFungus extends BigMushroom {
 
     @Nonnull
     @Override
-    public RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getBigMushroomFeature() {
+    public RegistryObject<ConfiguredFeature<?, ?>> getBigMushroomFeature() {
         return ModFeatures.BIG_HONEY_FUNGUS_CONFIGURED;
     }
 

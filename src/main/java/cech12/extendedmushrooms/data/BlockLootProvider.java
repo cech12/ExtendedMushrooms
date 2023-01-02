@@ -47,10 +47,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 public class BlockLootProvider implements DataProvider {
@@ -179,8 +181,9 @@ public class BlockLootProvider implements DataProvider {
     }
 
     @Override
-    public void run(@Nonnull final CachedOutput cache) throws IOException {
+    public CompletableFuture<?> run(@Nonnull final CachedOutput cache) {
         Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
+        List<CompletableFuture<?>> list = new ArrayList<>();
 
         for (Block block : ForgeRegistries.BLOCKS) {
             if (!ExtendedMushrooms.MOD_ID.equals(ForgeRegistries.BLOCKS.getKey(block).getNamespace())) {
@@ -195,9 +198,15 @@ public class BlockLootProvider implements DataProvider {
         }
 
         for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
-            Path path = getPath(generator.getOutputFolder(), e.getKey());
+            Path path = getPath(generator.getPackOutput().getOutputFolder(), e.getKey());
             DataProvider.saveStable(cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.BLOCK).build()), path);
         }
+
+        return null;
+        //TODO return a correct value
+        //return CompletableFuture.allOf(list.toArray((p_253414_) -> {
+        //    return new CompletableFuture[p_253414_];
+        //}));
     }
 
     @Nonnull

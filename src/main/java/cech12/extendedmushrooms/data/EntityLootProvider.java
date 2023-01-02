@@ -17,10 +17,10 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 public class EntityLootProvider implements DataProvider {
@@ -46,7 +46,7 @@ public class EntityLootProvider implements DataProvider {
     }
 
     @Override
-    public void run(@Nonnull final CachedOutput cache) throws IOException {
+    public CompletableFuture<?> run(@Nonnull final CachedOutput cache) {
         Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
 
         for (MushroomType mushroomType : MushroomType.values()) {
@@ -55,9 +55,10 @@ public class EntityLootProvider implements DataProvider {
         }
 
         for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
-            Path path = getSheepPath(generator.getOutputFolder(), e.getKey());
+            Path path = getSheepPath(generator.getPackOutput().getOutputFolder(), e.getKey());
             DataProvider.saveStable(cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.ENTITY).build()), path);
         }
+        return null; //TODO return a correct value
     }
 
     @Nonnull

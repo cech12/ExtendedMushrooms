@@ -6,16 +6,16 @@ import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.item.MushroomType;
 import cech12.extendedmushrooms.item.MushroomWoodType;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
@@ -28,8 +28,8 @@ import java.util.function.Consumer;
 
 public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
-    public RecipeProvider(DataGenerator generatorIn) {
-        super(generatorIn);
+    public RecipeProvider(PackOutput packOutput) {
+        super(packOutput);
     }
 
     private static ResourceLocation getResourceLocation(String directory, @Nullable ResourceLocation name) {
@@ -45,22 +45,22 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     }
 
     @Override
-    protected void buildCraftingRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(@Nonnull Consumer<FinishedRecipe> consumer) {
 
         //grilled mushroom
         String name = ModItems.GRILLED_MUSHROOM.getId().getPath();
         SimpleCookingRecipeBuilder
-                .smelting(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ModItems.GRILLED_MUSHROOM.get(), 0.15F, 150)
+                .smelting(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), RecipeCategory.FOOD, ModItems.GRILLED_MUSHROOM.get(), 0.15F, 150)
                 .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer);
         SimpleCookingRecipeBuilder
-                .cooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ModItems.GRILLED_MUSHROOM.get(), 0.15F, 450, RecipeSerializer.CAMPFIRE_COOKING_RECIPE)
+                .campfireCooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), RecipeCategory.FOOD, ModItems.GRILLED_MUSHROOM.get(), 0.15F, 450)
                 .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer, getResourceLocation(name + "_from_campfire_cooking"));
         SimpleCookingRecipeBuilder
-                .cooking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), ModItems.GRILLED_MUSHROOM.get(), 0.15F, 75, RecipeSerializer.SMOKING_RECIPE)
+                .smoking(Ingredient.of(ModTags.ForgeItems.MUSHROOMS_EDIBLE), RecipeCategory.FOOD, ModItems.GRILLED_MUSHROOM.get(), 0.15F, 75)
                 .unlockedBy("has_mushroom", has(ModTags.ForgeItems.MUSHROOMS_EDIBLE)).save(consumer, getResourceLocation(name + "_from_smoking"));
 
         //mushroom bread
-        ShapedRecipeBuilder.shaped(ModItems.MUSHROOM_BREAD.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.MUSHROOM_BREAD.get())
                 .define('#', ModTags.ForgeItems.MUSHROOMS_EDIBLE)
                 .pattern("###")
                 .group("bread")
@@ -68,7 +68,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer);
 
         //rabbit stew
-        ShapelessRecipeBuilder.shapeless(Items.RABBIT_STEW)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.RABBIT_STEW)
                 .requires(Items.BAKED_POTATO)
                 .requires(Items.COOKED_RABBIT)
                 .requires(Items.BOWL)
@@ -79,7 +79,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.RABBIT_STEW).getPath() + "_from_edible_mushroom"));
 
         //brown dye from infested flower
-        ShapelessRecipeBuilder.shapeless(Items.BROWN_DYE)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BROWN_DYE)
                 .requires(ModBlocks.INFESTED_FLOWER.get())
                 .unlockedBy("has_flower", has(ModBlocks.INFESTED_FLOWER.get()))
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.BROWN_DYE).getPath() + "_from_infested_flower"));
@@ -106,7 +106,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer, getResourceLocation("infested_flower_from_flower"));
 
         //mushroom spores
-        ShapelessRecipeBuilder.shapeless(ModItems.MUSHROOM_SPORES.get(), 2)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MUSHROOM_SPORES.get(), 2)
                 .requires(Tags.Items.MUSHROOMS)
                 .unlockedBy("has_mushroom", has(Tags.Items.MUSHROOMS))
                 .save(consumer);
@@ -169,13 +169,13 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.GLOWSHROOM_CAP_CARPET.get().asItem(),
                 ModBlocks.GLOWSHROOM_CAP_PRESSURE_PLATE.get().asItem());
         //glowstone crumbs recipes
-        ShapedRecipeBuilder.shaped(Items.GLOWSTONE_DUST)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.GLOWSTONE_DUST)
                 .define('#', ModItems.GLOWSTONE_CRUMBS.get())
                 .pattern("##")
                 .pattern("##")
                 .unlockedBy("has_crumbs", has(ModItems.GLOWSTONE_CRUMBS.get()))
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.GLOWSTONE_DUST).getPath()));
-        ShapelessRecipeBuilder.shapeless(ModItems.GLOWSTONE_CRUMBS.get(), 4)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.GLOWSTONE_CRUMBS.get(), 4)
                 .requires(Items.GLOWSTONE_DUST)
                 .unlockedBy("has_dust", has(Items.GLOWSTONE_DUST))
                 .save(consumer);
@@ -225,13 +225,13 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.SLIME_FUNGUS_CAP_PRESSURE_PLATE.get().asItem());
         //no wood for slime fungus
         //slime blob recipes
-        ShapedRecipeBuilder.shaped(Items.SLIME_BALL)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SLIME_BALL)
                 .define('#', ModItems.SLIME_BLOB.get())
                 .pattern("##")
                 .pattern("##")
                 .unlockedBy("has_blobs", has(ModItems.SLIME_BLOB.get()))
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.SLIME_BALL).getPath()));
-        ShapelessRecipeBuilder.shapeless(ModItems.SLIME_BLOB.get(), 4)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SLIME_BLOB.get(), 4)
                 .requires(Items.SLIME_BALL)
                 .unlockedBy("has_slime", has(Items.SLIME_BALL))
                 .save(consumer);
@@ -265,23 +265,23 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.HONEY_FUNGUS_CAP_CARPET.get().asItem(),
                 ModBlocks.HONEY_FUNGUS_CAP_PRESSURE_PLATE.get().asItem());
         //honey blob recipes
-        ShapelessRecipeBuilder.shapeless(Items.HONEY_BOTTLE, 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.HONEY_BOTTLE, 1)
                 .requires(Items.GLASS_BOTTLE)
                 .requires(ModItems.HONEY_BLOB.get(), 3)
                 .unlockedBy("has_honey_blob", has(ModItems.HONEY_BLOB.get()))
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.HONEY_BOTTLE).getPath()));
-        ShapelessRecipeBuilder.shapeless(Items.SUGAR)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.SUGAR)
                 .requires(ModItems.HONEY_BLOB.get())
                 .unlockedBy("has_honey_blob", has(ModItems.HONEY_BLOB.get()))
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.SUGAR).getPath()));
         //honeycomb shred recipes
-        ShapedRecipeBuilder.shaped(Items.HONEYCOMB)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.HONEYCOMB)
                 .define('#', ModItems.HONEYCOMB_SHRED.get())
                 .pattern("##")
                 .pattern("##")
                 .unlockedBy("has_shreds", has(ModItems.HONEYCOMB_SHRED.get()))
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.HONEYCOMB).getPath()));
-        ShapelessRecipeBuilder.shapeless(ModItems.HONEYCOMB_SHRED.get(), 4)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.HONEYCOMB_SHRED.get(), 4)
                 .requires(Items.HONEYCOMB)
                 .unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
                 .save(consumer);
@@ -307,25 +307,25 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                                      Item chestBoat, Item button, Item door, Item fence, Item fenceGate, Item planks,
                                      Item pressurePlate, Item sign, Item slab, Item stairs, Item trapdoor) {
         String directory = "mushroom_wood/" + name + "/";
-        ShapedRecipeBuilder.shaped(boat)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, boat)
                 .define('#', planks)
                 .pattern("# #")
                 .pattern("###")
                 .group("boat")
                 .unlockedBy("in_water", insideOf(Blocks.WATER))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(boat)));
-        ShapelessRecipeBuilder.shapeless(chestBoat)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, chestBoat)
                 .requires(Tags.Items.CHESTS_WOODEN)
                 .requires(boat)
                 .group("chest_boat")
                 .unlockedBy("has_boat", has(ItemTags.BOATS))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(chestBoat)));
-        ShapelessRecipeBuilder.shapeless(button)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, button)
                 .requires(planks)
                 .group("wooden_button")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(button)));
-        ShapedRecipeBuilder.shaped(door, 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, door, 3)
                 .define('#', planks)
                 .pattern("##")
                 .pattern("##")
@@ -333,7 +333,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("wooden_door")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(door)));
-        ShapedRecipeBuilder.shaped(fence, 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, fence, 3)
                 .define('#', Tags.Items.RODS_WOODEN)
                 .define('W', planks)
                 .pattern("W#W")
@@ -341,7 +341,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("wooden_fence")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(fence)));
-        ShapedRecipeBuilder.shaped(fenceGate)
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, fenceGate)
                 .define('#', Tags.Items.RODS_WOODEN)
                 .define('W', planks)
                 .pattern("#W#")
@@ -349,18 +349,18 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("wooden_fence_gate")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(fenceGate)));
-        ShapelessRecipeBuilder.shapeless(planks, 4)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, planks, 4)
                 .requires(stems)
                 .group("planks")
                 .unlockedBy("has_logs", has(stems))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(planks)));
-        ShapedRecipeBuilder.shaped(pressurePlate)
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, pressurePlate)
                 .define('#', planks)
                 .pattern("##")
                 .group("wooden_pressure_plate")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(pressurePlate)));
-        ShapedRecipeBuilder.shaped(sign, 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, sign, 3)
                 .define('#', planks)
                 .define('|', Tags.Items.RODS_WOODEN)
                 .pattern("###")
@@ -368,13 +368,13 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .pattern(" | ")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(sign)));
-        ShapedRecipeBuilder.shaped(slab, 6)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, slab, 6)
                 .define('#', planks)
                 .pattern("###")
                 .group("wooden_slab")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(slab)));
-        ShapedRecipeBuilder.shaped(stairs, 4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, stairs, 4)
                 .define('#', planks)
                 .pattern("#  ")
                 .pattern("## ")
@@ -382,7 +382,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("wooden_stairs")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(stairs)));
-        ShapedRecipeBuilder.shaped(trapdoor, 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, trapdoor, 2)
                 .define('#', planks)
                 .pattern("###")
                 .pattern("###")
@@ -436,7 +436,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     private void mushroomCapRecipes(Consumer<FinishedRecipe> consumer, String name, TagKey<Item> caps, Item banner,
                                     Item bed, Item button, Item carpet, Item pressure_plate) {
         String directory = "mushroom_cap/" + name + "/";
-        ShapedRecipeBuilder.shaped(banner)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, banner)
                 .define('#', caps)
                 .define('|', Tags.Items.RODS_WOODEN)
                 .pattern("###")
@@ -445,7 +445,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("banner")
                 .unlockedBy("has_cap", has(caps))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(banner).getPath()));
-        ShapedRecipeBuilder.shaped(bed)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, bed)
                 .define('#', caps)
                 .define('W', ItemTags.PLANKS)
                 .pattern("###")
@@ -453,18 +453,18 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("bed")
                 .unlockedBy("has_cap", has(caps))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(bed).getPath()));
-        ShapelessRecipeBuilder.shapeless(button)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, button)
                 .requires(caps)
                 .group("wool_buttons")
                 .unlockedBy("has_cap", has(caps))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(button)));
-        ShapedRecipeBuilder.shaped(carpet, 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, carpet, 3)
                 .define('#', caps)
                 .pattern("##")
                 .group("carpet")
                 .unlockedBy("has_cap", has(caps))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(carpet)));
-        ShapelessRecipeBuilder.shapeless(pressure_plate)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, pressure_plate)
                 .requires(ItemTags.WOODEN_PRESSURE_PLATES)
                 .requires(caps)
                 .group("wool_plates")

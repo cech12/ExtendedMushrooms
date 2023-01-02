@@ -3,16 +3,16 @@ package cech12.extendedmushrooms.client.renderer.blockentity;
 import cech12.extendedmushrooms.client.ClientTickObserver;
 import cech12.extendedmushrooms.blockentity.FairyRingBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
-import com.mojang.math.Quaternion;
 import net.minecraft.world.phys.Vec3;
-import com.mojang.math.Vector3f;
+import org.joml.Quaternionf;
 
 import javax.annotation.Nonnull;
 
@@ -71,17 +71,16 @@ public class FairyRingBlockEntityRenderer implements BlockEntityRenderer<FairyRi
             }
             float anglePerItem = 360F / itemCount;
             Minecraft mc = Minecraft.getInstance();
-            mc.textureManager.bindForSetup(TextureAtlas.LOCATION_BLOCKS);
-            Vector3f yAxis = new Vector3f(0, 1, 0);
+            mc.textureManager.bindForSetup(InventoryMenu.BLOCK_ATLAS);
             for(int i = 0; i < fairyRing.getContainerSize(); i++) {
                 matrixStack.pushPose();
                 if (itemCount > 1) {
                     //deposit items in a circle, when more than one items are in inventory
-                    matrixStack.mulPose(new Quaternion(yAxis, (float) Math.toRadians(anglePerItem * i), false));
+                    matrixStack.mulPose(new Quaternionf(Axis.YP.rotation((float) Math.toRadians(anglePerItem * i))));
                     matrixStack.translate(0.75 * quadraticRecipeProgressInverse, 0, 0);
                 }
                 //add some (slow) motion
-                matrixStack.mulPose(new Quaternion(yAxis, (float) Math.toRadians((time / 3 + i * 10) % 360), false));
+                matrixStack.mulPose(new Quaternionf(Axis.YP.rotation((float) Math.toRadians((time / 3 + i * 10) % 360))));
                 matrixStack.translate(0, Math.sin((time + i * 10) / 10.0) * 0.01 + 0.05 + (1.1 * quadraticRecipeProgress), 0);
                 //render item
                 ItemStack stack = fairyRing.getItem(i);

@@ -16,10 +16,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
+import java.util.function.Supplier;
 
 public class InfestedFlowerBlock extends FlowerBlock {
 
-    public InfestedFlowerBlock(MobEffect effect, int effectDuration, Properties properties) {
+    public InfestedFlowerBlock(Supplier<MobEffect> effect, int effectDuration, Properties properties) {
         super(effect, effectDuration, properties);
     }
 

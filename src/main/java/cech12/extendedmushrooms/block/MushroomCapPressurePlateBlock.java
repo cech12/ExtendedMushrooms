@@ -20,11 +20,11 @@ public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
      * PressurePlateBlock has protected constructor.
      */
     public MushroomCapPressurePlateBlock() {
-        super(Sensitivity.EVERYTHING, generateBlockProperties());
+        super(Sensitivity.EVERYTHING, generateBlockProperties(), SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON);
     }
 
     public MushroomCapPressurePlateBlock(final int lightValue) {
-        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().lightLevel((state) -> lightValue));
+        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().lightLevel((state) -> lightValue), SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON);
     }
 
     @Nonnull
@@ -33,22 +33,22 @@ public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
     }
 
     @Override
-    public void fallOn(@Nonnull Level level, @Nonnull BlockState blockState, @Nonnull BlockPos blockPos, Entity entity, float fallDistance) {
+    public void fallOn(@Nonnull Level level, @Nonnull BlockState blockState, @Nonnull BlockPos blockPos, @Nonnull Entity entity, float fallDistance) {
         //negate some fall damage
         super.fallOn(level, blockState, blockPos, entity, fallDistance * 0.8F);
     }
 
     @Override
-    protected void playOnSound(LevelAccessor world, @Nonnull BlockPos pos) {
+    protected void playOnSound(@Nonnull LevelAccessor level, @Nonnull BlockPos pos) {
         if (ServerConfig.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
-            world.playSound(null, pos, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundSource.BLOCKS, 0.3F, 0.8F);
+            level.playSound(null, pos, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundSource.BLOCKS, 0.3F, 0.8F);
         }
     }
 
     @Override
-    protected void playOffSound(LevelAccessor world, @Nonnull BlockPos pos) {
+    protected void playOffSound(@Nonnull LevelAccessor level, @Nonnull BlockPos pos) {
         if (ServerConfig.MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND.get()) {
-            world.playSound(null, pos, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundSource.BLOCKS, 0.3F, 0.7F);
+            level.playSound(null, pos, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundSource.BLOCKS, 0.3F, 0.7F);
         }
     }
 

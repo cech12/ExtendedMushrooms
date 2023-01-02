@@ -35,6 +35,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -125,6 +126,7 @@ public class ExtendedMushrooms {
         ModParticles.PARTICLE_TYPES.register(eventBus);
 
         eventBus.addListener(this::setup);
+        eventBus.addListener(this::addItemsToTabs);
         eventBus.addListener(this::clientSetup);
 
         //Initialize Moonlight compatibility only if the library is loaded (Every Compat)
@@ -141,6 +143,11 @@ public class ExtendedMushrooms {
         BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_JUMP_BOOSTING, Potions.LEAPING));
         BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_POISONOUS, Potions.POISON));
         BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN, Potions.SLOWNESS));
+    }
+
+    private void addItemsToTabs(CreativeModeTabEvent.BuildContents event) {
+        ModBlocks.addItemsToTabs(event);
+        ModItems.addItemsToTabs(event);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

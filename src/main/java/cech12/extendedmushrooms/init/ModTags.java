@@ -1,7 +1,6 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -9,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
@@ -19,7 +19,7 @@ public class ModTags {
         public static final TagKey<Biome> HAS_MUSHROOMS = tag("has_mushrooms");
 
         private static TagKey<Biome> tag(@Nonnull String name) {
-            return TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
+            return TagKey.create(ForgeRegistries.BIOMES.getRegistryKey(), new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
         }
     }
 
@@ -69,10 +69,11 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOM_PRESSURE_PLATES_WOOD = tag("mushroom_pressure_plates/wood");
         public static final TagKey<Block> MUSHROOM_PRESSURE_PLATES_WOOL = tag("mushroom_pressure_plates/wool");
         public static final TagKey<Block> MUSHROOM_PRESSURE_PLATES = tag("mushroom_pressure_plates");
-        public static final TagKey<Block> MUSHROOM_SIGNS = tag("mushroom_signs");
         public static final TagKey<Block> MUSHROOM_SLABS = tag("mushroom_slabs");
         public static final TagKey<Block> MUSHROOM_STAIRS = tag("mushroom_stairs");
+        public static final TagKey<Block> MUSHROOM_STANDING_SIGNS = tag("mushroom_standing_signs");
         public static final TagKey<Block> MUSHROOM_TRAPDOORS = tag("mushroom_trapdoors");
+        public static final TagKey<Block> MUSHROOM_WALL_SIGNS = tag("mushroom_wall_signs");
 
         public static final TagKey<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible"); // only mod intern edible mushrooms
 
@@ -85,8 +86,6 @@ public class ModTags {
     }
 
     public static class OtherModBlocks {
-
-        public static final TagKey<Block> QUARK_LADDERS = tag("quark", "ladders");
         public static final TagKey<Block> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static TagKey<Block> tag(@Nonnull String mod, @Nonnull String name) {

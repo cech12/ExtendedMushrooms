@@ -17,7 +17,7 @@ import cech12.extendedmushrooms.world.gen.feature.MegaPoisonousMushroomFeature;
 import cech12.extendedmushrooms.world.gen.feature.MegaRedMushroomFeature;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -56,19 +56,19 @@ public class ModFeatures {
     public static final RegistryObject<Feature<HugeMushroomFeatureConfiguration>> BIG_SLIME_FUNGUS = FEATURES.register("big_slime_fungus", () -> new BigSlimeFungusFeature(HugeMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<HugeMushroomFeatureConfiguration>> BIG_HONEY_FUNGUS = FEATURES.register("big_honey_fungus", () -> new BigHoneyFungusFeature(HugeMushroomFeatureConfiguration.CODEC));
 
-    public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, ExtendedMushrooms.MOD_ID);
+    public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registries.CONFIGURED_FEATURE, ExtendedMushrooms.MOD_ID); //TODO registring does not work for now
     public static final RegistryObject<ConfiguredFeature<?, ?>> INFESTED_FLOWER_CONFIGURED = CONFIGURED_FEATURES.register("infested_flower", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32,PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.INFESTED_FLOWER.get()))))));
     public static final RegistryObject<ConfiguredFeature<?, ?>> INFESTED_GRASS_CONFIGURED = CONFIGURED_FEATURES.register("infested_grass", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.INFESTED_GRASS.get()))))));
-    public static final RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_BROWN_MUSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("mega_brown_mushroom", () -> new ConfiguredFeature<>(MEGA_BROWN_MUSHROOM.get(), BrownMushroom.getConfig()));
-    public static final RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_RED_MUSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("mega_red_mushroom", () -> new ConfiguredFeature<>(MEGA_RED_MUSHROOM.get(), RedMushroom.getConfig()));
-    public static final RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> BIG_GLOWSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("big_glowshroom", () -> new ConfiguredFeature<>(BIG_GLOWSHROOM.get(), Glowshroom.getConfig()));
-    public static final RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_GLOWSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("mega_glowshroom", () -> new ConfiguredFeature<>(MEGA_GLOWSHROOM.get(), Glowshroom.getConfig()));
-    public static final RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> BIG_POISONOUS_MUSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("big_poisonous_mushroom", () -> new ConfiguredFeature<>(BIG_POISONOUS_MUSHROOM.get(), PoisonousMushroom.getConfig()));
-    public static final RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> MEGA_POISONOUS_MUSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("mega_poisonous_mushroom", () -> new ConfiguredFeature<>(MEGA_POISONOUS_MUSHROOM.get(), PoisonousMushroom.getConfig()));
-    public static final RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> BIG_SLIME_FUNGUS_CONFIGURED = CONFIGURED_FEATURES.register("big_slime_fungus", () -> new ConfiguredFeature<>(BIG_SLIME_FUNGUS.get(), SlimeFungus.getConfig()));
-    public static final RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> BIG_HONEY_FUNGUS_CONFIGURED = CONFIGURED_FEATURES.register("big_honey_fungus", () -> new ConfiguredFeature<>(BIG_HONEY_FUNGUS.get(), HoneyFungus.getConfig()));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> MEGA_BROWN_MUSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("mega_brown_mushroom", () -> new ConfiguredFeature<>(MEGA_BROWN_MUSHROOM.get(), BrownMushroom.getConfig()));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> MEGA_RED_MUSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("mega_red_mushroom", () -> new ConfiguredFeature<>(MEGA_RED_MUSHROOM.get(), RedMushroom.getConfig()));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> BIG_GLOWSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("big_glowshroom", () -> new ConfiguredFeature<>(BIG_GLOWSHROOM.get(), Glowshroom.getConfig()));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> MEGA_GLOWSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("mega_glowshroom", () -> new ConfiguredFeature<>(MEGA_GLOWSHROOM.get(), Glowshroom.getConfig()));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> BIG_POISONOUS_MUSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("big_poisonous_mushroom", () -> new ConfiguredFeature<>(BIG_POISONOUS_MUSHROOM.get(), PoisonousMushroom.getConfig()));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> MEGA_POISONOUS_MUSHROOM_CONFIGURED = CONFIGURED_FEATURES.register("mega_poisonous_mushroom", () -> new ConfiguredFeature<>(MEGA_POISONOUS_MUSHROOM.get(), PoisonousMushroom.getConfig()));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> BIG_SLIME_FUNGUS_CONFIGURED = CONFIGURED_FEATURES.register("big_slime_fungus", () -> new ConfiguredFeature<>(BIG_SLIME_FUNGUS.get(), SlimeFungus.getConfig()));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> BIG_HONEY_FUNGUS_CONFIGURED = CONFIGURED_FEATURES.register("big_honey_fungus", () -> new ConfiguredFeature<>(BIG_HONEY_FUNGUS.get(), HoneyFungus.getConfig()));
 
-    public static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, ExtendedMushrooms.MOD_ID);
+    public static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registries.PLACED_FEATURE, ExtendedMushrooms.MOD_ID); //TODO registring does not work for now
     public static final RegistryObject<PlacedFeature> INFESTED_FLOWER_PLACED = PLACED_FEATURES.register("patch_infested_flower", () -> new PlacedFeature(Holder.direct(INFESTED_FLOWER_CONFIGURED.get()), List.copyOf(VegetationPlacements.worldSurfaceSquaredWithCount(4))));
     public static final RegistryObject<PlacedFeature> INFESTED_GRASS_PLACED = PLACED_FEATURES.register("patch_infested_grass", () -> new PlacedFeature(Holder.direct(INFESTED_GRASS_CONFIGURED.get()), List.copyOf(VegetationPlacements.worldSurfaceSquaredWithCount(2))));
     public static final Map<String, RegistryObject<PlacedFeature>> MUSHROOM_PLACED_FEATURES = new HashMap<>();
@@ -140,10 +140,10 @@ public class ModFeatures {
 
     private static class BigMushroom {
         String name;
-        RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> feature;
+        RegistryObject<ConfiguredFeature<?, ?>> feature;
         float spawnChance;
 
-        private BigMushroom(String name, RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> feature, float spawnChance) {
+        private BigMushroom(String name, RegistryObject<ConfiguredFeature<?, ?>> feature, float spawnChance) {
             this.name = name;
             this.feature = feature;
             this.spawnChance = spawnChance;

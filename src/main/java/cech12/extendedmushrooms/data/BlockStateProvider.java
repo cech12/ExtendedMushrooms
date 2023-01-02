@@ -3,7 +3,9 @@ package cech12.extendedmushrooms.data;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.init.ModBlocks;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
@@ -15,8 +17,6 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallSignBlock;
-import net.minecraft.world.level.block.WoodButtonBlock;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -34,8 +34,8 @@ import java.util.Map;
 
 public class BlockStateProvider extends net.minecraftforge.client.model.generators.BlockStateProvider {
 
-    public BlockStateProvider(DataGenerator generator, ExistingFileHelper fileHelper) {
-        super(generator, ExtendedMushrooms.MOD_ID, fileHelper);
+    public BlockStateProvider(PackOutput packOutput, ExistingFileHelper fileHelper) {
+        super(packOutput, ExtendedMushrooms.MOD_ID, fileHelper);
     }
 
     @Nonnull
@@ -75,7 +75,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
             }
             String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
 
-            if (block instanceof WoodButtonBlock) {
+            if (block instanceof ButtonBlock) {
                 // cap buttons, wood buttons
                 ModelFile button = models().getExistingFile(getBlockResourceLocation(name));
                 ModelFile pressed_button = models().getExistingFile(getBlockResourceLocation(name + "_pressed"));

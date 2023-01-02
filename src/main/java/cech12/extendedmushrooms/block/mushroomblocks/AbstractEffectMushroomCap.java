@@ -53,6 +53,7 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
         return 600 + random.nextInt(600);
     }
 
+    @Deprecated
     @Override
     public void randomTick(BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         if (!state.getValue(PERSISTENT) && this.shouldDropEffectCloud(state, worldIn, pos, random)) {
@@ -98,13 +99,13 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(@Nonnull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(PERSISTENT);
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
         return super.getStateForPlacement(context).setValue(PERSISTENT, true);
     }
 

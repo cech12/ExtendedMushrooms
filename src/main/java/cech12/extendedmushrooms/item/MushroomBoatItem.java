@@ -10,7 +10,6 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
@@ -36,7 +35,7 @@ public class MushroomBoatItem extends Item {
     private final boolean hasChest;
 
     public MushroomBoatItem(MushroomWoodType type, boolean hasChest) {
-        super((new Item.Properties()).stacksTo(1).tab(CreativeModeTab.TAB_TRANSPORTATION));
+        super((new Item.Properties()).stacksTo(1));
         this.type = type;
         this.hasChest = hasChest;
         DispenserBlock.registerBehavior(this, new DispenseBehavior(type));

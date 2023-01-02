@@ -4,43 +4,44 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.item.MushroomBoatItem;
-import net.minecraft.data.tags.BlockTagsProvider;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.SignItem;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
-import java.util.function.Predicate;
+import java.util.concurrent.CompletableFuture;
 
 public class ItemTagProvider extends ItemTagsProvider {
 
-    public ItemTagProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
-        super(generatorIn, blockTagProvider, ExtendedMushrooms.MOD_ID, existingFileHelper);
+    public ItemTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, TagsProvider<Block> tagsProvider, ExistingFileHelper existingFileHelper) {
+        super(packOutput, lookupProvider, tagsProvider, ExtendedMushrooms.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
-        Predicate<Item> extendedMushrooms = item -> ExtendedMushrooms.MOD_ID.equals(ForgeRegistries.ITEMS.getKey(item).getNamespace());
-
+    protected void addTags(@Nonnull HolderLookup.Provider lookupProvider) {
         //generate mod intern tags
-        tag(ModTags.Items.MUSHROOM_BOATS).add(registry.stream().filter(extendedMushrooms)
-                .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && !mushroomBoatItem.hasChest())
-                .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item)))
+        tag(ModTags.Items.MUSHROOM_BOATS).add(ModItems.ITEMS.getEntries().stream()
+                .filter(item -> item.get() instanceof MushroomBoatItem mushroomBoatItem && !mushroomBoatItem.hasChest())
+                .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item.get())))
                 .toArray(Item[]::new));
         copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD, ModTags.Items.MUSHROOM_BUTTONS_WOOD);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL, ModTags.Items.MUSHROOM_BUTTONS_WOOL);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS, ModTags.Items.MUSHROOM_BUTTONS);
         copy(ModTags.Blocks.MUSHROOM_CARPETS, ModTags.Items.MUSHROOM_CARPETS);
-        tag(ModTags.Items.MUSHROOM_CHEST_BOATS).add(registry.stream().filter(extendedMushrooms)
-                .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && mushroomBoatItem.hasChest())
-                .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item)))
+        tag(ModTags.Items.MUSHROOM_CHEST_BOATS).add(ModItems.ITEMS.getEntries().stream()
+                .filter(item -> item.get() instanceof MushroomBoatItem mushroomBoatItem && mushroomBoatItem.hasChest())
+                .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item.get())))
                 .toArray(Item[]::new));
         copy(ModTags.Blocks.MUSHROOM_DOORS, ModTags.Items.MUSHROOM_DOORS);
         copy(ModTags.Blocks.MUSHROOM_FENCE_GATES, ModTags.Items.MUSHROOM_FENCE_GATES);
@@ -49,7 +50,10 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOD);
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOL);
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES, ModTags.Items.MUSHROOM_PRESSURE_PLATES);
-        copy(ModTags.Blocks.MUSHROOM_SIGNS, ModTags.Items.MUSHROOM_SIGNS);
+        tag(ModTags.Items.MUSHROOM_SIGNS).add(ModItems.ITEMS.getEntries().stream()
+                .filter(item -> item.get() instanceof SignItem)
+                .sorted(Comparator.comparing(item -> ForgeRegistries.ITEMS.getKey(item.get())))
+                .toArray(Item[]::new));
         copy(ModTags.Blocks.MUSHROOM_SLABS, ModTags.Items.MUSHROOM_SLABS);
         copy(ModTags.Blocks.MUSHROOM_STAIRS, ModTags.Items.MUSHROOM_STAIRS);
         copy(ModTags.Blocks.MUSHROOM_TRAPDOORS, ModTags.Items.MUSHROOM_TRAPDOORS);
@@ -96,10 +100,10 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.WOOL_CARPETS, ItemTags.WOOL_CARPETS);
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.FENCES, ItemTags.FENCES);
+        copy(BlockTags.FENCE_GATES, ModTags.Items.MUSHROOM_FENCE_GATES);
         copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
-        copy(BlockTags.OVERWORLD_NATURAL_LOGS, ItemTags.OVERWORLD_NATURAL_LOGS);
         copy(BlockTags.PLANKS, ItemTags.PLANKS);
-        copy(BlockTags.SIGNS, ItemTags.SIGNS);
+        tag(ItemTags.SIGNS).addTag(ModTags.Items.MUSHROOM_SIGNS);
         copy(BlockTags.SLABS, ItemTags.SLABS);
         copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
         copy(BlockTags.STAIRS, ItemTags.STAIRS);

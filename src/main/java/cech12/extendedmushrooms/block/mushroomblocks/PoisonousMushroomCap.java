@@ -43,6 +43,7 @@ public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
         return super.isRandomlyTicking(state) || !state.getValue(TRIGGERED);
     }
 
+    @Deprecated
     @Override
     public void randomTick(BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
@@ -53,7 +54,7 @@ public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(@Nonnull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(TRIGGERED);
     }

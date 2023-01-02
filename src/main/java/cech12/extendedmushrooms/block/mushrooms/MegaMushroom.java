@@ -10,7 +10,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.level.SaplingGrowTreeEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -55,7 +54,7 @@ public abstract class MegaMushroom extends BigMushroom {
     }
 
     @Nonnull
-    protected abstract RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> getMegaMushroomFeature();
+    protected abstract RegistryObject<ConfiguredFeature<?, ?>> getMegaMushroomFeature();
 
     public static boolean canMegaMushroomSpawnAt(BlockState blockState, BlockGetter blockReader, BlockPos blockPos, int x, int z) {
         Block block = blockState.getBlock();

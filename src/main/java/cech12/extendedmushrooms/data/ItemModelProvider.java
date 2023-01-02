@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import net.minecraft.data.CachedOutput;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
@@ -10,7 +11,6 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
@@ -19,15 +19,15 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 public class ItemModelProvider extends net.minecraftforge.client.model.generators.ItemModelProvider {
 
     private static final ResourceLocation ITEM_GENERATED = new ResourceLocation("item/generated");
     private static final ResourceLocation SPAWN_EGG = new ResourceLocation("item/template_spawn_egg");
 
-    public ItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, ExtendedMushrooms.MOD_ID, existingFileHelper);
+    public ItemModelProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
+        super(packOutput, ExtendedMushrooms.MOD_ID, existingFileHelper);
     }
 
     private static ResourceLocation getResourceLocation(String path) {
@@ -89,8 +89,8 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
     }
 
     @Override
-    public void run(CachedOutput cache) throws IOException {
-        super.run(cache);
+    public CompletableFuture<?> run(CachedOutput cache) {
+        return super.run(cache);
     }
 
     @Override
