@@ -6,8 +6,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -52,7 +50,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
 
         private static TagKey<Block> tag(@Nonnull String name) {
-            return BlockTags.create(new ResourceLocation("forge", name));
+            return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
         }
     }
 
@@ -81,7 +79,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL = tag("mushroom_growing_blocks_lightlevel");
 
         private static TagKey<Block> tag(@Nonnull String name) {
-            return BlockTags.create(new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
+            return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
         }
     }
 
@@ -89,7 +87,7 @@ public class ModTags {
         public static final TagKey<Block> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static TagKey<Block> tag(@Nonnull String mod, @Nonnull String name) {
-            return BlockTags.create(new ResourceLocation(mod, name));
+            return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation(mod, name));
         }
     }
 
@@ -125,7 +123,7 @@ public class ModTags {
         public static final TagKey<Item> RAW_MEAT = tag("raw_meat");
 
         private static TagKey<Item> tag(@Nonnull String name) {
-            return ItemTags.create(new ResourceLocation("forge", name));
+            return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", name));
         }
     }
 
@@ -152,7 +150,7 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible"); // only mod intern edible mushrooms
 
         private static TagKey<Item> tag(@Nonnull String name) {
-            return ItemTags.create(new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
+            return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
         }
 
     }
@@ -162,7 +160,7 @@ public class ModTags {
         public static final TagKey<Item> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
 
         private static TagKey<Item> tag(@Nonnull String mod, @Nonnull String name) {
-            return ItemTags.create(new ResourceLocation(mod, name));
+            return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(mod, name));
         }
     }
 

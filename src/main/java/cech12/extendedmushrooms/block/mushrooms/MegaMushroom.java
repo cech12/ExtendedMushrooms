@@ -1,6 +1,9 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.MushroomUtils;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,9 +16,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.level.SaplingGrowTreeEvent;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public abstract class MegaMushroom extends BigMushroom {
 
@@ -27,10 +30,14 @@ public abstract class MegaMushroom extends BigMushroom {
         if (!MushroomUtils.isValidMushroomPosition(world, blockPos)) {
             return false;
         }
+        Optional<? extends Holder<ConfiguredFeature<?, ?>>> optional = world.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(this.getMegaMushroomFeature());
+        if (optional.isEmpty()) {
+            return false;
+        }
         for(int x = 0; x >= -1; --x) {
             for(int z = 0; z >= -1; --z) {
                 if (canMegaMushroomSpawnAt(blockState, world, blockPos, x, z)) {
-                    SaplingGrowTreeEvent event = ForgeEventFactory.blockGrowFeature(world, random, blockPos, this.getMegaMushroomFeature().getHolder().get());
+                    SaplingGrowTreeEvent event = ForgeEventFactory.blockGrowFeature(world, random, blockPos, optional.get());
                     if (event.getResult().equals(Event.Result.DENY) || event.getFeature() == null) continue;
                     ConfiguredFeature<?, ?> feature = event.getFeature().value();
                     BlockState lvt_9_1_ = Blocks.AIR.defaultBlockState();
@@ -54,7 +61,7 @@ public abstract class MegaMushroom extends BigMushroom {
     }
 
     @Nonnull
-    protected abstract RegistryObject<ConfiguredFeature<?, ?>> getMegaMushroomFeature();
+    protected abstract ResourceKey<ConfiguredFeature<?, ?>> getMegaMushroomFeature();
 
     public static boolean canMegaMushroomSpawnAt(BlockState blockState, BlockGetter blockReader, BlockPos blockPos, int x, int z) {
         Block block = blockState.getBlock();

@@ -265,7 +265,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.HONEY_FUNGUS_CAP_CARPET.get().asItem(),
                 ModBlocks.HONEY_FUNGUS_CAP_PRESSURE_PLATE.get().asItem());
         //honey blob recipes
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.HONEY_BOTTLE, 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.HONEY_BOTTLE, 1)
                 .requires(Items.GLASS_BOTTLE)
                 .requires(ModItems.HONEY_BLOB.get(), 3)
                 .unlockedBy("has_honey_blob", has(ModItems.HONEY_BLOB.get()))
@@ -307,14 +307,14 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                                      Item chestBoat, Item button, Item door, Item fence, Item fenceGate, Item planks,
                                      Item pressurePlate, Item sign, Item slab, Item stairs, Item trapdoor) {
         String directory = "mushroom_wood/" + name + "/";
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, boat)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, boat)
                 .define('#', planks)
                 .pattern("# #")
                 .pattern("###")
                 .group("boat")
                 .unlockedBy("in_water", insideOf(Blocks.WATER))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(boat)));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, chestBoat)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, chestBoat)
                 .requires(Tags.Items.CHESTS_WOODEN)
                 .requires(boat)
                 .group("chest_boat")
@@ -333,7 +333,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("wooden_door")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(door)));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, fence, 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, fence, 3)
                 .define('#', Tags.Items.RODS_WOODEN)
                 .define('W', planks)
                 .pattern("W#W")
@@ -360,7 +360,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("wooden_pressure_plate")
                 .unlockedBy("has_planks", has(planks))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(pressurePlate)));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, sign, 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, sign, 3)
                 .define('#', planks)
                 .define('|', Tags.Items.RODS_WOODEN)
                 .pattern("###")
@@ -436,7 +436,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     private void mushroomCapRecipes(Consumer<FinishedRecipe> consumer, String name, TagKey<Item> caps, Item banner,
                                     Item bed, Item button, Item carpet, Item pressure_plate) {
         String directory = "mushroom_cap/" + name + "/";
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, banner)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, banner)
                 .define('#', caps)
                 .define('|', Tags.Items.RODS_WOODEN)
                 .pattern("###")
@@ -445,7 +445,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("banner")
                 .unlockedBy("has_cap", has(caps))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(banner).getPath()));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, bed)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, bed)
                 .define('#', caps)
                 .define('W', ItemTags.PLANKS)
                 .pattern("###")
@@ -458,7 +458,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("wool_buttons")
                 .unlockedBy("has_cap", has(caps))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(button)));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, carpet, 3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 3)
                 .define('#', caps)
                 .pattern("##")
                 .group("carpet")

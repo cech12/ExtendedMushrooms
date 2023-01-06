@@ -1,8 +1,8 @@
 package cech12.extendedmushrooms.data;
 
-import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.FairyRingBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.MushroomStrippedStemBlock;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModItems;
 import com.ibm.icu.impl.Pair;
@@ -10,12 +10,13 @@ import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.Items;
@@ -43,53 +44,23 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 public class BlockLootProvider implements DataProvider {
-    private final DataGenerator generator;
-    private final Map<Block, Function<Block, LootTable.Builder>> functionTable = new HashMap<>();
+    private final PackOutput packOutput;
+    private final CompletableFuture<HolderLookup.Provider> lookupProvider;
 
-    public BlockLootProvider(final DataGenerator generator) {
-        this.generator = generator;
-
-        for (Block block : ForgeRegistries.BLOCKS) {
-            if (!ExtendedMushrooms.MOD_ID.equals(ForgeRegistries.BLOCKS.getKey(block).getNamespace())) {
-                continue;
-            }
-
-            if (block instanceof SlabBlock) {
-                this.functionTable.put(block, BlockLootProvider::dropSlab);
-            } else if (block instanceof DoorBlock) {
-                this.functionTable.put(block, BlockLootProvider::dropDoor);
-            } else if (block instanceof MushroomStemBlock) {
-                this.functionTable.put(block, BlockLootProvider::dropStem);
-            } else if (block instanceof FairyRingBlock) {
-                this.functionTable.put(block, BlockLootProvider::dropNothing);
-            }
-        }
-
-        //caps have other loot
-        this.functionTable.put(ModBlocks.GLOWSHROOM_CAP.get(), block -> dropCap(block, ModBlocks.GLOWSHROOM.get(),
-                Pair.of(ModItems.GLOWSTONE_CRUMBS.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-        this.functionTable.put(ModBlocks.POISONOUS_MUSHROOM_CAP.get(), block -> dropCap(block, ModBlocks.POISONOUS_MUSHROOM.get()));
-        this.functionTable.put(ModBlocks.SLIME_FUNGUS_CAP.get(), block -> dropCap(block, ModBlocks.SLIME_FUNGUS.get(),
-                Pair.of(ModItems.SLIME_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-        this.functionTable.put(ModBlocks.HONEY_FUNGUS_CAP.get(), block -> dropCap(block, ModBlocks.HONEY_FUNGUS.get(),
-                Pair.of(ModItems.HONEY_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F}),
-                Pair.of(ModItems.HONEYCOMB_SHRED.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-
-        //only with shears
-        this.functionTable.put(ModBlocks.INFESTED_GRASS.get(), BlockLootProvider::dropOnlyWithShears);
+    public BlockLootProvider(final PackOutput packOutput, final CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        this.packOutput = packOutput;
+        this.lookupProvider = lookupProvider;
     }
 
     private static Path getPath(Path root, ResourceLocation id) {
@@ -180,33 +151,47 @@ public class BlockLootProvider implements DataProvider {
         return LootTable.lootTable().withPool(LootPool.lootPool().name("main").setRolls(ConstantValue.exactly(1)).add(entry));
     }
 
+    @Nonnull
     @Override
     public CompletableFuture<?> run(@Nonnull final CachedOutput cache) {
-        Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
-        List<CompletableFuture<?>> list = new ArrayList<>();
+        return this.lookupProvider.thenCompose(provider -> {
+            Map<RegistryObject<Block>, Function<Block, LootTable.Builder>> tables = new HashMap<>();
 
-        for (Block block : ForgeRegistries.BLOCKS) {
-            if (!ExtendedMushrooms.MOD_ID.equals(ForgeRegistries.BLOCKS.getKey(block).getNamespace())) {
-                continue;
+            for (RegistryObject<Block> block : ModBlocks.BLOCKS.getEntries()) {
+                if (block.get() instanceof SlabBlock) {
+                    tables.put(block, BlockLootProvider::dropSlab);
+                } else if (block.get() instanceof DoorBlock) {
+                    tables.put(block, BlockLootProvider::dropDoor);
+                } else if (block.get() instanceof MushroomStemBlock) {
+                    tables.put(block, BlockLootProvider::dropStem);
+                } else if (block.get() instanceof MushroomStrippedStemBlock) {
+                    tables.put(block, BlockLootProvider::dropStem);
+                } else if (block.get() instanceof FairyRingBlock) {
+                    tables.put(block, BlockLootProvider::dropNothing);
+                } else if (!(block.get() instanceof FlowerPotBlock)) {
+                    //ignore potted flowers
+                    tables.put(block, BlockLootProvider::dropItself);
+                }
             }
-            if (block instanceof FlowerPotBlock) {
-                //ignore potted flowers
-                continue;
-            }
-            Function<Block, LootTable.Builder> func = functionTable.getOrDefault(block, BlockLootProvider::dropItself);
-            tables.put(ForgeRegistries.BLOCKS.getKey(block), func.apply(block));
-        }
 
-        for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
-            Path path = getPath(generator.getPackOutput().getOutputFolder(), e.getKey());
-            DataProvider.saveStable(cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.BLOCK).build()), path);
-        }
+            //caps have other loot
+            tables.put(ModBlocks.GLOWSHROOM_CAP, block -> dropCap(block, ModBlocks.GLOWSHROOM.get(),
+                    Pair.of(ModItems.GLOWSTONE_CRUMBS.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
+            tables.put(ModBlocks.POISONOUS_MUSHROOM_CAP, block -> dropCap(block, ModBlocks.POISONOUS_MUSHROOM.get()));
+            tables.put(ModBlocks.SLIME_FUNGUS_CAP, block -> dropCap(block, ModBlocks.SLIME_FUNGUS.get(),
+                    Pair.of(ModItems.SLIME_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
+            tables.put(ModBlocks.HONEY_FUNGUS_CAP, block -> dropCap(block, ModBlocks.HONEY_FUNGUS.get(),
+                    Pair.of(ModItems.HONEY_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F}),
+                    Pair.of(ModItems.HONEYCOMB_SHRED.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
 
-        return null;
-        //TODO return a correct value
-        //return CompletableFuture.allOf(list.toArray((p_253414_) -> {
-        //    return new CompletableFuture[p_253414_];
-        //}));
+            //only with shears
+            tables.put(ModBlocks.INFESTED_GRASS, BlockLootProvider::dropOnlyWithShears);
+
+            return CompletableFuture.allOf(tables.entrySet().stream().map(entry -> {
+                Path path = getPath(this.packOutput.getOutputFolder(), entry.getKey().getId());
+                return DataProvider.saveStable(cache, LootTables.serialize(entry.getValue().apply(entry.getKey().get()).setParamSet(LootContextParamSets.BLOCK).build()), path);
+            }).toArray(CompletableFuture[]::new));
+        });
     }
 
     @Nonnull

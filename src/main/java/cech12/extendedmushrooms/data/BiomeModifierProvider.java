@@ -40,6 +40,7 @@ public class BiomeModifierProvider {
         HolderSet<Biome> isMushroomTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), Tags.Biomes.IS_MUSHROOM);
         HolderSet<Biome> hasMushroomsTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
 
+        /* TODO
         HolderSet<PlacedFeature> infestedFlowerFeature = HolderSet.direct(placedFeature(ops, ModFeatures.INFESTED_FLOWER_PLACED.getId()));
         HolderSet<PlacedFeature> infestedGrassFeature = HolderSet.direct(placedFeature(ops, ModFeatures.INFESTED_GRASS_PLACED.getId()));
 
@@ -91,6 +92,7 @@ public class BiomeModifierProvider {
                 new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isMushroomTag, bigMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
         modifierMap.put(prefix("mega_mushroom_addition"),
                 new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isMushroomTag, megaMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
+         */
 
         event.getGenerator().addProvider(event.includeServer(), new JsonCodecProvider<>(event.getGenerator().getPackOutput(), event.getExistingFileHelper(), ExtendedMushrooms.MOD_ID,
                 ops, PackType.SERVER_DATA, "biome_modifier", BiomeModifier.DIRECT_CODEC, modifierMap));

@@ -56,6 +56,7 @@ public class ModFeatures {
     public static final RegistryObject<Feature<HugeMushroomFeatureConfiguration>> BIG_SLIME_FUNGUS = FEATURES.register("big_slime_fungus", () -> new BigSlimeFungusFeature(HugeMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<HugeMushroomFeatureConfiguration>> BIG_HONEY_FUNGUS = FEATURES.register("big_honey_fungus", () -> new BigHoneyFungusFeature(HugeMushroomFeatureConfiguration.CODEC));
 
+    /*
     public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registries.CONFIGURED_FEATURE, ExtendedMushrooms.MOD_ID); //TODO registring does not work for now
     public static final RegistryObject<ConfiguredFeature<?, ?>> INFESTED_FLOWER_CONFIGURED = CONFIGURED_FEATURES.register("infested_flower", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32,PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.INFESTED_FLOWER.get()))))));
     public static final RegistryObject<ConfiguredFeature<?, ?>> INFESTED_GRASS_CONFIGURED = CONFIGURED_FEATURES.register("infested_grass", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simpleRandomPatchConfiguration(32, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.INFESTED_GRASS.get()))))));
@@ -74,6 +75,7 @@ public class ModFeatures {
     public static final Map<String, RegistryObject<PlacedFeature>> MUSHROOM_PLACED_FEATURES = new HashMap<>();
     public static final Map<String, RegistryObject<PlacedFeature>> BIG_MUSHROOM_PLACED_FEATURES = new HashMap<>();
     public static final Map<String, RegistryObject<PlacedFeature>> MEGA_MUSHROOM_PLACED_FEATURES = new HashMap<>();
+    */
 
     private static final List<Mushroom> mushrooms = new LinkedList<>();
     private static final List<BigMushroom> bigMushrooms = new LinkedList<>();
@@ -82,6 +84,7 @@ public class ModFeatures {
     static {
         mushrooms.add(new Mushroom("glowshroom", ModBlocks.GLOWSHROOM, 0.4F));
         mushrooms.add(new Mushroom("poisonous_mushroom", ModBlocks.POISONOUS_MUSHROOM, 0.5F));
+        /* TODO
         bigMushrooms.add(new BigMushroom("big_glowshroom", BIG_GLOWSHROOM_CONFIGURED, 0.125F));
         bigMushrooms.add(new BigMushroom("big_poisonous_mushroom", BIG_POISONOUS_MUSHROOM_CONFIGURED, 0.1F));
         megaMushrooms.add(new BigMushroom("mega_red_mushroom", MEGA_RED_MUSHROOM_CONFIGURED, 0.2F));
@@ -106,6 +109,7 @@ public class ModFeatures {
             MEGA_MUSHROOM_PLACED_FEATURES.put("mushroom_island_" + megaMushroom.name, PLACED_FEATURES.register("mushroom_island_" + megaMushroom.name, () -> new PlacedFeature(Holder.direct(megaMushroom.feature.get()), List.copyOf(VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, megaMushroom.spawnChance, 1))))));
             //register(megaMushroom.name + "_field", megaMushroom.config.decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, megaMushroom.spawnChance, 1))));
         }
+         */
     }
 
     private static List<PlacementModifier> getMushroomPlacement(int chance) {

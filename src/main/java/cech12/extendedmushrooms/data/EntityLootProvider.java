@@ -2,9 +2,10 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -24,15 +25,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 public class EntityLootProvider implements DataProvider {
-    private final DataGenerator generator;
+    private final PackOutput packOutput;
+    private final CompletableFuture<HolderLookup.Provider> lookupProvider;
     private final Map<MushroomType, Function<MushroomType, LootTable.Builder>> functionTable = new HashMap<>();
 
-    public EntityLootProvider(final DataGenerator generator) {
-        this.generator = generator;
-
-        for (MushroomType mushroomType : MushroomType.values()) {
-            functionTable.put(mushroomType, EntityLootProvider::createSheepTable);
-        }
+    public EntityLootProvider(final PackOutput packOutput, final CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        this.packOutput = packOutput;
+        this.lookupProvider = lookupProvider;
     }
 
     private static Path getSheepPath(Path root, ResourceLocation id) {
@@ -45,20 +44,21 @@ public class EntityLootProvider implements DataProvider {
                 .setRolls(ConstantValue.exactly(1.0F)).add(LootTableReference.lootTableReference(EntityType.SHEEP.getDefaultLootTable())));
     }
 
+    @Nonnull
     @Override
     public CompletableFuture<?> run(@Nonnull final CachedOutput cache) {
-        Map<ResourceLocation, LootTable.Builder> tables = new HashMap<>();
+        return this.lookupProvider.thenCompose(provider -> {
+            Map<MushroomType, Function<MushroomType, LootTable.Builder>> tables = new HashMap<>();
 
-        for (MushroomType mushroomType : MushroomType.values()) {
-            Function<MushroomType, LootTable.Builder> func = functionTable.get(mushroomType);
-            tables.put(ForgeRegistries.ITEMS.getKey(mushroomType.getItem()), func.apply(mushroomType));
-        }
+            for (MushroomType mushroomType : MushroomType.values()) {
+                tables.put(mushroomType, EntityLootProvider::createSheepTable);
+            }
 
-        for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
-            Path path = getSheepPath(generator.getPackOutput().getOutputFolder(), e.getKey());
-            DataProvider.saveStable(cache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.ENTITY).build()), path);
-        }
-        return null; //TODO return a correct value
+            return CompletableFuture.allOf(tables.entrySet().stream().map((entry) -> {
+                Path path = getSheepPath(packOutput.getOutputFolder(), ForgeRegistries.ITEMS.getKey(entry.getKey().getItem()));
+                return DataProvider.saveStable(cache, LootTables.serialize(entry.getValue().apply(entry.getKey()).setParamSet(LootContextParamSets.ENTITY).build()), path);
+            }).toArray(CompletableFuture[]::new));
+        });
     }
 
     @Nonnull

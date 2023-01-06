@@ -1,11 +1,12 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.init.ModBlocks;
-import cech12.extendedmushrooms.init.ModFeatures;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 
@@ -18,8 +19,9 @@ public class SlimeFungus extends BigMushroom {
 
     @Nonnull
     @Override
-    public RegistryObject<ConfiguredFeature<?, ?>> getBigMushroomFeature() {
-        return ModFeatures.BIG_SLIME_FUNGUS_CONFIGURED;
+    public ResourceKey<ConfiguredFeature<?, ?>> getBigMushroomFeature() {
+        //TODO return ModFeatures.BIG_SLIME_FUNGUS_CONFIGURED;
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation("huge_brown_mushroom"));
     }
 
 }

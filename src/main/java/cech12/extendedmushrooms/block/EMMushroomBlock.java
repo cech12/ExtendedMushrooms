@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.block;
 
 import cech12.extendedmushrooms.block.mushrooms.BigMushroom;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.MushroomBlock;
@@ -14,7 +15,7 @@ public class EMMushroomBlock extends MushroomBlock {
     BigMushroom bigMushroom;
 
     public EMMushroomBlock(BigMushroom bigMushroom, Properties properties) {
-        super(properties, bigMushroom.getBigMushroomFeature().getKey());
+        super(properties, bigMushroom.getBigMushroomFeature());
         this.bigMushroom = bigMushroom;
     }
 
