@@ -6,7 +6,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.19.3-3.1.0.0] - 2023-??-??
 ### Changed
 - Update to Forge 1.19.3-44.0.41
-- Temporary deactivation of JEI until it is ported to 1.19.3
 
 ## [1.19.2-3.0.1.4] - 2022-12-10
 ### Fixed

@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms.client.jei;
 
-/*
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.init.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -59,4 +58,3 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
     }
 
 }
- */
