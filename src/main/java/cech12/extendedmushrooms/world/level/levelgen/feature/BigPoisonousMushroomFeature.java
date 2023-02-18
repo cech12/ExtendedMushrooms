@@ -1,15 +1,15 @@
-package cech12.extendedmushrooms.world.gen.feature;
+package cech12.extendedmushrooms.world.level.levelgen.feature;
 
+import cech12.extendedmushrooms.world.level.levelgen.feature.configurations.ExtendedMushroomFeatureConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 public class BigPoisonousMushroomFeature extends SingleBigMushroomFeature {
 
-    public BigPoisonousMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
+    public BigPoisonousMushroomFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -27,7 +27,7 @@ public class BigPoisonousMushroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config) {
         for (int x = -capRadius; x <= capRadius; ++x) {
             for (int z = -capRadius; z <= capRadius; ++z) {
                 mutableBlockPos.set(blockPos).move(x, size, z);
@@ -48,7 +48,7 @@ public class BigPoisonousMushroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config) {
         //top layer: "radius-1" blocks in each direction
         int topRadius = capRadius - 1;
         for(int x = -topRadius; x <= topRadius; ++x) {

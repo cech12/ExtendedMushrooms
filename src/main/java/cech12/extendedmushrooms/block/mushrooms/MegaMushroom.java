@@ -61,7 +61,7 @@ public abstract class MegaMushroom extends BigMushroom {
     }
 
     @Nonnull
-    protected abstract ResourceKey<ConfiguredFeature<?, ?>> getMegaMushroomFeature();
+    public abstract ResourceKey<ConfiguredFeature<?, ?>> getMegaMushroomFeature();
 
     public static boolean canMegaMushroomSpawnAt(BlockState blockState, BlockGetter blockReader, BlockPos blockPos, int x, int z) {
         Block block = blockState.getBlock();

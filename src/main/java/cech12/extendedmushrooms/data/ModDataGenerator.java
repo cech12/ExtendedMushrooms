@@ -29,6 +29,7 @@ public class ModDataGenerator {
             evt.getGenerator().addProvider(true, new ItemModelProvider(packOutput, existingFileHelper));
             evt.getGenerator().addProvider(true, new ItemTagProvider(packOutput, lookupProvider, blockTags, existingFileHelper));
             evt.getGenerator().addProvider(true, new RecipeProvider(packOutput));
+            evt.getGenerator().addProvider(true, new ConfiguredFeatureProvider(packOutput, lookupProvider));
             evt.getGenerator().addProvider(true, new BiomeTagProvider(packOutput, lookupProvider, existingFileHelper));
             //TODO BiomeModifierProvider.generateBiomeModifiers(evt);
         }

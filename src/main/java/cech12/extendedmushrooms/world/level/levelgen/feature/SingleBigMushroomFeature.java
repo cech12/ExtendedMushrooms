@@ -1,16 +1,16 @@
-package cech12.extendedmushrooms.world.gen.feature;
+package cech12.extendedmushrooms.world.level.levelgen.feature;
 
+import cech12.extendedmushrooms.world.level.levelgen.feature.configurations.ExtendedMushroomFeatureConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
 
-    public SingleBigMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
+    public SingleBigMushroomFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -25,18 +25,18 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
         return i;
     }
 
-    protected boolean canGrow(LevelAccessor world, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected boolean canGrow(LevelAccessor world, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config) {
         return isInWorldBounds(world, blockPos, size)
                 && this.hasValidGround(world, blockPos)
                 && canPlaceTrunk(world, blockPos, size, mutableBlockPos, config)
                 && canPlaceCap(world, blockPos, size, capRadius, mutableBlockPos, config);
     }
 
-    protected abstract boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config);
+    protected abstract boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config);
 
-    protected abstract void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config);
+    protected abstract void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int capRadius, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config);
 
-    protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, int size, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, int size, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config) {
         for (int i = 0; i < size; ++i) {
             mutableBlockPos.set(blockPos).move(Direction.UP, i);
             if (!isReplaceable(level, mutableBlockPos, true)) {
@@ -46,7 +46,7 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
         return true;
     }
 
-    protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos blockPos, ExtendedMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
         for(int i = 0; i < size; ++i) {
             mutableBlockPos.set(blockPos).move(Direction.UP, i);
             placeTrunkBlockIfPossible(level, random, config, mutableBlockPos);
@@ -54,7 +54,7 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<HugeMushroomFeatureConfiguration> context) {
+    public boolean place(FeaturePlaceContext<ExtendedMushroomFeatureConfiguration> context) {
         int size = this.getSize(context.random());
         int capRadius = this.getCapRadius(context.random());
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();

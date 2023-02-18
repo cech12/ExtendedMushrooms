@@ -1,12 +1,12 @@
-package cech12.extendedmushrooms.world.gen.feature;
+package cech12.extendedmushrooms.world.level.levelgen.feature;
 
+import cech12.extendedmushrooms.world.level.levelgen.feature.configurations.ExtendedMushroomFeatureConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class SplitBigMushroomFeature extends BigMushroomFeature {
 
-    public SplitBigMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
+    public SplitBigMushroomFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -26,17 +26,17 @@ public abstract class SplitBigMushroomFeature extends BigMushroomFeature {
     protected abstract int getSmallSize(RandomSource random);
     protected abstract int getSmallCapRadius(RandomSource random);
 
-    protected abstract boolean canPlaceCap(LevelAccessor level, BlockPos center, HugeMushroomFeatureConfiguration config, int capRadius, BlockPos.MutableBlockPos mutableBlockPos);
+    protected abstract boolean canPlaceCap(LevelAccessor level, BlockPos center, ExtendedMushroomFeatureConfiguration config, int capRadius, BlockPos.MutableBlockPos mutableBlockPos);
 
-    protected abstract void placeCap(LevelAccessor level, RandomSource random, BlockPos center, HugeMushroomFeatureConfiguration config, int capRadius, BlockPos.MutableBlockPos mutableBlockPos);
+    protected abstract void placeCap(LevelAccessor level, RandomSource random, BlockPos center, ExtendedMushroomFeatureConfiguration config, int capRadius, BlockPos.MutableBlockPos mutableBlockPos);
 
-    protected boolean canPlaceCaps(LevelAccessor level, HugeMushroomFeatureConfiguration config, Pair<BlockPos, Integer>[] capPairs, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected boolean canPlaceCaps(LevelAccessor level, ExtendedMushroomFeatureConfiguration config, Pair<BlockPos, Integer>[] capPairs, BlockPos.MutableBlockPos mutableBlockPos) {
         AtomicBoolean canPlaceCaps = new AtomicBoolean(true);
         Arrays.stream(capPairs).forEach(pair -> canPlaceCaps.set(canPlaceCaps.get() && canPlaceCap(level, pair.getLeft(), config, pair.getRight(), mutableBlockPos)));
         return canPlaceCaps.get();
     }
 
-    protected void placeCaps(LevelAccessor level, RandomSource random, HugeMushroomFeatureConfiguration config, Pair<BlockPos, Integer>[] capPairs, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected void placeCaps(LevelAccessor level, RandomSource random, ExtendedMushroomFeatureConfiguration config, Pair<BlockPos, Integer>[] capPairs, BlockPos.MutableBlockPos mutableBlockPos) {
         Arrays.stream(capPairs).forEach(pair -> placeCap(level, random, pair.getLeft(), config, pair.getRight(), mutableBlockPos));
     }
 
@@ -80,13 +80,13 @@ public abstract class SplitBigMushroomFeature extends BigMushroomFeature {
         return new BlockPos.MutableBlockPos().set(mushroomPos).move(Direction.UP, trunkTriple.getMiddle()).move(trunkTriple.getLeft(), trunkTriple.getRight()).immutable();
     }
 
-    protected boolean canPlaceTrunks(LevelAccessor level, BlockPos blockPos, HugeMushroomFeatureConfiguration config, Triple<Direction, Integer, Integer>[] directions, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected boolean canPlaceTrunks(LevelAccessor level, BlockPos blockPos, ExtendedMushroomFeatureConfiguration config, Triple<Direction, Integer, Integer>[] directions, BlockPos.MutableBlockPos mutableBlockPos) {
         AtomicBoolean canPlaceTrunks = new AtomicBoolean(true);
         Arrays.stream(directions).forEach(triple -> canPlaceTrunks.set(canPlaceTrunks.get() && canPlaceTrunk(level, blockPos, config, triple.getLeft(), triple.getMiddle(), triple.getRight(), mutableBlockPos)));
         return canPlaceTrunks.get();
     }
 
-    protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, HugeMushroomFeatureConfiguration config, Direction direction, int size, int distanceToCenter, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, ExtendedMushroomFeatureConfiguration config, Direction direction, int size, int distanceToCenter, BlockPos.MutableBlockPos mutableBlockPos) {
         mutableBlockPos.set(blockPos);
         for (int i = 0; i < size; ++i) {
             if (i > 0) {
@@ -102,11 +102,11 @@ public abstract class SplitBigMushroomFeature extends BigMushroomFeature {
         return true;
     }
 
-    protected void placeTrunks(LevelAccessor level, RandomSource random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, Triple<Direction, Integer, Integer>[] directions, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected void placeTrunks(LevelAccessor level, RandomSource random, BlockPos blockPos, ExtendedMushroomFeatureConfiguration config, Triple<Direction, Integer, Integer>[] directions, BlockPos.MutableBlockPos mutableBlockPos) {
         Arrays.stream(directions).forEach(triple -> placeTrunk(level, random, blockPos, config, triple.getLeft(), triple.getMiddle(), triple.getRight(), mutableBlockPos));
     }
 
-    protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, Direction direction, int size, int distanceToCenter, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos blockPos, ExtendedMushroomFeatureConfiguration config, Direction direction, int size, int distanceToCenter, BlockPos.MutableBlockPos mutableBlockPos) {
         mutableBlockPos.set(blockPos);
         for (int i = 0; i < size; ++i) {
             boolean up = i == 0;
@@ -124,7 +124,7 @@ public abstract class SplitBigMushroomFeature extends BigMushroomFeature {
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<HugeMushroomFeatureConfiguration> context) {
+    public boolean place(FeaturePlaceContext<ExtendedMushroomFeatureConfiguration> context) {
         Direction[] directions = this.getDirections(context.random());
         Triple<Direction, Integer, Integer>[] trunkTriples = this.getTrunkTriples(directions, context.random());
         Pair<BlockPos, Integer>[] capPairs = this.getCapPairs(context.origin(), trunkTriples, context.random());

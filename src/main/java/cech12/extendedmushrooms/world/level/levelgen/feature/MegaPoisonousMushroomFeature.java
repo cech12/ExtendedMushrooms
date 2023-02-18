@@ -1,15 +1,15 @@
-package cech12.extendedmushrooms.world.gen.feature;
+package cech12.extendedmushrooms.world.level.levelgen.feature;
 
+import cech12.extendedmushrooms.world.level.levelgen.feature.configurations.ExtendedMushroomFeatureConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 /**
  * Like MegaRedMushroomFeature, only size and cap height is different
  */
 public class MegaPoisonousMushroomFeature extends MegaRedMushroomFeature {
 
-    public MegaPoisonousMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
+    public MegaPoisonousMushroomFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 

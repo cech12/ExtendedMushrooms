@@ -1,0 +1,17 @@
+{
+  "type": "extendedmushrooms:big_slime_fungus",
+  "config": {
+    "cap_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "extendedmushrooms:slime_fungus_cap"
+      }
+    },
+    "stem_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:mushroom_stem"
+      }
+    }
+  }
+}

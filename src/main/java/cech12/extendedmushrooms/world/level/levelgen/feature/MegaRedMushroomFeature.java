@@ -1,17 +1,17 @@
-package cech12.extendedmushrooms.world.gen.feature;
+package cech12.extendedmushrooms.world.level.levelgen.feature;
 
+import cech12.extendedmushrooms.world.level.levelgen.feature.configurations.ExtendedMushroomFeatureConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MegaRedMushroomFeature extends MegaMushroomFeature {
 
-    public MegaRedMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
+    public MegaRedMushroomFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -28,7 +28,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected boolean canPlaceCap(LevelAccessor level, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);
@@ -41,7 +41,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
     }
 
     @Override
-    protected void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected void placeCap(LevelAccessor level, RandomSource random, BlockPos blockPos, int size, int radius, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config) {
         int capCenterHeight = (int) (size * (1.0F - getCapHeightFactor()));
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);

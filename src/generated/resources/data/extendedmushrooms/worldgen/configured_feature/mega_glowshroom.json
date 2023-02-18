@@ -1,0 +1,17 @@
+{
+  "type": "extendedmushrooms:mega_glowshroom",
+  "config": {
+    "cap_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "extendedmushrooms:glowshroom_cap"
+      }
+    },
+    "stem_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "extendedmushrooms:glowshroom_stem"
+      }
+    }
+  }
+}

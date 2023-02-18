@@ -1,14 +1,14 @@
-package cech12.extendedmushrooms.world.gen.feature;
+package cech12.extendedmushrooms.world.level.levelgen.feature;
 
+import cech12.extendedmushrooms.world.level.levelgen.feature.configurations.ExtendedMushroomFeatureConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 
 public abstract class MegaMushroomFeature extends SingleBigMushroomFeature {
 
-    public MegaMushroomFeature(Codec<HugeMushroomFeatureConfiguration> config) {
+    public MegaMushroomFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 
@@ -35,7 +35,7 @@ public abstract class MegaMushroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, int size, BlockPos.MutableBlockPos mutableBlockPos, HugeMushroomFeatureConfiguration config) {
+    protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, int size, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config) {
         for (int x = 0; x < 2; x++) {
             for (int z = 0; z < 2; z++) {
                 if (!super.canPlaceTrunk(level, mutableBlockPos.set(blockPos).move(x, 0, z), size, mutableBlockPos, config)) {
@@ -47,13 +47,13 @@ public abstract class MegaMushroomFeature extends SingleBigMushroomFeature {
     }
 
     @Override
-    protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos blockPos, HugeMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
+    protected void placeTrunk(LevelAccessor level, RandomSource random, BlockPos blockPos, ExtendedMushroomFeatureConfiguration config, int size, BlockPos.MutableBlockPos mutableBlockPos) {
         for(int y = 0; y < size; ++y) {
             for (int x = 0; x < 2; x++) {
                 for (int z = 0; z < 2; z++) {
                     mutableBlockPos.set(blockPos).move(x, y, z);
                     if (isReplaceable(level, mutableBlockPos, true)) {
-                        this.setBlock(level, mutableBlockPos, config.stemProvider.getState(random, blockPos));
+                        this.setBlock(level, mutableBlockPos, config.stemProvider().getState(random, blockPos));
                     }
                 }
             }

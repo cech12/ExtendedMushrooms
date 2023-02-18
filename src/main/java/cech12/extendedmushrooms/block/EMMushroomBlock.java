@@ -23,4 +23,8 @@ public class EMMushroomBlock extends MushroomBlock {
     public void performBonemeal(@Nonnull ServerLevel world, @Nonnull RandomSource random, @Nonnull BlockPos blockPos, @Nonnull BlockState state) {
         this.bigMushroom.growMushroom(world, world.getChunkSource().getGenerator(), blockPos, state, random);
     }
+
+    public BigMushroom getBigMushroom() {
+        return bigMushroom;
+    }
 }

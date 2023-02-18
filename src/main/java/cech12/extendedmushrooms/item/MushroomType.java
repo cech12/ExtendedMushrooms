@@ -80,6 +80,10 @@ public enum MushroomType implements StringRepresentable {
         return this.capBlock.get();
     }
 
+    public ResourceLocation getCapBlockId() {
+        return this.capBlock.getId();
+    }
+
     public MushroomWoodType getWoodType() {
         return this.woodType;
     }
