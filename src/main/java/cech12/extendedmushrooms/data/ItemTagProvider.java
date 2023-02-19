@@ -86,7 +86,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_SLOWING_DOWN, ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN);
 
         copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
-        copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
 
         tag(ModTags.ForgeItems.BREAD).add(ModItems.MUSHROOM_BREAD.get());
         tag(ModTags.ForgeItems.RAW_MEAT).add(Items.BEEF).add(Items.CHICKEN).add(Items.MUTTON).add(Items.PORKCHOP).add(Items.RABBIT);
@@ -97,7 +96,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.CHEST_BOATS).addTag(ModTags.Items.MUSHROOM_CHEST_BOATS);
         copy(BlockTags.WOOL_CARPETS, ItemTags.WOOL_CARPETS);
         copy(BlockTags.DOORS, ItemTags.DOORS);
-        copy(BlockTags.FENCES, ItemTags.FENCES);
         copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
         copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
         copy(BlockTags.PLANKS, ItemTags.PLANKS);
