@@ -1,6 +1,8 @@
 {
   "type": "forge:add_features",
   "biomes": "#forge:is_mushroom",
-  "features": "extendedmushrooms:patch_infested_flower",
+  "features": [
+    "extendedmushrooms:patch_infested_flower"
+  ],
   "step": "vegetal_decoration"
 }

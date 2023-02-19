@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#extendedmushrooms:has_mushrooms",
+  "biomes": "#forge:is_swamp",
   "features": [
     "extendedmushrooms:glowshroom_swamp",
     "extendedmushrooms:poisonous_mushroom_swamp"

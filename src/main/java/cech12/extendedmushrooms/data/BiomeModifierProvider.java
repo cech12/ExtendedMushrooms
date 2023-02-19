@@ -4,106 +4,137 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.init.ModEntityTypes;
 import cech12.extendedmushrooms.init.ModFeatures;
 import cech12.extendedmushrooms.init.ModTags;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.RegistryOps;
+import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.JsonCodecProvider;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashMap;
+import javax.annotation.Nonnull;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
-public class BiomeModifierProvider {
+public class BiomeModifierProvider implements DataProvider {
 
-    public static void generateBiomeModifiers(GatherDataEvent event) {
-        final RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, (HolderLookup.Provider) event.getLookupProvider());
-        Map<ResourceLocation, BiomeModifier> modifierMap = new HashMap<>();
+    private final PackOutput packOutput;
+    private final CompletableFuture<HolderLookup.Provider> lookupProvider;
 
-        HolderSet<Biome> isTaigaTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
-        HolderSet<Biome> isSwampTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
-        HolderSet<Biome> isNetherTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
-        HolderSet<Biome> isMushroomTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), Tags.Biomes.IS_MUSHROOM);
-        HolderSet<Biome> hasMushroomsTag = HolderSet.emptyNamed(ops.owner(ForgeRegistries.BIOMES.getRegistryKey()).orElseThrow(), ModTags.Biomes.HAS_MUSHROOMS);
-
-        /* TODO
-        HolderSet<PlacedFeature> infestedFlowerFeature = HolderSet.direct(placedFeature(ops, ModFeatures.INFESTED_FLOWER_PLACED.getId()));
-        HolderSet<PlacedFeature> infestedGrassFeature = HolderSet.direct(placedFeature(ops, ModFeatures.INFESTED_GRASS_PLACED.getId()));
-
-        HolderSet<PlacedFeature> normalMushroomFeatures = HolderSet.direct(
-                ModFeatures.MUSHROOM_PLACED_FEATURES.entrySet().stream().filter(mapEntry -> mapEntry.getKey().endsWith("normal"))
-                        .map(mapEntry -> placedFeature(ops, mapEntry.getValue().getId())).toList());
-        HolderSet<PlacedFeature> taigaMushroomFeatures = HolderSet.direct(
-                ModFeatures.MUSHROOM_PLACED_FEATURES.entrySet().stream().filter(mapEntry -> mapEntry.getKey().endsWith("taiga"))
-                        .map(mapEntry -> placedFeature(ops, mapEntry.getValue().getId())).toList());
-        HolderSet<PlacedFeature> mushroomIslandMushroomFeatures = HolderSet.direct(
-                ModFeatures.MUSHROOM_PLACED_FEATURES.entrySet().stream().filter(mapEntry -> mapEntry.getKey().endsWith("mushroom_island"))
-                        .map(mapEntry -> placedFeature(ops, mapEntry.getValue().getId())).toList());
-        HolderSet<PlacedFeature> swampMushroomFeatures = HolderSet.direct(
-                ModFeatures.MUSHROOM_PLACED_FEATURES.entrySet().stream().filter(mapEntry -> mapEntry.getKey().endsWith("swamp"))
-                        .map(mapEntry -> placedFeature(ops, mapEntry.getValue().getId())).toList());
-        HolderSet<PlacedFeature> netherMushroomFeatures = HolderSet.direct(
-                ModFeatures.MUSHROOM_PLACED_FEATURES.entrySet().stream().filter(mapEntry -> mapEntry.getKey().endsWith("nether"))
-                        .map(mapEntry -> placedFeature(ops, mapEntry.getValue().getId())).toList());
-
-        HolderSet<PlacedFeature> bigMushroomFeatures = HolderSet.direct(
-                ModFeatures.BIG_MUSHROOM_PLACED_FEATURES.values().stream().map(regObj -> placedFeature(ops, regObj.getId())).toList());
-        HolderSet<PlacedFeature> megaMushroomFeatures = HolderSet.direct(
-                ModFeatures.MEGA_MUSHROOM_PLACED_FEATURES.values().stream().map(regObj -> placedFeature(ops, regObj.getId())).toList());
-
-        //entities
-        modifierMap.put(prefix("mushroom_sheep_spawn"),
-                ForgeBiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(isMushroomTag, new MobSpawnSettings.SpawnerData(ModEntityTypes.MUSHROOM_SHEEP.get(), 8, 4, 8)));
-
-        //infested flower & infested grass
-        modifierMap.put(prefix("infested_flower_addition"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isMushroomTag, infestedFlowerFeature, GenerationStep.Decoration.VEGETAL_DECORATION));
-        modifierMap.put(prefix("infested_grass_addition"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isMushroomTag, infestedGrassFeature, GenerationStep.Decoration.VEGETAL_DECORATION));
-
-        //small mushrooms
-        modifierMap.put(prefix("mushroom_addition_normal"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(hasMushroomsTag, normalMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
-        modifierMap.put(prefix("mushroom_addition_taiga"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isTaigaTag, taigaMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
-        modifierMap.put(prefix("mushroom_addition_mushroom_island"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isMushroomTag, mushroomIslandMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
-        modifierMap.put(prefix("mushroom_addition_swamp"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isSwampTag, swampMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
-        modifierMap.put(prefix("mushroom_addition_nether"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isNetherTag, netherMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
-
-        //big & mega mushrooms
-        modifierMap.put(prefix("big_mushroom_addition"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isMushroomTag, bigMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
-        modifierMap.put(prefix("mega_mushroom_addition"),
-                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(isMushroomTag, megaMushroomFeatures, GenerationStep.Decoration.VEGETAL_DECORATION));
-         */
-
-        event.getGenerator().addProvider(event.includeServer(), new JsonCodecProvider<>(event.getGenerator().getPackOutput(), event.getExistingFileHelper(), ExtendedMushrooms.MOD_ID,
-                ops, PackType.SERVER_DATA, "biome_modifier", BiomeModifier.DIRECT_CODEC, modifierMap));
+    public BiomeModifierProvider(final PackOutput packOutput, final CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        this.packOutput = packOutput;
+        this.lookupProvider = lookupProvider;
     }
 
     private static ResourceLocation prefix(String name) {
         return new ResourceLocation(ExtendedMushrooms.MOD_ID, name);
     }
 
-    private static Holder<PlacedFeature> placedFeature(RegistryOps<JsonElement> ops, ResourceLocation id) {
-        return ops.getter(Registries.PLACED_FEATURE).get().getOrThrow(ResourceKey.create(Registries.PLACED_FEATURE, id));
+    private static Path getPath(Path root, ResourceLocation id) {
+        return root.resolve("data/" + id.getNamespace() + "/forge/biome_modifier/" + id.getPath() + ".json");
+    }
+
+    private static List<ResourceKey<PlacedFeature>> getPlacedFeatures(Map<String, Map<String, ResourceKey<PlacedFeature>>> mushrooms, String extension) {
+        List<ResourceKey<PlacedFeature>> placedFeatures = new ArrayList<>();
+        mushrooms.forEach((mushroom, extensionMap) -> placedFeatures.add(extensionMap.get(extension)));
+        return placedFeatures;
+    }
+
+    @Override
+    @Nonnull
+    public CompletableFuture<?> run(@Nonnull CachedOutput cache) {
+        return this.lookupProvider.thenCompose(provider -> {
+            List<JsonProvider> modifierList = new ArrayList<>();
+
+            TagKey<Biome> isTaigaTag = BiomeTags.IS_TAIGA;
+            TagKey<Biome> isSwampTag = Tags.Biomes.IS_SWAMP;
+            TagKey<Biome> isNetherTag = BiomeTags.IS_NETHER;
+            TagKey<Biome> isMushroomTag = Tags.Biomes.IS_MUSHROOM;
+            TagKey<Biome> hasMushroomsTag = ModTags.Biomes.HAS_MUSHROOMS;
+
+            //entities
+            modifierList.add(new AddSpawnsBiomeModifierJson(prefix("mushroom_sheep_spawn"), isMushroomTag, new MobSpawnSettings.SpawnerData(ModEntityTypes.MUSHROOM_SHEEP.get(), 8, 4, 8)));
+
+            //infested flower & infested grass
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("infested_flower_addition"), isMushroomTag, Collections.singletonList(ModFeatures.INFESTED_FLOWER_PLACED), GenerationStep.Decoration.VEGETAL_DECORATION));
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("infested_grass_addition"), isMushroomTag, Collections.singletonList(ModFeatures.INFESTED_GRASS_PLACED), GenerationStep.Decoration.VEGETAL_DECORATION));
+
+            //small mushrooms
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("mushroom_addition_normal"), hasMushroomsTag, getPlacedFeatures(ModFeatures.MUSHROOMS_PLACED, "normal"), GenerationStep.Decoration.VEGETAL_DECORATION));
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("mushroom_addition_taiga"), isTaigaTag, getPlacedFeatures(ModFeatures.MUSHROOMS_PLACED, "taiga"), GenerationStep.Decoration.VEGETAL_DECORATION));
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("mushroom_addition_mushroom_island"), isMushroomTag, getPlacedFeatures(ModFeatures.MUSHROOMS_PLACED, "mushroom_island"), GenerationStep.Decoration.VEGETAL_DECORATION));
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("mushroom_addition_swamp"), isSwampTag, getPlacedFeatures(ModFeatures.MUSHROOMS_PLACED, "swamp"), GenerationStep.Decoration.VEGETAL_DECORATION));
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("mushroom_addition_nether"), isNetherTag, getPlacedFeatures(ModFeatures.MUSHROOMS_PLACED, "nether"), GenerationStep.Decoration.VEGETAL_DECORATION));
+
+            //big & mega mushrooms
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("big_mushroom_addition"), isMushroomTag, getPlacedFeatures(ModFeatures.BIG_MUSHROOMS_PLACED, "mushroom_island"), GenerationStep.Decoration.VEGETAL_DECORATION));
+            modifierList.add(new AddFeaturesBiomeModifierJson(prefix("mega_mushroom_addition"), isMushroomTag, getPlacedFeatures(ModFeatures.MEGA_MUSHROOMS_PLACED, "mushroom_island"), GenerationStep.Decoration.VEGETAL_DECORATION));
+
+            return CompletableFuture.allOf(modifierList.stream().map(entry -> {
+                Path path = getPath(this.packOutput.getOutputFolder(), entry.location());
+                return DataProvider.saveStable(cache, entry.toJson(), path);
+            }).toArray(CompletableFuture[]::new));
+        });
+    }
+
+    @Override
+    @Nonnull
+    public String getName() {
+        return "Extended Mushrooms biome modifier provider";
+    }
+
+    private interface JsonProvider {
+        ResourceLocation location();
+        JsonElement toJson();
+    }
+
+    private record AddSpawnsBiomeModifierJson(
+            ResourceLocation location,
+            TagKey<Biome> tag,
+            MobSpawnSettings.SpawnerData spawnerData
+    ) implements JsonProvider {
+        public JsonElement toJson() {
+            JsonObject json = new JsonObject();
+            json.addProperty("type", ForgeMod.ADD_SPAWNS_BIOME_MODIFIER_TYPE.getId().toString());
+            json.addProperty("biomes", "#" + tag.location());
+            json.add("spawners", MobSpawnSettings.SpawnerData.CODEC.encodeStart(JsonOps.INSTANCE, spawnerData).getOrThrow(false, msg -> LOGGER.error("Failed to encode spawners of {}: {}", location, msg)));
+            return json;
+        }
+    }
+
+    private record AddFeaturesBiomeModifierJson(
+            ResourceLocation location,
+            TagKey<Biome> tag,
+            List<ResourceKey<PlacedFeature>> features,
+            GenerationStep.Decoration step
+    ) implements JsonProvider {
+        public JsonElement toJson() {
+            JsonObject json = new JsonObject();
+            json.addProperty("type", ForgeMod.ADD_FEATURES_BIOME_MODIFIER_TYPE.getId().toString());
+            json.addProperty("biomes", "#" + tag.location());
+            JsonArray featureJson = new JsonArray();
+            features.stream().sorted(Comparator.comparing(o -> o.location().toString()))
+                    .forEach(placedFeatureResourceKey -> featureJson.add(placedFeatureResourceKey.location().toString()));
+            json.add("features", featureJson);
+            json.addProperty("step", step.getName());
+            return json;
+        }
     }
 
 }

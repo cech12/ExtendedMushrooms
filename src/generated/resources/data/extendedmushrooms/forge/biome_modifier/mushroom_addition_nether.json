@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#extendedmushrooms:has_mushrooms",
+  "biomes": "#minecraft:is_nether",
   "features": [
     "extendedmushrooms:glowshroom_nether",
     "extendedmushrooms:poisonous_mushroom_nether"
