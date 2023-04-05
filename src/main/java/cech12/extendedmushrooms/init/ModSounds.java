@@ -15,7 +15,6 @@ public class ModSounds {
 
     public static RegistryObject<SoundEvent> FAIRY_RING_CRAFTING = makeSoundEvent("fairy_ring_crafting");
     public static RegistryObject<SoundEvent> FAIRY_RING_CRAFTING_FINISH = makeSoundEvent("fairy_ring_crafting_finish");
-    public static RegistryObject<SoundEvent> NO_SOUND = makeSoundEvent("no_sound");
 
     private static RegistryObject<SoundEvent> makeSoundEvent(String name) {
         ResourceLocation resourceLocation = new ResourceLocation(ExtendedMushrooms.MOD_ID, name);

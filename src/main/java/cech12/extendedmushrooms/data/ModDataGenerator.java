@@ -27,7 +27,7 @@ public class ModDataGenerator {
             evt.getGenerator().addProvider(true, blockTags);
             evt.getGenerator().addProvider(true, new EntityLootProvider(packOutput, lookupProvider));
             evt.getGenerator().addProvider(true, new ItemModelProvider(packOutput, existingFileHelper));
-            evt.getGenerator().addProvider(true, new ItemTagProvider(packOutput, lookupProvider, blockTags, existingFileHelper));
+            evt.getGenerator().addProvider(true, new ItemTagProvider(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
             evt.getGenerator().addProvider(true, new RecipeProvider(packOutput));
             evt.getGenerator().addProvider(true, new ConfiguredFeatureProvider(packOutput, lookupProvider));
             evt.getGenerator().addProvider(true, new PlacedFeatureProvider(packOutput, lookupProvider));

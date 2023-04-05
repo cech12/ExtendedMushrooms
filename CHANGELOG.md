@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.19.3-3.1.0.0] - 2023-??-??
 ### Changed
-- Update to Forge 1.19.3-44.0.41
+- Update to Forge 1.19.4-45.0.40
+
+### Removed
+- Config options "mushroomButtonPressurePlatePlaySound" & "mushroomCapPressurePlatePlaySound". Sounds for mushroom cap buttons & pressure plates are now the same as for wooden buttons & pressure plates
 
 ## [1.19.2-3.0.1.4] - 2022-12-10
 ### Fixed

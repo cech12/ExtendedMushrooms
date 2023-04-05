@@ -3,7 +3,6 @@ package cech12.extendedmushrooms.block.mushroomblocks;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.Entity;
@@ -65,7 +64,7 @@ public class HoneyFungusCap extends AbstractEffectMushroomCap {
         if (!level.isClientSide) {
             level.broadcastEntityEvent(entity, (byte)54);
         }
-        if (entity.causeFallDamage(fallDistance, 0.2F, DamageSource.FALL)) {
+        if (entity.causeFallDamage(fallDistance, 0.2F, level.damageSources().fall())) {
             entity.playSound(this.soundType.getFallSound(), this.soundType.getVolume() * 0.5F, this.soundType.getPitch() * 0.75F);
         }
     }

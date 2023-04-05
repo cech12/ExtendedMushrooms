@@ -14,9 +14,6 @@ public class ServerConfig {
     public static final ForgeConfigSpec.BooleanValue SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED;
     public static final ForgeConfigSpec.BooleanValue SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED;
 
-    public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_BUTTON_PLAY_SOUND;
-    public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND;
-
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
@@ -39,13 +36,6 @@ public class ServerConfig {
         SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED = builder
                 .comment("Whether or not sheeps and mushroom sheeps change their fleece to the mushroom type when eating a mushroom from ground or while feeding.")
                 .define("sheepAbsorbMushroomTypeEnabled", true);
-
-        MUSHROOM_CAP_BUTTON_PLAY_SOUND = builder
-                .comment("Whether or not mushroom cap buttons should play a sound when activated.")
-                .define("mushroomButtonPressurePlatePlaySound", false);
-        MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND = builder
-                .comment("Whether or not mushroom cap pressure plates should play a sound when stepped on or off.")
-                .define("mushroomCapPressurePlatePlaySound", false);
 
         builder.pop();
 

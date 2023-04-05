@@ -5,6 +5,7 @@ import cech12.extendedmushrooms.init.ModRecipeTypes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -98,7 +99,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
      */
     @Nonnull
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(@Nonnull RegistryAccess registryAccess) {
         return this.resultStack.copy();
     }
 
@@ -162,7 +163,7 @@ public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
     @Nonnull
     @Deprecated
     @Override
-    public ItemStack assemble(@Nonnull Container inv) {
+    public ItemStack assemble(@Nonnull Container inv, @Nonnull RegistryAccess registryAccess) {
         // This method is ignored. - getResultItemStack is used.
         return this.resultStack.copy();
     }

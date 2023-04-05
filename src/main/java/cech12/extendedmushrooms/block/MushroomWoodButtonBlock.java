@@ -1,6 +1,6 @@
 package cech12.extendedmushrooms.block;
 
-import net.minecraft.sounds.SoundEvents;
+import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -10,12 +10,12 @@ import javax.annotation.Nonnull;
 
 public class MushroomWoodButtonBlock extends ButtonBlock {
 
-    public MushroomWoodButtonBlock() {
-        super(generateBlockProperties(), 30, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
+    public MushroomWoodButtonBlock(final MushroomWoodType woodType) {
+        super(generateBlockProperties(), woodType.getBlockSetType(), 30, true);
     }
 
-    public MushroomWoodButtonBlock(final int lightValue) {
-        super(generateBlockProperties().lightLevel((state) -> lightValue), 30, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
+    public MushroomWoodButtonBlock(final MushroomWoodType woodType, final int lightValue) {
+        super(generateBlockProperties().lightLevel((state) -> lightValue), woodType.getBlockSetType(), 30, true);
     }
 
     @Nonnull

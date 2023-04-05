@@ -5,6 +5,7 @@ import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModItems;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.item.Item;
 import net.minecraft.util.StringRepresentable;
@@ -55,6 +56,7 @@ public enum MushroomWoodType implements StringRepresentable {
     private final RegistryObject<Item> boatItem;
     private final RegistryObject<Item> chestBoatItem;
     private final Supplier<Integer> lightValue;
+    private final BlockSetType blockSetType;
     private final WoodType woodType;
 
     MushroomWoodType(int id, String name, RegistryObject<Block> stemBlock, RegistryObject<Block> strippedStemBlock, RegistryObject<Block> planksBlock, RegistryObject<Item> boatItem, RegistryObject<Item> chestBoatItem) {
@@ -70,7 +72,9 @@ public enum MushroomWoodType implements StringRepresentable {
         this.boatItem = boatItem;
         this.chestBoatItem = chestBoatItem;
         this.lightValue = lightValue;
-        this.woodType = WoodType.register(WoodType.create(new ResourceLocation(ExtendedMushrooms.MOD_ID, name).toString()));
+        ResourceLocation resourceLocation = new ResourceLocation(ExtendedMushrooms.MOD_ID, name);
+        this.blockSetType = BlockSetType.register(new BlockSetType(resourceLocation.toString()));
+        this.woodType = WoodType.register(new WoodType(resourceLocation.toString(), this.blockSetType));
     }
 
     public int getId() {
@@ -107,6 +111,10 @@ public enum MushroomWoodType implements StringRepresentable {
 
     public int getLightValue() {
         return this.lightValue.get();
+    }
+
+    public BlockSetType getBlockSetType() {
+        return this.blockSetType;
     }
 
     public WoodType getWoodType() {

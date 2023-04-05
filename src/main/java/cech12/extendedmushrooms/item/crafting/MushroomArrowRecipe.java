@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.item.crafting;
 
 import cech12.extendedmushrooms.init.ModTags;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
@@ -58,7 +59,7 @@ public class MushroomArrowRecipe extends CustomRecipe {
 
     @Nonnull
     @Override
-    public ItemStack assemble(@Nonnull CraftingContainer inv) {
+    public ItemStack assemble(@Nonnull CraftingContainer inv, @Nonnull RegistryAccess registryAccess) {
         try {
             RecipeIngredients ingredients = new RecipeIngredients(inv);
             Potion potion = getPotionFromMushroom(ingredients.mushroom.getItem());

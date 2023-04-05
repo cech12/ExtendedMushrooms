@@ -119,7 +119,7 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
                     .addIngredients(ingredients.get(0));
         }
         builder.addSlot(RecipeIngredientRole.OUTPUT, 91, 26)
-                .addItemStack(recipe.getResultItem());
+                .addItemStack(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()));
     }
 
     public static Vec2 rotatePointAbout(Vec2 in, Vec2 about, double degrees) {

@@ -1,13 +1,15 @@
 package cech12.extendedmushrooms.block;
 
-import cech12.extendedmushrooms.config.ServerConfig;
-import cech12.extendedmushrooms.init.ModSounds;
-import net.minecraft.sounds.SoundEvents;
+import cech12.extendedmushrooms.item.MushroomWoodType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.sounds.SoundEvent;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
@@ -16,12 +18,12 @@ public class MushroomCapButtonBlock extends ButtonBlock {
     /**
      * WoodenButtonBlock has protected constructor.
      */
-    public MushroomCapButtonBlock() {
-        super(generateBlockProperties(), 30, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
+    public MushroomCapButtonBlock(final MushroomWoodType woodType) {
+        super(generateBlockProperties(), woodType.getBlockSetType(), 30, true);
     }
 
-    public MushroomCapButtonBlock(final int lightValue) {
-        super(generateBlockProperties().lightLevel((state) -> lightValue), 30, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
+    public MushroomCapButtonBlock(final MushroomWoodType woodType, final int lightValue) {
+        super(generateBlockProperties().lightLevel((state) -> lightValue), woodType.getBlockSetType(), 30, true);
     }
 
     @Nonnull
@@ -29,13 +31,9 @@ public class MushroomCapButtonBlock extends ButtonBlock {
         return Block.Properties.of(Material.DECORATION).noCollission().strength(0.5F).sound(SoundType.WOOL);
     }
 
-    @Nonnull
     @Override
-    protected SoundEvent getSound(boolean isPressed) {
-        if (ServerConfig.MUSHROOM_CAP_BUTTON_PLAY_SOUND.get()) {
-            return super.getSound(isPressed);
-        }
-        return ModSounds.NO_SOUND.get();
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return SoundType.WOOL;
     }
 
 }

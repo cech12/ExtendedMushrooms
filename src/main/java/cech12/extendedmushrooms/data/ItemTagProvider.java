@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ItemTagProvider extends ItemTagsProvider {
 
-    public ItemTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, TagsProvider<Block> tagsProvider, ExistingFileHelper existingFileHelper) {
+    public ItemTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Block>> tagsProvider, ExistingFileHelper existingFileHelper) {
         super(packOutput, lookupProvider, tagsProvider, ExtendedMushrooms.MOD_ID, existingFileHelper);
     }
 

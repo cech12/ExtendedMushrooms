@@ -6,10 +6,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
@@ -85,7 +85,7 @@ public class FairyRingBlockEntityRenderer implements BlockEntityRenderer<FairyRi
                 //render item
                 ItemStack stack = fairyRing.getItem(i);
                 if(!stack.isEmpty()) {
-                    mc.getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, p1, p2, matrixStack, iRenderTypeBuffer, 0);
+                    mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.GROUND, p1, p2, matrixStack, iRenderTypeBuffer, mc.level, 0);
                 }
                 matrixStack.popPose();
             }

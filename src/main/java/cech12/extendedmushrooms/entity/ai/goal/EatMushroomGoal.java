@@ -102,7 +102,7 @@ public class EatMushroomGoal extends Goal {
     }
 
     private BlockPos getBlockPos() {
-        return new BlockPos(this.eaterEntity.getX(), this.eaterEntity.getY(), this.eaterEntity.getZ());
+        return new BlockPos(this.eaterEntity.getBlockX(), this.eaterEntity.getBlockY(), this.eaterEntity.getBlockZ());
     }
 
 }
