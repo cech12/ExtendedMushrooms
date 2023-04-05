@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "extendedmushrooms:mushroom_bread"
-  }
+  },
+  "show_notification": true
 }

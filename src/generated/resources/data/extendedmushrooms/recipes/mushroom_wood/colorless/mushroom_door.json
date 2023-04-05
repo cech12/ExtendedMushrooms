@@ -15,5 +15,6 @@
   "result": {
     "count": 3,
     "item": "extendedmushrooms:mushroom_door"
-  }
+  },
+  "show_notification": true
 }

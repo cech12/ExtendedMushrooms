@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "extendedmushrooms:honey_fungus_fence_gate"
-  }
+  },
+  "show_notification": true
 }

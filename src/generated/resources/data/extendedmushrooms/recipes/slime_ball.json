@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "minecraft:slime_ball"
-  }
+  },
+  "show_notification": true
 }

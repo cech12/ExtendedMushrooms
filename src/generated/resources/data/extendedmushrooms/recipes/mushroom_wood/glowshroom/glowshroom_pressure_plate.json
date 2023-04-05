@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "extendedmushrooms:glowshroom_pressure_plate"
-  }
+  },
+  "show_notification": true
 }

@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "extendedmushrooms:honey_fungus_pressure_plate"
-  }
+  },
+  "show_notification": true
 }

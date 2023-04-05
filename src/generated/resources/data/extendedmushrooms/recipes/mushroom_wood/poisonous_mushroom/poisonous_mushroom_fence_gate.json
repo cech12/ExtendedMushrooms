@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "extendedmushrooms:poisonous_mushroom_fence_gate"
-  }
+  },
+  "show_notification": true
 }

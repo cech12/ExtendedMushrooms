@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "extendedmushrooms:poisonous_mushroom_boat"
-  }
+  },
+  "show_notification": true
 }
