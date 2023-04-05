@@ -6,6 +6,7 @@ import cech12.extendedmushrooms.item.MushroomWoodType;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.ListModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.BoatRenderer;
@@ -26,8 +27,8 @@ public class MushroomBoatRenderer extends BoatRenderer {
         this.BOAT_RESOURCES = Stream.of(MushroomWoodType.values()).collect(ImmutableMap.toImmutableMap(
                 (woodType) -> woodType,
                 (woodType) -> Pair.of(new ResourceLocation(ExtendedMushrooms.MOD_ID, getTextureLocation(woodType, withChest)),
-                        new BoatModel(context.bakeLayer((withChest) ? ModelLayers.createChestBoatModelName(Boat.Type.OAK) :
-                                ModelLayers.createBoatModelName(Boat.Type.OAK))))
+                        (withChest) ? new ChestBoatModel(context.bakeLayer(ModelLayers.createChestBoatModelName(Boat.Type.OAK))) :
+                                new BoatModel(context.bakeLayer(ModelLayers.createBoatModelName(Boat.Type.OAK))))
         ));
     }
 
