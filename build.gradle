@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
@@ -94,8 +94,6 @@ minecraft {
 
             // Add mixin config to runtime
             args '-mixin.config=' + project.getProperty('mod_id') + '.mixins.json'
-
-            forceExit false
 
             mods {
                 "${mod_id}" {
