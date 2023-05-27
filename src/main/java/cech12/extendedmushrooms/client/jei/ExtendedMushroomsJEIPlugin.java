@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.client.jei;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.init.ModRecipeTypes;
+import cech12.extendedmushrooms.init.ModTags;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -12,7 +13,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -52,7 +52,7 @@ public class ExtendedMushroomsJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(@Nonnull IRecipeCatalystRegistration registration) {
-        Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(Tags.Items.MUSHROOMS).forEach(mushroom ->
+        Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(ModTags.Items.FAIRY_RING_MUSHROOMS).forEach(mushroom ->
             registration.addRecipeCatalyst(new ItemStack(mushroom), fairyRingCategory.getRecipeType())
         );
     }

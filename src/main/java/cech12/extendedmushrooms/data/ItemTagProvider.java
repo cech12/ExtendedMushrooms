@@ -32,6 +32,7 @@ public class ItemTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags(@Nonnull HolderLookup.Provider lookupProvider) {
         //generate mod intern tags
+        tag(ModTags.Items.FAIRY_RING_MUSHROOMS).addTag(Tags.Items.MUSHROOMS).addTag(ModTags.ForgeItems.FUNGI);
         tag(ModTags.Items.MUSHROOM_BOATS).add(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get)
                 .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && !mushroomBoatItem.hasChest())
                 .sorted(Comparator.comparing(ForgeRegistries.ITEMS::getKey))
@@ -84,6 +85,8 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_JUMP_BOOSTING, ModTags.ForgeItems.MUSHROOMS_JUMP_BOOSTING);
         copy(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS, ModTags.ForgeItems.MUSHROOMS_POISONOUS);
         copy(ModTags.ForgeBlocks.MUSHROOMS_SLOWING_DOWN, ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN);
+
+        copy(ModTags.ForgeBlocks.FUNGI, ModTags.ForgeItems.FUNGI);
 
         copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
 

@@ -49,6 +49,8 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
         public static final TagKey<Block> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
 
+        public static final TagKey<Block> FUNGI = tag("fungi");
+
         private static TagKey<Block> tag(@Nonnull String name) {
             return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
         }
@@ -119,6 +121,8 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
         public static final TagKey<Item> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
 
+        public static final TagKey<Item> FUNGI = tag("fungi");
+
         public static final TagKey<Item> BREAD = tag("bread");
         public static final TagKey<Item> RAW_MEAT = tag("raw_meat");
 
@@ -128,6 +132,8 @@ public class ModTags {
     }
 
     public static class Items {
+
+        public static final TagKey<Item> FAIRY_RING_MUSHROOMS = tag("fairy_ring_mushrooms");
 
         public static final TagKey<Item> MUSHROOM_BOATS = tag("mushroom_boats");
         public static final TagKey<Item> MUSHROOM_BUTTONS_WOOD = tag("mushroom_buttons/wood");

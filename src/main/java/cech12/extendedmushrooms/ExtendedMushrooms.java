@@ -21,7 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.HugeMushroomBlock;
-import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.item.DyeItem;
@@ -244,10 +243,10 @@ public class ExtendedMushrooms {
         if (blockState.getBlock() != ModBlocks.FAIRY_RING.get()) {
             for (Direction direction : event.getNotifiedSides()) {
                 BlockPos neighbourPos = blockPos.relative(direction);
-                if (world.getBlockState(neighbourPos).getBlock() instanceof MushroomBlock) {
+                if (FairyRingBlock.isFairyRingMushroom(world.getBlockState(neighbourPos).getBlock().asItem())) {
                     //neighbour is mushroom?
                     FairyRingBlock.fairyRingPlaceCheck(world, neighbourPos);
-                } else if (world.getBlockState(neighbourPos.above()).getBlock() instanceof MushroomBlock) {
+                } else if (FairyRingBlock.isFairyRingMushroom(world.getBlockState(neighbourPos.above()).getBlock().asItem())) {
                     //for ground blocks - block above neighbour is mushroom?
                     FairyRingBlock.fairyRingPlaceCheck(world, neighbourPos.above());
                 }

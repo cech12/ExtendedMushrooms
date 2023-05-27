@@ -11,6 +11,7 @@ import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WoolCarpetBlock;
@@ -165,6 +166,13 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.POISONOUS_MUSHROOM.get());
         tag(ModTags.ForgeBlocks.MUSHROOMS_SLOWING_DOWN)
                 .add(ModBlocks.HONEY_FUNGUS.get());
+
+        tag(ModTags.ForgeBlocks.FUNGI)
+                .add(Blocks.CRIMSON_FUNGUS)
+                .add(Blocks.WARPED_FUNGUS)
+                .addOptional(new ResourceLocation("byg", "death_cap"))
+                .addOptional(new ResourceLocation("byg", "soul_shroom"))
+                .addOptional(new ResourceLocation("byg", "sythian_fungus"));
 
         //generate standard forge tags
         tag(Tags.Blocks.FENCE_GATES_WOODEN).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);

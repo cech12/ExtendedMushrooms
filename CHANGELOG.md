@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.19.4-3.2.0.0] - 2023-??-??
+### Added 
+- new item tag "extendedmushrooms:fairy_ring_mushrooms" to configure mushrooms which can be part of the fairy ring
+
+### Changed
+- Fairy Ring can now also be generated with nether fungi
+
 ## [1.19.4-3.1.0.0] - 2023-04-05
 ### Changed
 - Update to Forge 1.19.4-45.0.40

@@ -3,8 +3,10 @@ package cech12.extendedmushrooms.block;
 import cech12.extendedmushrooms.init.ModBlockEntityTypes;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.blockentity.FairyRingBlockEntity;
+import cech12.extendedmushrooms.init.ModTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -13,7 +15,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.entity.Entity;
@@ -33,6 +34,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITagManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -49,6 +52,11 @@ public class FairyRingBlock extends AirBlock implements EntityBlock {
     public FairyRingBlock() {
         super(Block.Properties.of(Material.AIR).noCollission().noLootTable());
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
+    }
+
+    public static boolean isFairyRingMushroom(Item item) {
+        ITagManager<Item> tagManager = ForgeRegistries.ITEMS.tags();
+        return tagManager != null && tagManager.getTag(ModTags.Items.FAIRY_RING_MUSHROOMS).contains(item);
     }
 
     @Override
@@ -165,7 +173,7 @@ public class FairyRingBlock extends AirBlock implements EntityBlock {
         boolean neighboursFound = false;
         for (Direction direction : DIRECTIONS) {
             Block neighbourBlock = world.getBlockState(blockPos.relative(direction)).getBlock();
-            if (neighbourBlock instanceof MushroomBlock) {
+            if (isFairyRingMushroom(neighbourBlock.asItem())) {
                 mushrooms++;
                 if (mushroomSeen) {
                     neighboursFound = true;
@@ -248,7 +256,7 @@ public class FairyRingBlock extends AirBlock implements EntityBlock {
             Direction newDirection = direction;
 
             //check if ring has mushrooms
-            if (positions.size() < 8 && !(world.getBlockState(mutablePos).getBlock() instanceof MushroomBlock)) {
+            if (positions.size() < 8 && !isFairyRingMushroom(world.getBlockState(mutablePos).getBlock().asItem())) {
                 return null;
             } else
             //check if center is filled with air blocks and below must be a solid block
