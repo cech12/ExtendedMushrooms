@@ -2,10 +2,10 @@
   "type": "extendedmushrooms:fairy_ring_recipe",
   "ingredients": [
     {
-      "tag": "forge:mushrooms"
+      "item": "minecraft:poisonous_potato"
     },
     {
-      "item": "minecraft:nether_wart"
+      "item": "minecraft:rotten_flesh"
     },
     {
       "item": "minecraft:spider_eye"

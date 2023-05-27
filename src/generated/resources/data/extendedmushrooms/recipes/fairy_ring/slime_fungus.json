@@ -2,9 +2,6 @@
   "type": "extendedmushrooms:fairy_ring_recipe",
   "ingredients": [
     {
-      "tag": "forge:mushrooms"
-    },
-    {
       "item": "minecraft:slime_block"
     },
     {

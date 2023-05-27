@@ -1,0 +1,18 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:warped_roots"
+    },
+    {
+      "item": "minecraft:twisting_vines"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "minecraft:warped_fungus"
+  }
+}

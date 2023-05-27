@@ -1,0 +1,12 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:sweet_berries"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "minecraft:nether_wart"
+  }
+}

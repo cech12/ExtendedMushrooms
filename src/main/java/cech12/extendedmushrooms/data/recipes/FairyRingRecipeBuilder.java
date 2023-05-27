@@ -55,6 +55,10 @@ public class FairyRingRecipeBuilder {
         return this.requires(Ingredient.of(tag));
     }
 
+    public FairyRingRecipeBuilder requires(TagKey<Item> tag, int count) {
+        return this.requires(Ingredient.of(tag), count);
+    }
+
     public FairyRingRecipeBuilder requires(ItemLike iItemProvider) {
         return this.requires(iItemProvider, 1);
     }

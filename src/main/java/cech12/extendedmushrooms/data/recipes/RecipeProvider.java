@@ -84,7 +84,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_flower", has(ModBlocks.INFESTED_FLOWER.get()))
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.BROWN_DYE).getPath() + "_from_infested_flower"));
 
-        //some fairy ring recipes
+        //overworld fairy ring recipes
         FairyRingRecipeBuilder.normal(Items.MYCELIUM, 1)
                 .requires(Items.DIRT)
                 .save(consumer, getResourceLocation("mycelium_from_dirt"));
@@ -104,6 +104,54 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         FairyRingRecipeBuilder.normal(ModBlocks.INFESTED_FLOWER.get(), 1)
                 .requires(ItemTags.FLOWERS)
                 .save(consumer, getResourceLocation("infested_flower_from_flower"));
+        FairyRingRecipeBuilder.normal(Items.POISONOUS_POTATO, 1)
+                .requires(Items.POTATO)
+                .save(consumer, getResourceLocation("poisonous_potato_from_potato"));
+
+        //nether fairy ring recipes
+        FairyRingRecipeBuilder.normal(Items.CRIMSON_FUNGUS, 1)
+                .requires(Items.CRIMSON_ROOTS)
+                .requires(Items.WEEPING_VINES)
+                .requires(Items.NETHER_WART)
+                .save(consumer, getResourceLocation("crimson_fungus"));
+        FairyRingRecipeBuilder.normal(Items.CRIMSON_NYLIUM, 1)
+                .requires(Tags.Items.NETHERRACK)
+                .requires(Tags.Items.DYES_RED)
+                .save(consumer, getResourceLocation("crimson_nylium_from_netherrack"));
+        FairyRingRecipeBuilder.normal(Items.CRIMSON_ROOTS, 2)
+                .requires(Items.MANGROVE_ROOTS)
+                .requires(Tags.Items.DYES_RED)
+                .save(consumer, getResourceLocation("crimson_roots_from_mangrove_roots"));
+        FairyRingRecipeBuilder.normal(Items.NETHER_WART, 1)
+                .requires(Items.SWEET_BERRIES)
+                .save(consumer, getResourceLocation("nether_wart_from_sweet_berry"));
+        FairyRingRecipeBuilder.normal(Items.SHROOMLIGHT, 1)
+                .requires(Items.GLOWSTONE)
+                .save(consumer, getResourceLocation("shroomlight_from_glowstone"));
+        FairyRingRecipeBuilder.normal(Items.SHROOMLIGHT, 1)
+                .requires(Tags.Items.DUSTS_GLOWSTONE, 4)
+                .save(consumer, getResourceLocation("shroomlight_from_glowstone_dust"));
+        FairyRingRecipeBuilder.normal(Items.TWISTING_VINES, 1)
+                .requires(Items.VINE)
+                .requires(Tags.Items.DYES_CYAN)
+                .save(consumer, getResourceLocation("twisting_vine_from_vine"));
+        FairyRingRecipeBuilder.normal(Items.WARPED_NYLIUM, 1)
+                .requires(Tags.Items.NETHERRACK)
+                .requires(Tags.Items.DYES_CYAN)
+                .save(consumer, getResourceLocation("warped_nylium_from_netherrack"));
+        FairyRingRecipeBuilder.normal(Items.WARPED_FUNGUS, 1)
+                .requires(Items.WARPED_ROOTS)
+                .requires(Items.TWISTING_VINES)
+                .requires(Items.NETHER_WART)
+                .save(consumer, getResourceLocation("warped_fungus"));
+        FairyRingRecipeBuilder.normal(Items.WARPED_ROOTS, 2)
+                .requires(Items.MANGROVE_ROOTS)
+                .requires(Tags.Items.DYES_CYAN)
+                .save(consumer, getResourceLocation("warped_roots_from_mangrove_roots"));
+        FairyRingRecipeBuilder.normal(Items.WEEPING_VINES, 1)
+                .requires(Items.VINE)
+                .requires(Tags.Items.DYES_RED)
+                .save(consumer, getResourceLocation("weeping_vine_from_vine"));
 
         //mushroom spores
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MUSHROOM_SPORES.get(), 2)
@@ -142,8 +190,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         //glowshroom
         FairyRingRecipeBuilder.normal(ModBlocks.GLOWSHROOM.get(), 1)
-                .requires(Tags.Items.MUSHROOMS)
-                .requires(Items.GLOWSTONE)
+                .requires(Items.SHROOMLIGHT)
                 .requires(Items.GOLDEN_CARROT)
                 .requires(Items.LAPIS_LAZULI)
                 .save(consumer);
@@ -182,8 +229,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         //poisonous mushroom
         FairyRingRecipeBuilder.normal(ModBlocks.POISONOUS_MUSHROOM.get(), 1)
-                .requires(Tags.Items.MUSHROOMS)
-                .requires(Items.NETHER_WART)
+                .requires(Items.POISONOUS_POTATO)
+                .requires(Items.ROTTEN_FLESH)
                 .requires(Items.SPIDER_EYE)
                 .requires(Items.PURPLE_DYE)
                 .save(consumer);
@@ -211,7 +258,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         //slime fungus
         FairyRingRecipeBuilder.normal(ModBlocks.SLIME_FUNGUS.get(), 1)
-                .requires(Tags.Items.MUSHROOMS)
                 .requires(Items.SLIME_BLOCK)
                 .requires(Items.RABBIT_FOOT)
                 .requires(Items.LIME_DYE)
@@ -238,7 +284,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
         //honey fungus
         FairyRingRecipeBuilder.normal(ModBlocks.HONEY_FUNGUS.get(), 1)
-                .requires(Tags.Items.MUSHROOMS)
                 .requires(Items.HONEYCOMB)
                 .requires(Items.HONEY_BOTTLE)
                 .requires(Items.ORANGE_DYE)

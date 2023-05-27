@@ -1,0 +1,15 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "tag": "forge:netherrack"
+    },
+    {
+      "tag": "forge:dyes/cyan"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "minecraft:warped_nylium"
+  }
+}

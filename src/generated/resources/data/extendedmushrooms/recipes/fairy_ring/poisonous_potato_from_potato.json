@@ -1,0 +1,12 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:potato"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "minecraft:poisonous_potato"
+  }
+}

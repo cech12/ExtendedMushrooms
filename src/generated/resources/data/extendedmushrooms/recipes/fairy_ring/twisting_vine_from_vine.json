@@ -1,0 +1,15 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:vine"
+    },
+    {
+      "tag": "forge:dyes/cyan"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "minecraft:twisting_vines"
+  }
+}

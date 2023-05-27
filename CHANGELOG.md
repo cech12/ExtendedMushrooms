@@ -6,9 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.19.4-3.2.0.0] - 2023-??-??
 ### Added 
 - new item tag "extendedmushrooms:fairy_ring_mushrooms" to configure mushrooms which can be part of the fairy ring
+- multiple Nether related recipes for the fairy ring (thanks to riskable for the idea) #70
 
 ### Changed
 - Fairy Ring can now also be generated with nether fungi
+- changed the recipes for the different mushrooms/fungi
 
 ## [1.19.4-3.1.0.0] - 2023-04-05
 ### Changed
