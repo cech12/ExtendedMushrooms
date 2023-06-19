@@ -30,5 +30,6 @@
     "recipes": [
       "extendedmushrooms:slime_blob"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

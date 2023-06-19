@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:grilled_mushroom_from_campfire_cooking"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

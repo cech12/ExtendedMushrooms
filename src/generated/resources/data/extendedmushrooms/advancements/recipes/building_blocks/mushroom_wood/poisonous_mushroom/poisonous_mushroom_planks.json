@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_wood/poisonous_mushroom/poisonous_mushroom_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

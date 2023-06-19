@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_wood/colorless/mushroom_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

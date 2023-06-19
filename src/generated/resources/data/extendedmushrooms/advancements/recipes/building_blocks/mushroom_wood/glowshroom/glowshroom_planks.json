@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_wood/glowshroom/glowshroom_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

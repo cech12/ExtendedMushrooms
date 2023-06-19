@@ -30,5 +30,6 @@
     "recipes": [
       "extendedmushrooms:glowstone_crumbs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:grilled_mushroom"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

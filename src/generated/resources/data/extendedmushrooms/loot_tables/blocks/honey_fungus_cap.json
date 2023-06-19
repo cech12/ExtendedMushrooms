@@ -53,7 +53,6 @@
           ]
         }
       ],
-      "name": "main",
       "rolls": 1.0
     },
     {
@@ -62,7 +61,7 @@
         {
           "condition": "minecraft:inverted",
           "term": {
-            "condition": "minecraft:alternative",
+            "condition": "minecraft:all_of",
             "terms": [
               {
                 "condition": "minecraft:match_tool",
@@ -105,7 +104,6 @@
           "name": "extendedmushrooms:honey_blob"
         }
       ],
-      "name": "additional",
       "rolls": 1.0
     },
     {
@@ -114,7 +112,7 @@
         {
           "condition": "minecraft:inverted",
           "term": {
-            "condition": "minecraft:alternative",
+            "condition": "minecraft:all_of",
             "terms": [
               {
                 "condition": "minecraft:match_tool",
@@ -157,7 +155,6 @@
           "name": "extendedmushrooms:honeycomb_shred"
         }
       ],
-      "name": "additional",
       "rolls": 1.0
     }
   ]

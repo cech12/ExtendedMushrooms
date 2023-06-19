@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_cap/poisonous_mushroom/purple_banner"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

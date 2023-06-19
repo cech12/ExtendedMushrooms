@@ -30,5 +30,6 @@
     "recipes": [
       "extendedmushrooms:glowstone_dust"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

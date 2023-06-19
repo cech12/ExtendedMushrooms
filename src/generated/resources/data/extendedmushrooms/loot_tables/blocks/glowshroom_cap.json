@@ -53,7 +53,6 @@
           ]
         }
       ],
-      "name": "main",
       "rolls": 1.0
     },
     {
@@ -62,7 +61,7 @@
         {
           "condition": "minecraft:inverted",
           "term": {
-            "condition": "minecraft:alternative",
+            "condition": "minecraft:all_of",
             "terms": [
               {
                 "condition": "minecraft:match_tool",
@@ -105,7 +104,6 @@
           "name": "extendedmushrooms:glowstone_crumbs"
         }
       ],
-      "name": "additional",
       "rolls": 1.0
     }
   ]

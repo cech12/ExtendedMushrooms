@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_cap/red/red_bed"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

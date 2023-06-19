@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_cap/slime_fungus/orange_banner"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

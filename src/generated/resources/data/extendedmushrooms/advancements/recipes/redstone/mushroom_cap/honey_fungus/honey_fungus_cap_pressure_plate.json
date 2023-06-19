@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_cap/honey_fungus/honey_fungus_cap_pressure_plate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

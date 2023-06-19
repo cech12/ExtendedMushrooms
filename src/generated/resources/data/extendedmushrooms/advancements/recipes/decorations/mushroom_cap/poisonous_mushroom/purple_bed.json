@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_cap/poisonous_mushroom/purple_bed"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

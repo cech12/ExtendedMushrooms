@@ -24,5 +24,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_wood/colorless/mushroom_boat"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

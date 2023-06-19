@@ -30,5 +30,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_wood/poisonous_mushroom/poisonous_mushroom_trapdoor"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

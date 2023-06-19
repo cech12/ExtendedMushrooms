@@ -30,5 +30,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_wood/glowshroom/glowshroom_slab"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

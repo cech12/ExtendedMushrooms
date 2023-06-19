@@ -29,6 +29,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.predicates.AllOfCondition;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
@@ -129,7 +130,7 @@ public class BlockLootProvider implements DataProvider {
                         .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortuneChances))
                         .apply(ApplyExplosionDecay.explosionDecay());
                 LootPool.Builder additionalLootPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(additionalEntry)
-                        .when(AllOfCondition.allOf(MatchTool.toolMatches(silkPredicate)));
+                        .when(InvertedLootItemCondition.invert(AllOfCondition.allOf(MatchTool.toolMatches(silkPredicate))));
                 lootTable.withPool(additionalLootPool);
             }
         }

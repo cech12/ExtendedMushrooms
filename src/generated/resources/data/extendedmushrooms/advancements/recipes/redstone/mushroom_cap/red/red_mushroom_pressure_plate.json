@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_cap/red/red_mushroom_pressure_plate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

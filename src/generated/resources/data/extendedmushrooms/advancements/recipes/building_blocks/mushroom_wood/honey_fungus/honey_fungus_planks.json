@@ -28,5 +28,6 @@
     "recipes": [
       "extendedmushrooms:mushroom_wood/honey_fungus/honey_fungus_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
