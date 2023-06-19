@@ -34,7 +34,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -144,7 +144,7 @@ public class ExtendedMushrooms {
         BrewingRecipeRegistry.addRecipe(new MushroomBrewingRecipe(ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN, Potions.SLOWNESS));
     }
 
-    private void addItemsToTabs(CreativeModeTabEvent.BuildContents event) {
+    private void addItemsToTabs(BuildCreativeModeTabContentsEvent event) {
         ModBlocks.addItemsToTabs(event);
         ModItems.addItemsToTabs(event);
     }

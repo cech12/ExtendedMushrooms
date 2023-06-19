@@ -39,7 +39,7 @@ public abstract class SingleBigMushroomFeature extends BigMushroomFeature {
     protected boolean canPlaceTrunk(LevelAccessor level, BlockPos blockPos, int size, BlockPos.MutableBlockPos mutableBlockPos, ExtendedMushroomFeatureConfiguration config) {
         for (int i = 0; i < size; ++i) {
             mutableBlockPos.set(blockPos).move(Direction.UP, i);
-            if (!isReplaceable(level, mutableBlockPos, true)) {
+            if (!isReplaceable(level, mutableBlockPos)) {
                 return false;
             }
         }

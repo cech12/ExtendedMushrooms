@@ -22,7 +22,7 @@ public class MegaBrownMushroomFeature extends MegaMushroomFeature {
         for (int x = -capRadius; x <= capRadius+1; ++x) {
             for (int z = -capRadius; z <= capRadius+1; ++z) {
                 mutableBlockPos.set(blockPos).move(x, size, z);
-                if (!isReplaceable(level, mutableBlockPos, false)) {
+                if (!isReplaceable(level, mutableBlockPos)) {
                     return false;
                 }
             }

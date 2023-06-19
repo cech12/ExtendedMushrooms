@@ -95,7 +95,7 @@ public abstract class SplitBigMushroomFeature extends BigMushroomFeature {
                 }
                 mutableBlockPos.move(Direction.UP);
             }
-            if (!isReplaceable(level, mutableBlockPos, true)) {
+            if (!isReplaceable(level, mutableBlockPos)) {
                 return false;
             }
         }

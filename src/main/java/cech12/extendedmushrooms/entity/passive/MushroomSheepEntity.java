@@ -68,7 +68,7 @@ public class MushroomSheepEntity extends Sheep {
      */
     public static void replaceSheep(@Nonnull Sheep sheep, @Nullable MushroomType mushroomType) {
         sheep.setSpeed(0);
-        Level world = sheep.level;
+        Level world = sheep.level();
         //create mushroom sheep
         MushroomSheepEntity mushroomSheep = ModEntityTypes.MUSHROOM_SHEEP.get().create(world);
         if (mushroomSheep != null && world instanceof ServerLevel) {
@@ -120,7 +120,7 @@ public class MushroomSheepEntity extends Sheep {
 
     @Override
     public void aiStep() {
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             this.sheepTimer = Math.max(0, this.sheepTimer - 1);
         }
         super.aiStep();
@@ -331,7 +331,7 @@ public class MushroomSheepEntity extends Sheep {
     @Nonnull
     public List<ItemStack> onSheared(@Nullable Player player, @Nonnull ItemStack item, @Nonnull Level world, @Nonnull BlockPos pos, int fortune) {
         List<ItemStack> ret = new ArrayList<>();
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             this.setSheared(true);
             int i = 1 + this.random.nextInt(3);
             for(int j = 0; j < i; ++j) {

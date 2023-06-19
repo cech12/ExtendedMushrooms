@@ -33,7 +33,7 @@ public class MegaRedMushroomFeature extends MegaMushroomFeature {
         int capSize = (int) (size * getCapHeightFactor());
         Cap cap = new Cap(mutableBlockPos.set(blockPos).move(0, capCenterHeight, 0), capSize, radius);
         for (CapPosition capPos: cap.capPositions) {
-            if (!isReplaceable(level, mutableBlockPos, false)) {
+            if (!isReplaceable(level, mutableBlockPos)) {
                 return false;
             }
         }

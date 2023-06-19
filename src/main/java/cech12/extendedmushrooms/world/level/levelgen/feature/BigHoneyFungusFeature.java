@@ -48,7 +48,7 @@ public class BigHoneyFungusFeature extends SplitBigMushroomFeature {
                     continue;
                 }
                 mutableBlockPos.set(center).move(x, 0, z);
-                if (!isReplaceable(level, mutableBlockPos, false)) {
+                if (!isReplaceable(level, mutableBlockPos)) {
                     return false;
                 }
             }
@@ -61,7 +61,7 @@ public class BigHoneyFungusFeature extends SplitBigMushroomFeature {
                     continue;
                 }
                 mutableBlockPos.set(center).move(x, -2, z);
-                if (!isReplaceable(level, mutableBlockPos, false)) {
+                if (!isReplaceable(level, mutableBlockPos)) {
                     return false;
                 }
             }

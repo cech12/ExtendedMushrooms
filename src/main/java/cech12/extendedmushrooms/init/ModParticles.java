@@ -21,6 +21,6 @@ public class ModParticles {
 
     @SubscribeEvent
     public static void register(RegisterParticleProvidersEvent event) {
-        event.register(FAIRY_RING.get(), FairyRingParticle.Factory::new);
+        event.registerSpriteSet(FAIRY_RING.get(), FairyRingParticle.Factory::new);
     }
 }

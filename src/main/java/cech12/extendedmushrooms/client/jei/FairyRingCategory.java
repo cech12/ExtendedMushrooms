@@ -5,7 +5,6 @@ import cech12.extendedmushrooms.api.recipe.FairyRingRecipe;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -18,6 +17,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -85,20 +85,20 @@ public class FairyRingCategory implements IRecipeCategory<FairyRingRecipe> {
     }
 
     @Override
-    public void draw(@Nonnull FairyRingRecipe recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull PoseStack matrixStack, double mouseX, double mouseY) {
+    public void draw(@Nonnull FairyRingRecipe recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         IDrawableAnimated arrow = getBubbles(recipe);
-        arrow.draw(matrixStack, 69, 24);
-        drawRecipeTime(recipe, matrixStack, 52);
+        arrow.draw(guiGraphics, 69, 24);
+        drawRecipeTime(recipe, guiGraphics, 52);
     }
 
-    protected void drawRecipeTime(FairyRingRecipe recipe, PoseStack matrixStack, int y) {
+    protected void drawRecipeTime(FairyRingRecipe recipe, GuiGraphics guiGraphics, int y) {
         int cookTime = recipe.getRecipeTime();
         if (cookTime > 0) {
             int cookTimeSeconds = cookTime / 20;
             Component timeString = Component.translatable("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
             Font fontRenderer = Minecraft.getInstance().font;
             int stringWidth = fontRenderer.width(timeString);
-            fontRenderer.draw(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
+            guiGraphics.drawString(fontRenderer, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
         }
     }
 

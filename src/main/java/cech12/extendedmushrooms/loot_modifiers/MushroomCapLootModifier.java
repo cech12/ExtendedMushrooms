@@ -11,6 +11,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -45,10 +46,10 @@ public class MushroomCapLootModifier extends LootModifier {
                     ItemStack fakeTool = tool.copy();
                     fakeTool.enchant(Enchantments.SILK_TOUCH, 1);
                     //generate loot with this tool
-                    LootContext.Builder builder = new LootContext.Builder(context).withParameter(LootContextParams.TOOL, fakeTool);
-                    LootContext ctx = builder.create(LootContextParamSets.BLOCK);
-                    LootTable loottable = context.getLevel().getServer().getLootTables()
-                            .get(blockState.getBlock().getLootTable());
+                    LootParams.Builder builder = new LootParams.Builder(context.getLevel()).withParameter(LootContextParams.TOOL, fakeTool);
+                    LootParams ctx = builder.create(LootContextParamSets.BLOCK);
+                    LootTable loottable = context.getLevel().getServer().getLootData()
+                            .getLootTable(blockState.getBlock().getLootTable());
                     return loottable.getRandomItems(ctx);
                 }
             }

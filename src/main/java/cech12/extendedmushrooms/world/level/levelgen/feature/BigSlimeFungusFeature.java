@@ -48,7 +48,7 @@ public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
                     continue;
                 }
                 mutableBlockPos.set(center).move(x, 0, z);
-                if (!isReplaceable(level, mutableBlockPos, false)) {
+                if (!isReplaceable(level, mutableBlockPos)) {
                     return false;
                 }
             }

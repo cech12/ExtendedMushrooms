@@ -31,15 +31,15 @@ public class BigPoisonousMushroomFeature extends SingleBigMushroomFeature {
         for (int x = -capRadius; x <= capRadius; ++x) {
             for (int z = -capRadius; z <= capRadius; ++z) {
                 mutableBlockPos.set(blockPos).move(x, size, z);
-                if (!isReplaceable(level, mutableBlockPos, false)) {
+                if (!isReplaceable(level, mutableBlockPos)) {
                     return false;
                 }
                 mutableBlockPos.move(Direction.DOWN, 1);
-                if (!isReplaceable(level, mutableBlockPos, false)) {
+                if (!isReplaceable(level, mutableBlockPos)) {
                     return false;
                 }
                 mutableBlockPos.move(Direction.DOWN, 1);
-                if (!isReplaceable(level, mutableBlockPos, false)) {
+                if (!isReplaceable(level, mutableBlockPos)) {
                     return false;
                 }
             }

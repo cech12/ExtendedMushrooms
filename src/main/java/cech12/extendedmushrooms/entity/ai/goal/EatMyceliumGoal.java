@@ -20,7 +20,7 @@ public class EatMyceliumGoal extends Goal {
 
     public EatMyceliumGoal(Mob eaterEntityIn) {
         this.eaterEntity = eaterEntityIn;
-        this.entityWorld = eaterEntityIn.level;
+        this.entityWorld = eaterEntityIn.level();
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
     }
 

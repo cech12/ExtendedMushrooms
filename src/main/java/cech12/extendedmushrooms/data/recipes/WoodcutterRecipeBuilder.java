@@ -52,14 +52,14 @@ public class WoodcutterRecipeBuilder {
     }
 
     /**
-     * Builds this recipe into an {@link IFinishedRecipe}.
+     * Builds this recipe into an {@link FinishedRecipe}.
      */
     public void build(Consumer<FinishedRecipe> consumerIn) {
         this.build(consumerIn, ForgeRegistries.ITEMS.getKey(this.result));
     }
 
     /**
-     * Builds this recipe into an {@link IFinishedRecipe}. Use {@link #build(Consumer)} if save is the same as the ID for
+     * Builds this recipe into an {@link FinishedRecipe}. Use {@link #build(Consumer)} if save is the same as the ID for
      * the result.
      */
     public void build(Consumer<FinishedRecipe> consumerIn, String save) {
@@ -72,7 +72,7 @@ public class WoodcutterRecipeBuilder {
     }
 
     /**
-     * Builds this recipe into an {@link IFinishedRecipe}.
+     * Builds this recipe into an {@link FinishedRecipe}.
      */
     public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
         consumerIn.accept(new Result(id, this.result, this.ingredient, this.count, this.conditions));
@@ -131,8 +131,7 @@ public class WoodcutterRecipeBuilder {
         }
 
         /**
-         * Gets the ID for the advancement associated with this recipe. Should not be null if {@link #getAdvancementJson}
-         * is non-null.
+         * Gets the ID for the advancement associated with this recipe.
          */
         @Nullable
         public ResourceLocation getAdvancementId() {

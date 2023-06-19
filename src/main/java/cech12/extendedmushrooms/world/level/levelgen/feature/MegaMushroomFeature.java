@@ -52,7 +52,7 @@ public abstract class MegaMushroomFeature extends SingleBigMushroomFeature {
             for (int x = 0; x < 2; x++) {
                 for (int z = 0; z < 2; z++) {
                     mutableBlockPos.set(blockPos).move(x, y, z);
-                    if (isReplaceable(level, mutableBlockPos, true)) {
+                    if (isReplaceable(level, mutableBlockPos)) {
                         this.setBlock(level, mutableBlockPos, config.stemProvider().getState(random, blockPos));
                     }
                 }

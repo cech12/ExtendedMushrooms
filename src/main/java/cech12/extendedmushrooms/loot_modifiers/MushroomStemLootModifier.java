@@ -12,6 +12,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -40,14 +41,14 @@ public class MushroomStemLootModifier extends LootModifier {
             if (blockState != null && blockState.is(ModTags.ForgeBlocks.MUSHROOM_STEMS)) {
                 ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
                 //to avoid endless loop: test for silk touch enchantment
-                if (tool == null || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
+                if (tool == null || EnchantmentHelper.getTagEnchantmentLevel(Enchantments.SILK_TOUCH, tool) <= 0) {
                     //generate fake tool with silk touch enchantment
                     ItemStack fakeTool = (tool != null && tool.isEnchantable()) ? tool.copy() : new ItemStack(Items.DIAMOND_AXE);
                     fakeTool.enchant(Enchantments.SILK_TOUCH, 1);
                     //generate loot with this tool
-                    LootContext ctx = new LootContext.Builder(context).withParameter(LootContextParams.TOOL, fakeTool).create(LootContextParamSets.BLOCK);
-                    LootTable loottable = context.getLevel().getServer().getLootTables()
-                            .get(blockState.getBlock().getLootTable());
+                    LootParams ctx = new LootParams.Builder(context.getLevel()).withParameter(LootContextParams.TOOL, fakeTool).create(LootContextParamSets.BLOCK);
+                    LootTable loottable = context.getLevel().getServer().getLootData()
+                            .getLootTable(blockState.getBlock().getLootTable());
                     return loottable.getRandomItems(ctx);
                 }
             }

@@ -25,7 +25,7 @@ public class EatMushroomGoal extends Goal {
 
     public EatMushroomGoal(Mob eaterEntity) {
         this.eaterEntity = eaterEntity;
-        this.entityWorld = eaterEntity.level;
+        this.entityWorld = eaterEntity.level();
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
     }
 

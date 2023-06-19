@@ -54,13 +54,13 @@ public class MushroomSporesItem extends Item {
     @Override
     public InteractionResult interactLivingEntity(@Nonnull ItemStack stack, @Nonnull Player playerIn, LivingEntity target, @Nonnull InteractionHand hand) {
         boolean itemUsed = false;
-        Level world = target.level;
+        Level world = target.level();
         if (!world.isClientSide && world instanceof ServerLevel) {
             if (target instanceof Cow && !(target instanceof MushroomCow)) {
                 // Cow to Mooshroom
                 target.setSpeed(0);
                 //create mooshroom
-                MushroomCow mooshroom = EntityType.MOOSHROOM.create(target.level);
+                MushroomCow mooshroom = EntityType.MOOSHROOM.create(target.level());
                 if (mooshroom != null) {
                     mooshroom.copyPosition(target);
                     mooshroom.finalizeSpawn((ServerLevel)world, world.getCurrentDifficultyAt(target.blockPosition()), MobSpawnType.CONVERSION, null, null);

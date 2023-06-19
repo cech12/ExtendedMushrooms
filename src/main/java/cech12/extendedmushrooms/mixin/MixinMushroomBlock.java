@@ -37,9 +37,10 @@ public class MixinMushroomBlock {
         }
         //automatic growing of mushrooms
         //Forge: prevent loading unloaded chunks
-        if (world.isAreaLoaded(pos, 7) && random.nextInt(25) == 0) {
+        if (random.nextInt(25) == 0) {
             if (state.getBlock() instanceof MushroomBlock) {
                 ((MushroomBlock) state.getBlock()).performBonemeal(world, random, pos, state);
+                ci.cancel();
             }
         }
         //automatic multiplication follows in tick method when ci.canceled NOT called

@@ -9,7 +9,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SignItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -43,23 +43,23 @@ public class ModItems {
 
     public static final RegistryObject<Item> MUSHROOM_SHEEP_SPAWN_EGG = ITEMS.register("mushroom_sheep_spawn_egg", () -> new ForgeSpawnEggItem(() -> ModEntityTypes.MUSHROOM_SHEEP.get(), 10489616, 10051392, new Item.Properties()));
 
-    public static void addItemsToTabs(CreativeModeTabEvent.BuildContents event) {
+    public static void addItemsToTabs(BuildCreativeModeTabContentsEvent event) {
         for (RegistryObject<Item> item : ITEMS.getEntries()) {
-            if (item.get() instanceof MushroomBoatItem && event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            if (item.get() instanceof MushroomBoatItem && event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
                 event.accept(item);
             }
-            if (item.get() instanceof SignItem && event.getTab() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            if (item.get() instanceof SignItem && event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
                 event.accept(item);
             }
-            if (item.get() instanceof ForgeSpawnEggItem && event.getTab() == CreativeModeTabs.SPAWN_EGGS) {
+            if (item.get() instanceof ForgeSpawnEggItem && event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
                 event.accept(item);
             }
         }
-        if (event.getTab() == CreativeModeTabs.FOOD_AND_DRINKS) {
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             event.accept(GRILLED_MUSHROOM);
             event.accept(MUSHROOM_BREAD);
         }
-        if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(MUSHROOM_SPORES);
             event.accept(GLOWSTONE_CRUMBS);
             event.accept(SLIME_BLOB);

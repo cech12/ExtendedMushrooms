@@ -2,15 +2,17 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.item.MushroomType;
+import com.google.gson.Gson;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.storage.loot.Deserializers;
+import net.minecraft.world.level.storage.loot.LootDataType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -25,6 +27,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 public class EntityLootProvider implements DataProvider {
+
+    private static final Gson GSON = Deserializers.createLootTableSerializer().create();
     private final PackOutput packOutput;
     private final CompletableFuture<HolderLookup.Provider> lookupProvider;
     private final Map<MushroomType, Function<MushroomType, LootTable.Builder>> functionTable = new HashMap<>();
@@ -56,7 +60,7 @@ public class EntityLootProvider implements DataProvider {
 
             return CompletableFuture.allOf(tables.entrySet().stream().map((entry) -> {
                 Path path = getSheepPath(packOutput.getOutputFolder(), ForgeRegistries.ITEMS.getKey(entry.getKey().getItem()));
-                return DataProvider.saveStable(cache, LootTables.serialize(entry.getValue().apply(entry.getKey()).setParamSet(LootContextParamSets.ENTITY).build()), path);
+                return DataProvider.saveStable(cache, LootDataType.TABLE.parser().toJsonTree(entry.getValue().apply(entry.getKey()).setParamSet(LootContextParamSets.ENTITY).build()), path);
             }).toArray(CompletableFuture[]::new));
         });
     }

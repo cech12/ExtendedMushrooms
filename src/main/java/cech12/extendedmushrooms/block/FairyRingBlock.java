@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEventListener;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -50,7 +49,7 @@ public class FairyRingBlock extends AirBlock implements EntityBlock {
     public static final Direction[] DIRECTIONS = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
     public FairyRingBlock() {
-        super(Block.Properties.of(Material.AIR).noCollission().noLootTable());
+        super(Block.Properties.of().noCollission().noLootTable());
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 
