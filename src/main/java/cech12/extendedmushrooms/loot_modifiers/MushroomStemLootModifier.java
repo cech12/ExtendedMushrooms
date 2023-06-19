@@ -46,7 +46,11 @@ public class MushroomStemLootModifier extends LootModifier {
                     ItemStack fakeTool = (tool != null && tool.isEnchantable()) ? tool.copy() : new ItemStack(Items.DIAMOND_AXE);
                     fakeTool.enchant(Enchantments.SILK_TOUCH, 1);
                     //generate loot with this tool
-                    LootParams ctx = new LootParams.Builder(context.getLevel()).withParameter(LootContextParams.TOOL, fakeTool).create(LootContextParamSets.BLOCK);
+                    LootParams ctx = new LootParams.Builder(context.getLevel())
+                            .withParameter(LootContextParams.TOOL, fakeTool)
+                            .withParameter(LootContextParams.ORIGIN, context.getParam(LootContextParams.ORIGIN))
+                            .withParameter(LootContextParams.BLOCK_STATE, blockState)
+                            .create(LootContextParamSets.BLOCK);
                     LootTable loottable = context.getLevel().getServer().getLootData()
                             .getLootTable(blockState.getBlock().getLootTable());
                     return loottable.getRandomItems(ctx);
