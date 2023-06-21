@@ -41,6 +41,25 @@ public class BlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(@Nonnull HolderLookup.Provider lookupProvider) {
         //generate mod intern tags
+        tag(ModTags.Blocks.MUSHROOMS_GLOWSHROOM).add(ModBlocks.GLOWSHROOM.get());
+        tag(ModTags.Blocks.MUSHROOMS_LIME).add(ModBlocks.SLIME_FUNGUS.get());
+        tag(ModTags.Blocks.MUSHROOMS_ORANGE).add(ModBlocks.HONEY_FUNGUS.get());
+        tag(ModTags.Blocks.MUSHROOMS_PURPLE).add(ModBlocks.POISONOUS_MUSHROOM.get());
+        tag(ModTags.Blocks.MUSHROOMS)
+                .addTag(ModTags.Blocks.MUSHROOMS_GLOWSHROOM)
+                .addTag(ModTags.Blocks.MUSHROOMS_LIME)
+                .addTag(ModTags.Blocks.MUSHROOMS_ORANGE)
+                .addTag(ModTags.Blocks.MUSHROOMS_PURPLE);
+        tag(ModTags.Blocks.MUSHROOMS_EDIBLE)
+                .add(ModBlocks.GLOWSHROOM.get())
+                .add(ModBlocks.HONEY_FUNGUS.get())
+                .add(ModBlocks.SLIME_FUNGUS.get());
+        tag(ModTags.Blocks.MUSHROOMS_JUMP_BOOSTING)
+                .add(ModBlocks.SLIME_FUNGUS.get());
+        tag(ModTags.Blocks.MUSHROOMS_POISONOUS)
+                .add(ModBlocks.POISONOUS_MUSHROOM.get());
+        tag(ModTags.Blocks.MUSHROOMS_SLOWING_DOWN)
+                .add(ModBlocks.HONEY_FUNGUS.get());
         tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomWoodButtonBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
@@ -141,10 +160,10 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         tag(ModTags.ForgeBlocks.MUSHROOMS_BROWN).add(Blocks.BROWN_MUSHROOM);
         tag(ModTags.ForgeBlocks.MUSHROOMS_RED).add(Blocks.RED_MUSHROOM);
-        tag(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM).add(ModBlocks.GLOWSHROOM.get());
-        tag(ModTags.ForgeBlocks.MUSHROOMS_LIME).add(ModBlocks.SLIME_FUNGUS.get());
-        tag(ModTags.ForgeBlocks.MUSHROOMS_ORANGE).add(ModBlocks.HONEY_FUNGUS.get());
-        tag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE).add(ModBlocks.POISONOUS_MUSHROOM.get());
+        tag(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM).addTag(ModTags.Blocks.MUSHROOMS_GLOWSHROOM);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_LIME).addTag(ModTags.Blocks.MUSHROOMS_LIME);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_ORANGE).addTag(ModTags.Blocks.MUSHROOMS_ORANGE);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE).addTag(ModTags.Blocks.MUSHROOMS_PURPLE);
         tag(ModTags.ForgeBlocks.MUSHROOMS)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_BROWN)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_RED)
@@ -152,20 +171,13 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_LIME)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_ORANGE)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE);
-        tag(ModTags.Blocks.MUSHROOMS_EDIBLE) // add mod intern edible mushrooms
-                .add(ModBlocks.GLOWSHROOM.get())
-                .add(ModBlocks.HONEY_FUNGUS.get())
-                .add(ModBlocks.SLIME_FUNGUS.get());
         tag(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE)
                 .add(Blocks.BROWN_MUSHROOM)
                 .add(Blocks.RED_MUSHROOM)
                 .addTag(ModTags.Blocks.MUSHROOMS_EDIBLE);
-        tag(ModTags.ForgeBlocks.MUSHROOMS_JUMP_BOOSTING)
-                .add(ModBlocks.SLIME_FUNGUS.get());
-        tag(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS)
-                .add(ModBlocks.POISONOUS_MUSHROOM.get());
-        tag(ModTags.ForgeBlocks.MUSHROOMS_SLOWING_DOWN)
-                .add(ModBlocks.HONEY_FUNGUS.get());
+        tag(ModTags.ForgeBlocks.MUSHROOMS_JUMP_BOOSTING).addTag(ModTags.Blocks.MUSHROOMS_JUMP_BOOSTING);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS).addTag(ModTags.Blocks.MUSHROOMS_POISONOUS);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_SLOWING_DOWN).addTag(ModTags.Blocks.MUSHROOMS_SLOWING_DOWN);
 
         tag(ModTags.ForgeBlocks.FUNGI)
                 .add(Blocks.CRIMSON_FUNGUS)
@@ -179,16 +191,18 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         //generate minecraft tags
         tag(BlockTags.BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
-        tag(BlockTags.WOOL_CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
         tag(BlockTags.DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
         tag(BlockTags.FENCE_GATES).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
         tag(BlockTags.LOGS_THAT_BURN).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
         tag(BlockTags.OVERWORLD_NATURAL_LOGS).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
         tag(BlockTags.PLANKS).addTag(ModTags.Blocks.MUSHROOM_PLANKS);
+        tag(BlockTags.REPLACEABLE).add(ModBlocks.INFESTED_GRASS.get());
+        tag(BlockTags.REPLACEABLE_BY_TREES).add(ModBlocks.INFESTED_GRASS.get());
         tag(BlockTags.SLABS).addTag(ModTags.Blocks.MUSHROOM_SLABS);
         tag(BlockTags.SMALL_FLOWERS).add(ModBlocks.INFESTED_FLOWER.get());
         tag(BlockTags.STAIRS).addTag(ModTags.Blocks.MUSHROOM_STAIRS);
         tag(BlockTags.STANDING_SIGNS).addTag(ModTags.Blocks.MUSHROOM_STANDING_SIGNS);
+        tag(BlockTags.SWORD_EFFICIENT).addTag(ModTags.Blocks.MUSHROOMS).add(ModBlocks.INFESTED_GRASS.get()); //small flowers already included
         tag(BlockTags.TRAPDOORS).addTag(ModTags.Blocks.MUSHROOM_TRAPDOORS);
         tag(BlockTags.WALL_SIGNS).addTag(ModTags.Blocks.MUSHROOM_WALL_SIGNS);
         tag(BlockTags.WOODEN_BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
@@ -199,6 +213,7 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.WOODEN_STAIRS).addTag(ModTags.Blocks.MUSHROOM_STAIRS);
         tag(BlockTags.WOODEN_TRAPDOORS).addTag(ModTags.Blocks.MUSHROOM_TRAPDOORS);
         tag(BlockTags.WOOL).addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS);
+        tag(BlockTags.WOOL_CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
 
         //generate tags for mod compatibility
         tag(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES).addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);

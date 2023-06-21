@@ -75,7 +75,15 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOM_TRAPDOORS = tag("mushroom_trapdoors");
         public static final TagKey<Block> MUSHROOM_WALL_SIGNS = tag("mushroom_wall_signs");
 
-        public static final TagKey<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible"); // only mod intern edible mushrooms
+        public static final TagKey<Block> MUSHROOMS = tag("mushrooms");
+        public static final TagKey<Block> MUSHROOMS_GLOWSHROOM = tag("mushrooms/glowshroom");
+        public static final TagKey<Block> MUSHROOMS_LIME = tag("mushrooms/lime");
+        public static final TagKey<Block> MUSHROOMS_ORANGE = tag("mushrooms/orange");
+        public static final TagKey<Block> MUSHROOMS_PURPLE = tag("mushrooms/purple");
+        public static final TagKey<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
+        public static final TagKey<Block> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
+        public static final TagKey<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
+        public static final TagKey<Block> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
 
         //use "minecraft:mushroom_grow_block" tag (Blocktags,MUSHROOM_GROW_BLOCK) for lightlevel ignoring blocks
         public static final TagKey<Block> MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL = tag("mushroom_growing_blocks_lightlevel");
@@ -153,7 +161,15 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOM_STAIRS = tag("mushroom_stairs");
         public static final TagKey<Item> MUSHROOM_TRAPDOORS = tag("mushroom_trapdoors");
 
-        public static final TagKey<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible"); // only mod intern edible mushrooms
+        public static final TagKey<Item> MUSHROOMS = tag("mushrooms");
+        public static final TagKey<Item> MUSHROOMS_GLOWSHROOM = tag("mushrooms/glowshroom");
+        public static final TagKey<Item> MUSHROOMS_LIME = tag("mushrooms/lime");
+        public static final TagKey<Item> MUSHROOMS_ORANGE = tag("mushrooms/orange");
+        public static final TagKey<Item> MUSHROOMS_PURPLE = tag("mushrooms/purple");
+        public static final TagKey<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
+        public static final TagKey<Item> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
+        public static final TagKey<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
+        public static final TagKey<Item> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
 
         private static TagKey<Item> tag(@Nonnull String name) {
             return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(ExtendedMushrooms.MOD_ID, name));

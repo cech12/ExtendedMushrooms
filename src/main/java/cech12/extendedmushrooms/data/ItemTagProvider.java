@@ -33,6 +33,15 @@ public class ItemTagProvider extends ItemTagsProvider {
     protected void addTags(@Nonnull HolderLookup.Provider lookupProvider) {
         //generate mod intern tags
         tag(ModTags.Items.FAIRY_RING_MUSHROOMS).addTag(Tags.Items.MUSHROOMS).addTag(ModTags.ForgeItems.FUNGI);
+        copy(ModTags.Blocks.MUSHROOMS_GLOWSHROOM, ModTags.Items.MUSHROOMS_GLOWSHROOM);
+        copy(ModTags.Blocks.MUSHROOMS_LIME, ModTags.Items.MUSHROOMS_LIME);
+        copy(ModTags.Blocks.MUSHROOMS_ORANGE, ModTags.Items.MUSHROOMS_ORANGE);
+        copy(ModTags.Blocks.MUSHROOMS_PURPLE, ModTags.Items.MUSHROOMS_PURPLE);
+        copy(ModTags.Blocks.MUSHROOMS, ModTags.Items.MUSHROOMS);
+        copy(ModTags.Blocks.MUSHROOMS_EDIBLE, ModTags.Items.MUSHROOMS_EDIBLE);
+        copy(ModTags.Blocks.MUSHROOMS_JUMP_BOOSTING, ModTags.Items.MUSHROOMS_JUMP_BOOSTING);
+        copy(ModTags.Blocks.MUSHROOMS_POISONOUS, ModTags.Items.MUSHROOMS_POISONOUS);
+        copy(ModTags.Blocks.MUSHROOMS_SLOWING_DOWN, ModTags.Items.MUSHROOMS_SLOWING_DOWN);
         tag(ModTags.Items.MUSHROOM_BOATS).add(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get)
                 .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && !mushroomBoatItem.hasChest())
                 .sorted(Comparator.comparing(ForgeRegistries.ITEMS::getKey))
@@ -80,7 +89,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_ORANGE, ModTags.ForgeItems.MUSHROOMS_ORANGE);
         copy(ModTags.ForgeBlocks.MUSHROOMS_PURPLE, ModTags.ForgeItems.MUSHROOMS_PURPLE);
         copy(ModTags.ForgeBlocks.MUSHROOMS, Tags.Items.MUSHROOMS);
-        copy(ModTags.Blocks.MUSHROOMS_EDIBLE, ModTags.Items.MUSHROOMS_EDIBLE); // add mod intern edible mushrooms
         copy(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE, ModTags.ForgeItems.MUSHROOMS_EDIBLE);
         copy(ModTags.ForgeBlocks.MUSHROOMS_JUMP_BOOSTING, ModTags.ForgeItems.MUSHROOMS_JUMP_BOOSTING);
         copy(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS, ModTags.ForgeItems.MUSHROOMS_POISONOUS);

@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.20.1-4.0.0.0] - 2023-06-??
 ### Changed
 - Update to Forge 1.20.1-47.0.16 #71
+- some block and item tags were changed and added #71
 
 ## [1.19.4-3.2.0.0] - 2023-05-27
 ### Added 
