@@ -53,6 +53,7 @@
           ]
         }
       ],
+      "name": "main",
       "rolls": 1.0
     },
     {
@@ -99,6 +100,7 @@
           "name": "extendedmushrooms:honey_blob"
         }
       ],
+      "name": "additional",
       "rolls": 1.0
     },
     {
@@ -145,6 +147,7 @@
           "name": "extendedmushrooms:honeycomb_shred"
         }
       ],
+      "name": "additional",
       "rolls": 1.0
     }
   ]
