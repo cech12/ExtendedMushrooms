@@ -177,8 +177,10 @@ public class BlockLootProvider implements DataProvider {
             tables.put(ModBlocks.INFESTED_GRASS, BlockLootProvider::dropOnlyWithShears);
 
             return CompletableFuture.allOf(tables.entrySet().stream().map(entry -> {
-                Path path = getPath(this.packOutput.getOutputFolder(), entry.getKey().getId());
-                return DataProvider.saveStable(cache, LootDataType.TABLE.parser().toJsonTree(entry.getValue().apply(entry.getKey().get()).setParamSet(LootContextParamSets.BLOCK).build()), path);
+                ResourceLocation id = entry.getKey().getId();
+                ResourceLocation randomSequence = new ResourceLocation(id.getNamespace(), "blocks/" + id.getPath());
+                Path path = getPath(this.packOutput.getOutputFolder(), id);
+                return DataProvider.saveStable(cache, LootDataType.TABLE.parser().toJsonTree(entry.getValue().apply(entry.getKey().get()).setRandomSequence(randomSequence).setParamSet(LootContextParamSets.BLOCK).build()), path);
             }).toArray(CompletableFuture[]::new));
         });
     }

@@ -150,5 +150,6 @@
       "name": "additional2",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "extendedmushrooms:blocks/honey_fungus_cap"
 }

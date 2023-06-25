@@ -103,5 +103,6 @@
       "name": "additional",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "extendedmushrooms:blocks/slime_fungus_cap"
 }
