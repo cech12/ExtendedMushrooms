@@ -6,6 +6,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.HugeMushroomBlock;
@@ -61,6 +62,8 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
                     singleTexture(name, ITEM_GENERATED, "layer0", getBlockResourceLocation(name));
                 } else if (block instanceof StandingSignBlock) {
                     //SignItem returns standing sign block in getBlock
+                    singleTexture(name, ITEM_GENERATED, "layer0", getItemResourceLocation(name));
+                } else if (block instanceof CeilingHangingSignBlock) {
                     singleTexture(name, ITEM_GENERATED, "layer0", getItemResourceLocation(name));
                 } else if (block instanceof DoorBlock) {
                     //block items with item texture

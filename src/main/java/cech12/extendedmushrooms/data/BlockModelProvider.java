@@ -13,6 +13,8 @@ import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.CeilingHangingSignBlock;
+import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
@@ -199,6 +201,15 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 //only one model for both signs
                 if (block instanceof StandingSignBlock) {
                     getBuilder(name).texture("particle", getBlockResourceLocation(name, "_sign", "_planks"));
+                }
+            } else if (block instanceof CeilingHangingSignBlock || block instanceof WallHangingSignBlock) {
+                //only one model for both signs
+                if (block instanceof CeilingHangingSignBlock) {
+                    ResourceLocation location = getBlockResourceLocation(name, "_hanging_sign", "_stem_stripped");
+                    if (block == ModBlocks.MUSHROOM_HANGING_SIGN.get()) {
+                        location = getBlockResourceLocation(ModBlocks.STRIPPED_MUSHROOM_STEM.getId().getPath());
+                    }
+                    getBuilder(name).texture("particle", location);
                 }
             } else if (block instanceof HugeMushroomBlock) { // Stems & Stripped Stems. MushroomCapBlock is checked before
                 hugeMushroomBlock(name, getBlockResourceLocation(name));

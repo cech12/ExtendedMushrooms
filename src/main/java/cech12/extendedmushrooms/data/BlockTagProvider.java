@@ -3,7 +3,9 @@ package cech12.extendedmushrooms.data;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
+import cech12.extendedmushrooms.block.MushroomCeilingHangingSignBlock;
 import cech12.extendedmushrooms.block.MushroomStandingSignBlock;
+import cech12.extendedmushrooms.block.MushroomWallHangingSignBlock;
 import cech12.extendedmushrooms.block.MushroomWallSignBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.MushroomWoodPressurePlateBlock;
@@ -75,6 +77,10 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .filter(block -> block instanceof WoolCarpetBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
+        tag(ModTags.Blocks.MUSHROOM_CEILING_HANGING_SIGNS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+                .filter(block -> block instanceof MushroomCeilingHangingSignBlock)
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
+                .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_DOORS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof DoorBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
@@ -116,6 +122,10 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_TRAPDOORS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof TrapDoorBlock)
+                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
+                .toArray(Block[]::new));
+        tag(ModTags.Blocks.MUSHROOM_WALL_HANGING_SIGNS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+                .filter(block -> block instanceof MushroomWallHangingSignBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
         tag(ModTags.Blocks.MUSHROOM_WALL_SIGNS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
@@ -191,6 +201,7 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         //generate minecraft tags
         tag(BlockTags.BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
+        tag(BlockTags.CEILING_HANGING_SIGNS).addTag(ModTags.Blocks.MUSHROOM_CEILING_HANGING_SIGNS);
         tag(BlockTags.DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);
         tag(BlockTags.FENCE_GATES).addTag(ModTags.Blocks.MUSHROOM_FENCE_GATES);
         tag(BlockTags.LOGS_THAT_BURN).addTag(ModTags.ForgeBlocks.MUSHROOM_STEMS);
@@ -204,6 +215,7 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.STANDING_SIGNS).addTag(ModTags.Blocks.MUSHROOM_STANDING_SIGNS);
         tag(BlockTags.SWORD_EFFICIENT).addTag(ModTags.Blocks.MUSHROOMS).add(ModBlocks.INFESTED_GRASS.get()); //small flowers already included
         tag(BlockTags.TRAPDOORS).addTag(ModTags.Blocks.MUSHROOM_TRAPDOORS);
+        tag(BlockTags.WALL_HANGING_SIGNS).addTag(ModTags.Blocks.MUSHROOM_WALL_HANGING_SIGNS);
         tag(BlockTags.WALL_SIGNS).addTag(ModTags.Blocks.MUSHROOM_WALL_SIGNS);
         tag(BlockTags.WOODEN_BUTTONS).addTag(ModTags.Blocks.MUSHROOM_BUTTONS);
         tag(BlockTags.WOODEN_DOORS).addTag(ModTags.Blocks.MUSHROOM_DOORS);

@@ -8,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.BlockTags;
@@ -39,6 +40,10 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOMS_PURPLE, ModTags.Items.MUSHROOMS_PURPLE);
         copy(ModTags.Blocks.MUSHROOMS, ModTags.Items.MUSHROOMS);
         copy(ModTags.Blocks.MUSHROOMS_EDIBLE, ModTags.Items.MUSHROOMS_EDIBLE);
+        tag(ModTags.Items.MUSHROOM_HANGING_SIGNS).add(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get)
+                .filter(item -> item instanceof HangingSignItem)
+                .sorted(Comparator.comparing(ForgeRegistries.ITEMS::getKey))
+                .toArray(Item[]::new));
         copy(ModTags.Blocks.MUSHROOMS_JUMP_BOOSTING, ModTags.Items.MUSHROOMS_JUMP_BOOSTING);
         copy(ModTags.Blocks.MUSHROOMS_POISONOUS, ModTags.Items.MUSHROOMS_POISONOUS);
         copy(ModTags.Blocks.MUSHROOMS_SLOWING_DOWN, ModTags.Items.MUSHROOMS_SLOWING_DOWN);
@@ -62,7 +67,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOL);
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES, ModTags.Items.MUSHROOM_PRESSURE_PLATES);
         tag(ModTags.Items.MUSHROOM_SIGNS).add(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get)
-                .filter(item -> item instanceof SignItem)
+                .filter(item -> item instanceof SignItem && !(item instanceof HangingSignItem))
                 .sorted(Comparator.comparing(ForgeRegistries.ITEMS::getKey))
                 .toArray(Item[]::new));
         copy(ModTags.Blocks.MUSHROOM_SLABS, ModTags.Items.MUSHROOM_SLABS);
@@ -108,6 +113,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.WOOL_CARPETS, ItemTags.WOOL_CARPETS);
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
+        tag(ItemTags.HANGING_SIGNS).addTag(ModTags.Items.MUSHROOM_HANGING_SIGNS);
         copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
         copy(BlockTags.PLANKS, ItemTags.PLANKS);
         tag(ItemTags.SIGNS).addTag(ModTags.Items.MUSHROOM_SIGNS);

@@ -19,7 +19,8 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.data.DataProvider;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.WallHangingSignBlock;
+import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootDataType;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
@@ -122,15 +123,17 @@ public class BlockLootProvider implements DataProvider {
 
         //add additional loot if set
         if (additionalLoot != null) {
+            int count = 1;
             for (Pair<ItemLike, float[]> pair : additionalLoot) {
                 ItemLike lootItem = pair.first;
                 float[] fortuneChances = pair.second;
                 LootPoolEntryContainer.Builder<?> additionalEntry = LootItem.lootTableItem(lootItem)
                         .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortuneChances))
                         .apply(ApplyExplosionDecay.explosionDecay());
-                LootPool.Builder additionalLootPool = LootPool.lootPool().name("additional").setRolls(ConstantValue.exactly(1)).add(additionalEntry)
+                LootPool.Builder additionalLootPool = LootPool.lootPool().name("additional" + ((count > 1) ? count : "")).setRolls(ConstantValue.exactly(1)).add(additionalEntry)
                         .when(InvertedLootItemCondition.invert(MatchTool.toolMatches(silkPredicate)));
                 lootTable.withPool(additionalLootPool);
+                count++;
             }
         }
 
@@ -154,8 +157,8 @@ public class BlockLootProvider implements DataProvider {
                     tables.put(block, BlockLootProvider::dropStem);
                 } else if (block.get() instanceof FairyRingBlock) {
                     tables.put(block, BlockLootProvider::dropNothing);
-                } else if (!(block.get() instanceof FlowerPotBlock)) {
-                    //ignore potted flowers
+                } else if (!(block.get() instanceof FlowerPotBlock) && !(block.get() instanceof WallSignBlock) && !(block.get() instanceof WallHangingSignBlock)) {
+                    //ignore potted flowers & wall signs
                     tables.put(block, BlockLootProvider::dropItself);
                 }
             }

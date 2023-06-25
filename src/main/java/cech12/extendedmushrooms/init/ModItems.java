@@ -6,6 +6,7 @@ import cech12.extendedmushrooms.item.MushroomSporesItem;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SignItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -28,9 +29,13 @@ public class ModItems {
     public static final RegistryObject<Item> HONEY_FUNGUS_CHEST_BOAT = ITEMS.register("honey_fungus_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.HONEY_FUNGUS, true));
 
     public static final RegistryObject<Item> MUSHROOM_SIGN = ITEMS.register("mushroom_sign", () -> new SignItem((new Item.Properties()).stacksTo(16), ModBlocks.MUSHROOM_STANDING_SIGN.get(), ModBlocks.MUSHROOM_WALL_SIGN.get()));
+    public static final RegistryObject<Item> MUSHROOM_HANGING_SIGN = ITEMS.register("mushroom_hanging_sign", () -> new HangingSignItem(ModBlocks.MUSHROOM_HANGING_SIGN.get(), ModBlocks.MUSHROOM_WALL_HANGING_SIGN.get(), (new Item.Properties()).stacksTo(16)));
     public static final RegistryObject<Item> GLOWSHROOM_SIGN = ITEMS.register("glowshroom_sign", () -> new SignItem((new Item.Properties()).stacksTo(16), ModBlocks.GLOWSHROOM_STANDING_SIGN.get(), ModBlocks.GLOWSHROOM_WALL_SIGN.get()));
+    public static final RegistryObject<Item> GLOWSHROOM_HANGING_SIGN = ITEMS.register("glowshroom_hanging_sign", () -> new HangingSignItem(ModBlocks.GLOWSHROOM_HANGING_SIGN.get(), ModBlocks.GLOWSHROOM_WALL_HANGING_SIGN.get(), (new Item.Properties()).stacksTo(16)));
     public static final RegistryObject<Item> POISONOUS_MUSHROOM_SIGN = ITEMS.register("poisonous_mushroom_sign", () -> new SignItem((new Item.Properties()).stacksTo(16), ModBlocks.POISONOUS_MUSHROOM_STANDING_SIGN.get(), ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN.get()));
+    public static final RegistryObject<Item> POISONOUS_MUSHROOM_HANGING_SIGN = ITEMS.register("poisonous_mushroom_hanging_sign", () -> new HangingSignItem(ModBlocks.POISONOUS_MUSHROOM_HANGING_SIGN.get(), ModBlocks.POISONOUS_MUSHROOM_WALL_HANGING_SIGN.get(), (new Item.Properties()).stacksTo(16)));
     public static final RegistryObject<Item> HONEY_FUNGUS_SIGN = ITEMS.register("honey_fungus_sign", () -> new SignItem((new Item.Properties()).stacksTo(16), ModBlocks.HONEY_FUNGUS_STANDING_SIGN.get(), ModBlocks.HONEY_FUNGUS_WALL_SIGN.get()));
+    public static final RegistryObject<Item> HONEY_FUNGUS_HANGING_SIGN = ITEMS.register("honey_fungus_hanging_sign", () -> new HangingSignItem(ModBlocks.HONEY_FUNGUS_HANGING_SIGN.get(), ModBlocks.HONEY_FUNGUS_WALL_HANGING_SIGN.get(), (new Item.Properties()).stacksTo(16)));
 
     public static final RegistryObject<Item> GRILLED_MUSHROOM = ITEMS.register("grilled_mushroom", () -> new Item((new Item.Properties()).food((new FoodProperties.Builder()).nutrition(2).saturationMod(0.3F).build())));
     public static final RegistryObject<Item> MUSHROOM_BREAD = ITEMS.register("mushroom_bread", () -> new Item((new Item.Properties()).food((new FoodProperties.Builder()).nutrition(5).saturationMod(0.3F).build())));

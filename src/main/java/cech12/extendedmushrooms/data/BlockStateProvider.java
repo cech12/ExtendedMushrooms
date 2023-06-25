@@ -6,6 +6,7 @@ import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.AttachFace;
@@ -141,6 +143,10 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof StandingSignBlock) {
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
             } else if (block instanceof WallSignBlock) {
+                simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name.replace("_wall", ""))));
+            } else if (block instanceof CeilingHangingSignBlock) {
+                simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
+            } else if (block instanceof WallHangingSignBlock) {
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name.replace("_wall", ""))));
             } else if (block instanceof SlabBlock) {
                 ModelFile bottom = models().getExistingFile(getBlockResourceLocation(name));
