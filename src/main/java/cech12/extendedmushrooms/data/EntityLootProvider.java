@@ -43,9 +43,9 @@ public class EntityLootProvider implements DataProvider {
     }
 
     private static LootTable.Builder createSheepTable(MushroomType mushroomType) {
-        return LootTable.lootTable().withPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(mushroomType.getCapBlock()))).withPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1.0F)).add(LootTableReference.lootTableReference(EntityType.SHEEP.getDefaultLootTable())));
+        return LootTable.lootTable().setRandomSequence(new ResourceLocation(ExtendedMushrooms.MOD_ID, "entities/sheep/" + mushroomType.name().toLowerCase()))
+                .withPool(LootPool.lootPool().name("wool").setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(mushroomType.getCapBlock())))
+                .withPool(LootPool.lootPool().name("sheep").setRolls(ConstantValue.exactly(1.0F)).add(LootTableReference.lootTableReference(EntityType.SHEEP.getDefaultLootTable())));
     }
 
     @Nonnull

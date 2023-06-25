@@ -9,6 +9,7 @@
           "name": "minecraft:brown_mushroom_block"
         }
       ],
+      "name": "wool",
       "rolls": 1.0
     },
     {
@@ -19,7 +20,9 @@
           "name": "minecraft:entities/sheep"
         }
       ],
+      "name": "sheep",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "extendedmushrooms:entities/sheep/brown_mushroom"
 }
