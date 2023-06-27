@@ -1,39 +1,37 @@
 modLoader="javafml"
-loaderVersion="[47,)"
-issueTrackerURL="https://github.com/cech12/ExtendedMushrooms/issues"
-license="The MIT License (MIT)"
+loaderVersion="${loader_version_range}"
+issueTrackerURL="${mod_issue_tracker}"
+license="${mod_license}"
 [[mods]]
-    modId="extendedmushrooms"
-    version="${file.jarVersion}"
-    displayName="Extended Mushrooms"
-    displayURL="https://www.curseforge.com/minecraft/mc-mods/extended-mushrooms"
-    authors="Cech12"
-    description='''
-    This mod changes some mushroom behaviour and adds mushroom related blocks, items and recipes.
-    '''
-[[dependencies.extendedmushrooms]]
+    modId="${mod_id}"
+    version="${minecraft_version}-${mod_version}"
+    displayName="${mod_name}"
+    displayURL="${mod_url}"
+    authors="${mod_authors}"
+    description='''${mod_description}'''
+[[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true
-    versionRange="[47.0.16,)"
+    versionRange="${forge_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.extendedmushrooms]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.1,)"
+    versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.extendedmushrooms]]
+[[dependencies.${mod_id}]]
    modId="jei"
    mandatory=false
-   versionRange="[15.0.0.17,)"
+   versionRange="${jei_version_range}"
    referralUrl="https://github.com/mezz/JustEnoughItems"
    ordering="NONE"
    side="BOTH"
-[[dependencies.extendedmushrooms]]
+[[dependencies.${mod_id}]]
    modId="moonlight"
    mandatory=false
-   versionRange="[1.20-2.5.8,)"
+   versionRange="${moonlight_version_range}"
    referralUrl="https://www.curseforge.com/minecraft/mc-mods/selene"
    ordering="NONE"
    side="BOTH"
