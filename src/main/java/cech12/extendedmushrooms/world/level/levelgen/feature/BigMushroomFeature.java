@@ -45,7 +45,7 @@ public abstract class BigMushroomFeature extends Feature<ExtendedMushroomFeature
 
     protected void placeCapBlockIfPossible(LevelAccessor level, RandomSource random, ExtendedMushroomFeatureConfiguration config, BlockPos blockPos, boolean west, boolean east, boolean north, boolean south, boolean up) {
         if (isReplaceable(level, blockPos)) {
-            this.setBlock(level, blockPos, config.capProvider().getState(random, blockPos).setValue(HugeMushroomBlock.WEST, west).setValue(HugeMushroomBlock.EAST, east).setValue(HugeMushroomBlock.NORTH, north).setValue(HugeMushroomBlock.SOUTH, south).setValue(HugeMushroomBlock.UP, up));
+            this.setBlock(level, blockPos, config.capProvider().getState(random, blockPos).setValue(HugeMushroomBlock.WEST, west).setValue(HugeMushroomBlock.EAST, east).setValue(HugeMushroomBlock.NORTH, north).setValue(HugeMushroomBlock.SOUTH, south).setValue(HugeMushroomBlock.UP, up).setValue(HugeMushroomBlock.DOWN, false));
         }
     }
 
