@@ -88,9 +88,9 @@ public class ConfiguredFeatureProvider implements DataProvider {
                     });
 
             for (ConfiguredFeatureProvider.Mushroom mushroom : ConfiguredFeatureProvider.MUSHROOMS) {
-                configuredFeatures.add(new SimpleRandomPatchFeature(mushroom.configuredFeature.location(), mushroom.block().getId(), 96, 7, 3));
+                configuredFeatures.add(new SimpleRandomPatchFeature(mushroom.configuredFeature.location(), mushroom.block().getId(), (int) (96 * mushroom.spawnFactor()), 7, 3));
             }
-            configuredFeatures.add(new SimpleRandomPatchFeature(ModFeatures.INFESTED_FLOWER_CONFIGURED.location(), ModBlocks.INFESTED_FLOWER.getId(), 32, 7, 3));
+            configuredFeatures.add(new SimpleRandomPatchFeature(ModFeatures.INFESTED_FLOWER_CONFIGURED.location(), ModBlocks.INFESTED_FLOWER.getId(), 16, 7, 3));
             configuredFeatures.add(new SimpleRandomPatchFeature(ModFeatures.INFESTED_GRASS_CONFIGURED.location(), ModBlocks.INFESTED_GRASS.getId(), 32, 7, 3));
 
             return CompletableFuture.allOf(configuredFeatures.stream().map(entry -> {

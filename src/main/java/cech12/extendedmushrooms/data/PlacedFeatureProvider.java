@@ -23,7 +23,6 @@ import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -48,7 +47,7 @@ public class PlacedFeatureProvider implements DataProvider {
         return this.lookupProvider.thenCompose(provider -> {
             List<PlacedFeatureJson> placedFeatures = new ArrayList<>();
 
-            placedFeatures.add(new PlacedFeatureJson(ModFeatures.INFESTED_FLOWER_PLACED.location(), ModFeatures.INFESTED_FLOWER_CONFIGURED, List.copyOf(VegetationPlacements.worldSurfaceSquaredWithCount(4))));
+            placedFeatures.add(new PlacedFeatureJson(ModFeatures.INFESTED_FLOWER_PLACED.location(), ModFeatures.INFESTED_FLOWER_CONFIGURED, List.copyOf(VegetationPlacements.worldSurfaceSquaredWithCount(1))));
             placedFeatures.add(new PlacedFeatureJson(ModFeatures.INFESTED_GRASS_PLACED.location(), ModFeatures.INFESTED_GRASS_CONFIGURED, List.copyOf(VegetationPlacements.worldSurfaceSquaredWithCount(2))));
 
             List<BigMushroom> bigMushrooms = new LinkedList<>();
@@ -61,11 +60,11 @@ public class PlacedFeatureProvider implements DataProvider {
             megaMushrooms.add(new BigMushroom("mega_poisonous_mushroom", ModFeatures.MEGA_POISONOUS_MUSHROOM_CONFIGURED, 0.02F));
             //register small mushroom features
             for (ConfiguredFeatureProvider.Mushroom mushroom : ConfiguredFeatureProvider.MUSHROOMS) {
-                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("normal").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement((int) (512 * mushroom.spawnFactor())))));
-                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("taiga").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement((int) (256 * mushroom.spawnFactor())))));
-                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("mushroom_island").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement((int) (256 * mushroom.spawnFactor())))));
-                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("swamp").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement((int) (64 * mushroom.spawnFactor())))));
-                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("nether").location(), mushroom.configuredFeature(), List.of(RarityFilter.onAverageOnceEvery(Math.max(1, (int) (2.0 * mushroom.spawnFactor()))), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome())));
+                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("normal").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement(512))));
+                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("taiga").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement(256))));
+                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("mushroom_island").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement(256))));
+                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("swamp").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement(64))));
+                placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("nether").location(), mushroom.configuredFeature(), List.of(RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome())));
             }
             //register feature for big mushrooms random patch
             for (BigMushroom bigMushroom : bigMushrooms) {

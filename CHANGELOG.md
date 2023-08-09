@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Changed Forge to NeoForge 1.20.1-47.1.54 (compatible with Forge 47.1.0)
 - Updated compat with JEI to 1.20.1-15.2.0.23
 - Updated compat with Moonlight Lib to 1.20-2.7.2
+- Reduced spawn of Glowshrooms, Poisonous Mushrooms and Infested Flowers #72
 
 ## [1.20.1-4.0.0.1] - 2023-06-28
 ### Fixed
