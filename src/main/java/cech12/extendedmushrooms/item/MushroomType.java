@@ -38,13 +38,13 @@ public enum MushroomType implements StringRepresentable {
             ModBlocks.POISONOUS_MUSHROOM_CAP,
             MushroomWoodType.POISONOUS_MUSHROOM, DyeColor.PURPLE),
     SLIME_FUNGUS(4,
-            () -> ModBlocks.SLIME_FUNGUS.get().asItem(),
-            ModBlocks.SLIME_FUNGUS_CAP,
+            () -> ModBlocks.PARROT_WAXCAP.get().asItem(),
+            ModBlocks.PARROT_WAXCAP_CAP,
             MushroomWoodType.POISONOUS_MUSHROOM, DyeColor.LIME),
     HONEY_FUNGUS(5,
-            () -> ModBlocks.HONEY_FUNGUS.get().asItem(),
-            ModBlocks.HONEY_FUNGUS_CAP,
-            MushroomWoodType.HONEY_FUNGUS, DyeColor.ORANGE);
+            () -> ModBlocks.HONEY_WAXCAP.get().asItem(),
+            ModBlocks.HONEY_WAXCAP_CAP,
+            MushroomWoodType.HONEY_WAXCAP, DyeColor.ORANGE);
 
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 

@@ -15,9 +15,9 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SlimeFungusCap extends AbstractEffectMushroomCap {
+public class ParrotWaxcapCap extends AbstractEffectMushroomCap {
 
-    public SlimeFungusCap(MushroomType type, Properties properties) {
+    public ParrotWaxcapCap(MushroomType type, Properties properties) {
         super(type, properties);
     }
 
@@ -33,7 +33,7 @@ public class SlimeFungusCap extends AbstractEffectMushroomCap {
 
     @Override
     public boolean canStickTo(BlockState state, BlockState other) {
-        if (other.getBlock() == Blocks.HONEY_BLOCK || other.getBlock() == ModBlocks.HONEY_FUNGUS_CAP.get()) return false;
+        if (other.getBlock() == Blocks.HONEY_BLOCK || other.getBlock() == ModBlocks.HONEY_WAXCAP_CAP.get()) return false;
         return state.isStickyBlock() || other.isStickyBlock();
     }
 

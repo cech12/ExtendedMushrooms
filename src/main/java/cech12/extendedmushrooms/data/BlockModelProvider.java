@@ -6,9 +6,9 @@ import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
 import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomPlanksBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
-import cech12.extendedmushrooms.block.mushroomblocks.HoneyFungusCap;
+import cech12.extendedmushrooms.block.mushroomblocks.HoneyWaxcapCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
-import cech12.extendedmushrooms.block.mushroomblocks.SlimeFungusCap;
+import cech12.extendedmushrooms.block.mushroomblocks.ParrotWaxcapCap;
 import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -109,7 +109,7 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof MushroomWoodButtonBlock) {
                 buttonBlock(name, getBlockResourceLocation(name, "_button", "_planks"));
             } else if (block instanceof MushroomCapBlock) {
-                if (block instanceof HoneyFungusCap || block instanceof SlimeFungusCap) {
+                if (block instanceof HoneyWaxcapCap || block instanceof ParrotWaxcapCap) {
                     translucentHugeMushroomBlock(name, getBlockResourceLocation(name));
                     // & inside variant
                     ResourceLocation texture = getBlockResourceLocation(name, "_cap", "_inside");

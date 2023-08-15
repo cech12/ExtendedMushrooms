@@ -6,17 +6,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 
-public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
+public class BigHoneyWaxcapFeature extends SplitBigMushroomFeature {
 
-    public BigSlimeFungusFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
+    public BigHoneyWaxcapFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 
     @Override
     protected int getSize(RandomSource random) {
-        int size = 7;
+        int size = 9;
         if (random.nextInt(12) == 0) {
-            size = 11;
+            size = 13;
         }
         return size + random.nextInt(2);
     }
@@ -31,7 +31,7 @@ public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
 
     @Override
     protected int getSmallSize(RandomSource random) {
-        return 4 + random.nextInt(1);
+        return 6 + random.nextInt(1);
     }
 
     @Override
@@ -53,6 +53,19 @@ public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
                 }
             }
         }
+        int lowerCapRadius = 1;
+        boolean hasLowerCorners = !hasCorners;
+        for (int x = -lowerCapRadius; x <= lowerCapRadius; ++x) {
+            for (int z = -lowerCapRadius; z <= lowerCapRadius; ++z) {
+                if ((x == 0 && z == 0) || hasLowerCorners && (x == lowerCapRadius || x == -lowerCapRadius) && (z == lowerCapRadius || z == -lowerCapRadius)) {
+                    continue;
+                }
+                mutableBlockPos.set(center).move(x, -2, z);
+                if (!isReplaceable(level, mutableBlockPos)) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
@@ -69,6 +82,20 @@ public class BigSlimeFungusFeature extends SplitBigMushroomFeature {
                 boolean flag2 = z == -capRadius || hasCorners && z == -capRadius + 1;
                 boolean flag3 = z == capRadius || hasCorners && z == capRadius - 1;
                 this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(center).move(x, 0, z), flag, flag1, flag2, flag3);
+            }
+        }
+        int lowerCapRadius = Math.max(capRadius / 2, 1);
+        boolean hasLowerCorners = !hasCorners || lowerCapRadius > 1;
+        for (int x = -lowerCapRadius; x <= lowerCapRadius; ++x) {
+            for (int z = -lowerCapRadius; z <= lowerCapRadius; ++z) {
+                if ((x == 0 && z == 0) || hasLowerCorners && (x == lowerCapRadius || x == -lowerCapRadius) && (z == lowerCapRadius || z == -lowerCapRadius)) {
+                    continue;
+                }
+                boolean flag = x == -lowerCapRadius || hasLowerCorners && x == -lowerCapRadius + 1;
+                boolean flag1 = x == lowerCapRadius || hasLowerCorners && x == lowerCapRadius - 1;
+                boolean flag2 = z == -lowerCapRadius || hasLowerCorners && z == -lowerCapRadius + 1;
+                boolean flag3 = z == lowerCapRadius || hasLowerCorners && z == lowerCapRadius - 1;
+                this.placeCapBlockIfPossible(level, random, config, mutableBlockPos.set(center).move(x, -2, z), flag, flag1, flag2, flag3);
             }
         }
     }

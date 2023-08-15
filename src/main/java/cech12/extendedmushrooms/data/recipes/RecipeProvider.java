@@ -262,8 +262,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.POISONOUS_MUSHROOM_CAP_CARPET.get().asItem(),
                 ModBlocks.POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.get().asItem());
 
-        //slime fungus
-        FairyRingRecipeBuilder.normal(ModBlocks.SLIME_FUNGUS.get(), 1)
+        //parrot waxcap
+        FairyRingRecipeBuilder.normal(ModBlocks.PARROT_WAXCAP.get(), 1)
                 .requires(Items.SLIME_BLOCK)
                 .requires(Items.RABBIT_FOOT)
                 .requires(Items.LIME_DYE)
@@ -272,9 +272,9 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
                 Items.ORANGE_BANNER,
                 Items.ORANGE_BED,
-                ModBlocks.SLIME_FUNGUS_CAP_BUTTON.get().asItem(),
-                ModBlocks.SLIME_FUNGUS_CAP_CARPET.get().asItem(),
-                ModBlocks.SLIME_FUNGUS_CAP_PRESSURE_PLATE.get().asItem());
+                ModBlocks.PARROT_WAXCAP_CAP_BUTTON.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_CAP_CARPET.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_CAP_PRESSURE_PLATE.get().asItem());
         //no wood for slime fungus
         //slime blob recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SLIME_BALL)
@@ -288,35 +288,35 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_slime", has(Items.SLIME_BALL))
                 .save(consumer);
 
-        //honey fungus
-        FairyRingRecipeBuilder.normal(ModBlocks.HONEY_FUNGUS.get(), 1)
+        //honey waxcap
+        FairyRingRecipeBuilder.normal(ModBlocks.HONEY_WAXCAP.get(), 1)
                 .requires(Items.HONEYCOMB)
                 .requires(Items.HONEY_BOTTLE)
                 .requires(Items.ORANGE_DYE)
                 .save(consumer);
         mushroomWoodRecipes(consumer, "honey_fungus",
                 ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE,
-                ModItems.HONEY_FUNGUS_BOAT.get(),
-                ModItems.HONEY_FUNGUS_CHEST_BOAT.get(),
-                ModBlocks.HONEY_FUNGUS_BUTTON.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_DOOR.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_FENCE.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_FENCE_GATE.get().asItem(),
+                ModItems.HONEY_WAXCAP_BOAT.get(),
+                ModItems.HONEY_WAXCAP_CHEST_BOAT.get(),
+                ModBlocks.HONEY_WAXCAP_BUTTON.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_DOOR.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_FENCE.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_FENCE_GATE.get().asItem(),
                 ModItems.HONEY_FUNGUS_HANGING_SIGN.get(),
-                ModBlocks.HONEY_FUNGUS_PLANKS.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_PRESSURE_PLATE.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_PLANKS.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_PRESSURE_PLATE.get().asItem(),
                 ModItems.HONEY_FUNGUS_SIGN.get(),
-                ModBlocks.HONEY_FUNGUS_SLAB.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_STAIRS.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_STEM_STRIPPED.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_TRAPDOOR.get().asItem());
+                ModBlocks.HONEY_WAXCAP_SLAB.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_STAIRS.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_STEM_STRIPPED.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_TRAPDOOR.get().asItem());
         mushroomCapRecipes(consumer, "honey_fungus",
                 ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE,
                 Items.ORANGE_BANNER,
                 Items.ORANGE_BED,
-                ModBlocks.HONEY_FUNGUS_CAP_BUTTON.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_CAP_CARPET.get().asItem(),
-                ModBlocks.HONEY_FUNGUS_CAP_PRESSURE_PLATE.get().asItem());
+                ModBlocks.HONEY_WAXCAP_CAP_BUTTON.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_CAP_CARPET.get().asItem(),
+                ModBlocks.HONEY_WAXCAP_CAP_PRESSURE_PLATE.get().asItem());
         //honey blob recipes
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.HONEY_BOTTLE, 1)
                 .requires(Items.GLASS_BOTTLE)

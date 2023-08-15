@@ -35,8 +35,8 @@ public class ModBlockEntityTypes {
             ModBlocks.GLOWSHROOM_WALL_SIGN,
             ModBlocks.POISONOUS_MUSHROOM_STANDING_SIGN,
             ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN,
-            ModBlocks.HONEY_FUNGUS_STANDING_SIGN,
-            ModBlocks.HONEY_FUNGUS_WALL_SIGN);
+            ModBlocks.HONEY_WAXCAP_STANDING_SIGN,
+            ModBlocks.HONEY_WAXCAP_WALL_SIGN);
 
     public static RegistryObject<BlockEntityType<MushroomHangingSignBlockEntity>> MUSHROOM_HANGING_SIGN = register("mushroom_hanging_sign", MushroomHangingSignBlockEntity::new,
             ModBlocks.MUSHROOM_HANGING_SIGN,
@@ -45,8 +45,8 @@ public class ModBlockEntityTypes {
             ModBlocks.GLOWSHROOM_WALL_HANGING_SIGN,
             ModBlocks.POISONOUS_MUSHROOM_HANGING_SIGN,
             ModBlocks.POISONOUS_MUSHROOM_WALL_HANGING_SIGN,
-            ModBlocks.HONEY_FUNGUS_HANGING_SIGN,
-            ModBlocks.HONEY_FUNGUS_WALL_HANGING_SIGN);
+            ModBlocks.HONEY_WAXCAP_HANGING_SIGN,
+            ModBlocks.HONEY_WAXCAP_WALL_HANGING_SIGN);
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String registryName, BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<Block>... blocks) {
         return BLOCK_ENTITY_TYPES.register(registryName, () -> BlockEntityType.Builder.of(supplier, Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)).build(null));

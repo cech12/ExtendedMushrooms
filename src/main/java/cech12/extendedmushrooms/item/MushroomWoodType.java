@@ -39,12 +39,12 @@ public enum MushroomWoodType implements StringRepresentable {
             ModBlocks.POISONOUS_MUSHROOM_PLANKS,
             ModItems.POISONOUS_MUSHROOM_BOAT,
             ModItems.POISONOUS_MUSHROOM_CHEST_BOAT),
-    HONEY_FUNGUS(3, "honey_fungus",
-            ModBlocks.HONEY_FUNGUS_STEM,
-            ModBlocks.HONEY_FUNGUS_STEM_STRIPPED,
-            ModBlocks.HONEY_FUNGUS_PLANKS,
-            ModItems.HONEY_FUNGUS_BOAT,
-            ModItems.HONEY_FUNGUS_CHEST_BOAT);
+    HONEY_WAXCAP(3, "honey_fungus",
+            ModBlocks.HONEY_WAXCAP_STEM,
+            ModBlocks.HONEY_WAXCAP_STEM_STRIPPED,
+            ModBlocks.HONEY_WAXCAP_PLANKS,
+            ModItems.HONEY_WAXCAP_BOAT,
+            ModItems.HONEY_WAXCAP_CHEST_BOAT);
 
     private static final MushroomWoodType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomWoodType::getId)).toArray(MushroomWoodType[]::new);
 

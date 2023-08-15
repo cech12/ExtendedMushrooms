@@ -2,9 +2,9 @@ package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.world.level.levelgen.feature.BigGlowshroomFeature;
-import cech12.extendedmushrooms.world.level.levelgen.feature.BigHoneyFungusFeature;
+import cech12.extendedmushrooms.world.level.levelgen.feature.BigHoneyWaxcapFeature;
 import cech12.extendedmushrooms.world.level.levelgen.feature.BigPoisonousMushroomFeature;
-import cech12.extendedmushrooms.world.level.levelgen.feature.BigSlimeFungusFeature;
+import cech12.extendedmushrooms.world.level.levelgen.feature.BigParrotWaxcapFeature;
 import cech12.extendedmushrooms.world.level.levelgen.feature.MegaBrownMushroomFeature;
 import cech12.extendedmushrooms.world.level.levelgen.feature.MegaGlowshroomFeature;
 import cech12.extendedmushrooms.world.level.levelgen.feature.MegaPoisonousMushroomFeature;
@@ -36,8 +36,8 @@ public class ModFeatures {
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> MEGA_GLOWSHROOM = FEATURES.register("mega_glowshroom", () -> new MegaGlowshroomFeature(ExtendedMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_POISONOUS_MUSHROOM = FEATURES.register("big_poisonous_mushroom", () -> new BigPoisonousMushroomFeature(ExtendedMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> MEGA_POISONOUS_MUSHROOM = FEATURES.register("mega_poisonous_mushroom", () -> new MegaPoisonousMushroomFeature(ExtendedMushroomFeatureConfiguration.CODEC));
-    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_SLIME_FUNGUS = FEATURES.register("big_slime_fungus", () -> new BigSlimeFungusFeature(ExtendedMushroomFeatureConfiguration.CODEC));
-    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_HONEY_FUNGUS = FEATURES.register("big_honey_fungus", () -> new BigHoneyFungusFeature(ExtendedMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_PARROT_WAXCAP = FEATURES.register("big_slime_fungus", () -> new BigParrotWaxcapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_HONEY_WAXCAP = FEATURES.register("big_honey_fungus", () -> new BigHoneyWaxcapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFESTED_FLOWER_CONFIGURED = configuredKey("infested_flower");
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFESTED_GRASS_CONFIGURED = configuredKey("infested_grass");
@@ -51,8 +51,8 @@ public class ModFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_POISONOUS_MUSHROOM_CONFIGURED = configuredKey("patch_poisonous_mushroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_POISONOUS_MUSHROOM_CONFIGURED = configuredKey("big_poisonous_mushroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_POISONOUS_MUSHROOM_CONFIGURED = configuredKey("mega_poisonous_mushroom");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_SLIME_FUNGUS_CONFIGURED = configuredKey("big_slime_fungus");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_HONEY_FUNGUS_CONFIGURED = configuredKey("big_honey_fungus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_PARROT_WAXCAP_CONFIGURED = configuredKey("big_slime_fungus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_HONEY_WAXCAP_CONFIGURED = configuredKey("big_honey_fungus");
 
     public static final ResourceKey<PlacedFeature> INFESTED_FLOWER_PLACED = placedKey("patch_infested_flower");
     public static final ResourceKey<PlacedFeature> INFESTED_GRASS_PLACED = placedKey("patch_infested_grass");

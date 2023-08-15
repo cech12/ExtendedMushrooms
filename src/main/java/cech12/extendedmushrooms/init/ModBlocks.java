@@ -3,16 +3,16 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
 import cech12.extendedmushrooms.block.mushroomblocks.GlowshroomCap;
-import cech12.extendedmushrooms.block.mushroomblocks.HoneyFungusCap;
+import cech12.extendedmushrooms.block.mushroomblocks.HoneyWaxcapCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStrippedStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomCap;
-import cech12.extendedmushrooms.block.mushroomblocks.SlimeFungusCap;
+import cech12.extendedmushrooms.block.mushroomblocks.ParrotWaxcapCap;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
-import cech12.extendedmushrooms.block.mushrooms.HoneyFungus;
-import cech12.extendedmushrooms.block.mushrooms.SlimeFungus;
+import cech12.extendedmushrooms.block.mushrooms.HoneyWaxcap;
+import cech12.extendedmushrooms.block.mushrooms.ParrotWaxcap;
 import cech12.extendedmushrooms.item.MushroomType;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -119,37 +119,37 @@ public final class ModBlocks {
     public static final RegistryObject<Block> POISONOUS_MUSHROOM_CAP_CARPET = registerBlockWithItem("poisonous_mushroom_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.PURPLE, Block.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(0.1F).sound(SoundType.WOOL)));
     public static final RegistryObject<Block> POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE = registerBlockWithItem("poisonous_mushroom_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.POISONOUS_MUSHROOM));
 
-    public static final RegistryObject<Block> SLIME_FUNGUS = registerBlockWithItem("slime_fungus", () -> new EMMushroomBlock(new SlimeFungus(), Block.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.SLIME_BLOCK).hasPostProcess((a, b, c)->true)));
-    public static final RegistryObject<Block> SLIME_FUNGUS_POTTED = registerBlock("slime_fungus_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SLIME_FUNGUS, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> PARROT_WAXCAP = registerBlockWithItem("slime_fungus", () -> new EMMushroomBlock(new ParrotWaxcap(), Block.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.SLIME_BLOCK).hasPostProcess((a, b, c)->true)));
+    public static final RegistryObject<Block> PARROT_WAXCAP_POTTED = registerBlock("slime_fungus_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PARROT_WAXCAP, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
-    public static final RegistryObject<Block> SLIME_FUNGUS_CAP = registerBlockWithItem("slime_fungus_cap", () -> new SlimeFungusCap(MushroomType.SLIME_FUNGUS, Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.2F).noOcclusion().jumpFactor(1.5F).friction(0.8F).sound(SoundType.SLIME_BLOCK)));
-    public static final RegistryObject<Block> SLIME_FUNGUS_CAP_BUTTON = registerBlockWithItem("slime_fungus_cap_button", () -> new MushroomCapButtonBlock(MushroomWoodType.POISONOUS_MUSHROOM));
-    public static final RegistryObject<Block> SLIME_FUNGUS_CAP_CARPET = registerBlockWithItem("slime_fungus_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.LIME, Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.1F).sound(SoundType.WOOL)));
-    public static final RegistryObject<Block> SLIME_FUNGUS_CAP_PRESSURE_PLATE = registerBlockWithItem("slime_fungus_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.POISONOUS_MUSHROOM));
+    public static final RegistryObject<Block> PARROT_WAXCAP_CAP = registerBlockWithItem("slime_fungus_cap", () -> new ParrotWaxcapCap(MushroomType.SLIME_FUNGUS, Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.2F).noOcclusion().jumpFactor(1.5F).friction(0.8F).sound(SoundType.SLIME_BLOCK)));
+    public static final RegistryObject<Block> PARROT_WAXCAP_CAP_BUTTON = registerBlockWithItem("slime_fungus_cap_button", () -> new MushroomCapButtonBlock(MushroomWoodType.POISONOUS_MUSHROOM));
+    public static final RegistryObject<Block> PARROT_WAXCAP_CAP_CARPET = registerBlockWithItem("slime_fungus_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.LIME, Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.1F).sound(SoundType.WOOL)));
+    public static final RegistryObject<Block> PARROT_WAXCAP_CAP_PRESSURE_PLATE = registerBlockWithItem("slime_fungus_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.POISONOUS_MUSHROOM));
 
-    public static final RegistryObject<Block> HONEY_FUNGUS = registerBlockWithItem("honey_fungus", () -> new EMMushroomBlock(new HoneyFungus(), Block.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.HONEY_BLOCK).hasPostProcess((a, b, c)->true)));
-    public static final RegistryObject<Block> HONEY_FUNGUS_POTTED = registerBlock("honey_fungus_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, HONEY_FUNGUS, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> HONEY_WAXCAP = registerBlockWithItem("honey_fungus", () -> new EMMushroomBlock(new HoneyWaxcap(), Block.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.HONEY_BLOCK).hasPostProcess((a, b, c)->true)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_POTTED = registerBlock("honey_fungus_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, HONEY_WAXCAP, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
-    public static final RegistryObject<Block> HONEY_FUNGUS_CAP = registerBlockWithItem("honey_fungus_cap", () -> new HoneyFungusCap(MushroomType.HONEY_FUNGUS, Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.2F).noOcclusion().speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.HONEY_BLOCK)));
-    public static final RegistryObject<Block> HONEY_FUNGUS_STEM = registerBlockWithItem("honey_fungus_stem", () -> new MushroomStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> HONEY_FUNGUS_STEM_STRIPPED = registerBlockWithItem("honey_fungus_stem_stripped", () -> new MushroomStrippedStemBlock(MushroomWoodType.HONEY_FUNGUS, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_CAP = registerBlockWithItem("honey_fungus_cap", () -> new HoneyWaxcapCap(MushroomType.HONEY_FUNGUS, Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.2F).noOcclusion().speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.HONEY_BLOCK)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_STEM = registerBlockWithItem("honey_fungus_stem", () -> new MushroomStemBlock(MushroomWoodType.HONEY_WAXCAP, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_STEM_STRIPPED = registerBlockWithItem("honey_fungus_stem_stripped", () -> new MushroomStrippedStemBlock(MushroomWoodType.HONEY_WAXCAP, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
 
-    public static final RegistryObject<Block> HONEY_FUNGUS_BUTTON = registerBlockWithItem("honey_fungus_button", () -> new MushroomWoodButtonBlock(MushroomWoodType.HONEY_FUNGUS));
-    public static final RegistryObject<Block> HONEY_FUNGUS_DOOR = registerBlockWithItem("honey_fungus_door", () -> new DoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(3.0F).sound(SoundType.WOOD), MushroomWoodType.HONEY_FUNGUS.getBlockSetType()));
-    public static final RegistryObject<Block> HONEY_FUNGUS_FENCE = registerBlockWithItem("honey_fungus_fence", () -> new MushroomFenceBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> HONEY_FUNGUS_FENCE_GATE = registerBlockWithItem("honey_fungus_fence_gate", () -> new MushroomFenceGateBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> HONEY_FUNGUS_HANGING_SIGN = registerBlock("honey_fungus_hanging_sign", () -> new MushroomCeilingHangingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), MushroomWoodType.HONEY_FUNGUS.getWoodType()));
-    public static final RegistryObject<Block> HONEY_FUNGUS_PLANKS = registerBlockWithItem("honey_fungus_planks", () -> new MushroomPlanksBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> HONEY_FUNGUS_PRESSURE_PLATE = registerBlockWithItem("honey_fungus_pressure_plate", () -> new MushroomWoodPressurePlateBlock(MushroomWoodType.HONEY_FUNGUS));
-    public static final RegistryObject<Block> HONEY_FUNGUS_SLAB = registerBlockWithItem("honey_fungus_slab", () -> new MushroomSlabBlock(Block.Properties.copy(HONEY_FUNGUS_PLANKS.get())));
-    public static final RegistryObject<Block> HONEY_FUNGUS_STAIRS = registerBlockWithItem("honey_fungus_stairs", () -> new MushroomStairsBlock(() -> HONEY_FUNGUS_PLANKS.get().defaultBlockState(), Block.Properties.copy(HONEY_FUNGUS_PLANKS.get())));
-    public static final RegistryObject<Block> HONEY_FUNGUS_STANDING_SIGN = registerBlock("honey_fungus_sign", () -> new MushroomStandingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), MushroomWoodType.HONEY_FUNGUS.getWoodType()));
-    public static final RegistryObject<Block> HONEY_FUNGUS_TRAPDOOR = registerBlockWithItem("honey_fungus_trapdoor", () -> new TrapDoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(3.0F).sound(SoundType.WOOD), MushroomWoodType.HONEY_FUNGUS.getBlockSetType()));
-    public static final RegistryObject<Block> HONEY_FUNGUS_WALL_HANGING_SIGN = registerBlock("honey_fungus_wall_hanging_sign", () -> new MushroomWallHangingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().lootFrom(HONEY_FUNGUS_HANGING_SIGN), MushroomWoodType.HONEY_FUNGUS.getWoodType()));
-    public static final RegistryObject<Block> HONEY_FUNGUS_WALL_SIGN = registerBlock("honey_fungus_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().lootFrom(HONEY_FUNGUS_STANDING_SIGN), MushroomWoodType.HONEY_FUNGUS.getWoodType()));
-    public static final RegistryObject<Block> HONEY_FUNGUS_CAP_BUTTON = registerBlockWithItem("honey_fungus_cap_button", () -> new MushroomCapButtonBlock(MushroomWoodType.HONEY_FUNGUS));
-    public static final RegistryObject<Block> HONEY_FUNGUS_CAP_CARPET = registerBlockWithItem("honey_fungus_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.ORANGE, Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.1F).sound(SoundType.WOOL)));
-    public static final RegistryObject<Block> HONEY_FUNGUS_CAP_PRESSURE_PLATE = registerBlockWithItem("honey_fungus_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.HONEY_FUNGUS));
+    public static final RegistryObject<Block> HONEY_WAXCAP_BUTTON = registerBlockWithItem("honey_fungus_button", () -> new MushroomWoodButtonBlock(MushroomWoodType.HONEY_WAXCAP));
+    public static final RegistryObject<Block> HONEY_WAXCAP_DOOR = registerBlockWithItem("honey_fungus_door", () -> new DoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(3.0F).sound(SoundType.WOOD), MushroomWoodType.HONEY_WAXCAP.getBlockSetType()));
+    public static final RegistryObject<Block> HONEY_WAXCAP_FENCE = registerBlockWithItem("honey_fungus_fence", () -> new MushroomFenceBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_FENCE_GATE = registerBlockWithItem("honey_fungus_fence_gate", () -> new MushroomFenceGateBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_HANGING_SIGN = registerBlock("honey_fungus_hanging_sign", () -> new MushroomCeilingHangingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), MushroomWoodType.HONEY_WAXCAP.getWoodType()));
+    public static final RegistryObject<Block> HONEY_WAXCAP_PLANKS = registerBlockWithItem("honey_fungus_planks", () -> new MushroomPlanksBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_PRESSURE_PLATE = registerBlockWithItem("honey_fungus_pressure_plate", () -> new MushroomWoodPressurePlateBlock(MushroomWoodType.HONEY_WAXCAP));
+    public static final RegistryObject<Block> HONEY_WAXCAP_SLAB = registerBlockWithItem("honey_fungus_slab", () -> new MushroomSlabBlock(Block.Properties.copy(HONEY_WAXCAP_PLANKS.get())));
+    public static final RegistryObject<Block> HONEY_WAXCAP_STAIRS = registerBlockWithItem("honey_fungus_stairs", () -> new MushroomStairsBlock(() -> HONEY_WAXCAP_PLANKS.get().defaultBlockState(), Block.Properties.copy(HONEY_WAXCAP_PLANKS.get())));
+    public static final RegistryObject<Block> HONEY_WAXCAP_STANDING_SIGN = registerBlock("honey_fungus_sign", () -> new MushroomStandingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), MushroomWoodType.HONEY_WAXCAP.getWoodType()));
+    public static final RegistryObject<Block> HONEY_WAXCAP_TRAPDOOR = registerBlockWithItem("honey_fungus_trapdoor", () -> new TrapDoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(3.0F).sound(SoundType.WOOD), MushroomWoodType.HONEY_WAXCAP.getBlockSetType()));
+    public static final RegistryObject<Block> HONEY_WAXCAP_WALL_HANGING_SIGN = registerBlock("honey_fungus_wall_hanging_sign", () -> new MushroomWallHangingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().lootFrom(HONEY_WAXCAP_HANGING_SIGN), MushroomWoodType.HONEY_WAXCAP.getWoodType()));
+    public static final RegistryObject<Block> HONEY_WAXCAP_WALL_SIGN = registerBlock("honey_fungus_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().lootFrom(HONEY_WAXCAP_STANDING_SIGN), MushroomWoodType.HONEY_WAXCAP.getWoodType()));
+    public static final RegistryObject<Block> HONEY_WAXCAP_CAP_BUTTON = registerBlockWithItem("honey_fungus_cap_button", () -> new MushroomCapButtonBlock(MushroomWoodType.HONEY_WAXCAP));
+    public static final RegistryObject<Block> HONEY_WAXCAP_CAP_CARPET = registerBlockWithItem("honey_fungus_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.ORANGE, Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.1F).sound(SoundType.WOOL)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_CAP_PRESSURE_PLATE = registerBlockWithItem("honey_fungus_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.HONEY_WAXCAP));
 
     private static final Map<RegistryObject<Block>, RegistryObject<Block>> BLOCK_STRIPPING_MAP = new HashMap<>();
 
@@ -157,12 +157,12 @@ public final class ModBlocks {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(INFESTED_FLOWER.getId()), INFESTED_FLOWER_POTTED);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(GLOWSHROOM.getId()), GLOWSHROOM_POTTED);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(POISONOUS_MUSHROOM.getId()), POISONOUS_MUSHROOM_POTTED);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(SLIME_FUNGUS.getId()), SLIME_FUNGUS_POTTED);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(HONEY_FUNGUS.getId()), HONEY_FUNGUS_POTTED);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(PARROT_WAXCAP.getId()), PARROT_WAXCAP_POTTED);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(HONEY_WAXCAP.getId()), HONEY_WAXCAP_POTTED);
         BLOCK_STRIPPING_MAP.put(RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.MUSHROOM_STEM), ForgeRegistries.BLOCKS), STRIPPED_MUSHROOM_STEM);
         BLOCK_STRIPPING_MAP.put(GLOWSHROOM_STEM, GLOWSHROOM_STEM_STRIPPED);
         BLOCK_STRIPPING_MAP.put(POISONOUS_MUSHROOM_STEM, POISONOUS_MUSHROOM_STEM_STRIPPED);
-        BLOCK_STRIPPING_MAP.put(HONEY_FUNGUS_STEM, HONEY_FUNGUS_STEM_STRIPPED);
+        BLOCK_STRIPPING_MAP.put(HONEY_WAXCAP_STEM, HONEY_WAXCAP_STEM_STRIPPED);
     }
 
     public static Block getStrippedBlock(Block block) {
