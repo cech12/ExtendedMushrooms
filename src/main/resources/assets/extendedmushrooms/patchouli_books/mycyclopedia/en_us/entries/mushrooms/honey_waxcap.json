@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Ancient writings tell of a sticky mushroom that exudes a honey-like substance. However, this seems to have died out a long time ago."
+      "text": "Ancient writings tell of a sticky mushroom called $(o)Hygrocybe reidii$() that exudes a honey-like substance. However, this seems to have died out a long time ago."
     },
     {
       "type": "patchouli:multiblock",
@@ -26,7 +26,7 @@
     {
       "type": "patchouli:text",
       "title": "Harvesting",
-      "text": "The cap of adult Honey Waxcaps exudes small drops of a honey-like substance that can be harvested.$(br2)The cap's solid structure is reminiscent of honeycombs, parts of which can be removed."
+      "text": "The cap of adult Honey Waxcap exudes small drops of a honey-like substance that can be harvested.$(br2)The cap's solid structure is reminiscent of honeycombs, parts of which can be removed."
     },
     {
       "type": "patchouli:crafting",

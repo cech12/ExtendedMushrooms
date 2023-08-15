@@ -46,6 +46,7 @@ public abstract class MegaMushroom extends BigMushroom {
                     world.setBlock(blockPos.offset(x, 0, z + 1), lvt_9_1_, 4);
                     world.setBlock(blockPos.offset(x + 1, 0, z + 1), lvt_9_1_, 4);
                     if (feature.place(world, chunkGenerator, random, blockPos.offset(x, 0, z))) {
+                        afterGrowing(world, chunkGenerator, blockPos, blockState, random);
                         return true;
                     } else {
                         world.setBlock(blockPos.offset(x, 0, z), blockState, 4);

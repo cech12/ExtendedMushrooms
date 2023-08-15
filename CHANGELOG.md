@@ -5,7 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [1.20.1-4.2.0.0] - 2023-??-??
 ### Added
-- new Guidebook (with required Patchouli 1.20.1-81 mod dependency)
+- new Guidebook (with required Patchouli 1.20.1-81 mod dependency) #73
+- There is a 1% chance to spawn a parrot when a Parrot Waxcap is growing up.
+- There is a 1% chance to spawn a bee when a Honey Waxcap is growing up.
+
+### Changed
+- renamed Slime Fungus to Parrot Waxcap #76
+- renamed Honey Fungus to Honey Waxcap #76
 
 ## [1.20.1-4.1.0.0] - 2023-08-09
 ### Changed

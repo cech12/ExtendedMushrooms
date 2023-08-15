@@ -1,6 +1,8 @@
 package cech12.extendedmushrooms.block.mushrooms;
 
 import cech12.extendedmushrooms.MushroomUtils;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Direction8;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -36,6 +38,25 @@ public abstract class BigMushroom {
         return capBlock.defaultBlockState().setValue(HugeMushroomBlock.DOWN, false);
     }
 
+    /**
+     * Try to find an empty block at the 8 (flat) positions around the given position.
+     * @param level level to check
+     * @param center center position
+     * @return the BlockPos of the found empty block position. null when none is empty
+     */
+    protected static BlockPos getEmptyPositionAround(ServerLevel level, BlockPos center) {
+        for (Direction8 directions : Direction8.values()) {
+            BlockPos pos = center;
+            for (Direction direction : directions.getDirections()) {
+                pos = pos.relative(direction);
+            }
+            if (level.isEmptyBlock(pos)) {
+                return pos;
+            }
+        }
+        return null;
+    }
+
     public boolean growMushroom(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, RandomSource random) {
         if (!MushroomUtils.isValidMushroomPosition(world, blockPos)) {
             return false;
@@ -49,11 +70,19 @@ public abstract class BigMushroom {
         ConfiguredFeature<?, ?> feature = event.getFeature().value();
         world.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 4);
         if (feature.place(world, chunkGenerator, random, blockPos)) {
+            afterGrowing(world, chunkGenerator, blockPos, blockState, random);
             return true;
         } else {
             world.setBlock(blockPos, blockState, 4);
             return false;
         }
+    }
+
+    /**
+     * Called after a mushroom grew up.
+     */
+    protected void afterGrowing(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, RandomSource random) {
+        //could be overridden by extending classes
     }
 
 }
