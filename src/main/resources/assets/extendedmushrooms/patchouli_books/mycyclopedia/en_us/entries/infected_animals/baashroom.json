@@ -1,0 +1,21 @@
+{
+  "name": "Baashroom",
+  "icon": "extendedmushrooms:textures/mycyclopedia/baashroom.png",
+  "category": "extendedmushrooms:infected_animals",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Baashroom has a soft mushroom-like wool that is edible in most cases. The appearance of the wool is very similar to the well-known $(l:mushrooms)species of mushrooms$(). Unlike the $(l:infected_animals/mooshroom)Mooshroom$(), the fungal infection is not lost when it is sheared off."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "extendedmushrooms:mushroom_sheep",
+      "text": "How a sheep can get such a $(l:myths/animal_infection)fungal infection$() is unknown.",
+      "scale": 0.7
+    },
+    {
+      "type": "patchouli:text",
+      "text": ""
+    }
+  ]
+}

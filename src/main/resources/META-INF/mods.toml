@@ -22,6 +22,12 @@ license="${mod_license}"
     ordering="NONE"
     side="BOTH"
 [[dependencies.${mod_id}]]
+    modId="patchouli"
+    mandatory=true
+    versionRange="${patchouli_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${mod_id}]]
    modId="jei"
    mandatory=false
    versionRange="${jei_version_range}"

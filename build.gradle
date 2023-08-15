@@ -99,6 +99,10 @@ repositories {
         url = 'https://repo.spongepowered.org/maven'
     }
     maven {
+        //for patchouli
+        url = 'https://maven.blamejared.com'
+    }
+    maven {
         // location of the maven that hosts JEI files
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
@@ -129,6 +133,10 @@ dependencies {
     // Mixin annotation processor - generates the refmap
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
+    //patchouli for guide book
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${project.patchouli_version}-FORGE:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${project.patchouli_version}-FORGE")
+
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft_version}-common-api:${project.jei_version}")
     // at runtime, use the full JEI jar
@@ -146,7 +154,8 @@ tasks.named('processResources', ProcessResources).configure {
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors: mod_authors, mod_description: mod_description, mod_issue_tracker: mod_issue_tracker,
             mod_url: mod_url,
-            jei_version_range: jei_version_range, moonlight_version_range: moonlight_version_range
+            patchouli_version_range: patchouli_version_range, jei_version_range: jei_version_range,
+            moonlight_version_range: moonlight_version_range
     ]
     inputs.properties replaceProperties
 

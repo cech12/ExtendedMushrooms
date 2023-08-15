@@ -1,0 +1,37 @@
+{
+  "name": "Brown Mushroom",
+  "icon": "minecraft:brown_mushroom",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A delicious brownish mushroom which can be found everywhere. It is the most common species of mushrooms in these lands, closely followed by the $(l:mushrooms/red_mushroom)Red Mushroom$()."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "This mushroom is colored light brown.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:brown_mushroom"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Usage",
+      "text": "The Brown Mushroom is edible and can be used for cooking meals.$(br2)Specially prepared with precisely dosed sweeteners and arachnid tissue, it can also be used as a basis for brewing potions."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "minecraft:mushroom_stew",
+      "recipe2": "minecraft:fermented_spider_eye"
+    }
+  ]
+}

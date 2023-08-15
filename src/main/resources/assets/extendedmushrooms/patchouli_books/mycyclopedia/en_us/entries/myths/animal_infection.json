@@ -1,0 +1,21 @@
+{
+  "name": "Animal Infection",
+  "icon": "minecraft:textures/mob_effect/poison.png",
+  "category": "extendedmushrooms:myths",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "According to newspapers, farmer John Sheppard led his flock of sheep too close to a grassy cave in 2004, resulting in the loss of 2 sheeps in the cave. These, however, reappeared well fed but $(l:infected_animals/baashroom)somewhat changed$() after a few days."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "extendedmushrooms:mushroom_sheep",
+      "text": "The wool was fungus and edible.",
+      "scale": 0.7
+    },
+    {
+      "type": "patchouli:text",
+      "text": "How this infection came about is unclear, but the farmer no longer has to slaughter sheep to get a meal."
+    }
+  ]
+}

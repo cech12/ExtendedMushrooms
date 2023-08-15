@@ -1,6 +1,10 @@
 {
   "jei.extendedmushrooms.fairy_ring": "Fairy Ring",
 
+  "item.extendedmushrooms.mycyclopedia": "Mycyclopedia",
+  "extendedmushrooms.mycyclopedia.subtitle": "Mycology Encyclopedia",
+  "extendedmushrooms.mycyclopedia.landing_text": "The accumulated knowledge about mycology: All scientific knowledge and open research areas.$(br2)By Mycroft Cech the 12th",
+
   "item.extendedmushrooms.grilled_mushroom": "Grilled Mushroom",
   "item.extendedmushrooms.mushroom_bread": "Mushroom Bread",
 

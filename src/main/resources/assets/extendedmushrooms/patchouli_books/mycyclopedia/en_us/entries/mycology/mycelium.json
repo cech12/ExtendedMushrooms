@@ -1,0 +1,29 @@
+{
+  "name": "Mycelium",
+  "icon": "minecraft:mycelium",
+  "category": "extendedmushrooms:mycology",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In general, only the visible fruiting bodies are referred to as mushrooms. In the case of edible mushrooms, the actual fungus is predominantly the fine mycelium consisting of hyphae in the soil or - in the case of tree fungi - in the wood, which is usually not perceived because of its occurrence in these opaque substrates."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "Fungal mycelia can reach a size of more than one square kilometer, a huge biological mass and an old age.",
+      "multiblock": {
+        "pattern": [
+          [
+            "   ",
+            " 0 ",
+            "   "
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:mycelium"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    }
+  ]
+}

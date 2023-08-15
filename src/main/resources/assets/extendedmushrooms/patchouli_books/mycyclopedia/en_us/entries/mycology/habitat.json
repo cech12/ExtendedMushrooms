@@ -1,0 +1,15 @@
+{
+  "name": "Habitat",
+  "icon": "minecraft:compass",
+  "category": "extendedmushrooms:mycology",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Mushrooms settle mainly in dark or heavily shaded areas. Dense forests and deep caves are among the most common places where mushrooms are found. The subsoil is mostly earthy or rocky."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The more nutrient-rich the soil, the more likely it is that a fungus will grow, even in lighter colored areas. Even direct sunlight cannot harm the mushrooms on Podzol or $(l:mycology/mycelium)Mycelium$(). Legends tell that there are entire $(l:myths/mushroom_island)islands covered with Mycelium and huge mushrooms$()."
+    }
+  ]
+}

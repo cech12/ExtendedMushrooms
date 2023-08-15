@@ -1,0 +1,36 @@
+{
+  "name": "Red Mushroom",
+  "icon": "minecraft:red_mushroom",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A delicious white dotted red mushroom which can be found everywhere. After the $(l:mushrooms/brown_mushroom)Brown Mushroom$() it is one of the most common species of mushrooms in these lands."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "This mushrooms is colored red with white dots.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:red_mushroom"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Usage",
+      "text": "The Red Mushroom is edible and can be used for cooking meals."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "minecraft:mushroom_stew"
+    }
+  ]
+}

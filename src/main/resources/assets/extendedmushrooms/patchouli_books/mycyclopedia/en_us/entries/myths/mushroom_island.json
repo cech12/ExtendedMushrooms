@@ -1,0 +1,23 @@
+{
+  "name": "Mushroom Island",
+  "icon": "extendedmushrooms:textures/mycyclopedia/mushroom_island.png",
+  "category": "extendedmushrooms:myths",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The diaries of Spanish mycologist Elex Plorer spoke of a visit to an island in the middle of the deep ocean. There, instead of grass, there is soil completely covered with mycelium. Even in sunlight, the mushrooms can grow and thrive there without restrictions. As a result, they are naturally gigantic there."
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Mushroom Island Sketch",
+      "text": "A sketch of the Mushroom Island copied from an old diary.",
+      "images": [
+        "extendedmushrooms:textures/mycyclopedia/mushroom_island_entry.png"
+      ]
+    },
+    {
+      "type": "patchouli:text",
+      "text": "If you like mushrooms, you cannot starve on this island. Otherwise there doesn't seem to be any danger on this paradisiacal island and nothing stands in the way of a night walk here. Only a few strange peaceful animals can be found there, which are covered by fungal growth, apparently a benign $(l:myths/animal_infection)fungal infection$()."
+    }
+  ]
+}

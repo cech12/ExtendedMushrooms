@@ -1,0 +1,39 @@
+{
+  "name": "Crimson Fungus",
+  "icon": "minecraft:crimson_fungus",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A fungus with a crimson, warty fruit body that only thrives in the Crimson Forest of the Nether."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "A red to purple-colored mushroom with orange warts on the cap.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:crimson_fungus"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:hoglin",
+      "text": "The Crimson Fungus isn't edible, but it's Hoglin's favorite dish.",
+      "scale": 0.5,
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:shroomlight",
+      "text": "When fully grown, its orange warts grow so large that they can also be used as light sources."
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "Growth",
+  "icon": "extendedmushrooms:textures/mycyclopedia/growth.png",
+  "category": "extendedmushrooms:mycology",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Like trees, mushrooms can also sprout and even tower over one or the other tree. With mushrooms, it just takes a little longer if the conditions are right. An earthy subsoil is required."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "In addition, the supply of nutrients and the environment are crucial.",
+      "multiblock": {
+        "pattern": [
+          [
+            "     ",
+            " RRR ",
+            " RRR ",
+            " RRR ",
+            "     "
+          ],
+          [
+            " RRR ",
+            "R   R",
+            "R S R",
+            "R   R",
+            " RRR "
+          ],
+          [
+            " RRR ",
+            "R   R",
+            "R S R",
+            "R   R",
+            " RRR "
+          ],
+          [
+            " RRR ",
+            "R   R",
+            "R S R",
+            "R   R",
+            " RRR "
+          ],
+          [
+            "     ",
+            "     ",
+            "  S  ",
+            "     ",
+            "     "
+          ],
+          [
+            "     ",
+            "     ",
+            "  0  ",
+            "     ",
+            "     "
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:mushroom_stem",
+          "S": "minecraft:mushroom_stem",
+          "R": "minecraft:red_mushroom_block"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:bone_meal",
+      "text": "With good swell and enough space, a mushroom can grow in no time at all."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A mushroom can also assume its large form on its own with enough space. Nutrient-rich soils such as $(l:mycology/mycelium)Mycelium$() or Podzol are ideal for this. For other surfaces, a dark environment is required.$(br2)A group of 4 mushrooms can also grow into a gigantic mushroom. The size can compete with tropical trees."
+    }
+  ]
+}

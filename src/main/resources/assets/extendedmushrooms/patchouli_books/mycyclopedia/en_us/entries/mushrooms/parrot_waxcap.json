@@ -1,0 +1,37 @@
+{
+  "name": "Parrot Waxcap",
+  "icon": "extendedmushrooms:slime_fungus",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Antique parchments describe a wet and bouncy mushroom that excretes a slimy substance. Unfortunately, it seems to have died out a long time ago."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "This mushroom consists of multiple slimy stems and caps with a lime color.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "extendedmushrooms:slime_fungus"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extendedmushrooms:slime_ball",
+      "text": "The caps of adult Parrot Waxcap excrete small drops of a slimy substance that can be harvested."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Jump Boost",
+      "text": "The bouncyness of the Parrot Waxcap allows you to make potions and tipped arrows of leaping from them."
+    }
+  ]
+}

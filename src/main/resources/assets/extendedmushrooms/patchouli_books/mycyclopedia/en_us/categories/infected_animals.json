@@ -1,0 +1,5 @@
+{
+  "name": "Infected Animals",
+  "description": "The diaries of Spanish mycologist Elex Plorer contain evidence of a $(l:myths/animal_infection)fungal infection$() causing a benign symbiosis in some animals.",
+  "icon": "extendedmushrooms:textures/mycyclopedia/animals.png"
+}

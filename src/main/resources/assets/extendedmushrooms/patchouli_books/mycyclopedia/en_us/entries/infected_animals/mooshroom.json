@@ -1,0 +1,23 @@
+{
+  "name": "Mooshroom",
+  "icon": "extendedmushrooms:textures/mycyclopedia/mooshroom.png",
+  "category": "extendedmushrooms:infected_animals",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The mushroom cow has only rarely been seen and is therefore little researched. It has fungus-like red skin with white dots, and mushrooms sprout from the back. The milk has a mushroom flavor if milked only a little. Upon closer examination, some fungi were removed from the back, but this resulted in the fungal infection regressing and it became indistinguishable from a normal cow."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:mooshroom",
+      "text": "How a cow becomes $(l:myths/animal_infection)infected with a fungus$() is unexplored.",
+      "scale": 0.7,
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:suspicious_stew",
+      "text": "Texts surviving from the Ancient Kingdom speak of a mushroom cow secreting a strange stew that gives various effects to those who consume it. However, this cow was brown and is said to find its way on earth only through $(o)Thor's powers$()."
+    }
+  ]
+}

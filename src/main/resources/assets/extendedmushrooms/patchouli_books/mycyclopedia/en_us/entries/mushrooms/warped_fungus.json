@@ -1,0 +1,50 @@
+{
+  "name": "Warped Fungus",
+  "icon": "minecraft:warped_fungus",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A fungus with a humped, warty fruit body that only thrives in the Warped Forest of the Nether."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "A greenish-bluish mushroom with orange warts on the cap.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:warped_fungus"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:shroomlight",
+      "text": "When fully grown, its orange warts grow so large that they can also be used as light sources."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:hoglin",
+      "text": "For an unknown reason, Hoglins are afraid of the Warped Fungus.",
+      "scale": 0.5,
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:strider",
+      "text": "The Warped Fungus isn't edible, but it's Striders's favorite dish.",
+      "scale": 0.7
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "minecraft:warped_fungus_on_a_stick",
+      "text": "According to records, some have succeeded in crossing lava with Striders using this mushroom."
+    }
+  ]
+}

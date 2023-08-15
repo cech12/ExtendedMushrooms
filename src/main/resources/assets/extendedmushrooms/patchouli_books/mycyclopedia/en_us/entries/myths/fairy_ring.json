@@ -1,0 +1,23 @@
+{
+  "name": "Fairy Ring",
+  "icon": "extendedmushrooms:textures/mycyclopedia/fairy_ring.png",
+  "category": "extendedmushrooms:myths",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In mycology, most of the legends are entwined around the fairy ring. It is believed that glowing fairies dance around it at night. Numerous legends revolve around the entry of mortals into a fairy ring - and the consequences. A superstition holds that anyone who steps into an empty fairy ring will die at a young age."
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Old Painting",
+      "text": "Most surviving paintings depict 8 mushrooms forming a rooted glowing ring. The center features mostly floating and merging objects.",
+      "images": [
+        "extendedmushrooms:textures/mycyclopedia/fairy_ring_entry.png"
+      ]
+    },
+    {
+      "type": "patchouli:text",
+      "text": "But these are just stories and pipe dreams that are not scientifically proven. However, since there are so many records from different origins and eras, it is unlikely that it is just a superstition. After all, there is a grain of truth behind every story."
+    }
+  ]
+}

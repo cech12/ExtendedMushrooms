@@ -1,0 +1,15 @@
+{
+  "name": "Reproduction",
+  "icon": "extendedmushrooms:textures/mycyclopedia/reproduction.png",
+  "category": "extendedmushrooms:mycology",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Depending on the size of the fungi, several fruiting bodies (mushrooms) can be formed. Most $(l:mushrooms)mushroom varieties$() form 5 fruiting bodies in a 9x9x3 meters area."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It takes a certain amount of time for a fungus to reach such a size. In addition, the nature of the subsoil and the ambient brightness must be right. You can read more about this in $(l:mycology/habitat)Chapter \"Habitat\"$()."
+    }
+  ]
+}

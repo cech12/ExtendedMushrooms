@@ -1,0 +1,37 @@
+{
+  "name": "Glowshroom",
+  "icon": "extendedmushrooms:glowshroom",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A rare but delicious bluish mushroom, that shimmers and lights up its surrounding.$(br2)Adult mushrooms can spread spores that have a positive effect on night vision."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "This mushroom has a dark blue color with yellow glimmering dots.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "extendedmushrooms:glowshroom"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extendedmushrooms:glowstone_dust",
+      "text": "When fully grown, the cap contains a small amount of Glowstone that can be harvested."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Night Vision",
+      "text": "The special spores of the Glowshroom allow you to make potions and tipped arrows of night vision from them."
+    }
+  ]
+}

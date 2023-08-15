@@ -1,0 +1,42 @@
+{
+  "name": "Honey Waxcap",
+  "icon": "extendedmushrooms:honey_fungus",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ancient writings tell of a sticky mushroom that exudes a honey-like substance. However, this seems to have died out a long time ago."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "This mushroom consists of multiple sticky stems and caps with an orange color.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "extendedmushrooms:honey_fungus"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Harvesting",
+      "text": "The cap of adult Honey Waxcaps exudes small drops of a honey-like substance that can be harvested.$(br2)The cap's solid structure is reminiscent of honeycombs, parts of which can be removed."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extendedmushrooms:honey_bottle",
+      "recipe2": "extendedmushrooms:honeycomb"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Slowness",
+      "text": "The stickyness of the Honey Waxcap allows you to make potions and tipped arrows of slowness from them."
+    }
+  ]
+}
