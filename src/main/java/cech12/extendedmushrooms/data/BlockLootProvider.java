@@ -166,7 +166,7 @@ public class BlockLootProvider implements DataProvider {
             //caps have other loot
             tables.put(ModBlocks.GLOWSHROOM_CAP, block -> dropCap(block, ModBlocks.GLOWSHROOM.get(),
                     Pair.of(ModItems.GLOWSTONE_CRUMBS.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-            tables.put(ModBlocks.POISONOUS_MUSHROOM_CAP, block -> dropCap(block, ModBlocks.POISONOUS_MUSHROOM.get()));
+            tables.put(ModBlocks.DEADLY_FIBRECAP_CAP, block -> dropCap(block, ModBlocks.DEADLY_FIBRECAP.get()));
             tables.put(ModBlocks.PARROT_WAXCAP_CAP, block -> dropCap(block, ModBlocks.PARROT_WAXCAP.get(),
                     Pair.of(ModItems.SLIME_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
             tables.put(ModBlocks.HONEY_WAXCAP_CAP, block -> dropCap(block, ModBlocks.HONEY_WAXCAP.get(),

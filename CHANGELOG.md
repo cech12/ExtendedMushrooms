@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - renamed Slime Fungus to Parrot Waxcap #76
 - renamed Honey Fungus to Honey Waxcap #76
+- renamed and reworked Poisonous Mushroom (poisonous, purple, green) to Deadly Fibrecap (poisonous, white, fibre loot) #77
 
 ## [1.20.1-4.1.0.0] - 2023-08-09
 ### Changed

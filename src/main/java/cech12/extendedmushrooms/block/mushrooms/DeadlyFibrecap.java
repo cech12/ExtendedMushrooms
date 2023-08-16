@@ -6,18 +6,18 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import javax.annotation.Nonnull;
 
-public class PoisonousMushroom extends MegaMushroom {
+public class DeadlyFibrecap extends MegaMushroom {
 
     @Nonnull
     @Override
     public ResourceKey<ConfiguredFeature<?, ?>> getBigMushroomFeature() {
-        return ModFeatures.BIG_POISONOUS_MUSHROOM_CONFIGURED;
+        return ModFeatures.BIG_DEADLY_FIBRECAP_CONFIGURED;
     }
 
     @Nonnull
     @Override
     public ResourceKey<ConfiguredFeature<?, ?>> getMegaMushroomFeature() {
-        return ModFeatures.MEGA_POISONOUS_MUSHROOM_CONFIGURED;
+        return ModFeatures.MEGA_DEADLY_FIBRECAP_CONFIGURED;
     }
 
 }

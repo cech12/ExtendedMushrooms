@@ -1,22 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "banner",
+  "group": "bed",
   "key": {
     "#": {
-      "tag": "forge:mushroom_caps/purple"
+      "tag": "forge:mushroom_caps/white"
     },
-    "|": {
-      "tag": "forge:rods/wooden"
+    "W": {
+      "tag": "minecraft:planks"
     }
   },
   "pattern": [
     "###",
-    "###",
-    " | "
+    "WWW"
   ],
   "result": {
-    "item": "minecraft:purple_banner"
+    "item": "minecraft:white_bed"
   },
   "show_notification": true
 }

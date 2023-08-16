@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:mushroom_caps/purple"
+            "tag": "forge:mushroom_caps/white"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extendedmushrooms:mushroom_cap/poisonous_mushroom/purple_banner"
+        "recipe": "extendedmushrooms:mushroom_cap/poisonous_mushroom/white_banner"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "extendedmushrooms:mushroom_cap/poisonous_mushroom/purple_banner"
+      "extendedmushrooms:mushroom_cap/poisonous_mushroom/white_banner"
     ]
   },
   "sends_telemetry_event": false

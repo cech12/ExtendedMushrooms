@@ -33,8 +33,8 @@ public class ModBlockEntityTypes {
             ModBlocks.MUSHROOM_WALL_SIGN,
             ModBlocks.GLOWSHROOM_STANDING_SIGN,
             ModBlocks.GLOWSHROOM_WALL_SIGN,
-            ModBlocks.POISONOUS_MUSHROOM_STANDING_SIGN,
-            ModBlocks.POISONOUS_MUSHROOM_WALL_SIGN,
+            ModBlocks.PARROT_WAXCAP_STANDING_SIGN,
+            ModBlocks.PARROT_WAXCAP_WALL_SIGN,
             ModBlocks.HONEY_WAXCAP_STANDING_SIGN,
             ModBlocks.HONEY_WAXCAP_WALL_SIGN);
 
@@ -43,8 +43,8 @@ public class ModBlockEntityTypes {
             ModBlocks.MUSHROOM_WALL_HANGING_SIGN,
             ModBlocks.GLOWSHROOM_HANGING_SIGN,
             ModBlocks.GLOWSHROOM_WALL_HANGING_SIGN,
-            ModBlocks.POISONOUS_MUSHROOM_HANGING_SIGN,
-            ModBlocks.POISONOUS_MUSHROOM_WALL_HANGING_SIGN,
+            ModBlocks.PARROT_WAXCAP_HANGING_SIGN,
+            ModBlocks.PARROT_WAXCAP_WALL_HANGING_SIGN,
             ModBlocks.HONEY_WAXCAP_HANGING_SIGN,
             ModBlocks.HONEY_WAXCAP_WALL_HANGING_SIGN);
 

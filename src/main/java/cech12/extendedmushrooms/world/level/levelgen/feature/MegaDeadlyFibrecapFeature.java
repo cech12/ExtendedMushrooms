@@ -7,9 +7,9 @@ import net.minecraft.util.RandomSource;
 /**
  * Like MegaRedMushroomFeature, only size and cap height is different
  */
-public class MegaPoisonousMushroomFeature extends MegaRedMushroomFeature {
+public class MegaDeadlyFibrecapFeature extends MegaRedMushroomFeature {
 
-    public MegaPoisonousMushroomFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
+    public MegaDeadlyFibrecapFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 

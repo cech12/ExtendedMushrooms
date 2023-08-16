@@ -7,9 +7,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 
-public class BigPoisonousMushroomFeature extends SingleBigMushroomFeature {
+public class BigDeadlyFibrecapFeature extends SingleBigMushroomFeature {
 
-    public BigPoisonousMushroomFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
+    public BigDeadlyFibrecapFeature(Codec<ExtendedMushroomFeatureConfiguration> config) {
         super(config);
     }
 

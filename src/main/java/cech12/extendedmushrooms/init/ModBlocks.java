@@ -7,8 +7,8 @@ import cech12.extendedmushrooms.block.mushroomblocks.HoneyWaxcapCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStrippedStemBlock;
-import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomBlock;
-import cech12.extendedmushrooms.block.mushroomblocks.PoisonousMushroomCap;
+import cech12.extendedmushrooms.block.mushroomblocks.DeadlyFibrecapBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.DeadlyFibrecapCap;
 import cech12.extendedmushrooms.block.mushroomblocks.ParrotWaxcapCap;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
 import cech12.extendedmushrooms.block.mushrooms.HoneyWaxcap;
@@ -95,42 +95,42 @@ public final class ModBlocks {
     public static final RegistryObject<Block> GLOWSHROOM_CAP_CARPET = registerBlockWithItem("glowshroom_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.BLUE, Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.1F).sound(SoundType.WOOL).lightLevel((state) -> 8)));
     public static final RegistryObject<Block> GLOWSHROOM_CAP_PRESSURE_PLATE = registerBlockWithItem("glowshroom_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.GLOWSHROOM, 8));
 
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM = registerBlockWithItem("poisonous_mushroom", () -> new PoisonousMushroomBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS).hasPostProcess((a, b, c)->true)));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_POTTED = registerBlock("poisonous_mushroom_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, POISONOUS_MUSHROOM, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
+    public static final RegistryObject<Block> DEADLY_FIBRECAP = registerBlockWithItem("poisonous_mushroom", () -> new DeadlyFibrecapBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS).hasPostProcess((a, b, c)->true)));
+    public static final RegistryObject<Block> DEADLY_FIBRECAP_POTTED = registerBlock("poisonous_mushroom_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DEADLY_FIBRECAP, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_CAP = registerBlockWithItem("poisonous_mushroom_cap", () -> new PoisonousMushroomCap(MushroomType.POISONOUS_MUSHROOM, Block.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(0.2F).sound(SoundType.WOOL)));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_STEM = registerBlockWithItem("poisonous_mushroom_stem", () -> new MushroomStemBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_STEM_STRIPPED = registerBlockWithItem("poisonous_mushroom_stem_stripped", () -> new MushroomStrippedStemBlock(MushroomWoodType.POISONOUS_MUSHROOM, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_BUTTON = registerBlockWithItem("poisonous_mushroom_button", () -> new MushroomWoodButtonBlock(MushroomWoodType.POISONOUS_MUSHROOM));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_DOOR = registerBlockWithItem("poisonous_mushroom_door", () -> new DoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(3.0F).sound(SoundType.WOOD), MushroomWoodType.POISONOUS_MUSHROOM.getBlockSetType()));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_FENCE = registerBlockWithItem("poisonous_mushroom_fence", () -> new MushroomFenceBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_FENCE_GATE = registerBlockWithItem("poisonous_mushroom_fence_gate", () -> new MushroomFenceGateBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_HANGING_SIGN = registerBlock("poisonous_mushroom_hanging_sign", () -> new MushroomCeilingHangingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), MushroomWoodType.POISONOUS_MUSHROOM.getWoodType()));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_PLANKS = registerBlockWithItem("poisonous_mushroom_planks", () -> new MushroomPlanksBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_PRESSURE_PLATE = registerBlockWithItem("poisonous_mushroom_pressure_plate", () -> new MushroomWoodPressurePlateBlock(MushroomWoodType.POISONOUS_MUSHROOM));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_SLAB = registerBlockWithItem("poisonous_mushroom_slab", () -> new MushroomSlabBlock(Block.Properties.copy(POISONOUS_MUSHROOM_PLANKS.get())));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_STAIRS = registerBlockWithItem("poisonous_mushroom_stairs", () -> new MushroomStairsBlock(() -> POISONOUS_MUSHROOM_PLANKS.get().defaultBlockState(), Block.Properties.copy(POISONOUS_MUSHROOM_PLANKS.get())));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_STANDING_SIGN = registerBlock("poisonous_mushroom_sign", () -> new MushroomStandingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), MushroomWoodType.POISONOUS_MUSHROOM.getWoodType()));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_TRAPDOOR = registerBlockWithItem("poisonous_mushroom_trapdoor", () -> new TrapDoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(3.0F).sound(SoundType.WOOD), MushroomWoodType.POISONOUS_MUSHROOM.getBlockSetType()));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_WALL_HANGING_SIGN = registerBlock("poisonous_mushroom_wall_hanging_sign", () -> new MushroomWallHangingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().lootFrom(POISONOUS_MUSHROOM_HANGING_SIGN), MushroomWoodType.POISONOUS_MUSHROOM.getWoodType()));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_WALL_SIGN = registerBlock("poisonous_mushroom_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().lootFrom(POISONOUS_MUSHROOM_STANDING_SIGN), MushroomWoodType.POISONOUS_MUSHROOM.getWoodType()));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_CAP_BUTTON = registerBlockWithItem("poisonous_mushroom_cap_button", () -> new MushroomCapButtonBlock(MushroomWoodType.POISONOUS_MUSHROOM));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_CAP_CARPET = registerBlockWithItem("poisonous_mushroom_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.PURPLE, Block.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(0.1F).sound(SoundType.WOOL)));
-    public static final RegistryObject<Block> POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE = registerBlockWithItem("poisonous_mushroom_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.POISONOUS_MUSHROOM));
+    public static final RegistryObject<Block> DEADLY_FIBRECAP_CAP = registerBlockWithItem("poisonous_mushroom_cap", () -> new DeadlyFibrecapCap(MushroomType.DEADLY_FIBRECAP, Block.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).strength(0.2F).sound(SoundType.WOOL)));
+    public static final RegistryObject<Block> DEADLY_FIBRECAP_CAP_BUTTON = registerBlockWithItem("poisonous_mushroom_cap_button", () -> new MushroomCapButtonBlock(MushroomWoodType.PARROT_WAXCAP));
+    public static final RegistryObject<Block> DEADLY_FIBRECAP_CAP_CARPET = registerBlockWithItem("poisonous_mushroom_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.WHITE, Block.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).strength(0.1F).sound(SoundType.WOOL)));
+    public static final RegistryObject<Block> DEADLY_FIBRECAP_CAP_PRESSURE_PLATE = registerBlockWithItem("poisonous_mushroom_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.PARROT_WAXCAP));
 
     public static final RegistryObject<Block> PARROT_WAXCAP = registerBlockWithItem("slime_fungus", () -> new EMMushroomBlock(new ParrotWaxcap(), Block.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.SLIME_BLOCK).hasPostProcess((a, b, c)->true)));
     public static final RegistryObject<Block> PARROT_WAXCAP_POTTED = registerBlock("slime_fungus_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, PARROT_WAXCAP, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
-    public static final RegistryObject<Block> PARROT_WAXCAP_CAP = registerBlockWithItem("slime_fungus_cap", () -> new ParrotWaxcapCap(MushroomType.SLIME_FUNGUS, Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.2F).noOcclusion().jumpFactor(1.5F).friction(0.8F).sound(SoundType.SLIME_BLOCK)));
-    public static final RegistryObject<Block> PARROT_WAXCAP_CAP_BUTTON = registerBlockWithItem("slime_fungus_cap_button", () -> new MushroomCapButtonBlock(MushroomWoodType.POISONOUS_MUSHROOM));
+    public static final RegistryObject<Block> PARROT_WAXCAP_CAP = registerBlockWithItem("slime_fungus_cap", () -> new ParrotWaxcapCap(MushroomType.PARROT_WAXCAP, Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.2F).noOcclusion().jumpFactor(1.5F).friction(0.8F).sound(SoundType.SLIME_BLOCK)));
+    public static final RegistryObject<Block> PARROT_WAXCAP_STEM = registerBlockWithItem("poisonous_mushroom_stem", () -> new MushroomStemBlock(MushroomWoodType.PARROT_WAXCAP, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> PARROT_WAXCAP_STEM_STRIPPED = registerBlockWithItem("poisonous_mushroom_stem_stripped", () -> new MushroomStrippedStemBlock(MushroomWoodType.PARROT_WAXCAP, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+
+    public static final RegistryObject<Block> PARROT_WAXCAP_BUTTON = registerBlockWithItem("poisonous_mushroom_button", () -> new MushroomWoodButtonBlock(MushroomWoodType.PARROT_WAXCAP));
+    public static final RegistryObject<Block> PARROT_WAXCAP_DOOR = registerBlockWithItem("poisonous_mushroom_door", () -> new DoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(3.0F).sound(SoundType.WOOD), MushroomWoodType.PARROT_WAXCAP.getBlockSetType()));
+    public static final RegistryObject<Block> PARROT_WAXCAP_FENCE = registerBlockWithItem("poisonous_mushroom_fence", () -> new MushroomFenceBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> PARROT_WAXCAP_FENCE_GATE = registerBlockWithItem("poisonous_mushroom_fence_gate", () -> new MushroomFenceGateBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> PARROT_WAXCAP_HANGING_SIGN = registerBlock("poisonous_mushroom_hanging_sign", () -> new MushroomCeilingHangingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), MushroomWoodType.PARROT_WAXCAP.getWoodType()));
+    public static final RegistryObject<Block> PARROT_WAXCAP_PLANKS = registerBlockWithItem("poisonous_mushroom_planks", () -> new MushroomPlanksBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> PARROT_WAXCAP_PRESSURE_PLATE = registerBlockWithItem("poisonous_mushroom_pressure_plate", () -> new MushroomWoodPressurePlateBlock(MushroomWoodType.PARROT_WAXCAP));
+    public static final RegistryObject<Block> PARROT_WAXCAP_SLAB = registerBlockWithItem("poisonous_mushroom_slab", () -> new MushroomSlabBlock(Block.Properties.copy(PARROT_WAXCAP_PLANKS.get())));
+    public static final RegistryObject<Block> PARROT_WAXCAP_STAIRS = registerBlockWithItem("poisonous_mushroom_stairs", () -> new MushroomStairsBlock(() -> PARROT_WAXCAP_PLANKS.get().defaultBlockState(), Block.Properties.copy(PARROT_WAXCAP_PLANKS.get())));
+    public static final RegistryObject<Block> PARROT_WAXCAP_STANDING_SIGN = registerBlock("poisonous_mushroom_sign", () -> new MushroomStandingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava(), MushroomWoodType.PARROT_WAXCAP.getWoodType()));
+    public static final RegistryObject<Block> PARROT_WAXCAP_TRAPDOOR = registerBlockWithItem("poisonous_mushroom_trapdoor", () -> new TrapDoorBlock(Block.Properties.of().mapColor(MapColor.WOOD).strength(3.0F).sound(SoundType.WOOD), MushroomWoodType.PARROT_WAXCAP.getBlockSetType()));
+    public static final RegistryObject<Block> PARROT_WAXCAP_WALL_HANGING_SIGN = registerBlock("poisonous_mushroom_wall_hanging_sign", () -> new MushroomWallHangingSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().lootFrom(PARROT_WAXCAP_HANGING_SIGN), MushroomWoodType.PARROT_WAXCAP.getWoodType()));
+    public static final RegistryObject<Block> PARROT_WAXCAP_WALL_SIGN = registerBlock("poisonous_mushroom_wall_sign", () -> new MushroomWallSignBlock(Block.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava().lootFrom(PARROT_WAXCAP_STANDING_SIGN), MushroomWoodType.PARROT_WAXCAP.getWoodType()));
+    public static final RegistryObject<Block> PARROT_WAXCAP_CAP_BUTTON = registerBlockWithItem("slime_fungus_cap_button", () -> new MushroomCapButtonBlock(MushroomWoodType.PARROT_WAXCAP));
     public static final RegistryObject<Block> PARROT_WAXCAP_CAP_CARPET = registerBlockWithItem("slime_fungus_cap_carpet", () -> new MushroomCarpetBlock(DyeColor.LIME, Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.1F).sound(SoundType.WOOL)));
-    public static final RegistryObject<Block> PARROT_WAXCAP_CAP_PRESSURE_PLATE = registerBlockWithItem("slime_fungus_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.POISONOUS_MUSHROOM));
+    public static final RegistryObject<Block> PARROT_WAXCAP_CAP_PRESSURE_PLATE = registerBlockWithItem("slime_fungus_cap_pressure_plate", () -> new MushroomCapPressurePlateBlock(MushroomWoodType.PARROT_WAXCAP));
 
     public static final RegistryObject<Block> HONEY_WAXCAP = registerBlockWithItem("honey_fungus", () -> new EMMushroomBlock(new HoneyWaxcap(), Block.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().strength(0.0F).sound(SoundType.HONEY_BLOCK).hasPostProcess((a, b, c)->true)));
     public static final RegistryObject<Block> HONEY_WAXCAP_POTTED = registerBlock("honey_fungus_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, HONEY_WAXCAP, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
-    public static final RegistryObject<Block> HONEY_WAXCAP_CAP = registerBlockWithItem("honey_fungus_cap", () -> new HoneyWaxcapCap(MushroomType.HONEY_FUNGUS, Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.2F).noOcclusion().speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.HONEY_BLOCK)));
+    public static final RegistryObject<Block> HONEY_WAXCAP_CAP = registerBlockWithItem("honey_fungus_cap", () -> new HoneyWaxcapCap(MushroomType.HONEY_WAXCAP, Block.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.2F).noOcclusion().speedFactor(0.4F).jumpFactor(0.5F).sound(SoundType.HONEY_BLOCK)));
     public static final RegistryObject<Block> HONEY_WAXCAP_STEM = registerBlockWithItem("honey_fungus_stem", () -> new MushroomStemBlock(MushroomWoodType.HONEY_WAXCAP, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> HONEY_WAXCAP_STEM_STRIPPED = registerBlockWithItem("honey_fungus_stem_stripped", () -> new MushroomStrippedStemBlock(MushroomWoodType.HONEY_WAXCAP, Block.Properties.of().mapColor(MapColor.WOOD).strength(0.2F).sound(SoundType.WOOD)));
 
@@ -156,12 +156,12 @@ public final class ModBlocks {
     static {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(INFESTED_FLOWER.getId()), INFESTED_FLOWER_POTTED);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(GLOWSHROOM.getId()), GLOWSHROOM_POTTED);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(POISONOUS_MUSHROOM.getId()), POISONOUS_MUSHROOM_POTTED);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(DEADLY_FIBRECAP.getId()), DEADLY_FIBRECAP_POTTED);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(PARROT_WAXCAP.getId()), PARROT_WAXCAP_POTTED);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(HONEY_WAXCAP.getId()), HONEY_WAXCAP_POTTED);
         BLOCK_STRIPPING_MAP.put(RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.MUSHROOM_STEM), ForgeRegistries.BLOCKS), STRIPPED_MUSHROOM_STEM);
         BLOCK_STRIPPING_MAP.put(GLOWSHROOM_STEM, GLOWSHROOM_STEM_STRIPPED);
-        BLOCK_STRIPPING_MAP.put(POISONOUS_MUSHROOM_STEM, POISONOUS_MUSHROOM_STEM_STRIPPED);
+        BLOCK_STRIPPING_MAP.put(PARROT_WAXCAP_STEM, PARROT_WAXCAP_STEM_STRIPPED);
         BLOCK_STRIPPING_MAP.put(HONEY_WAXCAP_STEM, HONEY_WAXCAP_STEM_STRIPPED);
     }
 

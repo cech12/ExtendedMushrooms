@@ -21,7 +21,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import vazkii.patchouli.api.PatchouliAPI;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -243,36 +242,21 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_dust", has(Items.GLOWSTONE_DUST))
                 .save(consumer);
 
-        //poisonous mushroom
-        FairyRingRecipeBuilder.normal(ModBlocks.POISONOUS_MUSHROOM.get(), 1)
+        //deadly fibrecap
+        FairyRingRecipeBuilder.normal(ModBlocks.DEADLY_FIBRECAP.get(), 1)
                 .requires(Items.POISONOUS_POTATO)
                 .requires(Items.ROTTEN_FLESH)
                 .requires(Items.SPIDER_EYE)
-                .requires(Items.PURPLE_DYE)
+                .requires(Items.WHITE_DYE)
                 .save(consumer);
-        mushroomWoodRecipes(consumer, "poisonous_mushroom",
-                ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
-                ModItems.POISONOUS_MUSHROOM_BOAT.get(),
-                ModItems.POISONOUS_MUSHROOM_CHEST_BOAT.get(),
-                ModBlocks.POISONOUS_MUSHROOM_BUTTON.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_DOOR.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_FENCE.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_FENCE_GATE.get().asItem(),
-                ModItems.POISONOUS_MUSHROOM_HANGING_SIGN.get(),
-                ModBlocks.POISONOUS_MUSHROOM_PLANKS.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_PRESSURE_PLATE.get().asItem(),
-                ModItems.POISONOUS_MUSHROOM_SIGN.get(),
-                ModBlocks.POISONOUS_MUSHROOM_SLAB.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_STAIRS.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_STEM_STRIPPED.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_TRAPDOOR.get().asItem());
         mushroomCapRecipes(consumer, "poisonous_mushroom",
-                ModTags.ForgeItems.MUSHROOM_CAPS_PURPLE,
-                Items.PURPLE_BANNER,
-                Items.PURPLE_BED,
-                ModBlocks.POISONOUS_MUSHROOM_CAP_BUTTON.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_CAP_CARPET.get().asItem(),
-                ModBlocks.POISONOUS_MUSHROOM_CAP_PRESSURE_PLATE.get().asItem());
+                ModTags.ForgeItems.MUSHROOM_CAPS_WHITE,
+                Items.WHITE_BANNER,
+                Items.WHITE_BED,
+                ModBlocks.DEADLY_FIBRECAP_CAP_BUTTON.get().asItem(),
+                ModBlocks.DEADLY_FIBRECAP_CAP_CARPET.get().asItem(),
+                ModBlocks.DEADLY_FIBRECAP_CAP_PRESSURE_PLATE.get().asItem());
+        //no wood for deadly fibrecap
 
         //parrot waxcap
         FairyRingRecipeBuilder.normal(ModBlocks.PARROT_WAXCAP.get(), 1)
@@ -280,6 +264,22 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.RABBIT_FOOT)
                 .requires(Items.LIME_DYE)
                 .save(consumer);
+        mushroomWoodRecipes(consumer, "poisonous_mushroom",
+                ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
+                ModItems.PARROT_WAXCAP_BOAT.get(),
+                ModItems.PARROT_WAXCAP_CHEST_BOAT.get(),
+                ModBlocks.PARROT_WAXCAP_BUTTON.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_DOOR.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_FENCE.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_FENCE_GATE.get().asItem(),
+                ModItems.PARROT_WAXCAP_HANGING_SIGN.get(),
+                ModBlocks.PARROT_WAXCAP_PLANKS.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_PRESSURE_PLATE.get().asItem(),
+                ModItems.PARROT_WAXCAP_SIGN.get(),
+                ModBlocks.PARROT_WAXCAP_SLAB.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_STAIRS.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_STEM_STRIPPED.get().asItem(),
+                ModBlocks.PARROT_WAXCAP_TRAPDOOR.get().asItem());
         mushroomCapRecipes(consumer, "slime_fungus",
                 ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
                 Items.ORANGE_BANNER,
@@ -287,7 +287,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.PARROT_WAXCAP_CAP_BUTTON.get().asItem(),
                 ModBlocks.PARROT_WAXCAP_CAP_CARPET.get().asItem(),
                 ModBlocks.PARROT_WAXCAP_CAP_PRESSURE_PLATE.get().asItem());
-        //no wood for slime fungus
         //slime blob recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SLIME_BALL)
                 .define('#', ModItems.SLIME_BLOB.get())
@@ -314,10 +313,10 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.HONEY_WAXCAP_DOOR.get().asItem(),
                 ModBlocks.HONEY_WAXCAP_FENCE.get().asItem(),
                 ModBlocks.HONEY_WAXCAP_FENCE_GATE.get().asItem(),
-                ModItems.HONEY_FUNGUS_HANGING_SIGN.get(),
+                ModItems.HONEY_WAXCAP_HANGING_SIGN.get(),
                 ModBlocks.HONEY_WAXCAP_PLANKS.get().asItem(),
                 ModBlocks.HONEY_WAXCAP_PRESSURE_PLATE.get().asItem(),
-                ModItems.HONEY_FUNGUS_SIGN.get(),
+                ModItems.HONEY_WAXCAP_SIGN.get(),
                 ModBlocks.HONEY_WAXCAP_SLAB.get().asItem(),
                 ModBlocks.HONEY_WAXCAP_STAIRS.get().asItem(),
                 ModBlocks.HONEY_WAXCAP_STEM_STRIPPED.get().asItem(),

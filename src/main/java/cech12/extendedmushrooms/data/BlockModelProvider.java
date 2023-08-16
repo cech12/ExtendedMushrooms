@@ -232,16 +232,16 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
         }
 
         //special models
-        //triggered poisonous mushroom & its cap
-        ResourceLocation triggeredPoisonousMushroom = getBlockResourceLocation("poisonous_mushroom_triggered");
-        getBuilder(triggeredPoisonousMushroom.getPath())
+        //triggered deadly fibrecap & its cap
+        ResourceLocation triggeredDeadlyFibrecap = getBlockResourceLocation("poisonous_mushroom_triggered");
+        getBuilder(triggeredDeadlyFibrecap.getPath())
                 .parent(getExistingFile(new ResourceLocation("block/cross")))
-                .texture("cross", triggeredPoisonousMushroom)
+                .texture("cross", triggeredDeadlyFibrecap)
                 .renderType("cutout");
-        ResourceLocation triggeredPoisonousMushroomCap = getBlockResourceLocation("poisonous_mushroom_cap_triggered");
-        getBuilder(triggeredPoisonousMushroomCap.getPath())
-                .texture("texture", triggeredPoisonousMushroomCap)
-                .texture("particle", triggeredPoisonousMushroomCap)
+        ResourceLocation triggeredDeadlyFibrecapCap = getBlockResourceLocation("poisonous_mushroom_cap_triggered");
+        getBuilder(triggeredDeadlyFibrecapCap.getPath())
+                .texture("texture", triggeredDeadlyFibrecapCap)
+                .texture("particle", triggeredDeadlyFibrecapCap)
                 .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
 
 

@@ -46,12 +46,14 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.MUSHROOMS_GLOWSHROOM).add(ModBlocks.GLOWSHROOM.get());
         tag(ModTags.Blocks.MUSHROOMS_LIME).add(ModBlocks.PARROT_WAXCAP.get());
         tag(ModTags.Blocks.MUSHROOMS_ORANGE).add(ModBlocks.HONEY_WAXCAP.get());
-        tag(ModTags.Blocks.MUSHROOMS_PURPLE).add(ModBlocks.POISONOUS_MUSHROOM.get());
+        tag(ModTags.Blocks.MUSHROOMS_PURPLE); //TODO
+        tag(ModTags.Blocks.MUSHROOMS_WHITE).add(ModBlocks.DEADLY_FIBRECAP.get());
         tag(ModTags.Blocks.MUSHROOMS)
                 .addTag(ModTags.Blocks.MUSHROOMS_GLOWSHROOM)
                 .addTag(ModTags.Blocks.MUSHROOMS_LIME)
                 .addTag(ModTags.Blocks.MUSHROOMS_ORANGE)
-                .addTag(ModTags.Blocks.MUSHROOMS_PURPLE);
+                .addTag(ModTags.Blocks.MUSHROOMS_PURPLE)
+                .addTag(ModTags.Blocks.MUSHROOMS_WHITE);
         tag(ModTags.Blocks.MUSHROOMS_EDIBLE)
                 .add(ModBlocks.GLOWSHROOM.get())
                 .add(ModBlocks.HONEY_WAXCAP.get())
@@ -59,7 +61,7 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.MUSHROOMS_JUMP_BOOSTING)
                 .add(ModBlocks.PARROT_WAXCAP.get());
         tag(ModTags.Blocks.MUSHROOMS_POISONOUS)
-                .add(ModBlocks.POISONOUS_MUSHROOM.get());
+                .add(ModBlocks.DEADLY_FIBRECAP.get());
         tag(ModTags.Blocks.MUSHROOMS_SLOWING_DOWN)
                 .add(ModBlocks.HONEY_WAXCAP.get());
         tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
@@ -141,14 +143,16 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM).add(ModBlocks.GLOWSHROOM_CAP.get());
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_LIME).add(ModBlocks.PARROT_WAXCAP_CAP.get());
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_ORANGE).add(ModBlocks.HONEY_WAXCAP_CAP.get());
-        tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE).add(ModBlocks.POISONOUS_MUSHROOM_CAP.get());
+        tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE); //TODO
+        tag(ModTags.ForgeBlocks.MUSHROOM_CAPS_WHITE).add(ModBlocks.DEADLY_FIBRECAP_CAP.get());
         tag(ModTags.ForgeBlocks.MUSHROOM_CAPS)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_BROWN)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_RED)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_GLOWSHROOM)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_LIME)
                 .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_ORANGE)
-                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE);
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE)
+                .addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS_WHITE);
 
         tag(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS)
                 .add(Blocks.MUSHROOM_STEM)
@@ -157,8 +161,8 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.GLOWSHROOM_STEM.get())
                 .add(ModBlocks.GLOWSHROOM_STEM_STRIPPED.get());
         tag(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN)
-                .add(ModBlocks.POISONOUS_MUSHROOM_STEM.get())
-                .add(ModBlocks.POISONOUS_MUSHROOM_STEM_STRIPPED.get());
+                .add(ModBlocks.PARROT_WAXCAP_STEM.get())
+                .add(ModBlocks.PARROT_WAXCAP_STEM_STRIPPED.get());
         tag(ModTags.ForgeBlocks.MUSHROOM_STEMS_ORANGE)
                 .add(ModBlocks.HONEY_WAXCAP_STEM.get())
                 .add(ModBlocks.HONEY_WAXCAP_STEM_STRIPPED.get());
@@ -174,13 +178,15 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(ModTags.ForgeBlocks.MUSHROOMS_LIME).addTag(ModTags.Blocks.MUSHROOMS_LIME);
         tag(ModTags.ForgeBlocks.MUSHROOMS_ORANGE).addTag(ModTags.Blocks.MUSHROOMS_ORANGE);
         tag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE).addTag(ModTags.Blocks.MUSHROOMS_PURPLE);
+        tag(ModTags.ForgeBlocks.MUSHROOMS_WHITE).addTag(ModTags.Blocks.MUSHROOMS_WHITE);
         tag(ModTags.ForgeBlocks.MUSHROOMS)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_BROWN)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_RED)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_GLOWSHROOM)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_LIME)
                 .addTag(ModTags.ForgeBlocks.MUSHROOMS_ORANGE)
-                .addTag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE);
+                .addTag(ModTags.ForgeBlocks.MUSHROOMS_PURPLE)
+                .addTag(ModTags.ForgeBlocks.MUSHROOMS_WHITE);
         tag(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE)
                 .add(Blocks.BROWN_MUSHROOM)
                 .add(Blocks.RED_MUSHROOM)

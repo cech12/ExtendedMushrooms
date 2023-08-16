@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.block.EMMushroomBlock;
-import cech12.extendedmushrooms.block.mushrooms.PoisonousMushroom;
+import cech12.extendedmushrooms.block.mushrooms.DeadlyFibrecap;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,12 +24,12 @@ import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PoisonousMushroomBlock extends EMMushroomBlock {
+public class DeadlyFibrecapBlock extends EMMushroomBlock {
 
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
 
-    public PoisonousMushroomBlock(Properties properties) {
-        super(new PoisonousMushroom(), properties);
+    public DeadlyFibrecapBlock(Properties properties) {
+        super(new DeadlyFibrecap(), properties);
         this.registerDefaultState(this.defaultBlockState().setValue(TRIGGERED, false));
     }
 

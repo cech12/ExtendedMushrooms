@@ -27,13 +27,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
+public class DeadlyFibrecapCap extends AbstractEffectMushroomCap {
 
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
 
     private static final Direction[] DIRECTION_ORDER = {Direction.UP, Direction.DOWN, Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.SOUTH};
 
-    public PoisonousMushroomCap(MushroomType type, Properties properties) {
+    public DeadlyFibrecapCap(MushroomType type, Properties properties) {
         super(type, properties);
         this.registerDefaultState(this.defaultBlockState().setValue(TRIGGERED, false));
     }

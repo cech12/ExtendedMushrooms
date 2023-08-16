@@ -38,6 +38,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOMS_LIME, ModTags.Items.MUSHROOMS_LIME);
         copy(ModTags.Blocks.MUSHROOMS_ORANGE, ModTags.Items.MUSHROOMS_ORANGE);
         copy(ModTags.Blocks.MUSHROOMS_PURPLE, ModTags.Items.MUSHROOMS_PURPLE);
+        copy(ModTags.Blocks.MUSHROOMS_WHITE, ModTags.Items.MUSHROOMS_WHITE);
         copy(ModTags.Blocks.MUSHROOMS, ModTags.Items.MUSHROOMS);
         copy(ModTags.Blocks.MUSHROOMS_EDIBLE, ModTags.Items.MUSHROOMS_EDIBLE);
         tag(ModTags.Items.MUSHROOM_HANGING_SIGNS).add(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get)
@@ -81,6 +82,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_LIME, ModTags.ForgeItems.MUSHROOM_CAPS_LIME);
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_ORANGE, ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE);
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_PURPLE, ModTags.ForgeItems.MUSHROOM_CAPS_PURPLE);
+        copy(ModTags.ForgeBlocks.MUSHROOM_CAPS_WHITE, ModTags.ForgeItems.MUSHROOM_CAPS_WHITE);
         copy(ModTags.ForgeBlocks.MUSHROOM_CAPS, ModTags.ForgeItems.MUSHROOM_CAPS);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_COLORLESS, ModTags.ForgeItems.MUSHROOM_STEMS_COLORLESS);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_GLOWSHROOM, ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM);
@@ -93,6 +95,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_LIME, ModTags.ForgeItems.MUSHROOMS_LIME);
         copy(ModTags.ForgeBlocks.MUSHROOMS_ORANGE, ModTags.ForgeItems.MUSHROOMS_ORANGE);
         copy(ModTags.ForgeBlocks.MUSHROOMS_PURPLE, ModTags.ForgeItems.MUSHROOMS_PURPLE);
+        copy(ModTags.ForgeBlocks.MUSHROOMS_WHITE, ModTags.ForgeItems.MUSHROOMS_WHITE);
         copy(ModTags.ForgeBlocks.MUSHROOMS, Tags.Items.MUSHROOMS);
         copy(ModTags.ForgeBlocks.MUSHROOMS_EDIBLE, ModTags.ForgeItems.MUSHROOMS_EDIBLE);
         copy(ModTags.ForgeBlocks.MUSHROOMS_JUMP_BOOSTING, ModTags.ForgeItems.MUSHROOMS_JUMP_BOOSTING);

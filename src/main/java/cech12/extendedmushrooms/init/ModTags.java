@@ -30,6 +30,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOM_CAPS_LIME = tag("mushroom_caps/lime");
         public static final TagKey<Block> MUSHROOM_CAPS_ORANGE = tag("mushroom_caps/orange");
         public static final TagKey<Block> MUSHROOM_CAPS_PURPLE = tag("mushroom_caps/purple");
+        public static final TagKey<Block> MUSHROOM_CAPS_WHITE = tag("mushroom_caps/white");
 
         public static final TagKey<Block> MUSHROOM_STEMS = tag("mushroom_stems");
         public static final TagKey<Block> MUSHROOM_STEMS_COLORLESS = tag("mushroom_stems/colorless");
@@ -44,6 +45,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOMS_LIME = tag("mushrooms/lime");
         public static final TagKey<Block> MUSHROOMS_ORANGE = tag("mushrooms/orange");
         public static final TagKey<Block> MUSHROOMS_PURPLE = tag("mushrooms/purple");
+        public static final TagKey<Block> MUSHROOMS_WHITE = tag("mushrooms/white");
         public static final TagKey<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
         public static final TagKey<Block> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final TagKey<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
@@ -82,6 +84,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOMS_LIME = tag("mushrooms/lime");
         public static final TagKey<Block> MUSHROOMS_ORANGE = tag("mushrooms/orange");
         public static final TagKey<Block> MUSHROOMS_PURPLE = tag("mushrooms/purple");
+        public static final TagKey<Block> MUSHROOMS_WHITE = tag("mushrooms/white");
         public static final TagKey<Block> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
         public static final TagKey<Block> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final TagKey<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
@@ -112,6 +115,7 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOM_CAPS_LIME = tag("mushroom_caps/lime");
         public static final TagKey<Item> MUSHROOM_CAPS_ORANGE = tag("mushroom_caps/orange");
         public static final TagKey<Item> MUSHROOM_CAPS_PURPLE = tag("mushroom_caps/purple");
+        public static final TagKey<Item> MUSHROOM_CAPS_WHITE = tag("mushroom_caps/white");
 
         public static final TagKey<Item> MUSHROOM_STEMS = tag("mushroom_stems");
         public static final TagKey<Item> MUSHROOM_STEMS_COLORLESS = tag("mushroom_stems/colorless");
@@ -126,6 +130,7 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOMS_LIME = tag("mushrooms/lime");
         public static final TagKey<Item> MUSHROOMS_ORANGE = tag("mushrooms/orange");
         public static final TagKey<Item> MUSHROOMS_PURPLE = tag("mushrooms/purple");
+        public static final TagKey<Item> MUSHROOMS_WHITE = tag("mushrooms/white");
         public static final TagKey<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
         public static final TagKey<Item> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final TagKey<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
@@ -169,6 +174,7 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOMS_LIME = tag("mushrooms/lime");
         public static final TagKey<Item> MUSHROOMS_ORANGE = tag("mushrooms/orange");
         public static final TagKey<Item> MUSHROOMS_PURPLE = tag("mushrooms/purple");
+        public static final TagKey<Item> MUSHROOMS_WHITE = tag("mushrooms/white");
         public static final TagKey<Item> MUSHROOMS_EDIBLE = tag("mushrooms/edible");
         public static final TagKey<Item> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final TagKey<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");

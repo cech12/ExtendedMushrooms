@@ -53,11 +53,11 @@ public class PlacedFeatureProvider implements DataProvider {
             List<BigMushroom> bigMushrooms = new LinkedList<>();
             List<BigMushroom> megaMushrooms = new LinkedList<>();
             bigMushrooms.add(new BigMushroom("big_glowshroom", ModFeatures.BIG_GLOWSHROOM_CONFIGURED, 0.125F));
-            bigMushrooms.add(new BigMushroom("big_poisonous_mushroom", ModFeatures.BIG_POISONOUS_MUSHROOM_CONFIGURED, 0.1F));
+            bigMushrooms.add(new BigMushroom("big_poisonous_mushroom", ModFeatures.BIG_DEADLY_FIBRECAP_CONFIGURED, 0.1F));
             megaMushrooms.add(new BigMushroom("mega_red_mushroom", ModFeatures.MEGA_RED_MUSHROOM_CONFIGURED, 0.2F));
             megaMushrooms.add(new BigMushroom("mega_brown_mushroom", ModFeatures.MEGA_BROWN_MUSHROOM_CONFIGURED, 0.2F));
             megaMushrooms.add(new BigMushroom("mega_glowshroom", ModFeatures.MEGA_GLOWSHROOM_CONFIGURED, 0.02F));
-            megaMushrooms.add(new BigMushroom("mega_poisonous_mushroom", ModFeatures.MEGA_POISONOUS_MUSHROOM_CONFIGURED, 0.02F));
+            megaMushrooms.add(new BigMushroom("mega_poisonous_mushroom", ModFeatures.MEGA_DEADLY_FIBRECAP_CONFIGURED, 0.02F));
             //register small mushroom features
             for (ConfiguredFeatureProvider.Mushroom mushroom : ConfiguredFeatureProvider.MUSHROOMS) {
                 placedFeatures.add(new PlacedFeatureJson(ModFeatures.MUSHROOMS_PLACED.get(mushroom.name()).get("normal").location(), mushroom.configuredFeature(), List.copyOf(getMushroomPlacement(512))));
