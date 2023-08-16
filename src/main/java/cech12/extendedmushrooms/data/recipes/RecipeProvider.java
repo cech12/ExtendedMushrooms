@@ -21,6 +21,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
+import vazkii.patchouli.api.PatchouliAPI;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -83,6 +84,17 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(ModBlocks.INFESTED_FLOWER.get())
                 .unlockedBy("has_flower", has(ModBlocks.INFESTED_FLOWER.get()))
                 .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.BROWN_DYE).getPath() + "_from_infested_flower"));
+
+        //mycyclopedia
+        Item mycyclopedia = ModItems.MYCYCLOPEDIA.get();
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, mycyclopedia)
+                .requires(Items.BOOK)
+                .requires(Tags.Items.MUSHROOMS)
+                .unlockedBy("has_mushroom", has(Tags.Items.MUSHROOMS))
+                .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(mycyclopedia).getPath()));
+        FairyRingRecipeBuilder.normal(mycyclopedia, 1)
+                .requires(Items.BOOK)
+                .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(mycyclopedia).getPath()));
 
         //overworld fairy ring recipes
         FairyRingRecipeBuilder.normal(Items.MYCELIUM, 1)

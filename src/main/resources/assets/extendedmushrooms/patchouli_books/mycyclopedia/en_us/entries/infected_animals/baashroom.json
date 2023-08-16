@@ -12,10 +12,6 @@
       "entity": "extendedmushrooms:mushroom_sheep",
       "text": "How a sheep can get such a $(l:myths/animal_infection)fungal infection$() is unknown.",
       "scale": 0.7
-    },
-    {
-      "type": "patchouli:text",
-      "text": ""
     }
   ]
 }

@@ -4,7 +4,7 @@
   "landing_text": "extendedmushrooms.mycyclopedia.landing_text",
   "version": 0,
   "book_texture": "patchouli:textures/gui/book_purple.png",
-  "model": "extendedmushrooms:mycyclopedia",
-  "creative_tab": "minecraft:tools_and_utilities",
+  "dont_generate_book": true,
+  "custom_book_item": "extendedmushrooms:mycyclopedia",
   "use_resource_pack": true
 }

@@ -4,6 +4,7 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.item.MushroomBoatItem;
 import cech12.extendedmushrooms.item.MushroomSporesItem;
 import cech12.extendedmushrooms.item.MushroomWoodType;
+import cech12.extendedmushrooms.item.MycyclopediaItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.HangingSignItem;
@@ -40,6 +41,7 @@ public class ModItems {
     public static final RegistryObject<Item> GRILLED_MUSHROOM = ITEMS.register("grilled_mushroom", () -> new Item((new Item.Properties()).food((new FoodProperties.Builder()).nutrition(2).saturationMod(0.3F).build())));
     public static final RegistryObject<Item> MUSHROOM_BREAD = ITEMS.register("mushroom_bread", () -> new Item((new Item.Properties()).food((new FoodProperties.Builder()).nutrition(5).saturationMod(0.3F).build())));
 
+    public static final RegistryObject<Item> MYCYCLOPEDIA = ITEMS.register("mycyclopedia", MycyclopediaItem::new);
     public static final RegistryObject<Item> MUSHROOM_SPORES = ITEMS.register("mushroom_spores", () -> new MushroomSporesItem(new Item.Properties()));
     public static final RegistryObject<Item> GLOWSTONE_CRUMBS = ITEMS.register("glowstone_crumbs", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SLIME_BLOB = ITEMS.register("slime_blob", () -> new Item(new Item.Properties()));
@@ -63,6 +65,9 @@ public class ModItems {
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             event.accept(GRILLED_MUSHROOM);
             event.accept(MUSHROOM_BREAD);
+        }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(MYCYCLOPEDIA);
         }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(MUSHROOM_SPORES);
