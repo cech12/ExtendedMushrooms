@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Changed
 - renamed Slime Fungus to Parrot Waxcap #76
+- removed Parrot Waxcap from edible mushroom tag, because it is slightly poisonous in real life
 - renamed Honey Fungus to Honey Waxcap #76
 - renamed and reworked Poisonous Mushroom (poisonous, purple, green) to Deadly Fibrecap (poisonous, white, fibre loot) #77
 

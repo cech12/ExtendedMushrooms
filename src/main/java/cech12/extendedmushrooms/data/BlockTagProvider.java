@@ -56,8 +56,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.MUSHROOMS_WHITE);
         tag(ModTags.Blocks.MUSHROOMS_EDIBLE)
                 .add(ModBlocks.GLOWSHROOM.get())
-                .add(ModBlocks.HONEY_WAXCAP.get())
-                .add(ModBlocks.PARROT_WAXCAP.get());
+                .add(ModBlocks.HONEY_WAXCAP.get());
         tag(ModTags.Blocks.MUSHROOMS_JUMP_BOOSTING)
                 .add(ModBlocks.PARROT_WAXCAP.get());
         tag(ModTags.Blocks.MUSHROOMS_POISONOUS)
