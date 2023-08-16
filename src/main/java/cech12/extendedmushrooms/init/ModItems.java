@@ -47,6 +47,7 @@ public class ModItems {
     public static final RegistryObject<Item> SLIME_BLOB = ITEMS.register("slime_blob", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HONEY_BLOB = ITEMS.register("honey_blob", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HONEYCOMB_SHRED = ITEMS.register("honeycomb_shred", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FIBRE = ITEMS.register("fibre", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> MUSHROOM_SHEEP_SPAWN_EGG = ITEMS.register("mushroom_sheep_spawn_egg", () -> new ForgeSpawnEggItem(() -> ModEntityTypes.MUSHROOM_SHEEP.get(), 10489616, 10051392, new Item.Properties()));
 
@@ -75,6 +76,7 @@ public class ModItems {
             event.accept(SLIME_BLOB);
             event.accept(HONEY_BLOB);
             event.accept(HONEYCOMB_SHRED);
+            event.accept(FIBRE);
         }
     }
 

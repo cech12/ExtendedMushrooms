@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.20.1-4.2.0.0] - 2023-??-??
 ### Added
 - new Guidebook (with required Patchouli 1.20.1-81 mod dependency) #73
+- new Fibre item which can be dropped by the reworked Deadly Fibrecap #77
+- There is a 5% chance to spawn a cave spider when a Deadly Fibrecap is growing up.
 - There is a 1% chance to spawn a parrot when a Parrot Waxcap is growing up.
 - There is a 1% chance to spawn a bee when a Honey Waxcap is growing up.
 

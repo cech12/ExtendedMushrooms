@@ -349,6 +349,17 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.HONEYCOMB)
                 .unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
                 .save(consumer);
+        //fibre recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.STRING)
+                .define('#', ModItems.FIBRE.get())
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_fibre", has(ModItems.FIBRE.get()))
+                .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.STRING).getPath()));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.FIBRE.get(), 4)
+                .requires(Items.STRING)
+                .unlockedBy("has_string", has(Items.STRING))
+                .save(consumer);
 
         //botany pots
         for (MushroomType mushroomType : MushroomType.values()) {

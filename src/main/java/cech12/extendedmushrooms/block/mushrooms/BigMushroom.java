@@ -7,6 +7,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -55,6 +59,28 @@ public abstract class BigMushroom {
             }
         }
         return null;
+    }
+
+    /**
+     * Spawns by chance a new mob of the given entity type around the given position.
+     * @param oneOf chance to spawn the mob (one of 100 means 1%)
+     * @param entityType entity type of mob
+     * @param level level
+     * @param blockPos position
+     * @param random random object
+     */
+    protected static <T extends LivingEntity> void spawnMobAroundPositionByChance(int oneOf, EntityType<T> entityType, ServerLevel level, BlockPos blockPos, RandomSource random) {
+        if (random.nextInt(oneOf) == 0) {
+            T entity = entityType.create(level);
+            BlockPos entityPos = getEmptyPositionAround(level, blockPos);
+            if (entity != null && entityPos != null) {
+                entity.setPos(entityPos.getCenter());
+                if (entity instanceof AgeableMob ageableMob) {
+                    ageableMob.finalizeSpawn(level, level.getCurrentDifficultyAt(blockPos), MobSpawnType.NATURAL, null, null);
+                }
+                level.addFreshEntity(entity);
+            }
+        }
     }
 
     public boolean growMushroom(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, RandomSource random) {
