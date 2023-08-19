@@ -1,0 +1,37 @@
+{
+  "name": "Deadly Fibrecap",
+  "icon": "extendedmushrooms:poisonous_mushroom",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A light-colored mushroom called $(o)Inosperma erubescens$() that appears harmless but is deadly if eaten. It is not common, but should always be avoided, as even touching it will result in poisoning."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "This mushroom is white to light brown.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "extendedmushrooms:poisonous_mushroom"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extendedmushrooms:string",
+      "text": "The caps of Deadly Fibrecaps are fibrous and these fibers can be removed. With a little skill, strings can be made from it."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Poison",
+      "text": "Although the mushroom is not edible, its lethality can be used to create poison potions or poisonous arrows."
+    }
+  ]
+}
