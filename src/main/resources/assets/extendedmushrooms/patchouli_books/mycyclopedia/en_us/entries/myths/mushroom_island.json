@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The diaries of Spanish mycologist Elex Plorer spoke of a visit to an island in the middle of the deep ocean. There, instead of grass, there is soil completely covered with mycelium. Even in sunlight, the mushrooms can grow and thrive there without restrictions. As a result, they are naturally gigantic there."
+      "text": "The diaries of Spanish mycologist Elex Plorer spoke of a visit to an island in the middle of the deep ocean. There, instead of grass, there is soil completely covered with $(l:mycology/mycelium)Mycelium$(). Even in sunlight, the mushrooms can grow and thrive there without restrictions. As a result, they are naturally gigantic there."
     },
     {
       "type": "patchouli:image",
