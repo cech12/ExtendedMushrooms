@@ -3,9 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
-## [1.20.1-4.2.0.0] - 2023-??-??
+## [1.20.1-5.0.0.0] - 2023-??-??
 ### Added
 - new Guidebook (with required Patchouli 1.20.1-81 mod dependency) #73
+- 3 new advancements for the fairy ring, mushroom island and animal infection #73
 - new Fibre item which can be dropped by the reworked Deadly Fibrecap #77
 - There is a 5% chance to spawn a cave spider when a Deadly Fibrecap is growing up.
 - There is a 1% chance to spawn a parrot when a Parrot Waxcap is growing up.

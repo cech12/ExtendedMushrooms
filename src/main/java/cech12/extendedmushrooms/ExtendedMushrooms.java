@@ -15,6 +15,7 @@ import cech12.extendedmushrooms.init.ModFeatures;
 import cech12.extendedmushrooms.init.ModItems;
 import cech12.extendedmushrooms.init.ModSounds;
 import cech12.extendedmushrooms.init.ModTags;
+import cech12.extendedmushrooms.init.ModTriggers;
 import cech12.extendedmushrooms.init.ModVanillaCompat;
 import cech12.extendedmushrooms.item.crafting.MushroomBrewingRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -88,6 +89,7 @@ public class ExtendedMushrooms {
         ModLootModifiers.SERIALIZERS.register(eventBus);
         ModSounds.SOUND_EVENTS.register(eventBus);
         ModParticles.PARTICLE_TYPES.register(eventBus);
+        ModTriggers.init();
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::addItemsToTabs);

@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "enter_fairy_ring": {
+      "conditions": {
+        "block": "extendedmushrooms:fairy_ring"
+      },
+      "trigger": "minecraft:enter_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.fairy_ring.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "extendedmushrooms:mushroom_spores"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.fairy_ring.title"
+    }
+  },
+  "requirements": [
+    [
+      "enter_fairy_ring"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

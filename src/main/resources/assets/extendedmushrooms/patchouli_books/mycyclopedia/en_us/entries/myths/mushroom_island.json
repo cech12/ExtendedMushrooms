@@ -18,6 +18,12 @@
     {
       "type": "patchouli:text",
       "text": "If you like mushrooms, you cannot starve on this island. Otherwise there doesn't seem to be any danger on this paradisiacal island and nothing stands in the way of a night walk here. Only a few strange peaceful animals can be found there, which are covered by fungal growth, apparently a benign $(l:myths/animal_infection)fungal infection$()."
+    },
+    {
+      "type": "patchouli:quest",
+      "trigger": "extendedmushrooms:mushroom_island",
+      "title": "Find Mushroom Island",
+      "text": "So far, every mycoclogist has at least once in his life been in search of such a mythical island, just to set foot on this island and put an end to the myth. Maybe you're the first to do this?"
     }
   ]
 }

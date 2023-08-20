@@ -4,7 +4,9 @@ import cech12.extendedmushrooms.init.ModEntityTypes;
 import cech12.extendedmushrooms.init.ModTags;
 import cech12.extendedmushrooms.config.ServerConfig;
 import cech12.extendedmushrooms.entity.ai.goal.EatMyceliumGoal;
+import cech12.extendedmushrooms.init.ModTriggers;
 import cech12.extendedmushrooms.item.MushroomType;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
@@ -89,6 +91,10 @@ public class MushroomSheepEntity extends Sheep {
             sheep.remove(RemovalReason.DISCARDED);
             world.addFreshEntity(mushroomSheep);
             mushroomSheep.playSound(SoundEvents.ZOMBIE_VILLAGER_CONVERTED, 2.0F, 1.0F);
+            //send advancement trigger to all players in radius of 32 blocks
+            for (ServerPlayer serverplayer : ((ServerLevel)sheep.level()).getPlayers((player) -> player.distanceTo(sheep) < 32.0F)) {
+                ModTriggers.MUSHROOM_SHEEP_CONVERSION.trigger(serverplayer, sheep, mushroomSheep);
+            }
         }
     }
 

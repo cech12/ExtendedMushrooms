@@ -1,0 +1,41 @@
+{
+  "criteria": {
+    "in_mushroom_fields": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "minecraft:mushroom_fields"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.mushroom_island.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "extendedmushrooms:mushroom_boat"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.mushroom_island.title"
+    }
+  },
+  "requirements": [
+    [
+      "in_mushroom_fields"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

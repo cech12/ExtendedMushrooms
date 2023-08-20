@@ -18,6 +18,12 @@
     {
       "type": "patchouli:text",
       "text": "But these are just stories and pipe dreams that are not scientifically proven. However, since there are so many records from different origins and eras, it is unlikely that it is just a superstition. After all, there is a grain of truth behind every story."
+    },
+    {
+      "type": "patchouli:quest",
+      "trigger": "extendedmushrooms:fairy_ring",
+      "title": "Get cursed",
+      "text": "Stepping into a fairy ring is said to curse someone into dying at a young age. But whether that's true can only be found out by daring."
     }
   ]
 }

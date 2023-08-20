@@ -126,5 +126,12 @@
   "item.extendedmushrooms.honey_waxcap_boat": "Honey Waxcap Boat",
   "item.extendedmushrooms.honey_waxcap_chest_boat": "Honey Waxcap Boat with Chest",
   "entity.extendedmushrooms.honey_waxcap_boat": "Honey Waxcap Boat",
-  "entity.extendedmushrooms.honey_waxcap_chest_boat": "Honey Waxcap Boat with Chest"
+  "entity.extendedmushrooms.honey_waxcap_chest_boat": "Honey Waxcap Boat with Chest",
+
+  "advancements.mushroom_island.title": "Where's Wilson?",
+  "advancements.mushroom_island.description": "Enter a Mushroom Island",
+  "advancements.fairy_ring.title": "Cursed?",
+  "advancements.fairy_ring.description": "Enter a Fairy Ring",
+  "advancements.mushroom_sheep_conversion.title": "Infected but good",
+  "advancements.mushroom_sheep_conversion.description": "Convert a Sheep into a Baashroom"
 }

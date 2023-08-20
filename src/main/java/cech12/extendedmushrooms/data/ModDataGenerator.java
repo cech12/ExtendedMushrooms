@@ -5,10 +5,12 @@ import cech12.extendedmushrooms.data.recipes.RecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.data.event.GatherDataEvent;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = ExtendedMushrooms.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -33,6 +35,7 @@ public class ModDataGenerator {
             evt.getGenerator().addProvider(true, new PlacedFeatureProvider(packOutput, lookupProvider));
             evt.getGenerator().addProvider(true, new BiomeTagProvider(packOutput, lookupProvider, existingFileHelper));
             evt.getGenerator().addProvider(true, new BiomeModifierProvider(packOutput, lookupProvider));
+            evt.getGenerator().addProvider(true, new ForgeAdvancementProvider(packOutput, lookupProvider, existingFileHelper, List.of(new AdvancementGenerator())));
         }
     }
 

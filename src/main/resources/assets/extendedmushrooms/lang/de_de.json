@@ -126,5 +126,12 @@
   "item.extendedmushrooms.honey_waxcap_boat": "Honigsaftlingboot",
   "item.extendedmushrooms.honey_waxcap_chest_boat": "Honigsaftlingtruhenboot",
   "entity.extendedmushrooms.honey_waxcap_boat": "Honigsaftlingboot",
-  "entity.extendedmushrooms.honey_waxcap_chest_boat": "Honigsaftlingtruhenboot"
+  "entity.extendedmushrooms.honey_waxcap_chest_boat": "Honigsaftlingtruhenboot",
+
+  "advancements.mushroom_island.title": "Wo ist Wilson?",
+  "advancements.mushroom_island.description": "Betritt eine Pilzinsel",
+  "advancements.fairy_ring.title": "Verflucht?",
+  "advancements.fairy_ring.description": "Betritt einen Feenring",
+  "advancements.mushroom_sheep_conversion.title": "Gutartig infiziert",
+  "advancements.mushroom_sheep_conversion.description": "Verwandle ein Schaf in ein Pilzschaf"
 }

@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "mushroom_sheep_conversion": {
+      "conditions": {},
+      "trigger": "extendedmushrooms:mushroom_sheep_conversion"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.mushroom_sheep_conversion.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "minecraft:red_mushroom"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.mushroom_sheep_conversion.title"
+    }
+  },
+  "requirements": [
+    [
+      "mushroom_sheep_conversion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

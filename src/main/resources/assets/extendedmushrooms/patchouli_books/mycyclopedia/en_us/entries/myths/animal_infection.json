@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "According to newspapers, farmer John Sheppard led his flock of sheep too close to a grassy cave in 2004, resulting in the loss of 2 sheeps in the cave. These, however, reappeared well fed but $(l:infected_animals/baashroom)somewhat changed$() after a few days."
+      "text": "According to newspapers, farmer John Sheppard led his flock of sheep too close to a grassy cave in 2004, resulting in the loss of two sheep in the cave. These, however, reappeared well fed but $(l:infected_animals/baashroom)somewhat changed$() after a few days."
     },
     {
       "type": "patchouli:entity",
@@ -16,6 +16,12 @@
     {
       "type": "patchouli:text",
       "text": "How this infection came about is unclear, but the farmer no longer has to slaughter sheep to get a meal."
+    },
+    {
+      "type": "patchouli:quest",
+      "trigger": "extendedmushrooms:mushroom_sheep_conversion",
+      "title": "Infect it",
+      "text": "Find out what the story is about and how the sheep may have transformed."
     }
   ]
 }
