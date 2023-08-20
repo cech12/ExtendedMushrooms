@@ -1,6 +1,6 @@
 {
   "name": "Deadly Fibrecap",
-  "icon": "extendedmushrooms:poisonous_mushroom",
+  "icon": "extendedmushrooms:deadly_fibrecap",
   "category": "extendedmushrooms:mushrooms",
   "pages": [
     {
@@ -17,7 +17,7 @@
           ]
         ],
         "mapping": {
-          "0": "extendedmushrooms:poisonous_mushroom"
+          "0": "extendedmushrooms:deadly_fibrecap"
         },
         "symmetrical": true
       },

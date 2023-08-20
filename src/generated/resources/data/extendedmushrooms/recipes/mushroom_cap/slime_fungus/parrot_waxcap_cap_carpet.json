@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "carpet",
+  "key": {
+    "#": {
+      "tag": "forge:mushroom_caps/lime"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extendedmushrooms:parrot_waxcap_cap_carpet"
+  },
+  "show_notification": true
+}

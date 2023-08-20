@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extendedmushrooms:block/parrot_waxcap_slab"
+    },
+    "type=double": {
+      "model": "extendedmushrooms:block/parrot_waxcap_planks"
+    },
+    "type=top": {
+      "model": "extendedmushrooms:block/parrot_waxcap_slab_top"
+    }
+  }
+}

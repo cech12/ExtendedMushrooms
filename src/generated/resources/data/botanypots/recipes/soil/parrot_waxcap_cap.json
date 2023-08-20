@@ -1,0 +1,19 @@
+{
+  "type": "botanypots:soil",
+  "categories": [
+    "mushroom"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "display": {
+    "block": "extendedmushrooms:parrot_waxcap_cap"
+  },
+  "growthModifier": 0.95,
+  "input": {
+    "item": "extendedmushrooms:parrot_waxcap_cap"
+  }
+}

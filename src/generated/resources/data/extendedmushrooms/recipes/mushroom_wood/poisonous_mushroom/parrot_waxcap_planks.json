@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "forge:mushroom_stems/green"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "extendedmushrooms:parrot_waxcap_planks"
+  }
+}

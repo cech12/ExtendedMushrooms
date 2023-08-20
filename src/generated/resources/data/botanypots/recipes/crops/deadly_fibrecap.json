@@ -1,0 +1,29 @@
+{
+  "type": "botanypots:crop",
+  "categories": [
+    "stone",
+    "mushroom",
+    "mulch"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "display": {
+    "block": "extendedmushrooms:deadly_fibrecap"
+  },
+  "drops": [
+    {
+      "chance": 1.0,
+      "output": {
+        "item": "extendedmushrooms:deadly_fibrecap"
+      }
+    }
+  ],
+  "growthTicks": 1200,
+  "seed": {
+    "item": "extendedmushrooms:deadly_fibrecap"
+  }
+}

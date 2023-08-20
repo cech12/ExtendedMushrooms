@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "extendedmushrooms:block/honey_waxcap_stem_stripped"
+  }
+}

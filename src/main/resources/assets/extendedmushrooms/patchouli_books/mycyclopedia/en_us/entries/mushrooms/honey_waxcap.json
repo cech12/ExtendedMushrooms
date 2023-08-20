@@ -1,6 +1,6 @@
 {
   "name": "Honey Waxcap",
-  "icon": "extendedmushrooms:honey_fungus",
+  "icon": "extendedmushrooms:honey_waxcap",
   "category": "extendedmushrooms:mushrooms",
   "pages": [
     {
@@ -17,7 +17,7 @@
           ]
         ],
         "mapping": {
-          "0": "extendedmushrooms:honey_fungus"
+          "0": "extendedmushrooms:honey_waxcap"
         },
         "symmetrical": true
       },

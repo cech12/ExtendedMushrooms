@@ -233,6 +233,7 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
 
         //special models
         //triggered deadly fibrecap & its cap
+        /*
         ResourceLocation triggeredDeadlyFibrecap = getBlockResourceLocation("poisonous_mushroom_triggered");
         getBuilder(triggeredDeadlyFibrecap.getPath())
                 .parent(getExistingFile(new ResourceLocation("block/cross")))
@@ -243,6 +244,7 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 .texture("texture", triggeredDeadlyFibrecapCap)
                 .texture("particle", triggeredDeadlyFibrecapCap)
                 .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+         */
 
 
     }

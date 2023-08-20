@@ -1,6 +1,6 @@
 {
   "name": "Parrot Waxcap",
-  "icon": "extendedmushrooms:slime_fungus",
+  "icon": "extendedmushrooms:parrot_waxcap",
   "category": "extendedmushrooms:mushrooms",
   "pages": [
     {
@@ -17,7 +17,7 @@
           ]
         ],
         "mapping": {
-          "0": "extendedmushrooms:slime_fungus"
+          "0": "extendedmushrooms:parrot_waxcap"
         },
         "symmetrical": true
       },

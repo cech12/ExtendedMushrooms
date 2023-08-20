@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_left",
-  "textures": {
-    "bottom": "extendedmushrooms:block/honey_fungus_door_bottom",
-    "top": "extendedmushrooms:block/honey_fungus_door_top"
-  }
-}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "tag": "forge:chests/wooden"
+    },
+    {
+      "item": "extendedmushrooms:parrot_waxcap_boat"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:parrot_waxcap_chest_boat"
+  }
+}

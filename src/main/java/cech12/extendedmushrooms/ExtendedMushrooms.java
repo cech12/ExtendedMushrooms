@@ -60,39 +60,6 @@ public class ExtendedMushrooms {
 
     public static final String MOD_ID = "extendedmushrooms";
 
-    private static final Map<ResourceLocation, ResourceLocation> OLD_RESOURCE_LOCATION_MAP = Map.ofEntries(
-            //old compat blocks
-            Map.entry(loc("mushroom_bookshelf"), compatLoc("q/extendedmushrooms/mushroom_bookshelf")),
-            Map.entry(loc("mushroom_ladder"), compatLoc("q/extendedmushrooms/mushroom_ladder")),
-            Map.entry(loc("mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_mushroom_planks")),
-            Map.entry(loc("mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/mushroom_vertical_slab")),
-            Map.entry(compatLoc("q/extendedmushrooms/mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/mushroom_vertical_slab")),
-            Map.entry(loc("glowshroom_bookshelf"), compatLoc("q/extendedmushrooms/glowshroom_bookshelf")),
-            Map.entry(loc("glowshroom_ladder"), compatLoc("q/extendedmushrooms/glowshroom_ladder")),
-            Map.entry(loc("glowshroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_glowshroom_planks")),
-            Map.entry(loc("glowshroom_vertical_slab"), slabCompatLoc("extendedmushrooms/glowshroom_vertical_slab")),
-            Map.entry(compatLoc("q/extendedmushrooms/glowshroom_vertical_slab"), slabCompatLoc("extendedmushrooms/glowshroom_vertical_slab")),
-            Map.entry(loc("poisonous_mushroom_bookshelf"), compatLoc("q/extendedmushrooms/poisonous_mushroom_bookshelf")),
-            Map.entry(loc("poisonous_mushroom_ladder"), compatLoc("q/extendedmushrooms/poisonous_mushroom_ladder")),
-            Map.entry(loc("poisonous_mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_poisonous_mushroom_planks")),
-            Map.entry(loc("poisonous_mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/poisonous_mushroom_vertical_slab")),
-            Map.entry(compatLoc("q/extendedmushrooms/poisonous_mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/poisonous_mushroom_vertical_slab")),
-            Map.entry(loc("honey_fungus_bookshelf"), compatLoc("q/extendedmushrooms/honey_fungus_bookshelf")),
-            Map.entry(loc("honey_fungus_ladder"), compatLoc("q/extendedmushrooms/honey_fungus_ladder")),
-            Map.entry(loc("honey_fungus_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_honey_fungus_planks")),
-            Map.entry(loc("honey_fungus_vertical_slab"), slabCompatLoc("extendedmushrooms/honey_fungus_vertical_slab")),
-            Map.entry(compatLoc("q/extendedmushrooms/honey_fungus_vertical_slab"), slabCompatLoc("extendedmushrooms/honey_fungus_vertical_slab"))
-            //Chests cannot be ported because of their block entity ("variant_chest" & "variant_trapped_chest")
-            //Map.entry(loc("mushroom_chest"), compatLoc("q/extendedmushrooms/mushroom_chest")),
-            //Map.entry(loc("mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/mushroom_trapped_chest")),
-            //Map.entry(loc("glowshroom_chest"), compatLoc("q/extendedmushrooms/glowshroom_chest")),
-            //Map.entry(loc("glowshroom_chest_trapped"), compatLoc("q/extendedmushrooms/glowshroom_trapped_chest")),
-            //Map.entry(loc("poisonous_mushroom_chest"), compatLoc("q/extendedmushrooms/poisonous_mushroom_chest")),
-            //Map.entry(loc("poisonous_mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/poisonous_mushroom_trapped_chest")),
-            //Map.entry(loc("honey_fungus_chest"), compatLoc("q/extendedmushrooms/honey_fungus_chest")),
-            //Map.entry(loc("honey_fungus_chest_trapped"), compatLoc("q/extendedmushrooms/honey_fungus_trapped_chest")),
-    );
-
     private static ResourceLocation loc(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
@@ -154,18 +121,81 @@ public class ExtendedMushrooms {
 
     @SubscribeEvent
     public static void remapOldIds(MissingMappingsEvent event) {
-        event.getMappings(ForgeRegistries.ITEMS.getRegistryKey(), MOD_ID).forEach(itemMapping -> OLD_RESOURCE_LOCATION_MAP.entrySet().stream()
+        Map<ResourceLocation, ResourceLocation> oldResourceLocationMap = Map.ofEntries(
+                //old compat blocks
+                Map.entry(loc("mushroom_bookshelf"), compatLoc("q/extendedmushrooms/mushroom_bookshelf")),
+                Map.entry(loc("mushroom_ladder"), compatLoc("q/extendedmushrooms/mushroom_ladder")),
+                Map.entry(loc("mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_mushroom_planks")),
+                Map.entry(loc("mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/mushroom_vertical_slab")),
+                Map.entry(compatLoc("q/extendedmushrooms/mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/mushroom_vertical_slab")),
+                Map.entry(loc("glowshroom_bookshelf"), compatLoc("q/extendedmushrooms/glowshroom_bookshelf")),
+                Map.entry(loc("glowshroom_ladder"), compatLoc("q/extendedmushrooms/glowshroom_ladder")),
+                Map.entry(loc("glowshroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_glowshroom_planks")),
+                Map.entry(loc("glowshroom_vertical_slab"), slabCompatLoc("extendedmushrooms/glowshroom_vertical_slab")),
+                Map.entry(compatLoc("q/extendedmushrooms/glowshroom_vertical_slab"), slabCompatLoc("extendedmushrooms/glowshroom_vertical_slab")),
+                Map.entry(loc("poisonous_mushroom_bookshelf"), compatLoc("q/extendedmushrooms/parrot_waxcap_bookshelf")),
+                Map.entry(loc("poisonous_mushroom_ladder"), compatLoc("q/extendedmushrooms/parrot_waxcap_ladder")),
+                Map.entry(loc("poisonous_mushroom_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_parrot_waxcap_planks")),
+                Map.entry(loc("poisonous_mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/parrot_waxcap_vertical_slab")),
+                Map.entry(compatLoc("q/extendedmushrooms/poisonous_mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/parrot_waxcap_vertical_slab")),
+                Map.entry(loc("honey_fungus_bookshelf"), compatLoc("q/extendedmushrooms/honey_waxcap_bookshelf")),
+                Map.entry(loc("honey_fungus_ladder"), compatLoc("q/extendedmushrooms/honey_waxcap_ladder")),
+                Map.entry(loc("honey_fungus_vertical_planks"), compatLoc("q/extendedmushrooms/vertical_honey_waxcap_planks")),
+                Map.entry(loc("honey_fungus_vertical_slab"), slabCompatLoc("extendedmushrooms/honey_waxcap_vertical_slab")),
+                Map.entry(compatLoc("q/extendedmushrooms/honey_fungus_vertical_slab"), slabCompatLoc("extendedmushrooms/honey_waxcap_vertical_slab")),
+                //Chests cannot be ported because of their block entity ("variant_chest" & "variant_trapped_chest")
+                //Map.entry(loc("mushroom_chest"), compatLoc("q/extendedmushrooms/mushroom_chest")),
+                //Map.entry(loc("mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/mushroom_trapped_chest")),
+                //Map.entry(loc("glowshroom_chest"), compatLoc("q/extendedmushrooms/glowshroom_chest")),
+                //Map.entry(loc("glowshroom_chest_trapped"), compatLoc("q/extendedmushrooms/glowshroom_trapped_chest")),
+                //Map.entry(loc("poisonous_mushroom_chest"), compatLoc("q/extendedmushrooms/poisonous_mushroom_chest")),
+                //Map.entry(loc("poisonous_mushroom_chest_trapped"), compatLoc("q/extendedmushrooms/poisonous_mushroom_trapped_chest")),
+                //Map.entry(loc("honey_fungus_chest"), compatLoc("q/extendedmushrooms/honey_fungus_chest")),
+                //Map.entry(loc("honey_fungus_chest_trapped"), compatLoc("q/extendedmushrooms/honey_fungus_trapped_chest")),
+                //mushroom renaming of mod version 5.0.0
+                Map.entry(compatLoc("q/extendedmushrooms/poisonous_mushroom_bookshelf"), compatLoc("q/extendedmushrooms/parrot_waxcap_bookshelf")),
+                Map.entry(compatLoc("q/extendedmushrooms/poisonous_mushroom_ladder"), compatLoc("q/extendedmushrooms/parrot_waxcap_ladder")),
+                Map.entry(compatLoc("q/extendedmushrooms/vertical_poisonous_mushroom_planks"), compatLoc("q/extendedmushrooms/vertical_parrot_waxcap_planks")),
+                Map.entry(slabCompatLoc("extendedmushrooms/poisonous_mushroom_vertical_slab"), slabCompatLoc("extendedmushrooms/parrot_waxcap_vertical_slab")),
+                Map.entry(compatLoc("q/extendedmushrooms/honey_fungus_bookshelf"), compatLoc("q/extendedmushrooms/honey_waxcap_bookshelf")),
+                Map.entry(compatLoc("q/extendedmushrooms/honey_fungus_ladder"), compatLoc("q/extendedmushrooms/honey_waxcap_ladder")),
+                Map.entry(compatLoc("q/extendedmushrooms/vertical_honey_fungus_planks"), compatLoc("q/extendedmushrooms/vertical_honey_waxcap_planks")),
+                Map.entry(slabCompatLoc("extendedmushrooms/honey_fungus_vertical_slab"), slabCompatLoc("extendedmushrooms/honey_waxcap_vertical_slab")),
+                Map.entry(loc("poisonous_mushroom"), loc("deadly_fibrecap")),
+                Map.entry(loc("poisonous_mushroom_potted"), loc("deadly_fibrecap_potted")),
+                Map.entry(loc("poisonous_mushroom_cap"), loc("deadly_fibrecap_cap")),
+                Map.entry(loc("poisonous_mushroom_cap_button"), loc("deadly_fibrecap_cap_button")),
+                Map.entry(loc("poisonous_mushroom_cap_carpet"), loc("deadly_fibrecap_cap_carpet")),
+                Map.entry(loc("poisonous_mushroom_cap_pressure_plate"), loc("deadly_fibrecap_cap_pressure_plate"))
+        );
+        //mushroom renaming of mod version 5.0.0
+        Map<String, String> resourceRenamingMap = Map.ofEntries(
+                Map.entry("poisonous_mushroom", "parrot_waxcap"),
+                Map.entry("slime_fungus", "parrot_waxcap"),
+                Map.entry("honey_fungus", "honey_waxcap")
+        );
+        event.getMappings(ForgeRegistries.ITEMS.getRegistryKey(), MOD_ID).forEach(itemMapping -> oldResourceLocationMap.entrySet().stream()
                 .filter(entry -> entry.getKey().equals(itemMapping.getKey()))
                 .map(Map.Entry::getValue)
                 .filter(ForgeRegistries.ITEMS::containsKey)
                 .findFirst()
-                .ifPresent(remap -> itemMapping.remap(ForgeRegistries.ITEMS.getValue(remap))));
-        event.getMappings(ForgeRegistries.BLOCKS.getRegistryKey(), MOD_ID).forEach(blockMapping -> OLD_RESOURCE_LOCATION_MAP.entrySet().stream()
+                .ifPresentOrElse(remap -> itemMapping.remap(ForgeRegistries.ITEMS.getValue(remap)), () -> resourceRenamingMap.entrySet().stream()
+                        .filter(entry -> itemMapping.getKey().getPath().contains(entry.getKey()))
+                        .map(entry -> new ResourceLocation(MOD_ID, itemMapping.getKey().getPath().replace(entry.getKey(), entry.getValue())))
+                        .filter(ForgeRegistries.ITEMS::containsKey)
+                        .findFirst()
+                        .ifPresent(remap -> itemMapping.remap(ForgeRegistries.ITEMS.getValue(remap)))));
+        event.getMappings(ForgeRegistries.BLOCKS.getRegistryKey(), MOD_ID).forEach(blockMapping -> oldResourceLocationMap.entrySet().stream()
                 .filter(entry -> entry.getKey().equals(blockMapping.getKey()))
                 .map(Map.Entry::getValue)
                 .filter(ForgeRegistries.BLOCKS::containsKey)
                 .findFirst()
-                .ifPresent(remap -> blockMapping.remap(ForgeRegistries.BLOCKS.getValue(remap))));
+                .ifPresentOrElse(remap -> blockMapping.remap(ForgeRegistries.BLOCKS.getValue(remap)), () -> resourceRenamingMap.entrySet().stream()
+                        .filter(entry -> blockMapping.getKey().getPath().contains(entry.getKey()))
+                        .map(entry -> new ResourceLocation(MOD_ID, blockMapping.getKey().getPath().replace(entry.getKey(), entry.getValue())))
+                        .filter(ForgeRegistries.BLOCKS::containsKey)
+                        .findFirst()
+                        .ifPresent(remap -> blockMapping.remap(ForgeRegistries.BLOCKS.getValue(remap)))));
     }
 
     /**

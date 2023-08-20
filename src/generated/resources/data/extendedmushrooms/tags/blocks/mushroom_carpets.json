@@ -1,10 +1,10 @@
 {
   "values": [
     "extendedmushrooms:brown_mushroom_carpet",
+    "extendedmushrooms:deadly_fibrecap_cap_carpet",
     "extendedmushrooms:glowshroom_cap_carpet",
-    "extendedmushrooms:honey_fungus_cap_carpet",
-    "extendedmushrooms:poisonous_mushroom_cap_carpet",
-    "extendedmushrooms:red_mushroom_carpet",
-    "extendedmushrooms:slime_fungus_cap_carpet"
+    "extendedmushrooms:honey_waxcap_cap_carpet",
+    "extendedmushrooms:parrot_waxcap_cap_carpet",
+    "extendedmushrooms:red_mushroom_carpet"
   ]
 }

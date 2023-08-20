@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/carpet",
+  "textures": {
+    "particle": "extendedmushrooms:block/deadly_fibrecap_cap",
+    "wool": "extendedmushrooms:block/deadly_fibrecap_cap"
+  }
+}

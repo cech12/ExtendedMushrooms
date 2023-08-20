@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "extendedmushrooms:block/deadly_fibrecap_cap"
+  }
+}

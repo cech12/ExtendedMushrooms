@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "extendedmushrooms:block/deadly_fibrecap_cap_pressure_plate"
+    },
+    "powered=true": {
+      "model": "extendedmushrooms:block/deadly_fibrecap_cap_pressure_plate_down"
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
   "values": [
     "extendedmushrooms:brown_mushroom_button",
+    "extendedmushrooms:deadly_fibrecap_cap_button",
     "extendedmushrooms:glowshroom_cap_button",
-    "extendedmushrooms:honey_fungus_cap_button",
-    "extendedmushrooms:poisonous_mushroom_cap_button",
-    "extendedmushrooms:red_mushroom_button",
-    "extendedmushrooms:slime_fungus_cap_button"
+    "extendedmushrooms:honey_waxcap_cap_button",
+    "extendedmushrooms:parrot_waxcap_cap_button",
+    "extendedmushrooms:red_mushroom_button"
   ]
 }

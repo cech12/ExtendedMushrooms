@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "extendedmushrooms:block/deadly_fibrecap_cap"
+  }
+}

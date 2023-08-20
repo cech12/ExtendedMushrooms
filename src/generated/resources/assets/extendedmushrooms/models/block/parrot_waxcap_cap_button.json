@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "extendedmushrooms:block/parrot_waxcap_cap"
+  }
+}
