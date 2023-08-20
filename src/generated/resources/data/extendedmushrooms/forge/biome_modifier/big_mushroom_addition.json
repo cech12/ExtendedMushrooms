@@ -2,8 +2,8 @@
   "type": "forge:add_features",
   "biomes": "#forge:is_mushroom",
   "features": [
-    "extendedmushrooms:mushroom_island_big_glowshroom",
-    "extendedmushrooms:mushroom_island_big_poisonous_mushroom"
+    "extendedmushrooms:mushroom_island_big_deadly_fibrecap",
+    "extendedmushrooms:mushroom_island_big_glowshroom"
   ],
   "step": "vegetal_decoration"
 }

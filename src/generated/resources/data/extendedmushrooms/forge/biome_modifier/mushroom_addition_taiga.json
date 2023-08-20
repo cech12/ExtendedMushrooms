@@ -2,8 +2,8 @@
   "type": "forge:add_features",
   "biomes": "#minecraft:is_taiga",
   "features": [
-    "extendedmushrooms:glowshroom_taiga",
-    "extendedmushrooms:poisonous_mushroom_taiga"
+    "extendedmushrooms:deadly_fibrecap_taiga",
+    "extendedmushrooms:glowshroom_taiga"
   ],
   "step": "vegetal_decoration"
 }

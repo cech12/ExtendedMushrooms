@@ -47,7 +47,7 @@ public class ConfiguredFeatureProvider implements DataProvider {
 
     static {
         MUSHROOMS.add(new Mushroom("glowshroom", ModFeatures.PATCH_GLOWSHROOM_CONFIGURED, ModBlocks.GLOWSHROOM, 0.4F));
-        MUSHROOMS.add(new Mushroom("poisonous_mushroom", ModFeatures.PATCH_DEADLY_FIBRECAP_CONFIGURED, ModBlocks.DEADLY_FIBRECAP, 0.5F));
+        MUSHROOMS.add(new Mushroom("deadly_fibrecap", ModFeatures.PATCH_DEADLY_FIBRECAP_CONFIGURED, ModBlocks.DEADLY_FIBRECAP, 0.5F));
     }
 
     public ConfiguredFeatureProvider(final PackOutput packOutput, final CompletableFuture<HolderLookup.Provider> lookupProvider) {

@@ -2,8 +2,8 @@
   "type": "forge:add_features",
   "biomes": "#minecraft:is_nether",
   "features": [
-    "extendedmushrooms:glowshroom_nether",
-    "extendedmushrooms:poisonous_mushroom_nether"
+    "extendedmushrooms:deadly_fibrecap_nether",
+    "extendedmushrooms:glowshroom_nether"
   ],
   "step": "vegetal_decoration"
 }

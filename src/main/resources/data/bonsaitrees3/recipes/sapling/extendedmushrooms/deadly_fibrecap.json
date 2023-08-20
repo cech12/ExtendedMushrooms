@@ -1,0 +1,49 @@
+{
+  "type": "bonsaitrees3:sapling",
+  "mod": "minecraft",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bonsaitrees3"
+    }
+  ],
+  "sapling": {
+    "item": "extendedmushrooms:deadly_fibrecap"
+  },
+  "drops": [
+    {
+      "rolls": 3,
+      "chance": 0.2,
+      "result": {
+        "item": "extendedmushrooms:deadly_fibrecap"
+      }
+    },
+    {
+      "rolls": 3,
+      "chance": 0.3,
+      "result": {
+        "item": "extendedmushrooms:fibre"
+      }
+    },
+    {
+      "rolls": 1,
+      "chance": 0.75,
+      "result": {
+        "item": "extendedmushrooms:parrot_waxcap_stem"
+      }
+    },
+    {
+      "rolls": 2,
+      "chance": 0.2,
+      "result": {
+        "item": "extendedmushrooms:deadly_fibrecap_cap"
+      },
+      "requiresSilkTouch": true
+    }
+  ],
+  "compatibleSoilTags": [
+    "mycelium",
+    "podzol"
+  ],
+  "ticks": 300
+}

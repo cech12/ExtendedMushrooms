@@ -34,10 +34,10 @@ public class ModFeatures {
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> MEGA_RED_MUSHROOM = FEATURES.register("mega_red_mushroom", () -> new MegaRedMushroomFeature(ExtendedMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_GLOWSHROOM = FEATURES.register("big_glowshroom", () -> new BigGlowshroomFeature(ExtendedMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> MEGA_GLOWSHROOM = FEATURES.register("mega_glowshroom", () -> new MegaGlowshroomFeature(ExtendedMushroomFeatureConfiguration.CODEC));
-    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_DEADLY_FIBRECAP = FEATURES.register("big_poisonous_mushroom", () -> new BigDeadlyFibrecapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
-    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> MEGA_DEADLY_FIBRECAP = FEATURES.register("mega_poisonous_mushroom", () -> new MegaDeadlyFibrecapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
-    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_PARROT_WAXCAP = FEATURES.register("big_slime_fungus", () -> new BigParrotWaxcapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
-    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_HONEY_WAXCAP = FEATURES.register("big_honey_fungus", () -> new BigHoneyWaxcapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_DEADLY_FIBRECAP = FEATURES.register("big_deadly_fibrecap", () -> new BigDeadlyFibrecapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> MEGA_DEADLY_FIBRECAP = FEATURES.register("mega_deadly_fibrecap", () -> new MegaDeadlyFibrecapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_PARROT_WAXCAP = FEATURES.register("big_parrot_waxcap", () -> new BigParrotWaxcapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_HONEY_WAXCAP = FEATURES.register("big_honey_waxcap", () -> new BigHoneyWaxcapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFESTED_FLOWER_CONFIGURED = configuredKey("infested_flower");
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFESTED_GRASS_CONFIGURED = configuredKey("infested_grass");
@@ -48,11 +48,11 @@ public class ModFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_GLOWSHROOM_CONFIGURED = configuredKey("patch_glowshroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_GLOWSHROOM_CONFIGURED = configuredKey("big_glowshroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_GLOWSHROOM_CONFIGURED = configuredKey("mega_glowshroom");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_DEADLY_FIBRECAP_CONFIGURED = configuredKey("patch_poisonous_mushroom");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_DEADLY_FIBRECAP_CONFIGURED = configuredKey("big_poisonous_mushroom");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_DEADLY_FIBRECAP_CONFIGURED = configuredKey("mega_poisonous_mushroom");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_PARROT_WAXCAP_CONFIGURED = configuredKey("big_slime_fungus");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_HONEY_WAXCAP_CONFIGURED = configuredKey("big_honey_fungus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_DEADLY_FIBRECAP_CONFIGURED = configuredKey("patch_deadly_fibrecap");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_DEADLY_FIBRECAP_CONFIGURED = configuredKey("big_deadly_fibrecap");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_DEADLY_FIBRECAP_CONFIGURED = configuredKey("mega_deadly_fibrecap");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_PARROT_WAXCAP_CONFIGURED = configuredKey("big_parrot_waxcap");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_HONEY_WAXCAP_CONFIGURED = configuredKey("big_honey_waxcap");
 
     public static final ResourceKey<PlacedFeature> INFESTED_FLOWER_PLACED = placedKey("patch_infested_flower");
     public static final ResourceKey<PlacedFeature> INFESTED_GRASS_PLACED = placedKey("patch_infested_grass");
@@ -63,17 +63,17 @@ public class ModFeatures {
 
     static {
         List<String> mushroomExtensions = Arrays.asList("normal", "taiga", "mushroom_island", "swamp", "nether");
-        for (String mushroom : Arrays.asList("glowshroom", "poisonous_mushroom")) {
+        for (String mushroom : Arrays.asList("glowshroom", "deadly_fibrecap")) {
             Map<String, ResourceKey<PlacedFeature>> extensionMap = new HashMap<>();
             mushroomExtensions.forEach(extension -> extensionMap.put(extension, placedKey(mushroom + "_" + extension)));
             MUSHROOMS_PLACED.put(mushroom, extensionMap);
         }
-        for (String bigMushroom : Arrays.asList("big_glowshroom", "big_poisonous_mushroom")) {
+        for (String bigMushroom : Arrays.asList("big_glowshroom", "big_deadly_fibrecap")) {
             Map<String, ResourceKey<PlacedFeature>> extensionMap = new HashMap<>();
             extensionMap.put("mushroom_island", placedKey("mushroom_island_" + bigMushroom));
             BIG_MUSHROOMS_PLACED.put(bigMushroom, extensionMap);
         }
-        for (String megaMushroom : Arrays.asList("mega_red_mushroom", "mega_brown_mushroom", "mega_glowshroom", "mega_poisonous_mushroom")) {
+        for (String megaMushroom : Arrays.asList("mega_red_mushroom", "mega_brown_mushroom", "mega_glowshroom", "mega_deadly_fibrecap")) {
             Map<String, ResourceKey<PlacedFeature>> extensionMap = new HashMap<>();
             extensionMap.put("mushroom_island", placedKey("mushroom_island_" + megaMushroom));
             MEGA_MUSHROOMS_PLACED.put(megaMushroom, extensionMap);

@@ -3,8 +3,8 @@
   "biomes": "#forge:is_mushroom",
   "features": [
     "extendedmushrooms:mushroom_island_mega_brown_mushroom",
+    "extendedmushrooms:mushroom_island_mega_deadly_fibrecap",
     "extendedmushrooms:mushroom_island_mega_glowshroom",
-    "extendedmushrooms:mushroom_island_mega_poisonous_mushroom",
     "extendedmushrooms:mushroom_island_mega_red_mushroom"
   ],
   "step": "vegetal_decoration"

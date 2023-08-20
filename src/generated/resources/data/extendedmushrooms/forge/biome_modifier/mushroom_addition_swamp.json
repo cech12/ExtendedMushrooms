@@ -2,8 +2,8 @@
   "type": "forge:add_features",
   "biomes": "#forge:is_swamp",
   "features": [
-    "extendedmushrooms:glowshroom_swamp",
-    "extendedmushrooms:poisonous_mushroom_swamp"
+    "extendedmushrooms:deadly_fibrecap_swamp",
+    "extendedmushrooms:glowshroom_swamp"
   ],
   "step": "vegetal_decoration"
 }

@@ -249,7 +249,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.SPIDER_EYE)
                 .requires(Items.WHITE_DYE)
                 .save(consumer);
-        mushroomCapRecipes(consumer, "poisonous_mushroom",
+        mushroomCapRecipes(consumer, "deadly_fibrecap",
                 ModTags.ForgeItems.MUSHROOM_CAPS_WHITE,
                 Items.WHITE_BANNER,
                 Items.WHITE_BED,
@@ -264,7 +264,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.RABBIT_FOOT)
                 .requires(Items.LIME_DYE)
                 .save(consumer);
-        mushroomWoodRecipes(consumer, "poisonous_mushroom",
+        mushroomWoodRecipes(consumer, "parrot_waxcap",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
                 ModItems.PARROT_WAXCAP_BOAT.get(),
                 ModItems.PARROT_WAXCAP_CHEST_BOAT.get(),
@@ -280,10 +280,10 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.PARROT_WAXCAP_STAIRS.get().asItem(),
                 ModBlocks.PARROT_WAXCAP_STEM_STRIPPED.get().asItem(),
                 ModBlocks.PARROT_WAXCAP_TRAPDOOR.get().asItem());
-        mushroomCapRecipes(consumer, "slime_fungus",
+        mushroomCapRecipes(consumer, "parrot_waxcap",
                 ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
-                Items.ORANGE_BANNER,
-                Items.ORANGE_BED,
+                Items.LIME_BANNER,
+                Items.LIME_BED,
                 ModBlocks.PARROT_WAXCAP_CAP_BUTTON.get().asItem(),
                 ModBlocks.PARROT_WAXCAP_CAP_CARPET.get().asItem(),
                 ModBlocks.PARROT_WAXCAP_CAP_PRESSURE_PLATE.get().asItem());
@@ -305,7 +305,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.HONEY_BOTTLE)
                 .requires(Items.ORANGE_DYE)
                 .save(consumer);
-        mushroomWoodRecipes(consumer, "honey_fungus",
+        mushroomWoodRecipes(consumer, "honey_waxcap",
                 ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE,
                 ModItems.HONEY_WAXCAP_BOAT.get(),
                 ModItems.HONEY_WAXCAP_CHEST_BOAT.get(),
@@ -321,7 +321,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModBlocks.HONEY_WAXCAP_STAIRS.get().asItem(),
                 ModBlocks.HONEY_WAXCAP_STEM_STRIPPED.get().asItem(),
                 ModBlocks.HONEY_WAXCAP_TRAPDOOR.get().asItem());
-        mushroomCapRecipes(consumer, "honey_fungus",
+        mushroomCapRecipes(consumer, "honey_waxcap",
                 ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE,
                 Items.ORANGE_BANNER,
                 Items.ORANGE_BED,

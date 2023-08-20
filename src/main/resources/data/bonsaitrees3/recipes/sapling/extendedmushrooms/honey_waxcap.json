@@ -1,0 +1,56 @@
+{
+  "type": "bonsaitrees3:sapling",
+  "mod": "minecraft",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bonsaitrees3"
+    }
+  ],
+  "sapling": {
+    "item": "extendedmushrooms:honey_waxcap"
+  },
+  "drops": [
+    {
+      "rolls": 3,
+      "chance": 0.2,
+      "result": {
+        "item": "extendedmushrooms:honey_waxcap"
+      }
+    },
+    {
+      "rolls": 3,
+      "chance": 0.2,
+      "result": {
+        "item": "extendedmushrooms:honey_blob"
+      }
+    },
+    {
+      "rolls": 3,
+      "chance": 0.2,
+      "result": {
+        "item": "extendedmushrooms:honeycomb_shred"
+      }
+    },
+    {
+      "rolls": 1,
+      "chance": 0.75,
+      "result": {
+        "item": "extendedmushrooms:honey_waxcap_stem"
+      }
+    },
+    {
+      "rolls": 2,
+      "chance": 0.2,
+      "result": {
+        "item": "extendedmushrooms:honey_waxcap_cap"
+      },
+      "requiresSilkTouch": true
+    }
+  ],
+  "compatibleSoilTags": [
+    "mycelium",
+    "podzol"
+  ],
+  "ticks": 300
+}

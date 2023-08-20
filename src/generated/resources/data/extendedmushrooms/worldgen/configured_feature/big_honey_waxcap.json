@@ -1,0 +1,17 @@
+{
+  "type": "extendedmushrooms:big_honey_waxcap",
+  "config": {
+    "cap_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "extendedmushrooms:honey_waxcap_cap"
+      }
+    },
+    "stem_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "extendedmushrooms:honey_waxcap_stem"
+      }
+    }
+  }
+}
