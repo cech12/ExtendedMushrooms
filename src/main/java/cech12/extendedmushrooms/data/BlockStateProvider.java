@@ -97,8 +97,6 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                                     .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
                                     .build();
                         });
-                //Forge bug: VariantBlockStateBuilder.PartialBlockstate.toString method produces wrong values for AttachFace EnumProperty (CAPSLOCK)
-                // see BugFixer class below
             } else if (block instanceof HugeMushroomBlock) {
                 // caps, stems, stripped stems
                 ModelFile outside = models().getExistingFile(getBlockResourceLocation(name));
@@ -164,7 +162,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile open = models().getExistingFile(getBlockResourceLocation(name + "_open"));
                 trapdoorBlock((TrapDoorBlock) block, bottom, top, open, true);
             } else if (!(block instanceof FairyRingBlock)) { // Fairy Ring is hand made
-                //mushrooms, (vertical) planks, carpets, flower, potted flower, grass
+                //mushrooms, planks, carpets, flower, potted flower, grass, ...
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
             }
         }

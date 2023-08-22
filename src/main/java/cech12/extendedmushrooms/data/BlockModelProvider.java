@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -72,30 +71,6 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
 
     @Override
     protected void registerModels() {
-        //parent models
-        ResourceLocation verticalPlanks = getBlockResourceLocation("vertical_planks");
-        getBuilder(verticalPlanks.getPath())
-                .parent(getExistingFile(new ResourceLocation("block/block")))
-                .texture("particle", "#all")
-                .element().from(0, 0, 0).to(16, 16, 16)
-                .allFaces((direction, faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture("#all").cullface(direction).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90));
-        ResourceLocation verticalSlab = getBlockResourceLocation("vertical_slab");
-        getBuilder(verticalSlab.getPath())
-                .parent(getExistingFile(new ResourceLocation("block/block")))
-                .texture("particle", "#side")
-                .element().from(0, 0, 8).to(16, 16, 16)
-                .allFaces((direction, faceBuilder) -> {
-                    String texture = "#side";
-                    if (direction == Direction.DOWN) {
-                        texture = "#bottom";
-                    } else if (direction == Direction.UP) {
-                        texture = "#top";
-                    }
-                    int u1 = (direction == Direction.EAST || direction == Direction.WEST) ? 8 : 0;
-                    int v1 = (direction == Direction.DOWN || direction == Direction.UP) ? 8 : 0;
-                    faceBuilder.uvs(u1, v1, 16, 16).texture(texture);
-                });
-
         //block models
         for (RegistryObject<Block> blockSupplier : ModBlocks.BLOCKS.getEntries()) {
             Block block = blockSupplier.get();
@@ -228,7 +203,7 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 //planks
                 cubeBlock(name, getBlockResourceLocation(name));
             }
-            // ignored: FairyRingBlock, VariantTrappedChestBlock
+            // ignored: FairyRingBlock
         }
 
         //special models
