@@ -28,8 +28,8 @@ public class DeadlyFibrecap extends MegaMushroom {
 
     @Override
     protected void afterGrowing(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, RandomSource random) {
-        //spawn a cave spider with a chance of 5%
-        spawnMobAroundPositionByChance(20, EntityType.CAVE_SPIDER, world, blockPos, random);
+        //spawn a cave spider with a chance of 10%
+        spawnMobAroundPositionByChance(10, EntityType.CAVE_SPIDER, world, blockPos, random);
     }
 
 }

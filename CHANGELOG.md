@@ -8,9 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - new Guidebook (with required Patchouli 1.20.1-81 mod dependency) #73
 - 3 new advancements for the fairy ring, mushroom island and animal infection #73
 - new Fibre item which can be dropped by the reworked Deadly Fibrecap #77
-- There is a 5% chance to spawn a cave spider when a Deadly Fibrecap is growing up.
-- There is a 1% chance to spawn a parrot when a Parrot Waxcap is growing up.
-- There is a 1% chance to spawn a bee when a Honey Waxcap is growing up.
+- There is a 10% chance to spawn a cave spider when a Deadly Fibrecap is growing up.
+- There is a 5% chance to spawn a parrot when a Parrot Waxcap is growing up.
+- There is a 5% chance to spawn a bee when a Honey Waxcap is growing up.
 
 ### Changed
 - renamed Slime Fungus to Parrot Waxcap #76

@@ -22,8 +22,8 @@ public class HoneyWaxcap extends BigMushroom {
 
     @Override
     protected void afterGrowing(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, RandomSource random) {
-        //spawn a bee with a chance of 1%
-        spawnMobAroundPositionByChance(100, EntityType.BEE, world, blockPos, random);
+        //spawn a bee with a chance of 5%
+        spawnMobAroundPositionByChance(20, EntityType.BEE, world, blockPos, random);
     }
 
 }

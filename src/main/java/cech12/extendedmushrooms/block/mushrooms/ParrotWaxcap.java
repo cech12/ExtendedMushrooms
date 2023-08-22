@@ -22,8 +22,8 @@ public class ParrotWaxcap extends BigMushroom {
 
     @Override
     protected void afterGrowing(ServerLevel world, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, RandomSource random) {
-        //spawn a parrot with a chance of 1%
-        spawnMobAroundPositionByChance(100, EntityType.PARROT, world, blockPos, random);
+        //spawn a parrot with a chance of 5%
+        spawnMobAroundPositionByChance(20, EntityType.PARROT, world, blockPos, random);
     }
 
 }
