@@ -164,7 +164,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 ModelFile open = models().getExistingFile(getBlockResourceLocation(name + "_open"));
                 trapdoorBlock((TrapDoorBlock) block, bottom, top, open, true);
             } else if (!(block instanceof FairyRingBlock)) { // Fairy Ring is hand made
-                //mushrooms, (vertical) planks, carpets, flower, potted flower, grass, bookshelf
+                //mushrooms, (vertical) planks, carpets, flower, potted flower, grass
                 simpleBlock(block, models().getExistingFile(getBlockResourceLocation(name)));
             }
         }
