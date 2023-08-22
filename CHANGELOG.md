@@ -21,6 +21,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Fixed
 - banner and bed created from of Slime Fungus aka. Parrot Waxcap were orange instead of lime
 
+### Removed
+- Bonsai Tree 3 recipes, because mod was not updated since Minecraft 1.18.2
+
 ## [1.20.1-4.1.0.0] - 2023-08-09
 ### Changed
 - Changed Forge to NeoForge 1.20.1-47.1.54 (compatible with Forge 47.1.0)
