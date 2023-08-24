@@ -58,24 +58,23 @@ public final class ModBlocks {
     private static final Map<RegistryObject<Block>, RegistryObject<Block>> BLOCK_STRIPPING_MAP = new HashMap<>();
 
     static {
-
-        registerCapBlocks("brown_mushroom", MushroomType.BROWN_MUSHROOM, MushroomWoodType.MUSHROOM, DyeColor.BROWN, MapColor.DIRT, SoundType.WOOL, null);
-        registerCapBlocks("red_mushroom", MushroomType.RED_MUSHROOM, MushroomWoodType.MUSHROOM, DyeColor.RED, MapColor.COLOR_RED, SoundType.WOOL, null);
+        registerCapBlocks("brown_mushroom", MushroomType.BROWN_MUSHROOM, DyeColor.BROWN, MapColor.DIRT, SoundType.WOOL, null);
+        registerCapBlocks("red_mushroom", MushroomType.RED_MUSHROOM, DyeColor.RED, MapColor.COLOR_RED, SoundType.WOOL, null);
         registerWoodBlocks("mushroom", MushroomWoodType.MUSHROOM, MapColor.WOOD, SoundType.WOOD, (state) -> 0, RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.MUSHROOM_STEM), ForgeRegistries.BLOCKS));
 
         registerMushroomBlocks("glowshroom", new Glowshroom(), MapColor.COLOR_BLUE, (state) -> 8);
-        registerCapBlocks("glowshroom", MushroomType.GLOWSHROOM, MushroomWoodType.GLOWSHROOM, DyeColor.BLUE, MapColor.COLOR_BLUE, SoundType.WOOL, GlowshroomCap::new, (state) -> 8);
+        registerCapBlocks("glowshroom", MushroomType.GLOWSHROOM, DyeColor.BLUE, MapColor.COLOR_BLUE, SoundType.WOOL, GlowshroomCap::new, (state) -> 8);
         registerWoodBlocks("glowshroom", MushroomWoodType.GLOWSHROOM, MapColor.COLOR_LIGHT_BLUE, SoundType.WOOD, (state) -> 8, null);
 
         registerMushroomBlocks("deadly_fibrecap", new DeadlyFibrecap(), MapColor.TERRACOTTA_WHITE);
-        registerCapBlocks("deadly_fibrecap", MushroomType.DEADLY_FIBRECAP, MushroomWoodType.PARROT_WAXCAP, DyeColor.WHITE, MapColor.TERRACOTTA_WHITE, SoundType.WOOL, DeadlyFibrecapCap::new);
+        registerCapBlocks("deadly_fibrecap", MushroomType.DEADLY_FIBRECAP, DyeColor.WHITE, MapColor.TERRACOTTA_WHITE, SoundType.WOOL, DeadlyFibrecapCap::new);
 
         registerMushroomBlocks("parrot_waxcap", new ParrotWaxcap(), MapColor.COLOR_LIGHT_GREEN);
-        registerCapBlocks("parrot_waxcap", MushroomType.PARROT_WAXCAP, MushroomWoodType.PARROT_WAXCAP, DyeColor.LIME, MapColor.COLOR_LIGHT_GREEN, SoundType.SLIME_BLOCK, ParrotWaxcapCap::new);
+        registerCapBlocks("parrot_waxcap", MushroomType.PARROT_WAXCAP, DyeColor.LIME, MapColor.COLOR_LIGHT_GREEN, SoundType.SLIME_BLOCK, ParrotWaxcapCap::new);
         registerWoodBlocks("parrot_waxcap", MushroomWoodType.PARROT_WAXCAP, MapColor.COLOR_GREEN, SoundType.WOOD);
 
         registerMushroomBlocks("honey_waxcap", new HoneyWaxcap(), MapColor.COLOR_ORANGE);
-        registerCapBlocks("honey_waxcap", MushroomType.HONEY_WAXCAP, MushroomWoodType.HONEY_WAXCAP, DyeColor.ORANGE, MapColor.COLOR_ORANGE, SoundType.HONEY_BLOCK, HoneyWaxcapCap::new);
+        registerCapBlocks("honey_waxcap", MushroomType.HONEY_WAXCAP, DyeColor.ORANGE, MapColor.COLOR_ORANGE, SoundType.HONEY_BLOCK, HoneyWaxcapCap::new);
         registerWoodBlocks("honey_waxcap", MushroomWoodType.HONEY_WAXCAP, MapColor.COLOR_ORANGE, SoundType.WOOD);
 
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(INFESTED_FLOWER.getId()), INFESTED_FLOWER_POTTED);
@@ -139,11 +138,11 @@ public final class ModBlocks {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(mushroom.getId(), pottedMushroom);
     }
 
-    private static void registerCapBlocks(String name, MushroomType mushroomType, MushroomWoodType mushroomWoodType, DyeColor dyeColor, MapColor mapColor, SoundType sound, BiFunction<MushroomType, Block.Properties, MushroomCapBlock> capBlock) {
-        registerCapBlocks(name, mushroomType, mushroomWoodType, dyeColor, mapColor, sound, capBlock, (state) -> 0);
+    private static void registerCapBlocks(String name, MushroomType mushroomType, DyeColor dyeColor, MapColor mapColor, SoundType sound, BiFunction<MushroomType, Block.Properties, MushroomCapBlock> capBlock) {
+        registerCapBlocks(name, mushroomType, dyeColor, mapColor, sound, capBlock, (state) -> 0);
     }
 
-    private static void registerCapBlocks(String name, MushroomType mushroomType, MushroomWoodType mushroomWoodType, DyeColor dyeColor, MapColor mapColor, SoundType sound, BiFunction<MushroomType, Block.Properties, MushroomCapBlock> capBlock, ToIntFunction<BlockState> lightLevel) {
+    private static void registerCapBlocks(String name, MushroomType mushroomType, DyeColor dyeColor, MapColor mapColor, SoundType sound, BiFunction<MushroomType, Block.Properties, MushroomCapBlock> capBlock, ToIntFunction<BlockState> lightLevel) {
         if (capBlock != null) {
             registerBlockWithItem(BlockType.CAP.getName(name), () -> capBlock.apply(mushroomType, Block.Properties.of().mapColor(mapColor).strength(0.2F).sound(sound).lightLevel(lightLevel)));
         }
