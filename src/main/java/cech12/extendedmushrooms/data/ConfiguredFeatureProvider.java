@@ -46,8 +46,8 @@ public class ConfiguredFeatureProvider implements DataProvider {
     public static final List<Mushroom> MUSHROOMS = new LinkedList<>();
 
     static {
-        MUSHROOMS.add(new Mushroom("glowshroom", ModFeatures.PATCH_GLOWSHROOM_CONFIGURED, ModBlocks.GLOWSHROOM, 0.4F));
-        MUSHROOMS.add(new Mushroom("deadly_fibrecap", ModFeatures.PATCH_DEADLY_FIBRECAP_CONFIGURED, ModBlocks.DEADLY_FIBRECAP, 0.5F));
+        MUSHROOMS.add(new Mushroom(MushroomType.GLOWSHROOM.getName(), ModFeatures.PATCH_GLOWSHROOM_CONFIGURED, ModBlocks.getMushroomBlock(MushroomType.GLOWSHROOM.getName(), ModBlocks.BlockType.MUSHROOM), 0.4F));
+        MUSHROOMS.add(new Mushroom(MushroomType.DEADLY_FIBRECAP.getName(), ModFeatures.PATCH_DEADLY_FIBRECAP_CONFIGURED, ModBlocks.getMushroomBlock(MushroomType.DEADLY_FIBRECAP.getName(), ModBlocks.BlockType.MUSHROOM), 0.5F));
     }
 
     public ConfiguredFeatureProvider(final PackOutput packOutput, final CompletableFuture<HolderLookup.Provider> lookupProvider) {

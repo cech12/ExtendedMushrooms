@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.function.ToIntFunction;
 
 public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
 
@@ -22,8 +23,8 @@ public class MushroomCapPressurePlateBlock extends PressurePlateBlock {
         super(Sensitivity.EVERYTHING, generateBlockProperties(), woodType.getBlockSetType());
     }
 
-    public MushroomCapPressurePlateBlock(final MushroomWoodType woodType, final int lightValue) {
-        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().lightLevel((state) -> lightValue), woodType.getBlockSetType());
+    public MushroomCapPressurePlateBlock(final MushroomWoodType woodType, final ToIntFunction<BlockState> lightLevel) {
+        super(PressurePlateBlock.Sensitivity.EVERYTHING, generateBlockProperties().lightLevel(lightLevel), woodType.getBlockSetType());
     }
 
     @Nonnull

@@ -1,6 +1,5 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
-import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,7 +17,7 @@ import java.util.List;
 public class ParrotWaxcapCap extends AbstractEffectMushroomCap {
 
     public ParrotWaxcapCap(MushroomType type, Properties properties) {
-        super(type, properties);
+        super(type, properties.noOcclusion().jumpFactor(1.5F).friction(0.8F));
     }
 
     @Override
@@ -33,7 +32,7 @@ public class ParrotWaxcapCap extends AbstractEffectMushroomCap {
 
     @Override
     public boolean canStickTo(BlockState state, BlockState other) {
-        if (other.getBlock() == Blocks.HONEY_BLOCK || other.getBlock() == ModBlocks.HONEY_WAXCAP_CAP.get()) return false;
+        if (other.getBlock() == Blocks.HONEY_BLOCK || other.getBlock() == MushroomType.HONEY_WAXCAP.getCapBlock()) return false;
         return state.isStickyBlock() || other.isStickyBlock();
     }
 

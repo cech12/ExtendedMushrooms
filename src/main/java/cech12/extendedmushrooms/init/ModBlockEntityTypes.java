@@ -20,35 +20,37 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ModBlockEntityTypes {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ExtendedMushrooms.MOD_ID);
 
-    public static RegistryObject<BlockEntityType<FairyRingBlockEntity>> FAIRY_RING = register("fairy_ring", FairyRingBlockEntity::new,
-            ModBlocks.FAIRY_RING);
-    public static RegistryObject<BlockEntityType<MushroomSignBlockEntity>> MUSHROOM_SIGN = register("mushroom_sign", MushroomSignBlockEntity::new,
-            ModBlocks.MUSHROOM_STANDING_SIGN,
-            ModBlocks.MUSHROOM_WALL_SIGN,
-            ModBlocks.GLOWSHROOM_STANDING_SIGN,
-            ModBlocks.GLOWSHROOM_WALL_SIGN,
-            ModBlocks.PARROT_WAXCAP_STANDING_SIGN,
-            ModBlocks.PARROT_WAXCAP_WALL_SIGN,
-            ModBlocks.HONEY_WAXCAP_STANDING_SIGN,
-            ModBlocks.HONEY_WAXCAP_WALL_SIGN);
+    public static RegistryObject<BlockEntityType<FairyRingBlockEntity>> FAIRY_RING = register("fairy_ring", FairyRingBlockEntity::new, ModBlocks.FAIRY_RING);
+    public static RegistryObject<BlockEntityType<MushroomSignBlockEntity>> MUSHROOM_SIGN = register("mushroom_sign", MushroomSignBlockEntity::new, generateSignBlocks());
 
-    public static RegistryObject<BlockEntityType<MushroomHangingSignBlockEntity>> MUSHROOM_HANGING_SIGN = register("mushroom_hanging_sign", MushroomHangingSignBlockEntity::new,
-            ModBlocks.MUSHROOM_HANGING_SIGN,
-            ModBlocks.MUSHROOM_WALL_HANGING_SIGN,
-            ModBlocks.GLOWSHROOM_HANGING_SIGN,
-            ModBlocks.GLOWSHROOM_WALL_HANGING_SIGN,
-            ModBlocks.PARROT_WAXCAP_HANGING_SIGN,
-            ModBlocks.PARROT_WAXCAP_WALL_HANGING_SIGN,
-            ModBlocks.HONEY_WAXCAP_HANGING_SIGN,
-            ModBlocks.HONEY_WAXCAP_WALL_HANGING_SIGN);
+    public static RegistryObject<BlockEntityType<MushroomHangingSignBlockEntity>> MUSHROOM_HANGING_SIGN = register("mushroom_hanging_sign", MushroomHangingSignBlockEntity::new, generateHangingSignBlocks());
 
-    private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String registryName, BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<Block>... blocks) {
+    private static RegistryObject<?>[] generateSignBlocks() {
+        ArrayList<RegistryObject<?>> list = new ArrayList<>();
+        for (MushroomWoodType woodType : MushroomWoodType.values()) {
+            list.add(ModBlocks.getMushroomBlock(woodType.getName(), ModBlocks.BlockType.STANDING_SIGN));
+            list.add(ModBlocks.getMushroomBlock(woodType.getName(), ModBlocks.BlockType.WALL_SIGN));
+        }
+        return list.toArray(new RegistryObject<?>[0]);
+    }
+
+    private static RegistryObject<?>[] generateHangingSignBlocks() {
+        ArrayList<RegistryObject<?>> list = new ArrayList<>();
+        for (MushroomWoodType woodType : MushroomWoodType.values()) {
+            list.add(ModBlocks.getMushroomBlock(woodType.getName(), ModBlocks.BlockType.HANGING_SIGN));
+            list.add(ModBlocks.getMushroomBlock(woodType.getName(), ModBlocks.BlockType.WALL_HANGING_SIGN));
+        }
+        return list.toArray(new RegistryObject<?>[0]);
+    }
+
+    private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String registryName, BlockEntityType.BlockEntitySupplier<T> supplier, RegistryObject<?>... blocks) {
         return BLOCK_ENTITY_TYPES.register(registryName, () -> BlockEntityType.Builder.of(supplier, Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)).build(null));
     }
 

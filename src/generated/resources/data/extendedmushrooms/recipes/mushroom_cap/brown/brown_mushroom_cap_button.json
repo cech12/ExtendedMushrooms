@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wool_buttons",
+  "ingredients": [
+    {
+      "tag": "forge:mushroom_caps/brown"
+    }
+  ],
+  "result": {
+    "item": "extendedmushrooms:brown_mushroom_cap_button"
+  }
+}

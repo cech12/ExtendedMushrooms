@@ -60,6 +60,10 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
         return getBlockResourceLocation(name.substring(0, name.length() - removeSuffix.length()) + addSuffix);
     }
 
+    private static ResourceLocation getBlockResourceLocation(String name, String removeSuffix, String addPrefix, String addSuffix) {
+        return getBlockResourceLocation(addPrefix + name.substring(0, name.length() - removeSuffix.length()) + addSuffix);
+    }
+
     private static ResourceLocation getCapResourceLocation(String name, String removeSuffix) {
         if (name.startsWith("brown_mushroom_")) {
             return new ResourceLocation("block/brown_mushroom_block");
@@ -180,10 +184,7 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof CeilingHangingSignBlock || block instanceof WallHangingSignBlock) {
                 //only one model for both signs
                 if (block instanceof CeilingHangingSignBlock) {
-                    ResourceLocation location = getBlockResourceLocation(name, "_hanging_sign", "_stem_stripped");
-                    if (block == ModBlocks.MUSHROOM_HANGING_SIGN.get()) {
-                        location = getBlockResourceLocation(ModBlocks.STRIPPED_MUSHROOM_STEM.getId().getPath());
-                    }
+                    ResourceLocation location = getBlockResourceLocation(name, "_hanging_sign", "stripped_", "_stem");
                     getBuilder(name).texture("particle", location);
                 }
             } else if (block instanceof HugeMushroomBlock) { // Stems & Stripped Stems. MushroomCapBlock is checked before

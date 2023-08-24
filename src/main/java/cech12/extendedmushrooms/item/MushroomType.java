@@ -6,8 +6,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,68 +18,93 @@ import java.util.function.Supplier;
 
 public enum MushroomType implements StringRepresentable {
 
-    BROWN_MUSHROOM(0,
-            () -> Items.BROWN_MUSHROOM,
-            RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.BROWN_MUSHROOM_BLOCK), ForgeRegistries.BLOCKS),
-            MushroomWoodType.MUSHROOM, DyeColor.BROWN),
-    RED_MUSHROOM(1,
-            () -> Items.RED_MUSHROOM,
-            RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.RED_MUSHROOM_BLOCK), ForgeRegistries.BLOCKS),
-            MushroomWoodType.MUSHROOM, DyeColor.RED),
-    GLOWSHROOM(2,
-            () -> ModBlocks.GLOWSHROOM.get().asItem(),
-            ModBlocks.GLOWSHROOM_CAP,
-            MushroomWoodType.GLOWSHROOM, DyeColor.BLUE,
-            () -> ModBlocks.GLOWSHROOM_CAP.get().getLightEmission(ModBlocks.GLOWSHROOM_CAP.get().defaultBlockState(), null, null)),
-    DEADLY_FIBRECAP(3,
-            () -> ModBlocks.DEADLY_FIBRECAP.get().asItem(),
-            ModBlocks.DEADLY_FIBRECAP_CAP,
-            MushroomWoodType.MUSHROOM, DyeColor.WHITE),
-    PARROT_WAXCAP(4,
-            () -> ModBlocks.PARROT_WAXCAP.get().asItem(),
-            ModBlocks.PARROT_WAXCAP_CAP,
-            MushroomWoodType.PARROT_WAXCAP, DyeColor.LIME),
-    HONEY_WAXCAP(5,
-            () -> ModBlocks.HONEY_WAXCAP.get().asItem(),
-            ModBlocks.HONEY_WAXCAP_CAP,
-            MushroomWoodType.HONEY_WAXCAP, DyeColor.ORANGE);
+    BROWN_MUSHROOM(0, "brown_mushroom",
+            MushroomWoodType.MUSHROOM,
+            DyeColor.BROWN,
+            () -> Blocks.BROWN_MUSHROOM,
+            RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.BROWN_MUSHROOM_BLOCK), ForgeRegistries.BLOCKS)),
+    RED_MUSHROOM(1, "red_mushroom",
+            MushroomWoodType.MUSHROOM,
+            DyeColor.RED,
+            () -> Blocks.RED_MUSHROOM,
+            RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.RED_MUSHROOM_BLOCK), ForgeRegistries.BLOCKS)),
+    GLOWSHROOM(2, "glowshroom",
+            MushroomWoodType.GLOWSHROOM,
+            DyeColor.BLUE,
+            () -> 8),
+    DEADLY_FIBRECAP(3, "deadly_fibrecap",
+            MushroomWoodType.MUSHROOM,
+            DyeColor.WHITE),
+    PARROT_WAXCAP(4, "parrot_waxcap",
+            MushroomWoodType.PARROT_WAXCAP,
+            DyeColor.LIME),
+    HONEY_WAXCAP(5, "honey_waxcap",
+            MushroomWoodType.HONEY_WAXCAP,
+            DyeColor.ORANGE);
 
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 
     private final int id;
-    private final Supplier<ItemLike> item;
-    private final RegistryObject<Block> capBlock;
+    private final String name;
     private final MushroomWoodType woodType;
     private final DyeColor color;
     private final Supplier<Integer> lightValue;
 
-    MushroomType(int id, Supplier<ItemLike> item, RegistryObject<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color) {
-        this(id, item, capBlock, woodType, color, () -> 0);
+    private final Supplier<Block> mushroom;
+    private final RegistryObject<Block> capBlock;
+
+    MushroomType(int id, String name, MushroomWoodType woodType, @Nonnull DyeColor color) {
+        this(id, name, woodType, color, () -> 0, null, null);
     }
 
-    MushroomType(int id, Supplier<ItemLike> item, RegistryObject<Block> capBlock, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
+    MushroomType(int id, String name, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Integer> lightValue) {
+        this(id, name, woodType, color, lightValue, null, null);
+    }
+
+    MushroomType(int id, String name, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Block> item, RegistryObject<Block> capBlock) {
+        this(id, name, woodType, color, () -> 0, item, capBlock);
+    }
+
+    MushroomType(int id, String name, MushroomWoodType woodType, @Nonnull DyeColor color, Supplier<Integer> lightValue, Supplier<Block> item, RegistryObject<Block> capBlock) {
         this.id = id;
-        this.item = item;
-        this.capBlock = capBlock;
+        this.name = name;
         this.woodType = woodType;
         this.color = color;
         this.lightValue = lightValue;
+        this.mushroom = item;
+        this.capBlock = capBlock;
     }
 
     public int getId() {
         return this.id;
     }
+    public String getName() {
+        return this.name;
+    }
 
     public Item getItem() {
-        return this.item.get().asItem();
+        return this.getBlock().asItem();
+    }
+
+    public Block getBlock() {
+        if (this.mushroom != null) {
+            return this.mushroom.get();
+        }
+        return ModBlocks.getMushroomBlock(this.name, ModBlocks.BlockType.MUSHROOM).get();
     }
 
     public Block getCapBlock() {
-        return this.capBlock.get();
+        if (this.capBlock != null) {
+            return this.capBlock.get();
+        }
+        return ModBlocks.getMushroomBlock(this.name, ModBlocks.BlockType.CAP).get();
     }
 
     public ResourceLocation getCapBlockId() {
-        return this.capBlock.getId();
+        if (this.capBlock != null) {
+            return this.capBlock.getId();
+        }
+        return ModBlocks.getMushroomBlock(this.name, ModBlocks.BlockType.CAP).getId();
     }
 
     public MushroomWoodType getWoodType() {
@@ -97,12 +120,13 @@ public enum MushroomType implements StringRepresentable {
     }
 
     public ResourceLocation getSheepLootTable() {
-        return new ResourceLocation(ExtendedMushrooms.MOD_ID, "entities/sheep/" + ForgeRegistries.ITEMS.getKey(this.getItem()).getPath());
+        return new ResourceLocation(ExtendedMushrooms.MOD_ID, "entities/sheep/" + this.name);
     }
 
+    @Nonnull
     @Override
     public String getSerializedName() {
-        return ForgeRegistries.ITEMS.getKey(this.getItem()).getPath();
+        return this.name;
     }
 
     public static MushroomType byId(int id) {

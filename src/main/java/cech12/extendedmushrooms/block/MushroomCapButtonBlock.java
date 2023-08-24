@@ -8,11 +8,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.function.ToIntFunction;
 
 public class MushroomCapButtonBlock extends ButtonBlock {
 
@@ -23,8 +23,8 @@ public class MushroomCapButtonBlock extends ButtonBlock {
         super(generateBlockProperties(), woodType.getBlockSetType(), 30, true);
     }
 
-    public MushroomCapButtonBlock(final MushroomWoodType woodType, final int lightValue) {
-        super(generateBlockProperties().lightLevel((state) -> lightValue), woodType.getBlockSetType(), 30, true);
+    public MushroomCapButtonBlock(final MushroomWoodType woodType, final ToIntFunction<BlockState> lightLevel) {
+        super(generateBlockProperties().lightLevel(lightLevel), woodType.getBlockSetType(), 30, true);
     }
 
     @Nonnull

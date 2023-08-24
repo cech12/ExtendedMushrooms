@@ -168,7 +168,16 @@ public class ExtendedMushrooms {
                 Map.entry(loc("poisonous_mushroom_cap"), loc("deadly_fibrecap_cap")),
                 Map.entry(loc("poisonous_mushroom_cap_button"), loc("deadly_fibrecap_cap_button")),
                 Map.entry(loc("poisonous_mushroom_cap_carpet"), loc("deadly_fibrecap_cap_carpet")),
-                Map.entry(loc("poisonous_mushroom_cap_pressure_plate"), loc("deadly_fibrecap_cap_pressure_plate"))
+                Map.entry(loc("poisonous_mushroom_cap_pressure_plate"), loc("deadly_fibrecap_cap_pressure_plate")),
+                Map.entry(loc("brown_mushroom_button"), loc("brown_mushroom_cap_button")),
+                Map.entry(loc("brown_mushroom_carpet"), loc("brown_mushroom_cap_carpet")),
+                Map.entry(loc("brown_mushroom_pressure_plate"), loc("brown_mushroom_cap_pressure_plate")),
+                Map.entry(loc("red_mushroom_button"), loc("red_mushroom_cap_button")),
+                Map.entry(loc("red_mushroom_carpet"), loc("red_mushroom_cap_carpet")),
+                Map.entry(loc("red_mushroom_pressure_plate"), loc("red_mushroom_cap_pressure_plate")),
+                Map.entry(loc("glowshroom_stem_stripped"), loc("stripped_glowshroom_stem")),
+                Map.entry(loc("poisonous_mushroom_stem_stripped"), loc("stripped_parrot_waxcap_stem")),
+                Map.entry(loc("honey_fungus_stem_stripped"), loc("stripped_honey_waxcap_stem"))
         );
         //mushroom renaming of mod version 5.0.0
         Map<String, String> resourceRenamingMap = Map.ofEntries(

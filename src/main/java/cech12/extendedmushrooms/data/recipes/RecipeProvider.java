@@ -170,66 +170,37 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_mushroom", has(Tags.Items.MUSHROOMS))
                 .save(consumer);
 
-        mushroomWoodRecipes(consumer, "colorless",
+        mushroomWoodRecipes(consumer, "colorless", "mushroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_COLORLESS,
                 ModItems.MUSHROOM_BOAT.get(),
                 ModItems.MUSHROOM_CHEST_BOAT.get(),
-                ModBlocks.MUSHROOM_BUTTON.get().asItem(),
-                ModBlocks.MUSHROOM_DOOR.get().asItem(),
-                ModBlocks.MUSHROOM_FENCE.get().asItem(),
-                ModBlocks.MUSHROOM_FENCE_GATE.get().asItem(),
                 ModItems.MUSHROOM_HANGING_SIGN.get(),
-                ModBlocks.MUSHROOM_PLANKS.get().asItem(),
-                ModBlocks.MUSHROOM_PRESSURE_PLATE.get().asItem(),
-                ModItems.MUSHROOM_SIGN.get(),
-                ModBlocks.MUSHROOM_SLAB.get().asItem(),
-                ModBlocks.MUSHROOM_STAIRS.get().asItem(),
-                ModBlocks.STRIPPED_MUSHROOM_STEM.get().asItem(),
-                ModBlocks.MUSHROOM_TRAPDOOR.get().asItem());
-        mushroomCapRecipes(consumer, "brown",
+                ModItems.MUSHROOM_SIGN.get());
+        mushroomCapRecipes(consumer, "brown", "brown_mushroom",
                 ModTags.ForgeItems.MUSHROOM_CAPS_BROWN,
                 Items.BROWN_BANNER,
-                Items.BROWN_BED,
-                ModBlocks.BROWN_MUSHROOM_BUTTON.get().asItem(),
-                ModBlocks.BROWN_MUSHROOM_CARPET.get().asItem(),
-                ModBlocks.BROWN_MUSHROOM_PRESSURE_PLATE.get().asItem());
-        mushroomCapRecipes(consumer, "red",
+                Items.BROWN_BED);
+        mushroomCapRecipes(consumer, "red", "red_mushroom",
                 ModTags.ForgeItems.MUSHROOM_CAPS_RED,
                 Items.RED_BANNER,
-                Items.RED_BED,
-                ModBlocks.RED_MUSHROOM_BUTTON.get().asItem(),
-                ModBlocks.RED_MUSHROOM_CARPET.get().asItem(),
-                ModBlocks.RED_MUSHROOM_PRESSURE_PLATE.get().asItem());
+                Items.RED_BED);
 
         //glowshroom
-        FairyRingRecipeBuilder.normal(ModBlocks.GLOWSHROOM.get(), 1)
+        FairyRingRecipeBuilder.normal(MushroomType.GLOWSHROOM.getBlock(), 1)
                 .requires(Items.SHROOMLIGHT)
                 .requires(Items.GOLDEN_CARROT)
                 .requires(Items.LAPIS_LAZULI)
                 .save(consumer);
-        mushroomWoodRecipes(consumer, "glowshroom",
+        mushroomWoodRecipes(consumer, "glowshroom", "glowshroom",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM,
                 ModItems.GLOWSHROOM_BOAT.get(),
                 ModItems.GLOWSHROOM_CHEST_BOAT.get(),
-                ModBlocks.GLOWSHROOM_BUTTON.get().asItem(),
-                ModBlocks.GLOWSHROOM_DOOR.get().asItem(),
-                ModBlocks.GLOWSHROOM_FENCE.get().asItem(),
-                ModBlocks.GLOWSHROOM_FENCE_GATE.get().asItem(),
                 ModItems.GLOWSHROOM_HANGING_SIGN.get(),
-                ModBlocks.GLOWSHROOM_PLANKS.get().asItem(),
-                ModBlocks.GLOWSHROOM_PRESSURE_PLATE.get().asItem(),
-                ModItems.GLOWSHROOM_SIGN.get(),
-                ModBlocks.GLOWSHROOM_SLAB.get().asItem(),
-                ModBlocks.GLOWSHROOM_STAIRS.get().asItem(),
-                ModBlocks.GLOWSHROOM_STEM_STRIPPED.get().asItem(),
-                ModBlocks.GLOWSHROOM_TRAPDOOR.get().asItem());
-        mushroomCapRecipes(consumer, "glowshroom",
+                ModItems.GLOWSHROOM_SIGN.get());
+        mushroomCapRecipes(consumer, "glowshroom", "glowshroom",
                 ModTags.ForgeItems.MUSHROOM_CAPS_GLOWSHROOM,
                 Items.BLUE_BANNER,
-                Items.BLUE_BED,
-                ModBlocks.GLOWSHROOM_CAP_BUTTON.get().asItem(),
-                ModBlocks.GLOWSHROOM_CAP_CARPET.get().asItem(),
-                ModBlocks.GLOWSHROOM_CAP_PRESSURE_PLATE.get().asItem());
+                Items.BLUE_BED);
         //glowstone crumbs recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.GLOWSTONE_DUST)
                 .define('#', ModItems.GLOWSTONE_CRUMBS.get())
@@ -243,50 +214,34 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer);
 
         //deadly fibrecap
-        FairyRingRecipeBuilder.normal(ModBlocks.DEADLY_FIBRECAP.get(), 1)
+        FairyRingRecipeBuilder.normal(MushroomType.DEADLY_FIBRECAP.getBlock(), 1)
                 .requires(Items.POISONOUS_POTATO)
                 .requires(Items.ROTTEN_FLESH)
                 .requires(Items.SPIDER_EYE)
                 .requires(Items.WHITE_DYE)
                 .save(consumer);
-        mushroomCapRecipes(consumer, "deadly_fibrecap",
+        mushroomCapRecipes(consumer, "deadly_fibrecap", "deadly_fibrecap",
                 ModTags.ForgeItems.MUSHROOM_CAPS_WHITE,
                 Items.WHITE_BANNER,
-                Items.WHITE_BED,
-                ModBlocks.DEADLY_FIBRECAP_CAP_BUTTON.get().asItem(),
-                ModBlocks.DEADLY_FIBRECAP_CAP_CARPET.get().asItem(),
-                ModBlocks.DEADLY_FIBRECAP_CAP_PRESSURE_PLATE.get().asItem());
+                Items.WHITE_BED);
         //no wood for deadly fibrecap
 
         //parrot waxcap
-        FairyRingRecipeBuilder.normal(ModBlocks.PARROT_WAXCAP.get(), 1)
+        FairyRingRecipeBuilder.normal(MushroomType.PARROT_WAXCAP.getBlock(), 1)
                 .requires(Items.SLIME_BLOCK)
                 .requires(Items.RABBIT_FOOT)
                 .requires(Items.LIME_DYE)
                 .save(consumer);
-        mushroomWoodRecipes(consumer, "parrot_waxcap",
+        mushroomWoodRecipes(consumer, "parrot_waxcap", "parrot_waxcap",
                 ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
                 ModItems.PARROT_WAXCAP_BOAT.get(),
                 ModItems.PARROT_WAXCAP_CHEST_BOAT.get(),
-                ModBlocks.PARROT_WAXCAP_BUTTON.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_DOOR.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_FENCE.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_FENCE_GATE.get().asItem(),
                 ModItems.PARROT_WAXCAP_HANGING_SIGN.get(),
-                ModBlocks.PARROT_WAXCAP_PLANKS.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_PRESSURE_PLATE.get().asItem(),
-                ModItems.PARROT_WAXCAP_SIGN.get(),
-                ModBlocks.PARROT_WAXCAP_SLAB.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_STAIRS.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_STEM_STRIPPED.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_TRAPDOOR.get().asItem());
-        mushroomCapRecipes(consumer, "parrot_waxcap",
+                ModItems.PARROT_WAXCAP_SIGN.get());
+        mushroomCapRecipes(consumer, "parrot_waxcap", "parrot_waxcap",
                 ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
                 Items.LIME_BANNER,
-                Items.LIME_BED,
-                ModBlocks.PARROT_WAXCAP_CAP_BUTTON.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_CAP_CARPET.get().asItem(),
-                ModBlocks.PARROT_WAXCAP_CAP_PRESSURE_PLATE.get().asItem());
+                Items.LIME_BED);
         //slime blob recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SLIME_BALL)
                 .define('#', ModItems.SLIME_BLOB.get())
@@ -300,34 +255,21 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer);
 
         //honey waxcap
-        FairyRingRecipeBuilder.normal(ModBlocks.HONEY_WAXCAP.get(), 1)
+        FairyRingRecipeBuilder.normal(MushroomType.HONEY_WAXCAP.getBlock(), 1)
                 .requires(Items.HONEYCOMB)
                 .requires(Items.HONEY_BOTTLE)
                 .requires(Items.ORANGE_DYE)
                 .save(consumer);
-        mushroomWoodRecipes(consumer, "honey_waxcap",
+        mushroomWoodRecipes(consumer, "honey_waxcap", "honey_waxcap",
                 ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE,
                 ModItems.HONEY_WAXCAP_BOAT.get(),
                 ModItems.HONEY_WAXCAP_CHEST_BOAT.get(),
-                ModBlocks.HONEY_WAXCAP_BUTTON.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_DOOR.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_FENCE.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_FENCE_GATE.get().asItem(),
                 ModItems.HONEY_WAXCAP_HANGING_SIGN.get(),
-                ModBlocks.HONEY_WAXCAP_PLANKS.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_PRESSURE_PLATE.get().asItem(),
-                ModItems.HONEY_WAXCAP_SIGN.get(),
-                ModBlocks.HONEY_WAXCAP_SLAB.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_STAIRS.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_STEM_STRIPPED.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_TRAPDOOR.get().asItem());
-        mushroomCapRecipes(consumer, "honey_waxcap",
+                ModItems.HONEY_WAXCAP_SIGN.get());
+        mushroomCapRecipes(consumer, "honey_waxcap", "honey_waxcap",
                 ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE,
                 Items.ORANGE_BANNER,
-                Items.ORANGE_BED,
-                ModBlocks.HONEY_WAXCAP_CAP_BUTTON.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_CAP_CARPET.get().asItem(),
-                ModBlocks.HONEY_WAXCAP_CAP_PRESSURE_PLATE.get().asItem());
+                Items.ORANGE_BED);
         //honey blob recipes
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.HONEY_BOTTLE, 1)
                 .requires(Items.GLASS_BOTTLE)
@@ -378,11 +320,20 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     }
 
 
-    private void mushroomWoodRecipes(Consumer<FinishedRecipe> consumer, String name, TagKey<Item> stems, Item boat,
-                                     Item chestBoat, Item button, Item door, Item fence, Item fenceGate, Item hangingSign,
-                                     Item planks, Item pressurePlate, Item sign, Item slab, Item stairs, Item strippedStem,
-                                     Item trapdoor) {
-        String directory = "mushroom_wood/" + name + "/";
+    private void mushroomWoodRecipes(Consumer<FinishedRecipe> consumer, String directoryName, String mushroomName,
+                                     TagKey<Item> stems, Item boat, Item chestBoat, Item hangingSign, Item sign) {
+        String directory = "mushroom_wood/" + directoryName + "/";
+        Item button = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.BUTTON).get().asItem();
+        Item door = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.DOOR).get().asItem();
+        Item fence = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.FENCE).get().asItem();
+        Item fenceGate = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.FENCE_GATE).get().asItem();
+        Item planks = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.PLANKS).get().asItem();
+        Item pressurePlate = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.PRESSURE_PLATE).get().asItem();
+        Item slab = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.SLAB).get().asItem();
+        Item stairs = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.STAIRS).get().asItem();
+        Item strippedStem = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.STRIPPED_STEM).get().asItem();
+        Item trapdoor = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.TRAPDOOR).get().asItem();
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, boat)
                 .define('#', planks)
                 .pattern("# #")
@@ -517,9 +468,13 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "trapdoor_from_planks"));
     }
 
-    private void mushroomCapRecipes(Consumer<FinishedRecipe> consumer, String name, TagKey<Item> caps, Item banner,
-                                    Item bed, Item button, Item carpet, Item pressure_plate) {
-        String directory = "mushroom_cap/" + name + "/";
+    private void mushroomCapRecipes(Consumer<FinishedRecipe> consumer, String directoryName, String mushroomName,
+                                    TagKey<Item> caps, Item banner, Item bed) {
+        String directory = "mushroom_cap/" + directoryName + "/";
+        Item button = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.CAP_BUTTON).get().asItem();
+        Item carpet = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.CAP_CARPET).get().asItem();
+        Item pressure_plate = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.CAP_PRESSURE_PLATE).get().asItem();
+
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, banner)
                 .define('#', caps)
                 .define('|', Tags.Items.RODS_WOODEN)

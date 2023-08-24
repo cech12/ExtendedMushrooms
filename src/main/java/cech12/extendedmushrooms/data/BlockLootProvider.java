@@ -5,6 +5,7 @@ import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStrippedStemBlock;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModItems;
+import cech12.extendedmushrooms.item.MushroomType;
 import com.ibm.icu.impl.Pair;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -164,13 +165,13 @@ public class BlockLootProvider implements DataProvider {
             }
 
             //caps have other loot
-            tables.put(ModBlocks.GLOWSHROOM_CAP, block -> dropCap(block, ModBlocks.GLOWSHROOM.get(),
+            tables.put(ModBlocks.getMushroomBlock(MushroomType.GLOWSHROOM.getName(), ModBlocks.BlockType.CAP), block -> dropCap(block, MushroomType.GLOWSHROOM.getBlock(),
                     Pair.of(ModItems.GLOWSTONE_CRUMBS.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-            tables.put(ModBlocks.DEADLY_FIBRECAP_CAP, block -> dropCap(block, ModBlocks.DEADLY_FIBRECAP.get(),
+            tables.put(ModBlocks.getMushroomBlock(MushroomType.DEADLY_FIBRECAP.getName(), ModBlocks.BlockType.CAP), block -> dropCap(block, MushroomType.DEADLY_FIBRECAP.getBlock(),
                     Pair.of(ModItems.FIBRE.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-            tables.put(ModBlocks.PARROT_WAXCAP_CAP, block -> dropCap(block, ModBlocks.PARROT_WAXCAP.get(),
+            tables.put(ModBlocks.getMushroomBlock(MushroomType.PARROT_WAXCAP.getName(), ModBlocks.BlockType.CAP), block -> dropCap(block, MushroomType.PARROT_WAXCAP.getBlock(),
                     Pair.of(ModItems.SLIME_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
-            tables.put(ModBlocks.HONEY_WAXCAP_CAP, block -> dropCap(block, ModBlocks.HONEY_WAXCAP.get(),
+            tables.put(ModBlocks.getMushroomBlock(MushroomType.HONEY_WAXCAP.getName(), ModBlocks.BlockType.CAP), block -> dropCap(block, MushroomType.HONEY_WAXCAP.getBlock(),
                     Pair.of(ModItems.HONEY_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F}),
                     Pair.of(ModItems.HONEYCOMB_SHRED.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
 

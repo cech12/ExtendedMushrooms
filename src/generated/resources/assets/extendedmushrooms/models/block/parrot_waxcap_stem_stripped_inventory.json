@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "extendedmushrooms:block/parrot_waxcap_stem_stripped"
-  }
-}

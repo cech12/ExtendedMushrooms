@@ -2,7 +2,7 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.FairyRingBlock;
-import cech12.extendedmushrooms.init.ModBlocks;
+import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -59,14 +59,14 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
     }
 
     private static ResourceLocation getInsideResourceLocation(String name) {
-        if (name.equals(ModBlocks.STRIPPED_MUSHROOM_STEM.getKey().location().getPath())) {
+        if (name.equals(MushroomWoodType.MUSHROOM.getStrippedStemBlockId().getPath())) {
             return new ResourceLocation("block/mushroom_block_inside");
         }
         return getBlockResourceLocation(name
                 .replace("_cap", "")
                 .replace("_stem", "")
                 .replace("_log", "")
-                .replace("_stripped", "") + "_inside");
+                .replace("stripped_", "") + "_inside");
     }
 
     @Override
