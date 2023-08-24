@@ -23,6 +23,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Removed
 - Bonsai Tree 3 recipes, because mod was not updated since Minecraft 1.18.2
+- all cap buttons and related tags - but added corresponding recipes when Wool Buttons mod of bl4ckscor3 is installed
+- all cap pressure plates and related tags - but added corresponding recipes when Wool Pressure Plates mod of bl4ckscor3 is installed
 
 ## [1.20.1-4.1.0.0] - 2023-08-09
 ### Changed

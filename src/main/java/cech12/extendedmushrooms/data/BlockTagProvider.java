@@ -1,8 +1,6 @@
 package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
-import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
-import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomCeilingHangingSignBlock;
 import cech12.extendedmushrooms.block.MushroomStandingSignBlock;
 import cech12.extendedmushrooms.block.MushroomWallHangingSignBlock;
@@ -65,17 +63,10 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .add(MushroomType.DEADLY_FIBRECAP.getBlock());
         tag(ModTags.Blocks.MUSHROOMS_SLOWING_DOWN)
                 .add(MushroomType.HONEY_WAXCAP.getBlock());
-        tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+        tag(ModTags.Blocks.MUSHROOM_BUTTONS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomWoodButtonBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
-                .filter(block -> block instanceof MushroomCapButtonBlock)
-                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
-                .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_BUTTONS)
-                .addTag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD)
-                .addTag(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL);
         tag(ModTags.Blocks.MUSHROOM_CARPETS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof WoolCarpetBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
@@ -100,17 +91,10 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .filter(block -> ForgeRegistries.BLOCKS.getKey(block).getPath().contains("_planks"))
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+        tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof MushroomWoodPressurePlateBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
-                .filter(block -> block instanceof MushroomCapPressurePlateBlock)
-                .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
-                .toArray(Block[]::new));
-        tag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES)
-                .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD)
-                .addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
         tag(ModTags.Blocks.MUSHROOM_SLABS).add(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                 .filter(block -> block instanceof SlabBlock)
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
@@ -233,10 +217,6 @@ public class BlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.WOODEN_TRAPDOORS).addTag(ModTags.Blocks.MUSHROOM_TRAPDOORS);
         tag(BlockTags.WOOL).addTag(ModTags.ForgeBlocks.MUSHROOM_CAPS);
         tag(BlockTags.WOOL_CARPETS).addTag(ModTags.Blocks.MUSHROOM_CARPETS);
-
-        //generate tags for mod compatibility
-        tag(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES).addTag(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL);
-
     }
 
     @Nonnull

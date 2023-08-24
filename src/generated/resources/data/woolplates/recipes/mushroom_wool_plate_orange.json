@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "woolplates"
+    }
+  ],
+  "group": "wool_plates",
+  "ingredients": [
+    {
+      "tag": "minecraft:wooden_pressure_plates"
+    },
+    {
+      "tag": "forge:mushroom_caps/orange"
+    }
+  ],
+  "result": {
+    "item": "woolplates:wool_plate_orange"
+  }
+}

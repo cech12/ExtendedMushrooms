@@ -1,6 +1,8 @@
 {
   "values": [
-    "#extendedmushrooms:mushroom_pressure_plates/wood",
-    "#extendedmushrooms:mushroom_pressure_plates/wool"
+    "extendedmushrooms:glowshroom_pressure_plate",
+    "extendedmushrooms:honey_waxcap_pressure_plate",
+    "extendedmushrooms:mushroom_pressure_plate",
+    "extendedmushrooms:parrot_waxcap_pressure_plate"
   ]
 }

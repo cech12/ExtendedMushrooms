@@ -94,13 +94,11 @@ public final class ModBlocks {
             Block block = registryObject.get();
             if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
                 if (block instanceof MushroomWoodButtonBlock
-                        || block instanceof MushroomCapButtonBlock
                         || block instanceof DoorBlock
                         || block instanceof MushroomFenceBlock
                         || block instanceof MushroomFenceGateBlock
                         || block instanceof MushroomPlanksBlock
                         || block instanceof MushroomWoodPressurePlateBlock
-                        || block instanceof MushroomCapPressurePlateBlock
                         || block instanceof MushroomSlabBlock
                         || block instanceof MushroomStairsBlock
                         || block instanceof TrapDoorBlock
@@ -149,9 +147,7 @@ public final class ModBlocks {
         if (capBlock != null) {
             registerBlockWithItem(BlockType.CAP.getName(name), () -> capBlock.apply(mushroomType, Block.Properties.of().mapColor(mapColor).strength(0.2F).sound(sound).lightLevel(lightLevel)));
         }
-        registerBlockWithItem(BlockType.CAP_BUTTON.getName(name), () -> new MushroomCapButtonBlock(mushroomWoodType, lightLevel));
         registerBlockWithItem(BlockType.CAP_CARPET.getName(name), () -> new MushroomCarpetBlock(dyeColor, Block.Properties.of().mapColor(mapColor).strength(0.1F).sound(sound).lightLevel(lightLevel)));
-        registerBlockWithItem(BlockType.CAP_PRESSURE_PLATE.getName(name), () -> new MushroomCapPressurePlateBlock(mushroomWoodType, lightLevel));
     }
 
     private static void registerWoodBlocks(String name, MushroomWoodType mushroomWoodType, MapColor mapColor, SoundType sound) {
@@ -195,9 +191,7 @@ public final class ModBlocks {
         MUSHROOM("{0}"),
         POTTED_MUSHROOM("{0}_potted"),
         CAP("{0}_cap"),
-        CAP_BUTTON("{0}_cap_button"),
         CAP_CARPET("{0}_cap_carpet"),
-        CAP_PRESSURE_PLATE("{0}_cap_pressure_plate"),
         STEM("{0}_stem"),
         STRIPPED_STEM("stripped_{0}_stem"),
         BUTTON("{0}_button"),

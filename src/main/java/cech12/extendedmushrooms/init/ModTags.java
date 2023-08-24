@@ -60,8 +60,6 @@ public class ModTags {
 
     public static class Blocks {
 
-        public static final TagKey<Block> MUSHROOM_BUTTONS_WOOD = tag("mushroom_buttons/wood");
-        public static final TagKey<Block> MUSHROOM_BUTTONS_WOOL = tag("mushroom_buttons/wool");
         public static final TagKey<Block> MUSHROOM_BUTTONS = tag("mushroom_buttons");
         public static final TagKey<Block> MUSHROOM_CARPETS = tag("mushroom_carpets");
         public static final TagKey<Block> MUSHROOM_CEILING_HANGING_SIGNS = tag("mushroom_ceiling_hanging_signs");
@@ -69,8 +67,6 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOM_FENCE_GATES = tag("mushroom_fence_gates");
         public static final TagKey<Block> MUSHROOM_FENCES = tag("mushroom_fences");
         public static final TagKey<Block> MUSHROOM_PLANKS = tag("mushroom_planks");
-        public static final TagKey<Block> MUSHROOM_PRESSURE_PLATES_WOOD = tag("mushroom_pressure_plates/wood");
-        public static final TagKey<Block> MUSHROOM_PRESSURE_PLATES_WOOL = tag("mushroom_pressure_plates/wool");
         public static final TagKey<Block> MUSHROOM_PRESSURE_PLATES = tag("mushroom_pressure_plates");
         public static final TagKey<Block> MUSHROOM_SLABS = tag("mushroom_slabs");
         public static final TagKey<Block> MUSHROOM_STAIRS = tag("mushroom_stairs");
@@ -95,14 +91,6 @@ public class ModTags {
 
         private static TagKey<Block> tag(@Nonnull String name) {
             return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
-        }
-    }
-
-    public static class OtherModBlocks {
-        public static final TagKey<Block> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
-
-        private static TagKey<Block> tag(@Nonnull String mod, @Nonnull String name) {
-            return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation(mod, name));
         }
     }
 
@@ -151,8 +139,6 @@ public class ModTags {
         public static final TagKey<Item> FAIRY_RING_MUSHROOMS = tag("fairy_ring_mushrooms");
 
         public static final TagKey<Item> MUSHROOM_BOATS = tag("mushroom_boats");
-        public static final TagKey<Item> MUSHROOM_BUTTONS_WOOD = tag("mushroom_buttons/wood");
-        public static final TagKey<Item> MUSHROOM_BUTTONS_WOOL = tag("mushroom_buttons/wool");
         public static final TagKey<Item> MUSHROOM_BUTTONS = tag("mushroom_buttons");
         public static final TagKey<Item> MUSHROOM_CARPETS = tag("mushroom_carpets");
         public static final TagKey<Item> MUSHROOM_CHEST_BOATS = tag("mushroom_chest_boats");
@@ -161,8 +147,6 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOM_FENCES = tag("mushroom_fences");
         public static final TagKey<Item> MUSHROOM_HANGING_SIGNS = tag("mushroom_hanging_signs");
         public static final TagKey<Item> MUSHROOM_PLANKS = tag("mushroom_planks");
-        public static final TagKey<Item> MUSHROOM_PRESSURE_PLATES_WOOD = tag("mushroom_pressure_plates/wood");
-        public static final TagKey<Item> MUSHROOM_PRESSURE_PLATES_WOOL = tag("mushroom_pressure_plates/wool");
         public static final TagKey<Item> MUSHROOM_PRESSURE_PLATES = tag("mushroom_pressure_plates");
         public static final TagKey<Item> MUSHROOM_SIGNS = tag("mushroom_signs");
         public static final TagKey<Item> MUSHROOM_SLABS = tag("mushroom_slabs");
@@ -184,15 +168,6 @@ public class ModTags {
             return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(ExtendedMushrooms.MOD_ID, name));
         }
 
-    }
-
-    public static class OtherModItems {
-
-        public static final TagKey<Item> WOOLPLATES_WOOLPLATES = tag("woolplates", "woolplates");
-
-        private static TagKey<Item> tag(@Nonnull String mod, @Nonnull String name) {
-            return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(mod, name));
-        }
     }
 
 }

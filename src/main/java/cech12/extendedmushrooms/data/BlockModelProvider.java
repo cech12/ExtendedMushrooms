@@ -2,8 +2,6 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.EMMushroomBlock;
-import cech12.extendedmushrooms.block.MushroomCapButtonBlock;
-import cech12.extendedmushrooms.block.MushroomCapPressurePlateBlock;
 import cech12.extendedmushrooms.block.MushroomPlanksBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.HoneyWaxcapCap;
@@ -108,16 +106,12 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                             .texture("particle", texture)
                             .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
                 }
-            } else if (block instanceof MushroomCapButtonBlock) {
-                buttonBlock(name, getCapResourceLocation(name, "_button"));
             } else if (block instanceof WoolCarpetBlock) {
                 ResourceLocation texture = getCapResourceLocation(name, "_carpet");
                 getBuilder(name)
                         .parent(getExistingFile(new ResourceLocation("block/carpet")))
                         .texture("particle", texture)
                         .texture("wool", texture);
-            } else if (block instanceof MushroomCapPressurePlateBlock) {
-                pressurePlateBlock(name, getCapResourceLocation(name, "_pressure_plate"));
             } else if (block instanceof DoorBlock) {
                 ResourceLocation bottom = getBlockResourceLocation(name + "_bottom");
                 ResourceLocation top = getBlockResourceLocation(name + "_top");

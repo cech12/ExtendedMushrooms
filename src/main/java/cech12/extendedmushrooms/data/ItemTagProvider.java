@@ -52,8 +52,6 @@ public class ItemTagProvider extends ItemTagsProvider {
                 .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && !mushroomBoatItem.hasChest())
                 .sorted(Comparator.comparing(ForgeRegistries.ITEMS::getKey))
                 .toArray(Item[]::new));
-        copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOD, ModTags.Items.MUSHROOM_BUTTONS_WOOD);
-        copy(ModTags.Blocks.MUSHROOM_BUTTONS_WOOL, ModTags.Items.MUSHROOM_BUTTONS_WOOL);
         copy(ModTags.Blocks.MUSHROOM_BUTTONS, ModTags.Items.MUSHROOM_BUTTONS);
         copy(ModTags.Blocks.MUSHROOM_CARPETS, ModTags.Items.MUSHROOM_CARPETS);
         tag(ModTags.Items.MUSHROOM_CHEST_BOATS).add(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get)
@@ -64,8 +62,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOM_FENCE_GATES, ModTags.Items.MUSHROOM_FENCE_GATES);
         copy(ModTags.Blocks.MUSHROOM_FENCES, ModTags.Items.MUSHROOM_FENCES);
         copy(ModTags.Blocks.MUSHROOM_PLANKS, ModTags.Items.MUSHROOM_PLANKS);
-        copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOD, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOD);
-        copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES_WOOL, ModTags.Items.MUSHROOM_PRESSURE_PLATES_WOOL);
         copy(ModTags.Blocks.MUSHROOM_PRESSURE_PLATES, ModTags.Items.MUSHROOM_PRESSURE_PLATES);
         tag(ModTags.Items.MUSHROOM_SIGNS).add(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get)
                 .filter(item -> item instanceof SignItem && !(item instanceof HangingSignItem))
@@ -132,10 +128,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
         copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
         copy(BlockTags.WOOL, ItemTags.WOOL);
-
-        //generate tags for mod compatibility
-        copy(ModTags.OtherModBlocks.WOOLPLATES_WOOLPLATES, ModTags.OtherModItems.WOOLPLATES_WOOLPLATES);
-
     }
 
     @Nonnull

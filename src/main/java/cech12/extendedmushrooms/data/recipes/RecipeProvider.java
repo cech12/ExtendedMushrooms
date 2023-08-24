@@ -176,11 +176,11 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModItems.MUSHROOM_CHEST_BOAT.get(),
                 ModItems.MUSHROOM_HANGING_SIGN.get(),
                 ModItems.MUSHROOM_SIGN.get());
-        mushroomCapRecipes(consumer, "brown", "brown_mushroom",
+        mushroomCapRecipes(consumer, "brown", "brown_mushroom", "brown",
                 ModTags.ForgeItems.MUSHROOM_CAPS_BROWN,
                 Items.BROWN_BANNER,
                 Items.BROWN_BED);
-        mushroomCapRecipes(consumer, "red", "red_mushroom",
+        mushroomCapRecipes(consumer, "red", "red_mushroom", "red",
                 ModTags.ForgeItems.MUSHROOM_CAPS_RED,
                 Items.RED_BANNER,
                 Items.RED_BED);
@@ -197,7 +197,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModItems.GLOWSHROOM_CHEST_BOAT.get(),
                 ModItems.GLOWSHROOM_HANGING_SIGN.get(),
                 ModItems.GLOWSHROOM_SIGN.get());
-        mushroomCapRecipes(consumer, "glowshroom", "glowshroom",
+        mushroomCapRecipes(consumer, "glowshroom", "glowshroom", "blue",
                 ModTags.ForgeItems.MUSHROOM_CAPS_GLOWSHROOM,
                 Items.BLUE_BANNER,
                 Items.BLUE_BED);
@@ -220,7 +220,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.SPIDER_EYE)
                 .requires(Items.WHITE_DYE)
                 .save(consumer);
-        mushroomCapRecipes(consumer, "deadly_fibrecap", "deadly_fibrecap",
+        mushroomCapRecipes(consumer, "deadly_fibrecap", "deadly_fibrecap", "white",
                 ModTags.ForgeItems.MUSHROOM_CAPS_WHITE,
                 Items.WHITE_BANNER,
                 Items.WHITE_BED);
@@ -238,7 +238,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModItems.PARROT_WAXCAP_CHEST_BOAT.get(),
                 ModItems.PARROT_WAXCAP_HANGING_SIGN.get(),
                 ModItems.PARROT_WAXCAP_SIGN.get());
-        mushroomCapRecipes(consumer, "parrot_waxcap", "parrot_waxcap",
+        mushroomCapRecipes(consumer, "parrot_waxcap", "parrot_waxcap", "lime",
                 ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
                 Items.LIME_BANNER,
                 Items.LIME_BED);
@@ -266,7 +266,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 ModItems.HONEY_WAXCAP_CHEST_BOAT.get(),
                 ModItems.HONEY_WAXCAP_HANGING_SIGN.get(),
                 ModItems.HONEY_WAXCAP_SIGN.get());
-        mushroomCapRecipes(consumer, "honey_waxcap", "honey_waxcap",
+        mushroomCapRecipes(consumer, "honey_waxcap", "honey_waxcap", "orange",
                 ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE,
                 Items.ORANGE_BANNER,
                 Items.ORANGE_BED);
@@ -468,12 +468,10 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .build(consumer, getResourceLocation(woodcuttingDirectory, "trapdoor_from_planks"));
     }
 
-    private void mushroomCapRecipes(Consumer<FinishedRecipe> consumer, String directoryName, String mushroomName,
+    private void mushroomCapRecipes(Consumer<FinishedRecipe> consumer, String directoryName, String mushroomName, String color,
                                     TagKey<Item> caps, Item banner, Item bed) {
         String directory = "mushroom_cap/" + directoryName + "/";
-        Item button = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.CAP_BUTTON).get().asItem();
         Item carpet = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.CAP_CARPET).get().asItem();
-        Item pressure_plate = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.CAP_PRESSURE_PLATE).get().asItem();
 
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, banner)
                 .define('#', caps)
@@ -492,23 +490,27 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .group("bed")
                 .unlockedBy("has_cap", has(caps))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(bed).getPath()));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, button)
-                .requires(caps)
-                .group("wool_buttons")
-                .unlockedBy("has_cap", has(caps))
-                .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(button)));
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 3)
                 .define('#', caps)
                 .pattern("##")
                 .group("carpet")
                 .unlockedBy("has_cap", has(caps))
                 .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(carpet)));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, pressure_plate)
+
+        //wool buttons and plates
+        ResourceLocation button = new ResourceLocation("sbmwoolbuttons", "wool_button_" + color);
+        OtherModShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, button)
+                .requires(caps)
+                .group("wool_buttons")
+                //.unlockedBy("has_cap", has(caps))
+                .save(consumer, getResourceLocation("mushroom_", button));
+        ResourceLocation pressure_plate = new ResourceLocation("woolplates", "wool_plate_" + color);
+        OtherModShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, pressure_plate)
                 .requires(ItemTags.WOODEN_PRESSURE_PLATES)
                 .requires(caps)
                 .group("wool_plates")
-                .unlockedBy("has_cap", has(caps))
-                .save(consumer, getResourceLocation(directory, ForgeRegistries.ITEMS.getKey(pressure_plate)));
+                //.unlockedBy("has_cap", has(caps))
+                .save(consumer, getResourceLocation("mushroom_", pressure_plate));
     }
 
 }
