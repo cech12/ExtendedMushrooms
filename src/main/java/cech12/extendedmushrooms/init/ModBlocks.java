@@ -51,15 +51,15 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> FAIRY_RING = registerBlock("fairy_ring", FairyRingBlock::new);
 
-    public static final RegistryObject<Block> INFESTED_GRASS = registerBlockWithItem("infested_grass", () -> new InfestedGrassBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS).offsetType(Block.OffsetType.XYZ)));
-    public static final RegistryObject<Block> INFESTED_FLOWER = registerBlockWithItem("infested_flower", () -> new InfestedFlowerBlock(() -> MobEffects.MOVEMENT_SLOWDOWN, 9, Block.Properties.of().mapColor(MapColor.PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> INFESTED_GRASS = registerBlockWithItem("infested_grass", () -> new InfestedGrassBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).noCollission().strength(0.0F).sound(SoundType.GRASS).offsetType(Block.OffsetType.XYZ)));
+    public static final RegistryObject<Block> INFESTED_FLOWER = registerBlockWithItem("infested_flower", () -> new InfestedFlowerBlock(() -> MobEffects.MOVEMENT_SLOWDOWN, 9, Block.Properties.of().mapColor(MapColor.COLOR_BROWN).noCollission().strength(0.0F).sound(SoundType.GRASS)));
     public static final RegistryObject<Block> INFESTED_FLOWER_POTTED = registerBlock("infested_flower_potted", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, INFESTED_FLOWER, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     private static final Map<RegistryObject<Block>, RegistryObject<Block>> BLOCK_STRIPPING_MAP = new HashMap<>();
 
     static {
 
-        registerCapBlocks("brown_mushroom", MushroomType.BROWN_MUSHROOM, MushroomWoodType.MUSHROOM, DyeColor.BROWN, MapColor.COLOR_BROWN, SoundType.WOOL, null);
+        registerCapBlocks("brown_mushroom", MushroomType.BROWN_MUSHROOM, MushroomWoodType.MUSHROOM, DyeColor.BROWN, MapColor.DIRT, SoundType.WOOL, null);
         registerCapBlocks("red_mushroom", MushroomType.RED_MUSHROOM, MushroomWoodType.MUSHROOM, DyeColor.RED, MapColor.COLOR_RED, SoundType.WOOL, null);
         registerWoodBlocks("mushroom", MushroomWoodType.MUSHROOM, MapColor.WOOD, SoundType.WOOD, (state) -> 0, RegistryObject.create(ForgeRegistries.BLOCKS.getKey(Blocks.MUSHROOM_STEM), ForgeRegistries.BLOCKS));
 
