@@ -40,7 +40,10 @@ public enum MushroomType implements StringRepresentable {
             DyeColor.LIME),
     HONEY_WAXCAP(5, "honey_waxcap",
             MushroomWoodType.HONEY_WAXCAP,
-            DyeColor.ORANGE);
+            DyeColor.ORANGE),
+    AMETHYST_DECEIVER(6, "amethyst_deceiver",
+            MushroomWoodType.AMETHYST_DECEIVER,
+            DyeColor.PURPLE);
 
     private static final MushroomType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(MushroomType::getId)).toArray(MushroomType[]::new);
 

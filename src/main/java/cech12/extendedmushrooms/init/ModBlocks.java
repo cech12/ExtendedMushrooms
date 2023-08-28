@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
+import cech12.extendedmushrooms.block.mushroomblocks.AmethystDeceiverCap;
 import cech12.extendedmushrooms.block.mushroomblocks.GlowshroomCap;
 import cech12.extendedmushrooms.block.mushroomblocks.HoneyWaxcapCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
@@ -9,6 +10,7 @@ import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStrippedStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.DeadlyFibrecapCap;
 import cech12.extendedmushrooms.block.mushroomblocks.ParrotWaxcapCap;
+import cech12.extendedmushrooms.block.mushrooms.AmethystDeceiver;
 import cech12.extendedmushrooms.block.mushrooms.BigMushroom;
 import cech12.extendedmushrooms.block.mushrooms.DeadlyFibrecap;
 import cech12.extendedmushrooms.block.mushrooms.Glowshroom;
@@ -76,6 +78,10 @@ public final class ModBlocks {
         registerMushroomBlocks("honey_waxcap", new HoneyWaxcap(), MapColor.COLOR_ORANGE);
         registerCapBlocks("honey_waxcap", MushroomType.HONEY_WAXCAP, DyeColor.ORANGE, MapColor.COLOR_ORANGE, SoundType.HONEY_BLOCK, HoneyWaxcapCap::new);
         registerWoodBlocks("honey_waxcap", MushroomWoodType.HONEY_WAXCAP, MapColor.COLOR_ORANGE, SoundType.WOOD);
+
+        registerMushroomBlocks("amethyst_deceiver", new AmethystDeceiver(), MapColor.COLOR_PURPLE);
+        registerCapBlocks("amethyst_deceiver", MushroomType.AMETHYST_DECEIVER, DyeColor.PURPLE, MapColor.COLOR_PURPLE, SoundType.WOOL, AmethystDeceiverCap::new);
+        registerWoodBlocks("amethyst_deceiver", MushroomWoodType.AMETHYST_DECEIVER, MapColor.COLOR_PURPLE, SoundType.WOOD);
 
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(Objects.requireNonNull(INFESTED_FLOWER.getId()), INFESTED_FLOWER_POTTED);
     }

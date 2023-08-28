@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bed",
+  "key": {
+    "#": {
+      "tag": "forge:mushroom_caps/purple"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "###",
+    "WWW"
+  ],
+  "result": {
+    "item": "minecraft:purple_bed"
+  },
+  "show_notification": true
+}

@@ -174,6 +174,8 @@ public class BlockLootProvider implements DataProvider {
             tables.put(ModBlocks.getMushroomBlock(MushroomType.HONEY_WAXCAP.getName(), ModBlocks.BlockType.CAP), block -> dropCap(block, MushroomType.HONEY_WAXCAP.getBlock(),
                     Pair.of(ModItems.HONEY_BLOB.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F}),
                     Pair.of(ModItems.HONEYCOMB_SHRED.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
+            tables.put(ModBlocks.getMushroomBlock(MushroomType.AMETHYST_DECEIVER.getName(), ModBlocks.BlockType.CAP), block -> dropCap(block, MushroomType.AMETHYST_DECEIVER.getBlock(),
+                    Pair.of(ModItems.AMETHYST_SPLINTER.get(), new float[] {0.5F, 0.6F, 0.7F, 0.8F, 0.9F})));
 
             //only with shears
             tables.put(ModBlocks.INFESTED_GRASS, BlockLootProvider::dropOnlyWithShears);

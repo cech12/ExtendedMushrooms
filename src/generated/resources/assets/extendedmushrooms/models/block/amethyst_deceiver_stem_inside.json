@@ -1,0 +1,27 @@
+{
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#texture"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        0
+      ]
+    }
+  ],
+  "textures": {
+    "particle": "extendedmushrooms:block/amethyst_deceiver_stem_inside",
+    "texture": "extendedmushrooms:block/amethyst_deceiver_stem_inside"
+  }
+}

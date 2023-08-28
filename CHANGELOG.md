@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.20.1-5.0.0.0] - 2023-??-??
 ### Added
 - new Guidebook (with required Patchouli 1.20.1-81 mod dependency) #73
+- new purple mushroom Amethyst Deceiver that generates Amethyst Splinters #77
 - 3 new advancements for the fairy ring, mushroom island and animal infection #73
 - new Fibre item which can be dropped by the reworked Deadly Fibrecap #77
 - There is a 10% chance to spawn a cave spider when a Deadly Fibrecap is growing up.

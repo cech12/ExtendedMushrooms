@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:amethyst_deceiver_planks"
+    },
+    "|": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    " | "
+  ],
+  "result": {
+    "count": 3,
+    "item": "extendedmushrooms:amethyst_deceiver_sign"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extendedmushrooms:block/amethyst_deceiver_slab"
+    },
+    "type=double": {
+      "model": "extendedmushrooms:block/amethyst_deceiver_planks"
+    },
+    "type=top": {
+      "model": "extendedmushrooms:block/amethyst_deceiver_slab_top"
+    }
+  }
+}

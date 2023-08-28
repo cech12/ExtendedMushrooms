@@ -1,0 +1,18 @@
+{
+  "type": "extendedmushrooms:fairy_ring_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_block"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    },
+    {
+      "item": "minecraft:purple_dye"
+    }
+  ],
+  "recipeTime": 200,
+  "result": {
+    "item": "extendedmushrooms:amethyst_deceiver"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "boat",
+  "key": {
+    "#": {
+      "item": "extendedmushrooms:amethyst_deceiver_planks"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "result": {
+    "item": "extendedmushrooms:amethyst_deceiver_boat"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "extendedmushrooms:block/amethyst_deceiver_door_bottom",
+    "top": "extendedmushrooms:block/amethyst_deceiver_door_top"
+  }
+}

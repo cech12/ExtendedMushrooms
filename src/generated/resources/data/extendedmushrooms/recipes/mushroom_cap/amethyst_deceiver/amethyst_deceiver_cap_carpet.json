@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "carpet",
+  "key": {
+    "#": {
+      "tag": "forge:mushroom_caps/purple"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extendedmushrooms:amethyst_deceiver_cap_carpet"
+  },
+  "show_notification": true
+}

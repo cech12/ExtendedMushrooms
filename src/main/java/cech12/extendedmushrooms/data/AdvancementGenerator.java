@@ -4,6 +4,7 @@ import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.advancements.criterion.MushroomSheepConversionTrigger;
 import cech12.extendedmushrooms.init.ModBlocks;
 import cech12.extendedmushrooms.init.ModItems;
+import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.EnterBlockTrigger;
@@ -30,7 +31,7 @@ public class AdvancementGenerator implements ForgeAdvancementProvider.Advancemen
     public void generate(@Nonnull HolderLookup.Provider registries, @Nonnull Consumer<Advancement> saver, @Nonnull ExistingFileHelper existingFileHelper) {
         Advancement.Builder.advancement()
                 .addCriterion("in_mushroom_fields", PlayerTrigger.TriggerInstance.located(LocationPredicate.inBiome(Biomes.MUSHROOM_FIELDS)))
-                .display(new ItemStack(ModItems.MUSHROOM_BOAT.get()), Component.translatable("advancements.mushroom_island.title"), Component.translatable("advancements.mushroom_island.description"), null, FrameType.GOAL, true, true, true)
+                .display(new ItemStack(MushroomWoodType.MUSHROOM.getBoatItem()), Component.translatable("advancements.mushroom_island.title"), Component.translatable("advancements.mushroom_island.description"), null, FrameType.GOAL, true, true, true)
                 .save(saver, new ResourceLocation(ExtendedMushrooms.MOD_ID, "mushroom_island"), existingFileHelper);
         Advancement.Builder.advancement()
                 .addCriterion("enter_fairy_ring", EnterBlockTrigger.TriggerInstance.entersBlock(ModBlocks.FAIRY_RING.get()))

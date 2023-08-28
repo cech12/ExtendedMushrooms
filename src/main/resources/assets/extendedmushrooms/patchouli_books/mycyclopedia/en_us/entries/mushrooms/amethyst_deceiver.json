@@ -1,0 +1,37 @@
+{
+  "name": "Amethyst Deceiver",
+  "icon": "extendedmushrooms:amethyst_deceiver",
+  "category": "extendedmushrooms:mushrooms",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ancient sagas and cave paintings describe a sharp-edged mushroom named $(o)Laccaria amethystina$() containing shiny splinters. Unfortunately, it has never been sighted and is therefore considered extinct."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "text": "This mushroom consists of multiple stems and caps with a purple color.",
+      "multiblock": {
+        "pattern": [
+          [
+            "0"
+          ]
+        ],
+        "mapping": {
+          "0": "extendedmushrooms:amethyst_deceiver"
+        },
+        "symmetrical": true
+      },
+      "enable_visualize": false
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extendedmushrooms:amethyst_shard",
+      "text": "The adult caps of the Amethyst Deceiver contain valuable amethyst splinters, which can be extracted with care."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Blindness",
+      "text": "Getting the spores of this inedible mushroom in your eyes will temporarily blur your vision."
+    }
+  ]
+}

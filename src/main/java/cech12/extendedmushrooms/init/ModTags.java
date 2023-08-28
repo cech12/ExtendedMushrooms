@@ -37,6 +37,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOM_STEMS_GLOWSHROOM = tag("mushroom_stems/glowshroom");
         public static final TagKey<Block> MUSHROOM_STEMS_GREEN = tag("mushroom_stems/green");
         public static final TagKey<Block> MUSHROOM_STEMS_ORANGE = tag("mushroom_stems/orange");
+        public static final TagKey<Block> MUSHROOM_STEMS_PURPLE = tag("mushroom_stems/purple");
 
         public static final TagKey<Block> MUSHROOMS = tag("mushrooms");
         public static final TagKey<Block> MUSHROOMS_BROWN = tag("mushrooms/brown");
@@ -50,6 +51,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final TagKey<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
         public static final TagKey<Block> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
+        public static final TagKey<Block> MUSHROOMS_BLINDING = tag("mushrooms/blinding");
 
         public static final TagKey<Block> FUNGI = tag("fungi");
 
@@ -85,6 +87,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final TagKey<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
         public static final TagKey<Block> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
+        public static final TagKey<Block> MUSHROOMS_BLINDING = tag("mushrooms/blinding");
 
         //use "minecraft:mushroom_grow_block" tag (Blocktags,MUSHROOM_GROW_BLOCK) for lightlevel ignoring blocks
         public static final TagKey<Block> MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL = tag("mushroom_growing_blocks_lightlevel");
@@ -110,6 +113,7 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOM_STEMS_GLOWSHROOM = tag("mushroom_stems/glowshroom");
         public static final TagKey<Item> MUSHROOM_STEMS_GREEN = tag("mushroom_stems/green");
         public static final TagKey<Item> MUSHROOM_STEMS_ORANGE = tag("mushroom_stems/orange");
+        public static final TagKey<Item> MUSHROOM_STEMS_PURPLE = tag("mushroom_stems/purple");
 
         // public static final ITag.INamedTag<Item> MUSHROOMS = tag("mushrooms"); // already there!
         public static final TagKey<Item> MUSHROOMS_BROWN = tag("mushrooms/brown");
@@ -123,6 +127,7 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final TagKey<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
         public static final TagKey<Item> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
+        public static final TagKey<Item> MUSHROOMS_BLINDING = tag("mushrooms/blinding");
 
         public static final TagKey<Item> FUNGI = tag("fungi");
 
@@ -163,6 +168,7 @@ public class ModTags {
         public static final TagKey<Item> MUSHROOMS_JUMP_BOOSTING = tag("mushrooms/jump_boosting");
         public static final TagKey<Item> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
         public static final TagKey<Item> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
+        public static final TagKey<Item> MUSHROOMS_BLINDING = tag("mushrooms/blinding");
 
         private static TagKey<Item> tag(@Nonnull String name) {
             return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(ExtendedMushrooms.MOD_ID, name));

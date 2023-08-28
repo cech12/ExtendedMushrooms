@@ -1,6 +1,7 @@
 package cech12.extendedmushrooms.init;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
+import cech12.extendedmushrooms.world.level.levelgen.feature.BigAmethystDeceiverFeature;
 import cech12.extendedmushrooms.world.level.levelgen.feature.BigGlowshroomFeature;
 import cech12.extendedmushrooms.world.level.levelgen.feature.BigHoneyWaxcapFeature;
 import cech12.extendedmushrooms.world.level.levelgen.feature.BigDeadlyFibrecapFeature;
@@ -38,6 +39,7 @@ public class ModFeatures {
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> MEGA_DEADLY_FIBRECAP = FEATURES.register("mega_deadly_fibrecap", () -> new MegaDeadlyFibrecapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_PARROT_WAXCAP = FEATURES.register("big_parrot_waxcap", () -> new BigParrotWaxcapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_HONEY_WAXCAP = FEATURES.register("big_honey_waxcap", () -> new BigHoneyWaxcapFeature(ExtendedMushroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<ExtendedMushroomFeatureConfiguration>> BIG_AMETHYST_DEVEICER = FEATURES.register("big_amethyst_deceiver", () -> new BigAmethystDeceiverFeature(ExtendedMushroomFeatureConfiguration.CODEC));
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFESTED_FLOWER_CONFIGURED = configuredKey("infested_flower");
     public static final ResourceKey<ConfiguredFeature<?, ?>> INFESTED_GRASS_CONFIGURED = configuredKey("infested_grass");
@@ -53,6 +55,7 @@ public class ModFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_DEADLY_FIBRECAP_CONFIGURED = configuredKey("mega_deadly_fibrecap");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_PARROT_WAXCAP_CONFIGURED = configuredKey("big_parrot_waxcap");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_HONEY_WAXCAP_CONFIGURED = configuredKey("big_honey_waxcap");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_AMETHYST_DECEIVER_CONFIGURED = configuredKey("big_amethyst_deceiver");
 
     public static final ResourceKey<PlacedFeature> INFESTED_FLOWER_PLACED = placedKey("patch_infested_flower");
     public static final ResourceKey<PlacedFeature> INFESTED_GRASS_PLACED = placedKey("patch_infested_grass");

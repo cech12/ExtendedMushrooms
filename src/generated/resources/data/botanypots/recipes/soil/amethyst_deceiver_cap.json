@@ -1,0 +1,19 @@
+{
+  "type": "botanypots:soil",
+  "categories": [
+    "mushroom"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "display": {
+    "block": "extendedmushrooms:amethyst_deceiver_cap"
+  },
+  "growthModifier": 0.95,
+  "input": {
+    "item": "extendedmushrooms:amethyst_deceiver_cap"
+  }
+}

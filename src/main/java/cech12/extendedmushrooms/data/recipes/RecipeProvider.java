@@ -171,11 +171,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer);
 
         mushroomWoodRecipes(consumer, "colorless", "mushroom",
-                ModTags.ForgeItems.MUSHROOM_STEMS_COLORLESS,
-                ModItems.MUSHROOM_BOAT.get(),
-                ModItems.MUSHROOM_CHEST_BOAT.get(),
-                ModItems.MUSHROOM_HANGING_SIGN.get(),
-                ModItems.MUSHROOM_SIGN.get());
+                ModTags.ForgeItems.MUSHROOM_STEMS_COLORLESS);
         mushroomCapRecipes(consumer, "brown", "brown_mushroom", "brown",
                 ModTags.ForgeItems.MUSHROOM_CAPS_BROWN,
                 Items.BROWN_BANNER,
@@ -192,11 +188,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.LAPIS_LAZULI)
                 .save(consumer);
         mushroomWoodRecipes(consumer, "glowshroom", "glowshroom",
-                ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM,
-                ModItems.GLOWSHROOM_BOAT.get(),
-                ModItems.GLOWSHROOM_CHEST_BOAT.get(),
-                ModItems.GLOWSHROOM_HANGING_SIGN.get(),
-                ModItems.GLOWSHROOM_SIGN.get());
+                ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM);
         mushroomCapRecipes(consumer, "glowshroom", "glowshroom", "blue",
                 ModTags.ForgeItems.MUSHROOM_CAPS_GLOWSHROOM,
                 Items.BLUE_BANNER,
@@ -233,11 +225,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.LIME_DYE)
                 .save(consumer);
         mushroomWoodRecipes(consumer, "parrot_waxcap", "parrot_waxcap",
-                ModTags.ForgeItems.MUSHROOM_STEMS_GREEN,
-                ModItems.PARROT_WAXCAP_BOAT.get(),
-                ModItems.PARROT_WAXCAP_CHEST_BOAT.get(),
-                ModItems.PARROT_WAXCAP_HANGING_SIGN.get(),
-                ModItems.PARROT_WAXCAP_SIGN.get());
+                ModTags.ForgeItems.MUSHROOM_STEMS_GREEN);
         mushroomCapRecipes(consumer, "parrot_waxcap", "parrot_waxcap", "lime",
                 ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
                 Items.LIME_BANNER,
@@ -261,11 +249,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(Items.ORANGE_DYE)
                 .save(consumer);
         mushroomWoodRecipes(consumer, "honey_waxcap", "honey_waxcap",
-                ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE,
-                ModItems.HONEY_WAXCAP_BOAT.get(),
-                ModItems.HONEY_WAXCAP_CHEST_BOAT.get(),
-                ModItems.HONEY_WAXCAP_HANGING_SIGN.get(),
-                ModItems.HONEY_WAXCAP_SIGN.get());
+                ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE);
         mushroomCapRecipes(consumer, "honey_waxcap", "honey_waxcap", "orange",
                 ModTags.ForgeItems.MUSHROOM_CAPS_ORANGE,
                 Items.ORANGE_BANNER,
@@ -303,6 +287,30 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_string", has(Items.STRING))
                 .save(consumer);
 
+        //amethyst deceiver
+        FairyRingRecipeBuilder.normal(MushroomType.AMETHYST_DECEIVER.getBlock(), 1)
+                .requires(Items.AMETHYST_BLOCK)
+                .requires(Items.CRYING_OBSIDIAN)
+                .requires(Items.PURPLE_DYE)
+                .save(consumer);
+        mushroomWoodRecipes(consumer, "amethyst_deceiver", "amethyst_deceiver",
+                ModTags.ForgeItems.MUSHROOM_STEMS_PURPLE);
+        mushroomCapRecipes(consumer, "amethyst_deceiver", "amethyst_deceiver", "purple",
+                ModTags.ForgeItems.MUSHROOM_CAPS_PURPLE,
+                Items.PURPLE_BANNER,
+                Items.PURPLE_BED);
+        //amethyst splinter recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.AMETHYST_SHARD)
+                .define('#', ModItems.AMETHYST_SPLINTER.get())
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_splinters", has(ModItems.AMETHYST_SPLINTER.get()))
+                .save(consumer, getResourceLocation(ForgeRegistries.ITEMS.getKey(Items.AMETHYST_SHARD).getPath()));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.AMETHYST_SPLINTER.get(), 4)
+                .requires(Items.AMETHYST_SHARD)
+                .unlockedBy("has_shard", has(Items.AMETHYST_SHARD))
+                .save(consumer);
+
         //botany pots
         for (MushroomType mushroomType : MushroomType.values()) {
             if (mushroomType == MushroomType.BROWN_MUSHROOM || mushroomType == MushroomType.RED_MUSHROOM) {
@@ -320,8 +328,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     }
 
 
-    private void mushroomWoodRecipes(Consumer<FinishedRecipe> consumer, String directoryName, String mushroomName,
-                                     TagKey<Item> stems, Item boat, Item chestBoat, Item hangingSign, Item sign) {
+    private void mushroomWoodRecipes(Consumer<FinishedRecipe> consumer, String directoryName, String mushroomName, TagKey<Item> stems) {
         String directory = "mushroom_wood/" + directoryName + "/";
         Item button = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.BUTTON).get().asItem();
         Item door = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.DOOR).get().asItem();
@@ -333,6 +340,10 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         Item stairs = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.STAIRS).get().asItem();
         Item strippedStem = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.STRIPPED_STEM).get().asItem();
         Item trapdoor = ModBlocks.getMushroomBlock(mushroomName, ModBlocks.BlockType.TRAPDOOR).get().asItem();
+        Item boat = ModItems.getMushroomItem(mushroomName, ModItems.ItemType.BOAT).get();
+        Item chestBoat = ModItems.getMushroomItem(mushroomName, ModItems.ItemType.CHEST_BOAT).get();
+        Item hangingSign = ModItems.getMushroomItem(mushroomName, ModItems.ItemType.HANGING_SIGN).get();
+        Item sign = ModItems.getMushroomItem(mushroomName, ModItems.ItemType.SIGN).get();
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, boat)
                 .define('#', planks)

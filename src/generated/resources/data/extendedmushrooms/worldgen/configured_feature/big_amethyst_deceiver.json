@@ -1,0 +1,17 @@
+{
+  "type": "extendedmushrooms:big_amethyst_deceiver",
+  "config": {
+    "cap_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "extendedmushrooms:amethyst_deceiver_cap"
+      }
+    },
+    "stem_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "extendedmushrooms:amethyst_deceiver_stem"
+      }
+    }
+  }
+}

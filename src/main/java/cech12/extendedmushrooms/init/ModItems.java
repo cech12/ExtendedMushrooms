@@ -5,6 +5,7 @@ import cech12.extendedmushrooms.item.MushroomBoatItem;
 import cech12.extendedmushrooms.item.MushroomSporesItem;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import cech12.extendedmushrooms.item.MycyclopediaItem;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.HangingSignItem;
@@ -20,24 +21,6 @@ public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ExtendedMushrooms.MOD_ID);
 
-    public static final RegistryObject<Item> MUSHROOM_BOAT = ITEMS.register("mushroom_boat", () -> new MushroomBoatItem(MushroomWoodType.MUSHROOM, false));
-    public static final RegistryObject<Item> MUSHROOM_CHEST_BOAT = ITEMS.register("mushroom_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.MUSHROOM, true));
-    public static final RegistryObject<Item> GLOWSHROOM_BOAT = ITEMS.register("glowshroom_boat", () -> new MushroomBoatItem(MushroomWoodType.GLOWSHROOM, false));
-    public static final RegistryObject<Item> GLOWSHROOM_CHEST_BOAT = ITEMS.register("glowshroom_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.GLOWSHROOM, true));
-    public static final RegistryObject<Item> PARROT_WAXCAP_BOAT = ITEMS.register("parrot_waxcap_boat", () -> new MushroomBoatItem(MushroomWoodType.PARROT_WAXCAP, false));
-    public static final RegistryObject<Item> PARROT_WAXCAP_CHEST_BOAT = ITEMS.register("parrot_waxcap_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.PARROT_WAXCAP, true));
-    public static final RegistryObject<Item> HONEY_WAXCAP_BOAT = ITEMS.register("honey_waxcap_boat", () -> new MushroomBoatItem(MushroomWoodType.HONEY_WAXCAP, false));
-    public static final RegistryObject<Item> HONEY_WAXCAP_CHEST_BOAT = ITEMS.register("honey_waxcap_chest_boat", () -> new MushroomBoatItem(MushroomWoodType.HONEY_WAXCAP, true));
-
-    public static final RegistryObject<Item> MUSHROOM_SIGN = ITEMS.register("mushroom_sign", () -> new SignItem((new Item.Properties()).stacksTo(16), MushroomWoodType.MUSHROOM.getStandingSignBlock(), MushroomWoodType.MUSHROOM.getWallSignBlock()));
-    public static final RegistryObject<Item> MUSHROOM_HANGING_SIGN = ITEMS.register("mushroom_hanging_sign", () -> new HangingSignItem(MushroomWoodType.MUSHROOM.getHangingSignBlock(), MushroomWoodType.MUSHROOM.getWallHangingSignBlock(), (new Item.Properties()).stacksTo(16)));
-    public static final RegistryObject<Item> GLOWSHROOM_SIGN = ITEMS.register("glowshroom_sign", () -> new SignItem((new Item.Properties()).stacksTo(16), MushroomWoodType.GLOWSHROOM.getStandingSignBlock(), MushroomWoodType.GLOWSHROOM.getWallSignBlock()));
-    public static final RegistryObject<Item> GLOWSHROOM_HANGING_SIGN = ITEMS.register("glowshroom_hanging_sign", () -> new HangingSignItem(MushroomWoodType.GLOWSHROOM.getHangingSignBlock(), MushroomWoodType.GLOWSHROOM.getWallHangingSignBlock(), (new Item.Properties()).stacksTo(16)));
-    public static final RegistryObject<Item> PARROT_WAXCAP_SIGN = ITEMS.register("parrot_waxcap_sign", () -> new SignItem((new Item.Properties()).stacksTo(16), MushroomWoodType.PARROT_WAXCAP.getStandingSignBlock(), MushroomWoodType.PARROT_WAXCAP.getWallSignBlock()));
-    public static final RegistryObject<Item> PARROT_WAXCAP_HANGING_SIGN = ITEMS.register("parrot_waxcap_hanging_sign", () -> new HangingSignItem(MushroomWoodType.PARROT_WAXCAP.getHangingSignBlock(), MushroomWoodType.PARROT_WAXCAP.getWallHangingSignBlock(), (new Item.Properties()).stacksTo(16)));
-    public static final RegistryObject<Item> HONEY_WAXCAP_SIGN = ITEMS.register("honey_waxcap_sign", () -> new SignItem((new Item.Properties()).stacksTo(16), MushroomWoodType.HONEY_WAXCAP.getStandingSignBlock(), MushroomWoodType.HONEY_WAXCAP.getWallSignBlock()));
-    public static final RegistryObject<Item> HONEY_WAXCAP_HANGING_SIGN = ITEMS.register("honey_waxcap_hanging_sign", () -> new HangingSignItem(MushroomWoodType.HONEY_WAXCAP.getHangingSignBlock(), MushroomWoodType.HONEY_WAXCAP.getWallHangingSignBlock(), (new Item.Properties()).stacksTo(16)));
-
     public static final RegistryObject<Item> GRILLED_MUSHROOM = ITEMS.register("grilled_mushroom", () -> new Item((new Item.Properties()).food((new FoodProperties.Builder()).nutrition(2).saturationMod(0.3F).build())));
     public static final RegistryObject<Item> MUSHROOM_BREAD = ITEMS.register("mushroom_bread", () -> new Item((new Item.Properties()).food((new FoodProperties.Builder()).nutrition(5).saturationMod(0.3F).build())));
 
@@ -48,8 +31,22 @@ public class ModItems {
     public static final RegistryObject<Item> HONEY_BLOB = ITEMS.register("honey_blob", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HONEYCOMB_SHRED = ITEMS.register("honeycomb_shred", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FIBRE = ITEMS.register("fibre", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> AMETHYST_SPLINTER = ITEMS.register("amethyst_splinter", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> MUSHROOM_SHEEP_SPAWN_EGG = ITEMS.register("mushroom_sheep_spawn_egg", () -> new ForgeSpawnEggItem(() -> ModEntityTypes.MUSHROOM_SHEEP.get(), 10489616, 10051392, new Item.Properties()));
+
+    static {
+        for (MushroomWoodType woodType : MushroomWoodType.values()) {
+            registerWoodTypeItems(woodType.getName(), woodType);
+        }
+    }
+
+    private static void registerWoodTypeItems(String name, MushroomWoodType mushroomType) {
+        ITEMS.register(ItemType.BOAT.getName(name), () -> new MushroomBoatItem(mushroomType, false));
+        ITEMS.register(ItemType.CHEST_BOAT.getName(name), () -> new MushroomBoatItem(mushroomType, true));
+        ITEMS.register(ItemType.SIGN.getName(name), () -> new SignItem((new Item.Properties()).stacksTo(16), mushroomType.getStandingSignBlock(), mushroomType.getWallSignBlock()));
+        ITEMS.register(ItemType.HANGING_SIGN.getName(name), () -> new HangingSignItem(mushroomType.getHangingSignBlock(), mushroomType.getWallHangingSignBlock(), (new Item.Properties()).stacksTo(16)));
+    }
 
     public static void addItemsToTabs(BuildCreativeModeTabContentsEvent event) {
         for (RegistryObject<Item> item : ITEMS.getEntries()) {
@@ -77,7 +74,31 @@ public class ModItems {
             event.accept(HONEY_BLOB);
             event.accept(HONEYCOMB_SHRED);
             event.accept(FIBRE);
+            event.accept(AMETHYST_SPLINTER);
         }
+    }
+
+    public static RegistryObject<Item> getMushroomItem(String mushroomName, ItemType blockType) {
+        return RegistryObject.create(new ResourceLocation(ExtendedMushrooms.MOD_ID, blockType.getName(mushroomName)), ForgeRegistries.ITEMS);
+    }
+
+    public enum ItemType {
+
+        BOAT("{0}_boat"),
+        CHEST_BOAT("{0}_chest_boat"),
+        SIGN("{0}_sign"),
+        HANGING_SIGN("{0}_hanging_sign");
+
+        private final String pattern;
+
+        ItemType(String pattern) {
+            this.pattern = pattern;
+        }
+
+        String getName(String mushroomName) {
+            return this.pattern.replace("{0}", mushroomName);
+        }
+
     }
 
 }

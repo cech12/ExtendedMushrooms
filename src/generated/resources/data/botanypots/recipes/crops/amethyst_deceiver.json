@@ -1,0 +1,29 @@
+{
+  "type": "botanypots:crop",
+  "categories": [
+    "stone",
+    "mushroom",
+    "mulch"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botanypots"
+    }
+  ],
+  "display": {
+    "block": "extendedmushrooms:amethyst_deceiver"
+  },
+  "drops": [
+    {
+      "chance": 1.0,
+      "output": {
+        "item": "extendedmushrooms:amethyst_deceiver"
+      }
+    }
+  ],
+  "growthTicks": 1200,
+  "seed": {
+    "item": "extendedmushrooms:amethyst_deceiver"
+  }
+}

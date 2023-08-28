@@ -48,6 +48,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.MUSHROOMS_JUMP_BOOSTING, ModTags.Items.MUSHROOMS_JUMP_BOOSTING);
         copy(ModTags.Blocks.MUSHROOMS_POISONOUS, ModTags.Items.MUSHROOMS_POISONOUS);
         copy(ModTags.Blocks.MUSHROOMS_SLOWING_DOWN, ModTags.Items.MUSHROOMS_SLOWING_DOWN);
+        copy(ModTags.Blocks.MUSHROOMS_BLINDING, ModTags.Items.MUSHROOMS_BLINDING);
         tag(ModTags.Items.MUSHROOM_BOATS).add(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get)
                 .filter(item -> item instanceof MushroomBoatItem mushroomBoatItem && !mushroomBoatItem.hasChest())
                 .sorted(Comparator.comparing(ForgeRegistries.ITEMS::getKey))
@@ -84,6 +85,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_GLOWSHROOM, ModTags.ForgeItems.MUSHROOM_STEMS_GLOWSHROOM);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_GREEN, ModTags.ForgeItems.MUSHROOM_STEMS_GREEN);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_ORANGE, ModTags.ForgeItems.MUSHROOM_STEMS_ORANGE);
+        copy(ModTags.ForgeBlocks.MUSHROOM_STEMS_PURPLE, ModTags.ForgeItems.MUSHROOM_STEMS_PURPLE);
         copy(ModTags.ForgeBlocks.MUSHROOM_STEMS, ModTags.ForgeItems.MUSHROOM_STEMS);
         copy(ModTags.ForgeBlocks.MUSHROOMS_BROWN, ModTags.ForgeItems.MUSHROOMS_BROWN);
         copy(ModTags.ForgeBlocks.MUSHROOMS_RED, ModTags.ForgeItems.MUSHROOMS_RED);
@@ -97,6 +99,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         copy(ModTags.ForgeBlocks.MUSHROOMS_JUMP_BOOSTING, ModTags.ForgeItems.MUSHROOMS_JUMP_BOOSTING);
         copy(ModTags.ForgeBlocks.MUSHROOMS_POISONOUS, ModTags.ForgeItems.MUSHROOMS_POISONOUS);
         copy(ModTags.ForgeBlocks.MUSHROOMS_SLOWING_DOWN, ModTags.ForgeItems.MUSHROOMS_SLOWING_DOWN);
+        copy(ModTags.ForgeBlocks.MUSHROOMS_BLINDING, ModTags.ForgeItems.MUSHROOMS_BLINDING);
 
         copy(ModTags.ForgeBlocks.FUNGI, ModTags.ForgeItems.FUNGI);
 
