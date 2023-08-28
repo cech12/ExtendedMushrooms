@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - removed Parrot Waxcap from edible mushroom tag, because it is slightly poisonous in real life
 - renamed Honey Fungus to Honey Waxcap #76
 - renamed and reworked Poisonous Mushroom (poisonous, purple, green) to Deadly Fibrecap (poisonous, white, fibre loot) #77
+- mushroom wood boats and signs can now be composted
 
 ### Fixed
 - banner and bed created from of Slime Fungus aka. Parrot Waxcap were orange instead of lime

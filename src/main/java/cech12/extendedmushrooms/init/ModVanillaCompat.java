@@ -5,6 +5,9 @@ import cech12.extendedmushrooms.block.InfestedGrassBlock;
 import cech12.extendedmushrooms.block.MushroomPlanksBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
+import cech12.extendedmushrooms.item.MushroomBoatItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -30,10 +33,6 @@ public class ModVanillaCompat {
         registerFlammable(Blocks.RED_MUSHROOM_BLOCK, 30, 60);
         registerFlammable(Blocks.MUSHROOM_STEM, 5, 5);
 
-        registerCompostable(0.65F, ModItems.GRILLED_MUSHROOM.get());
-        registerCompostable(0.85F, ModItems.MUSHROOM_BREAD.get());
-        registerCompostable(0.15F, ModItems.MUSHROOM_SPORES.get());
-
         ModBlocks.BLOCKS.getEntries().forEach(blockRegistryObject -> {
             Block block = blockRegistryObject.get();
             if (block instanceof ButtonBlock || block instanceof PressurePlateBlock || block instanceof SlabBlock
@@ -46,6 +45,19 @@ public class ModVanillaCompat {
                 registerCompostable(0.65F, block);
             } else if (block instanceof MushroomCapBlock) {
                 registerCompostable(0.85F, block);
+            }
+        });
+
+        registerCompostable(0.65F, ModItems.GRILLED_MUSHROOM.get());
+        registerCompostable(0.85F, ModItems.MUSHROOM_BREAD.get());
+        registerCompostable(0.15F, ModItems.MUSHROOM_SPORES.get());
+
+        ModItems.ITEMS.getEntries().forEach(itemRegistryObject -> {
+            Item item = itemRegistryObject.get();
+            if (item instanceof SignItem) {
+                registerCompostable(0.3F, item);
+            } else if (item instanceof MushroomBoatItem) {
+                registerCompostable(0.65F, item);
             }
         });
     }
