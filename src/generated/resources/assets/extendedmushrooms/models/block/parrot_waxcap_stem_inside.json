@@ -21,7 +21,7 @@
     }
   ],
   "textures": {
-    "particle": "extendedmushrooms:block/deadly_fibrecap_inside",
-    "texture": "extendedmushrooms:block/deadly_fibrecap_inside"
+    "particle": "extendedmushrooms:block/parrot_waxcap_stem_inside",
+    "texture": "extendedmushrooms:block/parrot_waxcap_stem_inside"
   }
 }

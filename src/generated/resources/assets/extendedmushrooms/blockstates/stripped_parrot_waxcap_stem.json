@@ -61,7 +61,7 @@
     },
     {
       "apply": {
-        "model": "extendedmushrooms:block/parrot_waxcap_inside",
+        "model": "extendedmushrooms:block/parrot_waxcap_stem_inside",
         "x": 90
       },
       "when": {
@@ -70,7 +70,7 @@
     },
     {
       "apply": {
-        "model": "extendedmushrooms:block/parrot_waxcap_inside",
+        "model": "extendedmushrooms:block/parrot_waxcap_stem_inside",
         "x": 270
       },
       "when": {
@@ -79,7 +79,7 @@
     },
     {
       "apply": {
-        "model": "extendedmushrooms:block/parrot_waxcap_inside"
+        "model": "extendedmushrooms:block/parrot_waxcap_stem_inside"
       },
       "when": {
         "north": "false"
@@ -87,7 +87,7 @@
     },
     {
       "apply": {
-        "model": "extendedmushrooms:block/parrot_waxcap_inside",
+        "model": "extendedmushrooms:block/parrot_waxcap_stem_inside",
         "y": 180
       },
       "when": {
@@ -96,7 +96,7 @@
     },
     {
       "apply": {
-        "model": "extendedmushrooms:block/parrot_waxcap_inside",
+        "model": "extendedmushrooms:block/parrot_waxcap_stem_inside",
         "y": 270
       },
       "when": {
@@ -105,7 +105,7 @@
     },
     {
       "apply": {
-        "model": "extendedmushrooms:block/parrot_waxcap_inside",
+        "model": "extendedmushrooms:block/parrot_waxcap_stem_inside",
         "y": 90
       },
       "when": {

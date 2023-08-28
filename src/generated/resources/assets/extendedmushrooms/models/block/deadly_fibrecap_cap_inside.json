@@ -20,9 +20,8 @@
       ]
     }
   ],
-  "render_type": "minecraft:translucent",
   "textures": {
-    "particle": "extendedmushrooms:block/parrot_waxcap_inside",
-    "texture": "extendedmushrooms:block/parrot_waxcap_inside"
+    "particle": "extendedmushrooms:block/deadly_fibrecap_cap_inside",
+    "texture": "extendedmushrooms:block/deadly_fibrecap_cap_inside"
   }
 }

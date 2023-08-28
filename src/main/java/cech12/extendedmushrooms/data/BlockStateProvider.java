@@ -2,6 +2,7 @@ package cech12.extendedmushrooms.data;
 
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.FairyRingBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
 import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -58,7 +59,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
         return getBlockResourceLocation(name.substring(0, name.length() - removeSuffix.length()) + addSuffix);
     }
 
-    private static ResourceLocation getInsideResourceLocation(String name) {
+    private static ResourceLocation getInsideResourceLocation(String name, boolean isCap) {
         if (name.equals(MushroomWoodType.MUSHROOM.getStrippedStemBlockId().getPath())) {
             return new ResourceLocation("block/mushroom_block_inside");
         }
@@ -66,7 +67,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
                 .replace("_cap", "")
                 .replace("_stem", "")
                 .replace("_log", "")
-                .replace("stripped_", "") + "_inside");
+                .replace("stripped_", "") + ((isCap) ? "_cap" : "_stem") + "_inside");
     }
 
     @Override
@@ -100,7 +101,7 @@ public class BlockStateProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof HugeMushroomBlock) {
                 // caps, stems, stripped stems
                 ModelFile outside = models().getExistingFile(getBlockResourceLocation(name));
-                ModelFile inside = models().getExistingFile(getInsideResourceLocation(name));
+                ModelFile inside = models().getExistingFile(getInsideResourceLocation(name, block instanceof MushroomCapBlock));
                 MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
                 for (boolean boolValue : new boolean[]{true, false}) {
                     for (Map.Entry<Direction, BooleanProperty> entry : PipeBlock.PROPERTY_BY_DIRECTION.entrySet()) {

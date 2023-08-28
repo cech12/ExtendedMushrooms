@@ -6,6 +6,7 @@ import cech12.extendedmushrooms.block.MushroomPlanksBlock;
 import cech12.extendedmushrooms.block.MushroomWoodButtonBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.HoneyWaxcapCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
+import cech12.extendedmushrooms.block.mushroomblocks.MushroomStemBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.ParrotWaxcapCap;
 import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.data.PackOutput;
@@ -88,23 +89,10 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
             } else if (block instanceof MushroomCapBlock) {
                 if (block instanceof HoneyWaxcapCap || block instanceof ParrotWaxcapCap) {
                     translucentHugeMushroomBlock(name, getBlockResourceLocation(name));
-                    // & inside variant
-                    ResourceLocation texture = getBlockResourceLocation(name, "_cap", "_inside");
-                    getBuilder(texture.getPath())
-                            .ao(false)
-                            .texture("texture", texture)
-                            .texture("particle", texture)
-                            .renderType("translucent")
-                            .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+                    translucentHugeMushroomInsideBlock(getBlockResourceLocation(name, "_cap", "_cap_inside"));
                 } else {
                     hugeMushroomBlock(name, getBlockResourceLocation(name));
-                    // & inside variant
-                    ResourceLocation texture = getBlockResourceLocation(name, "_cap", "_inside");
-                    getBuilder(texture.getPath())
-                            .ao(false)
-                            .texture("texture", texture)
-                            .texture("particle", texture)
-                            .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+                    hugeMushroomInsideBlock(getBlockResourceLocation(name, "_cap", "_cap_inside"));
                 }
             } else if (block instanceof WoolCarpetBlock) {
                 ResourceLocation texture = getCapResourceLocation(name, "_carpet");
@@ -183,6 +171,9 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
                 }
             } else if (block instanceof HugeMushroomBlock) { // Stems & Stripped Stems. MushroomCapBlock is checked before
                 hugeMushroomBlock(name, getBlockResourceLocation(name));
+                if (block instanceof MushroomStemBlock) {
+                    hugeMushroomInsideBlock(getBlockResourceLocation(name, "_stem", "_stem_inside"));
+                }
             } else if (block instanceof TrapDoorBlock) {
                 ResourceLocation texture = getBlockResourceLocation(name);
                 simpleTexturedBlock(name + "_bottom", "template_orientable_trapdoor_bottom", texture);
@@ -251,6 +242,14 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
         cubeBlock(name + "_inventory", texture);
     }
 
+    private void hugeMushroomInsideBlock(ResourceLocation texture) {
+        getBuilder(texture.getPath())
+                .ao(false)
+                .texture("texture", texture)
+                .texture("particle", texture)
+                .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+    }
+
     private void translucentHugeMushroomBlock(String name, ResourceLocation texture) {
         getBuilder(name)
                 .texture("texture", texture)
@@ -260,6 +259,13 @@ public class BlockModelProvider extends net.minecraftforge.client.model.generato
         cubeBlock(name + "_inventory", texture);
     }
 
-
+    private void translucentHugeMushroomInsideBlock(ResourceLocation texture) {
+        getBuilder(texture.getPath())
+                .ao(false)
+                .texture("texture", texture)
+                .texture("particle", texture)
+                .renderType("translucent")
+                .element().from(0, 0, 0).to(16, 16, 0).face(Direction.NORTH).texture("#texture").cullface(Direction.NORTH);
+    }
 
 }

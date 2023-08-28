@@ -21,7 +21,7 @@
     }
   ],
   "textures": {
-    "particle": "extendedmushrooms:block/glowshroom_inside",
-    "texture": "extendedmushrooms:block/glowshroom_inside"
+    "particle": "extendedmushrooms:block/honey_waxcap_stem_inside",
+    "texture": "extendedmushrooms:block/honey_waxcap_stem_inside"
   }
 }
