@@ -1,7 +1,7 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
 import cech12.extendedmushrooms.block.EMMushroomBlock;
-import cech12.extendedmushrooms.block.mushrooms.DeadlyFibrecap;
+import cech12.extendedmushrooms.block.mushrooms.BigMushroom;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,8 +28,8 @@ public class DeadlyFibrecapBlock extends EMMushroomBlock {
 
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
 
-    public DeadlyFibrecapBlock(Properties properties) {
-        super(new DeadlyFibrecap(), properties);
+    public DeadlyFibrecapBlock(BigMushroom bigMushroom, Properties properties) {
+        super(bigMushroom, properties);
         this.registerDefaultState(this.defaultBlockState().setValue(TRIGGERED, false));
     }
 

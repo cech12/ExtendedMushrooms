@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.init;
 import cech12.extendedmushrooms.ExtendedMushrooms;
 import cech12.extendedmushrooms.block.*;
 import cech12.extendedmushrooms.block.mushroomblocks.AmethystDeceiverCap;
+import cech12.extendedmushrooms.block.mushroomblocks.DeadlyFibrecapBlock;
 import cech12.extendedmushrooms.block.mushroomblocks.GlowshroomCap;
 import cech12.extendedmushrooms.block.mushroomblocks.HoneyWaxcapCap;
 import cech12.extendedmushrooms.block.mushroomblocks.MushroomCapBlock;
@@ -68,7 +69,7 @@ public final class ModBlocks {
         registerCapBlocks("glowshroom", MushroomType.GLOWSHROOM, DyeColor.BLUE, MapColor.COLOR_BLUE, SoundType.WOOL, GlowshroomCap::new, (state) -> 8);
         registerWoodBlocks("glowshroom", MushroomWoodType.GLOWSHROOM, MapColor.COLOR_LIGHT_BLUE, SoundType.WOOD, (state) -> 8, null);
 
-        registerMushroomBlocks("deadly_fibrecap", new DeadlyFibrecap(), MapColor.TERRACOTTA_WHITE);
+        registerMushroomBlocks("deadly_fibrecap", new DeadlyFibrecap(), MapColor.TERRACOTTA_WHITE, DeadlyFibrecapBlock::new);
         registerCapBlocks("deadly_fibrecap", MushroomType.DEADLY_FIBRECAP, DyeColor.WHITE, MapColor.TERRACOTTA_WHITE, SoundType.WOOL, DeadlyFibrecapCap::new);
 
         registerMushroomBlocks("parrot_waxcap", new ParrotWaxcap(), MapColor.COLOR_LIGHT_GREEN);
@@ -135,11 +136,19 @@ public final class ModBlocks {
 
 
     private static void registerMushroomBlocks(String name, BigMushroom bigMushroom, MapColor color) {
-        registerMushroomBlocks(name, bigMushroom, color, (state) -> 0);
+        registerMushroomBlocks(name, bigMushroom, color, EMMushroomBlock::new, (state) -> 0);
     }
 
-    private static void registerMushroomBlocks(String name, BigMushroom bigMushroom, MapColor mapColor, ToIntFunction<BlockState> lightLevel) {
-        RegistryObject<Block> mushroom = registerBlockWithItem(BlockType.MUSHROOM.getName(name), () -> new EMMushroomBlock(bigMushroom, Block.Properties.of().mapColor(mapColor).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS).lightLevel(lightLevel).hasPostProcess((a, b, c)->true)));
+    private static void registerMushroomBlocks(String name, BigMushroom bigMushroom, MapColor color, BiFunction<BigMushroom, Block.Properties, EMMushroomBlock> mushroomBlock) {
+        registerMushroomBlocks(name, bigMushroom, color, mushroomBlock, (state) -> 0);
+    }
+
+    private static void registerMushroomBlocks(String name, BigMushroom bigMushroom, MapColor color, ToIntFunction<BlockState> lightLevel) {
+        registerMushroomBlocks(name, bigMushroom, color, EMMushroomBlock::new, lightLevel);
+    }
+
+    private static void registerMushroomBlocks(String name, BigMushroom bigMushroom, MapColor mapColor, BiFunction<BigMushroom, Block.Properties, EMMushroomBlock> mushroomBlock, ToIntFunction<BlockState> lightLevel) {
+        RegistryObject<Block> mushroom = registerBlockWithItem(BlockType.MUSHROOM.getName(name), () -> mushroomBlock.apply(bigMushroom, Block.Properties.of().mapColor(mapColor).noCollission().randomTicks().strength(0.0F).sound(SoundType.GRASS).lightLevel(lightLevel).hasPostProcess((a, b, c)->true)));
         RegistryObject<Block> pottedMushroom = registerBlock(BlockType.POTTED_MUSHROOM.getName(name), () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, mushroom, Block.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).lightLevel(lightLevel)));
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(mushroom.getId(), pottedMushroom);
     }
