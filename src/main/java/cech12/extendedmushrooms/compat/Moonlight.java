@@ -24,10 +24,9 @@ public class Moonlight {
             BlockSetAPI.addBlockTypeFinder(WoodType.class, () -> {
                 try {
                     //constructor has protected access - use reflections
-                    Class<?> cl = Class.forName("net.mehvahdjukaar.moonlight.api.set.wood.WoodType");
-                    Constructor<?> cons = cl.getDeclaredConstructor(ResourceLocation.class, Block.class, Block.class);
+                    Constructor<WoodType> cons = WoodType.class.getDeclaredConstructor(ResourceLocation.class, Block.class, Block.class);
                     cons.setAccessible(true);
-                    WoodType w = (WoodType) cons.newInstance(new ResourceLocation(ExtendedMushrooms.MOD_ID, woodType.getSerializedName()), woodType.getPlanksBlock(), woodType.getStemBlock());
+                    WoodType w = cons.newInstance(new ResourceLocation(ExtendedMushrooms.MOD_ID, woodType.getSerializedName()), woodType.getPlanksBlock(), woodType.getStemBlock());
                     //w.addChild("wood", woodType.getStemBlock()); //block should not be added twice
                     //w.addChild("stripped_wood", woodType.getStrippedStemBlock()); //block should not be added twice
                     w.addChild("stripped_log", woodType.getStrippedStemBlock());
