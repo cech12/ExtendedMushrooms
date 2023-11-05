@@ -5,11 +5,9 @@ import cech12.extendedmushrooms.item.MushroomWoodType;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Constructor;
 import java.util.Optional;
 
 public class Moonlight {
@@ -23,10 +21,7 @@ public class Moonlight {
         for (MushroomWoodType woodType : MushroomWoodType.values()) {
             BlockSetAPI.addBlockTypeFinder(WoodType.class, () -> {
                 try {
-                    //constructor has protected access - use reflections
-                    Constructor<WoodType> cons = WoodType.class.getDeclaredConstructor(ResourceLocation.class, Block.class, Block.class);
-                    cons.setAccessible(true);
-                    WoodType w = cons.newInstance(new ResourceLocation(ExtendedMushrooms.MOD_ID, woodType.getSerializedName()), woodType.getPlanksBlock(), woodType.getStemBlock());
+                    WoodType w = new WoodType(new ResourceLocation(ExtendedMushrooms.MOD_ID, woodType.getSerializedName()), woodType.getPlanksBlock(), woodType.getStemBlock()){}; //protected access
                     //w.addChild("wood", woodType.getStemBlock()); //block should not be added twice
                     //w.addChild("stripped_wood", woodType.getStrippedStemBlock()); //block should not be added twice
                     w.addChild("stripped_log", woodType.getStrippedStemBlock());
