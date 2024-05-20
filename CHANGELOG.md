@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
+## [1.20.1-4.1.1.0] - 2024-05-20
+### Added
+- added uk_ua language support (thanks to unroman for the translation) #85
+
 ## [1.20.1-4.1.0.3] - 2024-04-08
 ### Fixed
 - fairy ring could break in dark areas after crafting process (thanks to IdrisQe for the report) #84
