@@ -55,21 +55,21 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
 
     @Deprecated
     @Override
-    public void randomTick(BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
-        if (!state.getValue(PERSISTENT) && this.shouldDropEffectCloud(state, worldIn, pos, random)) {
+    public void randomTick(BlockState state, @Nonnull ServerLevel level, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
+        if (!state.getValue(PERSISTENT) && this.shouldDropEffectCloud(state, level, pos, random)) {
             //find ground block below
             BlockPos down = pos.below();
             BlockPos.MutableBlockPos effectPos = new BlockPos.MutableBlockPos(down.getX(), down.getY(), down.getZ());
             //block below must not be a solid block
-            if (!worldIn.getBlockState(effectPos).canOcclude()) {
+            if (!level.getBlockState(effectPos).canOcclude()) {
                 //go down until reached a solid block or world bounds
                 do {
                     effectPos.move(Direction.DOWN);
-                } while (!worldIn.getBlockState(effectPos).canOcclude() && effectPos.getY() >= 0);
+                } while (!level.getBlockState(effectPos).canOcclude() && effectPos.getY() >= level.getMinBuildHeight());
                 //to spawn effect, go one block up
-                if (effectPos.getY() >= 0) {
+                if (effectPos.getY() >= level.getMinBuildHeight()) {
                     effectPos.move(Direction.UP);
-                    this.spawnEffectCloud(worldIn, effectPos, random);
+                    this.spawnEffectCloud(level, effectPos, random);
                 }
             }
         }

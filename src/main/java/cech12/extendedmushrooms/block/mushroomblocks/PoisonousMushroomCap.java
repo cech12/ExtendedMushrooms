@@ -40,7 +40,7 @@ public class PoisonousMushroomCap extends AbstractEffectMushroomCap {
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return super.isRandomlyTicking(state) || !state.getValue(TRIGGERED);
+        return super.isRandomlyTicking(state) || state.getValue(TRIGGERED);
     }
 
     @Deprecated
