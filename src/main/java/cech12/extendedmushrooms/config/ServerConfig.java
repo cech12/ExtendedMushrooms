@@ -14,6 +14,8 @@ public class ServerConfig {
     public static final ForgeConfigSpec.BooleanValue SHEEP_EAT_MUSHROOM_FROM_GROUND_ENABLED;
     public static final ForgeConfigSpec.BooleanValue SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED;
 
+    public static final ForgeConfigSpec.DoubleValue MUSHROOM_CAP_EFFECT_CLOUD_CHANCE;
+
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
@@ -36,6 +38,10 @@ public class ServerConfig {
         SHEEP_ABSORB_MUSHROOM_TYPE_ENABLED = builder
                 .comment("Whether or not sheeps and mushroom sheeps change their fleece to the mushroom type when eating a mushroom from ground or while feeding.")
                 .define("sheepAbsorbMushroomTypeEnabled", true);
+
+        MUSHROOM_CAP_EFFECT_CLOUD_CHANCE = builder
+                .comment("Chance of mushroom caps are dropping an effect cloud on the ground at random tick. (0.05 - chance of 5% at random tick [default], 0 - never, 1 - every random tick)")
+                .defineInRange("mushroomCapEffectCloudChance", 0.05D, 0D, 1D);
 
         builder.pop();
 
