@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Forge Recommended Versioning](https://mcforge.readthedocs.io/en/latest/conventions/versioning/).
 
-## [1.19.2-3.2.1.0] - 2024-05-22
+## [1.19.4-3.2.1.0] - 2024-05-22
 ### Added
 - config option to balance effect clouds of the mushroom caps (thanks to katubug & alltheArdy for the idea) #86
 
