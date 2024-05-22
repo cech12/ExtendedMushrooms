@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms.block.mushroomblocks;
 
+import cech12.extendedmushrooms.config.ServerConfig;
 import cech12.extendedmushrooms.item.MushroomType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
@@ -34,7 +35,8 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
     abstract protected List<MobEffectInstance> getEffects(@Nonnull RandomSource random);
 
     protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
-        return random.nextDouble() < 0.05;
+        double chance = ServerConfig.MUSHROOM_CAP_EFFECT_CLOUD_CHANCE.get();
+        return chance > 0D && random.nextDouble() < chance;
     }
 
     protected int getEffectCloudColor(List<MobEffectInstance> effects, @Nonnull RandomSource random) {
@@ -94,7 +96,7 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return !state.getValue(PERSISTENT);
+        return ServerConfig.MUSHROOM_CAP_EFFECT_CLOUD_CHANCE.get() > 0D && !state.getValue(PERSISTENT);
     }
 
     @Override

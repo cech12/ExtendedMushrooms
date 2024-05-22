@@ -16,6 +16,7 @@ public class ServerConfig {
 
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_BUTTON_PLAY_SOUND;
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND;
+    public static final ForgeConfigSpec.DoubleValue MUSHROOM_CAP_EFFECT_CLOUD_CHANCE;
 
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -46,6 +47,9 @@ public class ServerConfig {
         MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND = builder
                 .comment("Whether or not mushroom cap pressure plates should play a sound when stepped on or off.")
                 .define("mushroomCapPressurePlatePlaySound", false);
+        MUSHROOM_CAP_EFFECT_CLOUD_CHANCE = builder
+                .comment("Chance of mushroom caps are dropping an effect cloud on the ground at random tick. (0.05 - chance of 5% at random tick [default], 0 - never, 1 - every random tick)")
+                .defineInRange("mushroomCapEffectCloudChance", 0.05D, 0D, 1D);
 
         builder.pop();
 
