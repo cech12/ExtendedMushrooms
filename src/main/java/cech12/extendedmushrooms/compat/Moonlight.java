@@ -21,9 +21,11 @@ public class Moonlight {
         for (MushroomWoodType woodType : MushroomWoodType.values()) {
             BlockSetAPI.addBlockTypeFinder(WoodType.class, () -> {
                 try {
-                    WoodType w = new WoodType(new ResourceLocation(ExtendedMushrooms.MOD_ID, woodType.getSerializedName()), woodType.getPlanksBlock(), woodType.getStemBlock()){}; //protected access
+                    WoodType w = new WoodType(new ResourceLocation(ExtendedMushrooms.MOD_ID, woodType.getSerializedName()), woodType.getPlanksBlock(), woodType.getStemBlock());
                     //w.addChild("wood", woodType.getStemBlock()); //block should not be added twice
                     //w.addChild("stripped_wood", woodType.getStrippedStemBlock()); //block should not be added twice
+                    w.addChild("planks", woodType.getPlanksBlock());
+                    w.addChild("log", woodType.getStemBlock());
                     w.addChild("stripped_log", woodType.getStrippedStemBlock());
                     w.addChild("slab", woodType.getSlabBlock());
                     w.addChild("stairs", woodType.getStairsBlock());

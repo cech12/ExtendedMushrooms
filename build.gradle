@@ -58,6 +58,8 @@ minecraft {
 
             // Export mixin-changed classes
             property 'mixin.debug.export', 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             mods {
                 "${mod_id}" {
@@ -135,7 +137,13 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft_version}-forge:${project.jei_version}")
 
     //moonlight (compatibility with Every Compat)
-    compileOnly "curse.maven:moonlightlib-499980:${project.moonlight_file_id}"
+    implementation fg.deobf("curse.maven:moonlightlib-499980:${project.moonlight_file_id}")
+
+    //testing
+    //runtimeOnly fg.deobf("curse.maven:jer-240630:5057220") // JustEnoughResources-1.20.1-1.4.0.247
+    //runtimeOnly fg.deobf("curse.maven:sawmill-964817:5367700") // sawmill 1.20-1.3.15
+    //runtimeOnly fg.deobf("curse.maven:everycompat-628539:5315017") // every compat 1.20-2.6.55
+    //runtimeOnly fg.deobf("curse.maven:anotherfurniture-610492:4815124") // Another Furniture 1.20.1-3.0.1
 }
 
 tasks.named('processResources', ProcessResources).configure {
