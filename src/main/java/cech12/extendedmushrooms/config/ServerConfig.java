@@ -16,7 +16,9 @@ public class ServerConfig {
 
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_BUTTON_PLAY_SOUND;
     public static final ForgeConfigSpec.BooleanValue MUSHROOM_CAP_PRESSURE_PLATE_PLAY_SOUND;
-    public static final ForgeConfigSpec.DoubleValue MUSHROOM_CAP_EFFECT_CLOUD_CHANCE;
+
+    private static final ForgeConfigSpec.DoubleValue MUSHROOM_CAP_EFFECT_CLOUD_CHANCE;
+    private static final double MUSHROOM_CAP_EFFECT_CLOUD_CHANCE_DEFAULT = 0.05D;
 
     static {
         final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -49,7 +51,7 @@ public class ServerConfig {
                 .define("mushroomCapPressurePlatePlaySound", false);
         MUSHROOM_CAP_EFFECT_CLOUD_CHANCE = builder
                 .comment("Chance of mushroom caps are dropping an effect cloud on the ground at random tick. (0.05 - chance of 5% at random tick [default], 0 - never, 1 - every random tick)")
-                .defineInRange("mushroomCapEffectCloudChance", 0.05D, 0D, 1D);
+                .defineInRange("mushroomCapEffectCloudChance", MUSHROOM_CAP_EFFECT_CLOUD_CHANCE_DEFAULT, 0D, 1D);
 
         builder.pop();
 
@@ -60,6 +62,14 @@ public class ServerConfig {
         final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
         configData.load();
         spec.setConfig(configData);
+    }
+
+    public static double getMushroomCapEffectCloudChance() {
+        try {
+            return MUSHROOM_CAP_EFFECT_CLOUD_CHANCE.get();
+        } catch (IllegalStateException ex) {
+            return MUSHROOM_CAP_EFFECT_CLOUD_CHANCE_DEFAULT;
+        }
     }
 
 }
