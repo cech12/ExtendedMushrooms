@@ -109,6 +109,11 @@ public class FairyRingRecipe implements IFairyRingRecipe, Recipe<Container> {
         return new ItemStack(Items.RED_MUSHROOM);
     }
 
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     public boolean isValid(FairyRingMode mode, Container inv) {
         // inventory must have a stack limit of 1
         if (inv.getMaxStackSize() != 1) return false;

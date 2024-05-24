@@ -35,7 +35,7 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
     abstract protected List<MobEffectInstance> getEffects(@Nonnull RandomSource random);
 
     protected boolean shouldDropEffectCloud(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
-        double chance = ServerConfig.MUSHROOM_CAP_EFFECT_CLOUD_CHANCE.get();
+        double chance = ServerConfig.getMushroomCapEffectCloudChance();
         return chance > 0D && random.nextDouble() < chance;
     }
 
@@ -97,7 +97,7 @@ public abstract class AbstractEffectMushroomCap extends MushroomCapBlock {
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return ServerConfig.MUSHROOM_CAP_EFFECT_CLOUD_CHANCE.get() > 0D && !state.getValue(PERSISTENT);
+        return ServerConfig.getMushroomCapEffectCloudChance() > 0D && !state.getValue(PERSISTENT);
     }
 
     @Override
