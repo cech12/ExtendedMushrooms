@@ -356,7 +356,7 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
                     entity.recipeTime++;
                 }
                 //detect finished recipe
-                if (entity.recipeTime >= entity.recipeTimeTotal) {
+                if (entity.currentRecipe != null && entity.recipeTime >= entity.recipeTimeTotal) {
                     //update fairy ring mode
                     if (entity.mode != entity.currentRecipe.getResultMode()) {
                         entity.mode = entity.currentRecipe.getResultMode();
@@ -471,19 +471,14 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
     public ItemStack addItemStack(ItemStack stack) {
         FairyRingBlockEntity master = this.getMaster();
         if (stack != null && master != null && !stack.isEmpty()) {
-            boolean dirty = false;
             //each slot has only a stack size of 1
             for (int i = 0; i < master.items.size(); i++) {
                 if (master.items.get(i).isEmpty()) {
                     master.setItem(i, stack.split(1));
-                    dirty = true;
                     if (stack.isEmpty()) {
                         break;
                     }
                 }
-            }
-            if (dirty) {
-                this.sendUpdates();
             }
         }
         return stack;
@@ -533,7 +528,8 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
         ItemStack stack = ItemStack.EMPTY;
         if (master != null && count > 0 && slot >= 0 && slot < master.items.size()) {
             stack = ContainerHelper.removeItem(master.items, slot, count);
-            this.sendUpdates();
+            master.updateRecipe();
+            master.sendUpdates();
         }
         return stack;
     }
@@ -553,6 +549,8 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
         FairyRingBlockEntity master = this.getMaster();
         if (master != null && slot >= 0 && slot < master.items.size()) {
             master.items.set(slot, itemStack);
+            master.updateRecipe();
+            master.sendUpdates();
         }
     }
 
@@ -566,6 +564,8 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
         FairyRingBlockEntity master = this.getMaster();
         if (master != null) {
             master.items.clear();
+            master.updateRecipe();
+            master.sendUpdates();
         }
     }
 }
