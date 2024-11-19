@@ -272,16 +272,6 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
     }
 
     /**
-     * reset cached recipe and recipe times.
-     * Hint: Sends no updates to client.
-     */
-    protected void resetRecipe() {
-        this.currentRecipe = null;
-        this.recipeTime = 0;
-        this.recipeTimeTotal = 0;
-    }
-
-    /**
      * Updates the current recipe.
      * Hint: Sends no updates to client.
      * @return true when recipe changed. false otherwise.
@@ -361,8 +351,7 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
                     if (entity.mode != entity.currentRecipe.getResultMode()) {
                         entity.mode = entity.currentRecipe.getResultMode();
                     }
-                    //clear inventory and pop out result itemStack
-                    entity.clearContent();
+                    //pop out result itemStack
                     Vec3 center = entity.getCenter();
                     ItemStack resultStack = entity.currentRecipe.getResultItemStack();
                     if (resultStack != null && resultStack != ItemStack.EMPTY) {
@@ -372,9 +361,8 @@ public class FairyRingBlockEntity extends BlockEntity implements Container {
                     }
                     //play sound
                     level.playSound(null, center.x, center.y, center.z, ModSounds.FAIRY_RING_CRAFTING_FINISH.get(), SoundSource.BLOCKS, 1.5F, 1.0F);
-                    //reset and update recipe
-                    entity.resetRecipe();
-                    entity.updateRecipe();
+                    //clear inventory and reset recipe
+                    entity.clearContent();
                     entity.setLight(false);
                 }
                 entity.sendUpdates();
