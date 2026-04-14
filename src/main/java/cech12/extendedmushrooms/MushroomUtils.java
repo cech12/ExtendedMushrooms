@@ -1,5 +1,6 @@
 package cech12.extendedmushrooms;
 
+import cech12.extendedmushrooms.config.ServerConfig;
 import cech12.extendedmushrooms.init.ModTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
@@ -12,7 +13,7 @@ public class MushroomUtils {
     public static boolean isValidMushroomPosition(LevelReader world, BlockPos pos) {
         BlockState block = world.getBlockState(pos.below());
         return block.is(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS) ||
-                (block.is(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL) && world.getRawBrightness(pos, 0) < 13);
+                (block.is(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL) && world.getRawBrightness(pos, 0) <= ServerConfig.MUSHROOM_AUTO_GROW_LIGHTLEVEL.get());
     }
 
 }
