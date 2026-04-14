@@ -270,8 +270,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .save(consumer);
         mushroomCapRecipes(consumer, "slime_fungus",
                 ModTags.ForgeItems.MUSHROOM_CAPS_LIME,
-                Items.ORANGE_BANNER,
-                Items.ORANGE_BED,
+                Items.LIME_BANNER,
+                Items.LIME_BED,
                 ModBlocks.SLIME_FUNGUS_CAP_BUTTON.get().asItem(),
                 ModBlocks.SLIME_FUNGUS_CAP_CARPET.get().asItem(),
                 ModBlocks.SLIME_FUNGUS_CAP_PRESSURE_PLATE.get().asItem());

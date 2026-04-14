@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [1.20.1-4.1.4.0] - 2026-04-14
+### Fixed
+- slime fungus cap crafts orange banner/bed instead of lime banner/bed (thanks to Aceplante for the report) #93
+
 ## [1.20.1-4.1.3.3] - 2024-11-19
 ### Fixed
 - server crashed while creating nether wart using fairy ring (thanks to RattenDieb for the report) #90
