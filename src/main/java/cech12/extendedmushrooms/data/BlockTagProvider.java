@@ -133,6 +133,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .sorted(Comparator.comparing(ForgeRegistries.BLOCKS::getKey))
                 .toArray(Block[]::new));
         //generate block categories
+        tag(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS).addTag(BlockTags.MUSHROOM_GROW_BLOCK);
         tag(ModTags.Blocks.MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL).add(Blocks.DIRT).add(Blocks.GRASS_BLOCK);
 
         //generate forge tags

@@ -87,7 +87,7 @@ public class ModTags {
         public static final TagKey<Block> MUSHROOMS_POISONOUS = tag("mushrooms/poisonous");
         public static final TagKey<Block> MUSHROOMS_SLOWING_DOWN = tag("mushrooms/slowing_down");
 
-        //use "minecraft:mushroom_grow_block" tag (Blocktags,MUSHROOM_GROW_BLOCK) for lightlevel ignoring blocks
+        public static final TagKey<Block> MUSHROOM_GROWING_BLOCKS = tag("mushroom_growing_blocks");
         public static final TagKey<Block> MUSHROOM_GROWING_BLOCKS_LIGHTLEVEL = tag("mushroom_growing_blocks_lightlevel");
 
         private static TagKey<Block> tag(@Nonnull String name) {

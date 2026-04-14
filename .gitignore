@@ -26,3 +26,4 @@ run-data
 forge*changelog.txt
 /assets_generator/MushroomAssetsGenerator/obj/Debug/*
 /assets_generator/.vs/
+.cache
