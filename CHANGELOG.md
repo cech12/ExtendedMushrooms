@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [this versioning scheme](https://gist.github.com/cech12/69319028e88c50349a6b044000a6607b).
 
+## [1.20.1-4.1.5.0] - 2026-06-21
+### Added
+- added "mushroomAutoGrowEnabled" config option to enable/disable the auto grow functionality (thanks to Aceplante for the report) #94
+
 ## [1.20.1-4.1.4.0] - 2026-04-14
 ### Added
 - re-added "extendedmushrooms:mushroom_growing_blocks" block tag to separate the vanilla placement behavior ("minecraft:mushroom_grow_block") from the auto growing of this mod (thanks to Poopchungus and Aceplante for the idea) #91 #92

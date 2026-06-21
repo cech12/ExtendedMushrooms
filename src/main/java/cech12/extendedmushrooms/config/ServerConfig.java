@@ -17,6 +17,7 @@ public class ServerConfig {
     private static final ForgeConfigSpec.DoubleValue MUSHROOM_CAP_EFFECT_CLOUD_CHANCE;
     private static final double MUSHROOM_CAP_EFFECT_CLOUD_CHANCE_DEFAULT = 0.05D;
 
+    public static final ForgeConfigSpec.BooleanValue MUSHROOM_AUTO_GROW_ENABLED;
     public static final ForgeConfigSpec.IntValue MUSHROOM_AUTO_GROW_LIGHTLEVEL;
     private static final int MUSHROOM_AUTO_GROW_LIGHTLEVEL_DEFAULT = 12;
 
@@ -31,6 +32,9 @@ public class ServerConfig {
         MUSHROOM_STEMS_WITHOUT_SILK_TOUCH_ENABLED = builder
                 .comment("Whether or not mushroom stems can be harvested without silk touch enchantment.")
                 .define("mushroomStemsWithoutSilkTouchEnabled", true);
+        MUSHROOM_AUTO_GROW_ENABLED = builder
+                .comment("Whether or not a mushroom can grow at a random tick.")
+                .define("mushroomAutoGrowEnabled", true);
         MUSHROOM_AUTO_GROW_LIGHTLEVEL = builder
                 .comment("A mushroom can grow at a random tick at this light level and below on the blocks specified in the block tag \"extendedmushrooms:mushroom_growing_blocks_lightlevel\".")
                 .defineInRange("mushroomAutoGrowLightlevel", MUSHROOM_AUTO_GROW_LIGHTLEVEL_DEFAULT, 0, 15);

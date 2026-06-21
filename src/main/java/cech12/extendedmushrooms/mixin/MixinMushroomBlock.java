@@ -3,6 +3,7 @@ package cech12.extendedmushrooms.mixin;
 import cech12.extendedmushrooms.MushroomUtils;
 import cech12.extendedmushrooms.block.mushrooms.BrownMushroom;
 import cech12.extendedmushrooms.block.mushrooms.RedMushroom;
+import cech12.extendedmushrooms.config.ServerConfig;
 import cech12.extendedmushrooms.init.ModBlocks;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
@@ -38,7 +39,7 @@ public class MixinMushroomBlock {
         }
         //automatic growing of mushrooms
         //Forge: prevent loading unloaded chunks
-        if (random.nextInt(25) == 0) {
+        if (ServerConfig.MUSHROOM_AUTO_GROW_ENABLED.get() && random.nextInt(25) == 0) {
             if (state.getBlock() instanceof MushroomBlock) {
                 ((MushroomBlock) state.getBlock()).performBonemeal(world, random, pos, state);
                 ci.cancel();
